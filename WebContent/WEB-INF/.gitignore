@@ -93,4 +93,6 @@ Temporary Items
 
 ## 특정 폴더 제외 ##
 WebContent/WEB-INF/jspwork/
-jspwork/org/apache/jsp/
+jspwork/org/apache/jsp/*.java
+
+## 0817 끝 ##
