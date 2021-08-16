@@ -92,7 +92,7 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/java,macos
 
 ## 특정 폴더 제외 ##
-WebContent/WEB-INF/jspwork/
-jspwork/org/apache/jsp/*.java
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
+
 
 ## 0817 끝 ##
