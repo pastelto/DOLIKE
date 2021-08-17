@@ -78,8 +78,8 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tagName=" + tagName + ", boardTitle=" + boardTitle
-				+ ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
-				+ views + ", categoryNo=" + categoryNo + "]";
+          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
+				  + views + ", categoryNo=" + categoryNo + "]";
 	}
 	
 	

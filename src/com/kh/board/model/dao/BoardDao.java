@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -33,6 +34,7 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 	}
+  
 	public Date getDate() {
 		String sql = prop.getProperty("getDate");
 		PreparedStatement pstmt = null;
@@ -50,6 +52,7 @@ public class BoardDao {
 		
 		return null;
 	}
+  
 	public int getNext() {
 		String sql = prop.getProperty("getNext");
 		PreparedStatement pstmt = null;
@@ -68,6 +71,7 @@ public class BoardDao {
 		
 		return -1; //데이터베이스 오류 
 	}
+  
 	public int write(String boardTitle, String nickName, String boardContent) {
 		String sql = prop.getProperty("write");
 		PreparedStatement pstmt = null;
@@ -90,6 +94,7 @@ public class BoardDao {
 		
 		return -1;
 	}
+  
 	public ArrayList<Board> getList(int pageNumber){
 		String sql = prop.getProperty("getList");
 		ArrayList<Board> list = new ArrayList<Board>();
@@ -118,6 +123,7 @@ public class BoardDao {
 		return list; //데이터베이스 오류 
 		
 	}
+  
 	public boolean nextPage(int pageNumber) {
 		String sql = prop.getProperty("nextPage");
 		
@@ -136,6 +142,7 @@ public class BoardDao {
 		
 		return false; 
 	}
+  
 	public Board getBoard(int boardNo) {
 		String sql = prop.getProperty("getBoard");
 		
@@ -162,6 +169,7 @@ public class BoardDao {
 		return null; 
 		
 	}
+  
 	public int boardUpdate(int boardNo, String boardTitle, String boardContent) {
 		String sql = prop.getProperty("boardUpdate");
 		try {
