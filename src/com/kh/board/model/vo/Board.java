@@ -6,7 +6,7 @@ public class Board {
 
 	private int boardNo;
 	private String nickName;
-	private String tag;
+	private String tagName;
 	private String boardTitle;
 	private Date boardDate;
 	private String boardContent;
@@ -32,11 +32,11 @@ public class Board {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getTag() {
-		return tag;
+	public String getTagName() {
+		return tagName;
 	}
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
 	}
 	public String getBoardTitle() {
 		return boardTitle;
@@ -77,9 +77,9 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tag=" + tag + ", boardTitle=" + boardTitle
-				+ ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
-				+ views + ", categoryNo=" + categoryNo + "]";
+		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tagName=" + tagName + ", boardTitle=" + boardTitle
+          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
+				  + views + ", categoryNo=" + categoryNo + "]";
 	}
 	
 	

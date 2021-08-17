@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
 <!DOCTYPE html>
@@ -35,11 +36,22 @@
 <body>
 	<%
 	
-		String userId = null;
-		if(session.getAttribute("userId") != null){
-			userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
+		String nickName = null;
+		if(session.getAttribute("nickName") != null){
+			nickName = (String)session.getAttribute("nickName"); //로그인한 유저의 정보 저장 
 		}
-	
+		int boardNo = 0;
+		if(request.getParameter("boardNo") != null){
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}
+		if(boardNo == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href = 'boardView.jsp'");
+			script.println("</script>");
+		}
+		Board board = new BoardDao().getBoard(boardNo);
 	%>
     <!--*******************
         Preloader start
@@ -344,26 +356,37 @@
         ***********************************-->
         <div class="content-body">
 	 		<div class="row" style="margin:20px">
-	 			<form method="post" action="views/board/writeAction.jsp" style="width:100%; max-width:1000px">
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
 		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-		 						<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글쓰기 양식 </th>
+		 						<th colspan="3" style="background-color:rgb(228, 243, 240); text-align:center;">게시판 글보기 </th>
 		 					</tr>
 		 				</thread>
 		 				<tbody>
-		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
+		 					<tr> 
+		 						<td style="width:20%;">글 제목</td>
+		 						<td colspan="2"><%= board.getBoardTitle().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
 		 					</tr>
-		 					<tr>
-		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
+		 					<tr> 
+		 						<td>작성자</td>
+		 						<td colspan="2"><%= board.getNickName() %></td>
+		 					</tr>
+		 					<tr> 
+		 						<td>작성일자</td>
+		 						<td colspan="2"><%= board.getBoardDate() %></td>
+		 					</tr>
+		 					<tr> 
+		 						<td>내용</td>
+		 						<td colspan="2" style="min-height:200px; text-align:left;"><%= board.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
 		 					</tr>
 		 				</tbody>
-		 				
 		 			</table>
-		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
-		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
-	 			</form>	
+		 			<a href="boardView.jsp" class="btn btn-primary">목록</a>
+		 			<% if(nickName != null && nickName.equals(board.getNickName())){ %>
+		 				<a onclick="return confirm('수정하시겠습니까?')" href="boardUpdate.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">수정</a>
+		 				<a onclick="return confirm('삭제하시겠습니까?')" href="boardDelete.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">삭제</a>
+		 			<% } %>
+		 			
 	 		</div>
             <!-- #/ container -->
         </div>
@@ -418,6 +441,14 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+
+
+
+</body>
+</html>
+ 	
+ 
+ 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
 </body>
