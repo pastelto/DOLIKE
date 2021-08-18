@@ -3007,10 +3007,10 @@ input[type="button"].btn-block {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }
 
-.navbar-collapse {
+<%--.navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;
-  align-items: center; }
+  align-items: center; } -->
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
