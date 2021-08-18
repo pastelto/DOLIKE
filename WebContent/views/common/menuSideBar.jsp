@@ -23,7 +23,7 @@
 <body>
     
         <!--**********************************
-            Nav header start
+            Nav header start  
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
@@ -170,7 +170,7 @@
                         </a>
                     </li>
                     <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">

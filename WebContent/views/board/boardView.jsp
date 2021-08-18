@@ -37,7 +37,6 @@
 	}
 </style>
 </head>
-
 <body>
 	<%
 			String userId = null;
@@ -49,8 +48,8 @@
 				pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 			}
 	%>
-
-
+	
+	
     <!--*******************
         Preloader start
     ********************-->
@@ -451,6 +450,5 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
-
 </body>
 </html>
