@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="footer">
+        <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by Team NTG 2021</p>
+                <p>&copy; <a href="https://github.com/pastelto/DOLIKE">TEAM DOLIKE</a> 2021</p>
             </div>
-        </div>	
+        </div>
 </body>
 </html>
