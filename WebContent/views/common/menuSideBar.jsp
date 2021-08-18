@@ -66,9 +66,8 @@
                 </div>
             <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown show"><a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="true">
+                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true">
                                 <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">3</span>
                             </a>
 
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
@@ -205,7 +204,15 @@
                    
                         </ul>
                     </li>
-                    
+                    <li class="mega-menu-sm">
+                        <a class="has-arrow" href="list.ms" aria-expanded="false">
+                            <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="list.ms">쪽지함</a></li>
+                            <li><a href="write.ms">쪽지 보내기</a></li>
+                        </ul>
+                    </li>
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
@@ -215,7 +222,8 @@
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
-               <li>
+
+               		<li>
                         <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
