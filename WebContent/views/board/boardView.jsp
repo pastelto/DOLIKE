@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,18 +31,26 @@
 	.content-body{
 		padding:5px 0px 0px 30px;
 	}
+	a, a:hover {
+		color : #000000;
+		text-decoration:none;
+	}
 </style>
 </head>
 
 <body>
 	<%
-	
-		String userId = null;
-		if(session.getAttribute("userId") != null){
-			userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
-		}
-	
+			String userId = null;
+			if(session.getAttribute("userId") != null){
+				userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
+			}
+			int pageNumber = 1;
+			if(request.getParameter("pageNumber") != null){
+				pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+			}
 	%>
+
+
     <!--*******************
         Preloader start
     ********************-->
@@ -343,27 +353,50 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-	 		<div class="row" style="margin:20px">
-	 			<form method="post" action="views/board/writeAction.jsp" style="width:100%; max-width:1000px">
-		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
-		 				<thread>
-		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-		 						<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글쓰기 양식 </th>
-		 					</tr>
-		 				</thread>
-		 				<tbody>
-		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
-		 					</tr>
-		 					<tr>
-		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
-		 					</tr>
-		 				</tbody>
-		 				
-		 			</table>
-		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
-		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
-	 			</form>	
+	 		<div class="row">
+	 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
+	 				<thread>
+	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성일 </th>
+	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">조회수 </th>
+	 					</tr>
+	 				</thread>
+	 				<tbody>
+		 			<%
+						BoardDao bDao = new BoardDao();
+						ArrayList<Board> list = bDao.getList(pageNumber);
+						for(int i=0; i<list.size(); i++){
+							
+					%>
+	 					<tr><a href="view.jsp?bbsId=<%= list.get(i).getBoardNo() %>"></a> <!-- 게시글리스트 테이블의 바디 -->
+	 						<td>image</td>
+	 						<td>1</td>
+	 						<td>제목칸입니다</td>
+	 						<td>운영자</td>
+	 						<td>2021-08-12</td>
+	 						<td>99</td>
+	 						<td><%= list.get(i)%></td> <!-- 게시글 이미지(첨부파일) -->
+	 						<td><%= list.get(i).getBoardNo() %></td> <!-- 게시글 번호 -->
+							<td><%= list.get(i).getBoardTitle() %></td> <!-- 게시글 제목 -->
+							<td><%= list.get(i).getNickName() %></td> <!-- 게시글 작성자 -->
+							<td><%= list.get(i).getBoardDate() %></td> <!-- 게시글 작성일 -->
+							<td><%= list.get(i).getViews() %></td> <!-- 게시글 조회수 -->
+	 					</tr>
+	 				<%
+						}
+					%>
+	 				</tbody>
+	 			</table>	
+	 			<% if(pageNumber != 1){ %>
+	 				<a href="BoardView.jsp?pageNumber=<%= pageNumber -1 %>" class="btn btn-success btn-arraw-left">이전</a>
+	 			<% }if(bDao.nextPage(pageNumber + 1)){ %>
+	 				<a href="BoardView.jsp?pageNumber=<%= pageNumber +1 %>" class="btn btn-success btn-arraw-left">다음</a>
+	 			<% } %>
+	 			<a href="boardWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
 	 		</div>
             <!-- #/ container -->
         </div>
