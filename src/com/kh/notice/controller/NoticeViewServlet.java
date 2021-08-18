@@ -33,11 +33,22 @@ public class NoticeViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("출력");
-		ArrayList<Notice> list = new NoticeService().selectList();
+//		ArrayList<Notice> list = new ArrayList<Notice>();
+//		list.add(new Notice(1, "123", "123", "admin", 1, "Y"));
 		
+//		System.out.println(list);
+//		ArrayList<Member> mem = new ArrayList<Member>();
+//		System.out.println(mem);
+//		
+//		Member m = new Member();
+//		System.out.println(m);
+		
+		ArrayList<Notice> list = new NoticeService().selectList();
+//		
 		request.setAttribute("list", list);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeView.jsp");
+		System.out.println("나와라");
 		view.forward(request, response);
 	}
 
