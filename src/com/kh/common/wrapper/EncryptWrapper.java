@@ -20,7 +20,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper{
 		
 		String value = "";
 		
-		if(key != null && (key.equals("userPwd") || key.equals("newPwd"))) { // 소영님이 사용하실 변수명으로 변경해주세요!
+		if(key != null && (key.equals("userPwd") || key.equals("newPwd"))) { 
 																		 	
 			MessageDigest md;
 			try {

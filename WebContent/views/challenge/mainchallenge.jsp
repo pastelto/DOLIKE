@@ -7,14 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - 챌린지</title>
-   <!-- Favicon icon -->
-   <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-
-    <!-- Custom Stylesheet -->
+<!-- Custom Stylesheet -->
 <!-- <link href="../css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -147,9 +140,11 @@
 </style>
 </head>
 <body>
+
 	<%@ include file="../common/menuSideBar.jsp"%>
 
 	<div class="content-body">
+
 	<div class="navbar">
 		<ul class="nav">
 			<li class="nav-item">
@@ -221,6 +216,7 @@
 										<a href="진행중인 챌린지 페이지" class="item-click">
 											<img src="./resources/challenge_upfiles/<%=list.get(i).getAtTitle() %>" 
 											alt="챌린지이미지" class="img-challenge">		
+
 										</a>
 										<div class="item-info">
 											<h4 class="title">
