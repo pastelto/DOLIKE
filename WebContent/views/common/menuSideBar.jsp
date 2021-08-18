@@ -14,14 +14,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <link href="../css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="./css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </head>
 <body>
- 	
+    
         <!--**********************************
             Nav header start
         ***********************************-->
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="header-right">
+            <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown show"><a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="true">
                                 <i class="mdi mdi-email-outline"></i>
@@ -154,14 +154,14 @@
                     </ul>
                 </div>
             </div>
-	        </div>
-		<!--**********************************
-		          Header end ti-comment-alt
-	     ***********************************-->
-	    <!--**********************************
-	            Sidebar start
+           </div>
+      <!--**********************************
+                Header end ti-comment-alt
         ***********************************-->
- 		<div class="nk-sidebar">           
+       <!--**********************************
+               Sidebar start
+        ***********************************-->
+       <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
                     <li>
@@ -192,7 +192,7 @@
                         <!-- 나중에 코드로 구현할 부분 -->
                             <li><a href="./layout-blank.html">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
-					      
+                     
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
@@ -215,7 +215,7 @@
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
-					<li>
+               <li>
                         <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
@@ -223,6 +223,6 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
- 
+
 </body>
 </html>

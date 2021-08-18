@@ -36,7 +36,7 @@
 	    <!--*******************
 	        Preloader end
 	    ********************-->
-	    <div id="main-wrapper">
+        <div id="main-wrapper">
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -49,6 +49,7 @@
             Content body start
         ***********************************-->
         <div class="content-body" style="min-height: 2000px;">
+
 				
      	<div class="topList" align="center">
 		<br>
@@ -57,7 +58,7 @@
 		<div id="thumbList">
 
 		</div>
- 
+
 		</div>
 	
             <!-- #/ container -->
@@ -74,7 +75,7 @@
         <!--**********************************
             Footer end
         ***********************************-->
-	</div>
+</div>
     <!--**********************************
         Main wrapper end
     ***********************************-->

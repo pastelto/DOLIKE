@@ -3007,10 +3007,10 @@ input[type="button"].btn-block {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }
 
-<%--.navbar-collapse {
+.navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;
-  align-items: center; } -->
+  align-items: center; }
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
@@ -7587,7 +7587,7 @@ sub {
   position: absolute;
   left: 0;
   top: 0;
-  background: rgb(236, 238, 239);
+  background: #111B27;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
   transition: all .2s ease; }
   .nav-header .logo-abbr {
