@@ -1,29 +1,27 @@
-package com.kh.notice.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
+import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/noticeView.no")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/idCheck")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public IdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +30,20 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("출력");
-//		ArrayList<Notice> list = new ArrayList<Notice>();
-//		list.add(new Notice(1, "123", "123", "admin", 1, "Y"));
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
+		int result = new MemberService().idCheck(userId);
 		
-//		System.out.println(list);
-//		ArrayList<Member> mem = new ArrayList<Member>();
-//		System.out.println(mem);
-//		
-//		Member m = new Member();
-//		System.out.println(m);
+		PrintWriter out = response.getWriter();
 		
-		ArrayList<Notice> list = new NoticeService().selectList();
-//		
-		request.setAttribute("list", list);
+		if (result > 0) {
+			out.print("fail");
+		} else {
+			out.print("success");
+		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeView.jsp");
-		System.out.println("나와라");
-		view.forward(request, response);
+		out.flush();
+		out.close();
 	}
 
 	/**

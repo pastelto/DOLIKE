@@ -1,7 +1,6 @@
-package com.kh.notice.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/noticeView.no")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +32,25 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("출력");
-//		ArrayList<Notice> list = new ArrayList<Notice>();
-//		list.add(new Notice(1, "123", "123", "admin", 1, "Y"));
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		
-//		System.out.println(list);
-//		ArrayList<Member> mem = new ArrayList<Member>();
-//		System.out.println(mem);
-//		
-//		Member m = new Member();
-//		System.out.println(m);
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
 		
-		ArrayList<Notice> list = new NoticeService().selectList();
-//		
-		request.setAttribute("list", list);
+		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeView.jsp");
-		System.out.println("나와라");
-		view.forward(request, response);
+		if (loginUser != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loguinUser", loginUser);
+
+			response.sendRedirect(request.getContextPath());
+		} else {
+			request.setAttribute("msg", "로그인 실패");
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**
