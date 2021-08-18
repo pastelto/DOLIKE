@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href=../../images/do_32.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -19,11 +19,6 @@
 </head>
 <body>
     
-     <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
-
         <!--**********************************
             Nav header start
         ***********************************-->
@@ -66,66 +61,13 @@
                         </div>
                     </div>
                 </div>
-				<div class="header-right">
+            <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown show"><a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="true">
                                 <i class="mdi mdi-email-outline"></i>
                                 <span class="badge badge-pill gradient-1">3</span>
                             </a>
-                            <div class="drop-down animated fadeIn dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(81px, 66px, 0px);">
-                                <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">받은 쪽지함</span>  
-                                    <a href="javascript:void()" class="d-inline-block">
-                                        <span class="badge badge-pill gradient-1">3</span>
-                                    </a>
-                                </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Saiful Islam</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Adam Smith</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Can you do me a favour?</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Barak Obama</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Hilari Clinton</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hello</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                            </div>
-                        </li>
+>
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <span class="badge badge-pill gradient-2">3</span>
@@ -209,14 +151,14 @@
                     </ul>
                 </div>
             </div>
-	        </div>
-		<!--**********************************
-		          Header end ti-comment-alt
-	     ***********************************-->
-	    <!--**********************************
-	            Sidebar start
+           </div>
+      <!--**********************************
+                Header end ti-comment-alt
         ***********************************-->
- 		<div class="nk-sidebar">           
+       <!--**********************************
+               Sidebar start
+        ***********************************-->
+       <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
                     <li>
@@ -247,7 +189,7 @@
                         <!-- 나중에 코드로 구현할 부분 -->
                             <li><a href="./layout-blank.html">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
-					      
+                     
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
@@ -270,16 +212,14 @@
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
-					<li>
-                        <a href="공지사항링크" aria-expanded="false">
+               <li>
+                        <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+
 </body>
 </html>
