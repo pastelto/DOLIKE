@@ -66,7 +66,7 @@
                 </div>
             <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true">
+                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
                                 <i class="mdi mdi-email-outline"></i>
                             </a>
 
