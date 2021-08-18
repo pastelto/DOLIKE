@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,8 +20,8 @@
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <style>
 	.nk-sidebar{
@@ -31,26 +30,43 @@
 	.content-body{
 		padding:5px 0px 0px 30px;
 	}
-	a, a:hover {
-		color : #000000;
-		text-decoration:none;
-	}
 </style>
 </head>
 
 <body>
 	<%
-			String userId = null;
-			if(session.getAttribute("userId") != null){
-				userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
-			}
-			int pageNumber = 1;
-			if(request.getParameter("pageNumber") != null){
-				pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-			}
+	
+		String nickName = null;
+		if(session.getAttribute("nickName") != null){
+			nickName = (String)session.getAttribute("nickName"); //로그인한 유저의 정보 저장 
+		}
+		if(nickName == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인을 하세요.')");
+			script.println("location.href = 'login.jsp'");
+			script.println("</script>");
+		}
+		int boardNo = 0;
+		if(request.getParameter("boardNo") != null ) {
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}
+		if(boardNo ==0) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href = 'boardView.jsp'");
+			script.println("</script>");
+		}
+		Board board = new BoardDao().getBoard(boardNo);
+		if(!nickName.equals(board.getNickName())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('권한이 없습니다.')");
+			script.println("location.href = 'boardView.jsp'");
+			script.println("</script>");
+		}
 	%>
-
-
     <!--*******************
         Preloader start
     ********************-->
@@ -353,50 +369,27 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-	 		<div class="row">
-	 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
-	 				<thread>
-	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성일 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">조회수 </th>
-	 					</tr>
-	 				</thread>
-	 				<tbody>
-		 			<%
-						BoardDao bDao = new BoardDao();
-						ArrayList<Board> list = bDao.getList(pageNumber);
-						for(int i=0; i<list.size(); i++){
-							
-					%>
-	 					<tr><a href="view.jsp?bbsId=<%= list.get(i).getBoardNo() %>"></a> <!-- 게시글리스트 테이블의 바디 -->
-	 						<td>image</td>
-	 						<td>1</td>
-	 						<td>제목칸입니다</td>
-	 						<td>운영자</td>
-	 						<td>2021-08-12</td>
-	 						<td>99</td>
-	 						<td><%= list.get(i)%></td> <!-- 게시글 이미지(첨부파일) -->
-	 						<td><%= list.get(i).getBoardNo() %></td> <!-- 게시글 번호 -->
-							<td><%= list.get(i).getBoardTitle() %></td> <!-- 게시글 제목 -->
-							<td><%= list.get(i).getNickName() %></td> <!-- 게시글 작성자 -->
-							<td><%= list.get(i).getBoardDate() %></td> <!-- 게시글 작성일 -->
-							<td><%= list.get(i).getViews() %></td> <!-- 게시글 조회수 -->
-	 					</tr>
-	 				<%
-						}
-					%>
-	 				</tbody>
-	 			</table>	
-	 			<% if(pageNumber != 1){ %>
-	 				<a href="BoardView.jsp?pageNumber=<%= pageNumber -1 %>" class="btn btn-success btn-arraw-left">이전</a>
-	 			<% }if(bDao.nextPage(pageNumber + 1)){ %>
-	 				<a href="BoardView.jsp?pageNumber=<%= pageNumber +1 %>" class="btn btn-success btn-arraw-left">다음</a>
-	 			<% } %>
-	 			<a href="boardWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+	 		<div class="row" style="margin:20px">
+	 			<form method="post" action="views/board/updateAction.jsp?nickName=<%= nickName %>" style="width:100%; max-width:1000px">
+		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
+		 				<thread>
+		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
+		 						<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글수정 양식 </th>
+		 					</tr>
+		 				</thread>
+		 				<tbody>
+		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
+		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50" value="<% board.getBoardTitle(); %>"></td>
+		 					</tr>
+		 					<tr>
+		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px" value="<% board.getBoardContent(); %>"></textarea></td>
+		 					</tr>
+		 				</tbody>
+		 				
+		 			</table>
+		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
+		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
+	 			</form>	
 	 		</div>
             <!-- #/ container -->
         </div>
@@ -452,5 +445,14 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
+
+
+</body>
+</html>
+ 	
+ 
+ 
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 </body>
 </html>
