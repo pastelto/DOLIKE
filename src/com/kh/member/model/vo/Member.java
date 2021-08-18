@@ -113,6 +113,5 @@ public class Member {
 		this.userCreateDate = userCreateDate;
 		this.userStatus = userStatus;
 	}
-
 	
 }
