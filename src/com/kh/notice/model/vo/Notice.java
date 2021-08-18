@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Notice {
 
-	private int noiceNo;			//	NOTICE_NO	NUMBER
+	private int noticeNo;			//	NOTICE_NO	NUMBER
 	private String noticeTitle;		//	NOTICE_TITLE	VARCHAR2(100 BYTE)
 	private String noticeContent;	//	NOTICE_CONTENT	VARCHAR2(4000 BYTE)
 	private String noticeWriter;	//	NOTICE_WRITER	VARCHAR2(20 BYTE)
@@ -16,10 +16,10 @@ public class Notice {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notice(int noiceNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
 			Date createDate, String noticeStatus) {
 		super();
-		this.noiceNo = noiceNo;
+		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.noticeWriter = noticeWriter;
@@ -35,20 +35,30 @@ public class Notice {
 		this.noticeWriter = noticeWriter;
 	}
 
-	public Notice(int noiceNo, String noticeTitle, int count, Date createDate) {
+	public Notice(int noticeNo, String noticeTitle, int count, Date createDate) {
 		super();
-		this.noiceNo = noiceNo;
+		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.count = count;
 		this.createDate = createDate;
 	}
+	
 
-	public int getNoiceNo() {
-		return noiceNo;
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, int count, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
 	}
 
-	public void setNoiceNo(int noiceNo) {
-		this.noiceNo = noiceNo;
+	public int getNoticeNo() {
+		return noticeNo;
+	}
+
+	public void setNoticeNo(int noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 
 	public String getNoticeTitle() {
@@ -101,9 +111,10 @@ public class Notice {
 
 	@Override
 	public String toString() {
-		return "Notice [noiceNo=" + noiceNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
+		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
 				+ ", noticeWriter=" + noticeWriter + ", count=" + count + ", createDate=" + createDate
 				+ ", noticeStatus=" + noticeStatus + "]";
 	}
+
 	
 }
