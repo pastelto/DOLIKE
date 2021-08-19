@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- 소영님 로그인 관련 --%>
+<%@ page import="com.kh.member.model.vo.Member" %>
+<% 	
+ 	Member loginUser = (Member)session.getAttribute("loginUser");
+	String msg = (String)session.getAttribute("msg"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
