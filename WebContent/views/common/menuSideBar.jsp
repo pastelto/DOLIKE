@@ -8,23 +8,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
-    <!-- Favicon icon -->
+    <!-- Favicon icon 
     <link rel="icon" type="image/png" sizes="16x16" href=../../images/do_32.png">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    
     <!-- Custom Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="./css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </head>
 <body>
- 	
+    
         <!--**********************************
-            Nav header start
+            Nav header start  
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index2.jsp" style="background:#eceeef">
                     <b class="logo-abbr"><img src="images/do_32.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/mainLogo_text.png" alt=""></span>
                     <span class="brand-title">
@@ -61,13 +64,12 @@
                         </div>
                     </div>
                 </div>
-				<div class="header-right">
+            <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown show"><a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="true">
+                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
                                 <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">3</span>
                             </a>
->
+
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <span class="badge badge-pill gradient-2">3</span>
@@ -151,14 +153,14 @@
                     </ul>
                 </div>
             </div>
-	        </div>
-		<!--**********************************
-		          Header end ti-comment-alt
-	     ***********************************-->
-	    <!--**********************************
-	            Sidebar start
+           </div>
+      <!--**********************************
+                Header end ti-comment-alt
         ***********************************-->
- 		<div class="nk-sidebar">           
+       <!--**********************************
+               Sidebar start
+        ***********************************-->
+       <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
                     <li>
@@ -167,7 +169,7 @@
                         </a>
                     </li>
                     <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
@@ -189,7 +191,7 @@
                         <!-- 나중에 코드로 구현할 부분 -->
                             <li><a href="./layout-blank.html">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
-					      
+                     
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
@@ -197,22 +199,31 @@
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="./email-inbox.html">팔로잉1</a></li>
-                            <li><a href="./email-read.html">팔로잉2</a></li>
+                            <li><a href="followMain.fl">추천 친구</a></li>
+                            <li><a href="MyFollow.fl">나의 친구</a></li>
                    
                         </ul>
                     </li>
-                    
+                    <li class="mega-menu-sm">
+                        <a class="has-arrow" href="list.ms" aria-expanded="false">
+                            <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="list.ms">쪽지함</a></li>
+                            <li><a href="write.ms">쪽지 보내기</a></li>
+                        </ul>
+                    </li>
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="./app-profile.html">챌린지1</a></li>
+                            <li><a href="challengeMain.ch">진행중인 챌린지</a></li>
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
-					<li>
+
+               		<li>
                         <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
@@ -220,6 +231,6 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
- 
+
 </body>
 </html>

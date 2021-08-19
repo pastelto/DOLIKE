@@ -1,6 +1,7 @@
-package com.kh.member.controller;
+package com.kh.challenge.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
+import com.kh.challenge.model.service.ChallengeService;
+import com.kh.challenge.model.vo.Challenge;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ChallengeMainServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/challengeMain.ch")
+public class ChallengeMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public ChallengeMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +32,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		ArrayList<Challenge> list = new ChallengeService().selectList();
+		request.setAttribute("list", list);
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		
-		System.out.println("loginUser : " + loginUser);
-		
-		if (loginUser != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loguinUser", loginUser);
-
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.setAttribute("msg", "로그인 실패");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
+		view.forward(request, response);
 	}
 
 	/**

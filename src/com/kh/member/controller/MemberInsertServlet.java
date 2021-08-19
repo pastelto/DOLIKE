@@ -47,12 +47,13 @@ public class MemberInsertServlet extends HttpServlet {
 		
 		String[] interests = request.getParameterValues("interest");
 		
-		int interest = 0;
+		int interest = 0; //interests를 String형으로 변환?
+		
 		if (interests != null) {
 			interest = String.join(",", interests);
 		}
 		
-		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interest, userCreateDate, userStatus);
+		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests, userCreateDate, userStatus);
 		
 		int result = new MemberService().insertMember(mem);
 		
