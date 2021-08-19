@@ -41,6 +41,7 @@
 
 </head>
 <body>
+    <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 
 	<div class="content-body" style="height: 600px">
@@ -92,5 +93,7 @@
 		</div>
 	</div>
 	<%@ include file="../common/footer.jsp"%>
+	</div>
+
 </body>
 </html>
