@@ -41,6 +41,7 @@
 </style>
 </head>
 <body>
+<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
 		<div class=ch-body>
@@ -228,5 +229,6 @@
 		}
 	</script>
 	<%@ include file="../common/footer.jsp" %>
+	</div>
 </body>
 </html>

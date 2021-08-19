@@ -61,6 +61,7 @@
 </style>
 </head>
 <body>
+<div id="main-wrapper">
 <%@ include file="../common/menuSidebar.jsp" %>
 
 	<div class="outer">
@@ -175,5 +176,7 @@
 	
 	
 	<%@ include file = "../common/footer.jsp" %>
+	</div>
+
 </body>
 </html>

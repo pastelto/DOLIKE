@@ -38,6 +38,7 @@
 	</style>
 </head>
 <body>
+	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %>
 
 	<div class="outer">
@@ -215,6 +216,6 @@
 	
 	</script>
 	<%@ include file="../common/footer.jsp"%>
-
+	</div>
 </body>
 </html>
