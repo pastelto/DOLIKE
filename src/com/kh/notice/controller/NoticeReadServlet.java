@@ -1,9 +1,6 @@
 package com.kh.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +11,16 @@ import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class NoticeReadServlet
  */
-@WebServlet("/noticeView.no")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/NoticeReadServlet")
+public class NoticeReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public NoticeReadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +29,18 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("출력");
-//		ArrayList<Notice> list = new ArrayList<Notice>();
-//		list.add(new Notice(1, "123", "123", "admin", 1, "Y"));
-		
-//		System.out.println(list);
-//		ArrayList<Member> mem = new ArrayList<Member>();
-//		System.out.println(mem);
+//		int nno=Integer.parseInt(request.getParameter("nno"));
+//		Notice notice = new NoticeService().selectNotice(nno);
 //		
-//		Member m = new Member();
-//		System.out.println(m);
-		
-		ArrayList<Notice> list = new NoticeService().selectList();
-//		
-		request.setAttribute("list", list);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeView.jsp");
-		System.out.println("나와라");
-		view.forward(request, response);
+//		String view = "";
+//		if(notice != null) {
+//			request.setAttribute("notice", notice);
+//			view = "views/notice/noticeDetailView.jsp";
+//		}else {
+//			request.setAttribute("msg", "공지사항 조회에 실패하였습니다.");
+//			view = "views/common/errPage.jsp";
+//		}
+//		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

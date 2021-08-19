@@ -21,9 +21,10 @@ public class NoticeDao {
 	private Properties prop = new Properties();
 
 	public NoticeDao() {
+		String fileName = NoticeDao.class.getResource("/sql/notice/notice-query.properties").getPath();
+		System.out.println("fileName   " + fileName);
 		try {
-			prop = new Properties();
-			prop.load(new FileReader("/sql/notice/notice-query.properties"));
+			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,6 +32,7 @@ public class NoticeDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 	
 	public ArrayList<Notice> selectList(Connection conn) {

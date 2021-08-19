@@ -144,7 +144,7 @@ public class MemberDao {
 	
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
-	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, int interests) {
+	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String interests) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -155,7 +155,7 @@ public class MemberDao {
 			
 			pstmt.setString(1, newPwd);
 			pstmt.setString(2, nickName);
-			pstmt.setInt(3, interests);
+			pstmt.setString(3, interests);
 			pstmt.setString(4, userId);
 			pstmt.setString(5, userPwd);
 			
