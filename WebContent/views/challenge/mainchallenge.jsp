@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge"%>
+    import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
 	 ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
+	 ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 %>
 <!DOCTYPE html>
 <html>
 <head>
+ <title>DO LIKE - 챌린지</title>
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <!-- Custom Stylesheet -->
 <!-- <link href="../css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -196,7 +200,7 @@
 								<li class="item">
 									<div class="item-wrap">
 										<a href="진행중인 챌린지 페이지" class="item-click">
-											<img src="./resources/challenge_upfiles/<%=list.get(i).getAtTitle() %>" 
+											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 										</a>
 										<div class="item-info">
@@ -214,7 +218,7 @@
 								<li class="item">
 									<div class="item-wrap">
 										<a href="진행중인 챌린지 페이지" class="item-click">
-											<img src="./resources/challenge_upfiles/<%=list.get(i).getAtTitle() %>" 
+											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 
 										</a>
@@ -233,7 +237,7 @@
 								<li class="item">
 									<div class="item-wrap">
 										<a href="진행중인 챌린지 페이지" class="item-click">
-											<img src="./resources/challenge_upfiles/<%=list.get(i).getAtTitle() %>" 
+											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 										</a>
 										<div class="item-info">

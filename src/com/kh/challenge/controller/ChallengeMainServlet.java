@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeAttachment;
 
 /**
  * Servlet implementation class ChallengeMainServlet
@@ -34,6 +35,15 @@ public class ChallengeMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Challenge> list = new ChallengeService().selectList();
 		request.setAttribute("list", list);
+		
+		int[] arr = new int[3];
+		
+		for(int i=0; i < list.size(); i++) {
+			arr[i] = list.get(i).getChNo();
+		}
+		
+		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach(arr);
+		request.setAttribute("fileList", fileList);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
 		view.forward(request, response);
