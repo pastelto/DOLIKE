@@ -1,4 +1,4 @@
-package com.kh.message.vo;
+package com.kh.message.model.vo;
 
 public class MsgAttachment {
 

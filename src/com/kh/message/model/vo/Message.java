@@ -1,4 +1,4 @@
-package com.kh.message.vo;
+package com.kh.message.model.vo;
 
 import java.util.Date;
 
@@ -11,8 +11,8 @@ public class Message {
 	private String msgTitle;
 	private String msgContent;
 	private Date recvtime;
-	private char msgStatus;
-	private char msgDel;
+	private String msgStatus;
+	private String msgDel;
 	private String msgFile;
 	
 	public Message() {
@@ -20,7 +20,7 @@ public class Message {
 	}
 	
 	public Message(int msgNo, String userId, String recvId, String senderId, String msgTitle, String msgContent,
-			Date recvtime, char msgStatus, char msgDel) {
+			Date recvtime, String msgStatus, String msgDel) {
 		super();
 		this.msgNo = msgNo;
 		this.userId = userId;
@@ -34,7 +34,7 @@ public class Message {
 	}
 	
 	public Message(int msgNo, String userId, String recvId, String senderId, String msgTitle, String msgContent,
-			Date recvtime, char msgStatus, char msgDel, String msgFile) {
+			Date recvtime, String msgStatus, String msgDel, String msgFile) {
 		super();
 		this.msgNo = msgNo;
 		this.userId = userId;
@@ -48,6 +48,16 @@ public class Message {
 		this.msgFile = msgFile;
 	}
 	
+	
+	public Message(int msgNo, String senderId, String msgTitle, Date recvtime, String msgStatus) {
+		super();
+		this.msgNo = msgNo;
+		this.senderId = senderId;
+		this.msgTitle = msgTitle;
+		this.recvtime = recvtime;
+		this.msgStatus = msgStatus;
+	}
+
 	public int getMsgNo() {
 		return msgNo;
 	}
@@ -104,19 +114,19 @@ public class Message {
 		this.recvtime = recvtime;
 	}
 
-	public char getMsgStatus() {
+	public String getMsgStatus() {
 		return msgStatus;
 	}
 
-	public void setMsgStatus(char msgStatus) {
+	public void setMsgStatus(String msgStatus) {
 		this.msgStatus = msgStatus;
 	}
 
-	public char getMsgDel() {
+	public String getMsgDel() {
 		return msgDel;
 	}
 
-	public void setMsgDel(char msgDel) {
+	public void setMsgDel(String msgDel) {
 		this.msgDel = msgDel;
 	}
 

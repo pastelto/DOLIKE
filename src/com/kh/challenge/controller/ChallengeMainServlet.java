@@ -1,4 +1,4 @@
-package com.kh.notice.controller;
+package com.kh.challenge.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
+import com.kh.challenge.model.service.ChallengeService;
+import com.kh.challenge.model.vo.Challenge;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class ChallengeMainServlet
  */
-@WebServlet("/noticeView.no")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/challengeMain.ch")
+public class ChallengeMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public ChallengeMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +32,10 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("출력");
-//		ArrayList<Notice> list = new ArrayList<Notice>();
-//		list.add(new Notice(1, "123", "123", "admin", 1, "Y"));
-		
-//		System.out.println(list);
-//		ArrayList<Member> mem = new ArrayList<Member>();
-//		System.out.println(mem);
-//		
-//		Member m = new Member();
-//		System.out.println(m);
-		
-		ArrayList<Notice> list = new NoticeService().selectList();
-//		
+		ArrayList<Challenge> list = new ChallengeService().selectList();
 		request.setAttribute("list", list);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeView.jsp");
-		System.out.println("나와라");
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
 		view.forward(request, response);
 	}
 
