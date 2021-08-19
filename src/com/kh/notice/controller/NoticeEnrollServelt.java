@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
-
 /**
- * Servlet implementation class NoticeReadServlet
+ * Servlet implementation class NoticeEnrollServelt
  */
-@WebServlet("/read.no")
-public class NoticeReadServlet extends HttpServlet {
+@WebServlet("/enrollpage.no")
+public class NoticeEnrollServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeReadServlet() {
+    public NoticeEnrollServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +26,8 @@ public class NoticeReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno=Integer.parseInt(request.getParameter("nno"));
-		Notice notice = new NoticeService().selectNotice(nno);
 		
-		String view = "";
-		if(notice != null) {
-			request.setAttribute("notice", notice);
-			view = "views/notice/noticeReadView.jsp";
-		}else {
-			request.setAttribute("msg", "공지사항 조회에 실패하였습니다.");
-			view = "views/common/errPage.jsp";
-		}
-		request.getRequestDispatcher(view).forward(request, response);
+		request.getRequestDispatcher("views/notice/noticeEnrollPage.jsp").forward(request, response);
 	}
 
 	/**
