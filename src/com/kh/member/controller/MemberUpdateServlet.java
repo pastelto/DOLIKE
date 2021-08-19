@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/memberUpdate")
+public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MemberUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +32,29 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		String newPwd = request.getParameter("newPwd");
 		
-		String userId = request.getParameter("userId");
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		String userPwd = request.getParameter("userPwd");
+		String nickName = request.getParameter("nickName");
+		String[] interests = request.getParameterValues("interest");
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		Member updateMem = new MemberService().updateMember(newPwd, userId, userPwd, nickName, interests);
 		
-		System.out.println("loginUser : " + loginUser);
 		
-		if (loginUser != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loguinUser", loginUser);
-
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.setAttribute("msg", "로그인 실패");
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm.jsp");
+		
+		if(updateMem != null) {
+			request.setAttribute("sTag", "Y");
+			request.setAttribute("msg", "성공적으로 비밀번호를 변경하였습니다.");
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			request.getSession().setAttribute("loginUser", updateMem);
+			
+		}else {
+			request.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
 		}
+		
+		view.forward(request, response);
 	}
 
 	/**

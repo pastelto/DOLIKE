@@ -44,7 +44,7 @@ public class MemberService {
 		return mem;
 	}
 	
-	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, int interests) {
+	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String interests) {
 		Connection conn = getConnection();
 		Member updateMem = null;
 		int result = new MemberDao().updateMember(conn, newPwd, userId, userPwd, nickname, interests);

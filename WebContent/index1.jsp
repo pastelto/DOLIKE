@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>DO LIKE - Do Whatever You Like, Community</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <style type="text/css">
 	*{box-sizing:board-box;}
 	<%-- .video-film {box-shadow: rgba(0, 7, 15, 0.7) 0 0 0 9999px; z-index: 100;} --%>

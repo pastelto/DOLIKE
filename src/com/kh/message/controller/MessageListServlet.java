@@ -1,6 +1,7 @@
-package com.kh.member.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
+import com.kh.message.model.service.MessageService;
+import com.kh.message.model.vo.Message;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MessageListServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/list.ms")
+public class MessageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MessageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +32,13 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		ArrayList<Message> list = new MessageService().selectList();
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		request.setAttribute("list", list);
 		
-		System.out.println("loginUser : " + loginUser);
-		
-		if (loginUser != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loguinUser", loginUser);
-
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.setAttribute("msg", "로그인 실패");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("views/message/messageListView.jsp");
+		view.forward(request, response);
 	}
 
 	/**
