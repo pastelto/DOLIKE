@@ -1,5 +1,6 @@
 package com.kh.board.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,17 +9,17 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.PageInfo;
 
 public class BoardDao {
 
 	private Board board = new Board();
 	private Connection conn;
-	private ResultSet rs;
 	private Properties prop = new Properties();
 	
 	public BoardDao() {
@@ -38,7 +39,7 @@ public class BoardDao {
 	public Date getDate() {
 		String sql = prop.getProperty("getDate");
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -56,7 +57,7 @@ public class BoardDao {
 	public int getNext() {
 		String sql = prop.getProperty("getNext");
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -98,7 +99,7 @@ public class BoardDao {
 	public ArrayList<Board> getList(int pageNumber){
 		String sql = prop.getProperty("getList");
 		ArrayList<Board> list = new ArrayList<Board>();
-		
+		ResultSet rs = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, getNext() - (pageNumber -1) * 10); 
@@ -126,7 +127,7 @@ public class BoardDao {
   
 	public boolean nextPage(int pageNumber) {
 		String sql = prop.getProperty("nextPage");
-		
+		ResultSet rs = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, getNext() - (pageNumber -1) * 10); 
@@ -145,7 +146,7 @@ public class BoardDao {
   
 	public Board getBoard(int boardNo) {
 		String sql = prop.getProperty("getBoard");
-		
+		ResultSet rs = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo); 
@@ -201,5 +202,68 @@ public class BoardDao {
 		}
 		
 		return -1;
+	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
+		ArrayList<Board> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+		int endRow = startRow + pi.getBoardLimit()-1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getInt("CATEGORY_NO"),
+									rset.getString("BOARD_TITLE"),
+									rset.getString("USER_ID"),
+									rset.getDate("BOARD_DATE"),
+									rset.getInt("VIEWS")
+									));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 }
