@@ -34,7 +34,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>마이페이지 계정 관리</title>
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <style>
 	.outer{
 		background:black;
@@ -59,43 +61,58 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/menubar.jsp" %>
+<%@ include file="../common/menuSidebar.jsp" %>
 
 	<div class="outer">
 		<br>
 		
 		<h2 align="center">마이페이지</h2>
 		
-		<form id="updateForm" action="<%=request.getContextPath() %>/update.me" method="post">
+		<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post">
 			<table>
 				<tr>
-					<td width="200px">* 아이디</td>
+					<td width="200px">아이디</td>
 					<td><input type="text" maxlength="13" name="userId" value = "<%= userId %>" readonly></td>
-					
 				</tr>
-				
 				<tr>
-					<td>* 이름</td>
-					<td><input type="text" maxlength="5" name="userName" value = "<%= userName %>" required></td>
+					<td>비밀번호</td>
+					<td><input type="password" maxlength="15" name="userPwd" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type="password" maxlength="15" name="checkPwd" required></td>
+					<td><label id = "pwdResult"></label></td>
+				</tr>
+				<tr>
+					<td width="200px">닉네임</td>
+					<td><input type="text" maxlength="13" name="nickName" required></td>
+					<td width="200px">
+						<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
+					</td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" maxlength="10" name="userName" value = "<%= userName %>" readonly></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="text" maxlength="15" name="birthDate" value = "<%= birthDate %>" readonly></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
-					<td><input type="tel" maxlength="11" name="phone" value = "<%= phone %>" placeholder="(-없이)01012345678"></td>
+					<td><input type="tel" maxlength="15" name="phone" value = "<%= phone %>" readonly></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email" value = "<%= email %>"></td>
+					<td><input type="email" name="email" value = "<%= email %>" readonly></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td><input type="text" name="address" value = "<%= address %>" ></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>관심분야</td>
+					<td>관심사</td>
 					<td>
 						<input type="checkbox" id="study" name="interest" value="공부" <%= checkedInterest[0] %>>
 						<label for="study">공부</label>
@@ -126,14 +143,13 @@
 			<div class="btns" align="center">
 				<button type="submit" id="updateBtn">수정하기</button>
 				
-				<button type="button" id = "pwdUpdateBtn" onclick="updatePwd();">비밀번호 변경</button>
+				<!-- <button type="button" id = "pwdUpdateBtn" onclick="updatePwd();">비밀번호 변경</button> -->
 				<button type="button" id = "deleteBtn" onclick="deleteMember();">탈퇴하기</button>
 				
 			</div>
 		</form>
 	</div>
 	<script>
-	
 		function updatePwd(){
 			window.open("<%= request.getContextPath() %>/updatePwdForm.me", "비밀번호 변경창","width=500, height=300");
 		}
@@ -142,7 +158,7 @@
 			
 			var pwd = prompt("현재 비밀번호를 입력하세요.");
 			
-			if("<%= originPwd %>" == pwd){
+			if("<%= userPwd %>" == pwd){
 				var val = confirm("정말로 탈퇴하시겠습니까?");
 				
 				if(val){

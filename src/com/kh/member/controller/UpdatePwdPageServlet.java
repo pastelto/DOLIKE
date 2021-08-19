@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UpdatePwdPageServlet
  */
-@WebServlet("/updatePwdForm")
+@WebServlet("/updatePwdForm.me")
 public class UpdatePwdPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
