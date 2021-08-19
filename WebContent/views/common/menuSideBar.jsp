@@ -210,7 +210,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="list.ms">쪽지함</a></li>
-                            <li><a href="write.ms">쪽지 보내기</a></li>
+                            <li><a href="writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
