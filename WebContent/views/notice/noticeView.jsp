@@ -79,7 +79,7 @@
 				<tbody>					
 					<% if(list.isEmpty()){ %>
 				 	<tr>
-						<td colspan="5">존재하는 공지사항이 없습니다.</td>
+						<td colspan="4">존재하는 공지사항이 없습니다.</td>
 					</tr>
 				 <% }else{  %>
 				 	<% for(Notice n : list){ %>
@@ -142,11 +142,11 @@
 	
 		<div align="center">
 		<!-- 로그인 세션 생성시 이부분 주석 풀기  -->
-			<%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
+		<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
 			
 			<button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기</button> 
-		<% } %> --%>
-		<button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기(확인용)</button> 
+		<% } %>
+		<%-- <button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기(확인용)</button>  --%>
 		</div>
 		
 		

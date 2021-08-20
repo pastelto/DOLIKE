@@ -6,7 +6,6 @@
 	
 	String today = sdf.format(date);
 	
-	String contextPath = request.getContextPath();
 %>
 
 
@@ -15,6 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <title>DO LIKE - 공지사항 등록</title>
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 
 <!-- Custom Stylesheet -->
 <link href="../../css/style.css" rel="stylesheet">
@@ -42,7 +43,7 @@
 <body>
 	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
-	<div class="content-body" style="height: 600px">
+	<div class="content-body">
 		<br>
 		<div class="container-fluid">
 			<div class="row">
