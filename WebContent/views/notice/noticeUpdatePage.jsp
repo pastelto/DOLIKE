@@ -3,7 +3,6 @@
     
 <%
 	Notice n = (Notice)request.getAttribute("notice");
-	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
