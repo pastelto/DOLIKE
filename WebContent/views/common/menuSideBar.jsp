@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- 소영님 로그인 관련 --%>
+<%@ page import="com.kh.member.model.vo.Member" %>
+<% 	
+ 	Member loginUser = (Member)session.getAttribute("loginUser");
+	String msg = (String)session.getAttribute("msg"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,12 +209,12 @@
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
-                        <a class="has-arrow" href="list.ms" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="list.ms">쪽지함</a></li>
-                            <li><a href="write.ms">쪽지 보내기</a></li>
+                            <li><a href="writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
@@ -222,7 +226,6 @@
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
-
                		<li>
                         <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
@@ -231,6 +234,11 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
-
+        
+		<script src="plugins/common/common.min.js"></script>
+	    <script src="js/custom.min.js"></script>
+	    <script src="js/settings.js"></script>
+	    <script src="js/gleek.js"></script>
+	    <script src="js/styleSwitcher.js"></script>
 </body>
 </html>
