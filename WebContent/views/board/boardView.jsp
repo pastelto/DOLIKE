@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter, com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao, java.util.ArrayList" %>
+<%@ page import="java.io.PrintWriter, com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao, java.util.ArrayList, com.kh.member.model.vo.Member;" %>
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -12,6 +12,11 @@
 		
 	String contextPath = request.getContextPath();
 		
+%>
+<%
+	String loginUser = "admin";
+	//Member loginUser = (Member)session.getAttribute("loginUser");
+	String msg = (String)session.getAttribute("msg");
 %>
 
 <!DOCTYPE html>

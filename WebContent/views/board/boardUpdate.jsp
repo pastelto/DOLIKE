@@ -1,7 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="com.kh.board.model.vo.Board" %>
-<%@ page import="com.kh.board.model.dao.BoardDao" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao" %>
+<% 
+	String contextPath = request.getContextPath();
+	Board board = (Board)request.getAttribute("board");
+	Attachment at = (Attachment)request.getAttribute("at");
+
+	String tag = board.getTagName();
+	
+	String[] selected = new String[7];
+	
+	switch(tag){
+	case "옵션1": selected[0] = "selected"; break;
+	case "옵션2": selected[1] = "selected"; break;
+	case "옵션3": selected[2] = "selected"; break;
+	case "옵션4": selected[3] = "selected"; break;
+	case "옵션5": selected[4] = "selected"; break;
+	case "옵션6": selected[5] = "selected"; break;
+	case "옵션7": selected[6] = "selected"; break;
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,7 +43,7 @@
 
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
-	<%
+	<%--
 	
 		String nickName = null;
 		if(session.getAttribute("nickName") != null){
@@ -58,14 +75,15 @@
 			script.println("location.href = 'boardView.jsp'");
 			script.println("</script>");
 		}
-	%>
+	--%>
    
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
 	 		<div class="row" style="margin:20px">
-	 			<form method="post" action="views/board/updateAction.jsp?nickName=<%= nickName %>" style="width:100%; max-width:1000px">
+	 			<form id="updateForm" method="post" action="<%= contextPath %>/update.bo" style="width:100%; max-width:1000px" enctype="multipart/form-data">
+		 			<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
 		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
@@ -74,15 +92,32 @@
 		 				</thread>
 		 				<tbody>
 		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
+		 						<td class="tag-class">
+		 							<select name="tag">
+		 								<option value="1" <%= selected[0] %>>옵션1</option>
+		 								<option value="2" <%= selected[1] %>>옵션2</option>
+		 								<option value="3" <%= selected[2] %>>옵션3</option>
+		 								<option value="4" <%= selected[3] %>>옵션4</option>
+		 							</select>
+		 						</td>
 		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50" value="<% board.getBoardTitle(); %>"></td>
 		 					</tr>
 		 					<tr>
 		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px" value="<% board.getBoardContent(); %>"></textarea></td>
 		 					</tr>
+		 					<tr>
+		 						<th>첨부파일</th>
+		 						<% if(at != null){ %> <!--  기존의 첨부파일이 존재할 경우  -->
+		 							<%= at.getOriginName() %> <br>
+		 							<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
+		 							<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
+		 						<%} %>
+		 						<input type="file" name="upfile">
+		 					</tr>
 		 				</tbody>
 		 				
 		 			</table>
-		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
+		 			<input type="submit" class="btn btn-primary pull-right" value="수정하기"/>
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>

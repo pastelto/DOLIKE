@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.model.vo.Board" %>
-<%@ page import="com.kh.board.model.dao.BoardDao" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
+<% String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,6 +17,12 @@
 	.content-body{
 		padding:5px 0px 0px 30px;
 	}
+	.tag-class{
+		width:10%;
+	}
+	.title-class{
+		width:100%;
+	}
 </style>
 <link href="../../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -27,21 +33,21 @@
 
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
-	<%
+	<%--
 	
 		String userId = null;
 		if(session.getAttribute("userId") != null){
 			userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
 		}
 	
-	%>
+	--%>
   
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
 	 		<div class="row" style="margin:20px">
-	 			<form method="post" action="views/board/writeAction.jsp" style="width:100%; max-width:1000px">
+	 			<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
 		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
@@ -50,15 +56,25 @@
 		 				</thread>
 		 				<tbody>
 		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
+		 						<td class="tag-class">
+		 							<select name="tag">
+		 								<option value="1">옵션1</option>
+		 								<option value="2">옵션2</option>
+		 								<option value="3">옵션3</option>
+		 								<option value="4">옵션4</option>
+		 							</select>
+		 						</td>
+		 						<td class="title-class"><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
 		 					</tr>
-		 					<tr>
-		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
+		 					<tr >
+		 						<td style="text-align:center">내용</td>
+		 						<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
 		 					</tr>
 		 				</tbody>
 		 				
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
+		 			<input type="file" class="btn btn-primary pull-right" name="upfile" />
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>
@@ -69,4 +85,4 @@
         ***********************************-->
  	<%@ include file="../common/footer.jsp" %> 
 </body>
-</html>
+</html> 
