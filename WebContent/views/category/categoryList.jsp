@@ -33,6 +33,7 @@
 
 </head>
 <body>
+<div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
 
 <div class="container-fluid" >
@@ -71,6 +72,8 @@
                             </div>
                         </div>
                     </div>
+                 </div>
+				
 				<br><br>
 		
 
