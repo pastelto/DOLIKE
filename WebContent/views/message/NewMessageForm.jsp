@@ -56,7 +56,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-                        <li class="breadcrumb-item active"><a href="writeForm.ms">쪽지 보내기</a></li>
+                        <li class="breadcrumb-item active"><a href="write.ms">쪽지 보내기</a></li>
                     </ol>
                 </div>
             </div>
