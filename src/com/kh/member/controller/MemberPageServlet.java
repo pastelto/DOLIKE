@@ -15,7 +15,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class MemberPageServlet
  */
-@WebServlet("/mypage")
+@WebServlet("/mypage.me")
 public class MemberPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

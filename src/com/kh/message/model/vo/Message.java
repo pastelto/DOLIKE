@@ -5,7 +5,6 @@ import java.util.Date;
 public class Message {
 
 	private int msgNo;
-	private String userId;
 	private String recvId;
 	private String senderId;
 	private String msgTitle;
@@ -19,11 +18,10 @@ public class Message {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Message(int msgNo, String userId, String recvId, String senderId, String msgTitle, String msgContent,
+	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent,
 			Date recvtime, String msgStatus, String msgDel) {
 		super();
 		this.msgNo = msgNo;
-		this.userId = userId;
 		this.recvId = recvId;
 		this.senderId = senderId;
 		this.msgTitle = msgTitle;
@@ -33,11 +31,10 @@ public class Message {
 		this.msgDel = msgDel;
 	}
 	
-	public Message(int msgNo, String userId, String recvId, String senderId, String msgTitle, String msgContent,
+	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent,
 			Date recvtime, String msgStatus, String msgDel, String msgFile) {
 		super();
 		this.msgNo = msgNo;
-		this.userId = userId;
 		this.recvId = recvId;
 		this.senderId = senderId;
 		this.msgTitle = msgTitle;
@@ -49,9 +46,10 @@ public class Message {
 	}
 	
 	
-	public Message(int msgNo, String senderId, String msgTitle, Date recvtime, String msgStatus) {
+	public Message(int msgNo, String recvId, String senderId, String msgTitle, Date recvtime, String msgStatus) {
 		super();
 		this.msgNo = msgNo;
+		this.recvId = recvId;
 		this.senderId = senderId;
 		this.msgTitle = msgTitle;
 		this.recvtime = recvtime;
@@ -64,14 +62,6 @@ public class Message {
 
 	public void setMsgNo(int msgNo) {
 		this.msgNo = msgNo;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getRecvId() {
@@ -140,7 +130,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [msgNo=" + msgNo + ", userId=" + userId + ", recvId=" + recvId + ", senderId=" + senderId
+		return "Message [msgNo=" + msgNo + ", recvId=" + recvId + ", senderId=" + senderId
 				+ ", msgTitle=" + msgTitle + ", msgContent=" + msgContent + ", recvtime=" + recvtime + ", msgStatus="
 				+ msgStatus + ", msgDel=" + msgDel + ", msgFile=" + msgFile + "]";
 	} 

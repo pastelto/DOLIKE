@@ -44,11 +44,11 @@ public class Notice {
 	}
 	
 
-	public Notice(int noticeNo, String noticeTitle, String noticeWriter, int count, Date createDate) {
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, int count, Date createDate) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
-		this.noticeWriter = noticeWriter;
+		this.noticeContent = noticeContent;
 		this.count = count;
 		this.createDate = createDate;
 	}

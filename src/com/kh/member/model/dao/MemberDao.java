@@ -34,15 +34,16 @@ public class MemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("loginMember");
-		
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
-			
+			System.out.println(userId);
+			System.out.println(userPwd);
 			rset = pstmt.executeQuery();
-			
+			System.out.println(rset);
 			if (rset.next()) {
 				loginUser = new Member(
 						rset.getString("USER_ID"),
@@ -58,6 +59,7 @@ public class MemberDao {
 						);
 						
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
