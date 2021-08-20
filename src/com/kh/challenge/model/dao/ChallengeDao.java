@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -35,6 +36,32 @@ public class ChallengeDao {
 		}
 
 	}
+	
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		PreparedStatement pstmt = null; // 파라미터에서 받아오지 않아도 되기 떄문에 --> 전체 받아올 것 
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery(sql); // 쿼리실행
+			
+			if(rset.next()) {
+				listCount = rset.getInt("CH_NO"); // 컬럼명을 적어도 되고 컬럼인덱스로 적어도 된다. 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+			
+		return listCount;
+	}
+	
 
 	public ArrayList<Challenge> selectList(Connection conn) {
 		
@@ -108,5 +135,7 @@ public class ChallengeDao {
 		
 		return fileList;
 	}
+
+	
 
 }

@@ -199,13 +199,13 @@
 								<%if(i==0) { %>
 								<li class="item">
 									<div class="item-wrap">
-										<a href="진행중인 챌린지 페이지" class="item-click">
+										<a href="<%= request.getContextPath() %>/challengedetail.ch" class="item-click">
 											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 										</a>
 										<div class="item-info">
 											<h4 class="title">
-												<a href="진행중인 챌린지 페이지"><%= list.get(i).getChTitle()%></a>
+												<a href="<%= request.getContextPath() %>/challengedetail.ch"><%= list.get(i).getChTitle()%></a>
 											</h4>
 											<ul class="challenge-period">
 												<li>진행일정 : <%= list.get(i).getStart() %> ~ <%= list.get(i).getEnd() %></li>
@@ -217,14 +217,14 @@
 								<%} else if(i == 1){ %>
 								<li class="item">
 									<div class="item-wrap">
-										<a href="진행중인 챌린지 페이지" class="item-click">
+										<a href="<%= request.getContextPath() %>/challengedetail.ch" class="item-click">
 											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 
 										</a>
 										<div class="item-info">
 											<h4 class="title">
-												<a href="진행중인 챌린지 페이지"><%= list.get(i).getChTitle()%></a>
+												<a href="<%= request.getContextPath() %>/challengedetail.ch"><%= list.get(i).getChTitle()%></a>
 											</h4>
 											<ul class="challenge-period">
 												<li>진행일정 : <%= list.get(i).getStart() %> ~ <%= list.get(i).getEnd() %></li>
@@ -236,13 +236,13 @@
 								<%} else if(i == 2){ %>
 								<li class="item">
 									<div class="item-wrap">
-										<a href="진행중인 챌린지 페이지" class="item-click">
+										<a href="<%= request.getContextPath() %>/challengedetail.ch" class="item-click">
 											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
 											alt="챌린지이미지" class="img-challenge">		
 										</a>
 										<div class="item-info">
 											<h4 class="title">
-												<a href="진행중인 챌린지 페이지"><%= list.get(i).getChTitle()%></a>
+												<a href="<%= request.getContextPath() %>/challengedetail.ch"><%= list.get(i).getChTitle()%></a>
 											</h4>
 											<ul class="challenge-period">
 												<li>진행일정 : <%= list.get(i).getStart() %> ~ <%= list.get(i).getEnd() %></li>

@@ -110,11 +110,11 @@ public class ChallengeDetailServlet extends HttpServlet {
 				
 				
 				PageInfo pi = new PageInfo(rpCount, currentPage, startPage, endPage, maxPage, pageLimit, rpLimit);
-				
-				ArrayList<ChallengeReply> list = new ChallengeService().selectReply(pi);
-				
-				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
+				
+				ArrayList<ChallengeReply> list = new ChallengeService().selectReply(pi);				
+				request.setAttribute("list", list);
+				
 		
 				RequestDispatcher view = request.getRequestDispatcher("views/challenge/challengeDetailView.jsp");
 				view.forward(request, response);

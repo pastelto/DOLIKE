@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 import com.kh.challenge.model.dao.ChallengeDao;
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeAttachment;
@@ -40,14 +41,13 @@ public class ChallengeService {
 	
 	}
 
-	public ArrayList<ChallengeReply> selectDetail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection conn = getConnection();
+		
+		int listCount = new ChallengeDao().getListCount(conn);
+		close(conn);
+		return listCount;
 	}
 
 	public ArrayList<ChallengeReply> selectReply(PageInfo pi) {
