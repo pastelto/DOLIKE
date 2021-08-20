@@ -15,7 +15,7 @@ import java.util.Properties;
 import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgAttachment;
 import com.kh.message.model.vo.MsgPageInfo;
-import com.kh.notice.model.vo.Notice;
+
 
 public class MessageDao {
 	
@@ -46,13 +46,16 @@ public class MessageDao {
 		String sql = prop.getProperty("getMessageList");
 		int startRow = (pi.getCurrentPage()-1)*pi.getMsgLimit()+1;
 		int endRow = startRow + pi.getMsgLimit()-1;
+		String admin = "admin";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, admin);
 			
 			rset = pstmt.executeQuery();
-			
-			// 쿼리
-			// getMessageList=SELECT MSG_NO, SENDER_ID, MSG_TITLE, RECVTIME, MSG_STATUS FROM MESSAGE WHERE USER_ID = ?
+			System.out.println("sql? " + sql);
+			System.out.println("rset? " + rset);
 			while(rset.next()) {
 				list.add(new Message(rset.getInt("MSG_NO"),
 									 rset.getString("RECV_ID"),
@@ -60,10 +63,15 @@ public class MessageDao {
 						 			 rset.getString("MSG_TITLE"),
 						 			 rset.getDate("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
+				
+				System.out.println("list? " + list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
 		}
 		System.out.println("list dao ? " + list);
 		return list;

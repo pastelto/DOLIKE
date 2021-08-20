@@ -71,6 +71,13 @@
                         </div>
                     </div>
                 </div>
+                
+            <% if(loginUser == null) {%>  
+			<div class="loginArea">
+				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/views/member/memberLogin.jsp'">로그인</button>
+			</div>
+
+            <%}else{ %>
             <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
@@ -140,10 +147,10 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void()">
+                                            <a href="<%= request.getContextPath() %>/list.ms">
                                                 <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
@@ -159,6 +166,8 @@
                         </li>
                     </ul>
                 </div>
+               	<%} %> 
+                
             </div>
            </div>
       <!--**********************************
