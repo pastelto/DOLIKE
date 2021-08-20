@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8" import="com.kh.notice.model.vo.Notice"%>
 <%
 	Notice n = (Notice)request.getAttribute("notice");
-	String contextPath = request.getContextPath();
+	
 	//이부분 임시로 넣었음!(admin으로 확인 희망시 admin으로 아래 유저 값 넣으면 됨)
-	String loginUser = "admin";
+	//String loginUser = "admin";
 %>
 <!DOCTYPE html>
 <html>

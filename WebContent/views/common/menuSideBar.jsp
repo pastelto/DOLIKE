@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.member.model.vo.Member" %>
 <% 	
+ 	// Member loginUser = (Member)session.getAttribute("loginUser");
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
+
 %>
 <!DOCTYPE html>
 <html>
