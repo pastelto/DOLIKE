@@ -3,10 +3,9 @@
     import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
     		com.kh.challenge.model.vo.ChallengeReply"%>
 <%
-	Challenge c = (Challenge)request.getAttribute("c");
+	//Challenge c = (Challenge)request.getAttribute("c");
 	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 	ArrayList<ChallengeReply> list = (ArrayList<ChallengeReply>)request.getAttribute("list");
-	String loginUser = "user01";
 %>    
 <!DOCTYPE html>
 <html>
@@ -42,7 +41,7 @@
 </head>
 <body>
 <div id="main-wrapper">
-	<%@ include file="../common/menuSideBar.jsp"%>
+	<%@include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
 		<div class=ch-body>
 			<div class="card mb-3">
@@ -105,38 +104,13 @@
 								height="60" src="images/blog/4.jpg" alt=""></li>
 							<li class="d-inline-block"><img class="rounded" width="60"
 								height="60" src="images/blog/1.jpg" alt=""></li>
-						</ul>
-
-						<div class="media mt-3">
-							<img class="mr-3 circle-rounded circle-rounded"
-								src="images/avatar/4.jpg" width="50" height="50"
-								alt="Generic placeholder image">
-							<div class="media-body">
-								<div class="d-sm-flex justify-content-between mb-2">
-									<h5 class="mb-sm-0">
-										<!-- 작성유저 --> <small class="text-muted ml-3"><!-- 작성일 --></small>
-									</h5>
-									<div class="media-reply__link">
-										<button class="btn btn-transparent p-0 mr-3">
-											<i class="fa fa-thumbs-up"></i>
-										</button>
-										<button class="btn btn-transparent p-0 mr-3">
-											<i class="fa fa-thumbs-down"></i>
-										</button>
-										<button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
-									</div>
-								</div>
-								<p><!-- 댓글 내용 --></p>
-							</div>
-						</div>
+						</ul>						
 					</div>
 				</div>
-
-
 			</div>
 			<!-- 댓글 작성 -->
 			<div class="card-body">
-				<%if(loginUser != null){ %>
+				<%--<%if(loginUser != null){ --%>
 				<form action="#" class="form-profile">
 					<div class="form-group">
 						<textarea class="form-control" name="textarea" id="replyContent"
@@ -153,7 +127,7 @@
 						<button class="btn btn-primary px-3 ml-4" id="addReply">작성완료</button>
 					</div>
 				</form>
-				<%} else { %>
+				<%--<%} else { --%>
 				<form action="#" class="form-profile">
 					<div class="form-group">
 						<textarea readonly class="form-control" name="textarea"
@@ -171,16 +145,16 @@
 						<button disabled class="btn btn-primary px-3 ml-4">작성완료</button>
 					</div>
 				</form>
-				<%} %>
+				<%--<%} --%>
 			</div>
 		</div>
 	</div>
-	<script>
+	<!--  <script>
 		$(function() {
 			selectReplyList();// 함수호출
 			$("#addReply").click(function() {
 				var content = $("#replyContent").val();
-				var cNo =<%=c.getChNo()%>;
+				var cNo =<%--<%=c.getChNo()%>;--%>
 
 				$.ajax({
 					url : "rinsert.ch",
@@ -206,7 +180,7 @@
 			$.ajax({
 				url : "rlist.ch",
 				data : {
-				cNo :<%=c.getChNo()%>; }, 
+				cNo :<%--<%=c.getChNo()%>; }, --%>
 				type : "get",
 				success : function(list) {
 					console.log(list)
@@ -227,7 +201,7 @@
 				}
 			})
 		}
-	</script>
+	</script>-->
 	<%@ include file="../common/footer.jsp" %>
 	</div>
 </body>
