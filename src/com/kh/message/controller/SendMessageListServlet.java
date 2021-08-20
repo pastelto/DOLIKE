@@ -13,19 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.message.model.service.MessageService;
 import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgPageInfo;
-import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class MessageListServlet
+ * Servlet implementation class SendMessageListServlet
  */
-@WebServlet("/list.ms")
-public class MessageListServlet extends HttpServlet {
+@WebServlet("/slist.ms")
+public class SendMessageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageListServlet() {
+    public SendMessageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +33,6 @@ public class MessageListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 		int listCount;			// 총 게시글 갯수
 		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 		int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 
@@ -113,9 +110,8 @@ public class MessageListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 
-		RequestDispatcher view = request.getRequestDispatcher("views/message/messageListView.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/message/sendMsgListView.jsp");
 		view.forward(request, response);
-
 	}
 
 	/**

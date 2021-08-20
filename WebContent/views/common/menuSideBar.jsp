@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.member.model.vo.Member" %>
 <% 	
+ 	// Member loginUser = (Member)session.getAttribute("loginUser");
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -148,7 +150,7 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void()">
+                                            <a href="<%= request.getContextPath() %>/list.ms">
                                                 <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
