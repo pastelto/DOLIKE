@@ -11,16 +11,16 @@ import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeReadServlet
+ * Servlet implementation class NoticeUpdatePageServlet
  */
-@WebServlet("/read.no")
-public class NoticeReadServlet extends HttpServlet {
+@WebServlet("/updatePage.no")
+public class NoticeUpdatePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeReadServlet() {
+    public NoticeUpdatePageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,14 @@ public class NoticeReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno=Integer.parseInt(request.getParameter("nno"));
-		Notice notice = new NoticeService().selectNotice(nno);
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		
+		Notice notice = new NoticeService().selectUpdateNotice(nno);
 		
 		String view = "";
 		if(notice != null) {
 			request.setAttribute("notice", notice);
-			view = "views/notice/noticeReadView.jsp";
+			view = "views/notice/noticeUpdatePage.jsp";
 		}else {
 			request.setAttribute("msg", "공지사항 조회에 실패하였습니다.");
 			view = "views/common/errPage.jsp";

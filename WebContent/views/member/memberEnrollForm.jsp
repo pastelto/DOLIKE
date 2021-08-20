@@ -1,42 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-<style>
-	.outer{
-		background:black;
-		width:600px;
-		height:500px;
-		margin-top:50px;
-		margin-left:auto;
-		margin-right:auto;
-		color:white;
-	}
-	#enrollForm{
-		/* border:1px solid white; */
-		width:100%;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	#enrollForm td:nth-child(1){text-align:right;}
-	#enrollForm input{margin:3px;}
-	
-	#joinBtn{background:yellowgreen;}
-	#goMain{background:orangered;}
-</style>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+	<!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+	<title>회원가입</title>
+
+	<style>
+		.outer{
+			background:black;
+			width:600px;
+			height:500px;
+			margin-top:50px;
+			margin-left:auto;
+			margin-right:auto;
+			color:white;
+		}
+		#enrollForm{
+			/* border:1px solid white; */
+			width:100%;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#enrollForm td:nth-child(1){text-align:right;}
+		#enrollForm input{margin:3px;}
+		
+		#joinBtn{background:yellowgreen;}
+		#goMain{background:orangered;}
+	</style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+	<div id="main-wrapper">
+	<%@ include file="../common/menuSideBar.jsp" %>
 
 	<div class="outer">
 		<br>
 		
 		<h2 align="center">회원가입</h2>
 		
-		<form id="enrollForm" action="<%=request.getContextPath() %>/insert.me" method="post" onsubmit="return joinValidate();">
+		<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
 			<table>
 				<tr>
 					<td width="200px">아이디</td>
@@ -44,11 +54,6 @@
 					<td width="200px">
 						<button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
 					</td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td><input type="text" maxlength="13" name="userName" required></td>
-					<td></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -60,6 +65,18 @@
 					<td><input type="password" maxlength="15" name="checkPwd" required></td>
 					<td><label id = "pwdResult"></label></td>
 				</tr>	
+				<tr>
+					<td>이름</td>
+					<td><input type="text" maxlength="13" name="userName" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td width="200px">닉네임</td>
+					<td><input type="text" maxlength="13" name="nickName" required></td>
+					<td width="200px">
+						<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
+					</td>
+				</tr>
 				<tr>
 					<td>생년월일</td>
 					<td><input type="text" maxlength="15" name="birthDate" required></td>
@@ -74,13 +91,6 @@
 					<td>이메일</td>
 					<td><input type="email" name="email"></td>
 					<td></td>
-				</tr>
-				<tr>
-					<td width="200px">닉네임</td>
-					<td><input type="text" maxlength="13" name="nickName" required></td>
-					<td width="200px">
-						<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
-					</td>
 				</tr>
 				<tr>
 					<td>관심사</td>
@@ -153,7 +163,7 @@
 			return false;
 		}
 		$.ajax({
-			url:"idCheck",
+			url:"idCheck.me",
 			type:"post",
 			data:{userId:userId.val()},
 			success:function(result){
@@ -177,11 +187,11 @@
 	function checkNick(){
 		var userId = $("#enrollForm input[name=nickName]");
 		if(userId.val() == ""){
-			alert("아이디를 입력해주세요.");
+			alert("닉네임을 입력해주세요.");
 			return false;
 		}
 		$.ajax({
-			url:"nickCheck",
+			url:"nickCheck.me",
 			type:"post",
 			data:{nickName:nickName.val()},
 			success:function(result){
@@ -201,8 +211,11 @@
 			}
 		})
 	}
+	
+	//======================연락처, 이메일 중복체크 하기
+	
 	</script>
 	<%@ include file="../common/footer.jsp"%>
-
+	</div>
 </body>
 </html>

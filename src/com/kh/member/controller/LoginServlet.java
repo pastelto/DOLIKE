@@ -16,7 +16,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/login.me")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,6 +37,9 @@ public class LoginServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		System.out.println(userId);
+		System.out.println(userPwd);
+		
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
@@ -44,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loguinUser", loginUser);
+			session.setAttribute("loginUser", loginUser);
 
 			response.sendRedirect(request.getContextPath());
 		} else {

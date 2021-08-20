@@ -9,6 +9,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 public class MyFileRenamePolicy implements FileRenamePolicy{
 
 	@Override
+
 	public File rename(File originFile) { //업로드할 원본파일이 전달 됨
 
 		String originName = originFile.getName();
@@ -29,5 +30,6 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
 		File renameFile = new File(originFile.getParent(),fileName);
 		return renameFile;
 	}
+
 
 }

@@ -14,7 +14,7 @@ import com.kh.member.model.service.MemberService;
 /**
  * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/idCheck")
+@WebServlet("/idCheck.me")
 public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
