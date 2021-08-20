@@ -3,7 +3,6 @@
 	import="java.util.ArrayList, com.kh.notice.model.vo.*"%>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); 
-	String contextPath = request.getContextPath();
 	
 	NoticePageInfo pi = (NoticePageInfo)request.getAttribute("pi");
 	

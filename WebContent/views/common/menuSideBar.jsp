@@ -4,6 +4,7 @@
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -203,8 +204,8 @@
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="followMain.fl">추천 친구</a></li>
-                            <li><a href="MyFollow.fl">나의 친구</a></li>
+                            <li><a href="<%= request.getContextPath() %>/followMain.fl">추천 친구</a></li>
+                            <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
                    
                         </ul>
                     </li>
@@ -213,8 +214,8 @@
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="list.ms">쪽지함</a></li>
-                            <li><a href="writeForm.ms">쪽지 보내기</a></li>
+                            <li><a href="<%= request.getContextPath() %>/list.ms">쪽지함</a></li>
+                            <li><a href="<%= request.getContextPath() %>/writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu-sm">
@@ -222,12 +223,12 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
                		<li>
-                        <a href="noticeView.no" aria-expanded="false">
+                        <a href="<%= request.getContextPath() %>/noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
