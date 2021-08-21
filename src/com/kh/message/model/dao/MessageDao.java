@@ -36,7 +36,7 @@ public class MessageDao {
 	}
 	
 	// 받은 쪽지 목록 가져오기
-	public ArrayList<Message> selectList(Connection conn, MsgPageInfo pi){ 
+	public ArrayList<Message> selectList(Connection conn, MsgPageInfo pi, String userId){ 
 		
 		ArrayList<Message> list = new ArrayList<Message>();
 		
@@ -46,12 +46,12 @@ public class MessageDao {
 		String sql = prop.getProperty("getMessageList");
 		int startRow = (pi.getCurrentPage()-1)*pi.getMsgLimit()+1;
 		int endRow = startRow + pi.getMsgLimit()-1;
-		String admin = "admin";
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			pstmt.setString(3, admin);
+			pstmt.setString(3, userId);
 			
 			rset = pstmt.executeQuery();
 			System.out.println("sql? " + sql);
@@ -188,17 +188,18 @@ public class MessageDao {
 	}
 
 	// 받은 메세지 개수
-	public int getMessageCount(Connection conn) {  
+	public int getMessageCount(Connection conn, String userId) {  
 		int count = 0;
-		Statement stmt =  null;
+		PreparedStatement pstmt =  null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getMessageCount");
-		
-		try {
-			stmt = conn.createStatement();
 			
-			rset = stmt.executeQuery(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				count = rset.getInt(1);
@@ -208,7 +209,7 @@ public class MessageDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return count;
 	}

@@ -17,10 +17,10 @@ import com.kh.notice.model.vo.Notice;
 
 public class MessageService {
 
-	public ArrayList<Message> selectList(MsgPageInfo pi){
+	public ArrayList<Message> selectList(MsgPageInfo pi, String userId){
 		Connection conn = getConnection();
 		
-		ArrayList<Message> list = new MessageDao().selectList(conn, pi);
+		ArrayList<Message> list = new MessageDao().selectList(conn, pi, userId);
 		close(conn);
 		
 		return list;
@@ -49,10 +49,10 @@ public class MessageService {
 	}
 	
 	
-	public int getMessageCount() { // 받은 쪽지 목록 개수
+	public int getMessageCount(String userId) { // 받은 쪽지 목록 개수
 		Connection conn = getConnection();
 		
-		int count = new MessageDao().getMessageCount(conn);
+		int count = new MessageDao().getMessageCount(conn, userId);
 		close(conn);
 		
 		return count;
