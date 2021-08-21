@@ -4,13 +4,15 @@
 <%
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
 	
-	MsgPageInfo pi = (MsgPageInfo)request.getAttribute("pi");
+	MsgPageInfo mpi = (MsgPageInfo)request.getAttribute("pi");
 	
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
+	int listCount = mpi.getListCount();
+	int currentPage = mpi.getCurrentPage();
+	int endPage = mpi.getEndPage();
+	int maxPage = mpi.getMaxPage();
+	int startPage = mpi.getStartPage();
+	
+	int index = 1;
 	
 %>
 <!DOCTYPE html>
@@ -136,18 +138,18 @@
 												<th>번호</th>
 												<th>보낸사람</th>
 												<th>제목</th>
-												<th>받은 시각</th>
+												<th>받은 날짜</th>
 											</tr>
 										</thead>
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="5">받은 쪽지가 없습니다.</td>
+												<td colspan="4">받은 쪽지가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<td><%= m.getMsgNo() %></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -164,46 +166,48 @@
                         </div>
                     </div>
                 </div>
-					<div>
-					<ul class="pagination justify-content-center">
-						<!-- 맨앞으로 -->
-						<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.ms?currentPage=1"> &laquo; </a></li>
-						
-						<!-- 이전페이지 -->
-						<% if(currentPage == 1) {%>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-						<% }else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-						<%} %>
-						
-						
-						<!-- 페이지 목록 -->
-						<%for(int p=startPage; p<=endPage; p++){ %>
-						
-							<%if(p == currentPage){ %>
-								<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-							<%}else{ %>
-								<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.ms?currentPage=<%= p %>"><%= p %> </a></li>
-							<%} %>
-							
-						<%} %>
-						
-						
-						<!-- 다음페이지 -->
-						<% if(currentPage == maxPage) {%>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-						<% }else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-						<%} %>
-						
-						<!-- 맨뒤로 -->
-						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
-					</ul>
-				</div>
+                				<!-- 페이지 처리 -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 맨앞으로 -->
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.ms?currentPage=1"> &laquo; </a></li>
+				
+				<!-- 이전페이지 -->
+				<% if(currentPage == 1) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<%} %>
+				
+				
+				<!-- 페이지 목록 -->
+				<%for(int p=startPage; p<=endPage; p++){ %>
+				
+					<%if(p == currentPage){ %>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+					<%}else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.ms?currentPage=<%= p %>"><%= p %> </a></li>
+					<%} %>
+					
+				<%} %>
+				
+				
+				<!-- 다음페이지 -->
+				<% if(currentPage == maxPage) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<%} %>
+				
+				<!-- 맨뒤로 -->
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
+			</ul>
+		</div>
             </div>
 		
             <!-- #/ container -->
         </div>
+        
         <!--**********************************
             Content body end
         ***********************************-->
