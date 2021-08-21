@@ -3,6 +3,7 @@ package com.kh.category.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.category.model.service.CategoryService;
-import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
 import com.kh.category.model.vo.CategoryPageInfo;
 
@@ -18,7 +18,7 @@ import com.kh.category.model.vo.CategoryPageInfo;
 /**
  * Servlet implementation class CategoryListServlet
  */
-@WebServlet("/list.ca")
+@WebServlet("/categoryList.ca")
 public class CategoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -115,8 +115,11 @@ public class CategoryListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("ca", ca); // 페이지 정보를 담음
 		
-		request.getRequestDispatcher("views/category/categoryList.jsp").forward(request, response); // 담은 정보를 넘겨줌
-		
+		//request.getRequestDispatcher("views/category/categoryList.jsp").forward(request, response); // 담은 정보를 넘겨줌
+		RequestDispatcher view = request.getRequestDispatcher("views/category/categoryList.jsp");
+		System.out.println(list);
+		System.out.println("안녕하세요.");
+		view.forward(request, response);
 	}
 
 	/**

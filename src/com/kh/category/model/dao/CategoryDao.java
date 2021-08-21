@@ -67,7 +67,7 @@ public class CategoryDao {
 
 	public ArrayList<Category> categoryList(Connection conn, CategoryPageInfo ca) {
 		
-		ArrayList<Category> list = new ArrayList<>();
+		ArrayList<Category> list = new ArrayList<Category>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -84,18 +84,45 @@ public class CategoryDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Category(rset.getInt("BOARD_NO"), //Board의 생성자를 사용해서
-								      rset.getString("CATEGORY_NAME")
-								      // 추후에 게시판과 연동 시켜야 할것으로 보임 일단 카테고리만 보이게끔 작성
+				list.add(new Category(rset.getInt("CATEGORY_NO"), 
+								      rset.getString("CATEGORY_NAME")								      
 						));
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // 화면에 뛰우기 위함
-		
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
 		return list;
+	}
+
+	public int insertCategory(Connection conn, Category cat) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCategory");
+		System.out.println(sql);
+		System.out.println("상황파악중");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cat.getCategoryName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

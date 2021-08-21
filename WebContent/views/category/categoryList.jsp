@@ -3,6 +3,8 @@
 
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	String contextPath = request.getContextPath();
+
 	CategoryPageInfo ca = (CategoryPageInfo)request.getAttribute("ca");
 	
 	int listCount = ca.getListCount();
@@ -26,10 +28,42 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
 <!-- Custom Stylesheet -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<style>
+	#writeBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	#writeBtn:hover {
+		color: #78c2ad;
+		background-color: #fff;
+	}
+	#pageTag {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#pageTag:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	#pageDisable {
+		color: gray;
+    	background-color: #ced4da;
+    	border-color: #ced4da;
+	}
+	#categoryCreateBtn {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+</style>
 
 </head>
 <body>
@@ -50,7 +84,6 @@
                                             <tr>
                                                 <th>번호</th>
                                                 <th>카테고리</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,13 +102,55 @@
                                         </tbody>
                                     </table>
                                 </div>
+                             	<div class="general-button" align="right">
+                             		<%--<% if(loginUser != null){ --%>
+                            		<button id="categoryCreateBtn" onclick="location.href='enrollForm.ca'" type="button" class="btn mb-1 btn-primary">게시판 생성하기</button>
+									<%--<% } --%>
+								</div>
                             </div>
                         </div>
                     </div>
                  </div>
-				
-				
-		
+                
+		<br><br>
 
+		
+			<!-- 페이지 처리 -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 맨앞으로 -->
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/categoryList.ca?currentPage=1"> &laquo; </a></li>
+				
+				<!-- 이전페이지 -->
+				<% if(currentPage == 1) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<%} %>
+				
+				
+				<!-- 페이지 목록 -->
+				<%for(int p=startPage; p<=endPage; p++){ %>
+				
+					<%if(p == currentPage){ %>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+					<%}else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/categoryList.ca?currentPage=<%= p %>"><%= p %> </a></li>
+					<%} %>
+					
+				<%} %>
+				
+				
+				<!-- 다음페이지 -->
+				<% if(currentPage == maxPage) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<%} %>
+				
+				<!-- 맨뒤로 -->
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
+			</ul>
+		</div>
 </body>
 </html>
