@@ -79,7 +79,7 @@
                 
             <% if(loginUser == null) {%>  
 			<div class="loginArea">
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/views/member/memberLogin.jsp'">로그인</button>
+				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
 			</div>
 
             <%}else{ %>
@@ -156,15 +156,15 @@
                                         </li>
                                         <li>
                                             <a href="<%= request.getContextPath() %>/list.ms">
-                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                                <i class="icon-envelope-open"></i> <span>쪽지함</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-lock"></i> <span>진행중인 챌린지</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -44,7 +44,7 @@ public class MemberService {
 		return mem;
 	}
 	
-	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String interests) {
+	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String[] interests) {
 		Connection conn = getConnection();
 		Member updateMem = null;
 		int result = new MemberDao().updateMember(conn, newPwd, userId, userPwd, nickname, interests);
@@ -85,5 +85,39 @@ public class MemberService {
 		
 		return result;
 	}
+
+
+	public int nickCheck(String nickName) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().nickCheck(conn, nickName);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int phoneCheck(String phone) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().phoneCheck(conn, phone);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int emailCheck(String email) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().emailCheck(conn, email);
+		
+		close(conn);
+		
+		return result;
+	}
+
 	
 }

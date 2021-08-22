@@ -18,22 +18,6 @@
 	 -->
 	
 	<title>로그인</title>
-	<style>
-		.loginArea{
-			width:800px;
-			height:500px;
-			background:#eceeef;
-			color:white;
-			margin:auto;
-			margin-top:50px;
-		}
-		#loginForm{width:60%; margin:auto;}
-		#loginForm>table{border:1px solid white;}
-		#loginForm>table input{
-			width:100%;
-			box-sizing:border-box;
-		}
-	</style>
 	<script>
 		$(function(){
 			if(msg != "null"){
@@ -58,49 +42,63 @@
 	
 	</script>
 </head>
-<body>
-  	<div id="main-wrapper">
-	<%@ include file="../common/menuSideBar.jsp" %> 
-	
-	<div class="loginArea">
-		<br>
-		
-		<h2 align="center">로그인</h2>
-		<% if(loginUser == null) {%>
-		<form id="loginForm" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
-			<table>
-				<tr>
-					<th><label for="userId" style="color:white;">아이디</label></th>
-					<td><input id="userId" type="text" name="userId"></th>
-				</tr>
-				<tr>
-					<th><label for="userPwd" style="color:white;">비밀번호</label></th>
-					<td><input id="userPwd" type="password" name="userPwd"></th>
-				</tr>
-			</table>
-			
-			<div class = "btns" align="center">
-				<button id="loginBtn" type="submit">로그인</button>
-				<button id="enrollBtn" type="button" onclick="enrollPage();">회원가입</button>
-			</div>
-		</form>
-		<%}else{ %>
-			<div id="userInfo">
-				<b style="color:white;"><%= loginUser.getUserName() %>님</b>의 방문을 환영합니다.
-				<br><br>
 
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/index2.jsp'">메인으로 가기</button>
-			</div>
-		<%} %>
-	
+<body class="h-100">
+	<div id="main-wrapper">
+	<%@ include file="../common/menuSideBar.jsp" %> 
+    
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <a class="text-center"> <h4>로그인</h4></a>
+                                <form class="mt-5 mb-5 login-input" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
+                                    <div class="form-group">
+                                        <input id="userId" name="userId" type="text" class="form-control" placeholder="아이디">
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="userPwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호">
+                                    </div>
+                                    <button class="btn login-form__btn submit w-100" type="submit">로그인</button>
+                                </form>
+                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary">회원가입</a> 하러가기</p>
+                                <p class="mt-5 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary">공지사항</a> 보러가기</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%@ include file="../common/footer.jsp" %>
 	</div>
-	<script type="text/javascript">
-		function enrollPage(){
-			location.href = "<%= request.getContextPath()%>/enrollForm.me";
-		}
-	</script>
-	
-	<%@ include file="../common/footer.jsp" %>
-	</div>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
 </body>
 </html>
