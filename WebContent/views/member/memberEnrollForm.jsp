@@ -116,15 +116,31 @@
 				                                        <div class="form-group">
 				                                            <div class="form-check mb-3">
 				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">Option 1</label>
+				                                                    <input type="checkbox" class="form-check-input" value="">공부</label>
 				                                            </div>
 				                                            <div class="form-check mb-3">
 				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">Option 2</label>
+				                                                    <input type="checkbox" class="form-check-input" value="">건강</label>
+				                                            </div>
+				                                            <div class="form-check mb-3">
+				                                                <label class="form-check-label">
+				                                                    <input type="checkbox" class="form-check-input" value="">여행</label>
+				                                            </div>
+				                                            <div class="form-check mb-3">
+				                                                <label class="form-check-label">
+				                                                    <input type="checkbox" class="form-check-input" value="">요리</label>
+				                                            </div>
+				                                            <div class="form-check mb-3">
+				                                                <label class="form-check-label">
+				                                                    <input type="checkbox" class="form-check-input" value="">동물</label>
+				                                            </div>
+				                                            <div class="form-check mb-3">
+				                                                <label class="form-check-label">
+				                                                    <input type="checkbox" class="form-check-input" value="">패션뷰티</label>
 				                                            </div>
 				                                            <div class="form-check disabled">
 				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="" disabled="disabled">Disabled</label>
+				                                                    <input type="checkbox" class="form-check-input" value="">기타</label>
 				                                            </div>
 				                                        </div>
 				                                    </form>

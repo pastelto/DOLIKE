@@ -80,6 +80,7 @@
                                     <button class="btn login-form__btn submit w-100" type="submit">로그인</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary">회원가입</a> 하러가기</p>
+                                <p class="mt-5 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary">공지사항</a> 보러가기</p>
                             </div>
                         </div>
                     </div>
