@@ -41,7 +41,7 @@ public class BoardInsertServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10*1024*1024; //10M byte 
 			String resources = request.getSession().getServletContext().getRealPath("/resources"); //로컬경로 
-			String savePath = resources + "\\board_upfiles\\";
+			String savePath = resources + "//board_upfiles//";
 			System.out.println("savePath : " + savePath);
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
@@ -50,8 +50,7 @@ public class BoardInsertServlet extends HttpServlet {
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
 			
-			//String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-			String userId = "admin";
+			String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 			
 			
 			Board b = new Board();
