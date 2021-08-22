@@ -2,26 +2,29 @@ package com.kh.message.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
 import com.kh.message.model.vo.Message;
+import com.kh.message.model.vo.MsgAttachment;
 
 /**
- * Servlet implementation class RecMessageSelectServlet
+ * Servlet implementation class RecvMessageDetailServlet
  */
-@WebServlet("/rlist.ms")
-public class RecMessageSelectServlet extends HttpServlet {
+@WebServlet("/rread.ms")
+public class RecvMessageDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecMessageSelectServlet() {
+    public RecvMessageDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +33,23 @@ public class RecMessageSelectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int mno=Integer.parseInt(request.getParameter("mno"));
-		Message message = new MessageService().selectMessage(mno);
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+
+		Message m = new MessageService().msgReadStatus(mno, userId);
+		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
 		
-		String view = "";
-		if(message != null) {
-			request.setAttribute("message", message);
-			view = "views/notice/messageListView.jsp";
-		}else {
-			request.setAttribute("msg", "쪽지함 조회에 실패하였습니다.");
-			view = "views/common/errorPage.jsp";
+		if(m != null) {
+			request.setAttribute("message", m);
+			request.setAttribute("mat", mat);
+			
+			request.getRequestDispatcher("views/message/recvMessageDetailView.jsp").forward(request, response);
+		} else {
+			request.setAttribute("msg", "쪽지 상세조회 실패");
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

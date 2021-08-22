@@ -16,16 +16,16 @@ import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgPageInfo;
 
 /**
- * Servlet implementation class SendMessageListServlet
+ * Servlet implementation class DeleteMessageListServlet
  */
-@WebServlet("/slist.ms")
-public class SendMessageListServlet extends HttpServlet {
+@WebServlet("/dlist.ms")
+public class DeleteMessageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMessageListServlet() {
+    public DeleteMessageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,7 @@ public class SendMessageListServlet extends HttpServlet {
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 
-		listCount = new MessageService().getSendMessageCount(userId);
+		listCount = new MessageService().getDeleteMessageCount(userId);
 		
 		currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
@@ -64,11 +64,11 @@ public class SendMessageListServlet extends HttpServlet {
 		
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
 		
-		ArrayList<Message> list = new MessageService().selectSendList(pi, userId);
+		ArrayList<Message> list = new MessageService().selectDeleteList(pi, userId);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 
-		RequestDispatcher view = request.getRequestDispatcher("views/message/sendMsgListView.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/message/deleteMsgListView.jsp");
 		view.forward(request, response);
 	}
 
