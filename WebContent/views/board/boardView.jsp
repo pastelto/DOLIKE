@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter, com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao, java.util.ArrayList, com.kh.member.model.vo.Member;" %>
+<%@ page import="java.io.PrintWriter, com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao, java.util.ArrayList, com.kh.member.model.vo.Member " %>
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -13,11 +13,7 @@
 	String contextPath = request.getContextPath();
 		
 %>
-<%
-	String loginUser = "admin";
-	//Member loginUser = (Member)session.getAttribute("loginUser");
-	String msg = (String)session.getAttribute("msg");
-%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -81,24 +77,7 @@
 			 				</tr>
 			 				<% } %>
 		 				<% } %>
-		 				<%--
-	 					<tr><a href="view.jsp?bbsId=<%= list.get(i).getBoardNo() %>"></a> <!-- 게시글리스트 테이블의 바디 -->
-	 						<td>image</td>
-	 						<td>1</td>
-	 						<td>제목칸입니다</td>
-	 						<td>운영자</td>
-	 						<td>2021-08-12</td>
-	 						<td>99</td>
-	 						
-	 						<td><%= list.get(i)%></td> <!-- 게시글 이미지(첨부파일) -->
-	 						<td><%= list.get(i).getBoardNo() %></td> <!-- 게시글 번호 -->
-							<td><%= list.get(i).getBoardTitle() %></td> <!-- 게시글 제목 -->
-							<td><%= list.get(i).getNickName() %></td> <!-- 게시글 작성자 -->
-							<td><%= list.get(i).getBoardDate() %></td> <!-- 게시글 작성일 -->
-							<td><%= list.get(i).getViews() %></td> <!-- 게시글 조회수 -->
-							 
-	 					</tr>
-	 				 --%>
+		 				
 	 				</tbody>
 	 			</table>	
 	 				
@@ -133,12 +112,14 @@
 					<!-- 맨 끝으로 (>>) -->
 					<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
 	 			</div>
-	 			<div align="center">
+	 			<div class="btn btn-primary pull-right">
 				<% if(loginUser != null){ %>
 				<button onclick="location.href='enrollForm.bo'">작성하기</button>
 				<% } %>
 				</div>
-	 			<a href="boardWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+				<div>
+	 			<a href="enrollForm.bo" class="btn btn-primary pull-right">글쓰기</a>
+	 			</div>
 	 		</div>
 
         </div>
