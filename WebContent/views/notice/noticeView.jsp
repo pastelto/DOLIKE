@@ -67,7 +67,7 @@
 			<div class="table-responsive">
 			<div>
 			<table class="table table-hover" style="text-align: center;">
-				<caption style="caption-side: top; text-align: center"><h1 style="color: #78c2ad""><b>공지사항</b></h1></caption>
+				<caption style="caption-side: top; text-align: center"><h1 style="color: #78c2ad"><b>공지사항</b></h1></caption>
 				<thead>
 					<tr style="background-color: #78c2ad; color: white;">
 						<th>#</th>

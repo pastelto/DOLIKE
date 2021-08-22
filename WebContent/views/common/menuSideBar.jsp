@@ -26,6 +26,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script>
+	function msgLoginerror(){
+		alert("로그인 후 이용가능합니다.");
+	}
+</script>
 </head>
 <body>
     
@@ -220,7 +225,14 @@
                    
                         </ul>
                     </li>
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
+                            <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
+                        </a>
+                    </li>
+                    <%}else{ %>
+                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
@@ -229,6 +241,7 @@
                             <li><a href="<%= request.getContextPath() %>/writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
