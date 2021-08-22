@@ -202,4 +202,6 @@ public class BoardDao {
 		
 		return -1;
 	}
+
+	
 }

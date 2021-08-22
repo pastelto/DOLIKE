@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.category.model.service.CategoryService;
+import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
 import com.kh.category.model.vo.CategoryPageInfo;
 

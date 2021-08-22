@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.category.model.vo.*"%>
 <%
-
+	Category c = (Category)request.getAttribute("c");
 	String contextPath = request.getContextPath();
 
 %>
@@ -24,13 +24,13 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
 <style>
-	#formSize {
+	#formSizeDetail {
 		height: 1000px;
 		
 	}
 	
 
-	#insertCategoryForm {		
+	#detailCategoryForm {		
 		
 	 	display: grid;
  	 	place-items: center;
@@ -38,13 +38,25 @@
 		
 	}
 	
-	#caForm {
+	#caFormDetail {
 		height: 200px;
 		width: 600px;
 	}
 	
 	
-	#categoryCreateBtn {
+	#categoryUpdateBtn {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	
+	#categoryDeleteBtn {
+		color: #fff;
+		background-color: #FF0033;
+		border-color: #FF0033;
+	}
+	
+	#categoryListBtn {
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
@@ -55,26 +67,46 @@
 <body>
 <div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-<div class="container-fluid" id="formSize">
+<div class="container-fluid" id="formSizeDetail">
 	<div class="row">
-<div id="insertCategoryForm" style="margin-left: auto; margin-right: auto;">
+<div id="detailCategoryForm" style="margin-left: auto; margin-right: auto;">
 <div class="col-lg-12" >
                         <div class="card" >
-                            <div class="card-body"id="caForm">
-                                <h4 class="card-title">게시판 생성하기</h4>
+                            <div class="card-body"id="caFormDetail">
+                                <h4 class="card-title">카테고리 확인</h4>
                                 <form action="<%= contextPath %>/insert.ca" method="post" >
                                 <div class="basic-form">
                                         <div class="form-group">
-                                            <label>생성할 게시판의 이름을 작성해주세요.</label>
-                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caTitle"></input>
+                                            <label>카테고리를 확인하세요.</label>
+                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caTitleDetail" value="<%= c.getCategoryName() %>"></input>
                                         </div>
                                     <div class="general-button" align="center">
-                             		<%--<% if(loginUser != null){ --%>
-                            		<button id="categoryCreateBtn"  type="submit" class="btn mb-1 btn-primary">게시판 생성하기</button>
+                                    <button id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/list.ca?currentPage=1';">수정하기</button>
+                                    
+                                    
+									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
+                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary">수정하기</button>
+									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary">삭제하기</button>									
 									<%--<% } --%>
 								</div>
                                 </div>
                                  </form>
+                                 
+                                 <form action="" id="postForm" method="post">
+								<input type="hidden" name="cno" value="<%= c.getCategoryNo() %>">
+								</form>
+								<script>
+									function updateForm(){
+										$("#postForm").attr("action", "<%=contextPath%>/updateForm.ca");
+										$("#postForm").submit();
+									}
+									
+									function deleteBoard(){
+										$("#postForm").attr("action", "<%=contextPath%>/deleteC.ca");
+										$("#postForm").submit();
+									}
+								</script>
+                                 
                             </div>
                         </div>
                     </div>

@@ -11,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.category.model.service.CategoryService;
 import com.kh.category.model.vo.Category;
-import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class CategoryInsertServlet
+ * Servlet implementation class CategoryDetailServlet
  */
-@WebServlet("/insert.ca")
-public class CategoryInsertServlet extends HttpServlet {
+@WebServlet("/detail.ca")
+public class CategoryDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryInsertServlet() {
+    public CategoryDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +32,20 @@ public class CategoryInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		System.out.println("1caNo 값 확인중");
+		int cno = Integer.parseInt(request.getParameter("cno")); // jps 파일에서 선택한 카테고리 정보를 받아온다.
 		
+		Category c = new CategoryService().selectCategory(cno);
 		
-		String caTitle = request.getParameter("caTitle");
-		
-		Category cat = new Category(caTitle);
-		
-		int result = new CategoryService().insertCatogory(cat);
-		System.out.println("categoryInsertServlet 확인중");
-		System.out.println(result);
-		if(result > 0) {
-			request.getSession().setAttribute("msg", "새로운 개시판 등록 성공!");
-			response.sendRedirect("categoryList.ca");
+		if(c != null) {
+			request.setAttribute("c", c);
+			request.getRequestDispatcher("views/category/categoryDetailView.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "새로운 개시판 등록 실패!!");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "카테고리 조회 실패");
+	         
+	        RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	        view.forward(request, response);
 		}
-	
+		
 	}
 
 	/**

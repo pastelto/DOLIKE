@@ -94,7 +94,7 @@
                                             <%}else{ %>
 												<% for(Category c : list){ %>
                                             <tr>
-                                                <th><%= c.getCategoryNo() %></th>
+                                                <td><%= c.getCategoryNo() %></td>
                                                 <td><%= c.getCategoryName() %></td>                                             
                                             </tr>
                                             	<%} %>
@@ -104,7 +104,7 @@
                                 </div>
                              	<div class="general-button" align="right">
                              		<%--<% if(loginUser != null){ --%>
-                            		<button id="categoryCreateBtn" onclick="location.href='enrollForm.ca'" type="button" class="btn mb-1 btn-primary">게시판 생성하기</button>
+                            		<button id="categoryCreateBtn" onclick="location.href='<%= contextPath %>/enrollForm.ca'"  class="btn mb-1 btn-primary">게시판 생성하기</button>
 									<%--<% } --%>
 								</div>
                             </div>
@@ -152,5 +152,15 @@
 				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
+		<script>
+		<%if(!list.isEmpty()){ %>
+		$(function(){
+			$(".table>tbody>tr").click(function(){
+				var cno = $(this).children().eq(0).text();
+				location.href="<%= contextPath %>/detail.ca?cno=" +cno;
+			})
+		})
+		<%}%>
+	</script>
 </body>
 </html>
