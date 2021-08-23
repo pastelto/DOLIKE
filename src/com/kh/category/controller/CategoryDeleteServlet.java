@@ -36,7 +36,7 @@ public class CategoryDeleteServlet extends HttpServlet {
 		int result = new CategoryService().deleteCategory(cid);
 		
 		if(result > 0) {
-			response.sendRedirect("categroyList.ca");
+			response.sendRedirect("categoryList.ca");
 		}else {
 			 request.setAttribute("msg", "카테고리 삭제 실패");
 	         

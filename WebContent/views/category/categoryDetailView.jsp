@@ -83,8 +83,8 @@
                                     <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
                                    	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
-                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary"  >수정하기</button>
-									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary" >삭제하기</button>									
+                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary" onclick="updateCategoryForm()">수정하기</button>
+									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary" onclick="deleteCategory()">삭제하기</button>									
 									<%--<% } --%>
 								</div>
                                 </div>
@@ -94,12 +94,12 @@
 								<input type="hidden" name="cno" value="<%= c.getCategoryNo() %>">
 								</form>
 								<script>
-									function updateForm(){
+									function updateCategoryForm(){
 										$("#postForm").attr("action", "<%=contextPath%>/updateForm.ca");
 										$("#postForm").submit();
 									}
 									
-									function deleteBoard(){
+									function deleteCategory(){
 										$("#postForm").attr("action", "<%=contextPath%>/deleteC.ca");
 										$("#postForm").submit();
 									}
