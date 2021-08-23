@@ -170,7 +170,7 @@
 				<div class="top-content">
 					<a href="투표하기 링크">
 					<div class="root-banner-wrap" style="background: "><!-- 색지정 -->
-						<a href="투표하기 링크">
+						<a href="<%= request.getContextPath() %>/challengeVote.ch">
 						<div class="banner-item-wide" style="background: ">
 							<div class="left">
 								<h6 class="label-text">Vote your Challenge!</h6>
@@ -186,8 +186,8 @@
 					</a>
 				</div>
 			</div>
-			
-			<div class="container">
+			<%if(!list.isEmpty() && !fileList.isEmpty()) {%>
+			<div class="container ">
 				<div class="root-content">
 					<div class="root-section">
 						<section class="challenge-list">
@@ -219,6 +219,13 @@
 					</div>
 				</div>
 			</div>
+			<%} else { %>
+				<table border="lightgrey 0.5px" text-aligh="center" margin="auto">
+					<tr width="500px">
+						<td height="500px">지금은 점검중입니다.</td>
+					</tr>
+				</table>
+			<%}%>
 		</div>
 	</div>
 <%@ include file="../common/footer.jsp" %>
