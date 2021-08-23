@@ -150,8 +150,7 @@
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<!-- <td><%= index++ %></td> -->
-										 			<td><input type="checkbox" /></td>
+										 			<td><input type="checkbox"/></td>
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
