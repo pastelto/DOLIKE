@@ -1,30 +1,27 @@
-package com.kh.challenge.controller;
+package com.kh.follow.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.Challenge;
-import com.kh.challenge.model.vo.ChallengeAttachment;
+import com.kh.follow.model.service.FollowService;
 
 /**
- * Servlet implementation class ChallengeMainServlet
+ * Servlet implementation class FollowSearchServlet
  */
-@WebServlet("/challengeMain.ch")
-public class ChallengeMainServlet extends HttpServlet {
+@WebServlet("/search.fl")
+public class FollowSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeMainServlet() {
+    public FollowSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +30,18 @@ public class ChallengeMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Challenge> list = new ChallengeService().selectList();
-		request.setAttribute("list", list);
+		String followId = request.getParameter("followId");
+		System.out.println(followId);
+		int result = new FollowService().searchId(followId);
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.print("success"); //중복아이디 존재
+		}else {
+			out.print("fail"); //사용가능
+		}
 		
-		//int chNo = Integer.parseInt(request.getParameter("chNo"));
-		
-		//ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach(chNo);
-		//request.setAttribute("fileList", fileList);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
-		view.forward(request, response);
+		out.flush();
+		out.close();
 	}
 
 	/**
