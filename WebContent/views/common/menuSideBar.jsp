@@ -225,7 +225,7 @@
                    
                         </ul>
                     </li>
-                    <% if(loginUser == null) {%>  
+                    <% if(loginUser == null) {%>   
                     <li class="mega-menu-sm">
                         <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
