@@ -150,8 +150,13 @@
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
+<<<<<<< HEAD
+										 			<td><input type="checkbox" value=<%= m.getMsgNo()%>/></td>
+										 			<td><%= index++ %></td>
+=======
 										 			<td><input type="checkbox"/></td>
 										 			<td><%= m.getMsgNo()%></td>
+>>>>>>> branch 'master' of https://github.com/pastelto/DOLIKE
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
