@@ -134,7 +134,6 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th></th>
 												<th>번호</th>
 												<th>보낸 사람</th>
 												<th>제목</th>
@@ -144,12 +143,11 @@
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="5">휴지통이 비어있습니다.</td>
+												<td colspan="4">휴지통이 비어있습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<td><input type="checkbox" value=<%= m.getMsgNo()%>/></td>
 										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
