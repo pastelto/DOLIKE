@@ -68,6 +68,16 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+                
+            <% if(loginUser == null) {%>  
+			<div class="loginArea">
+				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/views/member/memberLogin.jsp'">로그인</button>
+			</div>
+
+            <%}else{ %>
+>>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
             <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
@@ -140,7 +150,11 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
+<<<<<<< HEAD
                                             <a href="javascript:void()">
+=======
+                                            <a href="<%= request.getContextPath() %>/list.ms">
+>>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
                                                 <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
