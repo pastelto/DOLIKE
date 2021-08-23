@@ -119,7 +119,7 @@
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
                                     <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                    
                                 </div>
@@ -150,8 +150,8 @@
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<td><input type="checkbox"/></td>
-										 			<td><%= m.getMsgNo()%></td>
+										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -230,8 +230,9 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
-				location.href="<%= contextPath %>/rread.ms?mno="+mno;
+				var mno = $("input[name=msgNo]").val();
+				console.log(mno);
+				location.href="<%= contextPath %>/sread.ms?mno="+mno;
 			})
 		})
 		<% } %>

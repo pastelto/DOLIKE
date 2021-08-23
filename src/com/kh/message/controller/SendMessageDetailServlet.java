@@ -34,6 +34,7 @@ public class SendMessageDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mno = Integer.parseInt(request.getParameter("mno"));
+		System.out.println("mno : " + mno);
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 
 		Message m = new MessageService().selectSendMsg(mno, userId);
