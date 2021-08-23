@@ -13,7 +13,7 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="media align-items-center mb-4">
-				<img class="mr-3" src="../../resources/images/do_100.png" width="80"
+				<img class="mr-3" src="./resources/images/do_100.png" width="80"
 					height="80" alt="">
 				<div class="media-body">
 					<h3 class="mb-0">유저 닉네임</h3>
