@@ -55,17 +55,6 @@ public class Message {
 		this.recvtime = recvtime;
 		this.msgStatus = msgStatus;
 	}
-	
-	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent, Date recvtime, String msgStatus) {
-		super();
-		this.msgNo = msgNo;
-		this.recvId = recvId;
-		this.senderId = senderId;
-		this.msgTitle = msgTitle;
-		this.msgContent = msgContent;
-		this.recvtime = recvtime;
-		this.msgStatus = msgStatus;
-	}
 
 	public int getMsgNo() {
 		return msgNo;

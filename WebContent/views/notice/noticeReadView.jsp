@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8" import="com.kh.notice.model.vo.Notice"%>
 <%
 	Notice n = (Notice)request.getAttribute("notice");
+	String contextPath = request.getContextPath();
+	//이부분 임시로 넣었음!(admin으로 확인 희망시 admin으로 아래 유저 값 넣으면 됨)
+	String loginUser = "admin";
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +44,7 @@
     <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 
-	<div class="content-body">
+	<div class="content-body" style="height: 600px">
 		<br>
 		<div class="container-fluid">
 			<div class="row">
@@ -72,9 +75,9 @@
 								<div align="center">
 									<button id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/noticeView.no'">돌아가기</button>
 									<!-- 로그인 세션 생성시 이부분 주석 풀기  -->
-									<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
-									<%-- <!-- 임시용 -->
-									<% if(loginUser != null && loginUser.equals("admin")) { %> --%>
+									<%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> --%>
+									<!-- 임시용 -->
+									<% if(loginUser != null && loginUser.equals("admin")) { %>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" type="button" class="btn btn-sm" onclick="location.href='updatePage.no?nno=<%=n.getNoticeNo()%>'">수정하기</button>
