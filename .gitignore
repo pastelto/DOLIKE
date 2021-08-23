@@ -93,7 +93,7 @@ $RECYCLE.BIN/
 WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
 WebContent/WEB-INF/jspwork/org/apache/jsp/index1_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/index2_jsp.java
-WebContent/WEB-INF/jspwork/*
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.class
 WebContent/WEB-INF/*
 ## 0817 끝 ##
 
