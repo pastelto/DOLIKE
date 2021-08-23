@@ -90,4 +90,9 @@ public class ChallengeService {
 		return list;
 	}
 
+	public ArrayList<Challenge> selectDetail(int chno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
