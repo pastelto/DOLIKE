@@ -13,6 +13,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
+	<style>
+	#submitBtn, #resetBtn, #sendBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	</style>
+
 </head>
 
 <body>
@@ -67,19 +75,19 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="email-left-box"><a href="write.ms" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+                                <div class="email-left-box"><a href="<%= request.getContextPath() %>/write.ms" id="sendBtn" class="btn btn-primary btn-block">쪽지보내기</a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
+                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                 </div>
                                 
-                                <div class="email-right-box">
+                                <div class="email-right-box">                                                                                                                                                                                                                                  
                                     <div class="toolbar" role="toolbar">
 										<h4> 쪽지 보내기 </h4>
                                     </div>
                                     <div class="compose-content mt-5">
-                                        <form id="newMessageInsertForm" action="write.ms" method="post" enctype="multipart/form-data">
+                                        <form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
                                         	
                                         	<input type="hidden" name="userId" value="user1">
                                         	
@@ -101,8 +109,8 @@
                                             </div>
                                     
                                     <div class="text-left m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit" style="background: #78c2ad"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset"><i class="ti-close m-r-5 f-s-12"></i> 취소</button>
+                                        <button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
+                                        <button id="resetBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset"><i class="ti-close m-r-5 f-s-12"></i> 취소</button>
                                     </div>
                                     </form>
                                     </div>
@@ -130,16 +138,6 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-
 </body>
 
 </html>

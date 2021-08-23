@@ -4,6 +4,8 @@
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
+	String contextPath = request.getContextPath();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +25,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script>
+	function msgLoginerror(){
+		alert("로그인 후 이용가능합니다.");
+	}
+</script>
 </head>
 <body>
     
@@ -68,6 +75,13 @@
                         </div>
                     </div>
                 </div>
+                
+            <% if(loginUser == null) {%>  
+			<div class="loginArea">
+				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+			</div>
+
+            <%}else{ %>
             <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
@@ -137,25 +151,27 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void()">
-                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            <a href="<%= request.getContextPath() %>/list.ms">
+                                                <i class="icon-envelope-open"></i> <span>쪽지함</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-lock"></i> <span>진행중인 챌린지</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
+               	<%} %> 
+                
             </div>
            </div>
       <!--**********************************
@@ -203,31 +219,39 @@
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="followMain.fl">추천 친구</a></li>
-                            <li><a href="MyFollow.fl">나의 친구</a></li>
+                            <li><a href="<%= request.getContextPath() %>/followMain.fl">추천 친구</a></li>
+                            <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
                    
                         </ul>
                     </li>
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
+                            <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
+                        </a>
+                    </li>
+                    <%}else{ %>
+                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="list.ms">쪽지함</a></li>
-                            <li><a href="writeForm.ms">쪽지 보내기</a></li>
+                            <li><a href="<%= request.getContextPath() %>/list.ms">쪽지함</a></li>
+                            <li><a href="<%= request.getContextPath() %>/writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
                             <li><a href="./app-calender.html">챌린지2</a></li>
                         </ul>
                     </li>
                		<li>
-                        <a href="noticeView.no" aria-expanded="false">
+                        <a href="<%= request.getContextPath() %>/noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>

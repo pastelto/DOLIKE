@@ -20,9 +20,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
 >>>>>>> parent of 9f544a3 (05. 00 복원중)
+=======
+<link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+>>>>>>> parent of e570fa2 (--에러잠시커밋)
 </head>
 
 <body>
@@ -61,6 +65,7 @@
 
 		<div id="thumbList">
 
+
 		</div>
 
 		</div>
@@ -84,22 +89,12 @@
         Main wrapper end
     ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="./plugins/common/common.min.js"></script>
-    <script src="./js/custom.min.js"></script>
-    <script src="./js/settings.js"></script>
-    <script src="./js/gleek.js"></script>
-    <script src="./js/styleSwitcher.js"></script>
-
-
-
     
     <!--**********************************
          인기글 Scripts
     ***********************************  -->
-
+	    <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
+    	<script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
 
 </body>
 

@@ -3,13 +3,14 @@
     
 <%
 	Notice n = (Notice)request.getAttribute("notice");
-	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>DO LIKE - 공지사항 수정</title>
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <style>
 	#updateBtn{
 		color: #fff;
@@ -40,7 +41,7 @@
 	<%@ include file="../common/menuSideBar.jsp"%>
 
 	
-	<div class="content-body" style="height: 600px">
+	<div class="content-body">
 		<br>
 		<div class="container-fluid">
 			<div class="row">
