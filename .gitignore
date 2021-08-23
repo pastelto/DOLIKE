@@ -1,7 +1,7 @@
 $ git rm -r --cached .
 $ git add .
 $ git commit -m "Apply .gitignore"
-$ git push
+$ git push origin 'master'
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,macos
@@ -95,7 +95,6 @@ Temporary Items
 WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
 WebContent/WEB-INF/jspwork/org/apache/jsp/index1_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/index2_jsp.java
-/classes/
 ## 0817 끝 ##
 
 
