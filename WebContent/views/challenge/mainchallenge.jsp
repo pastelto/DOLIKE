@@ -237,8 +237,7 @@ a {
 									<%
 									} else if(list.isEmpty() || fileList.isEmpty()){
 									%>
-									<table border="lightgrey 0.5px" text-aligh="center"
-										margin="auto">
+									<table border="lightgrey 0.5px" text-aligh="center" margin="auto">
 										<tr width="500px">
 											<td height="500px">지금은 점검중입니다.</td>
 										</tr>

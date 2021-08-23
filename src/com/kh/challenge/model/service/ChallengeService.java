@@ -1,16 +1,13 @@
 package com.kh.challenge.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.vo.Board;
-import com.kh.board.model.vo.Reply;
 import com.kh.challenge.model.dao.ChallengeDao;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
@@ -91,8 +88,29 @@ public class ChallengeService {
 	}
 
 	public ArrayList<Challenge> selectDetail(int chno) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = getConnection();
+		
+		ArrayList<Challenge> list = new ChallengeDao().selectDetail(conn, chno);
+		
+		close(conn);
+		
+		return list;
+	}
+
+
+	public int insertApply(ChallengeApply ca) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertApply(conn, ca);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 
 }
