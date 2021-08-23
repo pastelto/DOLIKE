@@ -22,6 +22,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
 >>>>>>> parent of 9f544a3 (05. 00 복원중)
@@ -30,6 +31,8 @@
 >>>>>>> parent of e570fa2 (--에러잠시커밋)
 =======
 >>>>>>> parent of 284a44e (게시판 추가하기 완료,)
+=======
+>>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
 </head>
 
 <body>

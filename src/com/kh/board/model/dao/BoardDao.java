@@ -177,9 +177,15 @@ public class BoardDao {
 			pstmt.setString(1, boardTitle);
 			pstmt.setString(2, boardContent);
 			pstmt.setInt(3, boardNo);
+<<<<<<< HEAD
 			
 			return pstmt.executeUpdate();
 			
+=======
+			
+			return pstmt.executeUpdate();
+			
+>>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
