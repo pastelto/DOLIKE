@@ -5,7 +5,11 @@
 	Attachment at = (Attachment)request.getAttribute("at");
 	String contextPath = request.getContextPath();
 %>  
-
+<%
+	String loginUser = "admin";
+	//Member loginUser = (Member)session.getAttribute("loginUser");
+	String msg = (String)session.getAttribute("msg");
+%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,7 +33,25 @@
 </head>
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
+	<%--
 	
+		String nickName = null;
+		if(session.getAttribute("nickName") != null){
+			nickName = (String)session.getAttribute("nickName"); //로그인한 유저의 정보 저장 
+		}
+		int boardNo = 0;
+		if(request.getParameter("boardNo") != null){
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}
+		if(boardNo == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href = 'boardView.jsp'");
+			script.println("</script>");
+		}
+		Board board = new BoardDao().getBoard(boardNo);
+	--%>
         <!--**********************************
             Content body start
         ***********************************-->
@@ -92,7 +114,13 @@
 							$("#postForm").submit();
 						}
 					</script>
-		 					
+		 			<%--
+		 			<a href="boardView.jsp" class="btn btn-primary">목록</a>
+		 			<% if(nickName != null && nickName.equals(board.getNickName())){ %>
+		 				<a onclick="return confirm('수정하시겠습니까?')" href="boardUpdate.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">수정</a>
+		 				<a onclick="return confirm('삭제하시겠습니까?')" href="boardDelete.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">삭제</a>
+		 			<% } %>
+		 			--%> 			
 	 		</div>
 	 	<!-- ************ 댓글 에어리어 **************** -->
 	 		<div class="replyArea">
@@ -115,7 +143,7 @@
 	 		</div>
 	 		<script>
 		$(function(){
-			selectReplyList(); 
+			selectReplyList(); //온로드되는 시점에 댓글 달린게 있으면 보여야 함
 			$('#addReply').click(function(){
 				var content = $('#replyContent').val();
 				var bId = <%= b.getBoardNo()%>;
@@ -129,8 +157,8 @@
 					},
 					success:function(status){
 						if(status == "success"){
-							selectReplyList(); 
-							$('#replyContent').val("");
+							selectReplyList(); //성공하면 댓글 달고 바로 보여야 함
+							$('#replyContent').val("");//댓글칸에 적은 내용 비워져야 함(다시 작성 가능하도록)
 						}
 					},
 					error:function(){
@@ -140,12 +168,12 @@
 			})
 		})
 		function selectReplyList(){
-			$("#replyList").empty(); 
+			$("#replyList").empty(); //먼저 테이블을 지우고 새로 뿌림(??)
 			$.ajax({
 				url:"rList.bo",
-				data:{bId:<%= b.getBoardNo()%>},
+				data:{bId:<%= b.getBoardNo()%>}, //해당되는 게시판번호의 게시글 가져옴
 				type:"get",
-				success:function(list){
+				success:function(list){ //한사람이 아니기때문에 list로 가져옴
 					console.log(list)
 					var value = "";
 					for(var i in list){

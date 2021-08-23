@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
+    
 <style>
 	.nk-sidebar{
 		padding:30px;
@@ -31,6 +33,15 @@
 
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
+	<%--
+	
+		String userId = null;
+		if(session.getAttribute("userId") != null){
+			userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
+		}
+	
+	--%>
+  
         <!--**********************************
             Content body start
         ***********************************-->
@@ -63,12 +74,11 @@
 		 				
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
-		 			<div class="form-row float-right">
-		 				<input type="file" class="btn" name="upfile" value="첨부파일" />
-		 			</div>
+		 			<input type="file" class="btn btn-primary pull-right" name="upfile" />
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>
+            <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
