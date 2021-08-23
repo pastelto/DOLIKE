@@ -84,7 +84,7 @@ public class MessageDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getMessageContent");
-		
+		System.out.println("받은 메세지 리스트!");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mno);
@@ -262,8 +262,6 @@ public class MessageDao {
 			pstmt.setString(3, userId);
 			
 			rset = pstmt.executeQuery();
-			System.out.println("sql? " + sql);
-			System.out.println("rset? " + rset);
 			while(rset.next()) {
 				list.add(new Message(rset.getInt("MSG_NO"),
 									 rset.getString("RECV_ID"),
@@ -390,7 +388,7 @@ public class MessageDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getSendMessageContent");
-		
+		System.out.println("보낸 쪽지 내용?");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mno);
