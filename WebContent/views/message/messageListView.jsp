@@ -152,6 +152,7 @@
 										 		<tr>
 										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
 										 			<td><%= index++ %></td>
+										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
