@@ -35,7 +35,12 @@ public class NoticeInsertServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
-		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		//로그인 세션 정보 없음
+//		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		
+		//임시
+		String writer = "admin";
+		
 		
 		Notice n = new Notice(title, content.replaceAll("\n", "<br>"), writer);
 		

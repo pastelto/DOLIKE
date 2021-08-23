@@ -9,8 +9,7 @@ public class ChallengeVote {
 	private Date start;
 	private Date end;
 	private int voteCount;
-	private int categoryNo;
-	private String categoryName;
+	private int CategoryNo;
 	
 	public ChallengeVote() {
 		// TODO Auto-generated constructor stub
@@ -23,15 +22,7 @@ public class ChallengeVote {
 		this.start = start;
 		this.end = end;
 		this.voteCount = voteCount;
-		this.categoryNo = categoryNo;
-	}
-	
-	public ChallengeVote(String chTitle, Date start, Date end, String categoryName) {
-		super();
-		this.chTitle = chTitle;
-		this.start = start;
-		this.end = end;
-		this.categoryName = categoryName;
+		CategoryNo = categoryNo;
 	}
 
 	public String getChTitle() {
@@ -75,28 +66,18 @@ public class ChallengeVote {
 	}
 
 	public int getCategoryNo() {
-		return categoryNo;
+		return CategoryNo;
 	}
 
 	public void setCategoryNo(int categoryNo) {
-		categoryNo = categoryNo;
-	}	
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+		CategoryNo = categoryNo;
 	}
 
 	@Override
 	public String toString() {
 		return "ChallengeVote [chTitle=" + chTitle + ", apNo=" + apNo + ", start=" + start + ", end=" + end
-				+ ", voteCount=" + voteCount + ", categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
+				+ ", voteCount=" + voteCount + ", CategoryNo=" + CategoryNo + "]";
 	}
-
-	
 
 
 	

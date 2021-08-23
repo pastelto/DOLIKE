@@ -9,10 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-<<<<<<< HEAD
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/BackEnd/jspPro1/WebContent/WEB-INF/lib/ojdbc6.jar"/>
->>>>>>> refs/heads/master
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
