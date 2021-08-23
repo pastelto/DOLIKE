@@ -35,7 +35,8 @@ public class RecvMessageDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-
+		
+		System.out.println("RecvMessageDetail mno? = " + mno ) ;
 		Message m = new MessageService().msgReadStatus(mno, userId);
 		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
 		
