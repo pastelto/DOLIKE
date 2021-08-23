@@ -1,11 +1,11 @@
-$ git rm -r --cached .
-$ git add .
-$ git commit -m "Apply .gitignore"
-$ git push
+git fetch origin
+git checkout -b DH origin/DH
+git merge master
 
+git rm -r --cached .
+git add . 
+git commit -m "Fixed .gitignore"
 
-# Created by https://www.toptal.com/developers/gitignore/api/java,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,macos
 
 ### Java ###
 # Compiled class file
@@ -31,34 +31,6 @@ $ git push
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-
-### Windows ###
-# Windows thumbnail cache files
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-
-# Dump file
-*.stackdump
-
-# Folder config file
-[Dd]esktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# End of https://www.toptal.com/developers/gitignore/api/java,windows
 
 ### macOS ###
 # General
@@ -89,13 +61,40 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.toptal.com/developers/gitignore/api/java,macos
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/java,windows,macos
 
 ## 특정 폴더 제외 ##
 WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
 WebContent/WEB-INF/jspwork/org/apache/jsp/index1_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/index2_jsp.java
-/classes/
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.class
+WebContent/WEB-INF/*
 ## 0817 끝 ##
 
 
@@ -106,7 +105,7 @@ Issues
 Marketplace
 Explore
  
-@pastelto 
+@pastelto
 Branch master was renamed to main.
 apache
 /
@@ -188,5 +187,9 @@ Pricing
 API
 Training
 Blog
+<<<<<<< HEAD
 About
 /bin/
+=======
+About
+>>>>>>> refs/heads/master
