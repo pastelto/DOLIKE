@@ -4,20 +4,36 @@ import java.sql.Date;
 
 public class Board {
 
-	private int boardNo;
-	private String nickName;
-	private String tagName;
-	private String boardTitle;
-	private Date boardDate;
-	private String boardContent;
-	private int avliable;
-	private int views;
-	private int categoryNo;
-	
+	private int boardNo;			//게시글 고유 번호 
+	private String nickName;		//게시글 작성자의 닉네임 
+	private String tagName;			//게시글 말머리 
+	private String boardTitle;		//게시글 제목 
+	private Date boardDate;			//게시글 작성일자 
+	private String boardContent;	//게시글 내용 
+	private int avaliable;			//게시글 상태값 (1이면 공개 0이면 비공개상태) 
+	private int views;				//게시글 조회수 
+	private int categoryNo;			//게시글 카테고리 번호 
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
-		
+	}
+	
+	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
+		// TODO Auto-generated constructor stub
+		//BOARD_DAO selectList 생성자 
+	}
+	
+	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,int avaliable,int views,int categoryNo) {
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.tagName = tagName;
+		this.boardTitle = boardTitle;
+		this.boardDate = boardDate;
+		this.boardContent = boardContent;
+		this.avaliable = avaliable;
+		this.views = views;
+		this.categoryNo = categoryNo;
 	}
 	
 	public int getBoardNo() {
@@ -57,10 +73,10 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 	public int getAvliable() {
-		return avliable;
+		return avaliable;
 	}
 	public void setAvliable(int avliable) {
-		this.avliable = avliable;
+		this.avaliable = avliable;
 	}
 	public int getViews() {
 		return views;
@@ -78,7 +94,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tagName=" + tagName + ", boardTitle=" + boardTitle
-          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
+          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avaliable=" + avaliable + ", views="
 				  + views + ", categoryNo=" + categoryNo + "]";
 	}
 	
