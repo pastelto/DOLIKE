@@ -37,9 +37,12 @@
 <<<<<<< HEAD
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	<%--
+<<<<<<< HEAD
 =======
 	<%
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	
 		String nickName = null;
 		if(session.getAttribute("nickName") != null){
@@ -71,6 +74,7 @@
 			script.println("location.href = 'boardView.jsp'");
 			script.println("</script>");
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	--%>
    
@@ -375,6 +379,10 @@
         ***********************************-->
 
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+	--%>
+   
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
         <!--**********************************
             Content body start
         ***********************************-->

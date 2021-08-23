@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
     <!-- Favicon icon -->
@@ -26,6 +27,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+    
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 <style>
 	.nk-sidebar{
 		padding:30px;
@@ -40,15 +44,19 @@
 <<<<<<< HEAD
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	<%--
+<<<<<<< HEAD
 =======
 	<%
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	
 		String userId = null;
 		if(session.getAttribute("userId") != null){
 			userId = (String)session.getAttribute("userId"); //로그인한 유저의 정보 저장 
 		}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	--%>
   
@@ -353,6 +361,10 @@
         ***********************************-->
 
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+	--%>
+  
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
         <!--**********************************
             Content body start
         ***********************************-->
@@ -377,9 +389,13 @@
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 			<input type="file" class="btn btn-primary pull-right" name="upfile" />
 =======
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+		 			<input type="file" class="btn btn-primary pull-right" name="upfile" />
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>

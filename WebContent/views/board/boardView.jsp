@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 <%@ page import="java.io.PrintWriter, com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao, java.util.ArrayList, com.kh.member.model.vo.Member;" %>
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
@@ -20,12 +23,15 @@
 	String msg = (String)session.getAttribute("msg");
 %>
 
+<<<<<<< HEAD
 =======
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
 <%@ page import="java.util.ArrayList" %>
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -406,6 +412,7 @@
 			 				<% } %>
 		 				<% } %>
 		 				<%--
+<<<<<<< HEAD
 =======
 		 			<%
 						BoardDao bDao = new BoardDao();
@@ -414,6 +421,8 @@
 							
 					%>
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	 					<tr><a href="view.jsp?bbsId=<%= list.get(i).getBoardNo() %>"></a> <!-- 게시글리스트 테이블의 바디 -->
 	 						<td>image</td>
 	 						<td>1</td>
@@ -422,9 +431,13 @@
 	 						<td>2021-08-12</td>
 	 						<td>99</td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 						
 =======
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+	 						
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	 						<td><%= list.get(i)%></td> <!-- 게시글 이미지(첨부파일) -->
 	 						<td><%= list.get(i).getBoardNo() %></td> <!-- 게시글 번호 -->
 							<td><%= list.get(i).getBoardTitle() %></td> <!-- 게시글 제목 -->
@@ -432,6 +445,9 @@
 							<td><%= list.get(i).getBoardDate() %></td> <!-- 게시글 작성일 -->
 							<td><%= list.get(i).getViews() %></td> <!-- 게시글 조회수 -->
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 							 
 	 					</tr>
 	 				 --%>
@@ -474,6 +490,7 @@
 				<button onclick="location.href='enrollForm.bo'">작성하기</button>
 				<% } %>
 				</div>
+<<<<<<< HEAD
 =======
 	 					</tr>
 	 				<%
@@ -487,6 +504,8 @@
 	 				<a href="BoardView.jsp?pageNumber=<%= pageNumber +1 %>" class="btn btn-success btn-arraw-left">다음</a>
 	 			<% } %>
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
+>>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	 			<a href="boardWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
 	 		</div>
             <!-- #/ container -->
