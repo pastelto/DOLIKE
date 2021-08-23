@@ -34,6 +34,7 @@ public class FollowSearchServlet extends HttpServlet {
 		System.out.println(followId);
 		int result = new FollowService().searchId(followId);
 		PrintWriter out = response.getWriter();
+		System.out.println(result);
 		if(result > 0) {
 			out.print("success"); //중복아이디 존재
 		}else {
