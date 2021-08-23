@@ -10,6 +10,13 @@
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<title>회원가입</title>
+	<style>
+	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	</style>
 </head>
 
 <body>
