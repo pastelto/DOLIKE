@@ -1,4 +1,4 @@
-package com.kh.message.controller;
+package com.kh.category.controller;
 
 import java.io.IOException;
 
@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.category.model.service.CategoryService;
+import com.kh.category.model.vo.Category;
 import com.kh.member.model.vo.Member;
-import com.kh.message.model.service.MessageService;
-import com.kh.message.model.vo.Message;
-import com.kh.message.model.vo.MsgAttachment;
 
 /**
- * Servlet implementation class RecvMessageDetailServlet
+ * Servlet implementation class CategoryInsertServlet
  */
-@WebServlet("/sread.ms")
-public class SendMessageDetailServlet extends HttpServlet {
+@WebServlet("/insert.ca")
+public class CategoryInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMessageDetailServlet() {
+    public CategoryInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +32,27 @@ public class SendMessageDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int mno = Integer.parseInt(request.getParameter("mno"));
-		System.out.println("mno : " + mno);
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-
-		Message message = new MessageService().selectSendMsg(mno, userId);
-		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
-		System.out.println("SendMessageDetailServlet : " + userId);
-		if(message != null) {
-			request.setAttribute("message", message);
-			request.setAttribute("mat", mat);
-			
-			request.getRequestDispatcher("views/message/SendMessageDetailView.jsp").forward(request, response);
-		} else {
-			request.setAttribute("msg", "보낸쪽지 상세조회 실패");
-			
+		
+		//String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		System.out.println("1caNo 값 확인중");
+		
+		
+		String caTitle = request.getParameter("caTitle");
+		
+		Category cat = new Category(caTitle);
+		
+		int result = new CategoryService().insertCatogory(cat);
+		System.out.println("categoryInsertServlet 확인중");
+		System.out.println(result);
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "새로운 개시판 등록 성공!");
+			response.sendRedirect("categoryList.ca");
+		}else {
+			request.setAttribute("msg", "새로운 개시판 등록 실패!!");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+	        view.forward(request, response);
 		}
+	
 	}
 
 	/**

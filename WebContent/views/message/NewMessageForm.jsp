@@ -89,7 +89,7 @@
                                     <div class="compose-content mt-5">
                                         <form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
                                         	
-                                        	<input type="hidden" name="userId" value="user1">
+                                        	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
                                         	
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디">

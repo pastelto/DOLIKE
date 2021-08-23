@@ -1,4 +1,4 @@
-package com.kh.follow.controller;
+package com.kh.category.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.category.model.service.CategoryService;
+
 /**
- * Servlet implementation class FollowMainView
+ * Servlet implementation class CategoryDeleteServlet
  */
-@WebServlet("/followMain.fl")
-public class FollowMainView extends HttpServlet {
+@WebServlet("/deleteC.ca")
+public class CategoryDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowMainView() {
+    public CategoryDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +30,19 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response);
+		
+		int cid = Integer.parseInt(request.getParameter("cno"));
+		
+		int result = new CategoryService().deleteCategory(cid);
+		
+		if(result > 0) {
+			response.sendRedirect("categoryList.ca");
+		}else {
+			 request.setAttribute("msg", "카테고리 삭제 실패");
+	         
+	         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+	         view.forward(request, response);
+		}
 	}
 
 	/**

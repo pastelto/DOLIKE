@@ -1,4 +1,4 @@
-package com.kh.follow.controller;
+package com.kh.category.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.category.model.service.CategoryService;
+import com.kh.category.model.vo.Category;
+
 /**
- * Servlet implementation class FollowMainView
+ * Servlet implementation class CategoryDetailServlet
  */
-@WebServlet("/followMain.fl")
-public class FollowMainView extends HttpServlet {
+@WebServlet("/detail.ca")
+public class CategoryDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowMainView() {
+    public CategoryDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +31,21 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response);
+		
+		int cno = Integer.parseInt(request.getParameter("cno")); // jps 파일에서 선택한 카테고리 정보를 받아온다.
+		
+		Category c = new CategoryService().selectCategory(cno);
+		
+		if(c != null) {
+			request.setAttribute("c", c);
+			request.getRequestDispatcher("views/category/categoryDetailView.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "카테고리 조회 실패");
+	         
+	        RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+	        view.forward(request, response);
+		}
+		
 	}
 
 	/**

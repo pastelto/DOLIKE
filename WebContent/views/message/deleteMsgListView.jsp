@@ -60,6 +60,12 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+	
+		#deleteBtn{
+		color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
 </style>
 </head>
 
@@ -134,6 +140,7 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
+												<th></th>
 												<th>번호</th>
 												<th>보낸 사람</th>
 												<th>제목</th>
@@ -143,12 +150,13 @@
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="4">휴지통이 비어있습니다.</td>
+												<td colspan="5">휴지통이 비어있습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<td><%= index++ %></td>
+										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value=""></td>
+										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -161,6 +169,12 @@
 									</div>
 								</div>
                                 </div>
+                                	<!-- 삭제 버튼 -->
+									<% if(!list.isEmpty()){ %>
+									<div class="float-right">
+									<button id="deleteBtn" type="button" class="btn btn-sm" onclick="">삭제하기</button>
+									</div>
+									<% } %>
                             </div>
                         </div>
                     </div>
@@ -225,8 +239,8 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(0).text();
-			
+				var mno = $(this).children().eq(1).text();
+				/* var mno = $("#msgList input[name=msgNo]").val(); */
 				location.href="<%= contextPath %>/dlist.ms?mno="+mno;
 			})
 		})
