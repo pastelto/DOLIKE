@@ -46,6 +46,12 @@
     	background-color: #fff;
     	border-color: #78c2ad;
 	}
+	#dia{
+		color: #78c2ad;
+	}
+	#iconfl{
+		color: #f3969a;
+	}
 </style>
 </head>
 <body>
@@ -54,119 +60,139 @@
 
 
 	<div class="content-body">
-		<br>
-<div class="col-lg-8" style="margin: 0 auto;">
+
+		<br> 
+			
+			<div class="col-lg-10" style="margin: 0 auto;">
 
 				<div id="interestDiv" style="margin: 0 auto;">
 					<span id="interestLabel" class="label label-pill label-primary">여기에 로그인 유저 관심사 </span>
 				</div>
 				<br>
-				<div class="card-deck">
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                   <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <button id="addfr" onclick="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+			
+			   <div class="row">
+				<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p>유저 아이디</p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p>팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p>게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
 				</div>
+
+				<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p>유저 아이디</p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p>팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p>게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p>유저 아이디</p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p>팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p>게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p>유저 아이디</p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p>팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p>게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
-
-
-			<br><br><br>
-
-		<div class="col-lg-8" style="margin: 0 auto;">
-
-				<div id="interestDiv" style="margin: 0 auto;">
-					<span id="interestLabel" class="label label-pill label-primary">여기에 로그인 유저 관심사 </span>
-				</div>
-				<br>
-				<div class="card-deck">
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                   <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <a id="addfr" href="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
-                                    <p>유저아이디</p>
-                                    <button id="addfr" onclick="javascript:void()" class="btn btn-sm btn-rounded ">친구추가</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div>
-			</div>
-
-
+		</div>
 		</div>
 	<%-- 		<%@ include file="../common/footer.jsp" %> 
 	</div> --%>
