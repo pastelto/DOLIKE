@@ -72,50 +72,33 @@
 		
 		<h2 align="center">로그인</h2>
 		<% if(loginUser == null) {%>
-<<<<<<< HEAD
 		<form id="loginForm" action="<%= contextPath %>/login.me" method="post" onsubmit="return loginValidate();">
-=======
-		<form id="loginForm" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
->>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
 			<table>
 				<tr>
 					<th><label for="userId" style="color:white;">아이디</label></th>
 					<td><input id="userId" type="text" name="userId"></th>
 				</tr>
 				<tr>
-<<<<<<< HEAD
 				<th><label for="userPwd" style="color:white;">비밀번호</label></th>
 				<td><input id="userPwd" type="password" name="userPwd"></th>
-=======
-					<th><label for="userPwd" style="color:white;">비밀번호</label></th>
-					<td><input id="userPwd" type="password" name="userPwd"></th>
->>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
 				</tr>
 			</table>
 			
 			<div class = "btns" align="center">
 				<button id="loginBtn" type="submit">로그인</button>
 				<button id="enrollBtn" type="button" onclick="enrollPage();">회원가입</button>
-<<<<<<< HEAD
 				
-=======
->>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
 			</div>
 		</form>
 		<%}else{ %>
 			<div id="userInfo">
 				<b style="color:white;"><%= loginUser.getUserName() %>님</b>의 방문을 환영합니다.
 				<br><br>
-<<<<<<< HEAD
 				<div class="btns" align="center">
 					<a href = "<%= request.getContextPath() %>/mypage.me">마이페이지</a>
 					<a href = "<%= request.getContextPath() %>/logout.me">로그아웃</a>
 				
 				</div>
-=======
-
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/index2.jsp'">메인으로 가기</button>
->>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
 			</div>
 		<%} %>
 	
@@ -125,7 +108,6 @@
 			location.href = "<%= request.getContextPath()%>/enrollForm.me";
 		}
 	</script>
-<<<<<<< HEAD
 		<!-- 
 			<table align="center">
 				<tr>
@@ -150,9 +132,6 @@
 		</div>
 	</div>
 	 -->
-=======
-	
->>>>>>> parent of f413a5b (Merge pull request #44 from pastelto/soyoung)
 	<%@ include file="../common/footer.jsp" %>
 	</div>
 </body>
