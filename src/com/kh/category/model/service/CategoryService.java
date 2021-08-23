@@ -70,21 +70,18 @@ public class CategoryService {
 		
 		Connection conn = getConnection();
 		
-		int result = new CategoryDao().increaseCount(conn, cno);
-		
-		//int result = new CategoryDao().selectCategory(conn, cno);
-		
-		Category c = null;
-		if(result > 0) {
-			commit(conn);
-			c= new CategoryDao().selectCategory(conn, cno);
-		}else {
-			rollback(conn);
-		}
+		Category result = new CategoryDao().selectCategory(conn, cno);
 		
 		close(conn);
 		
-		return c;
+		return result;
+	}
+
+
+
+	public int deleteCategory(int cid) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

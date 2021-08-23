@@ -128,37 +128,7 @@ public class CategoryDao {
 	}
 
 	
-
-
-	public int increaseCount(Connection conn, int cno) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("increaseCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, cno);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		return result;
-	}
-
-	
 	public Category selectCategory(Connection conn, int cno) {
-		
 		Category c = null;
 		
 		PreparedStatement pstmt = null;
@@ -188,10 +158,75 @@ public class CategoryDao {
 		
 		return c;
 	}
+
 	
-//	public int selectCategory(Connection conn, int cno) {
-//		// TODO Auto-generated method stub
-//		return 0;
+
+
+	
+
+
+//	public int increaseCount(Connection conn, int cno) {
+//		
+//		int result = 0;
+//		
+//		PreparedStatement pstmt = null;
+//		
+//		String sql = prop.getProperty("increaseCount");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//
+//			pstmt.setInt(1, cno);
+//			
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		
+//		
+//		return result;
 //	}
+//
+//	
+//	public Category selectCategory(Connection conn, int cno) {
+//		
+//		Category c = null;
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("selectCategory");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, cno);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next()) {
+//				c = new Category(rset.getInt("CATEGORY_NO"), //Category의 생성자를 사용해서
+//								 rset.getString("CATEGORY_NAME")
+//						);
+//			}
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return c;
+//	}
+//	
+////	public int selectCategory(Connection conn, int cno) {
+////		// TODO Auto-generated method stub
+////		return 0;
+////	}
 
 }
