@@ -80,11 +80,7 @@
                                     </div>
                                    
                                 </div>
-<<<<<<< HEAD
                                 <div class="email-right-box">
-=======
-                                <div class="email-right-box"  style="height: 40rem">
->>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
                                    <div class="toolbar" role="toolbar">
 										<h4> 받은 쪽지함 </h4>
                                     </div>
@@ -97,6 +93,7 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
+												<th></th>
 												<th>번호</th>
 												<th>보낸사람</th>
 												<th>제목</th>
@@ -106,15 +103,12 @@
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="4">받은 쪽지가 없습니다.</td>
+												<td colspan="5">받은 쪽지가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-<<<<<<< HEAD
 										 			<td><input type="checkbox" value=<%= m.getMsgNo()%>/></td>
-=======
->>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
 										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
@@ -189,21 +183,7 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-<<<<<<< HEAD
 
-=======
-	<script>
-		<% if(!list.isEmpty()){%>
-		$(function(){
-			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(0).text();
-			
-				location.href="<%= contextPath %>/list.ms?mno="+mno;
-			})
-		})
-		<% } %>
-	</script>
->>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
 
 </body>
 

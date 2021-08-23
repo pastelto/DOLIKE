@@ -43,35 +43,4 @@ public class MessageService {
 	}
 	
 	
-<<<<<<< HEAD
-=======
-	public int getMessageCount(String userId) { // 받은 쪽지 목록 개수
-		Connection conn = getConnection();
-		
-		int count = new MessageDao().getMessageCount(conn, userId);
-		close(conn);
-		
-		return count;
-	}
-
-	public Message selectMessage(int mno) {
-		Connection conn = getConnection();
-		
-		int result = new MessageDao().msgReadStatus(conn, mno);
-		Message m = null;
-		
-		if(result > 0) {
-			commit(conn);
-			m = new MessageDao().selectMessage(conn, mno);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return m;
-	}
-	
-	
->>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
 }
