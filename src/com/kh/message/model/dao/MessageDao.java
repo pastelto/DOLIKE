@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -64,9 +65,73 @@ public class MessageDao {
 		System.out.println("list dao ? " + list);
 		return list;
 	}
+<<<<<<< HEAD
 
 
 	public int insertNewMessage(Connection conn, Message m) { // 새 쪽지 작성하기
+=======
+	
+	// 받은 메세지 리스트 - 내용 읽어오기
+	public Message selectMessage(Connection conn, int mno) {
+		Message m= null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+			m = new Message(rset.getInt("MSG_NO"),
+							rset.getString("RECV_ID"),
+							rset.getString("SENDER_ID"),
+							rset.getString("MSG_TITLE"),
+							rset.getString("MSG_CONTENT"),
+							rset.getDate("RECVTIME"),
+							rset.getString("MSG_STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	// 받은 메세지 읽음 처리
+	public int msgReadStatus(Connection conn, int mno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("msgReadStatus");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 새 쪽지 작성하기
+	public int insertNewMessage(Connection conn, Message m) { 
+>>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -116,5 +181,39 @@ public class MessageDao {
 		
 		return result;
 	}
+<<<<<<< HEAD
+=======
+
+	// 받은 메세지 개수
+	public int getMessageCount(Connection conn, String userId) {  
+		int count = 0;
+		PreparedStatement pstmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getMessageCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+
+	
+
+>>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
 	
 }
