@@ -1,7 +1,6 @@
-$ git rm -r --cached .
-$ git add .
-$ git commit -m "Apply .gitignore"
-$ git push origin 'master'
+git rm -r --cached .
+git add .
+git commit -m "fixed untracked files"
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,macos
@@ -105,7 +104,7 @@ Issues
 Marketplace
 Explore
  
-@pastelto 
+@pastelto
 Branch master was renamed to main.
 apache
 /
