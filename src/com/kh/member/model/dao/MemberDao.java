@@ -40,10 +40,10 @@ public class MemberDao {
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
-			System.out.println("loginUserId : " + userId);
-			//System.out.println("loginUserPwd : " + userPwd);
+			System.out.println(userId);
+			System.out.println(userPwd);
 			rset = pstmt.executeQuery();
-			//System.out.println("ResultSet : " + rset);
+			System.out.println(rset);
 			if (rset.next()) {
 				loginUser = new Member(
 						rset.getString("USER_ID"),
@@ -146,7 +146,7 @@ public class MemberDao {
 	
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
-	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String[] interests) {
+	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String interests) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -205,87 +205,6 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			
-			if (rset.next()) {
-				result = rset.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int nickCheck(Connection conn, String nickName) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("nickCheck");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, nickName);
-			
-			rset = pstmt.executeQuery();
-			
-			if (rset.next()) {
-				result = rset.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int phoneCheck(Connection conn, String phone) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("phoneCheck");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, phone);
-			
-			rset = pstmt.executeQuery();
-			
-			if (rset.next()) {
-				result = rset.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int emailCheck(Connection conn, String email) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("emailCheck");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, email);
 			
 			rset = pstmt.executeQuery();
 			

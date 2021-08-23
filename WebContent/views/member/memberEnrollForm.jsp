@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,319 +13,31 @@
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<title>회원가입</title>
+
+	<style>
+		.outer{
+			background:black;
+			width:600px;
+			height:500px;
+			margin-top:50px;
+			margin-left:auto;
+			margin-right:auto;
+			color:white;
+		}
+		#enrollForm{
+			/* border:1px solid white; */
+			width:100%;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#enrollForm td:nth-child(1){text-align:right;}
+		#enrollForm input{margin:3px;}
+		
+		#joinBtn{background:yellowgreen;}
+		#goMain{background:orangered;}
+	</style>
 </head>
-
 <body>
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
-    <%@ include file="../common/menuSideBar.jsp" %> 
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
-            <!-- row -->
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-validation">
-									<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요.">
-                                                <button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요.">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요.">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userName">이름 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="userName" name="userName" placeholder="실명을 입력하세요.">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요."></textarea>
-                                            	<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="birthDate">생년월일 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="생년월일을 입력하세요."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="phone">연락처 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요."></textarea>
-                                                <button type="button" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="email">이메일 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요."></textarea>
-                                                <button type="button" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-lg-12">
-				                        <div class="card">
-				                            <div class="card-body">
-				                                <h4 class="card-title">관심사</h4>
-				                                <div class="basic-form">
-				                                    <form>
-				                                        <div class="form-group">
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">공부</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">건강</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">여행</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">요리</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">동물</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">패션뷰티</label>
-				                                            </div>
-				                                            <div class="form-check disabled">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">기타</label>
-				                                            </div>
-				                                        </div>
-				                                    </form>
-				                                </div>
-				                            </div>
-				                        </div>
-				                    </div>
-                                        
-                                        
-                                        <div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary" id="joinBtn" disabled>회원가입</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
-        </div>
-        
-    <script>
-	
-	function joinValidate(){
-		
-		if(!(/^[a-z][a-z\d]{3,11}$/i.test($("#enrollForm input[name=userId]").val()))){
-			$("#enrollForm input[name=userId]").focus();
-	        return false;
-		}
-		
-		if($("#enrollForm input[name=userPwd]").val() != $("#enrollForm input[name=checkPwd]").val()){
-			$("#pwdResult").text("비밀번호 불일치").css("color", "red");
-			return false;			
-		}
-		
-		 if(!(/^[가-힣]{2,}$/.test($("#enrollForm input[name=userName]").val()))){
-			 $("#enrollForm input[name=userName]").focus();
-	        return false;
-		 }
-		 
-		 return true;
-		
-		
-	}
-	
-	function checkId(){
-		var userId = $("#enrollForm input[name=userId]");
-		if(userId.val() == ""){
-			alert("아이디를 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"idCheck.me",
-			type:"post",
-			data:{userId:userId.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("사용할 수 없는 아이디입니다.");
-					userId.focus();
-				}else{
-					if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
-						userId.attr("readonly","true");
-						//$("#joinBtn").removeAttr("disabled"); //회원가입버튼 활성화!
-					}else{
-						userId.focus();
-					}
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-	
-	function checkNick(){
-		var nickName = $("#enrollForm input[name=nickName]");
-		if(nickName.val() == ""){
-			alert("닉네임을 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"nickCheck.me",
-			type:"post",
-			data:{nickName:nickName.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("이미 사용 중인 닉네임입니다.");
-					userId.focus();
-				}else{
-					if(confirm("사용가능한 닉네임입니다. 사용하시겠습니까?")){
-						nickName.attr("readonly","true");
-						$("#joinBtn").removeAttr("disabled"); //회원가입버튼 활성화!
-					}else{
-						nickName.focus();
-					}
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-	
-	function checkPhone(){
-		var phone = $("#enrollForm input[name=phone]");
-		if(phone.val() == ""){
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"phoneCheck.me",
-			type:"post",
-			data:{phone:phone.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("이미 가입된 전화번호입니다.");
-					phone.focus();
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-	
-	function checkEmail(){
-		var email = $("#enrollForm input[name=email]");
-		if(email.val() == ""){
-			alert("이메일을 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"emailCheck.me",
-			type:"post",
-			data:{email:email.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("이미 가입된 이메일입니다.");
-					email.focus();
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-
-	
-	</script>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
-	<%@ include file="../common/footer.jsp"%>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-
-    <script src="./plugins/validation/jquery.validate.min.js"></script>
-    <script src="./plugins/validation/jquery.validate-init.js"></script>
-
-</body>
-
-
-
-<%-- <body>
 	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %>
 
@@ -334,46 +49,46 @@
 		<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
 			<table>
 				<tr>
-					<td width="200px">*아이디</td>
+					<td width="200px">아이디</td>
 					<td><input type="text" maxlength="13" name="userId" required></td>
 					<td width="200px">
 						<button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
 					</td>
 				</tr>
 				<tr>
-					<td>*비밀번호</td>
+					<td>비밀번호</td>
 					<td><input type="password" maxlength="15" name="userPwd" required></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>*비밀번호 확인</td>
+					<td>비밀번호 확인</td>
 					<td><input type="password" maxlength="15" name="checkPwd" required></td>
 					<td><label id = "pwdResult"></label></td>
 				</tr>	
 				<tr>
-					<td>*이름</td>
+					<td>이름</td>
 					<td><input type="text" maxlength="13" name="userName" required></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td width="200px">*닉네임</td>
+					<td width="200px">닉네임</td>
 					<td><input type="text" maxlength="13" name="nickName" required></td>
 					<td width="200px">
 						<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
 					</td>
 				</tr>
 				<tr>
-					<td>*생년월일</td>
+					<td>생년월일</td>
 					<td><input type="text" maxlength="15" name="birthDate" required></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>*연락처</td>
+					<td>연락처</td>
 					<td><input type="tel" maxlength="11" name="phone" placeholder="(-없이)01012345678"></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>*이메일</td>
+					<td>이메일</td>
 					<td><input type="email" name="email"></td>
 					<td></td>
 				</tr>
@@ -407,7 +122,7 @@
 			<br>
 			
 			<div class="btns" align="center">
-				<button type="button" id="goMain" onclick="history.go(-1)">뒤로가기</button>
+				<button type="button" id="goMain" onclick="history.go(-1)">메인으로</button>
 				
 				<!-- <button type="submit" id="joinBtn" >가입하기</button> -->
 				<button type="submit" id="joinBtn" disabled>가입하기</button>
@@ -470,8 +185,8 @@
 	}
 	
 	function checkNick(){
-		var nickName = $("#enrollForm input[name=nickName]");
-		if(nickName.val() == ""){
+		var userId = $("#enrollForm input[name=nickName]");
+		if(userId.val() == ""){
 			alert("닉네임을 입력해주세요.");
 			return false;
 		}
@@ -485,10 +200,10 @@
 					userId.focus();
 				}else{
 					if(confirm("사용가능한 닉네임입니다. 사용하시겠습니까?")){
-						nickName.attr("readonly","true");
+						userId.attr("readonly","true");
 						$("#joinBtn").removeAttr("disabled"); //회원가입버튼 활성화!
 					}else{
-						nickName.focus();
+						userId.focus();
 					}
 				}
 			},error:function(){
@@ -497,51 +212,10 @@
 		})
 	}
 	
-	function checkPhone(){
-		var phone = $("#enrollForm input[name=phone]");
-		if(phone.val() == ""){
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"phoneCheck.me",
-			type:"post",
-			data:{phone:phone.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("이미 가입된 전화번호입니다.");
-					phone.focus();
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-	
-	function checkEmail(){
-		var email = $("#enrollForm input[name=email]");
-		if(email.val() == ""){
-			alert("이메일을 입력해주세요.");
-			return false;
-		}
-		$.ajax({
-			url:"emailCheck.me",
-			type:"post",
-			data:{email:email.val()},
-			success:function(result){
-				if(result == "fail"){
-					alert("이미 가입된 이메일입니다.");
-					email.focus();
-				}
-			},error:function(){
-				consloe.log("서버통신 실패");
-			}
-		})
-	}
-
+	//======================연락처, 이메일 중복체크 하기
 	
 	</script>
 	<%@ include file="../common/footer.jsp"%>
 	</div>
-</body> --%>
+</body>
 </html>

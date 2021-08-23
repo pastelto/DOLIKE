@@ -52,16 +52,16 @@ public class NewMessageServlet extends HttpServlet {
 			
 			Message m = new Message();
 			
-			String userId = mr.getParameter("userId");
+//			String userId = mr.getParameter("userId");
+//			String userId_1 = mr.getParameter("userId");
 			String recvId = mr.getParameter("recvId");
 			String title = mr.getParameter("messageTitle");
 			String messageContent = mr.getParameter("messageContent");
 			
-			m.setSenderId(userId);
+			m.setSenderId("user2");
 			m.setRecvId(recvId);
 			m.setMsgTitle(title);
 			m.setMsgContent(messageContent);
-			System.out.println("NewMessageServlet : " + userId + ", " + recvId + ", " + title + ", " + messageContent);
 			
 			MsgAttachment mat = null;
 			
@@ -83,6 +83,7 @@ public class NewMessageServlet extends HttpServlet {
 			
 			if(result > 0) {
 				request.getSession().setAttribute("msg", "쪽지를 성공적으로 발송했습니다.");
+//				response.sendRedirect("sendList.ms");
 				response.sendRedirect("list.ms");
 				System.out.println("쪽지 발송 성공!");
 			} else {

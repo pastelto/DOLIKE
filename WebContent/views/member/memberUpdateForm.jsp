@@ -32,7 +32,7 @@
 	<b>비밀번호 변경</b>
 	<br>
 	
-	<form id="updatePwdForm" action="<%= request.getContextPath() %>/memberUpdate.me" method="post">
+	<form id="updatePwdForm" action="<%= request.getContextPath() %>/updatePwd.me" method="post">
 		<table>
 			<tr>
 				<td><label>현재 비밀번호</label>

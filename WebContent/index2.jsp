@@ -51,7 +51,6 @@
 
 		<div id="thumbList">
 
-
 		</div>
 
 		</div>
@@ -75,12 +74,22 @@
         Main wrapper end
     ***********************************-->
 
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="./plugins/common/common.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/gleek.js"></script>
+    <script src="./js/styleSwitcher.js"></script>
+
+
+
     
     <!--**********************************
          인기글 Scripts
     ***********************************  -->
-	    <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
-    	<script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
+
 
 </body>
 

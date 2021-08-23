@@ -3,6 +3,7 @@
 	import="java.util.ArrayList, com.kh.notice.model.vo.*"%>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); 
+	String contextPath = request.getContextPath();
 	
 	NoticePageInfo pi = (NoticePageInfo)request.getAttribute("pi");
 	
@@ -67,7 +68,7 @@
 			<div class="table-responsive">
 			<div>
 			<table class="table table-hover" style="text-align: center;">
-				<caption style="caption-side: top; text-align: center"><h1 style="color: #78c2ad"><b>공지사항</b></h1></caption>
+				<caption style="caption-side: top; text-align: center"><h1 style="color: #78c2ad""><b>공지사항</b></h1></caption>
 				<thead>
 					<tr style="background-color: #78c2ad; color: white;">
 						<th>#</th>
@@ -79,7 +80,7 @@
 				<tbody>					
 					<% if(list.isEmpty()){ %>
 				 	<tr>
-						<td colspan="4">존재하는 공지사항이 없습니다.</td>
+						<td colspan="5">존재하는 공지사항이 없습니다.</td>
 					</tr>
 				 <% }else{  %>
 				 	<% for(Notice n : list){ %>
@@ -142,11 +143,11 @@
 	
 		<div align="center">
 		<!-- 로그인 세션 생성시 이부분 주석 풀기  -->
-		<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
+			<%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
 			
 			<button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기</button> 
-		<% } %>
-		<%-- <button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기(확인용)</button>  --%>
+		<% } %> --%>
+		<button id="writeBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/enrollpage.no'">작성하기(확인용)</button> 
 		</div>
 		
 		
