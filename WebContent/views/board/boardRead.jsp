@@ -11,15 +11,12 @@
 	//Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg");
 %>    
-<<<<<<< HEAD
 =======
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
-=======
->>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -55,12 +52,9 @@
 <<<<<<< HEAD
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	<%--
-<<<<<<< HEAD
 =======
 	<%
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
-=======
->>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 	
 		String nickName = null;
 		if(session.getAttribute("nickName") != null){
@@ -78,7 +72,6 @@
 			script.println("</script>");
 		}
 		Board board = new BoardDao().getBoard(boardNo);
-<<<<<<< HEAD
 <<<<<<< HEAD
 	--%>
 =======
@@ -382,9 +375,6 @@
         ***********************************-->
 
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
-=======
-	--%>
->>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
         <!--**********************************
             Content body start
         ***********************************-->
@@ -439,20 +429,14 @@
 						}
 					</script>
 		 			<%--
-<<<<<<< HEAD
 =======
 >>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
-=======
->>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 		 			<a href="boardView.jsp" class="btn btn-primary">목록</a>
 		 			<% if(nickName != null && nickName.equals(board.getNickName())){ %>
 		 				<a onclick="return confirm('수정하시겠습니까?')" href="boardUpdate.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">수정</a>
 		 				<a onclick="return confirm('삭제하시겠습니까?')" href="boardDelete.jsp?boardNo=<%= boardNo %>" class="btn btn-primary">삭제</a>
 		 			<% } %>
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 7e12f2c (Merge pull request #46 from pastelto/mingi)
 		 			--%> 			
 	 		</div>
 	 	<!-- ************ 댓글 에어리어 **************** -->
