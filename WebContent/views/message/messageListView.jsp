@@ -155,9 +155,16 @@
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
+<<<<<<< HEAD
 										 		<tr id="msgList"> 
 										 			<td><input type="checkbox"/></td>
 										 			<td><input type="hidden" name="msgNo" value=""><%= m.getMsgNo() %></td>
+=======
+										 		<tr>
+										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
+										 			<td><%= index++ %></td>
+										 			<td><%= m.getMsgNo()%></td>
+>>>>>>> refs/heads/master
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -246,9 +253,15 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
+<<<<<<< HEAD
 				var mno = $(this).children().eq(1).text();
 				/* var mno = $("input[name=msgNo]").val(); */
 				location.href="<%= contextPath %>/rread.ms?mno="+mno;
+=======
+				var mno = $("input[name=msgNo]").val();
+				console.log(mno);
+				location.href="<%= contextPath %>/sread.ms?mno="+mno;
+>>>>>>> refs/heads/master
 			})
 		})
 		<% } %>
