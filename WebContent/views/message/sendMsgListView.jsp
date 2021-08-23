@@ -147,11 +147,15 @@
 										 	<% for(Message m : list){ %>
 										 		<tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
 										 			<td><input type="checkbox" value=<%= m.getMsgNo()%>/></td>
 										 			<td><%= index++ %></td>
 =======
 										 			<td><%= m.getMsgNo() %></td>
 >>>>>>> parent of 75d1fc3 (05.02. 받은 쪽지함, 받은 쪽지 내용, 첨부파일, 보낸 쪽지함, 보낸 쪽지 내용, 보낸 쪽지 첨부파일, 휴지통, 로그인전)
+=======
+										 			<td><%= m.getMsgNo() %></td>
+>>>>>>> parent of d136e57 (Merge pull request #42 from pastelto/DH)
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
