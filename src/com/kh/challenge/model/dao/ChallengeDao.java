@@ -13,15 +13,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.vo.Board;
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
-import com.kh.notice.model.vo.Notice;
 
 public class ChallengeDao {
 	
@@ -179,8 +176,8 @@ public class ChallengeDao {
 		
 		String sql = prop.getProperty("selectChallengeRp");
 		
-		int startRow = (pi.getCurrentPage()-1)*pi.getRpLimit()+1;
-		int endRow = startRow + pi.getRpLimit()-1;
+		int startRow = (pi.getCurrentPage()-1)*pi.getListLimit()+1;
+		int endRow = startRow + pi.getListLimit()-1;
 		//SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME, PH_LOCATION, RP_LIKE FROM CHALLENGE_REPLY WHERE CH_NO = ?, RP_STATUS = 'Y'
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -332,7 +329,7 @@ public class ChallengeDao {
 	}
 
 	public ArrayList<ChallengeApply> selectApplyList(Connection conn, PageInfo pi) {
-		ArrayList<Notice> list = new ArrayList<Notice>();
+		ArrayList<ChallengeApply> list = new ArrayList<ChallengeApply>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -354,7 +351,8 @@ public class ChallengeDao {
 				list.add(new ChallengeApply(rset.getInt("AP_NO"),
 										rset.getString("AP_BODY"),
 										rset.getDate("AP_DATE"),
-										rset.getString("AP_USER")));
+										rset.getString("AP_USER"),
+										rset.getString("CATEGORY_NAME")));
 			}
 			
 		} catch (SQLException e) {

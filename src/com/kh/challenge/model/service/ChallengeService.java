@@ -12,8 +12,7 @@ import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
-import com.kh.notice.model.dao.NoticeDao;
-import com.kh.notice.model.vo.Notice;
+
 
 public class ChallengeService {
 
