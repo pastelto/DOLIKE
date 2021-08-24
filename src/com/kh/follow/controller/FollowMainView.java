@@ -29,7 +29,7 @@ public class FollowMainView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**

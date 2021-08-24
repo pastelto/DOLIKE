@@ -115,7 +115,7 @@
                                         <hr>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button">삭제하기</button>
+                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" href="<%= request.getContextPath() %>/dmsg.ms" >삭제하기</button>
                                     </div>
                                 </div>
                             </div>

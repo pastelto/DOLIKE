@@ -41,7 +41,6 @@ public class EmailCheckServlet extends HttpServlet {
 		} else {
 			out.print("success");
 		}
-		
 		out.flush();
 		out.close();
 	}

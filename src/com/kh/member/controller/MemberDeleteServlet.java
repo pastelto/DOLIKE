@@ -48,7 +48,6 @@ public class MemberDeleteServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**
