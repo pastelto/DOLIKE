@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class FollowMainView
  */
@@ -29,7 +31,7 @@ public class FollowMainView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**

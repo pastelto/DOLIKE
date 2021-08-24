@@ -1,6 +1,6 @@
-package com.kh.challenge.model.vo;
+package com.kh.follow.model.vo;
 
-public class PageInfo {
+public class FollowPageInfo {
 	
 	private int listCount;			// 총 게시글 갯수
 	private int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
@@ -8,14 +8,14 @@ public class PageInfo {
 	private int endPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 끝 수
 	private int maxPage;			// 전체 페이지에서의 가장 마지막 페이지
 	private int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
-	private int listLimit;			// 한 페이지에 보여질 게시글 최대 갯수
-	
-	public PageInfo() {
-		
-	}
+	private int followLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 
-	public PageInfo(int listCount, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
-			int listLimit) {
+	public FollowPageInfo() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public FollowPageInfo(int listCount, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
+			int followLimit) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
@@ -23,14 +23,14 @@ public class PageInfo {
 		this.endPage = endPage;
 		this.maxPage = maxPage;
 		this.pageLimit = pageLimit;
-		this.listLimit = listLimit;
+		this.followLimit = followLimit;
 	}
 
 	public int getListCount() {
 		return listCount;
 	}
 
-	public void setListCount(int rpCount) {
+	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
 
@@ -74,21 +74,20 @@ public class PageInfo {
 		this.pageLimit = pageLimit;
 	}
 
-	public int getListLimit() {
-		return listLimit;
+	public int getFollowLimit() {
+		return followLimit;
 	}
 
-	public void setListLimit(int rpLimit) {
-		this.listLimit = listLimit;
+	public void setFollowLimit(int followLimit) {
+		this.followLimit = followLimit;
 	}
 
 	@Override
 	public String toString() {
-		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", maxPage=" + maxPage + ", pageLimit=" + pageLimit + ", listLimit="
-				+ listLimit + "]";
+		return "FollowPageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", maxPage=" + maxPage + ", pageLimit=" + pageLimit + ", followLimit="
+				+ followLimit + "]";
 	}
 	
 	
-
 }

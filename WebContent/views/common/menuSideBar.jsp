@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
 <% 	
- 	// Member loginUser = (Member)session.getAttribute("loginUser");
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
@@ -15,22 +13,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
-    <!-- Favicon icon 
-    <link rel="icon" type="image/png" sizes="16x16" href=../../images/do_32.png">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link href="./css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script>
-	function msgLoginerror(){
-		alert("로그인 후 이용가능합니다.");
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="./css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<style>
+	#loginBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
 	}
-</script>
+	</style>
 </head>
 <body>
     
@@ -152,7 +151,7 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+                                            <a href="<%= request.getContextPath() %>/mypage.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
                                             <a href="<%= request.getContextPath() %>/list.ms">
@@ -225,7 +224,7 @@
                    
                         </ul>
                     </li>
-                    <% if(loginUser == null) {%>   
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
                         <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
@@ -269,7 +268,11 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
-        
+        <script>
+        	function msgLoginerror(){
+        		alert("로그인 후 이용 가능합니다.");
+        	}
+        </script>
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>

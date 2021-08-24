@@ -57,10 +57,7 @@ public class MemberDao {
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
-						
 			}
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- 
+<!-- 확인용! -->
 
 	<!-- 친구추가한 유저 정보 보여주는 부분 -->
 	<div class="card">

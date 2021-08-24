@@ -1794,8 +1794,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #7571f9;
-  border-color: #7571f9; }
+  background-color: #78c2ad;
+  border-color: #78c2ad; }
   .btn-primary:hover {
     color: #fff;
     background-color: #514cf7;
@@ -4394,7 +4394,7 @@ button.close {
   width: 20px;
   height: 20px;
   background: transparent no-repeat center center;
-  background-size: 100% 100%; }
+  background-size: 50% 100%; }
 
 .carousel-control-prev-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"); }
@@ -9522,7 +9522,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     padding-right: 5px; }
   .login-form__btn.submit {
     padding: 15px 40px;
-    background: #7571f9;
+    background: #78c2ad;
     font-weight: 700; }
 
 .login-form__intro p, .login-form__intro h4 {
@@ -11064,9 +11064,9 @@ table.dataTable thead .sorting::after {
   border-radius: 100%; }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background: #4540f7;
+  background: #78c2ad;
   color: #fff;
-  border-color: #4540f7; }
+  border-color: #78c2ad; }
 
 .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
   background: #6f78b2;

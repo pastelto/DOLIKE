@@ -12,6 +12,7 @@ public class Challenge {
 	private char status;
 	private String content;
 	private int userCount;
+	private int categoryNo;
 	private String categoryTitle;
 	
 	private String user;
@@ -44,7 +45,22 @@ public class Challenge {
 		this.chNo = chNo;
 		this.rpCount = rpCount;
 		this.achieve = achieve;
-	}	
+	}
+	
+	// insert_category
+	public Challenge(int chNo, String chTitle, int voteCount, Date start, Date end, char status, String content,
+			int userCount, int categoryNo) {
+		super();
+		this.chNo = chNo;
+		this.chTitle = chTitle;
+		this.voteCount = voteCount;
+		this.start = start;
+		this.end = end;
+		this.status = status;
+		this.content = content;
+		this.userCount = userCount;
+		this.categoryNo = categoryNo;
+	}
 	
 	public Challenge(String chTitle, String content, String categoryTitle) {
 		super();
@@ -129,10 +145,16 @@ public class Challenge {
 		return categoryTitle;
 	}
 
-	public void setCategoryTitle(String getCategoryTitle) {
+	public void setCategoryTitle(String categoryTitle) {
 		this.categoryTitle = categoryTitle;
 	}
-	
+
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -159,14 +181,18 @@ public class Challenge {
 	public void setAtTitle(String atTitle) {
 		this.atTitle = atTitle;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "Challenge [chNo=" + chNo + ", chTitle=" + chTitle + ", voteCount=" + voteCount + ", start=" + start
 				+ ", end=" + end + ", status=" + status + ", content=" + content + ", userCount=" + userCount
-				+ ", categoryTitle=" + categoryTitle + "]";
+				+ ", categoryNo=" + categoryNo + ", categoryTitle=" + categoryTitle + ", user=" + user + ", rpCount="
+				+ rpCount + ", achieve=" + achieve + ", atTitle=" + atTitle + "]";
 	}
+	
+	
+	
+	
+	
 		
 
 }
