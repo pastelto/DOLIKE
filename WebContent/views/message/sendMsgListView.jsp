@@ -239,14 +239,7 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-<<<<<<< HEAD
 				var mno = $(this).children().eq(1).text();
-				/* var mno = $("#msgList input[name=msgNo]").val(); */
-=======
-				/* var mno = $(this).children().eq(1).text(); */
-				var mno = $("input[name=msgNo]").val();
-				console.log(mno);
->>>>>>> refs/heads/master
 				location.href="<%= contextPath %>/sread.ms?mno="+mno;
 			})
 		})

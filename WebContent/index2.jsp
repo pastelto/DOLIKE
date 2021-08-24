@@ -44,6 +44,7 @@
     text-decoration: none;
     background-color: transparent;
 }
+
 </style>
 <body>
 
@@ -119,7 +120,7 @@
 					</div>
 				</div>
 			</div>
-		<div class="content-body" style="min-height: 1000px; width: 80%; height: 80%; padding-top: 10%; paading-right: 10%" >
+		<div class="content-body" style="min-height: 1000px; width: 65%; height: 80%; padding-top: 10%; paading-right: 10%; padding-left:1%;"  >
 
 		              <div class="col-md-12">
                         <div class="card">
