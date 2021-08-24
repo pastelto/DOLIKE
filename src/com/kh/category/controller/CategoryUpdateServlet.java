@@ -34,7 +34,7 @@ public class CategoryUpdateServlet extends HttpServlet {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		//String cno = request.getParameter("cno");
-		
+		//으 다시 접근해보자!!
 		System.out.println("cno 값 : " + cno);
 		String caName = request.getParameter("caName");
 		
