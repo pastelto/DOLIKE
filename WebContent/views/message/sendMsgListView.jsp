@@ -60,6 +60,12 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+	
+	#deleteBtn{
+		color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
 </style>
 </head>
 
@@ -149,8 +155,14 @@
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<tr>
-										 			<td><input type="checkbox" value=<%= m.getMsgNo()%>/></td>
+<<<<<<< HEAD
+										 			<td><input type="checkbox"/></td>
+										 			<td><input type="hidden" name="msgNo" value=""><%= m.getMsgNo()%></td>
+=======
+										 			<td><input type="checkbox" /><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
+										 			<%-- <td><%= m.getMsgNo()%></td> --%>
 										 			<td><%= index++ %></td>
+>>>>>>> refs/heads/master
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -163,6 +175,12 @@
 									</div>
 								</div>
                                 </div>
+									<!-- 삭제 버튼 -->
+									<% if(!list.isEmpty()){ %>
+									<div class="pagination justify-content-center">
+									<button id="deleteBtn" type="button" class="btn btn-sm" onclick="">삭제하기</button>
+									</div>
+									<% } %>
                             </div>
                         </div>
                     </div>
@@ -227,8 +245,14 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(0).text();
-			
+<<<<<<< HEAD
+				var mno = $(this).children().eq(1).text();
+				/* var mno = $("#msgList input[name=msgNo]").val(); */
+=======
+				/* var mno = $(this).children().eq(1).text(); */
+				var mno = $("input[name=msgNo]").val();
+				console.log(mno);
+>>>>>>> refs/heads/master
 				location.href="<%= contextPath %>/sread.ms?mno="+mno;
 			})
 		})

@@ -8,7 +8,7 @@ public class ChallengeApply {
 	private String content;
 	private Date apDate;
 	private String apUser;
-	private String categoryNo;
+	private int categoryNo;
 	
 	public ChallengeApply() {
 		// TODO Auto-generated constructor stub
@@ -46,11 +46,11 @@ public class ChallengeApply {
 		this.apUser = apUser;
 	}
 
-	public String getCategoryNo() {
+	public int getCategoryNo() {
 		return categoryNo;
 	}
 
-	public void setCategoryNo(String categoryNo) {
+	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
 	}
 

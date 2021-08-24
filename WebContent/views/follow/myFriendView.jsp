@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%> 
 <%
-	String contextPath = (String)request.getContextPath();
+	//String contextPath = (String)request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -12,15 +12,16 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../../images/do_32.png">
 <!-- Custom Stylesheet -->
-<link href="../../css/style.css" rel="stylesheet">
+<!-- <link href="../../css/style.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script> -->
+	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
@@ -28,7 +29,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 	
 <style>
 	#fList{
@@ -57,7 +58,7 @@
     	background-color: #fff;
     	border-color: #f3969a;
 	}
-	.jumbotron{
+	#jum{
 		padding:1rem 0.5rem;
 		margin-bottom:1rem;
 		background: #78c2ad;
@@ -69,8 +70,8 @@
 	
 </head>
 <body>
-<%-- 	<div id="main-wrapper">
-		<%@ include file="../common/menuSideBar.jsp"%> --%>
+	<div id="main-wrapper">
+		<%@ include file="../common/menuSideBar.jsp"%>
 
 	<div class="content-body">
 
@@ -89,18 +90,23 @@
 			<div class="col-10" style="margin: 0 auto;">
 				
 				<div class="row">
+				<div class="col-1">
+				</div>
 					<div class="col-5">
 						<!-- 오른 쪽 친구 선택시 보여지는 부분 -->
 						<%@ include file="../follow/followDetail.jsp" %>
 
 					</div>
 
+
+
+
 					<!-- 친구추가 검색창 및 리스트 -->
 
-					<div class="col-4">
+					<div class="col-5">
 
 						<div id="fList" class="card ">
-							<div class="jumbotron text-center"><b>나의 친구 (N명)</b></div>
+							<div id = "jum" class="jumbotron text-center"><b>나의 친구 (N명)</b></div>
 							<div class="card-body" style="margin: 0 auto;">
 							
 								<div class="input-group-prepend" >
@@ -125,6 +131,10 @@
                             </div>
 						</div>
 					</div>
+					
+					<div class="col-1">
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -133,8 +143,8 @@
 		
 	</div>
 
-			<%-- <%@ include file="../common/footer.jsp" %> 
-	</div> --%>
+			<%@ include file="../common/footer.jsp" %> 
+	</div>
 	
 	<script>
 		function searchId(){
@@ -146,7 +156,7 @@
 				return false;
 			}
 			$.ajax({
-				url:"serach.fl",
+				url:"search.fl",
 				type:"get",
 				data:{followId:followId.val()},
 				success:function(result){
