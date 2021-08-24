@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.vo.Board;
 import com.kh.category.model.dao.CategoryDao;
 import com.kh.category.model.vo.Category;
 import com.kh.category.model.vo.CategoryPageInfo;
@@ -51,9 +49,6 @@ public class CategoryService {
 		
 		int result = new CategoryDao().insertCategory(conn, cat);
 		
-		System.out.println(cat);
-		System.out.println("1. null 발생함");
-		System.out.println(result);
 		if(result > 0) {
 			commit(conn);
 		}else {
@@ -70,24 +65,33 @@ public class CategoryService {
 		
 		Connection conn = getConnection();
 		
-		int result = new CategoryDao().increaseCount(conn, cno);
+		Category result = new CategoryDao().selectCategory(conn, cno);
 		
-		//int result = new CategoryDao().selectCategory(conn, cno);
+		close(conn);
 		
-		Category c = null;
+		return result;
+	}
+
+
+
+	public int deleteCategory(int cid) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CategoryDao().deleteCategory(conn, cid);
+		
 		if(result > 0) {
 			commit(conn);
-			c= new CategoryDao().selectCategory(conn, cno);
 		}else {
 			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return c;
+		return result;
 	}
 
-	
+	//커밋엔 푸쉬 확인중
 
 }
 

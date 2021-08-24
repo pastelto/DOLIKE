@@ -3,8 +3,7 @@
 
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
-	String contextPath = request.getContextPath();
-
+	
 	CategoryPageInfo ca = (CategoryPageInfo)request.getAttribute("ca");
 	
 	int listCount = ca.getListCount();

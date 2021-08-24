@@ -208,6 +208,10 @@
                    
                         </ul>
                     </li>
+<<<<<<< HEAD
+=======
+                    <% if(loginUser == null) {%>   
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>

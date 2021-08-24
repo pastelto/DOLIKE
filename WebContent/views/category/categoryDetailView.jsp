@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="com.kh.category.model.vo.*"%>
 <%
 	Category c = (Category)request.getAttribute("c");
-	String contextPath = request.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -80,13 +79,12 @@
                                             <label>카테고리를 확인하세요.</label>
                                             <input type="text" class="form-control bg-transparent"  id="comment" name="caTitleDetail" value="<%= c.getCategoryName() %>"></input>
                                         </div>
-                                    <div class="general-button" align="center">
-                                    <button id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/list.ca?currentPage=1';">수정하기</button>
-                                    
-                                    
+                                    <div class="general-button" align="right">
+                                    <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
+                                   	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
-                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary">수정하기</button>
-									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary">삭제하기</button>									
+                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary" onclick="updateCategoryForm()">수정하기</button>
+									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary" onclick="deleteCategory()">삭제하기</button>									
 									<%--<% } --%>
 								</div>
                                 </div>
@@ -96,12 +94,12 @@
 								<input type="hidden" name="cno" value="<%= c.getCategoryNo() %>">
 								</form>
 								<script>
-									function updateForm(){
+									function updateCategoryForm(){
 										$("#postForm").attr("action", "<%=contextPath%>/updateForm.ca");
 										$("#postForm").submit();
 									}
 									
-									function deleteBoard(){
+									function deleteCategory(){
 										$("#postForm").attr("action", "<%=contextPath%>/deleteC.ca");
 										$("#postForm").submit();
 									}

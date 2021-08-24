@@ -16,7 +16,7 @@ public class Challenge {
 	
 	private String user;
 	private int rpCount;
-	private char achieve;
+	private String achieve;
 	
 	private String atTitle;
 	
@@ -38,10 +38,25 @@ public class Challenge {
 		this.categoryTitle = categoryTitle;
 	}	
 	// ch_user
-	public Challenge(String user,int chNo, int rpCount, char achieve) {
+	public Challenge(String user,int chNo, int rpCount, String achieve) {
 		super();
 		this.user = user;
 		this.chNo = chNo;
+		this.rpCount = rpCount;
+		this.achieve = achieve;
+	}	
+	
+	public Challenge(String chTitle, String content, String categoryTitle) {
+		super();
+		this.chTitle = chTitle;
+		this.content = content;
+		this.categoryTitle = categoryTitle;
+	}
+	
+	public Challenge(int chNo, String chTitle, int rpCount, String achieve) {
+		super();
+		this.chNo = chNo;
+		this.chTitle = chTitle;
 		this.rpCount = rpCount;
 		this.achieve = achieve;
 	}
@@ -130,10 +145,10 @@ public class Challenge {
 	public void setRpCount(int rpCount) {
 		this.rpCount = rpCount;
 	}
-	public char getAchieve() {
+	public String getAchieve() {
 		return achieve;
 	}
-	public void setAchieve(char achieve) {
+	public void setAchieve(String achieve) {
 		this.achieve = achieve;
 	}
 	

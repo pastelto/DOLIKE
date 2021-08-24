@@ -33,9 +33,16 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		
 
 		
+=======
+				
+				int chno = Integer.parseInt(getParameter("chno"));
+				ArrayList<Challenge> list = new ChallengeService().selectDetail(chno);
+				
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
 		// ---------------- 페이징 처리 -----------------
 				int rpCount;			// 총 댓글 갯수
 				int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
@@ -118,6 +125,11 @@ public class ChallengeDetailServlet extends HttpServlet {
 		
 				RequestDispatcher view = request.getRequestDispatcher("views/challenge/challengeDetailView.jsp");
 				view.forward(request, response);
+	}
+
+	private String getParameter(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
