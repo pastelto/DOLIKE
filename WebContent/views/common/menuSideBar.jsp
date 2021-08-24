@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
@@ -225,7 +224,7 @@
                    
                         </ul>
                     </li>
-                    <% if(loginUser == null) {%>   
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
                         <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
@@ -269,7 +268,11 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
-        
+        <script>
+        	function msgLoginerror(){
+        		alert("로그인 후 이용 가능합니다.");
+        	}
+        </script>
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>

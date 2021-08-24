@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
-ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
-ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
+ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
+ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 %>
 <!DOCTYPE html>
 <html>
