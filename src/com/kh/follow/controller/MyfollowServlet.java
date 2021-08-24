@@ -30,7 +30,7 @@ public class MyfollowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/myFriendView.jsp");
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**

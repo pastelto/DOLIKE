@@ -70,6 +70,7 @@
 	
 </head>
 <body>
+<!-- 확인용! -->
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 
