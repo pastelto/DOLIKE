@@ -11,10 +11,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<title>회원가입</title>
 	<style>
-	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn {
+	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn, #joinBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
+	}
+	
+	#goMain {
+		color: #000000;
+		background-color: #fff;
+		border-color: #78c2ad;
 	}
 	</style>
 </head>
@@ -58,7 +64,7 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요.">
-                                                <button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
+                                                <button type="button" class="btn btn-primary" id="idCheckBtn" onclick="checkId();">중복확인</button>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -74,6 +80,7 @@
                                             <div class="col-lg-6">
                                                 <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요.">
                                             </div>
+                                            <label id = "pwdResult"></label>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userName">이름 <span class="text-danger">*</span>
@@ -87,7 +94,7 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요."></textarea>
-                                            	<button type="button" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
+                                            	<button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -102,7 +109,7 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요."></textarea>
-                                                <button type="button" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
+                                                <button type="button" class="btn btn-primary" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -110,55 +117,51 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요."></textarea>
-                                                <button type="button" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
+                                                <button type="button" class="btn btn-primary" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
                                             </div>
                                         </div>
-                                        
-                                        <div class="col-lg-12">
-				                        <div class="card">
-				                            <div class="card-body">
-				                                <h4 class="card-title">관심사</h4>
-				                                <div class="basic-form">
-				                                    <form>
-				                                        <div class="form-group">
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">공부</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">건강</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">여행</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">요리</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">동물</label>
-				                                            </div>
-				                                            <div class="form-check mb-3">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">패션뷰티</label>
-				                                            </div>
-				                                            <div class="form-check disabled">
-				                                                <label class="form-check-label">
-				                                                    <input type="checkbox" class="form-check-input" value="">기타</label>
-				                                            </div>
-				                                        </div>
-				                                    </form>
-				                                </div>
-				                            </div>
-				                        </div>
-				                    </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="interests">관심사</label>
+                                            <div class="col-lg-6">
+												<form>
+			                                        <div class="form-group">
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="공부">공부</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="건강">건강</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="여행">여행</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="요리">요리</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="동물">동물</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
+			                                            </div>
+			                                            <div class="form-check mb-3">
+			                                                <label class="form-check-label">
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="기타">기타</label>
+			                                            </div>
+			                                        </div>
+			                                    </form>
+                                            </div>
+                                        </div>
                                         
                                         
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
+                                        	<button type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)">돌아가기</button>
                                             <button type="submit" class="btn btn-primary" id="joinBtn" disabled>회원가입</button>
                                         </div>
                                     </div>
