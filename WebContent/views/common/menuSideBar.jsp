@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
@@ -225,7 +224,7 @@
                    
                         </ul>
                     </li>
-                    <% if(loginUser == null) {%>   
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
                         <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
