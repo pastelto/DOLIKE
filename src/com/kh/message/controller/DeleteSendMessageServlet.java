@@ -13,16 +13,16 @@ import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
 
 /**
- * Servlet implementation class DeleteMessageServlet
+ * Servlet implementation class DeleteSendMessageServlet
  */
-@WebServlet("/dmsg.ms")
-public class DeleteMessageServlet extends HttpServlet {
+@WebServlet("/dsmsg.ms")
+public class DeleteSendMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMessageServlet() {
+    public DeleteSendMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +34,15 @@ public class DeleteMessageServlet extends HttpServlet {
 		// 유저아이디 넘기기 
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		
-		int result = new MessageService().deleteRecvMsg(mno);
+				
+		int result = new MessageService().deleteSendMsg(mno, userId);
 		if(result > 0) {
-			response.sendRedirect("list.ms");
+			response.sendRedirect("slist.ms");
 		} else {
-			request.setAttribute("msg", "쪽지 삭제 실패" );
+			request.setAttribute("msg", "보낸쪽지 삭제 실패" );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-		}
+				}
 	}
 
 	/**

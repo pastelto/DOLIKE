@@ -71,7 +71,7 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> </a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
@@ -115,8 +115,17 @@
                                         <hr>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button">삭제하기</button>
+                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" onclick="deleteSMsg();">삭제하기</button>
                                     </div>
+                                    	<form action="" id="msgDel" method="post">
+											<input type="hidden" name="mno" value="<%= mesg.getMsgNo() %>">
+										</form>
+										<script>
+	                                    function deleteSMsg(){
+	                        				$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
+	                        				$("#msgDel").submit();
+                        				}
+                                    </script>
                                 </div>
                             </div>
                         </div>

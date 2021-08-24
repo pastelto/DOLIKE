@@ -123,7 +123,7 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b></a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
@@ -141,29 +141,43 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th></th>
-												<th>번호</th>
-												<th>보낸사람</th>
-												<th>제목</th>
-												<th>받은 날짜</th>
+												<th style="width:3rem;"></th>
+												<th style="width:5rem;">번호</th>
+												<th style="width:8rem;">보낸사람</th>
+												<th style="width:40rem;">제목</th>
+												<th style="width:12rem;">받은 날짜</th>
+												<th>상태</th>
 											</tr>
 										</thead>
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="5">받은 쪽지가 없습니다.</td>
+												<td colspan="6">받은 쪽지가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
+										 		<% if( m.getMsgStatus().equals("Y") ){ %>
 										 		<tr>
 										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
-										 			<td><%= index++ %></td>
+										 			<%-- <td><%= index++ %></td> --%>
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
-										 		</tr>
+													<td><%= "읽음" %></td>
+												</tr>
+												<% } else if( m.getMsgStatus().equals("N")){  %>	
+												<tr>
+										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
+										 			<%-- <td><%= index++ %></td> --%>
+										 			<td><%= m.getMsgNo()%></td>
+													<td><%= m.getSenderId() %></td>
+													<td><%= m.getMsgTitle() %></td>
+													<td><%= m.getRecvtime()%></td>
+													<td><%= "읽지 않음" %></td>
+												</tr>
 										 	<% } %>
+										 <% } %>
 										 <% } %>
 										</tbody>
 									</table>
@@ -185,43 +199,42 @@
                     
                 </div>
                 
-                				<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.ms?currentPage=1"> &laquo; </a></li>
-				
-				<!-- 이전페이지 -->
-				<% if(currentPage == 1) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-				<%} %>
-				
-				
-				<!-- 페이지 목록 -->
-				<%for(int p=startPage; p<=endPage; p++){ %>
-				
-					<%if(p == currentPage){ %>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.ms?currentPage=<%= p %>"><%= p %> </a></li>
-					<%} %>
-					
-				<%} %>
-				
-				
-				<!-- 다음페이지 -->
-				<% if(currentPage == maxPage) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-				<%} %>
-				
-				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
-			</ul>
-		</div>
+					<div>
+					<ul class="pagination justify-content-center">
+						<!-- 맨앞으로 -->
+						<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.ms?currentPage=1"> &laquo; </a></li>
+						
+						<!-- 이전페이지 -->
+						<% if(currentPage == 1) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+						<%} %>
+						
+						
+						<!-- 페이지 목록 -->
+						<%for(int p=startPage; p<=endPage; p++){ %>
+						
+							<%if(p == currentPage){ %>
+								<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+							<%}else{ %>
+								<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.ms?currentPage=<%= p %>"><%= p %> </a></li>
+							<%} %>
+							
+						<%} %>
+						
+						
+						<!-- 다음페이지 -->
+						<% if(currentPage == maxPage) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+						<%} %>
+						
+						<!-- 맨뒤로 -->
+						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
+					</ul>
+				</div>
             </div>
 		
             <!-- #/ container -->
@@ -247,15 +260,10 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-<<<<<<< HEAD
 				var mno = $(this).children().eq(1).text();
 				/* var mno = $("input[name=msgNo]").val(); */
 				location.href="<%= contextPath %>/rread.ms?mno="+mno;
-=======
-				var mno = $("input[name=msgNo]").val();
-				console.log(mno);
-				location.href="<%= contextPath %>/sread.ms?mno="+mno;
->>>>>>> refs/heads/master
+
 			})
 		})
 		<% } %>
