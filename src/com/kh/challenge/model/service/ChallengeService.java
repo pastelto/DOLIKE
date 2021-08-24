@@ -12,6 +12,7 @@ import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
+import com.kh.message.model.dao.MessageDao;
 
 
 public class ChallengeService {
@@ -119,6 +120,62 @@ public class ChallengeService {
 		ArrayList<ChallengeApply> list = new ChallengeDao().selectApplyList(conn, pi);
 		close(conn);
 		return list;
+	}
+
+	public int insertVote(ChallengeVote cv) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertVote(conn, cv);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<ChallengeApply> selectVoteApList() {
+		Connection conn = getConnection();
+		ArrayList<ChallengeApply> list = new ChallengeDao().selectVoteApList(conn);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<ChallengeVote> selectChallengeVoteList() {
+		Connection conn = getConnection();
+		ArrayList<ChallengeVote> list = new ChallengeDao().selectChallengeVoteList(conn);
+		close(conn);
+		return list;
+	}
+
+	public int insertChallenge(Challenge c, ChallengeAttachment cat) {
+		Connection conn = getConnection();
+		
+		// 챌린지
+		int result1 = new ChallengeDao().insertChallenge(conn, c);
+		
+		// 첨부파일
+		int result2 = 1;
+		if(cat != null) {
+			result2 = new ChallengeDao().insertChAttachment(conn, cat);
+		}
+		
+		if(result1 * result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
+	}
+
+	public ArrayList<ChallengeAttachment> selectAttach() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
