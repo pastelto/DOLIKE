@@ -36,9 +36,12 @@ public class ChallengeMainServlet extends HttpServlet {
 		ArrayList<Challenge> list = new ChallengeService().selectList();
 		request.setAttribute("list", list);
 		
-		//int chNo = Integer.parseInt(request.getParameter("chNo"));
+		//int chNo = Integer.parseInt(request.getParameter());
 		
-		//ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach(chNo);
+		//ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();
+		
+		
+		
 		//request.setAttribute("fileList", fileList);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
