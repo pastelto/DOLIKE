@@ -10,8 +10,6 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 		
-	String contextPath = request.getContextPath();
-		
 %>
 
 
@@ -34,11 +32,13 @@
 			text-decoration:none;
 		}
 	</style>
+	<!-- 
 	<link href="../../css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	 -->
 </head>
 <body>
 
@@ -49,10 +49,10 @@
         ***********************************-->
         <div class="content-body">
 	 		<div class="row">
-	 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
+	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thread>
 	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
+	 						<!-- <th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th> -->
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
@@ -63,17 +63,17 @@
 	 				<tbody>
 						<% if(list.isEmpty()){ %>
 						<tr> 
-							<td colspan="6">조회된 리스트가 없습니다.</td>
+							<td colspan="6">조회된 게시글이 없습니다.</td>
 						</tr>
 		 				<% }else{ %>
 			 				<% for(Board b : list){ %>
 			 				<tr>
+			 					<!--  <td>IMAGE</td>-->
 			 					<td><%= b.getBoardNo() %></td>
-			 					<td><%= b.getCategoryNo() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
-			 					<td><%= b.getViews() %></td>
 			 					<td><%= b.getBoardDate() %></td>
+			 					<td><%= b.getViews() %></td>
 			 				</tr>
 			 				<% } %>
 		 				<% } %>
@@ -112,16 +112,16 @@
 					<!-- 맨 끝으로 (>>) -->
 					<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
 	 			</div>
-	 			<div class="btn btn-primary pull-right">
-				<% if(loginUser != null){ %>
-				<button onclick="location.href='enrollForm.bo'">작성하기</button>
-				<% } %>
-				</div>
-				<div>
-	 			<a href="enrollForm.bo" class="btn btn-primary pull-right">글쓰기</a>
-	 			</div>
+	 			
+				
+	 			<!--  <a href="enrollForm.bo" class="btn btn-primary pull-right">글쓰기</a>-->
+	 			
 	 		</div>
-
+	 		<% if(loginUser != null){ %>
+			<div class="btn btn-primary pull-right" >
+				<button onclick="location.href='enrollForm.bo'" style="border:none; background:none; color:white">작성하기</button>
+			</div>
+			<% } %>
         </div>
         <!--**********************************
             Content body end
@@ -131,9 +131,9 @@
 	<script>
 		<%if(!list.isEmpty()){%>
 		$(function(){
-			$(".listArea>tbody>tr").click(function(){
+			$(".table>tbody>tr").click(function(){
 				var bno = $(this).children().eq(0).text();
-				location.href="<%= contextPath%>/detail.bo?bno="+bno;
+				location.href="<%= contextPath %>/detail.bo?bno="+bno;
 			})
 		})
 		<%}%>

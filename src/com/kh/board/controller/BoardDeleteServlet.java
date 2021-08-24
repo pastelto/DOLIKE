@@ -14,7 +14,7 @@ import com.kh.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/delete.bo")
+@WebServlet("/deleteB.bo")
 public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
