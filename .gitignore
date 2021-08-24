@@ -90,7 +90,7 @@ WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
 WebContent/WEB-INF/jspwork/org/apache/jsp/index1_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/index2_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/*.class
-WebContent/WEB-INF/*
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.java
 ## 0817 끝 ##
 
 
