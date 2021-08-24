@@ -11,13 +11,31 @@ public class Member {
 	private String phone;
 	private String email;
 	private String nickName;
-	private int interests;
+	private String[] interests;
 	private Date userCreateDate;
 	private String userStatus;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Member(String userId, String userName, String userPwd, Date birthDate, String phone, String email,
+			String nickName, String[] interests, Date userCreateDate, String userStatus) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.birthDate = birthDate;
+		this.phone = phone;
+		this.email = email;
+		this.nickName = nickName;
+		this.interests = interests;
+		this.userCreateDate = userCreateDate;
+		this.userStatus = userStatus;
+	}
+
+
 
 	public String getUserId() {
 		return userId;
@@ -75,11 +93,11 @@ public class Member {
 		this.nickName = nickName;
 	}
 
-	public int getInterests() {
+	public String[] getInterests() {
 		return interests;
 	}
 
-	public void setInterests(int interests) {
+	public void setInterests(String[] interests) {
 		this.interests = interests;
 	}
 
@@ -99,19 +117,19 @@ public class Member {
 		this.userStatus = userStatus;
 	}
 
-	public Member(String userId, String userName, String userPwd, Date birthDate, String phone, String email,
-			String nickName, int interests, Date userCreateDate, String userStatus) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.userPwd = userPwd;
-		this.birthDate = birthDate;
-		this.phone = phone;
-		this.email = email;
-		this.nickName = nickName;
-		this.interests = interests;
-		this.userCreateDate = userCreateDate;
-		this.userStatus = userStatus;
+	
+	public String getInterestsArr() {
+		String interestsArr = "";
+		
+		for (int i = 0; i < interests.length; i++) {
+			interestsArr += interests[i];
+			
+			if (i < interests.length - 1) {
+				interestsArr += ',';
+			}
+		}
+		
+		return interestsArr;
 	}
 	
 }
