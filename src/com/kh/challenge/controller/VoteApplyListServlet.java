@@ -1,6 +1,7 @@
-package com.kh.follow.controller;
+package com.kh.challenge.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,19 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.Member;
+import com.kh.challenge.model.service.ChallengeService;
+import com.kh.challenge.model.vo.ChallengeApply;
 
 /**
- * Servlet implementation class FollowMainView
+ * Servlet implementation class VoteApplyListServlet
  */
-@WebServlet("/followMain.fl")
-public class FollowMainView extends HttpServlet {
+@WebServlet("/voteApList.ch")
+public class VoteApplyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowMainView() {
+    public VoteApplyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +32,11 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response); 
+		ArrayList<ChallengeApply> list = new ChallengeService().selectVoteApList();
+		request.setAttribute("list", list);
+				
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/insertVote.jsp");
+		view.forward(request, response);
 	}
 
 	/**

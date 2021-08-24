@@ -1,4 +1,4 @@
-package com.kh.follow.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 
@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.vo.Member;
+import com.kh.message.model.service.MessageService;
 
 /**
- * Servlet implementation class FollowMainView
+ * Servlet implementation class DeleteMessageServlet
  */
-@WebServlet("/followMain.fl")
-public class FollowMainView extends HttpServlet {
+@WebServlet("/dmsg.ms")
+public class DeleteMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowMainView() {
+    public DeleteMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +31,18 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response); 
+		// 유저아이디 넘기기 
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		
+		int result = new MessageService().deleteRecvMsg(mno);
+		if(result > 0) {
+			response.sendRedirect("list.ms");
+		} else {
+			request.setAttribute("msg", "쪽지 삭제 실패" );
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**

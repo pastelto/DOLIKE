@@ -31,6 +31,11 @@ public class Follow {
 		this.userId = userId;
 		this.followId = followId;
 	}
+	
+	public Follow(String followId) {
+		super();
+		this.followId = followId;
+	}
 
 	public int getFollowNo() {
 		return followNo;

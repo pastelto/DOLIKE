@@ -134,6 +134,44 @@ public class MessageService {
 		
 		return m;
 	}
+
+	// 받은 쪽지 삭제
+	public int deleteRecvMsg(int mno) {
+		Connection conn = getConnection();
+		
+		int result1 = new MessageDao().deleteRecvMsg(conn, mno);
+		int result2 = new MessageDao().deleteRecvAttachment(conn, mno);
+		
+		// 첨부파일 유무에 따라
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1;
+	}
+
+	// 보낸 쪽지 삭제
+	public int deleteSendMsg(int mno, String userId) {
+		Connection conn = getConnection();
+		
+		int result1 = new MessageDao().deleteSendMsg(conn, mno, userId);
+		int result2 = new MessageDao().deleteSendAttachment(conn, mno);
+		
+		// 첨부파일 유무에 따라
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1;
+	}
+
+
 	
 	
 }
