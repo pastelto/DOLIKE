@@ -2,6 +2,7 @@ git rm -r --cached .
 git add . 
 git commit -m "Fixed .gitignore"
 
+
 ### Java ###
 # Compiled class file
 *.class
@@ -88,6 +89,9 @@ $RECYCLE.BIN/
 WebContent/WEB-INF/jspwork/org/apache/jsp/*.*
 WebContent/WEB-INF/jspwork/org/apache/jsp/index1_jsp.java
 WebContent/WEB-INF/jspwork/org/apache/jsp/index2_jsp.java
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.class
+WebContent/WEB-INF/jspwork/org/apache/jsp/*.java
+WebContent/WEB-INF/jspwork/*
 ## 0817 끝 ##
 
 
@@ -180,4 +184,7 @@ Pricing
 API
 Training
 Blog
+
 About
+/bin/
+
