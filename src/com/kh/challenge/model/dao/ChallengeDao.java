@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
@@ -129,6 +130,9 @@ public class ChallengeDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return fileList;
@@ -223,11 +227,11 @@ public class ChallengeDao {
 			rset = stmt.executeQuery(sql);
 
 			while (rset.next()) {
-				new ChallengeVote(rset.getString("CH_TITLE"),
+				list.add(new ChallengeVote(rset.getString("CH_TITLE"),
 						          rset.getDate("VOTE_START"),
 						          rset.getDate("VOTE_END"),
 						          rset.getString("CATEGORY_NAME")						          
-						);
+						));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -242,8 +246,89 @@ public class ChallengeDao {
 	}
 
 	public ArrayList<Challenge> selectMyChallenge(Connection conn, String loginUser) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Challenge> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String sql = prop.getProperty("myChallengeAc");
+		/*SELECT CH_NO, CH_TITLE, RP_COUNT, ACHIEVEMENT FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WEHRE CH_USER = ?*/
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loginUser);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {				
+				list.add(new Challenge(rset.getInt("CH_NO"),
+							  rset.getString("CH_TITLE"),
+							  rset.getInt("RP_COUNT"),
+							  rset.getString("ACHIEVEMENT")
+				));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Challenge> selectDetail(Connection conn, int chno) {
+		ArrayList<Challenge> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		String sql = prop.getProperty("myChallengeAc");
+		/*SELECT CH_TITLE, CH_BODY, CATEGORY_NAME FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO  WHERE CH_NO= ?*/
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, chno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {				
+				list.add(new Challenge(rset.getString("CH_TITLE"),
+									   rset.getString("CH_BODY"),
+									   rset.getString("CATEGORY_NAME")
+				));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int insertApply(Connection conn, ChallengeApply ca) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("challengeAp");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ca.getContent());
+			pstmt.setString(2, ca.getApUser());
+			pstmt.setInt(3, ca.getCategoryNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("챌린지 신청 : " + result);
+		
+		return result;
 	}
 
 	
