@@ -316,7 +316,6 @@
     <!--**********************************
         Scripts
     ***********************************-->
-
     <script src="./plugins/validation/jquery.validate.min.js"></script>
     <script src="./plugins/validation/jquery.validate-init.js"></script>
 

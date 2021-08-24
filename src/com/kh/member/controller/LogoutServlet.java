@@ -29,7 +29,6 @@ public class LogoutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath() + "/index2.jsp");
-		
 	}
 
 	/**
