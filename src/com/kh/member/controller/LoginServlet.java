@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**
