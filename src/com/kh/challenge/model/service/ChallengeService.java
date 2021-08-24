@@ -12,6 +12,8 @@ import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
+import com.kh.notice.model.dao.NoticeDao;
+import com.kh.notice.model.vo.Notice;
 
 public class ChallengeService {
 
@@ -111,6 +113,13 @@ public class ChallengeService {
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList<ChallengeApply> selectApplyList(PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<ChallengeApply> list = new ChallengeDao().selectApplyList(conn, pi);
+		close(conn);
+		return list;
 	}
 
 }

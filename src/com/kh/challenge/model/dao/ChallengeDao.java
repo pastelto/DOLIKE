@@ -331,6 +331,43 @@ public class ChallengeDao {
 		return result;
 	}
 
+	public ArrayList<ChallengeApply> selectApplyList(Connection conn, PageInfo pi) {
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectChallengeApList");
+		/*SELECT AP_NO, AP_BODY, AP_DATE, AP_USER, CATEGORY_NAME FROM CHALLENGE_APPLY A JOIN CATEGORY C ON A.CATEGORY_NO = C.CATEGORY_NO ORDER BY AP_DATE DESC*/
+		
+		int startRow = (pi.getCurrentPage()-1)*pi.getListLimit()+1;
+		int endRow = startRow + pi.getListLimit()-1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new ChallengeApply(rset.getInt("AP_NO"),
+										rset.getString("AP_BODY"),
+										rset.getDate("AP_DATE"),
+										rset.getString("AP_USER")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 	
 
 }
