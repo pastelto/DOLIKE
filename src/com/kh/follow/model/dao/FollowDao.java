@@ -9,9 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.member.model.dao.MemberDao;
+import com.kh.follow.model.vo.Follow;
+import com.kh.follow.model.vo.FollowPageInfo;
+import com.kh.notice.model.vo.Notice;
 
 public class FollowDao {
 
@@ -19,7 +23,7 @@ public class FollowDao {
 
 	public FollowDao() {
 		String fileName = FollowDao.class.getResource("/sql/follow/follow-query.properties").getPath();
-		System.out.println("fileName   " + fileName);
+		System.out.println("fileName: " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -38,7 +42,7 @@ public class FollowDao {
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("idCheck");
+		String sql = prop.getProperty("searchId");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -47,8 +51,8 @@ public class FollowDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) { //값이 있으면 해당 아이디를 사용하는 사용자가 있는 상태
-				result = rset.getInt(1); //하나만 있어서 이렇게 하나 여러개면 컬럼명 명시 필요
+			if(rset.next()) { 
+				result = rset.getInt(1); 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -59,5 +63,85 @@ public class FollowDao {
 		}
 		return result;
 	}
+
+
+	public int insertId(Connection conn, Follow fl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertId");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fl.getUserId());
+			pstmt.setString(2, fl.getFollowId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public ArrayList<Follow> selectList(Connection conn, String userId) {
+		ArrayList<Follow> list = new ArrayList<Follow>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFollowList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Follow(rset.getString("FOLLOW_ID")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+//	public int getListCount(Connection conn, String userId) {
+//		int listCount = 0;
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("getListCount");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, userId);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next()) {
+//				listCount = rset.getInt(1);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return listCount;
+//	}
 
 }
