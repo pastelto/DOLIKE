@@ -172,7 +172,7 @@
 										 			<%-- <td><%= index++ %></td> --%>
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
-													<td><%= m.getMsgTitle() %></td>
+													<td><span class="badge badge-primary badge-sm float-none m-t-5"> New </span> &nbsp; <%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
 													<td><%= "읽지 않음" %></td>
 												</tr>
