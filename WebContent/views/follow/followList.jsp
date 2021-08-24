@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 확인용! -->
 	<table class="table table-hover table-borderless" style="text-align: center;">
 		<tr>
 		<td colspan="3">여기는 리스트임</td>

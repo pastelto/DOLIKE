@@ -1,27 +1,25 @@
-package com.kh.member.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class NickCheckServlet
+ * Servlet implementation class DeleteMessageServlet
  */
-@WebServlet("/nickCheck.me")
-public class NickCheckServlet extends HttpServlet {
+@WebServlet("/dmsg.ms")
+public class DeleteMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NickCheckServlet() {
+    public DeleteMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +28,8 @@ public class NickCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String nickName = request.getParameter("nickName");
-		int result = new MemberService().nickCheck(nickName);
-		
-		PrintWriter out = response.getWriter();
-		
-		if (result > 0) {
-			out.print("fail");
-		} else {
-			out.print("success");
-		}
-		out.flush();
-		out.close();
+		// 유저아이디 넘기기 
+				String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 	}
 
 	/**

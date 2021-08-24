@@ -155,16 +155,10 @@
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
-<<<<<<< HEAD
-										 		<tr id="msgList"> 
-										 			<td><input type="checkbox"/></td>
-										 			<td><input type="hidden" name="msgNo" value=""><%= m.getMsgNo() %></td>
-=======
 										 		<tr>
 										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
 										 			<td><%= index++ %></td>
 										 			<td><%= m.getMsgNo()%></td>
->>>>>>> refs/heads/master
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
