@@ -1,18 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
-    		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo "%>
+	import="java.util.ArrayList, com.kh.challenge.model.vo.*"%>
 <%
-	//Challenge c = (Challenge)request.getAttribute("c");
-	/* ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
-	ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>)request.getAttribute("rpList");	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	 
-	int listCount = pi.getRpCount();
-	int currentPage = pi.getCurrentPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage(); */
+	ArrayList<ChallengeVote> list = (ArrayList<ChallengeVote>)request.getAttribute("list"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -33,18 +23,22 @@
 					<p class="text-muted">1개의 챌린지만 선택 가능</p>
 					<div class="row">
 						<div class="col-md-6 col-lg-3">
-							<div class="card">
-								<div class="card-header bg-white">
-									<h5 class="card-title"></h5><!-- 챌린지 타이틀 -->
-								</div>
-								<img class="img-fluid" src="" alt=""><!-- 챌린지 배너 -->
-								<div class="card-body">
-									<p class="card-text"></p><!-- 챌린지 설명 -->
-								</div>
-								<div class="card-footer">									
-										<!-- form 태그 라디오버튼 넣기 -->									
-								</div>
-							</div>
+						<%if(!list.isEmpty()){%>
+							<% for(int i = 0; i < list.size(); i++) { %>
+								<form action="<%=contextPath%>/upVote.ch" method="post">
+									<div class="card">
+										<div class="card-header bg-white">
+											<h5 class="card-title"><%= list.get(i).getChTitle()%></h5><!-- 챌린지 타이틀 -->
+										</div>
+										<div class="card-body">
+											<p class="card-text"><%= list.get(i).getContent()%></p><!-- 챌린지 설명 -->
+										</div>
+										<div class="card-footer">									
+											<input type="radio" class="radio" name="challenge" value=<%= list.get(i)%>/>								
+										</div>
+									</div>
+								</form>
+							 <%}}%>
 						</div>				
 					</div>
 				</div>
