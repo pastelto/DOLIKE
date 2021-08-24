@@ -29,6 +29,13 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+
+	
+	#doLikeLogo{
+	
+	 background: white;
+	 
+	 }
 	</style>
 </head>
 <body>
@@ -38,7 +45,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index2.jsp" style="background:#eceeef">
+                <a href="index2.jsp" style="background:#fff">
                     <b class="logo-abbr"><img src="images/do_32.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/mainLogo_text.png" alt=""></span>
                     <span class="brand-title">
