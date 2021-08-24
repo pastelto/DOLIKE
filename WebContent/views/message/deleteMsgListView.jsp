@@ -122,7 +122,7 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함<span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함</a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i><b>휴지통</b></a>
                                     </div>
@@ -140,9 +140,9 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th></th>
-												<th>번호</th>
-												<th>보낸 사람</th>
+												<th style="width:3rem;"></th>
+												<th style="width:5rem;">번호</th>
+												<th style="width:8rem;">보낸 사람</th>
 												<th>제목</th>
 												<th>받은 날짜</th>
 											</tr>
@@ -169,12 +169,6 @@
 									</div>
 								</div>
                                 </div>
-                                	<!-- 삭제 버튼 -->
-									<% if(!list.isEmpty()){ %>
-									<div class="float-right">
-									<button id="deleteBtn" type="button" class="btn btn-sm" onclick="">삭제하기</button>
-									</div>
-									<% } %>
                             </div>
                         </div>
                     </div>
@@ -235,17 +229,6 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-	<script>
-		<% if(!list.isEmpty()){%>
-		$(function(){
-			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
-				/* var mno = $("#msgList input[name=msgNo]").val(); */
-				location.href="<%= contextPath %>/dlist.ms?mno="+mno;
-			})
-		})
-		<% } %>
-	</script>
 
 </body>
 
