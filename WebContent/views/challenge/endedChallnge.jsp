@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
+    import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
+    com.kh.challenge.model.vo.PageInfo"%>
 <%
-	 ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
-	 ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
+	ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	 
+	int listCount = pi.getRpCount();
+	int currentPage = pi.getCurrentPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -140,6 +148,21 @@
 	}
 	a{
 		cursor: pointer;
+	}	
+	#pageTag {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#pageTag:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	#pageDisable {
+		color: gray;
+    	background-color: #ced4da;
+    	border-color: #ced4da;
 	}
 </style>
 </head>
@@ -161,7 +184,7 @@
 				<a class="nav-link" href="">마이 챌린지</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="">종료된 챌린지</a>
+				<a class="nav-link" href="">챌린지</a>
 			</li>
 		</ul>
 	</div>
@@ -170,7 +193,7 @@
 				<div class="top-content">
 					<a href="투표하기 링크">
 					<div class="root-banner-wrap" style="background: "><!-- 색지정 -->
-						<a href="<%= request.getContextPath() %>/challengeVote.ch">
+						<a href="투표하기 링크">
 						<div class="banner-item-wide" style="background: ">
 							<div class="left">
 								<h6 class="label-text">Vote your Challenge!</h6>
@@ -186,8 +209,8 @@
 					</a>
 				</div>
 			</div>
-			<%if(!list.isEmpty() && !fileList.isEmpty()) {%>
-			<div class="container ">
+			
+			<div class="container">
 				<div class="root-content">
 					<div class="root-section">
 						<section class="challenge-list">
@@ -212,21 +235,53 @@
 											</ul>
 										</div>
 									</div>
-								</li>
+								</li>	
 								<%} %>
 							</ul>
 						</section>
 					</div>
 				</div>
 			</div>
-			<%} else { %>
-				<table border="lightgrey 0.5px" text-aligh="center" margin="auto">
-					<tr width="500px">
-						<td height="500px">지금은 점검중입니다.</td>
-					</tr>
-				</table>
-			<%}%>
 		</div>
+		
+		<!-- 페이지 처리 -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 맨앞으로 -->
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/challengeEnd.ch?currentPage=1"> &laquo; </a></li>
+				
+				<!-- 이전페이지 -->
+				<% if(currentPage == 1) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<%} %>
+				
+				
+				<!-- 페이지 목록 -->
+				<%for(int p=startPage; p<=endPage; p++){ %>
+				
+					<%if(p == currentPage){ %>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+					<%}else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/challengeEnd.ch?currentPage=<%= p %>"><%= p %> </a></li>
+					<%} %>
+					
+				<%} %>
+				
+				
+				<!-- 다음페이지 -->
+				<% if(currentPage == maxPage) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<%} %>
+				
+				<!-- 맨뒤로 -->
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= maxPage %>"> &raquo; </a></li>
+			</ul>
+		</div>
+		
 	</div>
 <%@ include file="../common/footer.jsp" %>
 </div>

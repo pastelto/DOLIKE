@@ -43,41 +43,7 @@
 
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
-	<%--
-	
-		String nickName = null;
-		if(session.getAttribute("nickName") != null){
-			nickName = (String)session.getAttribute("nickName"); //로그인한 유저의 정보 저장 
-		}
-		if(nickName == null){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인을 하세요.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
-		}
-		int boardNo = 0;
-		if(request.getParameter("boardNo") != null ) {
-			boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		}
-		if(boardNo ==0) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href = 'boardView.jsp'");
-			script.println("</script>");
-		}
-		Board board = new BoardDao().getBoard(boardNo);
-		if(!nickName.equals(board.getNickName())){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('권한이 없습니다.')");
-			script.println("location.href = 'boardView.jsp'");
-			script.println("</script>");
-		}
-	--%>
-   
-        <!--**********************************
+	 <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
@@ -121,7 +87,6 @@
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>
-            <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end

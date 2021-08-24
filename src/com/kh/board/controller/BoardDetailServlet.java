@@ -1,7 +1,6 @@
-package com.kh.challenge.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.Challenge;
-import com.kh.challenge.model.vo.ChallengeAttachment;
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Attachment;
+import com.kh.board.model.vo.Board;
 
 /**
- * Servlet implementation class ChallengeMainServlet
+ * Servlet implementation class BoardDetailServlet
  */
-@WebServlet("/challengeMain.ch")
-public class ChallengeMainServlet extends HttpServlet {
+@WebServlet("/detail.bo")
+public class BoardDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeMainServlet() {
+    public BoardDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +32,22 @@ public class ChallengeMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Challenge> list = new ChallengeService().selectList();
-		request.setAttribute("list", list);
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		//int chNo = Integer.parseInt(request.getParameter("chNo"));
+		Board b = new BoardService().selectBoard(bno);
+		Attachment at = new BoardService().selectAttachment(bno);
 		
-		//ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach(chNo);
-		//request.setAttribute("fileList", fileList);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
-		view.forward(request, response);
+		if(b != null) {
+			request.setAttribute("b", b);
+			request.setAttribute("at", at);
+			
+			request.getRequestDispatcher("views/board/boardRead.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "게시판 상세 조회 실패");
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**

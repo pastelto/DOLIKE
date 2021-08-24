@@ -23,7 +23,7 @@ public class Board {
 		//BOARD_DAO selectList 생성자 
 	}
 	
-	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,int avliable,int views,int categoryNo) {
+	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,int avaliable,int views,int categoryNo) {
 		super();
 		this.boardNo = boardNo;
 		this.nickName = nickName;
@@ -31,7 +31,7 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardDate = boardDate;
 		this.boardContent = boardContent;
-		this.avaliable = avliable;
+		this.avaliable = avaliable;
 		this.views = views;
 		this.categoryNo = categoryNo;
 	}

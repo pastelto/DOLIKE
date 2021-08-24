@@ -12,7 +12,7 @@
 <body>
 	<h1 align="center"><%= message %></h1>
 	<div align="center">
-		<button onclick = "location.href='<%=request.getContextPath()%>/views/common/menuSideBar.jsp'" style="width: 50%">홈으로 돌아가기</button>
+		<button onclick = "location.href='<%=request.getContextPath()%>/index2.jsp'" style="width: 50%">홈으로 돌아가기</button>
 		<!-- 메인페이지로 경로 수정하기 -->
 	</div>
 </body>

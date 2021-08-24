@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -16,6 +17,10 @@ import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeAttachment;
+import com.kh.challenge.model.vo.ChallengeReply;
+import com.kh.challenge.model.vo.ChallengeVote;
+import com.kh.challenge.model.vo.PageInfo;
+import com.kh.notice.model.vo.Notice;
 
 public class ChallengeDao {
 	
@@ -23,7 +28,7 @@ public class ChallengeDao {
 	
 	public ChallengeDao() {
 		String fileName = ChallengeDao.class.getResource("/sql/challenge/challenge-query.properties").getPath();
-		System.out.println("fileName   " + fileName);
+		
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -35,11 +40,37 @@ public class ChallengeDao {
 		}
 
 	}
+	
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null; // 파라미터에서 받아오지 않아도 되기 떄문에 --> 전체 받아올 것 
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql); // 쿼리실행
+			
+			if(rset.next()) {
+				listCount = rset.getInt("CH_NO"); // 컬럼명을 적어도 되고 컬럼인덱스로 적어도 된다. 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+			
+		return listCount;
+	}
+	
 
 	public ArrayList<Challenge> selectList(Connection conn) {
 		
 		ArrayList<Challenge> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		
 		/*selectChallengeList = SELECT CH_NO, CH_TITLE, CH_START, CH_END FROM CHALLENGE WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC*/
@@ -48,9 +79,8 @@ public class ChallengeDao {
 
 		try {
 
-			pstmt = conn.prepareStatement(sql);
-
-			rset = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
 
 			while (rset.next()) {
 				Challenge c = new Challenge();
@@ -65,25 +95,26 @@ public class ChallengeDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 
 		return list;
 	}
 
-	public ArrayList<ChallengeAttachment> selectAttach(Connection conn, int[] arr) {
+	public ArrayList<ChallengeAttachment> selectAttach(Connection conn, int chNo) {
 		
 		ArrayList<ChallengeAttachment> fileList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		/*selectChallengeAt = SELECT AT_NO, AT_NEWNAME, AT_ORIGINNAME FROM CH_ATTACHMENT WHERE CH_NO=?*/
-		
-		
+			
 		String sql = prop.getProperty("selectChallengeAt");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, chNo);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -92,12 +123,6 @@ public class ChallengeDao {
 				ca.setAtNo(rset.getInt("AT_NO"));
 				ca.setNewName(rset.getString("AT_NEWNAME"));
 				ca.setOriginName(rset.getString("AT_ORIGINNAME"));
-				
-				for(int i=0; i <= arr.length ; i++) {
-					ca.setChNo(rset.getInt(arr[i]));
-					break;
-				}
-				
 				fileList.add(ca);
 			}
 			
@@ -108,5 +133,119 @@ public class ChallengeDao {
 		
 		return fileList;
 	}
+
+	public ArrayList<Challenge> selectEndedList(Connection conn) {
+		ArrayList<Challenge> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		/*selectChallengeList = SELECT CH_NO, CH_TITLE, CH_START, CH_END FROM CHALLENGE WHERE CH_STATUS = 'N' ORDER BY CH_END ASC*/
+
+		String sql = prop.getProperty("selectEndChallenge");
+
+		try {
+
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+
+			while (rset.next()) {
+				Challenge c = new Challenge();
+				c.setChNo(rset.getInt("CH_NO"));
+				c.setChTitle(rset.getString("CH_TITLE"));
+				c.setStart(rset.getDate("CH_START"));
+				c.setEnd(rset.getDate("CH_END"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return list;
+	}
+
+	public ArrayList<ChallengeReply> selectReply(Connection conn, PageInfo pi) {
+		ArrayList<ChallengeReply> list = new ArrayList<ChallengeReply>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectChallengeRp");
+		
+		int startRow = (pi.getCurrentPage()-1)*pi.getRpLimit()+1;
+		int endRow = startRow + pi.getRpLimit()-1;
+		//SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME, PH_LOCATION, RP_LIKE FROM CHALLENGE_REPLY WHERE CH_NO = ?, RP_STATUS = 'Y'
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ChallengeReply ch = new ChallengeReply(); 
+				ch.setChNo(rset.getInt("CH_RP_NO"));
+				ch.setRpWriter(rset.getString("RP_USER"));
+				ch.setWriteDate(rset.getDate("CREATE_DATE"));
+				ch.setContent(rset.getString("RP_BODY"));
+				ch.setOriginName(rset.getString("PH_ORIGINNAME"));
+				ch.setNewName(rset.getString("PH_NEWNAME"));
+				ch.setLocation(rset.getString("PH_LOCATION"));
+				ch.setRpLike(rset.getInt("RP_LIKE"));
+				list.add(ch);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ChallengeVote> selectVote(Connection conn) {
+
+		ArrayList<ChallengeVote> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("voteChallengeList");
+		/*SELECT CH_TITLE, VOTE_START, VOTE_END, CATEGORY_NAME FROM CH_VOTE V JOIN ON CATEGORY C V.CATEGORY_NO = C.CATEGORY_NO WHERE SYSDATE BETWEEN VOTE_START AND VOTE_END*/
+		try {
+
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+
+			while (rset.next()) {
+				new ChallengeVote(rset.getString("CH_TITLE"),
+						          rset.getDate("VOTE_START"),
+						          rset.getDate("VOTE_END"),
+						          rset.getString("CATEGORY_NAME")						          
+						);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return list;
+
+	}
+
+	public ArrayList<Challenge> selectMyChallenge(Connection conn, String loginUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

@@ -197,13 +197,13 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="./layout-blank.html">카테고리1</a></li>
-                            <li><a href="./layout-one-column.html">카테고리2</a></li>
-                            <li><a href="./layout-two-column.html">카테고리3</a></li>
-                            <li><a href="./layout-compact-nav.html">카테고리4</a></li>
-                            <li><a href="./layout-vertical.html">카테고리5</a></li>
-                            <li><a href="./layout-horizontal.html">카테고리6</a></li>
-                            <li><a href="./layout-boxed.html">카테고리7</a></li>
+                            <li><a href="list.bo">카테고리1</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리2</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리3</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
+                            <li><a href="../board/boardView.jsp">카테고리7</a></li>
                            
                         </ul>
                     </li>
@@ -228,7 +228,14 @@
                    
                         </ul>
                     </li>
+                    <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
+                            <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
+                        </a>
+                    </li>
+                    <%}else{ %>
+                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
@@ -237,6 +244,7 @@
                             <li><a href="<%= request.getContextPath() %>/writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
