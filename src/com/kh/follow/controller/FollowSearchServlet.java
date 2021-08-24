@@ -42,7 +42,7 @@ public class FollowSearchServlet extends HttpServlet {
 		}
 		
 		out.flush();
-		out.close();
+		out.close(); 
 	}
 
 	/**
