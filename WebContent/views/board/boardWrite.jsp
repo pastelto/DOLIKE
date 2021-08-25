@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
-<% String contextPath = request.getContextPath(); %>
+<% //String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
