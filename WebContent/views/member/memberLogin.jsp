@@ -33,6 +33,13 @@
 		}
 	
 	</script>
+	<style>
+	#loginBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	</style>
 </head>
 <body class="h-100">
 	<div id="main-wrapper">
@@ -68,7 +75,7 @@
                                     <div class="form-group">
                                         <input id="userPwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호">
                                     </div>
-                                    <button class="btn login-form__btn submit w-100" type="submit">로그인</button>
+                                    <button id="loginBtn" class="btn login-form__btn submit w-100" type="submit">로그인</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary">회원가입</a> 하러가기</p>
                                 <p class="mt-5 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary">공지사항</a> 보러가기</p>
