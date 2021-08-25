@@ -39,7 +39,7 @@ public class DeleteMessageServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("list.ms");
 		} else {
-			request.setAttribute("msg", "쪽지 삭제 실패" );
+			request.setAttribute("msg", "쪽지 삭제를 실패하였습니다." );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
