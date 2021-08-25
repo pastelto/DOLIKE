@@ -4,7 +4,6 @@
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
-
 %>
 <!DOCTYPE html>
 <html>
@@ -25,6 +24,7 @@
 	<script>
 	   $(function(){
 	      var msg = "<%=msg%>";
+
 			if (msg != "null") {
 				alert(msg);
 	<%session.removeAttribute("msg");%>
@@ -200,7 +200,7 @@
 	                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
 	                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
 	                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>                           
 	                        </ul>
 						</li>
                     <%}else{ %>
@@ -313,6 +313,7 @@
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
+                    <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">회원 관리</span>
@@ -323,6 +324,7 @@
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
+                    <% } %>
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
