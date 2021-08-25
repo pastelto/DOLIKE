@@ -127,8 +127,16 @@
 										</form>
 										<script>
 	                                    function deleteSMsg(){
-	                        				$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
-	                        				$("#msgDel").submit();
+
+	                                    	var result = confirm("정말로 쪽지를 삭제하시겠습니까?");
+	                                        
+	                                        if(result)
+	                                        {
+	                                        	$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
+		                        				$("#msgDel").submit();
+	                                        }
+	                                        
+	                                    	
                         				}
                                     </script>
                                 </div>
