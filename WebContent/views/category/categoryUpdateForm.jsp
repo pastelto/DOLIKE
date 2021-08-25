@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.category.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.kh.category.model.vo.*" %>
 <%
-	Category c = (Category)request.getAttribute("c");
-
+	Category category = (Category)request.getAttribute("category");
 %>
 <!DOCTYPE html>
 <html>
@@ -10,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Detail category here</title>
+<title>UpdateForm category here</title>
 
 <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
@@ -23,13 +22,13 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
 <style>
-	#formSizeDetail {
+	#formSizeUpdate {
 		height: 1000px;
 		
 	}
 	
 
-	#detailCategoryForm {		
+	#updateCategoryForm {		
 		
 	 	display: grid;
  	 	place-items: center;
@@ -37,24 +36,18 @@
 		
 	}
 	
-	#caFormDetail {
+	#caFormUpdate {
 		height: 200px;
 		width: 600px;
 	}
 	
 	
-	#categoryUpdateBtn {
+	#categoryUpdateBtn2 {
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
 	}
-	
-	#categoryDeleteBtn {
-		color: #fff;
-		background-color: #FF0033;
-		border-color: #FF0033;
-	}
-	
+		
 	#categoryListBtn {
 		color: #fff;
 		background-color: #78c2ad;
@@ -64,47 +57,31 @@
 
 </head>
 <body>
-<div id="main-wrapper">
+	<div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-<div class="container-fluid" id="formSizeDetail">
+<div class="container-fluid" id="formSizeUpdate">
 	<div class="row">
-<div id="detailCategoryForm" style="margin-left: auto; margin-right: auto;">
+<div id="updateCategoryForm" style="margin-left: auto; margin-right: auto;">
 <div class="col-lg-12" >
                         <div class="card" >
-                            <div class="card-body"id="caFormDetail">
-                                <h4 class="card-title">카테고리 확인</h4>
-                                <form action="<%= contextPath %>/insert.ca" method="post" >
+                            <div class="card-body"id="caFormUpdate">
+                                <h4 class="card-title">카테고리 수정하기</h4>
+                                <form id="updateForm" action="<%= contextPath %>/update.ca" method="post" >
+                                <input type="hidden" name="cno" value="<%= category.getCategoryNo() %>">
                                 <div class="basic-form">
                                         <div class="form-group">
-                                            <label>카테고리를 확인하세요.</label>
-                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caTitleDetail" value="<%= c.getCategoryName() %>"></input>
+                                            <label>카테고리를 수정해주세요.</label>
+                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caName" value="<%= category.getCategoryName() %>"></input>
                                         </div>
                                     <div class="general-button" align="right">
-                                    <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
+                                    <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/detail.ca'" >돌아가기</button>
                                    	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
-                            		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary" onclick="updateCategoryForm()">수정하기</button>
-									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary" onclick="deleteCategory()">삭제하기</button>									
+                            		<button id="categoryUpdateBtn2"  type="submit" class="btn mb-1 btn-primary">수정하기</button>									
 									<%--<% } --%>
 								</div>
                                 </div>
-                                 </form>
-                                 
-                                 <form action="" id="postForm" method="post">
-								<input type="hidden" name="cno" value="<%= c.getCategoryNo() %>">
-								</form>
-								<script>
-									function updateCategoryForm(){
-										$("#postForm").attr("action", "<%=contextPath%>/updateForm.ca");
-										$("#postForm").submit();
-									}
-									
-									function deleteCategory(){
-										$("#postForm").attr("action", "<%=contextPath%>/deleteC.ca");
-										$("#postForm").submit();
-									}
-								</script>
-                                 
+                               </form>                                
                             </div>
                         </div>
                     </div>

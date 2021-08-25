@@ -2,6 +2,9 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +38,9 @@ public class MemberInsertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		Calendar time = Calendar.getInstance();
+		
 		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
 		String userPwd = request.getParameter("userPwd");
@@ -42,18 +48,36 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
-		String userCreateDate = request.getParameter("userCreateDate");
-		String userStatus = request.getParameter("userStatus");
+		//String userCreateDate = request.getParameter("userCreateDate");
+		//String userStatus = request.getParameter("userStatus");
 		
-		String[] interests = request.getParameterValues("interest");
+		String createDate = sdf.format(time.getTime());
 		
-		int interest = 0; //interests를 String형으로 변환?
-		
-		if (interests != null) {
-			interest = String.join(",", interests);
+		Date birth = null;
+		Date userCreateDate = null;
+		try {
+			birth = (Date) sdf.parse(birthDate);
+			userCreateDate = (Date) sdf.parse(createDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests, userCreateDate, userStatus);
+		
+		
+		String[] interests = request.getParameterValues("interests");
+		
+		String interestsArr = "";
+		
+		for (int i = 0; i < interests.length; i++) {
+			interestsArr += interests[i];
+			
+			if (i < interests.length - 1) {
+				interestsArr += ',';
+			}
+		}
+		
+		Member mem = new Member(userId, userName, userPwd, birth, phone, email, nickName, interestsArr, userCreateDate, "Y");
 		
 		int result = new MemberService().insertMember(mem);
 		
