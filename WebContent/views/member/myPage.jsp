@@ -41,7 +41,7 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 
-    <!-- Custom Stylesheet -->
+    Custom Stylesheet
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -50,26 +50,11 @@
 
 
 <style>
-	.outer{
-		background:black;
-		width:600px;
-		height:500px;
-		margin-top:50px;
-		margin-left:auto;
-		margin-right:auto;
-		color:white;
+	#goMain, #editBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
 	}
-	#updateForm{
-		/* border:1px solid white; */
-		width:100%;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	#updateForm td:nth-child(1){text-align:right;}
-	#updateForm input{margin:3px;}
-	
-	#joinBtn{background:yellowgreen;}
-	#goMain{background:orangered;}
 </style>
 </head>
 <body>
@@ -105,7 +90,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-									<form id="enrollForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return updateMem();">
+									<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return updateMem();">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userId">아이디</label>
                                             <div class="col-lg-6">
@@ -136,7 +121,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="nickName">닉네임 </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요."/>
+                                                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="<%= nickName %>"/>
                                             	<button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
                                             </div>
                                         </div>
@@ -154,8 +139,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="email">이메일 <span class="text-danger">*</span>
-                                            </label>
+                                            <label class="col-lg-4 col-form-label" for="email">이메일 </label>
                                             <div class="col-lg-6">
                                                 <input type="email" class="form-control" id="email" name="email" value="<%= email %>" readonly/>
                                                 <button type="button" class="btn btn-primary" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
@@ -168,7 +152,7 @@
 			                                        <div class="form-group">
 			                                            <div class="form-check mb-3">
 			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="공부">공부</label>
+			                                                    <input type="checkbox" class="form-check-input" name="interests" value="공부" <%= checkedInterest[0] %>>공부</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
 			                                                <label class="form-check-label">
@@ -203,7 +187,7 @@
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
                                         	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-                                            <input type="submit" class="btn btn-primary" id="joinBtn" value="회원정보수정" disabled />
+                                            <input type="submit" class="btn btn-primary" id="editBtn" onclick="updateMember();" value="회원정보수정" disabled />
                                         </div>
                                     </div>
                                     </form>
@@ -216,9 +200,43 @@
             <!-- #/ container -->
         </div>
     
-    
-    
-    
+        <script>
+		function updateMember(){
+			window.open("<%= request.getContextPath() %>/memberUpdate.me");
+			var pwd = prompt("현재 비밀번호를 입력하세요.");
+			
+			if("<%= userPwd %>" == pwd){
+				var val = confirm("회원정보를 수정하시겠습니까?");
+				
+				if(val){
+					$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
+					$("#updateForm").submit();
+				}else{
+					alert("취소하였습니다.");
+				}
+			}else{
+				alert("비밀번호를 잘못입력하였습니다.");
+			}
+		}
+	
+		function deleteMember(){
+			
+			var pwd = prompt("현재 비밀번호를 입력하세요.");
+			
+			if("<%= userPwd %>" == pwd){
+				var val = confirm("정말로 탈퇴하시겠습니까?");
+				
+				if(val){
+					$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
+					$("#updateForm").submit();
+				}else{
+					alert("취소하였습니다.");
+				}
+			}else{
+				alert("비밀번호를 잘못입력하였습니다.");
+			}
+		}
+    	</script>
     
     
     

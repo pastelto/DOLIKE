@@ -46,15 +46,6 @@ public class MemberInsertServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		Date birth = null;
-		try {
-			birth = (Date) sdf.parse(birthDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		
 		String[] interests = request.getParameterValues("interests");
 		
 		String interestsArr = "";
@@ -72,8 +63,7 @@ public class MemberInsertServlet extends HttpServlet {
 //		}
 		
 		
-		
-		Member mem = new Member(userId, userName, userPwd, birth, phone, email, nickName, interestsArr);
+		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interestsArr);
 		
 		int result = new MemberService().insertMember(mem);
 		
