@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao" %>
 <% 
-	String contextPath = request.getContextPath();
+	
 	Board board = (Board)request.getAttribute("board");
 	Attachment at = (Attachment)request.getAttribute("at");
 
@@ -38,6 +38,13 @@
 		.content-body{
 			padding:5px 0px 0px 30px;
 		}
+		.tag-class{
+			width:10%;
+		}
+		.title-class{
+			width:100%;
+		}
+		
 	</style>
 </head>
 
@@ -66,19 +73,20 @@
 		 								<option value="4" <%= selected[3] %>>옵션4</option>
 		 							</select>
 		 						</td>
-		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50" value="<% board.getBoardTitle(); %>"></td>
+		 						<td><input type="text" name="title" maxlength="50" value="<%= board.getBoardTitle() %>"></td>
 		 					</tr>
 		 					<tr>
-		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px" value="<% board.getBoardContent(); %>"></textarea></td>
+		 						<td colspan="2"><textarea name="content" maxlength="2048" style="border-style:none; width:90%; height:350px"><%= board.getBoardContent() %></textarea></td>
 		 					</tr>
 		 					<tr>
-		 						<th>첨부파일</th>
+		 						<th colspan="2">첨부파일</th>
 		 						<% if(at != null){ %> <!--  기존의 첨부파일이 존재할 경우  -->
+		 						<input type="file" name="upfile">
 		 							<%= at.getOriginName() %> <br>
 		 							<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
 		 							<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
 		 						<%} %>
-		 						<input type="file" name="upfile">
+		 						
 		 					</tr>
 		 				</tbody>
 		 				

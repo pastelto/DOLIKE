@@ -32,9 +32,10 @@ public class VoteApplyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<ChallengeApply> list = new ChallengeService().selectVoteApList();
 		request.setAttribute("list", list);
-				
+		System.out.println(list);
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/insertVote.jsp");
 		view.forward(request, response);
 	}

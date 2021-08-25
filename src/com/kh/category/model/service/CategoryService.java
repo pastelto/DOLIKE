@@ -91,7 +91,37 @@ public class CategoryService {
 		return result;
 	}
 
-	//커밋엔 푸쉬 확인중
+
+	public int updateCategory(Category c) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CategoryDao().updateCategory(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public Category selectUpdateCategory(int cno) {
+				
+		Connection conn = getConnection();
+		
+		Category c = new CategoryDao().selectCategory(conn, cno);
+		
+		close(conn);
+		
+		return c;
+	}
+
+
 
 }
 

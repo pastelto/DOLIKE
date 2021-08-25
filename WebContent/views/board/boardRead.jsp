@@ -3,7 +3,6 @@
 <%
 	Board b = (Board)request.getAttribute("b");
 	Attachment at = (Attachment)request.getAttribute("at");
-	String contextPath = request.getContextPath();
 %>  
 
 <!DOCTYPE html>
@@ -25,6 +24,21 @@
 		.content-body{
 			padding:5px 0px 0px 30px;
 		}
+		.btns{
+			color: #fff;
+	    	background-color: #78c2ad;
+	    	border-color: #78c2ad;
+		}
+		.btns:hover{
+			color: #78c2ad;
+	    	background-color: #fff;
+	    	border-color: #78c2ad;
+		}
+		.replyArea{
+			width:100%;
+			ailgn:center;
+		}
+		
 	</style>
 </head>
 <body>
@@ -44,11 +58,11 @@
 		 				<tbody>
 		 					<tr> 
 		 						<td style="width:20%;">글 제목</td>
-		 						<td colspan="2"><%= b.getBoardTitle().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
+		 						<td colspan="2" ><%= b.getBoardTitle().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
 		 					</tr>
 		 					<tr> 
 		 						<td>작성자</td>
-		 						<td colspan="2"><%= b.getNickName() %></td>
+		 						<td colspan="2" ><%= b.getNickName() %></td>
 		 					</tr>
 		 					<tr> 
 		 						<td>작성일자</td>
@@ -56,7 +70,7 @@
 		 					</tr>
 		 					<tr> 
 		 						<td>내용</td>
-		 						<td colspan="2" style="min-height:200px; text-align:left;"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
+		 						<td colspan="2" style="min-height:200px; "><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></td>
 		 					</tr>
 		 					<tr>
 								<th>첨부파일</th>
@@ -70,17 +84,35 @@
 							</tr>
 		 				</tbody>
 		 			</table>
-		 			<br>
+		 			<br><br>
+				 			<!-- ************ 댓글 에어리어 **************** -->
+			 		<div class="replyArea" style="margin-top:3px">
+			 					<% if(loginUser != null) {%>
+			 					<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:70%"></textarea>
+			 					<button class="btns" >댓글등록</button>
+			 					<% } else{ %>
+			 					<textarea readonly rows="1" cols="60" id="replyContent">로그인한 사용자만 가능합니다.</textarea>
+			 					<button disabled class="btns">댓글등록</button>
+			 					<% } %>
+
+			 			<!-- 댓글리스트  -->
+			 			<div id="replyListArea">
+			 				<table id="replyList" border="1" align="center"></table>
+			 			</div>
+			 		</div>
+		 			<br><br><br>
 		 			<div class="bottom-btns" align="center">
-		 				<button type="button" onclick="location.href='<%= contextPath %>/list.bo?currentPage=1';">목록으로</button>
+		 				<button class="btns" type="button" onclick="location.href='<%= contextPath %>/list.bo?currentPage=1';">목록으로</button>
 		 				<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
-		 					<button type="button" onclick="updateForm();">수정 </button>
-		 					<button type="button" onclick="deleteBoard();">삭제 </button>
+		 					<button class="btns" type="button" onclick="updateForm();">수정 </button>
+		 					<button class="btns" type="button" onclick="deleteBoard();">삭제 </button>
 		 				<% } %>
 		 			</div>		
 		 			<form action="" id="postForm" method="post">
 		 				<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
 		 			</form>
+		 			
+		 			
 		 			<script>
 						function updateForm(){
 							$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
@@ -94,25 +126,7 @@
 					</script>
 		 					
 	 		</div>
-	 	<!-- ************ 댓글 에어리어 **************** -->
-	 		<div class="replyArea">
-	 			<table border="1" align="center">
-	 				<tr>
-	 					<th>댓글작성</th>
-	 					<% if(loginUser != null) {%>
-	 					<td><textarea rows="3" cols="60" id="replyContent" style="resize:none;"></textarea></td>
-	 					<td><button id="addReply">댓글등록</button></td>
-	 					<% } else{ %>
-	 					<td><textarea readonly rows="3" cols="60" id="replyContent" style="resize:none;">로그인한 사용자만 가능합니다.</textarea></td>
-	 					<td><button disabled>댓글등록</button></td>
-	 					<% } %>
-	 				</tr>
-	 			</table>
-	 			<!-- 댓글리스트  -->
-	 			<div id="replyListArea">
-	 				<table id="replyList" border="1" align="center"></table>
-	 			</div>
-	 		</div>
+	 	
 	 		<script>
 		$(function(){
 			selectReplyList(); 
