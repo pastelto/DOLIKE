@@ -121,7 +121,7 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;  border: none;">쪽지보내기</a>
                                     <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
@@ -161,9 +161,8 @@
 										 	<% for(Message m : list){ %>
 										 	<% if( m.getMsgStatus().equals("Y") ){ %>
 										 		<tr>
-										 			<td><input type="checkbox" /><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
-										 			<td><%= m.getMsgNo()%></td>
-										 			<%-- <td><%= index++ %></td> --%>
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -171,9 +170,8 @@
 										 		</tr>
 										 	<% } else if( m.getMsgStatus().equals("N")){  %>	
 										 		<tr>
-										 			<td><input type="checkbox" /><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
-										 			<td><%= m.getMsgNo()%></td>
-										 			<%-- <td><%= index++ %></td> --%>
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -258,8 +256,7 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
-				/* var mno = $("#msgList input[name=msgNo]").val(); */
+				var mno = $(this).children().children().eq(0).val();
 				location.href="<%= contextPath %>/sread.ms?mno="+mno;
 			})
 		})

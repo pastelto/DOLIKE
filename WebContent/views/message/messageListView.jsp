@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.message.model.vo.*"%>
+	import="java.util.*, com.kh.message.model.vo.*, java.text.*"%>
 <%
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
 	MsgPageInfo mpi = (MsgPageInfo)request.getAttribute("pi");
 	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");
 	
 	int listCount = mpi.getListCount();
 	int currentPage = mpi.getCurrentPage();
@@ -31,7 +32,6 @@
 <style>
 	.text-primary{
 		color:#78c2ad;
-	
 	}
 	#writeBtn {
     	color: #fff;
@@ -132,7 +132,7 @@
                                     <div class="email-list m-t-15">
 									<div class="table-responsive">
 									<div class="col-mail col-mail-2">
-									<table class="table table-hover" style="text-align: center;">
+									<table class="table table-hover" id="msgListTb" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
 												<th style="width:3rem;"></th>
@@ -151,23 +151,25 @@
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
 										 		<% if( m.getMsgStatus().equals("Y") ){ %>
-										 		<tr>
-										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value=""></td>
-										 			<%-- <td><%= index++ %></td> --%>
-										 			<td><%= m.getMsgNo()%></td>
+										 		
+										 		<tr id="MsgNo">
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>		 			
+										 			<td><%= index++ %></td>
+										 			<%-- <td><%= m.getMsgNo()%></td> --%>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
-													<td><%= m.getRecvtime() %></td>
-													<td><%= "읽음" %></td>
-												</tr>
+													<td><%= sdf.format(m.getRecvtime()) %></td>
+													<td><%= "읽음" %></td>	
+													</tr>
+													
 												<% } else if( m.getMsgStatus().equals("N")){  %>	
-												<tr>
-										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
-										 			<%-- <td><%= index++ %></td> --%>
-										 			<td><%= m.getMsgNo()%></td>
+												<tr id="MsgNo">
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
+										 			<%-- <td><input type="hidden" id="msgNo" value="<%= m.getMsgNo() %>"><%= index++ %></td> --%>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a"> New </span> &nbsp; <%= m.getMsgTitle() %></td>
-													<td><%= m.getRecvtime()%></td>
+													<td><%= sdf.format(m.getRecvtime()) %></td>
 													<td><%= "읽지 않음" %></td>
 												</tr>
 										 	<% } %>
@@ -254,8 +256,8 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
-				/* var mno = $("input[name=msgNo]").val(); */
+				var mno = $(this).children().children().eq(0).val();
+				console.log(mno);
 				location.href="<%= contextPath %>/rread.ms?mno="+mno;
 
 			})
