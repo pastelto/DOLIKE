@@ -3,12 +3,12 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
     		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo "%>
 <%
-//Challenge c = (Challenge)request.getAttribute("c");
+Challenge c = (Challenge)request.getAttribute("c");
 ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
 ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
-int listCount = pi.getRpCount();
+int listCount = pi.getListCount();
 int currentPage = pi.getCurrentPage();
 int endPage = pi.getEndPage();
 int maxPage = pi.getMaxPage();
@@ -249,12 +249,12 @@ int startPage = pi.getStartPage();
 				</div>
 			</div>
 		</div>
-		<!--  <script>
+		<script>
 		$(function() {
 			selectReplyList();// 함수호출
 			$("#addReply").click(function() {
 				var content = $("#replyContent").val();
-				var cNo =<%--<%=c.getChNo()%>;--%>
+				var cNo =<%=c.getChNo()%>;
 
 				$.ajax({
 					url : "rinsert.ch",
@@ -280,7 +280,7 @@ int startPage = pi.getStartPage();
 			$.ajax({
 				url : "rlist.ch",
 				data : {
-				cNo :<%--<%=c.getChNo()%>; }, --%>
+				cNo :<%=c.getChNo()%>; },
 				type : "get",
 				success : function(list) {
 					console.log(list)
@@ -301,7 +301,7 @@ int startPage = pi.getStartPage();
 				}
 			})
 		}
-	</script>-->
+	</script>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 </body>
