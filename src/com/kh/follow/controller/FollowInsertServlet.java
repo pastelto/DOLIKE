@@ -36,24 +36,30 @@ public class FollowInsertServlet extends HttpServlet {
 		String followId = request.getParameter("followId");
 		System.out.println("insert: "+followId);
 		
-		Follow fl = new Follow(userId, followId);
-		
-		int count = new FollowService().countId(userId, followId); //해당 아이디로 친구 추가된 유저아이디가 있는지 확인 1이상이면 있는 것
-		
-		if(count > 0) {
-			request.getSession().setAttribute("msg", followId+"님은 이미 친구입니다.");
+		if(userId.equals(followId)) {
+			request.getSession().setAttribute("msg","나 자신은 영원한 인생의 친구입니다.");
 			response.sendRedirect("MyFollow.fl");
 		}else {
-			int result = new FollowService().insertId(fl);
-			System.out.println(result);
-			if(result > 0) {
-				request.getSession().setAttribute("msg", followId+"님 친구 등록 성공!");
+			Follow fl = new Follow(userId, followId);
+			
+			int count = new FollowService().countId(userId, followId); //해당 아이디로 친구 추가된 유저아이디가 있는지 확인 1이상이면 있는 것
+			
+			if(count > 0) {
+				request.getSession().setAttribute("msg", followId+"님은 이미 친구입니다.");
 				response.sendRedirect("MyFollow.fl");
 			}else {
-				request.getSession().setAttribute("msg", "친구 등록 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				int result = new FollowService().insertId(fl);
+				System.out.println(result);
+				if(result > 0) {
+					request.getSession().setAttribute("msg", followId+"님 친구 등록 성공!");
+					response.sendRedirect("MyFollow.fl");
+				}else {
+					request.getSession().setAttribute("msg", "친구 등록 실패");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				}
 			}
 		}
+
 		
 
 	}

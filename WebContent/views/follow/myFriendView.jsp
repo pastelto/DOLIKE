@@ -22,7 +22,6 @@
 <style>
 	#fList{
 		height: 100%;
-		
 	}
 	
 	#iconMsg{
@@ -111,15 +110,13 @@
 
 						<div class="col-5">
 
-							<div id="fList" class="card ">
+							<div id="fList" class="card">
 								<div id="jum" class="jumbotron text-center">
 									<b>나의 친구 (N명)</b>
 								</div>
-								<div class="card-body" style="margin: 0 auto;">
-
+								<div class="card-body" >
 									<div class="input-group-prepend">
-										<form id="searchForm" class="form-inline" action="insert.fl"
-											method="post">
+										<form id="searchForm" class="form-inline" action="insert.fl" method="post">
 
 											<div class="input-group text-center mb-3">
 												<input type="text" class="form-control"
@@ -132,65 +129,70 @@
 											</div>
 										</form>
 									</div>
-
 									<br>
 									<!-- 친구 목록 페이지 불러오기 -->
 									<div>
-										<table class="table table-hover table-borderless"
-											style="text-align: center;">
+										
 											<%if (list.isEmpty()) {%>
-											<tr>
-												<td colspan="2">친구가 없습니다.</td>
-											</tr>
+											<div style="text-align: center;">
+												<img src="./resources/images/friend.png" width="50%" height="50%">
+											</div>
 											<% } else {%>
-											
+											<table class="table table-hover table-borderless"
+											style="text-align: center;">
 											
 												<% for (Follow fl : list) {%>
 												<tr>
 													<td><%=fl.getFollowId()%></td>
 													<td>버튼</td>
 												</tr>
+												
 												<%}%>
+												</table>
+												
+													<!-- 페이지 처리 -->
+														<div>
+															<ul class="pagination justify-content-center">
+																<!-- 맨앞으로 -->
+																<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MyFollow.fl?currentPage=1"> &laquo; </a></li>
+																
+																<!-- 이전페이지 -->
+																<% if(currentPage == 1) {%>
+																<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+																<% }else{ %>
+																<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+																<%} %>
+																
+																
+																<!-- 페이지 목록 -->
+																<%for(int p=startPage; p<=endPage; p++){ %>
+																
+																	<%if(p == currentPage){ %>
+																		<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+																	<%}else{ %>
+																		<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MyFollow.fl?currentPage=<%= p %>"><%= p %> </a></li>
+																	<%} %>
+																	
+																<%} %>
+																
+																
+																<!-- 다음페이지 -->
+																<% if(currentPage == maxPage) {%>
+																<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+																<% }else{ %>
+																<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+																<%} %>
+																
+																<!-- 맨뒤로 -->
+																<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= maxPage %>"> &raquo; </a></li>
+															</ul>
+														</div>
+												
+												
 											<%}%>
-										</table>
+										
 									</div>
-											<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MyFollow.fl?currentPage=1"> &laquo; </a></li>
-				
-				<!-- 이전페이지 -->
-				<% if(currentPage == 1) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-				<%} %>
-				
-				
-				<!-- 페이지 목록 -->
-				<%for(int p=startPage; p<=endPage; p++){ %>
-				
-					<%if(p == currentPage){ %>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MyFollow.fl?currentPage=<%= p %>"><%= p %> </a></li>
-					<%} %>
-					
-				<%} %>
-				
-				
-				<!-- 다음페이지 -->
-				<% if(currentPage == maxPage) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-				<%} %>
-				
-				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= maxPage %>"> &raquo; </a></li>
-			</ul>
-		</div>
+
 
 									<div class="col-1"></div>
 
@@ -226,7 +228,6 @@
 						var check = confirm(followId.val()+"님을 친구 추가하겠습니까?");
 						if(check == true){
 							$("#searchForm").submit();
-							alert("등록되었습니다.");
 						}else{
 							alert("취소되었습니다.");
 						}
