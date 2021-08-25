@@ -196,9 +196,8 @@ public class CategoryDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, c.getCategoryNo());
-			pstmt.setString(2, c.getCategoryName());
-			
+			pstmt.setString(1, c.getCategoryName());
+			pstmt.setInt(2, c.getCategoryNo());
 			
 			result = pstmt.executeUpdate();
 			

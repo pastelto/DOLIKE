@@ -13,16 +13,16 @@ import com.kh.category.model.service.CategoryService;
 import com.kh.category.model.vo.Category;
 
 /**
- * Servlet implementation class CategoryUpdateServlet
+ * Servlet implementation class CategoryUpdateFormServlet
  */
-@WebServlet("/update.ca")
-public class CategoryUpdateServlet extends HttpServlet {
+@WebServlet("/updateForm.ca")
+public class CategoryUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryUpdateServlet() {
+    public CategoryUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +34,17 @@ public class CategoryUpdateServlet extends HttpServlet {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		String caName = request.getParameter("caName");
+		Category category = new CategoryService().selectUpdateCategory(cno);
 		
-		Category c = new Category();
-		c.setCategoryNo(cno);
-		c.setCategoryName(caName);
-		
-		int result = new CategoryService().updateCategory(c);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("msg", "성공적으로 카테고리를 수정하였습니다.");
-			//request.getSession().setAttribute("loginUser", updateCat);
-			response.sendRedirect("categoryList.ca?cno"+cno);
-		}else {	
-	         request.setAttribute("msg", "카테고리 수정 실패");
-	         
-	         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-	         view.forward(request, response);	
+		String view = "";
+		if(category != null) {
+			request.setAttribute("category", category);
+			view = "views/category/categoryUpdateForm.jsp";
+		} else {
+			request.setAttribute("msg", "수정할 카테고리를 불러오는데 실패했습니다.");	         
+	        view = "views/common/errorPage.jsp";	         
 		}
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

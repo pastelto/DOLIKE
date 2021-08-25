@@ -110,6 +110,18 @@ public class CategoryService {
 	}
 
 
+	public Category selectUpdateCategory(int cno) {
+				
+		Connection conn = getConnection();
+		
+		Category c = new CategoryDao().selectCategory(conn, cno);
+		
+		close(conn);
+		
+		return c;
+	}
+
+
 
 }
 
