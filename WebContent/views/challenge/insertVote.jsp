@@ -32,20 +32,21 @@
 									</div>
 								</div>
 								<div class="email-right-box">
-									<div class="toolbar" role="toolbar">
-										<div class="btn-group m-b-20">
-											<form action="<%=contextPath%>/voteInsert.ch" method="post">
+									<form action="<%=contextPath%>/voteInsert.ch" method="post">
+										<div class="toolbar" role="toolbar">
+											<div class="btn-group m-b-20">
+
 												<div class="form-group">
-													<label for="exampleSelect1" class="form-label mt-4">챌린지 선택</label> 
-													<select class="form-select" id="category"  name="apNo">
+													<label for="exampleSelect1" class="form-label mt-4">챌린지
+														선택</label> <select class="form-select" id="category" name="apNo">
 														<%for(int i = 0; i <list.size(); i++) {%>
 														<option value=<%=list.get(i).getApNo()%>><%=list.get(i).getApNo()%></option>
 														<%} %>
 													</select>
 												</div>
 												<div class="form-group">
-													<label for="exampleSelect1" class="form-label mt-4">카테고리 선택</label> 
-													<select class="form-select" id="category"  name="categoryNo">
+													<label for="exampleSelect1" class="form-label mt-4">카테고리
+														선택</label> <select class="form-select" id="category" name="categoryNo">
 														<option value='1'>카테고리1</option>
 														<option value='2'>2</option>
 														<option value='3'>3</option>
@@ -53,25 +54,26 @@
 														<option value='5'>5</option>
 													</select>
 												</div>
-											</form>
+											</div>
 										</div>
-									</div>
-									<div class="compose-content mt-5">
-										<form action="<%=contextPath%>/voteInsert.ch" method="post">
+										<div class="compose-content mt-5">
 											<div class="form-group">
-                                                <input type="text" name="chTitle" class="form-control bg-transparent" placeholder="제목">
-                                            </div>
-                                            <div class="form-group">
+												<input type="text" name="chTitle"
+													class="form-control bg-transparent" placeholder="제목">
+											</div>
+											<div class="form-group">
 												<textarea class="textarea_editor form-control bg-light"
 													rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
-											</div>											
-											<div class="col-md-6">
-		                                        <label class="m-t-20">투표 시작 날짜</label>
-		                                        <input type="text" class="form-control" name="start" placeholder="2021-08-01" id="mdate">
 											</div>
 											<div class="col-md-6">
-		                                        <label class="m-t-20">투표 마감 날짜</label>
-		                                        <input type="text" class="form-control" name="end" placeholder="2021-08-01" id="mdate">
+												<label class="m-t-20">투표 시작 날짜</label> <input type="text"
+													class="form-control" name="start" placeholder="2021-08-01"
+													id="mdate">
+											</div>
+											<div class="col-md-6">
+												<label class="m-t-20">투표 마감 날짜</label> <input type="text"
+													class="form-control" name="end" placeholder="2021-08-01"
+													id="mdate">
 											</div>
 											<div class="text-left m-t-15">
 												<button
@@ -85,8 +87,8 @@
 													<i class="ti-close m-r-5 f-s-12"></i> 취소하기
 												</button>
 											</div>
-										</form>
-									</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

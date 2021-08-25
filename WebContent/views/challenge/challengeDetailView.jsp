@@ -3,16 +3,16 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
     		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo "%>
 <%
-Challenge c = (Challenge)request.getAttribute("c");
-ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
-ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
-PageInfo pi = (PageInfo) request.getAttribute("pi");
-
-int listCount = pi.getListCount();
-int currentPage = pi.getCurrentPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
-int startPage = pi.getStartPage();
+	Challenge c = (Challenge)request.getAttribute("c");
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
+	ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -71,7 +71,8 @@ int startPage = pi.getStartPage();
 	<div id="main-wrapper">
 		<%@include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
-			<div class=ch-body>
+		
+			<div class=ch-body >
 				<div class="card mb-3">
 					<h3 class="card-header">챌린지타이틀</h3>
 					<svg class="d-block user-select-none" width="100%" height="200"
@@ -79,7 +80,7 @@ int startPage = pi.getStartPage();
 						preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
 						style="font-size: 1.125rem; text-anchor: middle">
 			    <rect width="100%" height="100%" fill="#868e96"></rect>
-			   <!-- <img src="./resources/challenge_upfiles/<%--<%=fileList.getNewName()%>" alt="챌린지이미지" class="img-challenge">--%> -->	
+			   <img src="./resources/challenge_upfiles/<%=fileList.get(0).getNewName()%>" alt="챌린지이미지" class="img-challenge">	
 			  </svg>
 					<div class="card-body">
 						<h5 class="card-title">챌린지 타이틀</h5>
