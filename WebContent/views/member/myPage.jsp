@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member, java.sql.Date"%>
 
 <%
 	Member m = (Member)request.getAttribute("loginUser");
@@ -10,22 +10,13 @@
 	String phone = m.getPhone();
 	String email = m.getEmail();
 	String nickName = m.getNickName();
+	int interests = m.getInterests();
 	
-	String[] checkedInterest = new String[6];
+	int [] checkedInterest = new int[6];
 	
-	if(m.getInterests() != null){
-		String[] interests = m.getInterests().split(",");
-		
-		for(int i = 0; i < interests.length; i++) {
-			switch(interests[i]){
-			case "공부" : checkedInterest[0] = "checked"; break;
-			case "건강" : checkedInterest[1] = "checked"; break;
-			case "여행" : checkedInterest[2] = "checked"; break;
-			case "요리" : checkedInterest[3] = "checked"; break;
-			case "동물" : checkedInterest[4] = "checked"; break;
-			case "패션뷰티" : checkedInterest[5] = "checked"; break;
-			case "기타" : checkedInterest[6] = "checked"; break;
-			}
+	for(int i = 0; i < checkedInterest.length; i++) {
+		if(m.getInterests() != 0){
+			checkedInterest[i] = "checked";
 		}
 	}
 %>
@@ -142,17 +133,29 @@
 			<br>
 			
 			<div class="btns" align="center">
-				<button type="submit" id="updateBtn">수정하기</button>
+				<button type="submit" id="updateBtn" onclick="updateMember();">수정하기</button>
 				
-				<!-- <button type="button" id = "pwdUpdateBtn" onclick="updatePwd();">비밀번호 변경</button> -->
 				<button type="button" id = "deleteBtn" onclick="deleteMember();">탈퇴하기</button>
-				
 			</div>
 		</form>
 	</div>
 	<script>
-		function updatePwd(){
-			window.open("<%= request.getContextPath() %>/updatePwdForm.me", "비밀번호 변경창","width=500, height=300");
+		function updateMember(){
+			window.open("<%= request.getContextPath() %>/updatePwdForm.me");
+			var pwd = prompt("현재 비밀번호를 입력하세요.");
+			
+			if("<%= userPwd %>" == pwd){
+				var val = confirm("회원정보를 수정하시겠습니까?");
+				
+				if(val){
+					$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
+					$("#updateForm").submit();
+				}else{
+					alert("취소하였습니다.");
+				}
+			}else{
+				alert("비밀번호를 잘못입력하였습니다.");
+			}
 		}
 	
 		function deleteMember(){
@@ -163,7 +166,7 @@
 				var val = confirm("정말로 탈퇴하시겠습니까?");
 				
 				if(val){
-					$("#updateForm").attr("action","<%= request.getContextPath()%>/delete.me");
+					$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
 					$("#updateForm").submit();
 				}else{
 					alert("취소하였습니다.");
