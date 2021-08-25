@@ -38,9 +38,6 @@ public class MemberInsertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		Calendar time = Calendar.getInstance();
-		
 		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
 		String userPwd = request.getParameter("userPwd");
@@ -48,36 +45,35 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
-		//String userCreateDate = request.getParameter("userCreateDate");
-		//String userStatus = request.getParameter("userStatus");
 		
-		String createDate = sdf.format(time.getTime());
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		Date birth = null;
-		Date userCreateDate = null;
 		try {
 			birth = (Date) sdf.parse(birthDate);
-			userCreateDate = (Date) sdf.parse(createDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		
 		String[] interests = request.getParameterValues("interests");
 		
 		String interestsArr = "";
 		
-		for (int i = 0; i < interests.length; i++) {
-			interestsArr += interests[i];
-			
-			if (i < interests.length - 1) {
-				interestsArr += ',';
-			}
+		if(interests != null) {
+			interestsArr = String.join(",", interests);
 		}
 		
-		Member mem = new Member(userId, userName, userPwd, birth, phone, email, nickName, interestsArr, userCreateDate, "Y");
+//		for (int i = 0; i < interests.length; i++) {
+//			interestsArr += interests[i];
+//			
+//			if (i < interests.length - 1) {
+//				interestsArr += ',';
+//			}
+//		}
+		
+		
+		
+		Member mem = new Member(userId, userName, userPwd, birth, phone, email, nickName, interestsArr);
 		
 		int result = new MemberService().insertMember(mem);
 		

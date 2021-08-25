@@ -17,7 +17,7 @@
     	border-color: #78c2ad;
 	}
 	
-	#goMain {
+	#goMain, #resetBtn {
 		color: #000000;
 		background-color: #fff;
 		border-color: #78c2ad;
@@ -108,7 +108,7 @@
                                             <label class="col-lg-4 col-form-label" for="phone">연락처 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요."></textarea>
+                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요.(-)없이 입력."></textarea>
                                                 <button type="button" class="btn btn-primary" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
                                             </div>
                                         </div>
@@ -161,8 +161,9 @@
                                         
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
-                                        	<button type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)">돌아가기</button>
-                                            <button type="submit" class="btn btn-primary" id="joinBtn" disabled>회원가입</button>
+                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
+                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력"/>
+                                            <input type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled />
                                         </div>
                                     </div>
                                     </form>
@@ -179,7 +180,7 @@
 	
 	function joinValidate(){
 		
-		if(!(/^[a-z][a-z\d]{3,11}$/i.test($("#enrollForm input[name=userId]").val()))){
+ 		if(!(/^[a-z][a-z\d]{3,11}$/i.test($("#enrollForm input[name=userId]").val()))){
 			$("#enrollForm input[name=userId]").focus();
 	        return false;
 		}
@@ -194,8 +195,18 @@
 	        return false;
 		 }
 		 
+		 if(!(/^[가-힣]{2,}$/.test($("#enrollForm input[name=phone]").val()))){
+			 $("#enrollForm input[name=phone]").focus();
+	        return false;
+		 }
+		 
+		 if(!(/^[가-힣]{2,}$/.test($("#enrollForm input[name=email]").val()))){
+			 $("#enrollForm input[name=email]").focus();
+	        return false;
+		 }
+		 
 		 return true;
-		
+		 
 		
 	}
 	
