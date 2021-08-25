@@ -24,7 +24,7 @@
 	<script>
 	   $(function(){
 	      var msg = "<%=msg%>";
-		
+
 			if (msg != "null") {
 				alert(msg);
 	<%session.removeAttribute("msg");%>
