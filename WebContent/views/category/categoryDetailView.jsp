@@ -77,7 +77,7 @@
                                 <div class="basic-form">
                                         <div class="form-group">
                                             <label>카테고리를 확인하세요.</label>
-                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caName" value="<%= c.getCategoryName() %>"></input>
+                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caSelectName" value="<%= c.getCategoryName() %>"></input>
                                         </div>
                                     <div class="general-button" align="right">
                                     <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
