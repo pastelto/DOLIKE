@@ -74,8 +74,8 @@
                                             <input type="text" class="form-control bg-transparent"  id="comment" name="caName" value="<%= category.getCategoryName() %>"></input>
                                         </div>
                                     <div class="general-button" align="right">
-                                    <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/detail.ca'" >돌아가기</button>
-                                   	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
+                                   	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
                             		<button id="categoryUpdateBtn2"  type="submit" class="btn mb-1 btn-primary">수정하기</button>									
 									<%--<% } --%>
@@ -88,6 +88,7 @@
                   </div>
 				</div>
 			</div>
+			<%@ include file="../common/footer.jsp" %>
 		</div>
 </body>
 </html>
