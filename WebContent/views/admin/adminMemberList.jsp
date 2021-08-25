@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.category.model.vo.*"%>
-
+    pageEncoding="UTF-8" import = "com.kh.admin.model.vo.*"%>
+    
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 	
-	CategoryPageInfo ca = (CategoryPageInfo)request.getAttribute("ca");
+	AdminPageInfo ca = (AdminPageInfo)request.getAttribute("ca");
 	
 	int listCount = ca.getListCount();
 	int currentPage = ca.getCurrentPage();
@@ -82,7 +82,12 @@
                                         <thead>
                                             <tr>
                                                 <th>번호</th>
-                                                <th>카테고리</th>
+                                                <th>ID</th>
+                                                <th>닉네임</th>
+                                                <th>생성일</th>
+                                                <th>접속 권한</th>
+                                                <th>회원 상태</th>
+                                                <th>이용 권한</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,8 +98,13 @@
                                             <%}else{ %>
 												<% for(Category c : list){ %>
                                             <tr>
-                                                <td><%= c.getCategoryNo() %></td>
-                                                <td><%= c.getCategoryName() %></td>                                             
+                                                <td><%= c.getNo() %></td>
+                                                <td><%= c.getName() %></td> 
+                                                <td><%= c.getNickName() %></td>
+                                                <td><%= c.getCreateDate() %></td>
+                                                <td><%= c.getAccess() %></td>
+                                                <td><%= c.getStatus() %></td>
+                                                <td><%= c.getRights() %></td>                                             
                                             </tr>
                                             	<%} %>
 											<%} %>
