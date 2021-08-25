@@ -6,7 +6,7 @@ git commit -m "Fixed .gitignore"
 ### Java ###
 # Compiled class file
 *.class
-
+*.classpath
 # Log file
 *.log
 
