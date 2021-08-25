@@ -42,6 +42,8 @@ public class DeleteMessageListServlet extends HttpServlet {
 		int pageLimit;
 		int msgLimit;
 		
+		int newMsgCount; // 새로운 쪽지 개수
+		
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 
@@ -61,13 +63,14 @@ public class DeleteMessageListServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		
+		newMsgCount = new MessageService().getNewMessageCount(userId);
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
 		
 		ArrayList<Message> list = new MessageService().selectDeleteList(pi, userId);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-
+		request.setAttribute("newMsgCount", newMsgCount);
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/message/deleteMsgListView.jsp");
 		view.forward(request, response);
 	}

@@ -36,14 +36,16 @@ public class MessageListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-		int listCount;			// 총 게시글 갯수
-		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
-		int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 
-		int endPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 끝 수
-		int maxPage;			// 전체 페이지에서의 가장 마지막 페이지
+		int listCount;
+		int currentPage;
+		int startPage;
+		int endPage;
+		int maxPage;
 		
-		int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
-		int msgLimit;	    // 한 페이지에 보여질 게시글 최대 갯수
+		int pageLimit;	
+		int msgLimit;	
+		
+		int newMsgCount; // 새로운 쪽지 개수
 		
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
@@ -68,11 +70,14 @@ public class MessageListServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-	
+		
+		newMsgCount = new MessageService().getNewMessageCount(userId);
+		
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
 		ArrayList<Message> list = new MessageService().selectList(pi, userId);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
+		request.setAttribute("newMsgCount", newMsgCount);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/message/messageListView.jsp");

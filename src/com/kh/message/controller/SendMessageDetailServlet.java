@@ -36,13 +36,17 @@ public class SendMessageDetailServlet extends HttpServlet {
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		System.out.println("mno : " + mno);
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-
+		
+		int newMsgCount;
+		newMsgCount = new MessageService().getNewMessageCount(userId);
+		
 		Message message = new MessageService().selectSendMsg(mno, userId);
 		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
 		System.out.println("SendMessageDetailServlet : " + userId);
 		if(message != null) {
 			request.setAttribute("message", message);
 			request.setAttribute("mat", mat);
+			request.setAttribute("newMsgCount", newMsgCount);
 			
 			request.getRequestDispatcher("views/message/SendMessageDetailView.jsp").forward(request, response);
 		} else {

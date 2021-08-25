@@ -504,6 +504,33 @@ public class MessageDao {
 		
 		return result;
 	}
+	
+	// 새 쪽지 개수
+	public int getNewMessageCount(Connection conn, String userId) {
+		int count = 0;
+		PreparedStatement pstmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getNewMessageCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
 
 
 	

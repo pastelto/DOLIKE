@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
+import com.kh.message.model.service.MessageService;
+
 /**
  * Servlet implementation class NewMessageFormServlet
  */
@@ -26,7 +29,10 @@ public class NewMessageFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int newMsgCount;
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		newMsgCount = new MessageService().getNewMessageCount(userId);
+		request.setAttribute("newMsgCount", newMsgCount);
 		request.getRequestDispatcher("views/message/NewMessageForm.jsp").forward(request, response);
 	}
 

@@ -170,6 +170,16 @@ public class MessageService {
 		
 		return result1;
 	}
+	
+	// 새 쪽지 개수
+	public int getNewMessageCount(String userId) {
+		Connection conn = getConnection();
+		
+		int count = new MessageDao().getNewMessageCount(conn, userId);
+		close(conn);
+		
+		return count;
+	}
 
 
 	

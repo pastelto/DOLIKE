@@ -3,8 +3,9 @@
 	import="java.util.ArrayList, com.kh.message.model.vo.*"%>
 <%
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
-	
 	MsgPageInfo mpi = (MsgPageInfo)request.getAttribute("pi");
+	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
+	
 	
 	int listCount = mpi.getListCount();
 	int currentPage = mpi.getCurrentPage();
@@ -41,7 +42,7 @@
 		color: #78c2ad;
 		background-color: #fff;
 	}
-	#pageTag {
+	#pageTag, #sendMsgLink, #resetBtn, #sendBtn, #deleteBtn {
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
@@ -55,17 +56,6 @@
 		color: gray;
     	background-color: #ced4da;
     	border-color: #ced4da;
-	}
-		#sendMsgLink, #resetBtn, #sendBtn {
-    	color: #fff;
-    	background-color: #78c2ad;
-    	border-color: #78c2ad;
-	}
-	
-	#deleteBtn{
-		color: #fff;
-    	background-color: #78c2ad;
-    	border-color: #78c2ad;
 	}
 </style>
 </head>
@@ -123,7 +113,11 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b></a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i><b>받은 쪽지함</b>
+                                    <%if(newMsgCount > 0){ %>
+                                    <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
+                                    <%} %>
+                                    </a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
@@ -158,7 +152,7 @@
 										 	<% for(Message m : list){ %>
 										 		<% if( m.getMsgStatus().equals("Y") ){ %>
 										 		<tr>
-										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value="<%= m.getMsgNo() %>"></td>
+										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value=""></td>
 										 			<%-- <td><%= index++ %></td> --%>
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
@@ -172,7 +166,7 @@
 										 			<%-- <td><%= index++ %></td> --%>
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
-													<td><span class="badge badge-primary badge-sm float-none m-t-5"> New </span> &nbsp; <%= m.getMsgTitle() %></td>
+													<td><span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a"> New </span> &nbsp; <%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
 													<td><%= "읽지 않음" %></td>
 												</tr>
