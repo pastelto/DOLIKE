@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-<<<<<<< HEAD
-                        
-=======
-                            
+                                
     
->>>>>>> refs/heads/master
+    
     
     
     
     
     <wb-module deploy-name="DoLikeProject">
-<<<<<<< HEAD
-                                                
-=======
-                                                        
+                                                                
         
->>>>>>> refs/heads/master
+        
         
         
         
         
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-<<<<<<< HEAD
-                                                
-=======
-                                                        
+                                                                
         
->>>>>>> refs/heads/master
+        
         
         
         
         
         <property name="context-root" value="DoLikeProject"/>
-<<<<<<< HEAD
-                                                
-=======
-                                                        
+                                                                
         
->>>>>>> refs/heads/master
+        
         
         
         
         
         <property name="java-output-path" value="/DoLikeProject/WebContent/WEB-INF/classes"/>
-<<<<<<< HEAD
-                                            
-=======
-                                                    
+                                                            
     
->>>>>>> refs/heads/master
+    
     
     
     
     
     </wb-module>
-<<<<<<< HEAD
-                    
-=======
-                        
+                            
 
->>>>>>> refs/heads/master
+
 
 
 
