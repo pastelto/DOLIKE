@@ -35,6 +35,7 @@ public class BoardService {
 	}
 
 	public int insertBoard(Board b, Attachment at) {
+
 		Connection conn = getConnection();
 		
 		int result1 = new BoardDao().insertBoard(conn, b);
@@ -51,6 +52,7 @@ public class BoardService {
 		}
 		close(conn);
 		return result1 * result2 ;
+		
 	}
 
 	public int deleteBoard(int bid) {

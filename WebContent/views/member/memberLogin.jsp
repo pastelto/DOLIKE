@@ -41,7 +41,7 @@
 	}
 	</style>
 </head>
-<body class="h-100">
+<body>
 	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
     

@@ -163,7 +163,7 @@
 										 			<td><%= m.getMsgNo()%></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
-													<td><%= m.getRecvtime()%></td>
+													<td><%= m.getRecvtime() %></td>
 													<td><%= "읽음" %></td>
 												</tr>
 												<% } else if( m.getMsgStatus().equals("N")){  %>	
