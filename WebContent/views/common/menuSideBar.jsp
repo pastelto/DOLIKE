@@ -24,18 +24,61 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
 	<style>
-	#loginBtn {
+	#loginBtn, #loginBtnModal, #EnrollBtnModal {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
-
+	
+	  #loginBtnModal:hover, #EnrollBtnModal:hover{
+      	background-color: #f3969a;
+      	border-color: #f3969a;
+      	
+      }
 	
 	#doLikeLogo{
-	
 	 background: white;
-	 
 	 }
+	 
+	  .favBoard {
+	  background-color: #fff;
+	  border: 2px none #2199e8;
+	  padding: 5px 5px;
+	  border-radius: 2px;
+	  color: #2199e8;
+	  background:rgba(0, 0, 0, 0.0);
+	} 
+	
+	#mailIcon:hover{
+		color: #78c2ad;
+	}
+	
+	
+	.btn-like {
+        color: transparent;
+        text-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 0 rgb(172, 170, 170);
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        margin-left: 20px;
+        margin-right: 20px;
+        
+       } 
+      .btn-like:hover {
+        text-shadow: 0 0 0 #f3969a;
+      }
+      .btn-like.done {
+        text-shadow:  0 0 0 #f3969a;
+      }
+      .btn-like.done:hover {
+        color: transparent;
+        text-shadow: 0 0 0 #777;
+      }
+      
+      .boardMargin{
+      	padding-left: 20px !important;
+      }
+      
+
 	</style>
 </head>
 <body>
@@ -91,7 +134,7 @@
             <%}else{ %>
             <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
+                        <li class="icons dropdown show"><a onclick="location.href='<%=contextPath%>/list.ms'" data-toggle="dropdown" aria-expanded="true" id="mailIcon"> 
                                 <i class="mdi mdi-email-outline"></i>
                             </a>
 
@@ -195,21 +238,62 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">메인</span>
                         </a>
                     </li>
-                    <li class="mega-menu-sm">
+                    <% if(loginUser == null) {%> 
+                      	<li class="mega-menu-sm">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
+	                        </a>
+	                        <ul aria-expanded="false" class="collapse">
+	                            <li><a href="list.bo">카테고리1</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리2</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리3</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>
+	                        </ul>
+						</li>
+                    <%}else{ %>
+                       <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="list.bo">카테고리1</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리2</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리3</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp">카테고리7</a></li>
-                           
+                            <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li>
                         </ul>
-                    </li>
+                        <!-- 즐겨찾는 게시판 Ajax Script -->
+				        <script>
+				        
+							$(function(){
+								$("#btn-like").eq(0).click(function(){
+								var favB = $("#input2").val();
+								
+								$.ajax({
+									
+									url: "jqTest2.do",
+									data: {input:input},
+									type: "post",
+									success: function(result){
+										$("#output2").val(result);
+									},
+									error: function(e){ // 에러 내용을 e로 받아옴
+										console.log(e);
+									}
+								})
+							})
+						})
+				        	$(".btn-like").click(function() {
+				         	   $(this).toggleClass("done");
+				       		 })
+        				</script>
+                    	</li>
+                      <%} %> 
                       <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
@@ -233,10 +317,12 @@
                     </li>
                     <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
-                        <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();">
+                        <!-- <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();"> -->
+                        <a class="has-arrow sweet-wrong" aria-expanded="false" data-toggle="modal" data-target="#myModal">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
                         </a>
                     </li>
+                    
                     <%}else{ %>
                      <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -275,6 +361,36 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
+        
+                <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+            
+                    <!-- Modal Header -->
+<!--                     <div class="modal-header">
+                    <h4 class="modal-title" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div> -->
+            
+                    <!-- Modal body -->
+                    <div class="modal-body justify-content-center">
+                     <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
+                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+                    	<div class="row" style="margin-top: 30px;">
+                    	<div class="col-2"></div>
+                        <button class="btn btn-primary px-3 ml-4 col-3" id="loginBtnModal" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+                        <button class="btn btn-primary px-3 ml-4 col-3" id="EnrollBtnModal" type="button" onclick="location.href='<%=contextPath%>/enrollForm.me'">회원가입</button>
+                   		</div>
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="background-color: #f3969a; border: 0" data-dismiss="modal">닫기</button>
+                    </div>
+            
+                </div>
+                </div>
+            </div>
         <script>
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
