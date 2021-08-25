@@ -53,7 +53,7 @@ public class MemberDao {
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
-						rset.getInt("INTERESTS"),
+						rset.getString("INTERESTS"),
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
@@ -86,7 +86,7 @@ public class MemberDao {
 			pstmt.setString(5, m.getPhone());
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getNickName());
-			pstmt.setInt(8, m.getInterests());
+			pstmt.setString(8, m.getInterests());
 			pstmt.setDate(9, m.getUserCreateDate());
 			pstmt.setString(10, m.getUserStatus());
 			
@@ -125,7 +125,7 @@ public class MemberDao {
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
-						rset.getInt("INTERESTS"),
+						rset.getString("INTERESTS"),
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
@@ -143,7 +143,7 @@ public class MemberDao {
 	
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
-	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String[] interests) {
+	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String interests) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
