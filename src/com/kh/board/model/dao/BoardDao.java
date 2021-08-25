@@ -106,10 +106,10 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, b.getTagName());
-			pstmt.setString(2, b.getBoardTitle());
-			pstmt.setString(3, b.getBoardContent());
-			pstmt.setString(4, b.getNickName());
+			pstmt.setString(1, b.getNickName());
+			pstmt.setString(2, b.getTagName());
+			pstmt.setString(3, b.getBoardTitle());
+			pstmt.setString(4, b.getBoardContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -342,19 +342,17 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, bno);
-			
+			System.out.println(" bno dao값 확인 : "+ bno );
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				b = new Board( rset.getInt("BOARD_NO"),
 							rset.getString("NICKNAME"),
-							rset.getString("TAG_NAME"),
+							rset.getString("TAG"),
 							rset.getString("BOARD_TITLE"),
 							rset.getDate("BOARD_DATE"),
 							rset.getString("BOARD_CONTENT"),
-							rset.getInt("AVALIABLE"),
-							rset.getInt("COUNT"),
-							rset.getInt("CATEGORY_NO")
+							rset.getInt("VIEWS")
 							);
 			}
 		} catch (SQLException e) {

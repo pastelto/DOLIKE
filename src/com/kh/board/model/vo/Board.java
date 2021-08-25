@@ -18,12 +18,17 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
-		// TODO Auto-generated constructor stub
-		//BOARD_DAO selectList 생성자 
+	public Board(String tagName, String boardTitle, String boardContent, String nickName) {
+		//insertBoard
+		super();
+		this.tagName = tagName;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.nickName = nickName;
 	}
 	
 	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,int avaliable,int views,int categoryNo) {
+		// all basic 
 		super();
 		this.boardNo = boardNo;
 		this.nickName = nickName;
@@ -36,6 +41,28 @@ public class Board {
 		this.categoryNo = categoryNo;
 	}
 	
+	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
+		//arraryList selectList
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.boardTitle = boardTitle;
+		this.boardDate = boardDate;
+		this.views = views;
+		this.categoryNo = categoryNo;
+	}
+
+	public Board(int boardNo, String nickName, String tagName, String boardTitle, Date boardDate, String boardContent, int views) {
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.tagName = tagName;
+		this.boardTitle = boardTitle;
+		this.boardDate = boardDate;
+		this.boardContent = boardContent;
+		this.views = views;
+	}
+
 	public int getBoardNo() {
 		return boardNo;
 	}
