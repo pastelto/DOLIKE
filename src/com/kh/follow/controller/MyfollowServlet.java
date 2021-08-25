@@ -37,6 +37,10 @@ public class MyfollowServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
+		int followCount = new FollowService().followCount(userId);
+		request.setAttribute("followCount", followCount);
+		
+		
 		int listCount;			
 		int currentPage;		
 		int startPage;			
@@ -56,7 +60,7 @@ public class MyfollowServlet extends HttpServlet {
 		
 		pageLimit = 10;
 		
-		followLimit = 10;
+		followLimit = 6;
 		
 		maxPage = (int)Math.ceil((double)listCount/followLimit);
 		
@@ -75,7 +79,6 @@ public class MyfollowServlet extends HttpServlet {
 		ArrayList<Follow> list = new FollowService().selectList(userId, pi);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/myFriendView.jsp");
 		view.forward(request, response);
 		
