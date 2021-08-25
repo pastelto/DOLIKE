@@ -22,7 +22,16 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
+	<script>
+	   $(function(){
+	      var msg = "<%=msg%>
+		";
+			if (msg != "null") {
+				alert(msg);
+	<%session.removeAttribute("msg");%>
+		}
+		})
+	</script>
 	<style>
 	#loginBtn, #loginBtnModal, #EnrollBtnModal {
     	color: #fff;
@@ -281,8 +290,23 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
+                        <%if(loginUser==null){ %>
                             <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
-                            <li><a href="./app-calender.html">챌린지2</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                        <%} else {%>
+                            <% if(loginUser.getUserId().equals("admin")) {%>
+                            <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/applyList.ch">신청 리스트</a></li>
+                            <li><a href="<%= request.getContextPath() %>/voteInsertForm.ch">투표 만들기</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeInsertForm.ch">챌린지 만들기</a></li>
+                            <%} else {%>                            
+                        	<li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeApplyForm.ch">챌린지 신청</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeVote.ch">챌린지 투표</a></li>
+                            <li><a href="<%= request.getContextPath() %>/myChallenge.ch">마이 챌린지</a></li>
+                        <%}}%>                           
                         </ul>
                     </li>
                		<li>
