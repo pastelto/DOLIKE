@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.follow.model.vo.Follow;
 import com.kh.follow.model.vo.FollowPageInfo;
 import com.kh.notice.model.vo.Notice;
+import com.kh.notice.model.vo.NoticePageInfo;
 
 public class FollowDao {
 
@@ -88,7 +89,7 @@ public class FollowDao {
 	}
 
 
-	public ArrayList<Follow> selectList(Connection conn, String userId) {
+	public ArrayList<Follow> selectList(Connection conn, String userId, FollowPageInfo pi) {
 		ArrayList<Follow> list = new ArrayList<Follow>();
 		
 		PreparedStatement pstmt = null;
@@ -96,9 +97,14 @@ public class FollowDao {
 		
 		String sql = prop.getProperty("selectFollowList");
 		
+		int startRow = (pi.getCurrentPage()-1)*pi.getFollowLimit()+1;
+		int endRow = startRow + pi.getFollowLimit()-1;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -118,30 +124,59 @@ public class FollowDao {
 	}
 
 
-//	public int getListCount(Connection conn, String userId) {
-//		int listCount = 0;
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		
-//		String sql = prop.getProperty("getListCount");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, userId);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			if(rset.next()) {
-//				listCount = rset.getInt(1);
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		return listCount;
-//	}
+	public int countId(Connection conn, String userId, String followId) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, followId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				result = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int getListCount(Connection conn, String userId) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 
 }

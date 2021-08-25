@@ -13,6 +13,7 @@ import com.kh.follow.model.vo.Follow;
 import com.kh.follow.model.vo.FollowPageInfo;
 import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
+import com.kh.notice.model.vo.NoticePageInfo;
 
 public class FollowService {
 
@@ -40,20 +41,29 @@ public class FollowService {
 		return result;	
 	}
 
-	public ArrayList<Follow> selectList(String userId) {
+	public ArrayList<Follow> selectList(String userId, FollowPageInfo pi) {
 		Connection conn = getConnection();
-		ArrayList<Follow> list = new FollowDao().selectList(conn, userId);
+		ArrayList<Follow> list = new FollowDao().selectList(conn, userId, pi);
 		close(conn);
 		return list;
 	}
 
-//	public int getListCount(String userId) {
-//		Connection conn = getConnection();
-//		
-//		int listCount = new FollowDao().getListCount(conn, userId);
-//		
-//		close(conn);
-//		return listCount;
-//	}
+	public int countId(String userId, String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().countId(conn, userId, followId);
+		
+		close(conn);
+		return result;
+	}
+
+	public int getListCount(String userId) {
+		Connection conn = getConnection();
+		
+		int listCount = new FollowDao().getListCount(conn, userId);
+		
+		close(conn);
+		return listCount;
+	}
 
 }

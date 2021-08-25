@@ -38,15 +38,23 @@ public class FollowInsertServlet extends HttpServlet {
 		
 		Follow fl = new Follow(userId, followId);
 		
-		int result = new FollowService().insertId(fl);
+		int count = new FollowService().countId(userId, followId); //해당 아이디로 친구 추가된 유저아이디가 있는지 확인 1이상이면 있는 것
 		
-		if(result > 0) {
-			request.getSession().setAttribute("msg", followId+"님 친구 등록 성공!");
+		if(count > 0) {
+			request.getSession().setAttribute("msg", followId+"님은 이미 친구입니다.");
 			response.sendRedirect("MyFollow.fl");
 		}else {
-			request.getSession().setAttribute("msg", "친구 등록 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			int result = new FollowService().insertId(fl);
+			System.out.println(result);
+			if(result > 0) {
+				request.getSession().setAttribute("msg", followId+"님 친구 등록 성공!");
+				response.sendRedirect("MyFollow.fl");
+			}else {
+				request.getSession().setAttribute("msg", "친구 등록 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 		}
+		
 
 	}
 
