@@ -40,7 +40,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10*1024*1024;
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			String savePath = resources + "\\board_upfiles\\";
+			String savePath = resources + "//board_upfiles//";
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
 			
@@ -49,7 +49,7 @@ public class BoardUpdateServlet extends HttpServlet {
 			String content = multiRequest.getParameter("content");
 			
 			int bno = Integer.parseInt(multiRequest.getParameter("bno"));
-			
+			System.out.println("update.bo 서블릿에서 받는 bno 값 " + bno);
 			Board b = new Board();
 			b.setTagName(tag);
 			b.setBoardTitle(title);

@@ -35,13 +35,12 @@ public class BoardDetailServlet extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		Board b = new BoardService().selectBoard(bno);
-		Attachment at = new BoardService().selectAttachment(bno);
+		
 		
 		if(b != null) {
 			request.setAttribute("b", b);
-			request.setAttribute("at", at);
-			
 			request.getRequestDispatcher("views/board/boardRead.jsp").forward(request, response);
+			
 		}else {
 			request.setAttribute("msg", "게시판 상세 조회 실패");
 			
