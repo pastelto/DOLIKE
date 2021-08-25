@@ -1,6 +1,7 @@
 package com.kh.challenge.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,20 +40,12 @@ public class VoteInsertServlet extends HttpServlet {
 		int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 		String chTitle = request.getParameter("chTitle");
 		String content = request.getParameter("content");
-		String ss = request.getParameter("start");
-		String se = request.getParameter("end");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
 		
-		SimpleDateFormat sf = new SimpleDateFormat("yy-mm-dd");
-		
-		Date start = null;
-		Date end = null;
-		try {
-			start = sf.parse(ss);
-			end = sf.parse(se);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(apNo+ categoryNo+ chTitle+ content);
+		System.out.println(start);
+		System.out.println(end);
 		
 		ChallengeVote cv = new ChallengeVote();
 
@@ -67,7 +60,7 @@ public class VoteInsertServlet extends HttpServlet {
 
 		if (result > 0) {
 			request.getSession().setAttribute("msg", "투표 등록이 완료되었습니다.");
-			response.sendRedirect("list.ms");
+			response.sendRedirect("index2.jsp");
 			System.out.println("투표 등록 성공!");
 		} else {
 			request.setAttribute("msg", "투표 등록에 실패했습니다.");

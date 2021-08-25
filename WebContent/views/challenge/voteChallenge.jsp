@@ -12,6 +12,12 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
+<style>
+	#voteBtn{
+		padding: 5px;
+   		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<div id="main-wrapper">
@@ -19,8 +25,7 @@
 		<div class="content-body">
 			<div class="row">
 				<div class="col-12 m-b-30">
-					<h4 class="d-inline">새롭게 참여하고싶은 챌린지를 선택해주세요</h4>
-					<p class="text-muted">1개의 챌린지만 선택 가능</p>
+					<h4 class="d-inline">새롭게 참여하고싶은 챌린지를 뽑아주세요!</h4>
 					<div class="row">
 						<div class="col-md-6 col-lg-3">
 						<%if(!list.isEmpty()){%>
@@ -28,13 +33,15 @@
 								<form action="<%=contextPath%>/upVote.ch" method="post">
 									<div class="card">
 										<div class="card-header bg-white">
-											<h5 class="card-title"><%= list.get(i).getChTitle()%></h5><!-- 챌린지 타이틀 -->
+											<h5><input type="hidden" class="card-title" style="text-align:center" name="chTitle" value="<%= list.get(i).getChTitle()%>"/><%= list.get(i).getChTitle()%></h5><!-- 챌린지 타이틀 -->
 										</div>
 										<div class="card-body">
 											<p class="card-text"><%= list.get(i).getContent()%></p><!-- 챌린지 설명 -->
 										</div>
 										<div class="card-footer">									
-											<input type="radio" class="radio" name="challenge" value=<%= list.get(i)%>/>								
+											<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit" id="voteBtn">
+													<i class="fa fa-paper-plane m-r-5"></i> Vote ME!
+											</button>								
 										</div>
 									</div>
 								</form>

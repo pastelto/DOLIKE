@@ -11,8 +11,8 @@
 <meta charset="UTF-8">
 <title>DO LIKE - 챌린지</title>
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="./images/do_32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+</head>
 <body>
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
@@ -35,18 +35,17 @@
 									<form action="<%=contextPath%>/voteInsert.ch" method="post">
 										<div class="toolbar" role="toolbar">
 											<div class="btn-group m-b-20">
-
 												<div class="form-group">
-													<label for="exampleSelect1" class="form-label mt-4">챌린지
-														선택</label> <select class="form-select" id="category" name="apNo">
+													<label for="exampleSelect1" class="form-label mt-4">챌린지선택</label> 
+													<select class="form-select" id="category" name="apNo">
 														<%for(int i = 0; i <list.size(); i++) {%>
 														<option value=<%=list.get(i).getApNo()%>><%=list.get(i).getApNo()%></option>
 														<%} %>
 													</select>
 												</div>
 												<div class="form-group">
-													<label for="exampleSelect1" class="form-label mt-4">카테고리
-														선택</label> <select class="form-select" id="category" name="categoryNo">
+													<label for="exampleSelect1" class="form-label mt-4">카테고리 선택</label> 
+													<select class="form-select" id="category" name="categoryNo">
 														<option value='1'>카테고리1</option>
 														<option value='2'>2</option>
 														<option value='3'>3</option>
@@ -65,15 +64,21 @@
 												<textarea class="textarea_editor form-control bg-light"
 													rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
 											</div>
-											<div class="col-md-6">
-												<label class="m-t-20">투표 시작 날짜</label> <input type="text"
-													class="form-control" name="start" placeholder="2021-08-01"
-													id="mdate">
-											</div>
-											<div class="col-md-6">
-												<label class="m-t-20">투표 마감 날짜</label> <input type="text"
-													class="form-control" name="end" placeholder="2021-08-01"
-													id="mdate">
+											<div class="card">
+												<div class="card-body">
+													<div class="row form-material">
+														<div class="col-md-6" >
+															<label class="m-t-20">투표 시작 날짜</label> 
+															<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="mdate">
+														</div>
+													</div>
+													<div class="row form-material">
+														<div class="col-md-6">
+															<label class="m-t-20">투표 마감 날짜</label> <input type="date"
+																name="end"class="form-control" placeholder="2017-06-04" id="mdate">
+														</div>
+													</div>
+												</div>
 											</div>
 											<div class="text-left m-t-15">
 												<button
@@ -98,5 +103,6 @@
 			<%@ include file="../common/footer.jsp"%>
 		</div>
 	</div>
+<script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 </body>
 </html>

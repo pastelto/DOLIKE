@@ -148,6 +148,7 @@ public class ChallengeService {
 		Connection conn = getConnection();
 		ArrayList<ChallengeVote> list = new ChallengeDao().selectChallengeVoteList(conn);
 		close(conn);
+		System.out.println(list + "service");
 		return list;
 	}
 
@@ -169,13 +170,27 @@ public class ChallengeService {
 			rollback(conn);
 		}
 		close(conn);
-		
+		System.out.println(result1 * result2);
 		return result1 * result2;
 	}
 
 	public ArrayList<ChallengeAttachment> selectAttach() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int voteCountUp(ChallengeVote cv) {
+		Connection conn = getConnection();
+		int result = new ChallengeDao().voteCountUp(conn, cv);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 
 }
