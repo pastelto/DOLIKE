@@ -71,20 +71,20 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad; border: none;">쪽지보내기</a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 받은 쪽지함
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
                                     <%} %>
                                      </a>
-                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
+                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i><b>보낸 쪽지함</b></a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                    
                                 </div>
                                 <div class="email-right-box"  style="height: 40rem">
                                    <div class="toolbar" role="toolbar">
-										<h4> 받은 쪽지 </h4>
+										<h4> 보낸 쪽지 </h4>
                                     </div>
                                     <div class="read-content">
                                         <div class="media pt-5">
@@ -127,8 +127,16 @@
 										</form>
 										<script>
 	                                    function deleteSMsg(){
-	                        				$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
-	                        				$("#msgDel").submit();
+
+	                                    	var result = confirm("정말로 쪽지를 삭제하시겠습니까?");
+	                                        
+	                                        if(result)
+	                                        {
+	                                        	$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
+		                        				$("#msgDel").submit();
+	                                        }
+	                                        
+	                                    	
                         				}
                                     </script>
                                 </div>
