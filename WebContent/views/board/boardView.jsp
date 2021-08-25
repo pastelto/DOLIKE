@@ -31,6 +31,10 @@
 			color : #000000;
 			text-decoration:none;
 		}
+		body{
+			margin-right : 100px ;
+			margin-left : 100px ;
+		}
 	</style>
 	<!-- 
 	<link href="../../css/style.css" rel="stylesheet">
