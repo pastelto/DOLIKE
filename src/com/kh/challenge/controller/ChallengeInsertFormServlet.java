@@ -3,7 +3,6 @@ package com.kh.challenge.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeApply;
+import com.kh.challenge.model.vo.ChallengeVote;
 
 /**
- * Servlet implementation class VoteApplyListServlet
+ * Servlet implementation class ChallengeInsertFormServlet
  */
-@WebServlet("/voteApList.ch")
-public class VoteApplyListServlet extends HttpServlet {
+@WebServlet("/challengeInsertForm.ch")
+public class ChallengeInsertFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteApplyListServlet() {
+    public ChallengeInsertFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,10 @@ public class VoteApplyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<ChallengeApply> list = new ChallengeService().selectVoteApList();
-		request.setAttribute("list", list);
+		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
+		request.setAttribute("list", list);		
 		System.out.println(list);
-		
+		request.getRequestDispatcher("views/challenge/insertChallenge.jsp").forward(request, response);
 	}
 
 	/**

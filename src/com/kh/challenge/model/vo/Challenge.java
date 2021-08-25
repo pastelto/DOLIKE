@@ -7,8 +7,8 @@ public class Challenge {
 	private int chNo;
 	private String chTitle;
 	private int voteCount;
-	private Date start;
-	private Date end;
+	private String start;
+	private String end;
 	private char status;
 	private String content;
 	private int userCount;
@@ -25,7 +25,7 @@ public class Challenge {
 		// TODO Auto-generated constructor stub
 	}
 	// select challenge
-	public Challenge(int chNo, String chTitle, int voteCount, Date start, Date end, char status, String content,
+	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, char status, String content,
 			int userCount, String categoryTitle) {
 		super();
 		this.chNo = chNo;
@@ -48,7 +48,7 @@ public class Challenge {
 	}
 	
 	// insert_category
-	public Challenge(int chNo, String chTitle, int voteCount, Date start, Date end, char status, String content,
+	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, char status, String content,
 			int userCount, int categoryNo) {
 		super();
 		this.chNo = chNo;
@@ -101,19 +101,19 @@ public class Challenge {
 		this.voteCount = voteCount;
 	}
 
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public String getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 

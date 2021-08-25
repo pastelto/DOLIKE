@@ -1,7 +1,6 @@
 package com.kh.challenge.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.ChallengeVote;
 
 /**
- * Servlet implementation class ChallengeInsertVoteListServlet
+ * Servlet implementation class VoteCountUpServlet
  */
-@WebServlet("/insertChVoteList.ch")
-public class ChallengeInsertVoteListServlet extends HttpServlet {
+@WebServlet("/upVote.ch")
+public class VoteCountUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeInsertVoteListServlet() {
+    public VoteCountUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,25 @@ public class ChallengeInsertVoteListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
-		request.setAttribute("list", list);
-				
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/insertChallenge.jsp");
-		view.forward(request, response);
+		
+		String chTitle = request.getParameter("chTitle");
+		
+		ChallengeVote cv = new ChallengeVote();
+		
+		cv.setChTitle(chTitle);
+		System.out.println(chTitle + "!!!");
+		int result = new ChallengeService().voteCountUp(cv);
+
+		if (result > 0) {
+			request.setAttribute("msg", "투표가 완료되었습니다!");
+			response.sendRedirect("challengeVote.ch");
+			System.out.println("투표 성공!");
+		} else {
+			request.setAttribute("msg", "투표에 실패했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**

@@ -5,7 +5,9 @@
 	Challenge c = new Challenge();	
 	ChallengeAttachment at = new ChallengeAttachment();
 	ArrayList<ChallengeVote> list = (ArrayList<ChallengeVote>)request.getAttribute("list");
-	int categoryNo = 0;
+	System.out.println(list);
+	int voteCount = 0;
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -83,35 +85,46 @@
 								</div>
 								<div class="email-right-box">									
 									<div class="compose-content mt-5">
-										<form action="<%=contextPath%>/challengeInsert.ch"
-											method="post">
+										<form action="<%=request.getContextPath()%>/challengeInsert.ch" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지 타이틀</label> 
 													<select class="form-select" id="category"  name="chTitle">
 														<%for(int i = 0; i <list.size(); i++) {%>
-														<option value=<%=list.get(i).getChTitle()%>><%=list.get(i).getChTitle()%></option>
-														<%=categoryNo = list.get(i).getCategoryNo()%>
+														<option value="<%=list.get(i).getChTitle()%>"><%=list.get(i).getChTitle()%></option>														
 														<%} %>
 													</select>
-												</div>
+											</div>
 											<div class="compose-content mt-5">
-
 												<div class="form-group">
 													<textarea class="textarea_editor form-control bg-light"
 														rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
 												</div>												
-												<div class="form-group">
-													<input type="text" class="form-label mt-4" name="categoryNo" value=<%=categoryNo%> readonly>
+												<div class="form-group"> 카테고리 번호													
+													<label for="exampleSelect1" class="form-label mt-4">카테고리 번호	</label> 
+													<select class="form-select" id="categoryNo"  name="categoryNo">
+														<%for(int i = 0; i <list.size(); i++) {%>
+														<option value="<%=list.get(i).getCategoryNo()%>"><%=list.get(i).getCategoryNo()%></option>	
+														<%System.out.println(list.get(i).getCategoryNo()); %>													
+														<%} %>
+													</select>
 												</div>
-												<div class="col-md-6">
-			                                        <label class="m-t-20">시작 날짜</label>
-			                                        <input type="text" class="form-control" name="start" placeholder="2021-08-01" id="mdate">
+												<div class="card">
+													<div class="card-body">
+														<div class="row form-material">
+															<div class="col-md-6" >
+																<label class="m-t-20">투표 시작 날짜</label> 
+																<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="mdate">
+															</div>
+														</div>
+														<div class="row form-material">
+															<div class="col-md-6">
+																<label class="m-t-20">투표 마감 날짜</label> <input type="date"
+																	name="end" class="form-control" placeholder="2017-06-04" id="mdate">
+															</div>														
+														</div>
+													</div>
 												</div>
-												<div class="col-md-6">
-			                                        <label class="m-t-20">마감 날짜</label>
-			                                        <input type="text" class="form-control" name="end" placeholder="2021-08-01" id="mdate">
-												</div>
-												<h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일</h5>
+												<h6 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일</h6>
 												<div class="form-group">
 													<div class="fallback">
 														<input class="l-border-1" name="file" type="file"
