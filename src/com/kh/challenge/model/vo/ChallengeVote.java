@@ -7,8 +7,8 @@ public class ChallengeVote {
 	private String chTitle;
 	private String content;
 	private int apNo;
-	private Date start;
-	private Date end;
+	private String start;
+	private String end;
 	private int voteCount;
 	private int categoryNo;
 	private String categoryName;
@@ -19,7 +19,7 @@ public class ChallengeVote {
 
 	
 	
-	public ChallengeVote(String chTitle, String content, int apNo, Date start, Date end, int voteCount, int categoryNo,
+	public ChallengeVote(String chTitle, String content, int apNo, String start, String end, int voteCount, int categoryNo,
 			String categoryName) {
 		super();
 		this.chTitle = chTitle;
@@ -33,7 +33,7 @@ public class ChallengeVote {
 	}
 
 
-	public ChallengeVote(String chTitle,String content, Date start, Date end, String categoryName) {
+	public ChallengeVote(String chTitle,String content, String start, String end, String categoryName) {
 		super();
 		this.chTitle = chTitle;
 		this.content = content;
@@ -66,19 +66,19 @@ public class ChallengeVote {
 		this.apNo = apNo;
 	}
 
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public String getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 

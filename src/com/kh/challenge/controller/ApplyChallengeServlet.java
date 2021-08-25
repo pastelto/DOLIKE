@@ -50,7 +50,7 @@ public class ApplyChallengeServlet extends HttpServlet {
 
 		if (result > 0) {
 			request.getSession().setAttribute("msg", "신청이 완료되었습니다.");
-			response.sendRedirect("list.ms");
+			response.sendRedirect("index2.jsp");
 			System.out.println("챌린지 신청 성공!");
 		} else {
 			request.setAttribute("msg", "신청에 실패했습니다.");
