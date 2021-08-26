@@ -12,6 +12,7 @@ import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.PageInfo;
 import com.kh.board.model.vo.Reply;
+import com.kh.follow.model.dao.FollowDao;
 
 
 public class BoardService {
@@ -169,6 +170,15 @@ public class BoardService {
 		}else {
 			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+
+	public int searchBoard(String findBoard) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().searchBoard(conn, findBoard);
+		
 		close(conn);
 		return result;
 	}

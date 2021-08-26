@@ -67,6 +67,7 @@
 	 					</tr>
 	 				</thread>
 	 				<tbody>
+	 				
 						<% if(list.isEmpty()){ %>
 						<tr> 
 							<td colspan="6">조회된 게시글이 없습니다.</td>

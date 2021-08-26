@@ -399,5 +399,32 @@ public class BoardDao {
 		return result;
 	}
 
+	public int searchBoard(Connection conn, String findBoard) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		System.out.println("검색어dao : "+findBoard);
+		String sql = prop.getProperty("searchBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, findBoard);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				result = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 }

@@ -127,7 +127,7 @@
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <div class="input-group text-center mb-3">
-                        	<input type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
+                        	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
                         		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
                         	</div>
@@ -371,6 +371,27 @@
         	}
         	
         	function searchBoard(){
+        		var findBoard = $("#searchBoardForm input[name=findBoard]");
+        		if(findBoard.val() == ""){
+        			alert("검색할 내용을 입력하세요.");
+        			return false;
+        		}
+        		$.ajax({
+        			url:"search.bo",
+        			type:"post",
+        			data:{findBoard:findBoard.val()},
+        			success:function(result){
+        				if(result == "success"){
+        					$("#searchBoardForm").submit();
+        				}else{
+        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
+        				}
+        			},
+        			error:function(){
+        				console.log("통신오류.")
+        			}
+        		})
+        		
         		
         	}
         </script>
