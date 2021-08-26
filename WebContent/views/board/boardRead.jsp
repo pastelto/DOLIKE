@@ -124,8 +124,14 @@
 						}
 						
 						function deleteBoard(){
-							$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
-							$("#postForm").submit();
+							if(confirm('게시글을 삭제하시겠습니까 ?')){
+								$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
+								$("#postForm").submit();
+							} 
+							return;
+								
+							
+							
 						}
 					</script>
 		 					
