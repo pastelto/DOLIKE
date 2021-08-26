@@ -30,7 +30,7 @@ public class FollowDeleteVer2Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		String followId = request.getParameter("flid");
+		String followId = request.getParameter("flidinput");
 		int result = new FollowService().deleteFollowVer2(userId, followId);
 		
 		if(result>0) {

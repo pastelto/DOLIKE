@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.follow.model.vo.*, com.kh.member.model.vo.*"%> 
+	pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.follow.model.vo.*, com.kh.member.model.vo.*, com.kh.category.model.vo.*"%> 
 <%
 	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
+	ArrayList<Category> catList = (ArrayList<Category>)request.getAttribute("catList");
 	FollowPageInfo pi = (FollowPageInfo)request.getAttribute("pi");
 	int followCount = (int)request.getAttribute("followCount");
 	Member m = (Member)request.getAttribute("m");
@@ -24,7 +25,7 @@
 	
 <style>
 	#fList{
-		height: 800px;
+		height: 600px;
 	}
 	
 	#iconMsg{
@@ -80,7 +81,14 @@
 		transform: translate(-50%,-50%);
 	}
 	#interestLabel {
-		background: #78c2ad;
+		/* background: #78c2ad; */
+		background: gray;
+	}
+	#dia{
+		color: #78c2ad;
+	}
+	#iconfl{
+		color: #f3969a;
 	}
 </style>	
 	
@@ -146,14 +154,54 @@
 										<i class="icon-envelope menu-icon"></i> 쪽지
 									</button>
 								</div>
-					
+								<hr>
+								<div class="text-center">
+									<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><h3><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount">팔로워 수</p></h3>
+											</span>
+										</div>
+										<div class="col-6">
+											<span><h3><i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount">게시글 수</p></h3>
+											</span>
+										</div>
+									</div>
+								</div>
+								</div>
+								
 								<hr>
 								<div class="card mt-4">
 									<div class="media align-items-center">
 					
 										<div class="card-body text-center">
-										<span id="interestLabel" class="label label-pill label-primary"></span>
+										<!-- <span id="interestLabel" class="label label-pill label-primary"></span> -->
 											<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
+										<!-- ----------------- -->
+										
+													<table id="catTable" class="table table-borderless" style="text-align: center;">
+															<% if(catList.isEmpty()){ %>
+														 	<tr>
+																<td colspan="3">등록 된 카테고리가 없습니다.</td>
+															</tr>
+														 <% }else{  %>
+														 	<% for(int i=0;i<catList.size();i++){ %>
+														 		<%if(i%3==0){ %>
+														 			<tr>
+														 				<td width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 		<%}else if(i%3==1){ %>
+														 				<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 		<%}else{ %>
+														 			<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 			</tr>
+														 		<%} %>
+														 	<% } %>
+														 <% } %>
+													</table>
+										
+										<!-- ----------------- -->
 										</div>
 					
 									</div>
@@ -164,7 +212,7 @@
 					
 								<div class="col-12 text-center">
 									<form action="deleteFl2.fl" method="get">
-										<input type="hidden" id="flid" name="flid"> 
+										<input type="hidden" id="flidinput" name="flidinput"> 
 										<button id="byefr" class="btn px-4" type="submit">친구 삭제하기</button>
 									</form>
 									
@@ -172,8 +220,11 @@
 							</div>
 						</div>
 					
-						<div class="card">
+					<!-- 왼쪽 하단 -->
+<%-- 						<div class="card">
 							<div class="card-body text-center">
+							
+							<!-- 에시 -->
 								<table class="table table-hover " style="text-align: center;">
 							<thead>
 								<tr style="background-color: #78c2ad; color: white;">
@@ -195,7 +246,7 @@
 									<td colspan="3">존재하는 게시글이 없습니다.</td>
 								</tr>
 					
-								<%-- <% if(list.isEmpty()){ %>
+								<% if(list.isEmpty()){ %>
 										 	<tr>
 												<td colspan="3">존재하는 게시글이 없습니다.</td>
 											</tr>
@@ -208,11 +259,16 @@
 													<td><%= n.getCreateDate()%></td>
 										 		</tr>
 										 	<% } %>
-										 <% } %> --%>
+										 <% } %>
 							</tbody>
 						</table>
+						<!-- ----------------------------------------------------------------- -->
+						
+						
+						
+						<!-- ----------------------------------------------------------------- -->
 							</div>
-						</div>
+						</div> --%>
 					
 					
 					
@@ -294,12 +350,6 @@
 							 --%>
 
 
-
-	
-
-
-
-
 						</div>
 
 
@@ -339,7 +389,7 @@
 												<img src="./resources/images/friend.png" width="50%" height="50%">
 											</div>
 											<% } else {%>
-											<table class="table table-hover table-borderless" style="text-align: center;">
+											<table id="flList" class="table table-hover table-borderless" style="text-align: center;">
 											
 												<% for (Follow fl : list) {%>
 												<tr>
@@ -453,9 +503,11 @@
 		
 		<% if(!list.isEmpty()){%>
 		$(function(){
-			$("table>tbody>tr").click(function(){
+			$("#flList>tbody>tr").click(function(){
 				var followId = $(this).children().eq(0).text();
 				console.log(followId);
+				
+				$('.label').attr("style","background: #ced4da;")
 				
 				$.ajax({
 					url:"userInfo.fl",
@@ -468,21 +520,61 @@
 						var nick = ""
 						var flid = ""
 						var followInterest =""
+						var followerCount = 0
+						var boardCount = 0
 						$.each(result, function(i){
 							
 							nick = result[i].nickname
 							nickId = result[i].nickname
 							flid = result[i].followUserId
 							followInterest = result[i].followInterest
+							followerCount = result[i].followerCount 
+							boardCount = result[i].boardCount
 						})
 						console.log(nickId)
+						console.log(followerCount)
 						$("#nonCheckFl").attr("style", "display:none")
 						$("#checkFl").attr("style", "display:block")
 						
 						$("#nick").text(nick)
 						$("#flid").text("(id: "+flid+")")
+						$("#flidinput").val(flid)
+						$("#followerCount").text(followerCount)
+						$("#boardCount").text(boardCount)
+						
 						//$("#followInterest").text(followInterest) //나중에 삭제
-						$("#interestLabel").text(followInterest)
+						console.log(followInterest);
+						
+						switch (followInterest) {
+						case "공부":
+							$("#0").attr("style","background: #78c2ad;")
+							break;
+						case "건강":
+							$("#1").attr("style","background: #78c2ad;")
+							break;
+						case "여행":
+							$("#2").attr("style","background: #78c2ad;")
+							break;
+						case "요리":
+							$("#3").attr("style","background: #78c2ad;")
+							break;
+						case "동물":
+							$("#4").attr("style","background: #78c2ad;")
+							break;
+						case "패션뷰티":
+							$("#5").attr("style","background: #78c2ad;")
+							break;
+						case "기타":
+							$("#6").attr("style","background: #78c2ad;")
+							break;
+						default:
+							break;
+						}	
+					
+						/* if(followInterest == "공부"){
+							$("#interestLabel").text(followInterest)
+						}else if */
+						
 						
 					},
 					error:function(){
@@ -493,6 +585,14 @@
 			})
 		})
 		<%} %>
+		
+		
+		$(function(){
+			$("#catTable>tbody>tr>td>span").click(function(){
+				alert("카테고리 클릭")
+		
+			})
+		})
 	</script>
 
 </body>

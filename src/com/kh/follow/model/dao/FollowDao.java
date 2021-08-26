@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Board;
+import com.kh.category.model.vo.Category;
 import com.kh.follow.model.vo.Follow;
 import com.kh.follow.model.vo.FollowPageInfo;
 import com.kh.member.model.vo.Member;
@@ -297,6 +299,92 @@ public class FollowDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+
+	public ArrayList<Category> categoryList(Connection conn) {
+		ArrayList<Category> catList = new ArrayList<Category>();
+		Statement stmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("categoryList");
+		
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				catList.add(new Category(rset.getInt("CATEGORY_NO"), 
+								      rset.getString("CATEGORY_NAME")
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(stmt);
+		}
+		return catList;
+	}
+
+
+	public int countFollower(Connection conn, String followId) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countFollower");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, followId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				result = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int countFollowBoard(Connection conn, String followId) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countFollowBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, followId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				result = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 

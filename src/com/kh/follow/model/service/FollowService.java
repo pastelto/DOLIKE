@@ -8,6 +8,9 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.model.vo.Board;
+import com.kh.category.model.dao.CategoryDao;
+import com.kh.category.model.vo.Category;
 import com.kh.follow.model.dao.FollowDao;
 import com.kh.follow.model.vo.Follow;
 import com.kh.follow.model.vo.FollowPageInfo;
@@ -82,7 +85,7 @@ public class FollowService {
 		return result;
 	}
 
-	public int followCount(String userId) {
+	public int followCount(String userId) { 
 		Connection conn = getConnection();
 		
 		int result = new FollowDao().followCount(conn, userId);
@@ -115,5 +118,34 @@ public class FollowService {
 		close(conn);
 		return result;
 	}
+
+	public ArrayList<Category> getCatList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Category> catList = new FollowDao().categoryList(conn);
+		
+		close(conn);
+		
+		return catList;
+	}
+
+	public int countFollower(String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().countFollower(conn, followId);
+		
+		close(conn);
+		return result;
+	}
+
+	public int countFollowBoard(String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().countFollowBoard(conn, followId);
+		
+		close(conn);
+		return result;
+	}
+
 
 }
