@@ -22,21 +22,36 @@ public class ChallengeService {
 		Connection conn = getConnection();
 		
 		ArrayList<Challenge> list = new ChallengeDao().selectList(conn);
+		System.out.println(list +": service");
 		
 		close(conn);
 		
 		return list;
 	}
+	//main at
+	public ArrayList<ChallengeAttachment> selectAttach() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<ChallengeAttachment> fileList = new ChallengeDao().selectAttach(conn);
+		
+		close(conn);
+		System.out.println(fileList +": servlet");
+		
+		return fileList;
 
+	}
+	// detail at
 	public ArrayList<ChallengeAttachment> selectAttach(int chNo) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<ChallengeAttachment> filelist = new ChallengeDao().selectAttach(conn, chNo);
+		ArrayList<ChallengeAttachment> fileList = new ChallengeDao().selectAttach(conn, chNo);
 		
 		close(conn);
+		System.out.println(fileList +": servlet");
 		
-		return filelist;
+		return fileList;
 		
 	}
 
@@ -172,11 +187,6 @@ public class ChallengeService {
 		close(conn);
 		System.out.println(result1 * result2);
 		return result1 * result2;
-	}
-
-	public ArrayList<ChallengeAttachment> selectAttach() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public int voteCountUp(ChallengeVote cv) {
