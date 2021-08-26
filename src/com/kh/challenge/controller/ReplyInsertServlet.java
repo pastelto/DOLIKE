@@ -83,8 +83,8 @@ public class ReplyInsertServlet extends HttpServlet {
 			result = new ChallengeService().insertReply(cp);
 
 			if (result > 0) {
-				request.getSession().setAttribute("msg", "댓글등록이 완료됐습니다.");
-				response.sendRedirect("");
+				response.sendRedirect("challengedetail.ch?chno="+chno);
+				
 				result = 0;
 			} else {
 				if (cp != null) {
@@ -93,7 +93,7 @@ public class ReplyInsertServlet extends HttpServlet {
 					result = 0;
 				}
 
-				request.setAttribute("msg", "댓글등록이 실패했습니다.");
+				//request.setAttribute("msg", "댓글등록이 실패했습니다.");
 
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);

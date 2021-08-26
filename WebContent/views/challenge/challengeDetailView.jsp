@@ -23,6 +23,7 @@ int startPage = pi.getStartPage();
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 #reply-list {
 	height: 100%;
@@ -153,7 +154,7 @@ int startPage = pi.getStartPage();
 													</div>
 												</li>
 											</ul>
-											<button class="btn btn-primary px-3 ml-4" id="addReply">작성</button>
+											<button class="btn btn-primary px-3 ml-4" id="addReply" onclick="submit();">작성</button>
 										</div>
 									</form>
 									<%
@@ -210,17 +211,16 @@ int startPage = pi.getStartPage();
 										</div>
 										<hr>
 										<%}}%>
-									</div>
-								</div>
+									</div>					
 								<!-- 페이지 처리 -->
 								<%
-										if (!rpList.isEmpty())
+										if (!rpList.isEmpty()){
 										%>
 								<div id="paging">
 									<ul class="pagination justify-content-center">
 										<!-- 맨앞으로 -->
 										<li><a id="pageTag" class="page-link"
-											href="<%=request.getContextPath()%>/challengedetail.ch?currentPage=1">
+											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage=1"%>">
 												&laquo; </a></li>
 
 										<!-- 이전페이지 -->
@@ -233,7 +233,7 @@ int startPage = pi.getStartPage();
 												} else {
 												%>
 										<li class="page-item"><a id="pageTag" class="page-link"
-											href="<%=request.getContextPath()%>/challengedetail.ch?currentPage=<%=currentPage - 1%>">
+											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=currentPage-1%>">
 												&lt; </a></li>
 										<%
 												}
@@ -255,7 +255,7 @@ int startPage = pi.getStartPage();
 												} else {
 												%>
 										<li class="page-item"><a id="pageTag" class="page-link"
-											href="<%=request.getContextPath()%>/challengedetail.ch?currentPage=<%=p%>"><%=p%>
+											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=p%>"><%=p%>
 										</a></li>
 										<%
 												}
@@ -275,82 +275,63 @@ int startPage = pi.getStartPage();
 												} else {
 												%>
 										<li class="page-item"><a id="pageTag" class="page-link"
-											href="<%=request.getContextPath()%>/challengedetail.ch?currentPage=<%=currentPage + 1%>">
+											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=currentPage + 1%>">
 												&gt; </a></li>
 										<%
-												}
+												}}
 												%>
 
 										<!-- 맨뒤로 -->
 										<li><a id="pageTag" class="page-link"
-											href="<%=request.getContextPath()%>/challengedetail.ch?currentPage=<%=maxPage%>">
+											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=maxPage%>">
 												&raquo; </a></li>
 									</ul>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<%@ include file="../common/footer.jsp"%>
-		</div>
+				</div>	
+			</div>				
 	</div>
+	<%@ include file="../common/footer.jsp"%>
+</div>
 
-	<!-- 	<script>
-		$(function() {
-			selectReplyList();// 함수호출
-			$("#addReply").click(function() {
-				var content = $("#replyContent").val();
-				<%--var cNo =<%=c.getChNo()%>;--%>
-
-				$.ajax({
-					url : "rinsert.ch",
-					type : "post",
-					data : {
-						content : content,
-						cNo : cNo
-					},
-					success : function(status) {
-						if (status == "success") {
-							selectReplyList();
-							$("#replyContent").val(""); // 댓글입력창 비우기
-						}
-					},
-					error : function() {
-						console.log("ajax통신 실패 - 댓글등록")
-					}
-				})
-			})
-		})
-		function selectReplyList() {
-			$("#reply-list").empty(); // 댓글 테이블을 게시판 온로드 시마다 비우고 내용을 채워준다.
-			$.ajax({
-				url : "rlist.ch",
-				data : {
-				<%--cNo :<%=chno%>; },--%>
-				type : "get",
-				success : function(list) {
-					console.log(list)
-					$.each(list, function(index, obj) {
-
-						var writerTd = $(".mb-sm-0").text(obj.rpWriter).attr();
-						var contentTd = $("<p>").text(obj.content).attr();
-						var dateTd = $(".text-muted ml-3").text(obj.writeDate).attr();
-
-						var reply = $(".media-body").append(writerTd, contentTd, dateTd);
-
-						$("#replyList").append(reply);
-
-					});
-				},
-				error : function() {
-					console.log("ajax통신 실패 - 댓글조회")
-				}
-			})
+	<script>
+		function submit(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '등록',        // 제목
+                text: "댓글을 등록하시겠습니까?",  // 내용
+                type: 'question',                              // 종류
+                confirmButtonText: '등록',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우               
+                	$("#addReply").attr("action", "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno");
+                    $("#replyContent").val("");
+				swal.fire(
+						{title: '등록',
+						 text: '성공적으로 등록되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#addReply").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        });
 		}
-	</script>-->
-	
-	
-
+		</script>
 </body>
 </html>

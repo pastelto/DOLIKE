@@ -56,10 +56,8 @@ public class ChallengeDetailServlet extends HttpServlet {
 				int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 				int rpLimit;			// 한 페이지에 보여질 댓글 최대 갯수
 				
-				// * listCount : 총 게시글 갯수 
 				rpCount = new ChallengeService().getListCount();
 				
-				// * currentPage : 현재 페이지 (요청한 페이지)
 				currentPage = 1;
 				
 				// 페이지 전환시 전달받은 페이지가 있을 경우 전달받은 페이지를 currentPage로!
