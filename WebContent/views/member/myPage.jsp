@@ -233,36 +233,24 @@
     	}
         
 		function updateMember(){
-			var pwd = prompt("현재 비밀번호를 입력하세요.");
+			var val = confirm("회원정보를 수정하시겠습니까?");
 			
-			if("<%= userPwd %>" == pwd){
-				var val = confirm("회원정보를 수정하시겠습니까?");
-				
-				if(val){
-					$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
-					$("#updateForm").submit();
-				}else{
-					alert("취소하였습니다.");
-				}
+			if(val){
+				$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
+				$("#updateForm").submit();
 			}else{
-				alert("비밀번호를 잘못입력하였습니다.");
+				alert("취소하였습니다.");
 			}
 		}
 	
 		function deleteMember(){
-			var pwd = prompt("현재 비밀번호를 입력하세요.");
+			var val = confirm("정말로 탈퇴하시겠습니까?");
 			
-			if("<%= userPwd %>" == pwd){
-				var val = confirm("정말로 탈퇴하시겠습니까?");
-				
-				if(val){
-					$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
-					$("#updateForm").submit();
-				}else{
-					alert("취소하였습니다.");
-				}
+			if(val){
+				$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
+				$("#updateForm").submit();
 			}else{
-				alert("비밀번호를 잘못입력하였습니다.");
+				alert("취소하였습니다.");
 			}
 		}
     	</script>
