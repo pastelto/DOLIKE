@@ -124,6 +124,7 @@ public class BoardService {
 		
 		int result = new BoardDao().increaseCount(conn, bno);
 		
+		
 		Board b = null;
 		
 		if(result > 0) {

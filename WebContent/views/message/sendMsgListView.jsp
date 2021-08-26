@@ -155,7 +155,7 @@
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="5">보낸 쪽지가 없습니다.</td>
+												<td colspan="6">보낸 쪽지가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
@@ -163,7 +163,7 @@
 										 		<tr>
 										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
 										 			<td><%= index++ %></td>
-													<td><%= m.getSenderId() %></td>
+													<td><%= m.getRecvId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
 													<td><%= "읽음" %></td>
@@ -172,7 +172,7 @@
 										 		<tr>
 										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
 										 			<td><%= index++ %></td>
-													<td><%= m.getSenderId() %></td>
+													<td><%= m.getRecvId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
 													<td><%= "읽지 않음" %></td>

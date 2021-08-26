@@ -10,7 +10,7 @@ public class Board {
 	private String boardTitle;		//게시글 제목 
 	private Date boardDate;			//게시글 작성일자 
 	private String boardContent;	//게시글 내용 
-	private int avaliable;			//게시글 상태값 (1이면 공개 0이면 비공개상태) 
+	private char boardStatus;			//게시글 상태값 (Y이면 공개 N이면 비공개상태) 
 	private int views;				//게시글 조회수 
 	private int categoryNo;			//게시글 카테고리 번호 
 	
@@ -27,7 +27,7 @@ public class Board {
 		this.nickName = nickName;
 	}
 	
-	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,int avaliable,int views,int categoryNo) {
+	public Board(int boardNo,String nickName,String tagName,String boardTitle,Date boardDate,String boardContent,char boardStatus,int views,int categoryNo) {
 		// all basic 
 		super();
 		this.boardNo = boardNo;
@@ -36,7 +36,7 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardDate = boardDate;
 		this.boardContent = boardContent;
-		this.avaliable = avaliable;
+		this.boardStatus = boardStatus;
 		this.views = views;
 		this.categoryNo = categoryNo;
 	}
@@ -99,11 +99,11 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public int getAvliable() {
-		return avaliable;
+	public int getBoardStatus() {
+		return boardStatus;
 	}
-	public void setAvliable(int avliable) {
-		this.avaliable = avliable;
+	public void setBoardStatus(char boardStatus) {
+		this.boardStatus = boardStatus;
 	}
 	public int getViews() {
 		return views;
@@ -121,7 +121,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tagName=" + tagName + ", boardTitle=" + boardTitle
-          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avaliable=" + avaliable + ", views="
+          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", boardStatus=" + boardStatus + ", views="
 				  + views + ", categoryNo=" + categoryNo + "]";
 	}
 	

@@ -40,7 +40,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10*1024*1024;
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			String savePath = resources + "//board_upfiles//";
+			String savePath = resources + "/board_upfiles";
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
 			
@@ -65,7 +65,7 @@ public class BoardUpdateServlet extends HttpServlet {
 				at.setOriginName(multiRequest.getOriginalFileName("upFile"));
 				at.setChangeName(multiRequest.getFilesystemName("upFile"));
 				at.setFilePath(savePath);
-				
+				System.out.println("upfile");
 				//기존 등록 파일은 삭제해주기
 				if(multiRequest.getParameter("originFile") != null ) {
 					

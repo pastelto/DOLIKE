@@ -37,7 +37,7 @@ public class DeleteMessageServlet extends HttpServlet {
 		
 		int result = new MessageService().deleteRecvMsg(mno);
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "휴지통을 비웠습니다.");
+			/* request.getSession().setAttribute("msg", "쪽지를 삭제했습니다."); */
 			response.sendRedirect("list.ms");
 		} else {
 			request.setAttribute("msg", "쪽지 삭제를 실패하였습니다." );
