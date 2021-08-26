@@ -1,30 +1,31 @@
-package com.kh.board.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
+import com.kh.member.model.vo.Member;
+import com.kh.message.model.service.MessageService;
+import com.kh.message.model.vo.Message;
+import com.kh.message.model.vo.MsgPageInfo;
 
 /**
- * Servlet implementation class ReplyListServlet
+ * Servlet implementation class DeleteAllMessageServlet
  */
-@WebServlet("/rList.bo")
-public class ReplyListServlet extends HttpServlet {
+@WebServlet("/dAllmsg.ms")
+public class DeleteAllMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyListServlet() {
+    public DeleteAllMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +35,17 @@ public class ReplyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bId = Integer.parseInt(request.getParameter("bId"));
-		ArrayList<Reply> list = new BoardService().selectRList(bId);
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
-		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().create();
-		gson.toJson(list, response.getWriter());
-		
-		
+		int result = new MessageService().clearMsgBin(userId);
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "휴지통을 비웠습니다.");
+			response.sendRedirect("dlist.ms");
+		} else {
+			request.setAttribute("msg", "휴지통을 비우지 못했습니다." );
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**
