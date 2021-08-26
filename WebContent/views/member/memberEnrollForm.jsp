@@ -124,49 +124,49 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-			                                        <div class="form-group">
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="공부">공부</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="건강">건강</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="여행">여행</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="요리">요리</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="동물">동물</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
-			                                            </div>
-			                                            <div class="form-check mb-3">
-			                                                <label class="radio-inline mr-3">
-			                                                    <input type="radio" class="form-check-input" name="interests" value="기타">기타</label>
-			                                            </div>
-			                                        </div>
-			                                        </div>
-			                                        </div>
-				                                    <div class="form-group row">
-				                                        <div class="col-lg-8 ml-auto">
-				                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-				                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력"/>
-				                                            <button type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled>회원가입</button>
-<!-- 				                                            <input type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled /> -->
-				                                        </div>
-				                                    </div>
-			                                    </form>
-                                            </div>
+		                                        <div class="form-group">
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="공부">공부</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="건강">건강</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="여행">여행</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="요리">요리</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="동물">동물</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
+		                                            </div>
+		                                            <div class="form-check mb-3">
+		                                                <label class="radio-inline mr-3">
+		                                                    <input type="radio" class="form-check-input" name="interests" value="기타">기타</label>
+		                                            </div>
+		                                        </div>
+	                                        </div>
                                         </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-lg-8 ml-auto">
+	                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
+	                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력"/>
+	                                            <button type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled>회원가입</button>
+<!-- 				                            <input type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled /> -->
+	                                        </div>
+	                                    </div>
+                                    </form>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
 			success:function(result){
 				if(result == "fail"){
 					alert("이미 사용 중인 닉네임입니다.");
-					userId.focus();
+					nickName.focus();
 				}else{
 					if(confirm("사용가능한 닉네임입니다. 사용하시겠습니까?")){
 						nickName.attr("readonly","true");

@@ -129,20 +129,5 @@ public class Member {
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
 	}
-
-	
-//	public String getInterestsArr() {
-//		String interestsArr = "";
-//		
-//		for (int i = 0; i < interests.length; i++) {
-//			interestsArr += interests[i];
-//			
-//			if (i < interests.length - 1) {
-//				interestsArr += ',';
-//			}
-//		}
-//		
-//		return interestsArr;
-//	}
 	
 }

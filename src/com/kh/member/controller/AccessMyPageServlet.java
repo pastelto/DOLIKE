@@ -8,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateServlet
+ * Servlet implementation class AccessMyPageServlet
  */
-@WebServlet("/memberUpdate.me")
-public class MemberUpdateServlet extends HttpServlet {
+@WebServlet("/access.me")
+public class AccessMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateServlet() {
+    public AccessMyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,35 +33,28 @@ public class MemberUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String newPwd = request.getParameter("newPwd");
+		request.setCharacterEncoding("UTF-8");
 		
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-		String nickName = request.getParameter("nickName");
-		String interests = request.getParameter("interests");
+		System.out.println(userId);
+		System.out.println(userPwd);
 		
-//		String interestsArr = "";
-//		
-//		for (int i = 0; i < interests.length; i++) {
-//			interestsArr += interests[i];
-//			
-//			if (i < interests.length - 1) {
-//				interestsArr += ',';
-//			}
-//		}
+		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
-		Member updateMem = new MemberService().updateMember(newPwd, userId, userPwd, nickName, interests);
+		System.out.println("loginUser : " + loginUser);
 		
-		if(updateMem != null) {
-			request.getSession().setAttribute("msg", "성공적으로 회원정보를 수정하였습니다.");
-			request.getSession().setAttribute("loginUser", updateMem);
-			response.sendRedirect(request.getContextPath() + "/myPage.jsp");
-		}else {
-			request.setAttribute("msg", "회원정보 변경에 실패했습니다.");
+		if (loginUser != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+
+			response.sendRedirect(request.getContextPath()); 
+		} else {
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
-		
 	}
 
 	/**
