@@ -85,14 +85,14 @@
 		 					</tr>
 		 					<tr>
 		 						<th>
-			 						<input type="file" name="upfile">
-			 							<%= at.getOriginName() %> <br>
-			 							<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
-			 							<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
+			 						<%= at.getOriginName() %>
+			 						<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
+			 						<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
 			 						<%} else {%>
 			 					</th>
 		 						<th colspan="2">등록된 첨부파일이 없습니다. </th>
 		 						<% } %>
+		 						<input type="file" name="upfile">
 		 					</tr>
 		 				</tbody>
 		 				
