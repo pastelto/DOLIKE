@@ -79,14 +79,16 @@
 		 						<td colspan="2"><textarea name="content" maxlength="2048" style="border-style:none; width:90%; height:350px"><%= board.getBoardContent() %></textarea></td>
 		 					</tr>
 		 					<tr>
-		 						<th colspan="2">첨부파일</th>
+		 						
 		 						<% if(at != null){ %> <!--  기존의 첨부파일이 존재할 경우  -->
+		 						<th colspan="2">첨부파일</th>
 		 						<input type="file" name="upfile">
 		 							<%= at.getOriginName() %> <br>
 		 							<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
 		 							<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
-		 						<%} %>
-		 						
+		 						<%} else {%>
+		 						<th colspan="2">등록된 첨부파일이 없습니다. </th>
+		 						<% } %>
 		 					</tr>
 		 				</tbody>
 		 				
