@@ -76,6 +76,8 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("insertMember");
 		
+		java.sql.Date birth = java.sql.Date.valueOf(m.getBirthDate());
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -87,8 +89,6 @@ public class MemberDao {
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getNickName());
 			pstmt.setString(8, m.getInterests());
-			pstmt.setDate(9, m.getUserCreateDate());
-			pstmt.setString(10, m.getUserStatus());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

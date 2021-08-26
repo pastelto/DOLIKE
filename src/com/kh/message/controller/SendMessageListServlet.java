@@ -41,11 +41,14 @@ public class SendMessageListServlet extends HttpServlet {
 		int maxPage;
 		int pageLimit;
 		int msgLimit;
-		
+		int newMsgCount; // 새로운 쪽지 개수
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-
+		
+		// 보낸 쪽지 개수
 		listCount = new MessageService().getSendMessageCount(userId);
+		// 새로운 쪽지 개수
+		newMsgCount = new MessageService().getNewMessageCount(userId);
 		
 		currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
@@ -62,12 +65,14 @@ public class SendMessageListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
 		
 		ArrayList<Message> list = new MessageService().selectSendList(pi, userId);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-
+		request.setAttribute("newMsgCount", newMsgCount);
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/message/sendMsgListView.jsp");
 		view.forward(request, response);
 	}

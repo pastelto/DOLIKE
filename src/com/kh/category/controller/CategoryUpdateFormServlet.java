@@ -1,26 +1,28 @@
-package com.kh.message.controller;
+package com.kh.category.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.Member;
-import com.kh.message.model.service.MessageService;
+import com.kh.category.model.service.CategoryService;
+import com.kh.category.model.vo.Category;
 
 /**
- * Servlet implementation class NewMessageFormServlet
+ * Servlet implementation class CategoryUpdateFormServlet
  */
-@WebServlet("/writeForm.ms")
-public class NewMessageFormServlet extends HttpServlet {
+@WebServlet("/updateForm.ca")
+public class CategoryUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewMessageFormServlet() {
+    public CategoryUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +31,20 @@ public class NewMessageFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int newMsgCount;
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		newMsgCount = new MessageService().getNewMessageCount(userId);
-		request.setAttribute("newMsgCount", newMsgCount);
-		request.getRequestDispatcher("views/message/NewMessageForm.jsp").forward(request, response);
+		
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		
+		Category category = new CategoryService().selectUpdateCategory(cno);
+		
+		String view = "";
+		if(category != null) {
+			request.setAttribute("category", category);
+			view = "views/category/categoryUpdateForm.jsp";
+		} else {
+			request.setAttribute("msg", "수정할 카테고리를 불러오는데 실패했습니다.");	         
+	        view = "views/common/errorPage.jsp";	         
+		}
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

@@ -15,7 +15,7 @@ import com.kh.category.model.vo.Category;
 /**
  * Servlet implementation class CategoryUpdateServlet
  */
-@WebServlet("/updateForm.ca")
+@WebServlet("/update.ca")
 public class CategoryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,17 +33,15 @@ public class CategoryUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
-		//String cno = request.getParameter("cno");
-		//으 다시 접근해보자!!
-		System.out.println("cno 값 : " + cno);
+		
 		String caName = request.getParameter("caName");
 		
 		Category c = new Category();
 		c.setCategoryNo(cno);
 		c.setCategoryName(caName);
-		System.out.println("caName 값 : " + caName);
+		
 		int result = new CategoryService().updateCategory(c);
-		System.out.println("==============11111=================");
+		
 		if(result > 0) {
 			request.getSession().setAttribute("msg", "성공적으로 카테고리를 수정하였습니다.");
 			//request.getSession().setAttribute("loginUser", updateCat);

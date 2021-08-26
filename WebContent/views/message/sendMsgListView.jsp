@@ -3,8 +3,8 @@
 	import="java.util.ArrayList, com.kh.message.model.vo.*"%>
 <%
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
-	
 	MsgPageInfo pi = (MsgPageInfo)request.getAttribute("pi");
+	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -121,8 +121,12 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함<span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;  border: none;">쪽지보내기</a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함
+                                    <%if(newMsgCount > 0){ %>
+                                    <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
+                                    <%} %>
+                                    </a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i><b>보낸 쪽지함</b></a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
@@ -140,11 +144,12 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th></th>
-												<th>번호</th>
-												<th>받는 사람</th>
-												<th>제목</th>
-												<th>보낸 날짜</th>
+												<th style="width:3rem;"></th>
+												<th style="width:5rem;">번호</th>
+												<th style="width:8rem;">받는 사람</th>
+												<th style="width:40rem;">제목</th>
+												<th style="width:12rem;">보낸 날짜</th>
+												<th>수신 확인</th>
 											</tr>
 										</thead>
 										<tbody>					
@@ -154,13 +159,25 @@
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
+										 	<% if( m.getMsgStatus().equals("Y") ){ %>
 										 		<tr>
-										 			<td><input type="checkbox"/></td>
-										 			<td><input type="hidden" name="msgNo" value=""><%= m.getMsgNo()%></td>
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
+													<td><%= "읽음" %></td>
 										 		</tr>
+										 	<% } else if( m.getMsgStatus().equals("N")){  %>	
+										 		<tr>
+										 			<td><input type="checkbox" value="<%= m.getMsgNo() %>"/></td>
+										 			<td><%= index++ %></td>
+													<td><%= m.getSenderId() %></td>
+													<td><%= m.getMsgTitle() %></td>
+													<td><%= m.getRecvtime()%></td>
+													<td><%= "읽지 않음" %></td>
+										 		</tr>
+										 	<% } %>
 										 	<% } %>
 										 <% } %>
 										</tbody>
@@ -239,7 +256,7 @@
 		<% if(!list.isEmpty()){%>
 		$(function(){
 			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
+				var mno = $(this).children().children().eq(0).val();
 				location.href="<%= contextPath %>/sread.ms?mno="+mno;
 			})
 		})
@@ -248,4 +265,4 @@
 
 </body>
 
-</html>
+</html>	
