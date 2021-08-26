@@ -211,6 +211,37 @@ public class CategoryDao {
 		return result;
 	}
 
+	public ArrayList<Category> categoryMenuBarList(Connection conn) {
+		
+		ArrayList<Category> list = new ArrayList<Category>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("categoryMenuBarList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Category(rset.getInt("CATEGORY_NO"),
+								rset.getString("CATEGORY_NAME")
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("CategoryDao의 caList 값 : " + list);
+		return list;
+	}
+
+	
 
 
 

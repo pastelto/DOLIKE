@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member, com.kh.category.model.vo.Category, java.util.ArrayList"%>
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
+	
+	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -189,19 +192,19 @@
                         </a>
                     </li>
                     <% if(loginUser == null) {%> 
-                      	<li class="mega-menu-sm">
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
-	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
+                      	<li class="mega-menu-sm" id="caMenu" >
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" onclick="caMenuList();">
+	                            <i class="icon-grid menu-icon"></i><span class="nav-text"  >카테고리</span>
 	                        </a>
-	                        <ul aria-expanded="false" class="collapse">
-	                            <li><a href="list.bo">카테고리1</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리2</a></li>
+	                        <ul aria-expanded="false" class="collapse" >	                        	
+	                            <!-- <li><a href="list.bo">카테고리1</a></li>
+	                            <li><a href="../board/boardView.jsp">카테고리2</a></li> 
 	                            <li><a href="../board/boardView.jsp">카테고리3</a></li>
 	                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
 	                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
 	                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>                           
-	                        </ul>
+	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>     -->                      
+	                        </ul>	                        
 						</li>
                     <%}else{ %>
                        <li class="mega-menu-sm">
@@ -222,7 +225,7 @@
 				        
 							$(function(){
 								$("#btn-like").eq(0).click(function(){
-								var favB = $("#input2").val();
+								var favB = $("#categoryList").val();
 								
 								$.ajax({
 									
@@ -241,7 +244,11 @@
 				        	$(".btn-like").click(function() {
 				         	   $(this).toggleClass("done");
 				       		 })
+				       		 
+				       		 				       		
         				</script>
+        				
+
                     	</li>
                       <%} %> 
                       <li class="mega-menu-sm">
@@ -324,8 +331,10 @@
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
-                    <% } %>
+                    <% } %>              
                 </ul>
+                
+                               
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
         
@@ -363,6 +372,47 @@
         		alert("로그인 후 이용 가능합니다.");
         	}
         </script>
+        
+                				<script>
+        				
+                				/* $(function(){
+                			         $("#categoryList").click(function(){ */
+				       			 function caMenuList(){ 
+				       				console.log("aaaaaaaaaaaaa")
+				       				$.ajax({
+				       					url:"CategoryMenuBar.ca",
+				       					dataType:"json",
+				       					type:"post",
+				       					success:function(result){
+				       						console.log(result)
+				       						console.log("ajax 성공!!")
+				       						
+				       					/* 	var $ulBody = $("#categoryList > ul") 
+				       						
+				       						$ulBody.html("");
+				       						$.each(map["jArr"], function(index, value){
+				       							console.log(value);
+				     							var $li = $("<li>");							
+				     							var $a = $("<a>").text(value.name);
+				     							//var $nameLi = $("<>").text(value.name); //<li> 패션 </li>				       										 
+				       							
+				     							
+				     							$li.append($nameLi);
+				       							$ulBody.append($li);
+				       							console.log("######################") */
+				       						})				       					
+				       					},
+				       					error:function(e){
+				       						console.log("ajax 통신 실패함")
+				       					}
+                			         })
+               			            
+                		          } 
+                		     /*  })
+                			}) */
+	        				
+        				</script>
+        
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>
