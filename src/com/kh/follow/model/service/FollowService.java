@@ -13,6 +13,7 @@ import com.kh.category.model.dao.CategoryDao;
 import com.kh.category.model.vo.Category;
 import com.kh.follow.model.dao.FollowDao;
 import com.kh.follow.model.vo.Follow;
+import com.kh.follow.model.vo.FollowCategoryPageInfo;
 import com.kh.follow.model.vo.FollowPageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.notice.model.dao.NoticeDao;
@@ -145,6 +146,22 @@ public class FollowService {
 		
 		close(conn);
 		return result;
+	}
+
+	public int getCatBoardListCount(String followId, String catTitle) {
+		Connection conn = getConnection();
+		
+		int listCount = new FollowDao().getCatBoardListCount(conn, followId, catTitle);
+		
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Board> selectFollowBoardList(String followId, String catTitle, FollowCategoryPageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Board> list = new FollowDao().selectFollowBoardList(conn, followId , catTitle,  pi);
+		close(conn);
+		return list;
 	}
 
 

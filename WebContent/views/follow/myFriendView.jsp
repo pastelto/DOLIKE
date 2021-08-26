@@ -146,8 +146,8 @@
 									<img class="mr-3" src="./resources/images/do_100.png" width="80"
 										height="80" alt="">
 									<div class="media-body">
-										<h3 class="mb-0"  id="nick"></h3>
-										<p class="text-muted mb-0" id="flid"></p>
+										<h3 class="mb-0"><b id="nick"></b></h3>
+										<p class="text-muted mb-0">(id: <small id="flid"></small>)</p>
 									</div>
 									<button id="iconMsg" class="btn btn-sm px-2"
 										onclick="location.href='<%=request.getContextPath()%>/writeForm.ms'">
@@ -190,11 +190,11 @@
 														 	<% for(int i=0;i<catList.size();i++){ %>
 														 		<%if(i%3==0){ %>
 														 			<tr>
-														 				<td width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 				<td width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
 														 		<%}else if(i%3==1){ %>
-														 				<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 				<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
 														 		<%}else{ %>
-														 			<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <%= catList.get(i).getCategoryName() %></span></td>
+														 			<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
 														 			</tr>
 														 		<%} %>
 														 	<% } %>
@@ -537,7 +537,7 @@
 						$("#checkFl").attr("style", "display:block")
 						
 						$("#nick").text(nick)
-						$("#flid").text("(id: "+flid+")")
+						$("#flid").text(flid)
 						$("#flidinput").val(flid)
 						$("#followerCount").text(followerCount)
 						$("#boardCount").text(boardCount)
@@ -589,7 +589,12 @@
 		
 		$(function(){
 			$("#catTable>tbody>tr>td>span").click(function(){
-				alert("카테고리 클릭")
+				var catTitle = $(this).children().text();
+				var followId = $("#flid").text();
+				alert("카테고리 클릭: "+catTitle+"followId:"+followId)
+				console.log(catTitle)
+				
+				location.href="<%= contextPath %>/catBoard.fl?cbno="+catTitle;
 		
 			})
 		})
