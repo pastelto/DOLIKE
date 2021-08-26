@@ -1,4 +1,4 @@
-package com.kh.message.model.dao;
+ package com.kh.message.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Reply;
 
@@ -36,6 +38,8 @@ public class ReplyListServlet extends HttpServlet {
 		ArrayList<Reply> list = new BoardService().selectRList(bId);
 		
 		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(list, response.getWriter());
 		
 		
 	}
