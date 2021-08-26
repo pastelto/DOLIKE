@@ -70,7 +70,7 @@ public class DeleteMessageListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		request.setAttribute("newMsgCount", newMsgCount);
-		request.getSession().setAttribute("msg", "휴지통을 비웠습니다.");
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/message/deleteMsgListView.jsp");
 		view.forward(request, response);
 	}
