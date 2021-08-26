@@ -37,35 +37,12 @@ public class BoardInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		String tag = request.getParameter("tag");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		
-		Board b = new Board();
-		b.setTagName(tag);
-		b.setBoardTitle(title);
-		b.setBoardContent(content);
-		b.setNickName(userId);
-		
-		int result = new BoardService().insertBoard(b);
-		if(result > 0) {
-			request.getSession().setAttribute("msg", "게시글 등록 성공");
-			response.sendRedirect("list.bo");
-		}else {
-			request.setAttribute("msg", "게시글 등록 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-			}
-		
-		*/
-		
+	
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10*1024*1024; //10M byte 
 			String resources = request.getSession().getServletContext().getRealPath("/resources"); //로컬경로 
-			String savePath = resources + "//board_upfiles//";
+			String savePath = resources + "/board_upfiles";
 			System.out.println("savePath : " + savePath);
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
@@ -101,6 +78,8 @@ public class BoardInsertServlet extends HttpServlet {
 			if(result > 0) {
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
 				response.sendRedirect("list.bo");
+				File successFile = new File(savePath+at.getChangeName());
+				System.out.println("successFile : " + successFile );
 			}else {
 				if(at != null) {
 					File failedFile = new File(savePath+at.getChangeName());
