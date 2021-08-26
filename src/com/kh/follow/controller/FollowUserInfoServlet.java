@@ -1,6 +1,7 @@
 package com.kh.follow.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.kh.board.model.vo.Board;
 import com.kh.follow.model.service.FollowService;
 import com.kh.member.model.vo.Member;
 
@@ -37,7 +39,11 @@ public class FollowUserInfoServlet extends HttpServlet {
 		String followId = request.getParameter("followId");
 		System.out.println("userInfo의 followId: "+followId);
 		Member m = new FollowService().selectFollowInfo(followId);
-		System.out.println(m);
+		
+		int followerCount = new FollowService().countFollower(followId);
+		int boardCount = new FollowService().countFollowBoard(followId);
+		
+		System.out.println("게시글 수:"+boardCount);
 		
 		JSONArray jArr = new JSONArray();
 		JSONObject jsonUser = null;
@@ -48,6 +54,9 @@ public class FollowUserInfoServlet extends HttpServlet {
 			
 			jsonUser.put("nickname", m.getNickName());
 			jsonUser.put("followUserId", m.getUserId());
+			jsonUser.put("followInterest", m.getInterests());
+			jsonUser.put("followerCount", followerCount);
+			jsonUser.put("boardCount", boardCount);
 			
 			jArr.add(jsonUser);
 		}

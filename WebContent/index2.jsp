@@ -87,8 +87,8 @@
 				<div class="topList col-10" align="center" >
 
 					<div id="thumbList"
-						style="height: 10%; padding-left: 15%; padding-right: 5%">
-						<div class="card" style="width: 80%;">
+						style="height: 10%; padding-left: 15%; padding-right: 15%">
+						<div class="card" style="width: 90%;">
 							<!--                             <div class="card-body"> -->
 
 							<div class="bootstrap-carousel" style="height: 5rem;">
@@ -105,25 +105,25 @@
 									<div class="carousel-inner">
 										<div class="carousel-item active">
 											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/db1ccc45-b19c-47ef-a29e-e1f358667700/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210825T073143Z&X-Amz-Expires=86400&X-Amz-Signature=ac3d557f5fcecf4727866acbe629ccb471588f6f4c0628af19e34c5a5d4c704d&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2520%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001.png%22"
+												src="resources/images/summer.png"
 												alt="First slide">
 										</div>
 										<div class="carousel-item">
 											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/25bb1fd3-937c-4576-b0cc-9a10dd26c8f8/runday.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210825T073217Z&X-Amz-Expires=86400&X-Amz-Signature=9e634719385ecafc99e7cf4153cd7169e8e4dec9102d1bae4524e0d41eb05407&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22runday.png%22"
+												src="resources/images/runday.png"
 												alt="Second slide">
 										</div>
 										<div class="carousel-item">
 											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d1b52843-f217-4fb6-803e-4a27563dccbd/%EC%A7%80%EB%82%9C-%EC%97%AC%EB%A6%84-_-%EB%B0%B0%EB%84%88%EC%9A%A9-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210825T073247Z&X-Amz-Expires=86400&X-Amz-Signature=d125959da56730ae94feba3e755e89f38b9f8409ab38c6aadaba347cba2c93bd&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%25A7%2580%25EB%2582%259C-%25EC%2597%25AC%25EB%25A6%2584-_-%25EB%25B0%25B0%25EB%2584%2588%25EC%259A%25A9-001.png%22" alt="Third slide">
+												src="resources/images/submit.png" alt="Third slide">
 										</div>
 										<div class="carousel-item">
 											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/6c26ce99-87e4-4463-bd37-35587041881d/bannerAnimal2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210825T073315Z&X-Amz-Expires=86400&X-Amz-Signature=2c3eadfbba74ebae00eb0f64172369bf002d8f9089a946d5f0a6cc58deae7586&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22bannerAnimal2.png%22" alt="Fourth slide">
+												src="resources/images/vege.png" alt="Fourth slide">
 										</div>
 										<div class="carousel-item">
 											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/c723f3a1-8d63-437d-9e86-e3cd7d9cd430/%EC%A0%9C%EB%AA%A9%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-001_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210825T073528Z&X-Amz-Expires=86400&X-Amz-Signature=67d707c2f5f048cd84d3ff1cc9316bec613ea7579066b0304d4503bed248a868&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584-%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001%2520%281%29.png%22" alt="Fifth slide">
+												src="resources/images/animal.png" alt="Fifth slide">
 										</div>
 									</div>
 									<a class="carousel-control-prev"
@@ -153,13 +153,13 @@
 									<b>전체 인기 게시글</b>
 								</h4>
 								<!-- Nav tabs -->
-								<div class="custom-tab-1">
+								<div class="custom-tab-2">
 <!-- 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
 											data-toggle="tab" href="#home1">카테고리1</a></li>
 									</ul> -->
 									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home1"
+										<div class="tab-pane fade show active" id="home2"
 											role="tabpanel">
 											<div class="p-t-15">
 												<h4>This is home title</h4>
@@ -178,39 +178,6 @@
 													texts. Separated they live in Bookmarksgrove.</p>
 											</div>
 										</div>
-										<div class="tab-pane fade" id="profile1">
-											<div class="p-t-15">
-												<h4>This is profile title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="contact1">
-											<div class="p-t-15">
-												<h4>This is contact title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="message1">
-											<div class="p-t-15">
-												<h4>This is message title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -224,7 +191,7 @@
 									<b>카테고리별 인기 게시글</b>
 								</h4>
 								<!-- Nav tabs -->
-								<div class="custom-tab-1">
+								<div class="custom-tab-2">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
 											data-toggle="tab" href="#home1">카테고리1</a></li>
@@ -246,13 +213,6 @@
 										<div class="tab-pane fade show active" id="home1"
 											role="tabpanel">
 											<div class="p-t-15">
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
 												<h4>This is home title</h4>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind
