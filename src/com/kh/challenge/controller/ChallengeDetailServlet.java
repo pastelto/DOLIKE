@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.PageInfo;
-import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ChallengeDetailServlet
@@ -36,8 +36,15 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 								
-				int chno = ((Challenge)request.getSession().getAttribute("chno")).getChNo();										
-				ArrayList<Challenge> list = new ChallengeService().selectDetail(chno);
+				int chno = Integer.parseInt(request.getParameter("chno"));
+				Challenge c = new ChallengeService().selectDetail(chno);
+				request.setAttribute("c", c);
+				
+				ChallengeAttachment at = new ChallengeService().selectAttach(chno);
+				request.setAttribute("at", at);
+				
+				System.out.println(c + "c servlet");
+				System.out.println(at +"at servlet");
 				
 		// ---------------- 페이징 처리 -----------------
 				int rpCount;			// 총 댓글 갯수
@@ -84,7 +91,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 				PageInfo pi = new PageInfo(rpCount, currentPage, startPage, endPage, maxPage, pageLimit, rpLimit);
 				request.setAttribute("pi", pi);
 				
-				ArrayList<ChallengeReply> rpList = new ChallengeService().selectReply(pi);				
+				ArrayList<ChallengeReply> rpList = new ChallengeService().selectReply(pi,chno);				
 				request.setAttribute("rpList", rpList);
 		
 				RequestDispatcher view = request.getRequestDispatcher("views/challenge/challengeDetailView.jsp");

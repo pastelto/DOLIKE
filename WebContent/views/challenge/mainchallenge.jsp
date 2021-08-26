@@ -260,15 +260,20 @@ a {
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-<script>
-<% if(!list.isEmpty()){%>
-	$(function() {
-		$("ul>li").click(function(){
-			var chno = $(this).children().eq(0).text();						
-					location.href = "<%= contextPath()%>/challengedetail.ch?chno="+chno;
-				})					
-			})
-<% } %>
-</script>
+	
+	
+	<script>
+	<% if(!list.isEmpty()){%>
+		$(function() {
+			$("ul>li").click(function(){
+				var chno = $(this).children().eq(0).text();				
+						
+						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+					})					
+				})
+	<% } %>
+	</script>
+
+
 </body>
 </html>

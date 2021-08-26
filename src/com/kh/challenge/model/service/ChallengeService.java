@@ -1,6 +1,9 @@
 package com.kh.challenge.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -12,7 +15,6 @@ import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
-import com.kh.message.model.dao.MessageDao;
 
 
 public class ChallengeService {
@@ -42,16 +44,16 @@ public class ChallengeService {
 
 	}
 	// detail at
-	public ArrayList<ChallengeAttachment> selectAttach(int chNo) {
+	public ChallengeAttachment selectAttach(int chNo) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<ChallengeAttachment> fileList = new ChallengeDao().selectAttach(conn, chNo);
+		ChallengeAttachment at = new ChallengeDao().selectAttach(conn, chNo);
 		
 		close(conn);
-		System.out.println(fileList +": servlet");
+		System.out.println(at +": servlet");
 		
-		return fileList;
+		return at;
 		
 	}
 
@@ -64,10 +66,10 @@ public class ChallengeService {
 		return listCount;
 	}
 
-	public ArrayList<ChallengeReply> selectReply(PageInfo pi) {
+	public ArrayList<ChallengeReply> selectReply(PageInfo pi, int chno) {
 		Connection conn = getConnection();
 		
-		ArrayList<ChallengeReply> list = new ChallengeDao().selectReply(conn, pi);
+		ArrayList<ChallengeReply> list = new ChallengeDao().selectReply(conn, pi, chno);
 		
 		close(conn);
 		
@@ -104,14 +106,14 @@ public class ChallengeService {
 		return list;
 	}
 
-	public ArrayList<Challenge> selectDetail(int chno) {
+	public Challenge selectDetail(int chno) {
 		Connection conn = getConnection();
 		
-		ArrayList<Challenge> list = new ChallengeDao().selectDetail(conn, chno);
+		Challenge c = new ChallengeDao().selectDetail(conn, chno);
 		
 		close(conn);
 		
-		return list;
+		return c;
 	}
 
 
@@ -200,6 +202,24 @@ public class ChallengeService {
 		}
 		close(conn);
 		
+		return result;
+	}
+	public int insertReply(ChallengeReply cp) {
+		Connection conn = getConnection();
+		
+		// 챌린지
+		int result = new ChallengeDao().insertReply(conn, cp);
+		
+		// 첨부파일
+
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		System.out.println(result);
 		return result;
 	}
 
