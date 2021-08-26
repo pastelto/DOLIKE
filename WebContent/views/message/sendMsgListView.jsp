@@ -155,7 +155,7 @@
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="5">보낸 쪽지가 없습니다.</td>
+												<td colspan="6">보낸 쪽지가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>

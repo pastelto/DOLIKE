@@ -122,14 +122,20 @@
                                     <div class="text-right">
                                         <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" onclick="deleteMsg();" >삭제하기</button>
                                     </div>
-                                    	<form action="" id="msgDel" method="post">
+                                    	<form id="msgDel" method="post">
 											<input type="hidden" name="mno" value="<%= mesg.getMsgNo() %>">
 										</form>
                                     <script>
                                     function deleteMsg(){
+                                    	
+                                    	var result = confirm("정말로 삭제하시겠습니까?");
+                                    	
+                                    	if(result){
                         				$("#msgDel").attr("action", "<%=contextPath%>/dmsg.ms");
                         				$("#msgDel").submit();
+
                         			}
+                                    }
                                     </script>
                                 </div>
                             </div>
@@ -151,7 +157,6 @@
         <!--**********************************
             Footer end
         ***********************************-->
-    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
