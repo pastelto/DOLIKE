@@ -3,7 +3,8 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-		
+	
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int endPage = pi.getEndPage();
@@ -56,7 +57,8 @@
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thread>
 	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-	 						<!-- <th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th> -->
+	 						
+			 				<!-- <th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th> -->
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
@@ -72,12 +74,16 @@
 		 				<% }else{ %>
 			 				<% for(Board b : list){ %>
 			 				<tr>
-			 					<!--  <td>IMAGE</td>-->
+			 				<% if(b.getTitleImg() != null ){ %>
+			 					<td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td>
+			 					<%} else{ %>
+			 					
+			 					<%} %>
 			 					<td><%= b.getBoardNo() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
-			 					<td><%= b.getViews() %></td>
+			 					<td><%= b.getViews() %></td> 
 			 				</tr>
 			 				<% } %>
 		 				<% } %>
