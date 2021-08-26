@@ -217,31 +217,7 @@
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li>
                         </ul>
-                        <!-- 즐겨찾는 게시판 Ajax Script -->
-				        <script>
-				        
-							$(function(){
-								$("#btn-like").eq(0).click(function(){
-								var favB = $("#input2").val();
-								
-								$.ajax({
-									
-									url: "jqTest2.do",
-									data: {input:input},
-									type: "post",
-									success: function(result){
-										$("#output2").val(result);
-									},
-									error: function(e){ // 에러 내용을 e로 받아옴
-										console.log(e);
-									}
-								})
-							})
-						})
-				        	$(".btn-like").click(function() {
-				         	   $(this).toggleClass("done");
-				       		 })
-        				</script>
+
                     	</li>
                       <%} %> 
                       <li class="mega-menu-sm">
@@ -358,11 +334,33 @@
                 </div>
                 </div>
             </div>
-        <script>
-        	function msgLoginerror(){
-        		alert("로그인 후 이용 가능합니다.");
-        	}
-        </script>
+         <!-- Ajax Script -->
+		<script>
+				        
+			$(function(){
+				$("#btn-like").eq(0).click(function(){
+				var favB = $("#input2").val();
+								
+				$.ajax({
+									
+				url: "myFavBoard.bo",
+				data: {input:input},
+				type: "post",
+				success: function(result){
+				$("#output2").val(result);
+				},
+				error: function(e){ // 에러 내용을 e로 받아옴
+					console.log(e);
+				}
+				})
+				})
+				})
+				
+				
+				$(".btn-like").click(function() {
+				$(this).toggleClass("done");
+				})
+        				</script>
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>

@@ -1,6 +1,7 @@
 package com.kh.message.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,18 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
+import com.kh.message.model.vo.Message;
+import com.kh.message.model.vo.MsgPageInfo;
 
 /**
- * Servlet implementation class DeleteMessageServlet
+ * Servlet implementation class DeleteAllMessageServlet
  */
-@WebServlet("/dmsg.ms")
-public class DeleteMessageServlet extends HttpServlet {
+@WebServlet("/dAllmsg.ms")
+public class DeleteAllMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMessageServlet() {
+    public DeleteAllMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +34,15 @@ public class DeleteMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 유저아이디 넘기기 
-		int mno = Integer.parseInt(request.getParameter("mno"));
+		
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
-		int result = new MessageService().deleteRecvMsg(mno);
+		int result = new MessageService().clearMsgBin(userId);
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "쪽지를 삭제했습니다.");
-			response.sendRedirect("list.ms");
+			request.getSession().setAttribute("msg", "휴지통을 비웠습니다.");
+			response.sendRedirect("dlist.ms");
 		} else {
-			request.setAttribute("msg", "쪽지 삭제를 실패하였습니다." );
+			request.setAttribute("msg", "휴지통을 비우지 못했습니다." );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
