@@ -55,13 +55,13 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
-		#sendMsgLink, #resetBtn, #sendBtn {
+	#sendMsgLink, #resetBtn, #sendBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
 	
-		#deleteBtn{
+	#deleteAllBtn{
 		color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
@@ -147,7 +147,7 @@
 												<th style="width:5rem;">번호</th>
 												<th style="width:8rem;">보낸 사람</th>
 												<th>제목</th>
-												<th>받은 날짜</th>
+												<th style="width:12rem;">받은 날짜</th>
 											</tr>
 										</thead>
 										<tbody>					
@@ -157,9 +157,9 @@
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
-										 		<tr>
-										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value=""></td>
-										 			<td><%= m.getMsgNo()%></td>
+										 		<tr>	 			
+										 			<td></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -175,8 +175,11 @@
                                <!-- 삭제 버튼 -->
 									<% if(!list.isEmpty()){ %>
 									<div class="pagination justify-content-center">
-									<button id="deleteBtn" type="button" class="btn btn-sm" onclick="">휴지통 비우기</button>
+									<button id="deleteAllBtn" type="button" class="btn btn-sm" onclick="deleteAllMsg();">휴지통 비우기</button>
 									</div>
+									<form id="msgAllDel" method="post">
+										<input type="hidden" name="mno" value="<%= loginUser.getUserId() %>">
+									</form>
 									<% } %>
                             </div>
                         </div>
@@ -238,7 +241,43 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
+		<script>
+		
+		function deleteAllMsg(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '삭제',        // 제목
+                text: "정말 휴지통을 비우겠습니까?",  // 내용
+                type: 'warning',                              // 종류
+                confirmButtonText: '삭제',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                
+                	$("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
+				swal.fire(
+						{title: '삭제',
+						 text: '성공적으로 삭제되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#msgAllDel").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        });
+		}
+		</script>
 </body>
 
 </html>
