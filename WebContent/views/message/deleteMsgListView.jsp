@@ -241,18 +241,43 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-	<script>
+		<script>
+		
 		function deleteAllMsg(){
-
-		var result = confirm("정말로 휴지통을 비우겠습니까?");
-	                                        
-	    if(result)
-	    {
-	        $("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
-		    $("#msgAllDel").submit();
-	    }
-	   }
-	</script>
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '삭제',        // 제목
+                text: "정말 휴지통을 비우겠습니까?",  // 내용
+                type: 'warning',                              // 종류
+                confirmButtonText: '삭제',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                
+                	$("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
+				swal.fire(
+						{title: '삭제',
+						 text: '성공적으로 삭제되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#msgAllDel").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        });
+		}
+		</script>
 </body>
 
 </html>

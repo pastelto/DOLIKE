@@ -120,48 +120,55 @@
                                         <hr>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" onclick="deleteMsg();" >삭제하기</button>
+                                        <!-- <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" onclick="deleteMsg();" >삭제하기</button> -->
+                                        <button class="btn btn-primaryw-md m-b-30" id="deleteBtn" type="button" onclick="deleteMsg();">삭제하기</button>
                                     </div>
                                     	<form id="msgDel" method="post">
 											<input type="hidden" name="mno" value="<%= mesg.getMsgNo() %>">
 										</form>
-                                    <script>
-                                    function deleteMsg(){
-                                    	
-                                    	var result = confirm("정말로 삭제하시겠습니까?");
-                                    	
-                                    	if(result){
-                        				$("#msgDel").attr("action", "<%=contextPath%>/dmsg.ms");
-                        				$("#msgDel").submit();
-
-                        			}
-                                    }
-                                    </script>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
+
       		<%@ include file="../common/footer.jsp" %> 
-        <!--**********************************
-            Footer end
-        ***********************************-->
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-
+		<script>
+		
+		function deleteMsg(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '확인',        // 제목
+                text: "정말 쪽지를 삭제하시겠습니까?",  // 내용
+                type: 'warning',                              // 종류
+                confirmButtonText: '삭제',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                
+                $("#msgDel").attr("action", "<%=contextPath%>/dmsg.ms");
+				swal.fire(
+						{title: '삭제',
+						 text: '성공적으로 삭제되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#msgDel").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+         
+            }
+        });
+		}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 
 </html>

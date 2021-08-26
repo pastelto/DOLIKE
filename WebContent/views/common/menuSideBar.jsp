@@ -16,11 +16,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
 	   $(function(){
 	      var msg = "<%=msg%>";
@@ -28,7 +29,9 @@
 			if (msg != "null") {
 				alert(msg);
 	<%session.removeAttribute("msg");%>
-		}
+		} else{
+			
+		}}
 		})
 	</script>
 	<style>
@@ -220,6 +223,12 @@
 
                     	</li>
                       <%} %> 
+                      <% if(loginUser == null) {%> 
+                      <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
+                            <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
+                        </a>
+                      <%}else{ %>
                       <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
@@ -231,6 +240,7 @@
                      
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
@@ -243,8 +253,7 @@
                     </li>
                     <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
-                        <!-- <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();"> -->
-                        <a class="has-arrow sweet-wrong" aria-expanded="false" data-toggle="modal" data-target="#myModal">
+                        <a class="has-arrow sweet-wrong" aria-expanded="false" id="needLogin" onclick="needLogin();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
                         </a>
                     </li>
@@ -304,36 +313,7 @@
                 </ul>
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
-        
-                <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                <div class="modal-content">
-            
-                    <!-- Modal Header -->
-<!--                     <div class="modal-header">
-                    <h4 class="modal-title" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div> -->
-            
-                    <!-- Modal body -->
-                    <div class="modal-body justify-content-center">
-                     <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
-                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
-                    	<div class="row" style="margin-top: 30px;">
-                    	<div class="col-2"></div>
-                        <button class="btn btn-primary px-3 ml-4 col-3" id="loginBtnModal" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
-                        <button class="btn btn-primary px-3 ml-4 col-3" id="EnrollBtnModal" type="button" onclick="location.href='<%=contextPath%>/enrollForm.me'">회원가입</button>
-                   		</div>
-                    </div>
-            
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" style="background-color: #f3969a; border: 0" data-dismiss="modal">닫기</button>
-                    </div>
-            
-                </div>
-                </div>
-            </div>
+
          <!-- Ajax Script -->
 		<script>
 				        
@@ -349,7 +329,7 @@
 				success: function(result){
 				$("#output2").val(result);
 				},
-				error: function(e){ // 에러 내용을 e로 받아옴
+				error: function(e){ 
 					console.log(e);
 				}
 				})
@@ -360,11 +340,24 @@
 				$(".btn-like").click(function() {
 				$(this).toggleClass("done");
 				})
-        				</script>
+			
+			function needLogin(){
+				Swal.fire({
+				  title: "로그인이 필요합니다.",
+				  icon: 'error',
+				  confirmButtonColor: "#78c2ad",
+				  confirmButtonBorder: "none",
+				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
+				})
+			}
+				
+        </script>
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>
 	    <script src="js/gleek.js"></script>
 	    <script src="js/styleSwitcher.js"></script>
+	    
+	    
 </body>
 </html>
