@@ -510,7 +510,7 @@ public class ChallengeDao {
 	
 
 	public int insertChAttachment(Connection conn, ChallengeAttachment cat) {
-		//insertAttachment=INSERT INTO CH_ATTACHMENT VALUES(SEQ_CHAT_NO.NEXTVAL, ?, ?, ?, SEQ_CH_NO.NEXTVAL)
+		//insertAttachment=INSERT INTO CH_ATTACHMENT VALUES(SEQ_CHAT_NO.NEXTVAL, ?, ?, ?, SEQ_CH_NO.CURVAL)
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
