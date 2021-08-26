@@ -34,6 +34,19 @@ public class Member {
 		this.userCreateDate = userCreateDate;
 		this.userStatus = userStatus;
 	}
+	
+	public Member(String userId, String userName, String userPwd, Date birthDate, String phone, String email,
+			String nickName, String interests) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.birthDate = birthDate;
+		this.phone = phone;
+		this.email = email;
+		this.nickName = nickName;
+		this.interests = interests;
+	}
 
 
 

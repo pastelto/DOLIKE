@@ -1,29 +1,26 @@
-package com.kh.challenge.controller;
+package com.kh.follow.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeVote;
+import com.kh.follow.model.service.FollowService;
 
 /**
- * Servlet implementation class ChallengeInsertVoteListServlet
+ * Servlet implementation class FollowDeleteServlet
  */
-@WebServlet("/insertChVoteList.ch")
-public class ChallengeInsertVoteListServlet extends HttpServlet {
+@WebServlet("/delete.fl")
+public class FollowDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeInsertVoteListServlet() {
+    public FollowDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +29,16 @@ public class ChallengeInsertVoteListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
-		request.setAttribute("list", list);
-				
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/insertChallenge.jsp");
-		view.forward(request, response);
+		int fno = Integer.parseInt(request.getParameter("fno"));
+		int result = new FollowService().deleteFollow(fno);
+		
+		if(result>0) {
+			request.getSession().setAttribute("msg", "친구 삭제 성공");
+			response.sendRedirect("MyFollow.fl");
+		}else {
+			request.setAttribute("msg", "친구 삭제에 실패했습니다. ");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -76,7 +76,7 @@ public class ChallengeDao {
 		 * WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC
 		 */
 
-		String sql = prop.getProperty("selectChallengeList");
+		String sql = prop.getProperty("selectChallengeList");		
 
 		try {
 
@@ -87,8 +87,8 @@ public class ChallengeDao {
 				Challenge c = new Challenge();
 				c.setChNo(rset.getInt("CH_NO"));
 				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getDate("CH_START"));
-				c.setEnd(rset.getDate("CH_END"));
+				c.setStart(rset.getString("CH_START"));
+				c.setEnd(rset.getString("CH_END"));
 				list.add(c);
 			}
 		} catch (SQLException e) {
@@ -162,8 +162,8 @@ public class ChallengeDao {
 				Challenge c = new Challenge();
 				c.setChNo(rset.getInt("CH_NO"));
 				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getDate("CH_START"));
-				c.setEnd(rset.getDate("CH_END"));
+				c.setStart(rset.getString("CH_START"));
+				c.setEnd(rset.getString("CH_END"));
 				list.add(c);
 			}
 		} catch (SQLException e) {
@@ -234,8 +234,11 @@ public class ChallengeDao {
 			rset = stmt.executeQuery(sql);
 
 			while (rset.next()) {
-				list.add(new ChallengeVote(rset.getString("CH_TITLE"), rset.getString("CH_VOTE"),
-						rset.getDate("VOTE_START"), rset.getDate("VOTE_END"), rset.getString("CATEGORY_NAME")));
+				list.add(new ChallengeVote(rset.getString("CH_TITLE"), 
+										   rset.getString("VOTE_CONTENT"),
+										   rset.getString("VOTE_START"), 
+										   rset.getString("VOTE_END"), 
+										   rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -377,16 +380,22 @@ public class ChallengeDao {
 	public int insertVote(Connection conn, ChallengeVote cv) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		// INSERT INTO CH_VOTE VALUES(CH_TITLE=?, AP_NO=?, VOTE_START=?,
-		// VOTE_END=?,,CATEGORY_NO=?)
+		
 		String sql = prop.getProperty("insertVote");
+		
+		java.sql.Date start = java.sql.Date.valueOf(cv.getStart());
+		java.sql.Date end = java.sql.Date.valueOf(cv.getEnd());
+		
+		System.out.println(start );
+		System.out.println(end);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cv.getChTitle());
-			pstmt.setString(2, cv.getContent());
-			pstmt.setInt(3, cv.getApNo());
-			pstmt.setDate(4, (Date) cv.getStart());
-			pstmt.setDate(5, (Date) cv.getEnd());
+			pstmt.setInt(2, cv.getApNo());
+			pstmt.setDate(3, start);
+			pstmt.setDate(4, end);
+			pstmt.setString(5, cv.getContent());			
 			pstmt.setInt(6, cv.getCategoryNo());
 
 			result = pstmt.executeUpdate();
@@ -440,7 +449,7 @@ public class ChallengeDao {
 
 		// SELECT CH_TITLE, CH_VOTECOUNT, CATEGORY_NO FROM (SELECT * FROM CH_VOTE ORDER BY CH_VOTECOUNT DESC) WHERE ROWNUM=5
 		String sql = prop.getProperty("selectChallengeVoteList");
-
+		System.out.println(sql + "dao");
 		try {
 
 			stmt = conn.createStatement();
@@ -449,7 +458,7 @@ public class ChallengeDao {
 			while (rset.next()) {
 				ChallengeVote cv = new ChallengeVote();
 				cv.setChTitle(rset.getString("CH_TITLE"));
-				cv.setVoteCount(rset.getInt("CH_VOTECOUNT"));
+				cv.setVoteCount(rset.getInt("VOTE_COUNT"));
 				cv.setCategoryNo(rset.getInt("CATEGORY_NO"));
 				list.add(cv);
 			}
@@ -461,6 +470,7 @@ public class ChallengeDao {
 			close(stmt);
 		}
 
+		System.out.println(list + "dao");
 		return list;
 	}
 
@@ -470,17 +480,23 @@ public class ChallengeDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertChallenge");
-			
+		
+		java.sql.Date start = java.sql.Date.valueOf(c.getStart());
+		java.sql.Date end = java.sql.Date.valueOf(c.getEnd());
+		//insertChallenge = INSERT INTO CHALLENGE VALUES(SEQ_CH_NO.NEXTVAL, ?,?,?,?,DEFAULT,?,0,?)	
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, c.getChTitle());
 			pstmt.setInt(2,c.getVoteCount());
-			pstmt.setDate(3, (Date) c.getStart());
-			pstmt.setDate(4, (Date) c.getEnd());
+			pstmt.setDate(3, start);
+			pstmt.setDate(4, end);
 			pstmt.setString(5, c.getContent());
 			pstmt.setInt(6, c.getCategoryNo());
 			
 			result = pstmt.executeUpdate();
+			
+			System.out.println(c.getChTitle());
+			System.out.println(c.getCategoryNo());
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -488,7 +504,7 @@ public class ChallengeDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("쪽지 발송?" + result);
+		System.out.println("챌린지 dao " + result);
 		return result;
 	}
 	
@@ -498,8 +514,8 @@ public class ChallengeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("insertMsgAttachment");
-		
+		String sql = prop.getProperty("insertAttachment");
+		System.out.println(sql + " atdao ");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cat.getNewName());
@@ -514,7 +530,34 @@ public class ChallengeDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("챌린지at dao " + result);
+		return result;
+	}
+
+	public int voteCountUp(Connection conn, ChallengeVote cv) {
 		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("voteChallenge");
+		System.out.println(sql);
+		System.out.println(cv.getChTitle());
+		
+		String title = cv.getChTitle();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,title);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result);
 		return result;
 	}
 

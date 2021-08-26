@@ -1,10 +1,6 @@
 package com.kh.challenge.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,16 +13,16 @@ import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.ChallengeVote;
 
 /**
- * Servlet implementation class VoteInsertServlet
+ * Servlet implementation class VoteCountUpServlet
  */
-@WebServlet("/voteInsert.ch")
-public class VoteInsertServlet extends HttpServlet {
+@WebServlet("/upVote.ch")
+public class VoteCountUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteInsertServlet() {
+    public VoteCountUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,38 +32,24 @@ public class VoteInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int apNo = Integer.parseInt(request.getParameter("apNo"));
-		int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 		String chTitle = request.getParameter("chTitle");
-		String content = request.getParameter("content");
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		
-		System.out.println(apNo+ categoryNo+ chTitle+ content);
-		System.out.println(start);
-		System.out.println(end);
 		
 		ChallengeVote cv = new ChallengeVote();
-
-		cv.setApNo(apNo);
-		cv.setCategoryNo(categoryNo);
+		
 		cv.setChTitle(chTitle);
-		cv.setContent(content);
-		cv.setStart(start);
-		cv.setEnd(end);
-
-		int result = new ChallengeService().insertVote(cv);
+		System.out.println(chTitle + "!!!");
+		int result = new ChallengeService().voteCountUp(cv);
 
 		if (result > 0) {
-			request.getSession().setAttribute("msg", "투표 등록이 완료되었습니다.");
-			response.sendRedirect("index2.jsp");
-			System.out.println("투표 등록 성공!");
+			request.setAttribute("msg", "투표가 완료되었습니다!");
+			response.sendRedirect("challengeVote.ch");
+			System.out.println("투표 성공!");
 		} else {
-			request.setAttribute("msg", "투표 등록에 실패했습니다.");
-
+			request.setAttribute("msg", "투표에 실패했습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**

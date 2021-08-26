@@ -37,6 +37,7 @@ public class DeleteSendMessageServlet extends HttpServlet {
 				
 		int result = new MessageService().deleteSendMsg(mno, userId);
 		if(result > 0) {
+			request.getSession().setAttribute("msg", "쪽지가 정상적으로 삭제되었습니다.");
 			response.sendRedirect("slist.ms");
 		} else {
 			request.setAttribute("msg", "보낸쪽지 삭제에 실패했습니다." );

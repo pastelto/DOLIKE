@@ -1,26 +1,28 @@
-package com.kh.message.controller;
+package com.kh.challenge.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.Member;
-import com.kh.message.model.service.MessageService;
+import com.kh.challenge.model.service.ChallengeService;
+import com.kh.challenge.model.vo.ChallengeVote;
 
 /**
- * Servlet implementation class NewMessageFormServlet
+ * Servlet implementation class ChallengeInsertFormServlet
  */
-@WebServlet("/writeForm.ms")
-public class NewMessageFormServlet extends HttpServlet {
+@WebServlet("/challengeInsertForm.ch")
+public class ChallengeInsertFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewMessageFormServlet() {
+    public ChallengeInsertFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +31,10 @@ public class NewMessageFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int newMsgCount;
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		newMsgCount = new MessageService().getNewMessageCount(userId);
-		request.setAttribute("newMsgCount", newMsgCount);
-		request.getRequestDispatcher("views/message/NewMessageForm.jsp").forward(request, response);
+		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
+		request.setAttribute("list", list);		
+		System.out.println(list);
+		request.getRequestDispatcher("views/challenge/insertChallenge.jsp").forward(request, response);
 	}
 
 	/**
