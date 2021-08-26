@@ -97,7 +97,8 @@
                                         	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
                                         	
                                             <div class="form-group">
-                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디">
+                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디"> <button id="iconMsg" class="btn" type="button"
+														onclick="searchId();">검색</button>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">

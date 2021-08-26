@@ -153,13 +153,13 @@
 									<b>전체 인기 게시글</b>
 								</h4>
 								<!-- Nav tabs -->
-								<div class="custom-tab-1">
+								<div class="custom-tab-2">
 <!-- 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
 											data-toggle="tab" href="#home1">카테고리1</a></li>
 									</ul> -->
 									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home1"
+										<div class="tab-pane fade show active" id="home2"
 											role="tabpanel">
 											<div class="p-t-15">
 												<h4>This is home title</h4>
@@ -178,39 +178,6 @@
 													texts. Separated they live in Bookmarksgrove.</p>
 											</div>
 										</div>
-										<div class="tab-pane fade" id="profile1">
-											<div class="p-t-15">
-												<h4>This is profile title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="contact1">
-											<div class="p-t-15">
-												<h4>This is contact title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="message1">
-											<div class="p-t-15">
-												<h4>This is message title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -224,7 +191,7 @@
 									<b>카테고리별 인기 게시글</b>
 								</h4>
 								<!-- Nav tabs -->
-								<div class="custom-tab-1">
+								<div class="custom-tab-2">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
 											data-toggle="tab" href="#home1">카테고리1</a></li>
@@ -246,13 +213,6 @@
 										<div class="tab-pane fade show active" id="home1"
 											role="tabpanel">
 											<div class="p-t-15">
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
 												<h4>This is home title</h4>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind

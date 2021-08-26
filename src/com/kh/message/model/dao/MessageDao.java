@@ -180,6 +180,8 @@ public class MessageDao {
 			
 			result = pstmt.executeUpdate();
 			
+			System.out.println("mat! 새이름 : " + mat.getMatNewName());
+			System.out.println("mat! 원래이름 : " + mat.getMatOrigin());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -367,8 +369,9 @@ public class MessageDao {
 			if(rset.next()) { 
 				mat = new MsgAttachment();
 				mat.setMatNo(rset.getInt("MAT_NO"));
-				mat.setMatOrigin(rset.getString("MAT_ORIGIN"));
 				mat.setMatNewName(rset.getString("MAT_NEWNAME"));
+				mat.setMatOrigin(rset.getString("MAT_ORIGIN"));
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
