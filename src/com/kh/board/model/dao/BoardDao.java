@@ -298,6 +298,7 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println("at : " + at);
 		return at;
 	}
 	public int insertAttachment(Connection conn, Attachment at) {
