@@ -48,6 +48,7 @@ public class FollowUserInfoServlet extends HttpServlet {
 			
 			jsonUser.put("nickname", m.getNickName());
 			jsonUser.put("followUserId", m.getUserId());
+			jsonUser.put("followInterest", m.getInterests());
 			
 			jArr.add(jsonUser);
 		}

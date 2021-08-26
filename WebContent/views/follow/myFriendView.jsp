@@ -78,7 +78,9 @@
 		left:50%;
 		transform: translate(-50%,-50%);
 	}
-	
+	#interestLabel {
+		background: #78c2ad;
+	}
 </style>	
 	
 </head>
@@ -120,8 +122,8 @@
 				<img class="mr-3" src="./resources/images/do_100.png" width="80"
 					height="80" alt="">
 				<div class="media-body">
-					<h3 class="mb-0"><input id="nick" style="border: none;"></h3>
-					<p class="text-muted mb-0">유저 아이디</p>
+					<h3 class="mb-0"  id="nick"></h3>
+					<p class="text-muted mb-0" id="flid"></p>
 				</div>
 				<button id="iconMsg" class="btn btn-sm px-2"
 					onclick="location.href='<%=request.getContextPath()%>/writeForm.ms'">
@@ -134,7 +136,8 @@
 				<div class="media align-items-center">
 
 					<div class="card-body text-center">
-						<p class="text-muted">등록된 관심사가 없습니다.</p>
+					<span id="interestLabel" class="label label-pill label-primary">여기에 로그인 유저 관심사 </span>
+						<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
 					</div>
 
 				</div>
@@ -313,7 +316,7 @@
 									<!-- 친구 목록 페이지 불러오기 -->
 									<div>
 											<%if (list.isEmpty()) {%>
-											<div style="text-align: center;">
+											<div id="down" style="text-align: center;">
 												<img src="./resources/images/friend.png" width="50%" height="50%">
 											</div>
 											<% } else {%>
@@ -324,7 +327,6 @@
 													<td><%=fl.getFollowId()%></td>
 													<td>
 													<form action="delete.fl" method="post">
-														<% System.out.println(fl.getFollowNo()); %>
 														<input type="hidden" name="fno" value="<%=fl.getFollowNo()%>">
 														<button id="deleteBtn" type="submit" class="btn btn-sm">삭제하기</button>
 													</form>
@@ -435,7 +437,6 @@
 			$("table>tbody>tr").click(function(){
 				var followId = $(this).children().eq(0).text();
 				console.log(followId);
-				<%-- location.href="<%= contextPath %>/userInfo.fl?followId="+followId; --%>
 				
 				$.ajax({
 					url:"userInfo.fl",
@@ -446,10 +447,17 @@
 					success:function(result){
 						console.log(result)
 						var nick = ""
+						var flid = ""
+						var followInterest =""
 						$.each(result, function(i){
 							nick = result[i].nickname
+							flid = result[i].followUserId
+							followInterest = result[i].followInterest
 						})
-						$("#nick").val(nick)
+						$("#nick").text(nick)
+						$("#flid").text("(id: "+flid+")")
+						//$("#followInterest").text(followInterest) //나중에 삭제
+						$("#interestLabel").text(followInterest)
 						
 					},
 					error:function(){
