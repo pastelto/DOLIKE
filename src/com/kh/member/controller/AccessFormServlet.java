@@ -1,30 +1,23 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class AccessMyPageServlet
+ * Servlet implementation class AccessFormServlet
  */
-@WebServlet("/access.me")
-public class AccessMyPageServlet extends HttpServlet {
+@WebServlet("/accessForm.me")
+public class AccessFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccessMyPageServlet() {
+    public AccessFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +27,7 @@ public class AccessMyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		System.out.println("userId : " + userId);
-		System.out.println("userPwd : " + userPwd);
-		
-		int result = new MemberService().accessUpdate(userId, userPwd);
-		
-		if (result > 0) {
-			response.sendRedirect(request.getContextPath() +"/mypage.me");
-		} else {
-			request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
+		request.getRequestDispatcher("views/member/accessMyPage.jsp").forward(request, response);
 	}
 
 	/**

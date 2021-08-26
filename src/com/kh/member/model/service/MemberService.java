@@ -119,5 +119,16 @@ public class MemberService {
 		return result;
 	}
 
+
+	public int accessUpdate(String userId, String userPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().accessUpdate(conn, userId, userPwd);
+		
+		close(conn);
+		
+		return result;
+	}
+
 	
 }

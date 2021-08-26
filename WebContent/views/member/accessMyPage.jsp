@@ -18,7 +18,12 @@
 	}
 	</style>
 </head>
-<body class="h-100">
+<body>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+    <%@ include file="../common/menuSideBar.jsp" %> 
     
     <!--*******************
         Preloader start
@@ -33,18 +38,12 @@
     <!--*******************
         Preloader end
     ********************-->
-    
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-	<div id="main-wrapper">
-    <%@ include file="../common/menuSideBar.jsp" %> 
+
     
     <!--**********************************
         Content body start
     ***********************************-->
-    
+    <div class="content-body">
    	<div class="login-form-bg h-100">
        <div class="container h-100">
            <div class="row justify-content-center h-100">
@@ -52,12 +51,13 @@
                    <div class="form-input-content">
                        <div class="card login-form mb-0">
                            <div class="card-body pt-5">
-                               <a class="text-center" href="index.html"> <h4>비밀번호 입력</h4></a>
+                               <a class="text-center"> <h4>비밀번호 재확인</h4></a>
                                <form class="mt-5 mb-3 login-input" id="accessMyPage" action="<%=request.getContextPath() %>/access.me">
                                    <div class="form-group">
-                                       <input type="password" id="goMyPageBtn" class="form-control" placeholder="Password" required>
+                                   		<input type="hidden" id="userId" name="userId" value=<%= loginUser.getUserId() %>>
+                                       <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="Password" required>
                                    </div>
-                                   <button class="btn login-form__btn submit w-100">계정 관리 들어가기</button>
+                                   <button class="btn login-form__btn submit w-100" id="goMyPageBtn">계정 관리 들어가기</button>
                                </form>
                                </div>
                            </div>
@@ -66,7 +66,8 @@
                </div>
            </div>
        </div>
-        
+    </div>
+       
    	<%@ include file = "../common/footer.jsp" %>
 	</div>   
 </body>
