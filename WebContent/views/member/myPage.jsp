@@ -97,14 +97,14 @@
                                             <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요.">
+                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요.">
+                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
                                             	<label id = "pwdResult"></label>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="nickName" name="nickName" value="<%= nickName %>" />
+                                                <input type="text" class="form-control" id="nickName" name="nickName" value="<%= nickName %>" required />
                                                 <button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
                                             </div>
                                         </div>
@@ -139,20 +139,13 @@
                                                 <input type="email" class="form-control" id="email" name="email" value="<%= email %>" readonly/>
                                             </div>
                                         </div>
-<%--                                    <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="interests">관심사</label>
-                                            <div class="col-lg-6">
-                                                <input type="email" class="form-control" id="interests" name="interests" value="<%= interests %>" readonly/>
-                                            </div>
-                                        </div> --%>
-                                        
                                         <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="공부"<%= checkedInterest[0] %>>공부</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="공부"<%= checkedInterest[0] %> required>공부</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
@@ -186,7 +179,6 @@
                                         <div class="col-lg-8 ml-auto">
                                         	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
                                         	<input type="button" class="btn btn-primary" id="updateBtn" onclick="updateMember();" value="회원정보수정"/>
-<%--                                         	<input type="button" class="btn btn-primary" id="updateBtn" onclick="location.href='<%=contextPath%>/updateForm.me'" value="회원정보수정"/> --%>
                                         </div>
                                     </div>
                                     <div class="form-group row">

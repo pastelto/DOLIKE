@@ -64,7 +64,7 @@
                                             <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요.">
+                                                <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요." required>
                                                 <button type="button" class="btn btn-primary" id="idCheckBtn" onclick="checkId();">중복확인</button>
                                             </div>
                                         </div>
@@ -72,14 +72,14 @@
                                             <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요.">
+                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요.">
+                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
                                             	<label id = "pwdResult"></label>
                                             </div>
                                         </div>
@@ -87,14 +87,14 @@
                                             <label class="col-lg-4 col-form-label" for="userName">이름 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="userName" name="userName" placeholder="실명을 입력하세요."/>
+                                                <input type="text" class="form-control" id="userName" name="userName" placeholder="실명을 입력하세요." required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요.">
+                                                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요." required>
                                             	<button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
                                             </div>
                                         </div>
@@ -102,14 +102,14 @@
                                             <label class="col-lg-4 col-form-label" for="birthDate">생년월일 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="생년월일을 입력하세요."/>
+                                                <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="생년월일을 입력하세요." required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="phone">연락처 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요."/>
+                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력하세요." required/>
                                                 <button type="button" class="btn btn-primary" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                             <label class="col-lg-4 col-form-label" for="email">이메일 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요."/>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요." required/>
                                                 <button type="button" class="btn btn-primary" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
                                             </div>
                                         </div>
@@ -127,7 +127,7 @@
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="공부">공부</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="공부" required>공부</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
