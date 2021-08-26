@@ -122,36 +122,36 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="interests">관심사</label>
+                                            <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
 			                                        <div class="form-group">
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="공부">공부</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="공부">공부</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="건강">건강</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="건강">건강</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="여행">여행</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="여행">여행</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="요리">요리</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="요리">요리</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="동물">동물</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="동물">동물</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
 			                                            </div>
 			                                            <div class="form-check mb-3">
-			                                                <label class="form-check-label">
-			                                                    <input type="checkbox" class="form-check-input" name="interests" value="기타">기타</label>
+			                                                <label class="radio-inline mr-3">
+			                                                    <input type="radio" class="form-check-input" name="interests" value="기타">기타</label>
 			                                            </div>
 			                                        </div>
 			                                        </div>
@@ -176,7 +176,7 @@
             <!-- #/ container -->
         
     <script>
-	
+/* 	
  	function joinValidate(){
 		//아이디
  		if(!(/^[a-z][a-z\d]{4,10}$/i.test($("#enrollForm input[name=userId]").val()))){
@@ -222,7 +222,7 @@
 		 
 		
 	} 
-	
+	 */
 	function checkId(){
 		var userId = $("#enrollForm input[name=userId]");
 		if(userId.val() == ""){

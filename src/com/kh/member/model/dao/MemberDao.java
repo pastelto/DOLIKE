@@ -49,7 +49,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
@@ -84,7 +84,7 @@ public class MemberDao {
 			pstmt.setString(1, m.getUserId());
 			pstmt.setString(2, m.getUserName());
 			pstmt.setString(3, m.getUserPwd());
-			pstmt.setDate(4, m.getBirthDate());
+			pstmt.setString(4, m.getBirthDate());
 			pstmt.setString(5, m.getPhone());
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getNickName());
@@ -121,7 +121,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
