@@ -11,6 +11,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
+	String nickId = null;
 %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
 	
 <style>
 	#fList{
-		height: 100%;
+		height: 800px;
 	}
 	
 	#iconMsg{
@@ -110,173 +111,191 @@
 
 					<div class="row">
 						<div class="col-1"></div>
-						<div class="col-5">
-							<!-- 오른 쪽 친구 선택시 보여지는 부분 -->
-							<%-- <%@ include file="../follow/followUserInfo.jsp"%> --%>
+						
+						
+						<!-- 친구 선택 안했을 경우 보여지는 창 -->
+						<div id="nonCheckFl" class="col-5" style="display: block;">
 
-
-	<!-- 친구추가한 유저 정보 보여주는 부분 -->
-	<div class="card">
-		<div class="card-body">
-			<div class="media align-items-center mb-4">
-				<img class="mr-3" src="./resources/images/do_100.png" width="80"
-					height="80" alt="">
-				<div class="media-body">
-					<h3 class="mb-0"  id="nick"></h3>
-					<p class="text-muted mb-0" id="flid"></p>
-				</div>
-				<button id="iconMsg" class="btn btn-sm px-2"
-					onclick="location.href='<%=request.getContextPath()%>/writeForm.ms'">
-					<i class="icon-envelope menu-icon"></i> 쪽지
-				</button>
-			</div>
-
-			<hr>
-			<div class="card mt-4">
-				<div class="media align-items-center">
-
-					<div class="card-body text-center">
-					<span id="interestLabel" class="label label-pill label-primary">여기에 로그인 유저 관심사 </span>
-						<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
-					</div>
-
-				</div>
-
-			</div>
-
-			<hr>
-
-			<div class="col-12 text-center">
-				<button id="byefr" class="btn px-4">친구 삭제하기</button>
-			</div>
-		</div>
-	</div>
-
-	<div class="card">
-		<div class="card-body text-center">
-			<table class="table table-hover " style="text-align: center;">
-		<thead>
-			<tr style="background-color: #78c2ad; color: white;">
-				<th>#</th>
-				<th>제목</th>
-				<th>날짜</th>
-			</tr>
-		</thead>
-
-		<!-- 3개만 보이게  -->
-		<tbody>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-
-			<%-- <% if(list.isEmpty()){ %>
-					 	<tr>
-							<td colspan="3">존재하는 게시글이 없습니다.</td>
-						</tr>
-					 <% }else{  %>
-					 	<% for(Notice n : list){ %>
-					 		<tr>
-					 			<td><%= n.getNoticeNo() %></td>
-								<td><%= n.getNoticeTitle() %></td>
-								<td><%= n.getCount() %></td>
-								<td><%= n.getCreateDate()%></td>
-					 		</tr>
-					 	<% } %>
-					 <% } %> --%>
-		</tbody>
-	</table>
-		</div>
-	</div>
-
-
-
-	<%-- 	<table class="table table-hover " style="text-align: center;">
-		<thead>
-			<tr style="background-color: #78c2ad; color: white;">
-				<th>#</th>
-				<th>제목</th>
-				<th>날짜</th>
-			</tr>
-		</thead>
-
-		<!-- 3개만 보이게  -->
-		<tbody>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-			<tr>
-				<td colspan="3">존재하는 게시글이 없습니다.</td>
-			</tr>
-
-			<% if(list.isEmpty()){ %>
-					 	<tr>
-							<td colspan="3">존재하는 게시글이 없습니다.</td>
-						</tr>
-					 <% }else{  %>
-					 	<% for(Notice n : list){ %>
-					 		<tr>
-					 			<td><%= n.getNoticeNo() %></td>
-								<td><%= n.getNoticeTitle() %></td>
-								<td><%= n.getCount() %></td>
-								<td><%= n.getCreateDate()%></td>
-					 		</tr>
-					 	<% } %>
-					 <% } %>
-		</tbody>
-	</table>
-	
-		<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/noticeView.no?currentPage=1"> &laquo; </a></li>
-				
-				<!-- 이전페이지 -->
-				<% if(currentPage == 1) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-				<%} %>
-				
-				
-				<!-- 페이지 목록 -->
-				<%for(int p=startPage; p<=endPage; p++){ %>
-				
-					<%if(p == currentPage){ %>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/noticeView.no?currentPage=<%= p %>"><%= p %> </a></li>
-					<%} %>
+							<div id="fList">
+							  <div class="text-center" style="text-align: center;">
+							  
+							  <div id="down" style="text-align: left;">
+												<img src="./resources/images/do_100.png" width="100%" height="100%">
+								</div>
+							  </div>
+							</div>
+						</div>
+						
+						
+						<!--오른 쪽 친구추가한 유저 정보 보여주는 부분 -->
+					<div id="checkFl" class="col-5" style="display: none">
+						
+						
+						
+						<div class="card">
+							<div class="card-body">
+								<div class="media align-items-center mb-4">
+									<img class="mr-3" src="./resources/images/do_100.png" width="80"
+										height="80" alt="">
+									<div class="media-body">
+										<h3 class="mb-0"  id="nick"></h3>
+										<p class="text-muted mb-0" id="flid"></p>
+									</div>
+									<button id="iconMsg" class="btn btn-sm px-2"
+										onclick="location.href='<%=request.getContextPath()%>/writeForm.ms'">
+										<i class="icon-envelope menu-icon"></i> 쪽지
+									</button>
+								</div>
 					
-				<%} %>
-				
-				
-				<!-- 다음페이지 -->
-				<% if(currentPage == maxPage) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-				<%} %>
-				
-				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= maxPage %>"> &raquo; </a></li>
-			</ul>
-		</div>
-		 --%>
+								<hr>
+								<div class="card mt-4">
+									<div class="media align-items-center">
+					
+										<div class="card-body text-center">
+										<span id="interestLabel" class="label label-pill label-primary"></span>
+											<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
+										</div>
+					
+									</div>
+					
+								</div>
+					
+								<hr>
+					
+								<div class="col-12 text-center">
+									<form action="deleteFl2.fl" method="get">
+										<input type="hidden" id="flid" name="flid"> 
+										<button id="byefr" class="btn px-4" type="submit">친구 삭제하기</button>
+									</form>
+									
+								</div>
+							</div>
+						</div>
+					
+						<div class="card">
+							<div class="card-body text-center">
+								<table class="table table-hover " style="text-align: center;">
+							<thead>
+								<tr style="background-color: #78c2ad; color: white;">
+									<th>#</th>
+									<th>제목</th>
+									<th>날짜</th>
+								</tr>
+							</thead>
+					
+							<!-- 3개만 보이게  -->
+							<tbody>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+					
+								<%-- <% if(list.isEmpty()){ %>
+										 	<tr>
+												<td colspan="3">존재하는 게시글이 없습니다.</td>
+											</tr>
+										 <% }else{  %>
+										 	<% for(Notice n : list){ %>
+										 		<tr>
+										 			<td><%= n.getNoticeNo() %></td>
+													<td><%= n.getNoticeTitle() %></td>
+													<td><%= n.getCount() %></td>
+													<td><%= n.getCreateDate()%></td>
+										 		</tr>
+										 	<% } %>
+										 <% } %> --%>
+							</tbody>
+						</table>
+							</div>
+						</div>
+					
+					
+					
+						<%-- 	<table class="table table-hover " style="text-align: center;">
+							<thead>
+								<tr style="background-color: #78c2ad; color: white;">
+									<th>#</th>
+									<th>제목</th>
+									<th>날짜</th>
+								</tr>
+							</thead>
+					
+							<!-- 3개만 보이게  -->
+							<tbody>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+								<tr>
+									<td colspan="3">존재하는 게시글이 없습니다.</td>
+								</tr>
+					
+								<% if(list.isEmpty()){ %>
+										 	<tr>
+												<td colspan="3">존재하는 게시글이 없습니다.</td>
+											</tr>
+										 <% }else{  %>
+										 	<% for(Notice n : list){ %>
+										 		<tr>
+										 			<td><%= n.getNoticeNo() %></td>
+													<td><%= n.getNoticeTitle() %></td>
+													<td><%= n.getCount() %></td>
+													<td><%= n.getCreateDate()%></td>
+										 		</tr>
+										 	<% } %>
+										 <% } %>
+							</tbody>
+						</table>
+						
+							<!-- 페이지 처리 -->
+							<div>
+								<ul class="pagination justify-content-center">
+									<!-- 맨앞으로 -->
+									<li><a id="pageTag" class="page-link" href="<%=contextPath%>/noticeView.no?currentPage=1"> &laquo; </a></li>
+									
+									<!-- 이전페이지 -->
+									<% if(currentPage == 1) {%>
+									<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+									<% }else{ %>
+									<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+									<%} %>
+									
+									
+									<!-- 페이지 목록 -->
+									<%for(int p=startPage; p<=endPage; p++){ %>
+									
+										<%if(p == currentPage){ %>
+											<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+										<%}else{ %>
+											<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/noticeView.no?currentPage=<%= p %>"><%= p %> </a></li>
+										<%} %>
+										
+									<%} %>
+									
+									
+									<!-- 다음페이지 -->
+									<% if(currentPage == maxPage) {%>
+									<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+									<% }else{ %>
+									<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+									<%} %>
+									
+									<!-- 맨뒤로 -->
+									<li><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= maxPage %>"> &raquo; </a></li>
+								</ul>
+							</div>
+							 --%>
 
 
 
-
-
+	
 
 
 
@@ -410,8 +429,8 @@
 				url:"search.fl",
 				type:"post",
 				data:{followId:followId.val()},
-				success:function(result){
-					if(result == "success"){
+				success:function(resultId){
+					if(resultId == "success"){
 						var check = confirm(followId.val()+"님을 친구 추가하겠습니까?");
 						if(check == true){
 							$("#searchForm").submit();
@@ -450,10 +469,16 @@
 						var flid = ""
 						var followInterest =""
 						$.each(result, function(i){
+							
 							nick = result[i].nickname
+							nickId = result[i].nickname
 							flid = result[i].followUserId
 							followInterest = result[i].followInterest
 						})
+						console.log(nickId)
+						$("#nonCheckFl").attr("style", "display:none")
+						$("#checkFl").attr("style", "display:block")
+						
 						$("#nick").text(nick)
 						$("#flid").text("(id: "+flid+")")
 						//$("#followInterest").text(followInterest) //나중에 삭제
@@ -467,7 +492,7 @@
 				}) 
 			})
 		})
-		<% } %>
+		<%} %>
 	</script>
 
 </body>

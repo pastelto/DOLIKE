@@ -101,4 +101,19 @@ public class FollowService {
 		return m;
 	}
 
+	public int deleteFollowVer2(String userId, String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().deleteFollowVer2(conn, userId, followId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
 }

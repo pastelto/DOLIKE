@@ -1,8 +1,6 @@
 package com.kh.follow.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.follow.model.service.FollowService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class FollowSearchServlet
+ * Servlet implementation class FollowDeleteVer2Servlet
  */
-@WebServlet("/search.fl")
-public class FollowSearchServlet extends HttpServlet {
+@WebServlet("/deleteFl2.fl")
+public class FollowDeleteVer2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowSearchServlet() {
+    public FollowDeleteVer2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +29,17 @@ public class FollowSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String followId = request.getParameter("followId");
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		String followId = request.getParameter("flid");
+		int result = new FollowService().deleteFollowVer2(userId, followId);
 		
-		System.out.println("검색한 아이디: "+followId);
-		
-		int result = 0;
-		result = new FollowService().searchId(followId);
-		PrintWriter out = response.getWriter();
-		
-		System.out.println("검색 후 result: "+result);
-		
-		if(result > 0) {
-			out.print("success"); //검색한 아이디 있는 경우
-			result = 0; //검색 후 result 다시 0으로 변경 해야함.
+		if(result>0) {
+			request.getSession().setAttribute("msg", "친구 삭제 성공");
+			response.sendRedirect("MyFollow.fl");
 		}else {
-			out.print("fail"); //검색한 아이디 없는 경우
-			result = 0; //검색 후 result 다시 0으로 변경 해야함.
+			request.setAttribute("msg", "친구 삭제에 실패했습니다. ");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		result = 0; //검색 후 result 다시 0으로 변경 해야함.
-		out.flush();
-		out.close(); 
 	}
 
 	/**

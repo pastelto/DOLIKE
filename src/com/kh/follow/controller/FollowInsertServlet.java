@@ -49,10 +49,13 @@ public class FollowInsertServlet extends HttpServlet {
 				response.sendRedirect("MyFollow.fl");
 			}else {
 				int result = new FollowService().insertId(fl);
-				System.out.println(result);
+				
+				System.out.println("insert result:"+result);
+				
 				if(result > 0) {
 					request.getSession().setAttribute("msg", followId+"님 친구 등록 성공!");
 					response.sendRedirect("MyFollow.fl");
+					result=0;
 				}else {
 					request.getSession().setAttribute("msg", "친구 등록 실패");
 					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
