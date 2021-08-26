@@ -97,8 +97,7 @@
                                         	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
                                         	
                                             <div class="form-group">
-                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디"> <button id="iconMsg" class="btn" type="button"
-														onclick="searchId();">검색</button>
+                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디">
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
@@ -115,7 +114,7 @@
                                             </div>
                                     
                                     <div class="text-left m-t-15">
-                                        <button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
+                                        <button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="submitMsg();"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
                                         <button id="resetBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset"><i class="ti-close m-r-5 f-s-12"></i> 취소</button>
                                     </div>
                                     </form>
@@ -126,24 +125,32 @@
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
+
 		<%@ include file="../common/footer.jsp" %> 
-        <!--**********************************
-            Footer end
-        ***********************************-->
+
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+    
+        
+		<script>
+		
+		function submitMsg(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '확인',
+                text: "쪽지가 정상적으로 발송되었습니다.", 
+                type: 'success',
+                confirmButtonText: '확인',          
+                confirmButtonColor: "#78c2ad",
+            }).then(function(result) { 
+                if(result.isConfirmed) {                
+                $("#submitBtn").submit();  
+            }
+        });
+		}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 </body>
 
 </html>
