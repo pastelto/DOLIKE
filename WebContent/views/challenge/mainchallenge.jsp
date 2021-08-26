@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
-	int chno  = Integer.parseInt(request.getParameter("chno"));
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
 	
@@ -261,20 +260,15 @@ a {
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-	
-	
-	<script>
-	<% if(!list.isEmpty()){%>
-		$(function() {
-			$("ul>li").click(function(){
-				var chno = $(this).children().eq(0).text();				
-						
-						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
-					})					
-				})
-	<% } %>
-	</script>
-
-
+<script>
+<% if(!list.isEmpty()){%>
+	$(function() {
+		$("ul>li").click(function(){
+			var chno = $(this).children().eq(0).text();						
+					location.href = "<%= contextPath()%>/challengedetail.ch?chno="+chno;
+				})					
+			})
+<% } %>
+</script>
 </body>
 </html>

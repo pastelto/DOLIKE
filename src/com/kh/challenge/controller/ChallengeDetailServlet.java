@@ -36,7 +36,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 								
-				int chno = Integer.parseInt(request.getParameter("chno"));
+				int chno = ((Challenge)request.getSession().getAttribute("chno")).getChNo();										
 				ArrayList<Challenge> list = new ChallengeService().selectDetail(chno);
 				
 		// ---------------- 페이징 처리 -----------------
