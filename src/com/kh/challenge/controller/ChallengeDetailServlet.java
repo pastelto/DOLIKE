@@ -14,6 +14,7 @@ import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ChallengeDetailServlet
@@ -34,8 +35,8 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-				int chno = Integer.parseInt(getParameter("chno"));
+								
+				int chno = ((Challenge)request.getSession().getAttribute("chno")).getChNo();										
 				ArrayList<Challenge> list = new ChallengeService().selectDetail(chno);
 				
 		// ---------------- 페이징 처리 -----------------

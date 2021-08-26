@@ -4,6 +4,7 @@
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -138,6 +139,9 @@ li {
 	list-style: none;
 	text-align: -webkit-match-parent;
 }
+.hide{
+	display: none;
+}
 
 .item>img {
 	position: absolute;
@@ -225,21 +229,22 @@ a {
 										for (int i = 0; i < list.size(); i++) {
 										%>
 										<li class="item">
+											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
 												<a href="<%=request.getContextPath()%>/challengedetail.ch"
-													class="item-click"> <img
-													src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>"
-													alt="챌린지이미지" class="img-challenge">
+													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												</a>
 												<div class="item-info">
-													<h4 class="title">
+													<div>
+													<h4 class="title" style="float:left">
 														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
-													</h4>
+													</h4></div> <br>
+													<div>									
 													<ul class="challenge-period">
 														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
-														<li>카테고리 : <%=list.get(i).getCategoryTitle()%>
-														</li>
+														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
 													</ul>
+													</div>
 												</div>
 											</div>
 										</li>
@@ -255,16 +260,15 @@ a {
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-	<script>
-		<%if (!list.isEmpty()) {%>
-		$(function() {
-			$("ul>li>div").click(
-				function() {
-					var chno = $(this).children().eq(0);
-					location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+<script>
+<% if(!list.isEmpty()){%>
+	$(function() {
+		$("ul>li").click(function(){
+			var chno = $(this).children().eq(0).text();						
+					location.href = "<%= contextPath()%>/challengedetail.ch?chno="+chno;
+				})					
 			})
-		})
-		<%}%>
-	</script>
+<% } %>
+</script>
 </body>
 </html>

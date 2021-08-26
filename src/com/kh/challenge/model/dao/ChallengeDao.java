@@ -85,17 +85,20 @@ public class ChallengeDao {
 			Challenge c = new Challenge();
 			
 			while (rset.next()) {				
-				c.setChNo(rset.getInt("CH_NO"));
-				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getString("CH_START"));
-				c.setEnd(rset.getString("CH_END"));
-				c.setCategoryTitle(rset.getString("CATEGORY_NAME"));
-				list.add(c);
+//				c.setChNo(rset.getInt("CH_NO"));
+//				c.setChTitle(rset.getString("CH_TITLE"));
+//				c.setStart(rset.getString("CH_START"));
+//				c.setEnd(rset.getString("CH_END"));
+//				c.setCategoryTitle(rset.getString("CATEGORY_NAME"));
+//				list.add(c);
+//				
+//				System.out.println(c.getChNo());
+//				System.out.println(c.getChTitle());
+//				System.out.println(c.getStart());
+//				System.out.println(c.getEnd());				
 				
-				System.out.println(c.getChNo());
-				System.out.println(c.getChTitle());
-				System.out.println(c.getStart());
-				System.out.println(c.getEnd());
+				list.add(new Challenge(rset.getInt("CH_NO"), rset.getString("CH_TITLE"), rset.getString("CH_START"),
+						rset.getString("CH_END"), rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -129,11 +132,13 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 			ChallengeAttachment ca = new ChallengeAttachment();
 			while (rset.next()) {			
-				ca.setAtNo(rset.getInt("AT_NO"));
+				/*ca.setAtNo(rset.getInt("AT_NO"));
 				ca.setNewName(rset.getString("AT_NEWNAME"));
 				ca.setOriginName(rset.getString("AT_ORIGINNAME"));
 				ca.setChNo(rset.getInt("CH_NO"));
-				fileList.add(ca);
+				fileList.add(ca);*/
+				fileList.add(new ChallengeAttachment(rset.getInt("AT_NO"),rset.getString("AT_NEWNAME"),
+						rset.getString("AT_ORIGINNAME"), rset.getInt("CH_NO")));
 			}
 
 		} catch (SQLException e) {
@@ -522,7 +527,7 @@ public class ChallengeDao {
 	}
 
 	public int insertChallenge(Connection conn, Challenge c) {
-		//insertChallenge = INSERT INTO CHALLENGE VALUES(SEQ_CH_NO.NEXTVAL, ?,?, ?,?,DEFAULT, ?,,?)
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
