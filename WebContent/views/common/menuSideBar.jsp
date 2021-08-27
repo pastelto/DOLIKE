@@ -22,6 +22,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>
 	   $(function(){
 	      var msg = "<%=msg%>";
@@ -125,14 +126,14 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                    <form id="searchBoardForm" class="form-inline" action="search.bo" method="post">
+                    <form id="searchBoardForm" class="form-inline" action="<%= contextPath %>/search.bo" method="post">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <div class="input-group text-center mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        		<input id="searchBtn" class="btns" type="submit" value="검색"/>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">
@@ -354,7 +355,10 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	
+        	$(function(){
+        		
+        	})
+        	/*
         	function searchBoard(){
         		var findBoard = $("#searchBoardForm input[name=findBoard]");
         		if(findBoard.val() == ""){
@@ -365,12 +369,15 @@
         			url:"search.bo",
         			type:"post",
         			data:{findBoard:findBoard.val()},
-        			success:function(result){
-        				if(result == "success"){
-        					$("#searchBoardForm").submit();
-        				}else{
-        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
-        				}
+        			success:function(findBoard){
+        				console.log("검색성공!")
+        				$("")
+        				//location.href = "views";
+        				var url = "find.bo?findBoard = " + findBoard;
+        					console.log(url);
+        					alert(findBoard + ","+ url);
+    					 	location.replace(url);
+    					 	location.href = "find.bo";
         			},
         			error:function(){
         				console.log("통신오류.")
@@ -379,7 +386,7 @@
         		
         		
         	}
-				        
+        	*/       
 			$(function(){
 				$("#btn-like").eq(0).click(function(){
 				var favB = $("#input2").val();

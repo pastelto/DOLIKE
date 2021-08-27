@@ -35,15 +35,17 @@ public class BoardSearchServlet extends HttpServlet {
 		String findBoard = request.getParameter("findBoard");
 		
 		System.out.println("검색어 : "+findBoard);
-		
+		response.setCharacterEncoding("UTF-8");
 		int result = new BoardService().searchBoard(findBoard);
 		PrintWriter out = response.getWriter();
 		
 		System.out.println("result : " + result);
 		
 		if(result > 0) {
-			response.sendRedirect("find.bo?findBoard="+findBoard);
-			//request.getRequestDispatcher("views/board/boardSearch.jsp").forward(request, response);
+			//response.sendRedirect("find.bo");
+			request.setAttribute("findBoard", findBoard);
+			out.print(findBoard);
+			request.getRequestDispatcher("find.bo").forward(request, response);
 		}else {
 			request.setAttribute("msg", "검색할 게시글을 불러오는데 실패했습니다.");
 			
