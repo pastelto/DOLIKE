@@ -44,6 +44,7 @@
         Content body start
     ***********************************-->
     <div class="content-body">
+<<<<<<< HEAD
      <div class="row page-titles mx-0">
          <div class="col p-md-0">
              <ol class="breadcrumb">
@@ -53,6 +54,8 @@
          </div>
      </div>
     <div class="container-fluid">
+=======
+>>>>>>> parent of ad3e5c8 (Merge pull request #110 from pastelto/soyoung)
    	<div class="login-form-bg h-100">
        <div class="container h-100">
            <div class="row justify-content-center h-100">
@@ -76,8 +79,8 @@
            </div>
        </div>
     </div>
-    </div>
-	</div>   
+       
    	<%@ include file = "../common/footer.jsp" %>
+	</div>   
 </body>
 </html>

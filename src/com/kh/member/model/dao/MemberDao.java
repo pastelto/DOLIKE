@@ -53,9 +53,7 @@ public class MemberDao {
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTERESTS1"),
-						rset.getString("INTERESTS2"),
-						rset.getString("INTERESTS3"),
+						rset.getString("INTERESTS"),
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
@@ -90,9 +88,7 @@ public class MemberDao {
 			pstmt.setString(5, m.getPhone());
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getNickName());
-			pstmt.setString(8, m.getInterests1());
-			pstmt.setString(9, m.getInterests2());
-			pstmt.setString(10, m.getInterests3());
+			pstmt.setString(8, m.getInterests());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -129,9 +125,7 @@ public class MemberDao {
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTERESTS1"),
-						rset.getString("INTERESTS2"),
-						rset.getString("INTERESTS3"),
+						rset.getString("INTERESTS"),
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
@@ -150,10 +144,14 @@ public class MemberDao {
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String interests) {
 =======
 	public int updateMember(Connection conn, String userId, String userPwd, String nickName, String interests1, String interests2, String interests3) {
 >>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
+=======
+	public int updateMember(Connection conn, String userId, String userPwd, String nickName, String interests) {
+>>>>>>> parent of ad3e5c8 (Merge pull request #110 from pastelto/soyoung)
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -164,10 +162,8 @@ public class MemberDao {
 			
 			pstmt.setString(1, userPwd);
 			pstmt.setString(2, nickName);
-			pstmt.setString(3, interests1);
-			pstmt.setString(4, interests2);
-			pstmt.setString(5, interests3);
-			pstmt.setString(6, userId);
+			pstmt.setString(3, interests);
+			pstmt.setString(4, userId);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
