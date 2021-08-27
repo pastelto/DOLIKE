@@ -1,3 +1,6 @@
+git fetch origin
+git checkout -b KSW origin/KSW
+git merge master
 
 ### Java ###
 # Compiled class file
