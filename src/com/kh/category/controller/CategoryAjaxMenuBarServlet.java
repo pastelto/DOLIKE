@@ -20,7 +20,7 @@ import com.kh.category.model.vo.Category;
 /**
  * Servlet implementation class CategoryAjaxMenuBarServlet
  */
-@WebServlet("/CategoryMenuBar.ca")
+@WebServlet("/categoryMenuBar.ca")
 public class CategoryAjaxMenuBarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
