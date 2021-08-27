@@ -98,6 +98,19 @@
 		<%@ include file="../common/menuSideBar.jsp"%>
 
 	<div class="content-body">
+	
+	
+	        <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">팔로잉</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">나의 친구</a></li>
+                    </ol>
+                </div>
+            </div>
+	
+	
+	<br> <br> 
 
 			<%
 			if (loginUser == null) {
@@ -255,14 +268,14 @@
 									<br>
 									<hr>
 									<!-- 친구 목록 페이지 불러오기 -->
-									<div>
+									<!-- <div> -->
 											<%if (list.isEmpty()) {%>
 											<div id="down" style="text-align: center;">
 												<img src="./resources/images/friend.png" width="50%" height="50%">
 											</div>
 											<% } else {%>
 											
-											<div class="card-body" style="height: 360px">
+											<div class="card-body" style="height: 360px; padding-top:10px; padding-bottom: 10px ">
 											<table id="flList" class="table table-hover table-borderless" style="text-align: center;">
 											
 												<% for (Follow fl : list) {%>
@@ -332,7 +345,6 @@
 									
 
 								</div>
-							</div>
 							
 						</div>
 						<div class="col-1"></div>
@@ -344,9 +356,9 @@
 
 		</div>
 
-			<%@ include file="../common/footer.jsp" %> 
+			
 	</div>
-	
+	<%@ include file="../common/footer.jsp" %> 
 	<script>
 		function searchId(){
 			console.log("찍히나?")
@@ -472,26 +484,6 @@
 				
 				location.href="<%= contextPath %>/catBoard.fl?catTitle="+catTitle+"&followId="+followId;
 				
-<%--  				$.ajax({
-					url:"catBoard.fl",
-					data: {
-						followId:followId,
-						catTitle:catTitle
-						},
-					type: "get"
-					,
-					success:function(result){
-					 	console.log("성공")
-					 	//location.href="views/follow/followCategory.jsp;"
-					 	var url = "<%= contextPath %>/followCategoryList.fl?result="+result;"
-					 	
-					 	location.href(url); 
-					},
-					error:function(){
-						console.log("통신오류!")
-					} 
-					
-				}) --%>
 		
 			})
 		}) 
