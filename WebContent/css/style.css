@@ -7305,13 +7305,16 @@ body {
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  max-width: 100%; }
+  max-width: 100%; 
+  background-color: rgba(120, 194, 173, 1) !important;
+  }
 
 #main-wrapper {
   opacity: 0;
   transition: all 0.25s ease-in;
   overflow: hidden;
-  position: relative; }
+  position: relative; 
+}
 
 #main-wrapper.show {
   opacity: 1; }

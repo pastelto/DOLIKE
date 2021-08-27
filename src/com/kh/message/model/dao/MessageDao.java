@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Attachment;
 import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgAttachment;
 import com.kh.message.model.vo.MsgPageInfo;

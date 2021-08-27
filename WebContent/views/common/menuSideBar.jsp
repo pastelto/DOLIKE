@@ -88,7 +88,6 @@
       .boardMargin{
       	padding-left: 20px !important;
       }
-      
 
 	</style>
 </head>

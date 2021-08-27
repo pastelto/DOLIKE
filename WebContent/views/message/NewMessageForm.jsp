@@ -97,7 +97,13 @@
                                         	<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
                                         	
                                             <div class="form-group">
-                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder=" 받는 사람 아이디">
+                                                <input type="text" class="form-control bg-transparent" name="recvId" placeholder="받는 사람 아이디" >
+                                            	<div class="input-group-btn">
+												<!-- 검색 진행 버튼 -->
+												<button type="submit" class="btn btn-default" id="btnSearch" onclick="searchPopUp();">
+													<i class="glyphicon glyphicon-search"> 검색하기 </i>
+												</button>
+											</div>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
@@ -147,6 +153,13 @@
                 $("#submitBtn").submit();  
             }
         });
+		}
+
+
+		function searchPopUp(){
+			var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400"; 
+			var win = window.open("/findUser.fd", "_blank", "setting");
+	
 		}
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
