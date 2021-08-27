@@ -87,7 +87,7 @@ public class AdminDao {
 //				list.add(new Member(rset.getInt("CATEGORY_NO"), 
 //								      rset.getString("CATEGORY_NAME")
 //						));
-//			}
+//			}//
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
