@@ -36,14 +36,30 @@
 			margin-right : 100px ;
 			margin-left : 100px ;
 		}
+		#insertBtn{
+	      	background-color: #78c2ad;
+	      	color:#fff;
+	      	border-color:#78c2ad;
+	      
+     	}
+     	#insertBtn:hover{
+	      	background-color: #fff;
+	      	color:#78c2ad;
+	      	border-color:#78c2ad;
+     	}
+     	.btn-group{
+	      	background-color: #78c2ad;
+	      	color:#fff;
+	      	border-color:#78c2ad;
+	      
+     	}
+     	.btn-group:hover{
+	      	background-color: #fff;
+	      	color:#78c2ad;
+	      	border-color:#78c2ad;
+     	}
+	
 	</style>
-	<!-- 
-	<link href="../../css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	 -->
 </head>
 <body>
 
@@ -53,12 +69,14 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        	<div class="container-fluid">
+        
 	 		<div class="row">
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thread>
 	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
 	 						
-			 				<!-- <th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th> -->
+			 				<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
@@ -77,62 +95,65 @@
 			 				<tr>
 			 				<% if(b.getTitleImg() != null ){ %>
 			 					<td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td>
-			 					<%} else{ %>
-			 					
-			 					<%} %>
 			 					<td><%= b.getBoardNo() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
+			 					<%} else{ %>
+			 					<td> image </td> 
+			 					<td><%= b.getBoardNo() %></td>
+			 					<td><%= b.getBoardTitle() %></td>
+			 					<td><%= b.getNickName() %></td>
+			 					<td><%= b.getBoardDate() %></td>
+			 					<td><%= b.getViews() %></td> 
+			 					<%} %>
+			 					
 			 				</tr>
 			 				<% } %>
 		 				<% } %>
 		 				
 	 				</tbody>
 	 			</table>	
-	 				
-	 			<br><br>
-	 			
+	 		</div>
+	 		<% if(loginUser != null){ %>
+	 		<div>
 	 			<div class="pagingArea" align="center">
 	 				<!-- 맨 처음페이지로  -->
-	 				<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=1'"> &lt;&lt; </button>
+	 				<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=1'"> &lt;&lt; </button>
 	 				<!-- 이전 페이지로 -->
 	 				<%if(currentPage == 1){ %>
-					<button disabled> &lt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" disabled> &lt; </button>
 					<%}else{ %>
-					<button onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>'"> &lt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>'"> &lt; </button>
 					<%} %>
 					<!-- 페이지 목록 -->
 					<%for(int p=startPage; p<=endPage; p++){ %>
 						
 						<%if(p == currentPage){ %>
-						<button disabled> <%= p %> </button>
+						<button class="btn btn-sm btn-rounded" name="btn-group" disabled> <%= p %> </button>
 						<%}else{ %>
-						<button onclick="location.href='<%=contextPath %>/list.bo?currentPage=<%= p %>'"> <%= p %> </button>
+						<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath %>/list.bo?currentPage=<%= p %>'"> <%= p %> </button>
 						<%} %>
 						
 					<%} %>
 					<!-- 다음페이지로(>) -->
 					<%if(currentPage == maxPage){ %>
-					<button disabled> &gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" disabled> &gt; </button>
 					<%}else { %>
-					<button onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>'"> &gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>'"> &gt; </button>
 					<%} %>
 				
 					<!-- 맨 끝으로 (>>) -->
-					<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
+					
+					<!-- 글작성하기 버튼 -->
+					<button id="insertBtn" class="btn btn-sm btn-rounded pull-right" onclick="location.href='enrollForm.bo'" >작성하기</button>
 	 			</div>
-	 			
-				
-	 			<!--  <a href="enrollForm.bo" class="btn btn-primary pull-right">글쓰기</a>-->
-	 			
 	 		</div>
-	 		<% if(loginUser != null){ %>
-			<div class="btn btn-primary pull-right" >
-				<button onclick="location.href='enrollForm.bo'" style="border:none; background:none; color:white">작성하기</button>
-			</div>
+			
 			<% } %>
+        </div>
         </div>
         <!--**********************************
             Content body end
@@ -143,7 +164,7 @@
 		<%if(!list.isEmpty()){%>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
-				var bno = $(this).children().eq(0).text();
+				var bno = $(this).children().eq(1).text();
 				location.href="<%= contextPath %>/detail.bo?bno="+bno;
 			})
 		})
