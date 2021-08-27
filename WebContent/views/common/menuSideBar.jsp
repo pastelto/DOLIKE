@@ -89,8 +89,17 @@
       .boardMargin{
       	padding-left: 20px !important;
       }
-      
-
+      .btn-success{
+      	background-color: #78c2ad;
+      	color:#fff;
+      	border-color:#78c2ad;
+      }
+      .btn-success:hover{
+      	background-color: #fff;
+      	color:#78c2ad;
+      	border-color:#78c2ad;
+      }
+	
 	</style>
 </head>
 <body>
@@ -130,10 +139,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <div class="input-group text-center mb-3">
+                        <div class="input-group mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<input id="searchBtn" class="btns" type="submit" value="검색"/>
+                        		<button class="btn btn-success" type="submit">검색</button>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">
@@ -355,38 +364,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	$(function(){
-        		
-        	})
-        	/*
-        	function searchBoard(){
-        		var findBoard = $("#searchBoardForm input[name=findBoard]");
-        		if(findBoard.val() == ""){
-        			alert("검색할 내용을 입력하세요.");
-        			return false;
-        		}
-        		$.ajax({
-        			url:"search.bo",
-        			type:"post",
-        			data:{findBoard:findBoard.val()},
-        			success:function(findBoard){
-        				console.log("검색성공!")
-        				$("")
-        				//location.href = "views";
-        				var url = "find.bo?findBoard = " + findBoard;
-        					console.log(url);
-        					alert(findBoard + ","+ url);
-    					 	location.replace(url);
-    					 	location.href = "find.bo";
-        			},
-        			error:function(){
-        				console.log("통신오류.")
-        			}
-        		})
-        		
-        		
-        	}
-        	*/       
+        	
 			$(function(){
 				$("#btn-like").eq(0).click(function(){
 				var favB = $("#input2").val();

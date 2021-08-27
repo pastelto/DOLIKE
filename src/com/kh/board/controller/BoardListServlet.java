@@ -32,8 +32,8 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				int bno = Integer.parseInt(request.getParameter("bno"));
-		
+				//int bno = Integer.parseInt(request.getParameter("bno"));
+				//System.out.println("bno : "+bno);
 				int listCount;			// 총 게시글 갯수
 				int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 				int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 

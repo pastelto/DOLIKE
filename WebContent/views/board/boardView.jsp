@@ -36,6 +36,29 @@
 			margin-right : 100px ;
 			margin-left : 100px ;
 		}
+		#insertBtn{
+	      	background-color: #78c2ad;
+	      	color:#fff;
+	      	border-color:#78c2ad;
+	      
+     	}
+     	#insertBtn:hover{
+	      	background-color: #fff;
+	      	color:#78c2ad;
+	      	border-color:#78c2ad;
+     	}
+     	.btn-group{
+	      	background-color: #78c2ad;
+	      	color:#fff;
+	      	border-color:#78c2ad;
+	      
+     	}
+     	.btn-group:hover{
+	      	background-color: #fff;
+	      	color:#78c2ad;
+	      	border-color:#78c2ad;
+     	}
+	
 	</style>
 </head>
 <body>
@@ -78,7 +101,7 @@
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 					<%} else{ %>
-			 					<td> 111</td>
+			 					<td> image </td> 
 			 					<td><%= b.getBoardNo() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
@@ -92,44 +115,43 @@
 		 				
 	 				</tbody>
 	 			</table>	
-	 				
-	 			<br><br>
-	 			
+	 		</div>
+	 		<% if(loginUser != null){ %>
+	 		<div>
 	 			<div class="pagingArea" align="center">
 	 				<!-- 맨 처음페이지로  -->
-	 				<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=1'"> &lt;&lt; </button>
+	 				<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=1'"> &lt;&lt; </button>
 	 				<!-- 이전 페이지로 -->
 	 				<%if(currentPage == 1){ %>
-					<button disabled> &lt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" disabled> &lt; </button>
 					<%}else{ %>
-					<button onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>'"> &lt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>'"> &lt; </button>
 					<%} %>
 					<!-- 페이지 목록 -->
 					<%for(int p=startPage; p<=endPage; p++){ %>
 						
 						<%if(p == currentPage){ %>
-						<button disabled> <%= p %> </button>
+						<button class="btn btn-sm btn-rounded" name="btn-group" disabled> <%= p %> </button>
 						<%}else{ %>
-						<button onclick="location.href='<%=contextPath %>/list.bo?currentPage=<%= p %>'"> <%= p %> </button>
+						<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath %>/list.bo?currentPage=<%= p %>'"> <%= p %> </button>
 						<%} %>
 						
 					<%} %>
 					<!-- 다음페이지로(>) -->
 					<%if(currentPage == maxPage){ %>
-					<button disabled> &gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" disabled> &gt; </button>
 					<%}else { %>
-					<button onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>'"> &gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>'"> &gt; </button>
 					<%} %>
 				
 					<!-- 맨 끝으로 (>>) -->
-					<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
+					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
+					
+					<!-- 글작성하기 버튼 -->
+					<button id="insertBtn" class="btn btn-sm btn-rounded pull-right" onclick="location.href='enrollForm.bo'" >작성하기</button>
 	 			</div>
-	 			
 	 		</div>
-	 		<% if(loginUser != null){ %>
-			<div class="btn btn-primary pull-right" >
-				<button onclick="location.href='enrollForm.bo'" style="border:none; background:none; color:white">작성하기</button>
-			</div>
+			
 			<% } %>
         </div>
         </div>

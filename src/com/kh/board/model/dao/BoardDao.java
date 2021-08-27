@@ -409,8 +409,9 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			//pstmt.setString(1, "%'" + findBoard + "%'");
 			pstmt.setString(1, findBoard );
+					
+			//pstmt.setString(1, findBoard );
 			
 			rset = pstmt.executeQuery();
 			
@@ -441,8 +442,8 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1, startRow);
 			//pstmt.setInt(2, endRow);
-			//pstmt.setString(1, "%'" + findBoard + "%'");
-			pstmt.setString(1, findBoard );
+			pstmt.setString(1, findBoard);
+			//pstmt.setString(1, findBoard );
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
