@@ -210,7 +210,7 @@
     			success:function(result){
     				if(result == "fail"){
     					alert("이미 사용 중인 닉네임입니다.");
-    					userId.focus();
+    					nickName.focus();
     				}else{
     					if(confirm("사용가능한 닉네임입니다. 사용하시겠습니까?")){
     						nickName.attr("readonly","true");
@@ -230,25 +230,26 @@
 			if(val){
 				$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
 				$("#updateForm").submit();
+				alert("회원정보가 수정되었습니다!")
 			}else{
 				alert("취소하였습니다.");
 			}
 		}
 	
 		function deleteMember(){
-			var val = confirm("정말로 탈퇴하시겠습니까?");
+			var val = confirm("정말로 두라이크를 떠나실건가요?");
 			
 			if(val){
 				$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
 				$("#updateForm").submit();
+				alert("안녕히가세요...");
 			}else{
 				alert("취소하였습니다.");
 			}
 		}
     	</script>
-	
-	<%@ include file = "../common/footer.jsp" %>
 	</div>
+	<%@ include file = "../common/footer.jsp" %>
 
 </body>
 </html>
