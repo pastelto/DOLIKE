@@ -112,7 +112,7 @@ public class ChallengeService {
 
 		Connection conn = getConnection();
 		
-		ArrayList<Challenge> list = new ChallengeDao().selectMyChList(conn,loginUser);
+		
 		
 		close(conn);
 		
