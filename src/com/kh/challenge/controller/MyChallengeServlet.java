@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeReply;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MyChallengeServlet
@@ -32,10 +34,17 @@ public class MyChallengeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loginUser = String.valueOf(request.getParameter("loginUser"));
 		
-		ArrayList<Challenge> list = new ChallengeService().selectMyChallenge(loginUser);
+		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		
+		ArrayList<Challenge> list = new ChallengeService().selectMyChList(loginUser);
+		
+		Challenge c = new ChallengeService().selectMyChallenge(loginUser);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("c", c);
+		
+		System.out.println(list +": myc servlet");
 				
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myChallenge.jsp");
 		view.forward(request, response);

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
+	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
+	java.util.Date, java.text.SimpleDateFormat"%>
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
+	Challenge c = (Challenge)request.getAttribute("c");	
 %>
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,6 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
-
 </head>
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
@@ -27,13 +28,45 @@
 				
 			</div>
 			<div class="tab-pane fade show active" id="ch-body-e">
-				<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-					single-origin coffee squid. Exercitation +1 labore velit, blog
-					sartorial PBR leggings next level wes anderson artisan four loko
-					farm-to-table craft beer twee. Qui photo booth letterpress, commodo
-					enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-					PBR. Homo nostrud organic, assumenda labore aesthetic magna
-					delectus mollit.</p>
+				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>				
+				<%for (int i=0; i < list.size();i++) {%>
+					<%	
+						 String s = list.get(i).getStart();
+							String e = list.get(i).getEnd();
+							
+							SimpleDateFormat sf = new SimpleDateFormat("yy-mm-dd");
+							
+							Date start = sf.parse(s);
+							Date end = sf.parse(e);
+							
+							long calDate = start.getTime() - end.getTime();
+							
+							long calDays = calDate / (24*60*60*1000);
+							calDays = Math.abs(calDays);
+							
+							int mod = (int)(calDays%7);
+							int row = (int)(calDays/7); 
+					 %>				 				
+					<table border='lightgrey 0.5px'>
+					<%if(mod == 0){%>
+						<%for(int j = 0; j < row; j++){%>
+						<tr height = '100px'>
+							<%for(int k=0; k<7; j++) {%>
+							<td width='100px'>
+							<%}%>
+						<%}%>
+					<%} else { %>
+						<%for(int j = 0; j < row+1; j++){%>
+						<tr height = '100px'>
+							<%for(int k=0; k<7; k++) {%>
+							<td width='100px'>
+							<%}%>
+						<%}%>
+					<%}%>
+					</td>
+					</tr>
+					</table>
+				<%} %>
 			</div>				
 		</div>
 	</div>
