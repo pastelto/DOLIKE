@@ -293,7 +293,7 @@ public class ChallengeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("myChallengeAc");
+		String sql = prop.getProperty("myChallengeAt");
 		/*
 		 * SELECT CH_NO, CH_TITLE, RP_COUNT, ACHIEVEMENT FROM CHALLENGE C JOIN
 		 * CHALLENGE_USER U ON C.CH_NO = U.CH_NO WEHRE CH_USER = ?
@@ -365,16 +365,16 @@ public class ChallengeDao {
 	}
 	
 	
-	public ArrayList<Challenge> selectMyChList(Connection conn, String loginUser) {
+	public Challenge selectMyChList(Connection conn, String loginUser) {
 		
-		ArrayList<Challenge> list = new ArrayList<Challenge>();
+		Challenge c = new Challenge();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("myChallengeList");
+		String sql = prop.getProperty("myChallenge");
 		/*
-		 * SELECT CH_TITLE, CH_START, CH_END FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE 
-		 * CH_USER=? AND CH_STATUS = 'Y' ORDER BY CH_END ASC
+		 * myChallenge = SELECT C.CH_NO, C.CH_TITLE, C.CH_START, C.CH_END  C.CATEGORY_NAME 
+		 * FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE CH_USER=? AND CH_STATUS = 'Y'
 		 */
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -382,13 +382,13 @@ public class ChallengeDao {
 
 			rset = pstmt.executeQuery();
 
-			while (rset.next()) {
-				Challenge c = new Challenge();
-				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getString("CH_START"));
-				c.setEnd(rset.getString("CH_END"));
-				
-				list.add(c);
+			while (rset.next()) {			
+				c.setChNo(rset.getInt("C.CH_NO"));
+				c.setChTitle(rset.getString("C.CH_TITLE"));
+				c.setStart(rset.getString("C.CH_START"));
+				c.setEnd(rset.getString("C.CH_END"));
+				c.setCategoryTitle(rset.getString("C.CATEGORY_NAME"));
+
 			}
 
 		} catch (SQLException e) {
@@ -399,11 +399,11 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 
-		System.out.println(list +": myc dao");
+		System.out.println(c +": myc dao");
 		
 		
 		
-		return list;
+		return c;
 	}
 
 	public Challenge selectDetail(Connection conn, int chno) {
