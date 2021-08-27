@@ -83,8 +83,8 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="text-center">
-								<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
-								<p id="<%=i%>id"><%= flist.get(i).getFollowId() %></p>
+								<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
+								<p id="<%=i%>id" style="margin-bottom: 0px"><%= flist.get(i).getFollowId() %></p>
 
 								<div class="card-footer border-0 bg-transparent">
 									<div class="row">
@@ -100,10 +100,17 @@
 										</div>
 									</div>
 								</div>
-
-								<button id="addfr" onclick="javascript:void()"
-									class="btn btn-sm btn-rounded ">친구추가</button>
-
+								
+								
+								<% if(loginUser == null){%>
+							 			<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
+							 		<%}else{%>
+							 			<form action="insert.fl" method="get">
+											<input id="insertFl" type="hidden" name="followId" value="<%= flist.get(i).getFollowId() %>">
+											<button id="addfr" type="submit" class="btn btn-sm btn-rounded">친구추가</button>
+										</form>
+							 		<%}%>
+								
 							</div>
 						</div>
 					</div>
@@ -324,41 +331,53 @@
 				type:"get",
 				dataType: "json",
 				success:function(result){
+					var nickname = 0
 					var followerCount = 0
 					var boardCount = 0
 					
+					var nickname1 = 0
 					var followerCount1 = 0
 					var boardCount1 = 0
 					
+					var nickname2 = 0
 					var followerCount2 = 0
 					var boardCount2 = 0
 					
+					var nickname3 = 0
 					var followerCount3 = 0
 					var boardCount3 = 0
 					$.each(result, function(i){
 
+						nickname = result[i].nickname 
 						followerCount = result[i].followerCount 
 						boardCount = result[i].boardCount
 						
+						nickname1 = result[i].nickname1
 						followerCount1 = result[i].followerCount1
 						boardCount1 = result[i].boardCount1
 						
+						nickname2 = result[i].nickname2
 						followerCount2 = result[i].followerCount2
 						boardCount2 = result[i].boardCount2
 						
+						nickname3 = result[i].nickname3
 						followerCount3 = result[i].followerCount3 
 						boardCount3 = result[i].boardCount3
 					})
 					
+					$("#0nick").text(nickname)
 					$("#0fl").text(followerCount)
 					$("#0bo").text(boardCount)
 					
+					$("#1nick").text(nickname1)
 					$("#1fl").text(followerCount1)
 					$("#1bo").text(boardCount1)
 					
+					$("#2nick").text(nickname2)
 					$("#2fl").text(followerCount2)
 					$("#2bo").text(boardCount2)
 					
+					$("#3nick").text(nickname3)
 					$("#3fl").text(followerCount3)
 					$("#3bo").text(boardCount3)
 				},
@@ -367,10 +386,8 @@
 				}
 			})
 		}
-		
-
-		
 	}
+ 	
 
 
 </script>
