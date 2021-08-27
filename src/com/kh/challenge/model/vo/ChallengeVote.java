@@ -10,8 +10,7 @@ public class ChallengeVote {
 	private String start;
 	private String end;
 	private int voteCount;
-	private int categoryNo;
-	private String categoryName;
+	private int CategoryNo;
 	
 	public ChallengeVote() {
 		// TODO Auto-generated constructor stub
@@ -28,6 +27,9 @@ public class ChallengeVote {
 		this.start = start;
 		this.end = end;
 		this.voteCount = voteCount;
+<<<<<<< HEAD
+		CategoryNo = categoryNo;
+=======
 		this.categoryNo = categoryNo;
 		this.categoryName = categoryName;
 	}
@@ -40,6 +42,7 @@ public class ChallengeVote {
 		this.start = start;
 		this.end = end;
 		this.categoryName = categoryName;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	}
 
 	public String getChTitle() {
@@ -91,10 +94,13 @@ public class ChallengeVote {
 	}
 
 	public int getCategoryNo() {
-		return categoryNo;
+		return CategoryNo;
 	}
 
 	public void setCategoryNo(int categoryNo) {
+<<<<<<< HEAD
+		CategoryNo = categoryNo;
+=======
 		this.categoryNo = categoryNo;
 	}	
 
@@ -104,12 +110,19 @@ public class ChallengeVote {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	}
 
 
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
+		return "ChallengeVote [chTitle=" + chTitle + ", apNo=" + apNo + ", start=" + start + ", end=" + end
+				+ ", voteCount=" + voteCount + ", CategoryNo=" + CategoryNo + "]";
+	}
+
+=======
 		return "ChallengeVote [chTitle=" + chTitle + ", content=" + content + ", apNo=" + apNo + ", start=" + start
 				+ ", end=" + end + ", voteCount=" + voteCount + ", categoryNo=" + categoryNo + ", categoryName="
 				+ categoryName + "]";
@@ -119,6 +132,7 @@ public class ChallengeVote {
 
 	
 
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 
 	
 }

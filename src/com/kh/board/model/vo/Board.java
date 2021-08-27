@@ -4,6 +4,17 @@ import java.sql.Date;
 
 public class Board {
 
+<<<<<<< HEAD
+	private int boardNo;
+	private String nickName;
+	private String tagName;
+	private String boardTitle;
+	private Date boardDate;
+	private String boardContent;
+	private int avliable;
+	private int views;
+	private int categoryNo;
+=======
 	private int boardNo;			//게시글 고유 번호 
 	private String nickName;		//게시글 작성자의 닉네임 
 	private String tagName;			//게시글 말머리 
@@ -14,11 +25,13 @@ public class Board {
 	private int views;				//게시글 조회수 
 	private int categoryNo;			//게시글 카테고리 번호 
 	private String titleImg;		//게시글의 타이틀이미지 
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	
+	
+<<<<<<< HEAD
 	public Board() {
 		// TODO Auto-generated constructor stub
-	}
-	
+=======
 	public Board(String tagName, String boardTitle, String boardContent, String nickName) {
 		//insertBoard
 		super();
@@ -50,6 +63,7 @@ public class Board {
 		this.boardDate = boardDate;
 		this.views = views;
 		this.categoryNo = categoryNo;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
 	}
 	
@@ -121,11 +135,19 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
+<<<<<<< HEAD
+	public int getAvliable() {
+		return avliable;
+	}
+	public void setAvliable(int avliable) {
+		this.avliable = avliable;
+=======
 	public int getBoardStatus() {
 		return boardStatus;
 	}
 	public void setBoardStatus(char boardStatus) {
 		this.boardStatus = boardStatus;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	}
 	public int getViews() {
 		return views;
@@ -143,7 +165,11 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", nickName=" + nickName + ", tagName=" + tagName + ", boardTitle=" + boardTitle
+<<<<<<< HEAD
+          + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", avliable=" + avliable + ", views="
+=======
           + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", boardStatus=" + boardStatus + ", views="
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 				  + views + ", categoryNo=" + categoryNo + "]";
 	}
 	

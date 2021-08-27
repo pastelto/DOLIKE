@@ -1,28 +1,20 @@
 package com.kh.message.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.vo.Attachment;
 import com.kh.message.model.dao.MessageDao;
 import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgAttachment;
-import com.kh.message.model.vo.MsgPageInfo;
-import com.kh.notice.model.dao.NoticeDao;
-import com.kh.notice.model.vo.Notice;
 
 public class MessageService {
 
-	public ArrayList<Message> selectList(MsgPageInfo pi, String userId){
+	public ArrayList<Message> selectList(){
 		Connection conn = getConnection();
 		
-		ArrayList<Message> list = new MessageDao().selectList(conn, pi, userId);
+		ArrayList<Message> list = new MessageDao().selectList(conn);
 		close(conn);
 		
 		return list;
@@ -51,6 +43,8 @@ public class MessageService {
 	}
 	
 	
+<<<<<<< HEAD
+=======
 	public int getMessageCount(String userId) { // 받은 쪽지 목록 개수
 		Connection conn = getConnection();
 		
@@ -201,4 +195,5 @@ public class MessageService {
 
 	
 	
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 }

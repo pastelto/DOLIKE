@@ -8,12 +8,16 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+import com.kh.board.model.dao.BoardDao;
+import com.kh.board.model.vo.Board;
+=======
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
 import com.kh.challenge.model.dao.ChallengeDao;
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
-import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
 
 
@@ -42,6 +46,13 @@ public class ChallengeService {
 		
 		return fileList;
 
+<<<<<<< HEAD
+	public ArrayList<ChallengeAttachment> selectAttach(int[] arr) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<ChallengeAttachment> filelist = new ChallengeDao().selectAttach(conn, arr);
+=======
 	}
 	// detail at
 	public ChallengeAttachment selectAttach(int chNo) {
@@ -49,14 +60,21 @@ public class ChallengeService {
 		Connection conn = getConnection();
 		
 		ChallengeAttachment at = new ChallengeDao().selectAttach(conn, chNo);
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
 		close(conn);
 		System.out.println(at +": servlet");
 		
 		return at;
 		
+	
 	}
 
+<<<<<<< HEAD
+	public ArrayList<ChallengeReply> selectDetail() {
+		// TODO Auto-generated method stub
+		return null;
+=======
 	public int getListCount() {
 		
 		Connection conn = getConnection();
@@ -84,26 +102,17 @@ public class ChallengeService {
 		close(conn);
 		
 		return list;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	}
 
-	public ArrayList<ChallengeVote> selectVote() {
-		Connection conn = getConnection();
-		
-		ArrayList<ChallengeVote> list = new ChallengeDao().selectVote(conn);
-		
-		close(conn);
-		
-		return list;
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	public ArrayList<Challenge> selectMyChallenge(String loginUser) {
-		Connection conn = getConnection();
-		
-		ArrayList<Challenge> list = new ChallengeDao().selectMyChallenge(conn, loginUser);
-		
-		close(conn);
-		
-		return list;
+	public ArrayList<ChallengeReply> selectReply(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public Challenge selectDetail(int chno) {

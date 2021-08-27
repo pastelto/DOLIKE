@@ -3,10 +3,13 @@
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
+<<<<<<< HEAD
+=======
 	String contextPath = request.getContextPath();
 	
 	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");
 	
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 %>
 <!DOCTYPE html>
 <html>
@@ -21,6 +24,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
+<<<<<<< HEAD
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="./css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+=======
 		
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -97,6 +107,7 @@
       }
 
 	</style>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </head>
 <body>
     
@@ -149,13 +160,6 @@
                     </form>    
                     </div>
                 </div>
-                
-            <% if(loginUser == null) {%>  
-			<div class="loginArea">
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
-			</div>
-
-            <%}else{ %>
             <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
@@ -167,27 +171,29 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
+<<<<<<< HEAD
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+=======
                                             <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                                         </li>
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/list.ms">
-                                                <i class="icon-envelope-open"></i> <span>쪽지함</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            <a href="javascript:void()">
+                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
                                             </a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-lock"></i> <span>진행중인 챌린지</span></a>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
-               	<%} %> 
-                
             </div>
            </div>
       <!--**********************************
@@ -228,6 +234,16 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
+<<<<<<< HEAD
+                            <li><a href="./layout-blank.html">카테고리1</a></li>
+                            <li><a href="./layout-one-column.html">카테고리2</a></li>
+                            <li><a href="./layout-two-column.html">카테고리3</a></li>
+                            <li><a href="./layout-compact-nav.html">카테고리4</a></li>
+                            <li><a href="./layout-vertical.html">카테고리5</a></li>
+                            <li><a href="./layout-horizontal.html">카테고리6</a></li>
+                            <li><a href="./layout-boxed.html">카테고리7</a></li>
+                           
+=======
 <!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
@@ -235,6 +251,7 @@
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         </ul>
 
                         <!-- 즐겨찾는 게시판 Ajax Script -->
@@ -292,11 +309,18 @@
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="<%= request.getContextPath() %>/followMain.fl">추천 친구</a></li>
-                            <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
+                            <li><a href="followMain.fl">추천 친구</a></li>
+                            <li><a href="MyFollow.fl">나의 친구</a></li>
                    
                         </ul>
                     </li>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                    <% if(loginUser == null) {%>   
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
+                    <li class="mega-menu-sm">
+=======
                     <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
                         <a class="has-arrow sweet-wrong" aria-expanded="false" id="needLogin" onclick="needLogin();">
@@ -306,20 +330,24 @@
                     
                     <%}else{ %>
                      <li class="mega-menu-sm">
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="<%= request.getContextPath() %>/list.ms">쪽지함</a></li>
-                            <li><a href="<%= request.getContextPath() %>/writeForm.ms">쪽지 보내기</a></li>
+                            <li><a href="list.ms">쪽지함</a></li>
+                            <li><a href="writeForm.ms">쪽지 보내기</a></li>
                         </ul>
                     </li>
-                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
+<<<<<<< HEAD
+                            <li><a href="challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="./app-calender.html">챌린지2</a></li>
+=======
                         <%if(loginUser==null){ %>
                             <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
                             <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
@@ -337,10 +365,11 @@
                             <li><a href="<%= request.getContextPath() %>/challengeVote.ch">챌린지 투표</a></li>
                             <li><a href="<%= request.getContextPath() %>/myChallenge.ch">마이 챌린지</a></li>
                         <%}}%>                           
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         </ul>
                     </li>
                		<li>
-                        <a href="<%= request.getContextPath() %>/noticeView.no" aria-expanded="false">
+                        <a href="noticeView.no" aria-expanded="false">
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>

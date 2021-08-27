@@ -55,6 +55,8 @@ public class Message {
 		this.recvtime = recvtime;
 		this.msgStatus = msgStatus;
 	}
+<<<<<<< HEAD
+=======
 	
 	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent, String recvtime, String msgStatus) {
 		super();
@@ -66,6 +68,7 @@ public class Message {
 		this.recvtime = recvtime;
 		this.msgStatus = msgStatus;
 	}
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 
 	public int getMsgNo() {
 		return msgNo;

@@ -3,6 +3,39 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<<<<<<< HEAD
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DO LIKE - Do Whatever You Like, Community</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    <!-- Pignose Calender -->
+    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- Custom Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+>>>>>>> parent of 9f544a3 (05. 00 복원중)
+=======
+<link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+>>>>>>> parent of e570fa2 (--에러잠시커밋)
+=======
+>>>>>>> parent of 284a44e (게시판 추가하기 완료,)
+=======
+>>>>>>> parent of 6ceba06 (Merge branch 'master' of https://github.com/pastelto/DOLIKE)
+=======
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,6 +50,7 @@
 <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
 <link rel="stylesheet"
 	href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </head>
 <style>
 .carousel-inner {
@@ -147,6 +181,9 @@
 					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; paading-right: 10%; padding-left: 10%;"> -->
 
 
+<<<<<<< HEAD
+		</div>
+=======
 					<div class="col-md-6" style="width: 10%; padding-right: 30px;">
 						<div class="card">
 							<div class="card-body">
@@ -208,6 +245,7 @@
 											data-toggle="tab" href="#message1">카테고리6</a></li>
 										<li class="nav-item"><a class="nav-link"
 											data-toggle="tab" href="#message1">카테고리7</a></li>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 
 									</ul>
 									<div class="tab-content">
@@ -267,12 +305,35 @@
 	</div>
 	</div>
 </div>
+<<<<<<< HEAD
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="./plugins/common/common.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/gleek.js"></script>
+    <script src="./js/styleSwitcher.js"></script>
+
+
+
+    
+    <!--**********************************
+         인기글 Scripts
+    ***********************************  -->
+
+=======
 
 </div>
 
 	<%@ include file="./views/common/footer.jsp"%>
 
 
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 
 </body>
 

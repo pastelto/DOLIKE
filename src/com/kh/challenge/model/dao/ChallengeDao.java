@@ -9,16 +9,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.ChallengeAttachment;
+<<<<<<< HEAD
+=======
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.ChallengeVote;
 import com.kh.challenge.model.vo.PageInfo;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 
 public class ChallengeDao {
 
@@ -26,7 +28,11 @@ public class ChallengeDao {
 
 	public ChallengeDao() {
 		String fileName = ChallengeDao.class.getResource("/sql/challenge/challenge-query.properties").getPath();
+<<<<<<< HEAD
+		System.out.println("fileName   " + fileName);
+=======
 
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -38,6 +44,12 @@ public class ChallengeDao {
 		}
 
 	}
+<<<<<<< HEAD
+
+	public ArrayList<Challenge> selectList(Connection conn) {
+		
+		ArrayList<Challenge> list = new ArrayList<>();
+=======
 
 	public int getListCount(Connection conn) {
 		int listCount = 0;
@@ -67,6 +79,7 @@ public class ChallengeDao {
 	public ArrayList<Challenge> selectList(Connection conn) {
 
 		ArrayList<Challenge> list = new ArrayList<Challenge>();
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -79,6 +92,20 @@ public class ChallengeDao {
 		System.out.println(sql);
 
 		try {
+<<<<<<< HEAD
+
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Challenge c = new Challenge();
+				c.setChNo(rset.getInt("CH_NO"));
+				c.setChTitle(rset.getString("CH_TITLE"));
+				c.setStart(rset.getDate("CH_START"));
+				c.setEnd(rset.getDate("CH_END"));
+				list.add(c);
+=======
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();			
 			
@@ -88,6 +115,7 @@ public class ChallengeDao {
 									   rset.getString("CH_START"),
 									   rset.getString("CH_END"), 
 									   rset.getString("CATEGORY_NAME")));
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -102,11 +130,21 @@ public class ChallengeDao {
 		return list;
 	}
 
+<<<<<<< HEAD
+	public ArrayList<ChallengeAttachment> selectAttach(Connection conn, int[] arr) {
+=======
 	//MAIN
 	public ArrayList<ChallengeAttachment> selectAttach(Connection conn) {
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
 		ArrayList<ChallengeAttachment> fileList = new ArrayList<ChallengeAttachment>();
 		ResultSet rset = null;
+<<<<<<< HEAD
+		
+		/*selectChallengeAt = SELECT AT_NO, AT_NEWNAME, AT_ORIGINNAME FROM CH_ATTACHMENT WHERE CH_NO=?*/
+		
+		
+=======
 		PreparedStatement pstmt = null;
 		/*
 		 * SELECT AT_NO, AT_NEWNAME, AT_ORIGINNAME, CH_NO FROM CH_ATTACHMENT
@@ -151,10 +189,28 @@ public class ChallengeDao {
 		 * CH_ATTACHMENT WHERE CH_NO=?
 		 */
 
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		String sql = prop.getProperty("selectChallengeAt");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+<<<<<<< HEAD
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				ChallengeAttachment ca = new ChallengeAttachment();
+				ca.setAtNo(rset.getInt("AT_NO"));
+				ca.setNewName(rset.getString("AT_NEWNAME"));
+				ca.setOriginName(rset.getString("AT_ORIGINNAME"));
+				
+				for(int i=0; i <= arr.length ; i++) {
+					ca.setChNo(rset.getInt(arr[i]));
+					break;
+				}
+				
+				fileList.add(ca);
+=======
 			pstmt.setInt(1, chno);
 
 			rset = pstmt.executeQuery();
@@ -163,6 +219,7 @@ public class ChallengeDao {
 				at = new ChallengeAttachment(rset.getInt("AT_NO"),
 						 					 rset.getString("AT_NEWNAME"),
 						 				     rset.getString("AT_ORIGINNAME"));
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 			}
 
 		} catch (SQLException e) {
@@ -176,6 +233,8 @@ public class ChallengeDao {
 		return at;
 	}
 
+<<<<<<< HEAD
+=======
 	public ArrayList<Challenge> selectEndedList(Connection conn) {
 		ArrayList<Challenge> list = new ArrayList<>();
 		Statement stmt = null;
@@ -633,4 +692,5 @@ public class ChallengeDao {
 
 	
 
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
 }

@@ -37,6 +37,9 @@ public class LoginServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		System.out.println(userId);
+		System.out.println(userPwd);
+		
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
@@ -46,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 
-			response.sendRedirect(request.getContextPath() + "/index2.jsp"); //index2로 넘기기
+			response.sendRedirect(request.getContextPath());
 		} else {
 			request.setAttribute("msg", "로그인 실패");
 			

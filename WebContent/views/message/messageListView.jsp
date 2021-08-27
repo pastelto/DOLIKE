@@ -1,5 +1,8 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
+<<<<<<< HEAD
+	import="java.util.ArrayList, com.kh.message.model.vo.Message"%>
+=======
 	import="java.util.*, com.kh.message.model.vo.*, java.text.*"%>
 <%
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
@@ -15,6 +18,7 @@
 	int index = 1;
 	
 %>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +32,12 @@
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
 <style>
+<<<<<<< HEAD
+.text-primary{
+	color:#78c2ad;
+
+}
+=======
 	.text-primary{
 		color:#78c2ad;
 	}
@@ -55,6 +65,21 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
+<<<<<<< HEAD
+		#sendMsgLink, #resetBtn, #sendBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	
+	#deleteBtn{
+		color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
+=======
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </style>
 </head>
 
@@ -99,7 +124,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">받은쪽지함</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">쪽지함</a></li>
                     </ol>
                 </div>
             </div>
@@ -108,8 +133,57 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card" >
+                        <div class="card">
                             <div class="card-body">
+<<<<<<< HEAD
+                                <div class="email-left-box"><a href="writeForm.ms" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
+                                    <div class="mail-list mt-4"><a href="list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> <span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
+                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+                                    </div>
+                                   
+                                </div>
+                                <div class="email-right-box">
+                                   <div class="toolbar" role="toolbar">
+										<h4> 받은 쪽지함 </h4>
+                                    </div>
+                                    
+                                    
+                                    <div class="email-list m-t-15"> <!-- 쪽지함 받아오는 코드 작성 -->
+                                        <div class="message">
+                                            <a href="list.ms">
+                                                <div class="col-mail col-mail-1">
+                                                    <div class="email-checkbox" style="height: 650px">
+                                                        <input type="checkbox" id="chk2">
+                                                        <label class="toggle" for="chk2"></label>
+                                                    </div><span class="star-toggle ti-star"></span>
+                                                </div>
+                                                <div class="col-mail col-mail-2">
+                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
+                                                    <div class="date">11:49 am</div>
+                                                </div>
+                                            </a>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                    <!-- panel -->
+                                    <!-- 쪽지함 페이지 코드 작성할 곳  -->
+                                    <div class="row"> 
+                                        <div class="col-7">
+                                            <div class="text-left">1 - 20 of 568</div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="btn-group float-right">
+                                                <button class="btn btn-gradient" type="button" style="background: #ced4da"><i class="fa fa-angle-left"></i>
+                                                </button>
+                                                <button class="btn" type="button" style="background: #78c2ad"><i class="fa fa-angle-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+=======
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
                                     <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i><b>받은 쪽지함</b>
                                     <%if(newMsgCount > 0){ %>
@@ -178,6 +252,7 @@
 									</div>
 									</div>
 								</div>
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
                                 </div>
 									<!-- 삭제 버튼 -->
 									<% if(!list.isEmpty()){ %>
@@ -192,7 +267,49 @@
                     </div>
                     
                 </div>
+<<<<<<< HEAD
+=======
                 
+<<<<<<< HEAD
+                				<!-- 페이지 처리 -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 맨앞으로 -->
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.ms?currentPage=1"> &laquo; </a></li>
+				
+				<!-- 이전페이지 -->
+				<% if(currentPage == 1) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<%} %>
+				
+				
+				<!-- 페이지 목록 -->
+				<%for(int p=startPage; p<=endPage; p++){ %>
+				
+					<%if(p == currentPage){ %>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+					<%}else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.ms?currentPage=<%= p %>"><%= p %> </a></li>
+					<%} %>
+					
+				<%} %>
+				
+				
+				<!-- 다음페이지 -->
+				<% if(currentPage == maxPage) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<%} %>
+				
+				<!-- 맨뒤로 -->
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
+			</ul>
+		</div>
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
+=======
 					<div>
 					<ul class="pagination justify-content-center">
 						<!-- 맨앞으로 -->
@@ -229,11 +346,10 @@
 						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.ms?currentPage=<%= maxPage %>"> &raquo; </a></li>
 					</ul>
 				</div>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
             </div>
-		
             <!-- #/ container -->
         </div>
-        
         <!--**********************************
             Content body end
         ***********************************-->
@@ -250,6 +366,9 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
+<<<<<<< HEAD
+
+=======
 	<script>
 		<% if(!list.isEmpty()){%>
 		$(function(){
@@ -262,6 +381,7 @@
 		})
 		<% } %>
 	</script>
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
 
 </body>
 

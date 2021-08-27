@@ -36,12 +36,34 @@ public class ChallengeMainServlet extends HttpServlet {
 		
 		ArrayList<Challenge> list = new ChallengeService().selectList();
 		request.setAttribute("list", list);
+<<<<<<< HEAD
+		
+<<<<<<< HEAD
+		int[] arr = new int[3];
+		
+		for(int i=0; i < list.size(); i++) {
+			arr[i] = list.get(i).getChNo();
+		}
+		
+		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach(arr);
+		request.setAttribute("fileList", fileList);
+=======
+		//int chNo = Integer.parseInt(request.getParameter());
+		
+		//ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();
+		
+		
+		
+		//request.setAttribute("fileList", fileList);
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
+=======
 		System.out.println(list +": servlet");
 		
 		
 		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();						
 		request.setAttribute("fileList", fileList);
 		System.out.println(fileList +": servlet");
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
 		view.forward(request, response);

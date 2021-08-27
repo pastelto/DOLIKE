@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
 import com.kh.message.model.vo.Message;
-import com.kh.message.model.vo.MsgPageInfo;
 
 /**
  * Servlet implementation class MessageListServlet
@@ -34,6 +32,8 @@ public class MessageListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
+=======
 
 
 		int listCount;
@@ -53,18 +53,13 @@ public class MessageListServlet extends HttpServlet {
 		listCount = new MessageService().getMessageCount(userId);
 		
 		currentPage = 1;
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-
-		pageLimit = 10;
-		msgLimit = 10;
-
-		maxPage = (int)Math.ceil((double)listCount/msgLimit);
-
-		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		ArrayList<Message> list = new MessageService().selectList();
 		
+<<<<<<< HEAD
+		request.setAttribute("list", list);
+=======
 		endPage = startPage + pageLimit - 1;
 
 		if(maxPage < endPage) {
@@ -79,10 +74,10 @@ public class MessageListServlet extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("newMsgCount", newMsgCount);
 		
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/message/messageListView.jsp");
 		view.forward(request, response);
-
 	}
 
 	/**
