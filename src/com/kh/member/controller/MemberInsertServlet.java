@@ -45,18 +45,11 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
-		String interests = request.getParameter("interests");
+		String interests1 = request.getParameter("interests1");
+		String interests2 = request.getParameter("interests2");
+		String interests3 = request.getParameter("interests3");
 		
-		
-//		String[] interests = request.getParameterValues("interests");
-//		
-//		String interestsArr = "";
-//		
-//		if(interests != null) {
-//			interestsArr = String.join(",", interests);
-//		}
-		
-		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests);
+		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests1, interests2, interests3);
 		
 		int result = new MemberService().insertMember(mem);
 		
