@@ -77,6 +77,16 @@ public class Challenge {
 		this.achieve = achieve;
 	}
 
+	
+	
+	public Challenge(int chNo, String chTitle, String start, String end,  String categoryTitle) {
+		super();
+		this.chNo = chNo;
+		this.chTitle = chTitle;
+		this.start = start;
+		this.end = end;
+		this.categoryTitle = categoryTitle;
+	}
 	public int getChNo() {
 		return chNo;
 	}

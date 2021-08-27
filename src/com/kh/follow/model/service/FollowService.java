@@ -8,8 +8,12 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.model.vo.Board;
+import com.kh.category.model.dao.CategoryDao;
+import com.kh.category.model.vo.Category;
 import com.kh.follow.model.dao.FollowDao;
 import com.kh.follow.model.vo.Follow;
+import com.kh.follow.model.vo.FollowCategoryPageInfo;
 import com.kh.follow.model.vo.FollowPageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.notice.model.dao.NoticeDao;
@@ -82,7 +86,7 @@ public class FollowService {
 		return result;
 	}
 
-	public int followCount(String userId) {
+	public int followCount(String userId) { 
 		Connection conn = getConnection();
 		
 		int result = new FollowDao().followCount(conn, userId);
@@ -100,5 +104,65 @@ public class FollowService {
 		
 		return m;
 	}
+
+	public int deleteFollowVer2(String userId, String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().deleteFollowVer2(conn, userId, followId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Category> getCatList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Category> catList = new FollowDao().categoryList(conn);
+		
+		close(conn);
+		
+		return catList;
+	}
+
+	public int countFollower(String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().countFollower(conn, followId);
+		
+		close(conn);
+		return result;
+	}
+
+	public int countFollowBoard(String followId) {
+		Connection conn = getConnection();
+		
+		int result = new FollowDao().countFollowBoard(conn, followId);
+		
+		close(conn);
+		return result;
+	}
+
+	public int getCatBoardListCount(String followId, String catTitle) {
+		Connection conn = getConnection();
+		
+		int listCount = new FollowDao().getCatBoardListCount(conn, followId, catTitle);
+		
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Board> selectFollowBoardList(String followId, String catTitle, FollowCategoryPageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Board> list = new FollowDao().selectFollowBoardList(conn, followId , catTitle,  pi);
+		close(conn);
+		return list;
+	}
+
 
 }

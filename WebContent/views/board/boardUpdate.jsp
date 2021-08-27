@@ -92,7 +92,7 @@
 			 					</th>
 		 						<th colspan="2">등록된 첨부파일이 없습니다. </th>
 		 						<% } %>
-		 						<input type="file" name="upfile">
+		 						<input type="file" name="upFile">
 		 					</tr>
 		 				</tbody>
 		 				

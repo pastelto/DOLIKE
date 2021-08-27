@@ -10,9 +10,10 @@ public class Board {
 	private String boardTitle;		//게시글 제목 
 	private Date boardDate;			//게시글 작성일자 
 	private String boardContent;	//게시글 내용 
-	private char boardStatus;			//게시글 상태값 (Y이면 공개 N이면 비공개상태) 
+	private char boardStatus;		//게시글 상태값 (Y이면 공개 N이면 비공개상태) 
 	private int views;				//게시글 조회수 
 	private int categoryNo;			//게시글 카테고리 번호 
+	private String titleImg;		//게시글의 타이틀이미지 
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -40,9 +41,8 @@ public class Board {
 		this.views = views;
 		this.categoryNo = categoryNo;
 	}
-	
 	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
-		//arraryList selectList
+		//select list 
 		super();
 		this.boardNo = boardNo;
 		this.nickName = nickName;
@@ -50,6 +50,19 @@ public class Board {
 		this.boardDate = boardDate;
 		this.views = views;
 		this.categoryNo = categoryNo;
+		
+	}
+	
+	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views, String titleImg) {
+		//basic list 
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.boardTitle = boardTitle;
+		this.boardDate = boardDate;
+		this.views = views;
+		this.categoryNo = categoryNo;
+		this.titleImg = titleImg;
 	}
 
 	public Board(int boardNo, String nickName, String tagName, String boardTitle, Date boardDate, String boardContent, int views) {
@@ -61,6 +74,15 @@ public class Board {
 		this.boardDate = boardDate;
 		this.boardContent = boardContent;
 		this.views = views;
+		
+	}
+
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
 	}
 
 	public int getBoardNo() {

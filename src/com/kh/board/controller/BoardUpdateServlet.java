@@ -17,6 +17,7 @@ import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.Part;
 
 /**
  * Servlet implementation class BoardUpdateServlet
@@ -40,7 +41,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10*1024*1024;
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			String savePath = resources + "/board_upfiles";
+			String savePath = resources + "//board_upfiles";
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
 			
@@ -58,20 +59,30 @@ public class BoardUpdateServlet extends HttpServlet {
 			
 			Attachment at = null;
 			
+			String upFile = multiRequest.getOriginalFileName("upFile");
 			
-			if(multiRequest.getOriginalFileName("upFile") != null) {// 새로 파일이 들어온경우
+			if(multiRequest.getOriginalFileName(upFile) != null) {// 새로 파일이 들어온경우
 				
 				at = new Attachment();
-				at.setOriginName(multiRequest.getOriginalFileName("upFile"));
-				at.setChangeName(multiRequest.getFilesystemName("upFile"));
+				at.setOriginName(multiRequest.getOriginalFileName(upFile));
+				at.setChangeName(multiRequest.getFilesystemName(upFile));
 				at.setFilePath(savePath);
-				System.out.println("upfile");
+				System.out.println(upFile);
 				//기존 등록 파일은 삭제해주기
 				if(multiRequest.getParameter("originFile") != null ) {
 					
 					File deleteFile = new File(savePath + multiRequest.getParameter("originFile"));
-					System.out.println("deleteFile   "+ deleteFile);
-					deleteFile.delete();
+					System.out.println("deleteFile :  "+ deleteFile);
+					if(deleteFile.exists()) {
+						if(deleteFile.delete()) {
+							System.out.println("기존의 파일을 성공적으로 제거했습니다. ");
+						}else {
+							System.out.println("기존의 파일을 제거하지 못했습니다. ");
+						}
+					}else {
+						System.out.println("파일이 존재하지않습니다.");
+					}
+					
 					
 					at.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
 				}else {
@@ -79,10 +90,12 @@ public class BoardUpdateServlet extends HttpServlet {
 					at.setRefBoardNo(bno);
 				}
 			}
+			
 			int result = new BoardService().updateBoard(b, at);
 			
 			if(result > 0) {
 				response.sendRedirect("detail.bo?bno="+bno);
+				System.out.println("리턴 후 받는 bno 값 " + bno);
 			}else {
 					
 				request.setAttribute("msg", "게시판 수정 실패");

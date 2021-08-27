@@ -2,6 +2,7 @@ package com.kh.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -62,20 +63,22 @@ public class BoardInsertServlet extends HttpServlet {
 			
 			Attachment at = null;
 			
-			if(multiRequest.getOriginalFileName("upfile") != null) {
-				String originName = multiRequest.getOriginalFileName("upfile");
-				String changeName = multiRequest.getFilesystemName("upfile");
+			if(multiRequest.getOriginalFileName("upFile")  != null) {
+				String originName = multiRequest.getOriginalFileName("upFile");
+				String changeName = multiRequest.getFilesystemName("upFile");
 				System.out.println(originName);
 				System.out.println(changeName);
-				
+					
 				at = new Attachment();
 				at.setFilePath(savePath);
 				at.setOriginName(originName);
 				at.setChangeName(changeName);
-				
+					
 			}
+			
 			int result = new BoardService().insertBoard(b, at);
-			if(result > 0) {
+			
+			if(result  > 0) {
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
 				response.sendRedirect("list.bo");
 				File successFile = new File(savePath+at.getChangeName());

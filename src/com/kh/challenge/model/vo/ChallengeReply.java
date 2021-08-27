@@ -34,6 +34,21 @@ public class ChallengeReply {
 		this.status = status;
 	}
 
+	
+	
+	public ChallengeReply(int rpNo, String rpWriter, Date writeDate, String content, String originName, String newName,
+			String location, int rpLike) {
+		super();
+		this.rpNo = rpNo;
+		this.rpWriter = rpWriter;
+		this.writeDate = writeDate;
+		this.content = content;
+		this.originName = originName;
+		this.newName = newName;
+		this.location = location;
+		this.rpLike = rpLike;
+	}
+
 	public int getRpNo() {
 		return rpNo;
 	}
