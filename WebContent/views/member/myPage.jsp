@@ -136,6 +136,15 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">마이페이지</li>
+                        <li class="breadcrumb-item active">계정 관리</li>
+                    </ol>
+                </div>
+            </div>
+        
             <!-- row -->
             <div class="container-fluid">
                 <div class="row justify-content-center">
