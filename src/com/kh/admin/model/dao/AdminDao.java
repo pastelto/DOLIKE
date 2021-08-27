@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.admin.model.vo.AdminPageInfo;
-import com.kh.category.model.vo.Category;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -45,7 +44,7 @@ public class AdminDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getListCount");
-		
+		System.out.println("갯 리스트 카우느"+sql);
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(sql);
@@ -72,7 +71,7 @@ public class AdminDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("adminMemberList");
-		
+		System.out.println("쿼리문 : " + sql);
 		int startRow = (ami.getCurrentPage()-1)*ami.getAdminLimit()+1;
 		int endRow = startRow + ami.getAdminLimit()-1;
 		
@@ -91,7 +90,9 @@ public class AdminDao {
 								      rset.getString("PHONE"),
 								      rset.getString("EMAIL"),
 								      rset.getString("NICKNAME"),
-								      rset.getString("INTERESTS"),
+								      rset.getString("INTERESTS1"),
+								      rset.getString("INTERESTS2"),
+								      rset.getString("INTERESTS3"),
 								      rset.getDate("USER_CREATE_DATE"),
 								      rset.getString("USER_STATUS")
 						));
@@ -106,6 +107,7 @@ public class AdminDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println("다오에서 list 값 : " + list);
 		return list;
 	}
 

@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
 import com.kh.admin.model.vo.AdminPageInfo;
-import com.kh.category.model.service.CategoryService;
-import com.kh.category.model.vo.Category;
-import com.kh.category.model.vo.CategoryPageInfo;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -48,8 +45,8 @@ public class AdminMemberListServlet extends HttpServlet {
 				int adminLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 				
 				// * listCount : 총 게시글 갯수 
-				listCount = new CategoryService().getListCount();
-				
+				listCount = new AdminService().getListCount();
+				System.out.println("리스트카운트");
 				// * currentPage : 현재 페이지 (요청한 페이지)
 				currentPage = 1;
 				
@@ -119,7 +116,7 @@ public class AdminMemberListServlet extends HttpServlet {
 				
 				//request.getRequestDispatcher("views/category/categoryList.jsp").forward(request, response); // 담은 정보를 넘겨줌
 				RequestDispatcher view = request.getRequestDispatcher("views/admin/adminMemberList.jsp");
-				System.out.println(list);
+				System.out.println("회원 리스트 값 : " + list);
 				view.forward(request, response);
 	}
 

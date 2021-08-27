@@ -5,7 +5,7 @@
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
 	
-	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");
+	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");
 	
 %>
 <!DOCTYPE html>
@@ -344,18 +344,18 @@
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
-                    <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
+                    <%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> --%>
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">회원 관리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="categoryList.ca">카테고리 목록</a></li>
-                            <li><a href="userAdminList.ua">회원 목록</a></li>
+                            <li><a href="adminMemberList.am">회원 목록</a></li>
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
-                    <% } %>              
+                    <%-- <% } %> --%>         
                 </ul>
                 
                                
