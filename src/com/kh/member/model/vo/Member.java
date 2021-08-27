@@ -7,7 +7,7 @@ public class Member {
 	private String userId;
 	private String userName;
 	private String userPwd;
-	private Date birthDate;
+	private String birthDate;
 	private String phone;
 	private String email;
 	private String nickName;
@@ -20,7 +20,7 @@ public class Member {
 	}
 	
 
-	public Member(String userId, String userName, String userPwd, Date birthDate, String phone, String email,
+	public Member(String userId, String userName, String userPwd, String birthDate, String phone, String email,
 			String nickName, String interests, Date userCreateDate, String userStatus) {
 		super();
 		this.userId = userId;
@@ -35,7 +35,7 @@ public class Member {
 		this.userStatus = userStatus;
 	}
 	
-	public Member(String userId, String userName, String userPwd, Date birthDate, String phone, String email,
+	public Member(String userId, String userName, String userPwd, String birthDate, String phone, String email,
 			String nickName, String interests) {
 		super();
 		this.userId = userId;
@@ -74,11 +74,11 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -129,20 +129,5 @@ public class Member {
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
 	}
-
-	
-//	public String getInterestsArr() {
-//		String interestsArr = "";
-//		
-//		for (int i = 0; i < interests.length; i++) {
-//			interestsArr += interests[i];
-//			
-//			if (i < interests.length - 1) {
-//				interestsArr += ',';
-//			}
-//		}
-//		
-//		return interestsArr;
-//	}
 	
 }
