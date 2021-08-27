@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Insert title here</title>
+<title>Detail category here</title>
 
 <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
@@ -77,7 +77,7 @@
                                 <div class="basic-form">
                                         <div class="form-group">
                                             <label>카테고리를 확인하세요.</label>
-                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caTitleDetail" value="<%= c.getCategoryName() %>"></input>
+                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caSelectName" value="<%= c.getCategoryName() %>"></input>
                                         </div>
                                     <div class="general-button" align="right">
                                     <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
@@ -111,6 +111,7 @@
                   </div>
 				</div>
 			</div>
+			<%@ include file="../common/footer.jsp" %>
 		</div>
 </body>
 </html>

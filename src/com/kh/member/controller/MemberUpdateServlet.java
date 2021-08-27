@@ -32,29 +32,24 @@ public class MemberUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String newPwd = request.getParameter("newPwd");
-		
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		String userPwd = request.getParameter("userPwd");
 		String nickName = request.getParameter("nickName");
-		String[] interests = request.getParameterValues("interest");
+		String interests1 = request.getParameter("interests1");
+		String interests2 = request.getParameter("interests2");
+		String interests3 = request.getParameter("interests3");
 		
-		Member updateMem = new MemberService().updateMember(newPwd, userId, userPwd, nickName, interests);
-		
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm.jsp");
+		Member updateMem = new MemberService().updateMember(userId, userPwd, nickName, interests1, interests2, interests3);
 		
 		if(updateMem != null) {
-			request.setAttribute("sTag", "Y");
-			request.setAttribute("msg", "성공적으로 비밀번호를 변경하였습니다.");
-			
+			request.getSession().setAttribute("msg", "성공적으로 회원정보를 수정하였습니다.");
 			request.getSession().setAttribute("loginUser", updateMem);
-			
+			response.sendRedirect(request.getContextPath() + "/mypage.me");
 		}else {
-			request.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
+			request.setAttribute("msg", "회원정보 변경에 실패했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 		
-		view.forward(request, response);
 	}
 
 	/**

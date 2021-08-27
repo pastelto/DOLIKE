@@ -110,7 +110,7 @@
                         </div>
                     </div>
                  </div>
-                
+               </div>              
 		<br><br>
 
 		
@@ -150,6 +150,7 @@
 				<!-- 맨뒤로 -->
 				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
+		</div>
 		</div>
 		<script>
 		<%if(!list.isEmpty()){ %>

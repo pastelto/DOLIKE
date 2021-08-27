@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.message.model.vo.*"%>
 <%
-	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 
-	
+	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list"); 	
 	MsgPageInfo pi = (MsgPageInfo)request.getAttribute("pi");
+	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -55,13 +55,13 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
-		#sendMsgLink, #resetBtn, #sendBtn {
+	#sendMsgLink, #resetBtn, #sendBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
 	
-		#deleteBtn{
+	#deleteAllBtn{
 		color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
@@ -121,8 +121,11 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함<span class="badge badge-primary badge-sm float-right m-t-5" style="background: #78c2ad">95</span> </a>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;  border: none;">쪽지보내기</a>
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함                                    
+                                    <%if(newMsgCount > 0){ %>
+                                    <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
+                                    <%} %></a>
                                         <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
                                         <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i><b>휴지통</b></a>
                                     </div>
@@ -140,11 +143,11 @@
 									<table class="table table-hover" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th></th>
-												<th>번호</th>
-												<th>보낸 사람</th>
+												<th style="width:3rem;"></th>
+												<th style="width:5rem;">번호</th>
+												<th style="width:8rem;">보낸 사람</th>
 												<th>제목</th>
-												<th>받은 날짜</th>
+												<th style="width:12rem;">받은 날짜</th>
 											</tr>
 										</thead>
 										<tbody>					
@@ -154,9 +157,9 @@
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>
-										 		<tr>
-										 			<td><input type="checkbox"/><input type="hidden" name="msgNo" value=""></td>
-										 			<td><%= m.getMsgNo()%></td>
+										 		<tr>	 			
+										 			<td></td>
+										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
 													<td><%= m.getRecvtime()%></td>
@@ -169,11 +172,14 @@
 									</div>
 								</div>
                                 </div>
-                                	<!-- 삭제 버튼 -->
+                               <!-- 삭제 버튼 -->
 									<% if(!list.isEmpty()){ %>
-									<div class="float-right">
-									<button id="deleteBtn" type="button" class="btn btn-sm" onclick="">삭제하기</button>
+									<div class="pagination justify-content-center">
+									<button id="deleteAllBtn" type="button" class="btn btn-sm" onclick="deleteAllMsg();">휴지통 비우기</button>
 									</div>
+									<form id="msgAllDel" method="post">
+										<input type="hidden" name="mno" value="<%= loginUser.getUserId() %>">
+									</form>
 									<% } %>
                             </div>
                         </div>
@@ -235,18 +241,43 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-	<script>
-		<% if(!list.isEmpty()){%>
-		$(function(){
-			$("table>tbody>tr").click(function(){
-				var mno = $(this).children().eq(1).text();
-				/* var mno = $("#msgList input[name=msgNo]").val(); */
-				location.href="<%= contextPath %>/dlist.ms?mno="+mno;
-			})
-		})
-		<% } %>
-	</script>
-
+		<script>
+		
+		function deleteAllMsg(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            swal.fire({
+                title: '삭제',        // 제목
+                text: "정말 휴지통을 비우겠습니까?",  // 내용
+                type: 'warning',                              // 종류
+                confirmButtonText: '삭제',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                
+                	$("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
+				swal.fire(
+						{title: '삭제',
+						 text: '성공적으로 삭제되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#msgAllDel").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        });
+		}
+		</script>
 </body>
 
 </html>

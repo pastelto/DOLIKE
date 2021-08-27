@@ -1,6 +1,5 @@
 package com.kh.challenge.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.ChallengeApply;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ApplyChallengeServlet
@@ -34,8 +34,10 @@ public class ApplyChallengeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
-		String apUser = request.getParameter("loginuser");
+		String apUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+		System.out.println(categoryNo);
+		
 		String content = request.getParameter("content");
 
 		ChallengeApply ca = new ChallengeApply();
@@ -48,7 +50,7 @@ public class ApplyChallengeServlet extends HttpServlet {
 
 		if (result > 0) {
 			request.getSession().setAttribute("msg", "신청이 완료되었습니다.");
-			response.sendRedirect("list.ms");
+			response.sendRedirect("index2.jsp");
 			System.out.println("챌린지 신청 성공!");
 		} else {
 			request.setAttribute("msg", "신청에 실패했습니다.");

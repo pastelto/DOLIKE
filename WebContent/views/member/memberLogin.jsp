@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+<<<<<<< HEAD
     
     <!-- Custom Stylesheet -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -22,6 +23,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	
 	
+=======
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	<title>로그인</title>
 	<style>
 		.loginArea{
@@ -62,8 +65,16 @@
 		}
 	
 	</script>
+	<style>
+	#loginBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	</style>
 </head>
 <body>
+<<<<<<< HEAD
   	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	
@@ -134,5 +145,65 @@
 	 -->
 	<%@ include file="../common/footer.jsp" %>
 	</div>
+=======
+	<div id="main-wrapper">
+	<%@ include file="../common/menuSideBar.jsp" %> 
+    
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+    
+	<div class="content-body">
+     <div class="row page-titles mx-0">
+         <div class="col p-md-0">
+             <ol class="breadcrumb">
+                 <li class="breadcrumb-item">메인</li>
+                 <li class="breadcrumb-item active">로그인</li>
+             </ol>
+         </div>
+     </div>
+	
+    <div class="container-fluid">
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <a class="text-center"> <h4>로그인</h4></a>
+                                <form class="mt-5 mb-5 login-input" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
+                                    <div class="form-group">
+                                        <input id="userId" name="userId" type="text" class="form-control" placeholder="아이디">
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="userPwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호">
+                                    </div>
+                                    <button id="loginBtn" class="btn login-form__btn submit w-100" type="submit">로그인</button>
+                                </form>
+                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary">회원가입</a> 하러가기</p>
+                                <p class="mt-5 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary">공지사항</a> 보러가기</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+	</div>
+    <%@ include file="../common/footer.jsp" %>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.kh.message.model.dao;
+ package com.kh.message.model.dao;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -54,7 +54,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 			}
 		} catch (SQLException e) {
@@ -92,7 +92,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
@@ -174,6 +174,8 @@ public class MessageDao {
 			
 			result = pstmt.executeUpdate();
 			
+			System.out.println("mat! 새이름 : " + mat.getMatNewName());
+			System.out.println("mat! 원래이름 : " + mat.getMatOrigin());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -263,7 +265,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -331,7 +333,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -363,8 +365,9 @@ public class MessageDao {
 			if(rset.next()) { 
 				mat = new MsgAttachment();
 				mat.setMatNo(rset.getInt("MAT_NO"));
-				mat.setMatOrigin(rset.getString("MAT_ORIGIN"));
 				mat.setMatNewName(rset.getString("MAT_NEWNAME"));
+				mat.setMatOrigin(rset.getString("MAT_ORIGIN"));
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -399,7 +402,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
@@ -412,6 +415,143 @@ public class MessageDao {
 		}
 		
 		return m;
+	}
+
+	public int deleteRecvMsg(Connection conn, int mno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMessage");
+		System.out.println("dao mno? " + mno);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 받은쪽지 - 첨부파일 상태 삭제로 변경
+	public int deleteRecvAttachment(Connection conn, int mno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMsgAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 보낸 쪽지 삭제
+	public int deleteSendMsg(Connection conn, int mno, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteSendMessage");
+		System.out.println("dao mno? " + mno);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteSendAttachment(Connection conn, int mno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMsgAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 새 쪽지 개수
+	public int getNewMessageCount(Connection conn, String userId) {
+		int count = 0;
+		PreparedStatement pstmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getNewMessageCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	// 휴지통 비우기 
+	public int clearMsgBin(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("clearMsgBin");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

@@ -65,6 +65,7 @@
 	<div class="content-body">
 		<br>
 		<div class="col-lg-8" style="margin: 0 auto;">
+			<div style="height: 40rem">
 			<div class="table-responsive">
 			<div>
 			<table class="table table-hover" style="text-align: center;">
@@ -94,6 +95,7 @@
 				 <% } %>
 				</tbody>
 			</table>
+			</div>
 			</div>
 			</div>
 		</div>

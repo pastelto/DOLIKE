@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board" %>
 <%@ page import="com.kh.board.model.dao.BoardDao" %>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
+<% //String contextPath = request.getContextPath(); %>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -356,12 +362,27 @@
 		 						<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
 		 					</tr>
 		 					<tr>
+<<<<<<< HEAD
 		 						<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
+=======
+		 						<td style="text-align:center">내용</td>
+		 						<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		 					</tr>
+		 					<th>
+		 						<td colspan="3"><img id="titleImg" width="150" height="120"></td>
+		 					</th>
 		 				</tbody>
 		 				
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
+<<<<<<< HEAD
+=======
+		 			<div class="form-row float-right">
+		 				<input type="file" class="btn" name="upFile" value="첨부파일"/>
+		 				<input type="file" name="titleImg1" id="titleImg1" onchange="loadImg(this);" >
+		 			</div>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>
@@ -370,6 +391,7 @@
         <!--**********************************
             Content body end
         ***********************************-->
+<<<<<<< HEAD
         
         
         <!--**********************************
@@ -428,5 +450,25 @@
  
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+=======
+ 	<%@ include file="../common/footer.jsp" %> 
+ 	<script>
+	 	$(function(){
+	 		$("#titleImg").click(function(){
+				$("#titleImg1").click();
+			});	
+	 	});
+	 	function loadImg(inputFile){
+	 		if(inputFile.files.length == 1){
+	 			var reader = new FileReader();
+	 			reader.readAsDataURL(inputFile.files[0]);
+	 			reader.onload = function(e){
+	 				$("#titleImg").attr("src", e.target.result);
+	 			}
+	 		}
+	 	}
+ 	
+ 	</script>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </body>
 </html>

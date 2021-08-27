@@ -44,10 +44,14 @@ public class MemberService {
 		return mem;
 	}
 	
+<<<<<<< HEAD
 	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String interests) {
+=======
+	public Member updateMember(String userId, String userPwd, String nickname, String interests1, String interests2, String interests3) {
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MemberDao().updateMember(conn, newPwd, userId, userPwd, nickname, interests);
+		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests1, interests2, interests3);
 		
 		if (result > 0) {
 			commit(conn);
@@ -85,5 +89,53 @@ public class MemberService {
 		
 		return result;
 	}
+<<<<<<< HEAD
+=======
+
+
+	public int nickCheck(String nickName) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().nickCheck(conn, nickName);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int phoneCheck(String phone) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().phoneCheck(conn, phone);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int emailCheck(String email) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().emailCheck(conn, email);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int accessUpdate(String userId, String userPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().accessUpdate(conn, userId, userPwd);
+		
+		close(conn);
+		
+		return result;
+	}
+
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 	
 }

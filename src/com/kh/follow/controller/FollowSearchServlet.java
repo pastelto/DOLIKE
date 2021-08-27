@@ -31,18 +31,25 @@ public class FollowSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String followId = request.getParameter("followId");
-		System.out.println(followId);
-		int result = new FollowService().searchId(followId);
-		PrintWriter out = response.getWriter();
-		System.out.println(result);
-		if(result > 0) {
-			out.print("success"); //중복아이디 존재
-		}else {
-			out.print("fail"); //사용가능
-		}
 		
+		System.out.println("검색한 아이디: "+followId);
+		
+		int result = 0;
+		result = new FollowService().searchId(followId);
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("검색 후 result: "+result);
+		
+		if(result > 0) {
+			out.print("success"); //검색한 아이디 있는 경우
+			result = 0; //검색 후 result 다시 0으로 변경 해야함.
+		}else {
+			out.print("fail"); //검색한 아이디 없는 경우
+			result = 0; //검색 후 result 다시 0으로 변경 해야함.
+		}
+		result = 0; //검색 후 result 다시 0으로 변경 해야함.
 		out.flush();
-		out.close();
+		out.close(); 
 	}
 
 	/**

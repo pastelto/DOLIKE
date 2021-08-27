@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
 import com.kh.category.model.vo.CategoryPageInfo;
 import com.kh.member.model.dao.MemberDao;
@@ -184,6 +183,64 @@ public class CategoryDao {
 		return result;
 		
 	}
+
+	public int updateCategory(Connection conn, Category c) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getCategoryName());
+			pstmt.setInt(2, c.getCategoryNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Category> categoryMenuBarList(Connection conn) {
+		
+		ArrayList<Category> list = new ArrayList<Category>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("categoryMenuBarList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Category(rset.getInt("CATEGORY_NO"),
+								rset.getString("CATEGORY_NAME")
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("CategoryDao의 caList 값 : " + list);
+		return list;
+	}
+
+	
 
 
 

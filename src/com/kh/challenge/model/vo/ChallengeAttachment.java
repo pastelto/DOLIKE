@@ -20,6 +20,23 @@ public class ChallengeAttachment {
 		this.location = location;
 		this.chNo = chNo;
 	}
+	
+
+	public ChallengeAttachment(int atNo, String newName, String originName, int chNo) {
+		super();
+		this.atNo = atNo;
+		this.newName = newName;
+		this.originName = originName;
+		this.chNo = chNo;
+	}
+		
+
+	public ChallengeAttachment(int atNo, String newName, String originName) {
+		super();
+		this.atNo = atNo;
+		this.newName = newName;
+		this.originName = originName;
+	}
 
 	public int getAtNo() {
 		return atNo;

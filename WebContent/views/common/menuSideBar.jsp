@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member, com.kh.category.model.vo.Category, java.util.ArrayList"%>
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
+<<<<<<< HEAD
+=======
+	String contextPath = request.getContextPath();
+	
+	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");
+	
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 %>
 <!DOCTYPE html>
 <html>
@@ -12,17 +18,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
-    <!-- Favicon icon 
-    <link rel="icon" type="image/png" sizes="16x16" href=../../images/do_32.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <link href="./css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+=======
+		
+	<link href="./css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	   $(function(){
+	      var msg = "<%=msg%>";
+
+			if (msg != "null") {
+				alert(msg);
+		<%session.removeAttribute("msg");%>
+		} else{
+			console.log("Hi");
+		}
+			
+	   })
+	</script>
+	<style>
+	#loginBtn, #loginBtnModal, #EnrollBtnModal {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	
+	  #loginBtnModal:hover, #EnrollBtnModal:hover{
+      	background-color: #f3969a;
+      	border-color: #f3969a;
+      	
+      }
+	
+	#doLikeLogo{
+	 background: white;
+	 }
+	 
+	  .favBoard {
+	  background-color: #fff;
+	  border: 2px none #2199e8;
+	  padding: 5px 5px;
+	  border-radius: 2px;
+	  color: #2199e8;
+	  background:rgba(0, 0, 0, 0.0);
+	} 
+	
+	#mailIcon:hover{
+		color: #78c2ad;
+	}
+	
+	
+	.btn-like {
+        color: transparent;
+        text-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 0 rgb(172, 170, 170);
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        margin-left: 20px;
+        margin-right: 20px;
+        
+       } 
+      .btn-like:hover {
+        text-shadow: 0 0 0 #f3969a;
+      }
+      .btn-like.done {
+        text-shadow:  0 0 0 #f3969a;
+      }
+      .btn-like.done:hover {
+        color: transparent;
+        text-shadow: 0 0 0 #777;
+      }
+      
+      .boardMargin{
+      	padding-left: 20px !important;
+      }
+
+	</style>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </head>
 <body>
     
@@ -31,7 +116,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index2.jsp" style="background:#eceeef">
+                <a href="index2.jsp" style="background:#fff">
                     <b class="logo-abbr"><img src="images/do_32.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/mainLogo_text.png" alt=""></span>
                     <span class="brand-title">
@@ -57,87 +142,40 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
+                    <form id="searchBoardForm" class="form-inline" action="search.bo" method="post">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
+                        <div class="input-group text-center mb-3">
+                        	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
+                        	<div class="input-group-append">
+                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        	</div>
+                        </div>
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
                             </form>
                         </div>
+                    </form>    
                     </div>
                 </div>
             <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown show"><a href="list.ms" data-toggle="dropdown" aria-expanded="true"> 
-                                <i class="mdi mdi-email-outline"></i>
-                            </a>
-
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-bell-outline"></i>
-                                <span class="badge badge-pill gradient-2">3</span>
-                            </a>
-                            <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
-                                <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">2 New Notifications</span>  
-                                    <a href="javascript:void()" class="d-inline-block">
-                                        <span class="badge badge-pill gradient-2">5</span>
-                                    </a>
-                                </div>
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events near you</h6>
-                                                    <span class="notification-text">Within next 5 days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Started</h6>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Event Ended Successfully</h6>
-                                                    <span class="notification-text">One hour ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">Events to Join</h6>
-                                                    <span class="notification-text">After two days</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                            </div>
-                        </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="resources/images/profile.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
+<<<<<<< HEAD
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+=======
+                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
@@ -172,11 +210,31 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">메인</span>
                         </a>
                     </li>
-                    <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                    <% if(loginUser == null) {%> 
+                      	<li class="mega-menu-sm"  id="allmenu">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" >
+	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
+	                        </a>                 
+							
+	                        <ul aria-expanded="false" class="collapse">
+	                        
+	                            <!-- <li><a href="list.bo">카테고리1</a></li>
+	                            <li><a href="list.bo">카테고리2</a></li>
+	                            <li><a href="list.bo">카테고리3</a></li>
+	                            <li><a href="list.bo">카테고리4</a></li>
+	                            <li><a href="list.bo">카테고리5</a></li>
+	                            <li><a href="list.bo">카테고리6</a></li>
+	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
+	                        </ul>
+
+						</li>
+                    <%}else{ %>
+                       <li class="mega-menu-sm" id="allmenu">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
+<<<<<<< HEAD
                             <li><a href="./layout-blank.html">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
                             <li><a href="./layout-two-column.html">카테고리3</a></li>
@@ -185,8 +243,55 @@
                             <li><a href="./layout-horizontal.html">카테고리6</a></li>
                             <li><a href="./layout-boxed.html">카테고리7</a></li>
                            
+=======
+<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         </ul>
-                    </li>
+
+                        <!-- 즐겨찾는 게시판 Ajax Script -->
+				        <script>
+				        
+							$(function(){
+								$("#btn-like").eq(0).click(function(){
+								var favB = $("#categoryList").val();
+								
+								$.ajax({
+									
+									url: "jqTest2.do",
+									data: {input:input},
+									type: "post",
+									success: function(result){
+										$("#output2").val(result);
+									},
+									error: function(e){ // 에러 내용을 e로 받아옴
+										console.log(e);
+									}
+								})
+							})
+						})
+				        	$(".btn-like").click(function() {
+				         	   $(this).toggleClass("done");
+				       		 })
+				       		 
+				       		 				       		
+        				</script>
+        				
+
+
+                    	</li>
+                      <%} %> 
+                      <% if(loginUser == null) {%> 
+                      <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
+                            <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
+                        </a>
+                      <%}else{ %>
                       <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
@@ -198,6 +303,7 @@
                      
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
@@ -209,10 +315,22 @@
                         </ul>
                     </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     <% if(loginUser == null) {%>   
 >>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
                     <li class="mega-menu-sm">
+=======
+                    <% if(loginUser == null) {%>  
+                    <li class="mega-menu-sm">
+                        <a class="has-arrow sweet-wrong" aria-expanded="false" id="needLogin" onclick="needLogin();">
+                            <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
+                        </a>
+                    </li>
+                    
+                    <%}else{ %>
+                     <li class="mega-menu-sm">
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">쪽지</span>
                         </a>
@@ -226,8 +344,28 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">챌린지</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
+<<<<<<< HEAD
                             <li><a href="challengeMain.ch">진행중인 챌린지</a></li>
                             <li><a href="./app-calender.html">챌린지2</a></li>
+=======
+                        <%if(loginUser==null){ %>
+                            <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                        <%} else {%>
+                            <% if(loginUser.getUserId().equals("admin")) {%>
+                            <li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/applyList.ch">신청 리스트</a></li>
+                            <li><a href="<%= request.getContextPath() %>/voteInsertForm.ch">투표 만들기</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeInsertForm.ch">챌린지 만들기</a></li>
+                            <%} else {%>                            
+                        	<li><a href="<%= request.getContextPath() %>/challengeMain.ch">진행중인 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeEnd.ch">종료된 챌린지</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeApplyForm.ch">챌린지 신청</a></li>
+                            <li><a href="<%= request.getContextPath() %>/challengeVote.ch">챌린지 투표</a></li>
+                            <li><a href="<%= request.getContextPath() %>/myChallenge.ch">마이 챌린지</a></li>
+                        <%}}%>                           
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
                         </ul>
                     </li>
                		<li>
@@ -235,6 +373,7 @@
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
+                    <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">회원 관리</span>
@@ -245,14 +384,160 @@
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
+                    <% } %>              
                 </ul>
+                
+                               
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
+        
+                <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+            
+                    <!-- Modal Header -->
+<!--                     <div class="modal-header">
+                    <h4 class="modal-title" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div> -->
+            
+                    <!-- Modal body -->
+                    <div class="modal-body justify-content-center">
+                     <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
+                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+                    	<div class="row" style="margin-top: 30px;">
+                    	<div class="col-2"></div>
+                        <button class="btn btn-primary px-3 ml-4 col-3" id="loginBtnModal" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+                        <button class="btn btn-primary px-3 ml-4 col-3" id="EnrollBtnModal" type="button" onclick="location.href='<%=contextPath%>/enrollForm.me'">회원가입</button>
+                   		</div>
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="background-color: #f3969a; border: 0" data-dismiss="modal">닫기</button>
+                    </div>
+            
+                </div>
+                </div>
+            </div>
+        <script>
+        	function msgLoginerror(){
+        		alert("로그인 후 이용 가능합니다.");
+        	}
+        	
+        	function searchBoard(){
+        		var findBoard = $("#searchBoardForm input[name=findBoard]");
+        		if(findBoard.val() == ""){
+        			alert("검색할 내용을 입력하세요.");
+        			return false;
+        		}
+        		$.ajax({
+        			url:"search.bo",
+        			type:"post",
+        			data:{findBoard:findBoard.val()},
+        			success:function(result){
+        				if(result == "success"){
+        					$("#searchBoardForm").submit();
+        				}else{
+        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
+        				}
+        			},
+        			error:function(){
+        				console.log("통신오류.")
+        			}
+        		})
+        		
+        		
+        	}
+				        
+			$(function(){
+				$("#btn-like").eq(0).click(function(){
+				var favB = $("#input2").val();
+								
+				$.ajax({
+									
+				url: "myFavBoard.bo",
+				data: {input:input},
+				type: "post",
+				success: function(result){
+				$("#output2").val(result);
+				},
+				error: function(e){ 
+					console.log(e);
+				}
+				})
+				})
+				})
+				
+			function needLogin(){
+				Swal.fire({
+				  title: "로그인이 필요합니다.",
+				  icon: 'error',
+				  confirmButtonColor: "#78c2ad",
+				  confirmButtonBorder: "none",
+				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
+				})
+			}
+
+        </script>
+        
+		<script>
+        				
+              				  $(function(){
+              					 $("#categoryList").click(function(){     				       			                 			        
+              						 
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						var loginUser = "<%=loginUser%>";
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						var n = null;
+   				       						
+   				       						$liBody.html(""); 
+   				       	 					console.log(loginUser)
+   				       	 					$.each(list, function(i){
+   				       						if(loginUser == n){												
+												
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+												console.log("1")
+   				       						} else if(loginUser != n){ 
+												/* $.each(list, function(i){ */
+												
+    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       					
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							console.log("2")
+												/* }) */
+   				       						}
+   				       	 				})
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
         
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>
 	    <script src="js/gleek.js"></script>
 	    <script src="js/styleSwitcher.js"></script>
+	    
+	    
 </body>
 </html>

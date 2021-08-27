@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,13 +55,27 @@
 </style>
 </head>
 <body>
+<!-- 확인용! -->
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 
 
 	<div class="content-body">
 
-		<br> 
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">팔로잉</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">추천 친구</a></li>
+                    </ol>
+                </div>
+            </div>
+
+
+
+
+
+		<br> <br>
 			
 			<div class="col-lg-10" style="margin: 0 auto;">
 
@@ -194,8 +208,11 @@
 			</div>
 		</div>
 		</div>
-			<%@ include file="../common/footer.jsp" %> 
+			
 	</div>
+<%@ include file="../common/footer.jsp" %> 
+
+
 
 </body>
 </html>

@@ -35,6 +35,8 @@ public class RecvMessageDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		int newMsgCount;
+		newMsgCount = new MessageService().getNewMessageCount(userId);
 		
 		System.out.println("RecvMessageDetail mno? = " + mno ) ;
 		Message m = new MessageService().msgReadStatus(mno, userId);
@@ -43,6 +45,7 @@ public class RecvMessageDetailServlet extends HttpServlet {
 		if(m != null) {
 			request.setAttribute("message", m);
 			request.setAttribute("mat", mat);
+			request.setAttribute("newMsgCount", newMsgCount);
 			
 			request.getRequestDispatcher("views/message/recvMessageDetailView.jsp").forward(request, response);
 		} else {

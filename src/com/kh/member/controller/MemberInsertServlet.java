@@ -2,6 +2,9 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,24 +45,17 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
-		String userCreateDate = request.getParameter("userCreateDate");
-		String userStatus = request.getParameter("userStatus");
+		String interests1 = request.getParameter("interests1");
+		String interests2 = request.getParameter("interests2");
+		String interests3 = request.getParameter("interests3");
 		
-		String[] interests = request.getParameterValues("interest");
-		
-		int interest = 0; //interests를 String형으로 변환?
-		
-		if (interests != null) {
-			interest = String.join(",", interests);
-		}
-		
-		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests, userCreateDate, userStatus);
+		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests1, interests2, interests3);
 		
 		int result = new MemberService().insertMember(mem);
 		
 		if (result > 0) {
 			request.getSession().setAttribute("msg", "회원가입 성공");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/index2.jsp");
 		} else {
 			request.setAttribute("msg", "회원가입 실패");
 			

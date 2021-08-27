@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
+    <wb-module deploy-name="DoLikeProject">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="DoLikeProject"/>
+        <property name="java-output-path" value="/DoLikeProject/WebContent/WEB-INF/classes"/>
+    </wb-module>
+=======
+            
+    
+    <wb-module deploy-name="DoLikeProject">
+                        
+        
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                        
+        
+        <property name="context-root" value="DoLikeProject"/>
+                        
+        
+        <property name="java-output-path" value="/DoLikeProject/WebContent/WEB-INF/classes"/>
+                    
+    
+    </wb-module>
+        
+
+>>>>>>> 83361499e0173ac1696b69f06884aac4475dca14
+</project-modules>

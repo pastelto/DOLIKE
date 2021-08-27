@@ -1,6 +1,7 @@
 package com.kh.follow.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.follow.model.service.FollowService;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class FollowMainView
@@ -28,8 +32,15 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//ArrayList<Member> m = new FollowService().selectTop4User();
+		
+		
+		
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**
