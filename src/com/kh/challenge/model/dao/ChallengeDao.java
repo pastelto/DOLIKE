@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,14 +60,14 @@ public class ChallengeDao {
 			close(rset);
 			close(stmt);
 		}
-
+		System.out.println(listCount +" listcount dao");
 		return listCount;
 	}
 
 	public ArrayList<Challenge> selectList(Connection conn) {
 
-		ArrayList<Challenge> list = new ArrayList<>();
-		Statement stmt = null;
+		ArrayList<Challenge> list = new ArrayList<Challenge>();
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		/*
@@ -76,35 +75,74 @@ public class ChallengeDao {
 		 * WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC
 		 */
 
-		String sql = prop.getProperty("selectChallengeList");		
+		String sql = prop.getProperty("selectChallengeList");
+		System.out.println(sql);
 
 		try {
-
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
-
-			while (rset.next()) {
-				Challenge c = new Challenge();
-				c.setChNo(rset.getInt("CH_NO"));
-				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getString("CH_START"));
-				c.setEnd(rset.getString("CH_END"));
-				list.add(c);
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();			
+			
+			while (rset.next()) {									
+				list.add(new Challenge(rset.getInt("CH_NO"),
+									   rset.getString("CH_TITLE"), 
+									   rset.getString("CH_START"),
+									   rset.getString("CH_END"), 
+									   rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
+		
+		System.out.println(list +": dao");
 
 		return list;
 	}
 
-	public ArrayList<ChallengeAttachment> selectAttach(Connection conn, int chNo) {
+	//MAIN
+	public ArrayList<ChallengeAttachment> selectAttach(Connection conn) {
+		
+		ArrayList<ChallengeAttachment> fileList = new ArrayList<ChallengeAttachment>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		/*
+		 * SELECT AT_NO, AT_NEWNAME, AT_ORIGINNAME, CH_NO FROM CH_ATTACHMENT
+		 */
 
-		ArrayList<ChallengeAttachment> fileList = new ArrayList<>();
+		String sql = prop.getProperty("selectMainAt");
+		System.out.println(sql);
+
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+	
+			while (rset.next()) {			
+				fileList.add(new ChallengeAttachment(rset.getInt("AT_NO"),
+													 rset.getString("AT_NEWNAME"),
+													 rset.getString("AT_ORIGINNAME"), 
+													 rset.getInt("CH_NO")));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(fileList + ": dao");
+		return fileList;
+	}
+	
+	
+	// DETAIL
+	public ChallengeAttachment selectAttach(Connection conn, int chno) {
+
+		ChallengeAttachment at = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -117,17 +155,14 @@ public class ChallengeDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, chNo);
+			pstmt.setInt(1, chno);
 
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-
-				ChallengeAttachment ca = new ChallengeAttachment();
-				ca.setAtNo(rset.getInt("AT_NO"));
-				ca.setNewName(rset.getString("AT_NEWNAME"));
-				ca.setOriginName(rset.getString("AT_ORIGINNAME"));
-				fileList.add(ca);
+				at = new ChallengeAttachment(rset.getInt("AT_NO"),
+						 					 rset.getString("AT_NEWNAME"),
+						 				     rset.getString("AT_ORIGINNAME"));
 			}
 
 		} catch (SQLException e) {
@@ -137,8 +172,8 @@ public class ChallengeDao {
 			close(rset);
 			close(pstmt);
 		}
-
-		return fileList;
+		System.out.println(at + ": rpat dao");
+		return at;
 	}
 
 	public ArrayList<Challenge> selectEndedList(Connection conn) {
@@ -177,7 +212,7 @@ public class ChallengeDao {
 		return list;
 	}
 
-	public ArrayList<ChallengeReply> selectReply(Connection conn, PageInfo pi) {
+	public ArrayList<ChallengeReply> selectReply(Connection conn, PageInfo pi, int chno) {
 		ArrayList<ChallengeReply> list = new ArrayList<ChallengeReply>();
 
 		PreparedStatement pstmt = null;
@@ -187,27 +222,28 @@ public class ChallengeDao {
 
 		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
 		int endRow = startRow + pi.getListLimit() - 1;
-		// SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME,
-		// PH_LOCATION, RP_LIKE FROM CHALLENGE_REPLY WHERE CH_NO = ?, RP_STATUS = 'Y'
+		/*SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM 
+		 * (SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME, PH_LOCATION, RP_LIKE FROM CHALLENGE_REPLY 
+		 * WHERE CH_NO = ?, RP_STATUS = 'Y') A)WHERE RNUM BETWEEN ? AND ?
+		 */
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, chno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				ChallengeReply ch = new ChallengeReply();
-				ch.setChNo(rset.getInt("CH_RP_NO"));
-				ch.setRpWriter(rset.getString("RP_USER"));
-				ch.setWriteDate(rset.getDate("CREATE_DATE"));
-				ch.setContent(rset.getString("RP_BODY"));
-				ch.setOriginName(rset.getString("PH_ORIGINNAME"));
-				ch.setNewName(rset.getString("PH_NEWNAME"));
-				ch.setLocation(rset.getString("PH_LOCATION"));
-				ch.setRpLike(rset.getInt("RP_LIKE"));
-				list.add(ch);
-			}
+				list.add(new ChallengeReply(rset.getInt("CH_RP_NO"),
+											rset.getString("RP_USER"),
+											rset.getDate("CREATE_DATE"),
+											rset.getString("RP_BODY"),
+											rset.getString("PH_ORIGINNAME"),
+											rset.getString("PH_NEWNAME"),
+											rset.getString("PH_LOCATION"),
+											rset.getInt("RP_LIKE")));			
+			};
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -216,7 +252,7 @@ public class ChallengeDao {
 			close(rset);
 			close(pstmt);
 		}
-
+		System.out.println(list +": rplist dao");
 		return list;
 	}
 
@@ -269,8 +305,10 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				list.add(new Challenge(rset.getInt("CH_NO"), rset.getString("CH_TITLE"), rset.getInt("RP_COUNT"),
-						rset.getString("ACHIEVEMENT")));
+				list.add(new Challenge(rset.getInt("CH_NO"), 
+									   rset.getString("CH_TITLE"), 
+									   rset.getInt("RP_COUNT"),
+									   rset.getString("ACHIEVEMENT")));
 			}
 
 		} catch (SQLException e) {
@@ -284,12 +322,12 @@ public class ChallengeDao {
 		return list;
 	}
 
-	public ArrayList<Challenge> selectDetail(Connection conn, int chno) {
-		ArrayList<Challenge> list = new ArrayList<>();
+	public Challenge selectDetail(Connection conn, int chno) {
+		Challenge c = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("myChallengeAc");
+		String sql = prop.getProperty("selectChallengeInfo");
 		/*
 		 * SELECT CH_TITLE, CH_BODY, CATEGORY_NAME FROM CHALLENGE A JOIN CATEGORY B ON
 		 * A.CATEGORY_NO = B.CATEGORY_NO WHERE CH_NO= ?
@@ -301,8 +339,9 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				list.add(new Challenge(rset.getString("CH_TITLE"), rset.getString("CH_BODY"),
-						rset.getString("CATEGORY_NAME")));
+				c = new Challenge(rset.getString("CH_TITLE"), 
+								  rset.getString("CH_BODY"),
+								  rset.getString("CATEGORY_NAME"));
 			}
 
 		} catch (SQLException e) {
@@ -313,7 +352,7 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 
-		return list;
+		return c;
 	}
 
 	public int insertApply(Connection conn, ChallengeApply ca) {
@@ -475,7 +514,7 @@ public class ChallengeDao {
 	}
 
 	public int insertChallenge(Connection conn, Challenge c) {
-		//insertChallenge = INSERT INTO CHALLENGE VALUES(SEQ_CH_NO.NEXTVAL, ?,?, ?,?,DEFAULT, ?,,?)
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -510,7 +549,7 @@ public class ChallengeDao {
 	
 
 	public int insertChAttachment(Connection conn, ChallengeAttachment cat) {
-		//insertAttachment=INSERT INTO CH_ATTACHMENT VALUES(SEQ_CHAT_NO.NEXTVAL, ?, ?, ?, SEQ_CH_NO.NEXTVAL)
+		//insertAttachment=INSERT INTO CH_ATTACHMENT VALUES(SEQ_CHAT_NO.NEXTVAL, ?, ?, ?, SEQ_CH_NO.CURVAL)
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -560,5 +599,38 @@ public class ChallengeDao {
 		System.out.println(result);
 		return result;
 	}
+
+	public int insertReply(Connection conn, ChallengeReply cp) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertChallengeRp");
+		
+		//insertChallengeRp = INSERT INTO CHALLENGE_REPLY VALUES(SEQ_CHRP_NO.NEXTVAL,?,?,DEFAULT,?,?,?,?,NULL,DEFAULT)	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,cp.getChNo());
+			pstmt.setString(2, cp.getRpWriter());
+			pstmt.setString(3, cp.getContent());
+			pstmt.setString(4, cp.getOriginName());
+			pstmt.setString(5, cp.getNewName());
+			pstmt.setString(6, cp.getLocation());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(cp.getChNo() +" rp dao");
+			System.out.println(cp.getNewName() +"rp dao");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("챌린지 dao " + result);
+		return result;
+	}
+
+	
 
 }

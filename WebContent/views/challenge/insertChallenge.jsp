@@ -88,9 +88,10 @@
 										<form action="<%=request.getContextPath()%>/challengeInsert.ch" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지 타이틀</label> 
-													<select class="form-select" id="category"  name="chTitle">
+													<select class="form-select" id="title"  name="chTitle">
 														<%for(int i = 0; i <list.size(); i++) {%>
-														<option value="<%=list.get(i).getChTitle()%>"><%=list.get(i).getChTitle()%></option>														
+														<option value="<%=list.get(i).getChTitle()%>"><%=list.get(i).getChTitle()%></option>
+														<%System.out.println(list.get(i).getChTitle());%>														
 														<%} %>
 													</select>
 											</div>

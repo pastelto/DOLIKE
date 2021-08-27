@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.category.model.vo.Category;
+import com.kh.board.model.vo.Board;
 import com.kh.follow.model.service.FollowService;
-import com.kh.follow.model.vo.Follow;
-import com.kh.follow.model.vo.FollowPageInfo;
-import com.kh.member.model.vo.Member;
+import com.kh.follow.model.vo.FollowCategoryPageInfo;
 
 /**
- * Servlet implementation class MyfollowServlet
+ * Servlet implementation class FollowCategoryBoardServlet
  */
-@WebServlet("/MyFollow.fl")
-public class MyfollowServlet extends HttpServlet {
+@WebServlet("/catBoard.fl")
+public class FollowCategoryBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyfollowServlet() {
+    public FollowCategoryBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +33,6 @@ public class MyfollowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		
-		int followCount = new FollowService().followCount(userId);
-		request.setAttribute("followCount", followCount);
-		
-		ArrayList<Category> catList = new ArrayList<Category>();
-		catList = new FollowService().getCatList();
-		request.setAttribute("catList", catList);
-		
-		
 		int listCount;			
 		int currentPage;		
 		int startPage;			
@@ -53,9 +40,11 @@ public class MyfollowServlet extends HttpServlet {
 		int maxPage;
 		
 		int pageLimit;
-		int followLimit;
+		int catBoardLimit;
+		String followId = request.getParameter("followId");
+		String catTitle = request.getParameter("catTitle");
 		
-		listCount = new FollowService().getListCount(userId);
+		listCount = new FollowService().getCatBoardListCount(followId, catTitle);
 		
 		currentPage = 1;
 		
@@ -65,9 +54,9 @@ public class MyfollowServlet extends HttpServlet {
 		
 		pageLimit = 10;
 		
-		followLimit = 6;
+		catBoardLimit = 10;
 		
-		maxPage = (int)Math.ceil((double)listCount/followLimit);
+		maxPage = (int)Math.ceil((double)listCount/catBoardLimit);
 		
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
@@ -78,15 +67,15 @@ public class MyfollowServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		FollowPageInfo pi = new FollowPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, followLimit);
+		FollowCategoryPageInfo pi = new FollowCategoryPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, catBoardLimit);
 		
 		
-		ArrayList<Follow> list = new FollowService().selectList(userId, pi);
+		ArrayList<Board> list = new FollowService().selectFollowBoardList(followId, catTitle, pi);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/myFriendView.jsp");
-		view.forward(request, response);
 		
+		RequestDispatcher view = request.getRequestDispatcher("views/follow/followCategory.jsp");
+		view.forward(request, response);
 	}
 
 	/**

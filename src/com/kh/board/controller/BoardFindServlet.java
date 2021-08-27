@@ -1,30 +1,23 @@
-package com.kh.challenge.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.Challenge;
-import com.kh.challenge.model.vo.ChallengeAttachment;
-
 /**
- * Servlet implementation class ChallengeMainServlet
+ * Servlet implementation class BoardFindServlet
  */
-@WebServlet("/challengeMain.ch")
-public class ChallengeMainServlet extends HttpServlet {
+@WebServlet("/find.bo")
+public class BoardFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeMainServlet() {
+    public BoardFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +27,7 @@ public class ChallengeMainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Challenge> list = new ChallengeService().selectList();
-		request.setAttribute("list", list);
-		System.out.println(list +": servlet");
-		
-		
-		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();						
-		request.setAttribute("fileList", fileList);
-		System.out.println(fileList +": servlet");
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/mainchallenge.jsp");
-		view.forward(request, response);
+		request.getRequestDispatcher("views/board/boardSearch.jsp").forward(request, response);
 	}
 
 	/**

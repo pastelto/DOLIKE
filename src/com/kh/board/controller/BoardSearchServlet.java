@@ -1,6 +1,7 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Attachment;
-import com.kh.board.model.vo.Board;
+import com.kh.follow.model.service.FollowService;
 
 /**
- * Servlet implementation class BoardUpdateFormServlet
+ * Servlet implementation class BoardSearchServlet
  */
-@WebServlet("/updateForm.bo")
-public class BoardUpdateFormServlet extends HttpServlet {
+@WebServlet("/search.bo")
+public class BoardSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateFormServlet() {
+    public BoardSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +32,29 @@ public class BoardUpdateFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		String findBoard = request.getParameter("findBoard");
 		
-		Board board = new BoardService().selectUpdateBoard(bno);
-		Attachment at = new BoardService().selectAttachment(bno);
-		System.out.println("updateForm 서블릿에서 받는 bno 값 " + bno);
-		System.out.println("updateForm 서블릿에서 받는 at 값 " + at);
-		if(board != null) {
-			request.setAttribute("board", board);
-			request.setAttribute("at", at);
-			request.getRequestDispatcher("views/board/boardUpdate.jsp").forward(request, response);
+		System.out.println("검색어 : "+findBoard);
+		
+		int result = new BoardService().searchBoard(findBoard);
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("result : " + result);
+		
+		if(result > 0) {
+			response.sendRedirect("find.bo?findBoard="+findBoard);
+			//request.getRequestDispatcher("views/board/boardSearch.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "수정할 게시글을 불러오는데 실패했습니다.");
+			request.setAttribute("msg", "검색할 게시글을 불러오는데 실패했습니다.");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
+		
+		out.flush();
+		out.close(); 
+		
+		
 	}
 
 	/**

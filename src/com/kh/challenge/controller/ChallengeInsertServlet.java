@@ -45,6 +45,7 @@ public class ChallengeInsertServlet extends HttpServlet {
 		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
 		
 		int votecount = 0;
+		int result = 0;
 		
 		if (ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10 * 1024 * 1024;
@@ -101,15 +102,17 @@ public class ChallengeInsertServlet extends HttpServlet {
 				cat.setNewName(changeName);
 			}
 
-			int result = new ChallengeService().insertChallenge(c, cat);
+			result = new ChallengeService().insertChallenge(c, cat);
 
 			if (result > 0) {
 				request.getSession().setAttribute("msg", "챌린지 등록이 완료됐습니다.");
-				response.sendRedirect("index2.jsp");				
+				response.sendRedirect("index2.jsp");	
+				result = 0;
 			} else {
 				if (cat != null) {
 					File failedFile = new File(savePath + cat.getNewName());
 					failedFile.delete();
+					result = 0;
 				}
 
 				request.setAttribute("msg", "챌린지 등록이 실패했습니다.");
