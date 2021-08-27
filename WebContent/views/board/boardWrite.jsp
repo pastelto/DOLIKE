@@ -55,16 +55,20 @@
 		 						</td>
 		 						<td class="title-class"><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
 		 					</tr>
-		 					<tr >
+		 					<tr>
 		 						<td style="text-align:center">내용</td>
 		 						<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
 		 					</tr>
+		 					<th>
+		 						<td colspan="3"><img id="titleImg" width="150" height="120"></td>
+		 					</th>
 		 				</tbody>
 		 				
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
 		 			<div class="form-row float-right">
-		 				<input type="file" class="btn" name="upfile" value="첨부파일" />
+		 				<input type="file" class="btn" name="upFile" value="첨부파일"/>
+		 				<input type="file" name="titleImg1" id="titleImg1" onchange="loadImg(this);" >
 		 			</div>
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
@@ -74,5 +78,22 @@
             Content body end
         ***********************************-->
  	<%@ include file="../common/footer.jsp" %> 
+ 	<script>
+	 	$(function(){
+	 		$("#titleImg").click(function(){
+				$("#titleImg1").click();
+			});	
+	 	});
+	 	function loadImg(inputFile){
+	 		if(inputFile.files.length == 1){
+	 			var reader = new FileReader();
+	 			reader.readAsDataURL(inputFile.files[0]);
+	 			reader.onload = function(e){
+	 				$("#titleImg").attr("src", e.target.result);
+	 			}
+	 		}
+	 	}
+ 	
+ 	</script>
 </body>
 </html> 

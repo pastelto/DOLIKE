@@ -73,12 +73,13 @@ public class CategoryAjaxMenuBarServlet extends HttpServlet {
 //		
 //		System.out.println("jArr 값 : " + jArr);
 //		System.out.println("list 값 : " + list);
-//		
-//		
+		
+		
 //		response.setContentType("application/json; charset=utf-8");
 //		response.getWriter().print(jArr);
-		System.out.println("Gson### : " + list);
+//		System.out.println("Gson### : " + list);
 		response.setContentType("application/json; charset=utf-8");
+		System.out.println("서블릿 전송에 성공하였습니다. list 값 :" + list);
 		new Gson().toJson(list, response.getWriter());
 		
 		//RequestDispatcher view = request.getRequestDispatcher("views/category/menuSideBar.jsp");

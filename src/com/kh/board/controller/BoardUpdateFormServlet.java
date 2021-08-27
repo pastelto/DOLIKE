@@ -37,7 +37,7 @@ public class BoardUpdateFormServlet extends HttpServlet {
 		Board board = new BoardService().selectUpdateBoard(bno);
 		Attachment at = new BoardService().selectAttachment(bno);
 		System.out.println("updateForm 서블릿에서 받는 bno 값 " + bno);
-		
+		System.out.println("updateForm 서블릿에서 받는 at 값 " + at);
 		if(board != null) {
 			request.setAttribute("board", board);
 			request.setAttribute("at", at);

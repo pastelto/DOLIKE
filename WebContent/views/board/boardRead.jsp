@@ -3,6 +3,7 @@
 <%
 	Board b = (Board)request.getAttribute("b");
 	Attachment at = (Attachment)request.getAttribute("at");
+	Reply r = (Reply)request.getAttribute("r");
 %>  
 
 <!DOCTYPE html>
@@ -78,7 +79,7 @@
 									<% if(at != null){ %>
 									<a download="<%= at.getOriginName() %>" href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>"><%= at.getOriginName() %></a>
 									<% }else{ %>
-									첨부파일이 없습니다.
+									등록된 첨부파일이 없습니다.
 									<% } %>
 								</td> 
 							</tr>
@@ -87,18 +88,21 @@
 		 			<br><br>
 				 			<!-- ************ 댓글 에어리어 **************** -->
 			 		<div class="replyArea" style="margin-top:3px">
-			 					<% if(loginUser != null) {%>
-			 					<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:70%"></textarea>
-			 					<button class="btns" >댓글등록</button>
-			 					<% } else{ %>
-			 					<textarea readonly rows="1" cols="60" id="replyContent">로그인한 사용자만 가능합니다.</textarea>
-			 					<button disabled class="btns">댓글등록</button>
-			 					<% } %>
-
 			 			<!-- 댓글리스트  -->
 			 			<div id="replyListArea">
-			 				<table id="replyList" border="1" align="center"></table>
+			 				<table id="replyList" border="1" text-align="center" class="table">
+			 					
+			 				</table>
 			 			</div>
+			 			<br>
+			 			<% if(loginUser != null) {%>
+			 				<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:70%"></textarea>
+			 				<button id="addReply" class="btns">댓글등록</button>
+			 			<% } else{ %>
+			 				<textarea readonly rows="1" cols="60" id="replyContent">로그인한 사용자만 가능합니다.</textarea>
+			 			<% } %>
+
+			 			
 			 		</div>
 		 			<br><br><br>
 		 			<div class="bottom-btns" align="center">
@@ -120,8 +124,14 @@
 						}
 						
 						function deleteBoard(){
-							$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
-							$("#postForm").submit();
+							if(confirm('게시글을 삭제하시겠습니까 ?')){
+								$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
+								$("#postForm").submit();
+							} 
+							return;
+								
+							
+							
 						}
 					</script>
 		 					
@@ -157,7 +167,9 @@
 			$("#replyList").empty(); 
 			$.ajax({
 				url:"rList.bo",
-				data:{bId:<%= b.getBoardNo()%>},
+				data:{
+					bId : <%= b.getBoardNo() %>
+				},
 				type:"get",
 				success:function(list){
 					console.log(list)
@@ -166,7 +178,7 @@
 						value += '<tr>'+
 									'<td width="100px">'+list[i].replyWriter+'</td>'+
 									'<td width="330px">'+list[i].replyContent+'</td>'+
-									'<td width="150px">'+list[i].createDate+'</td>'+
+									
 								 '</tr>';
 					}
 					$("#replyList").html(value);

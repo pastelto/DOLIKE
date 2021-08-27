@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
-ArrayList<Challenge> list = (ArrayList<Challenge>)request.getAttribute("list");
-ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
+	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -138,6 +139,9 @@ li {
 	list-style: none;
 	text-align: -webkit-match-parent;
 }
+.hide{
+	display: none;
+}
 
 .item>img {
 	position: absolute;
@@ -160,110 +164,116 @@ a {
 <body>
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
-
 		<div class="content-body">
+			<div class="container-fluid">
+				<div class="row" style="margin-bottom: 13%;">
+					<div class="topList col-10" align="center">
 
-			<div class="navbar">
-				<ul class="nav">
-					<li class="nav-item"><a class="nav-link" href="">챌린지 투표</a></li>
-					<li class="nav-item"><a class="nav-link" href="">이달의 챌린저</a></li>
-					<li class="nav-item"><a class="nav-link" href="">마이 챌린지</a></li>
-					<li class="nav-item"><a class="nav-link" href="">종료된 챌린지</a></li>
-				</ul>
-			</div>
-			<div class="root-container">
-				<div class="full-banner-style">
-					<div class="top-content">
-						<a href="투표하기 링크">
-							<div class="root-banner-wrap" style="background:">
-								<!-- 색지정 -->
-								<a href="<%=request.getContextPath()%>/challengeVote.ch">
-									<div class="banner-item-wide" style="background:">
-										<div class="left">
-											<h6 class="label-text">Vote your Challenge!</h6>
-											<h4 class="headline">
-												<!-- 투표타이틀 -->
-											</h4>
-											<h5 class="period">
-												<!-- 기간 -->
-											</h5>
-										</div>
-										<div class="right">
-											<img src="투표이미지루트" alt="이달의 투표">
-										</div>
-									</div>
-								</a>
-							</div>
-						</a>
-					</div>
-				</div>
-				<%
-				if (!list.isEmpty() && !fileList.isEmpty()) {
-				%>
-				<div class="container ">
-					<div class="root-content">
-						<div class="root-section">
-							<section class="challenge-list">
-								<div class="section-header">
-									<h4>챌린지</h4>
-								</div>
-								<ul class="live-item-list">
-									<%
-									for (int i = 0; i < list.size(); i++) {
-									%>
-									<li class="item">
-										<div class="item-wrap">
-											<a href="<%=request.getContextPath()%>/challengedetail.ch"
-												class="item-click"> <img
-												src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>"
-												alt="챌린지이미지" class="img-challenge">
-											</a>
-											<div class="item-info">
-												<h4 class="title">
-													<a
-														href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
-												</h4>
-												<ul class="challenge-period">
-													<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
-													<li>카테고리 : <%=list.get(i).getCategoryTitle()%>
-													</li>
-												</ul>
+						<div id="thumbList"
+							style="height: 10%; padding-left: 15%; padding-right: 5%">
+							<div class="card" style="width: 80%;">
+								<!--                             <div class="card-body"> -->
+
+								<div class="bootstrap-carousel" style="height: 5rem;">
+									<div id="carouselExampleIndicators" class="carousel slide"
+										data-ride="carousel">
+										<ol class="carousel-indicators">
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="0" class="active"></li>
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="1"></li>
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="2"></li>
+										</ol>
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+												<img class="d-block w-100"
+													style="width: 10%; height: 18rem;"
+													src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2f584176-70f3-4f90-b940-6df1b60cd0e1/%ED%88%AC%ED%91%9C_%EB%B0%B0%EB%84%88-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210826%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210826T011928Z&X-Amz-Expires=86400&X-Amz-Signature=6ee40b3e716402b105df0a867a7a10b1b5518f55b7c8be7bf431961c6e4e79bf&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25ED%2588%25AC%25ED%2591%259C%2520%25EB%25B0%25B0%25EB%2584%2588-001.png%22"
+													alt="First slide">
+											</div>
+											<div class="carousel-item">
+												<img class="d-block w-100"
+													style="width: 10%; height: 18rem;"
+													src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/af158413-7cf3-4e68-bb99-4d9e2ce9ae7e/%EC%B1%8C%EB%A6%B0%EC%A7%80_%EC%8B%A0%EC%B2%AD-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210826%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210826T012613Z&X-Amz-Expires=86400&X-Amz-Signature=7d255596af802ada91b32fceba5325b8eb76f11ad5dcc81e8b47b38d21d46d30&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%25B1%258C%25EB%25A6%25B0%25EC%25A7%2580%2520%25EC%258B%25A0%25EC%25B2%25AD-001.png%22"
+													alt="Second slide">
 											</div>
 										</div>
-									</li>
-									<%
-									}
-									%>
-									<%
-									} else if(list.isEmpty() || fileList.isEmpty()){
-									%>
-									<table border="lightgrey 0.5px" text-aligh="center" margin="auto">
-										<tr width="500px">
-											<td height="500px">지금은 점검중입니다.</td>
-										</tr>
-									</table>
-									<%
-									}
-									%>
-								</ul>
-							</section>
+										<a class="carousel-control-prev"
+											href="#carouselExampleIndicators" data-slide="prev"><span
+											class="carousel-control-prev-icon"></span> <span
+											class="sr-only">Previous</span> </a><a
+											class="carousel-control-next"
+											href="#carouselExampleIndicators" data-slide="next"><span
+											class="carousel-control-next-icon"></span> <span
+											class="sr-only">Next</span></a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div>
+				<div class="root-container">
+					<%
+					if (!list.isEmpty() && !fileList.isEmpty()) {
+					%>
+					<div class="container ">
+						<div class="root-content">
+							<div class="root-section">
+								<section class="challenge-list">
+									<div class="section-header">
+										<h4>챌린지</h4>
+									</div>
+									<ul class="live-item-list">
+										<%
+										for (int i = 0; i < list.size(); i++) {
+										%>
+										<li class="item">
+											<div class="hide"><%=list.get(i).getChNo()%></div>
+											<div class="item-wrap">
+												<a href="<%=request.getContextPath()%>/challengedetail.ch"
+													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+												</a>
+												<div class="item-info">
+													<div>
+													<h4 class="title" style="float:left">
+														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
+													</h4></div> <br>
+													<div>									
+													<ul class="challenge-period">
+														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
+													</ul>
+													</div>
+												</div>
+											</div>
+										</li>
+										<%}%>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</div>
+					<%} %>
 				</div>
 			</div>
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
+	
+	
 	<script>
-		<% if(!list.isEmpty()){%>
-		$(function(){
-			$("ul>li>div").click(function(){
-				var chno = $(this).children().eq(0);
-			
-				location.href="<%= contextPath %>/challengedetail.ch?chno="+chno;
-			})
-		})
-		<% } %>
+	<% if(!list.isEmpty()){%>
+		$(function() {
+			$("ul>li").click(function(){
+				var chno = $(this).children().eq(0).text();				
+						
+						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+					})					
+				})
+	<% } %>
 	</script>
+
+
 </body>
 </html>

@@ -78,7 +78,8 @@ public class MessageService {
 		return m;
 	}
 
-	public int getSendMessageCount(String userId) { // 보낸 쪽지 목록 개수 
+	// 보낸 쪽지 목록 개수 
+	public int getSendMessageCount(String userId) { 
 		Connection conn = getConnection();
 		
 		int count = new MessageDao().getSendMessageCount(conn, userId);
@@ -179,6 +180,22 @@ public class MessageService {
 		close(conn);
 		
 		return count;
+	}
+
+	// 쪽지 휴지통 비우기
+	public int clearMsgBin(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new MessageDao().clearMsgBin(conn, userId);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 
 

@@ -15,15 +15,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
 	   $(function(){
 	      var msg = "<%=msg%>";
@@ -31,7 +34,9 @@
 			if (msg != "null") {
 				alert(msg);
 	<%session.removeAttribute("msg");%>
-		}
+		} else{
+			
+		}}
 		})
 	</script>
 	<style>
@@ -125,15 +130,22 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
+                    <form id="searchBoardForm" class="form-inline" action="search.bo" method="post">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
+                        <div class="input-group text-center mb-3">
+                        	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
+                        	<div class="input-group-append">
+                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        	</div>
+                        </div>
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
                             </form>
                         </div>
+                    </form>    
                     </div>
                 </div>
                 
@@ -192,34 +204,38 @@
                         </a>
                     </li>
                     <% if(loginUser == null) {%> 
-                      	<li class="mega-menu-sm" id="caMenu" >
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" onclick="caMenuList();">
-	                            <i class="icon-grid menu-icon"></i><span class="nav-text"  >카테고리</span>
-	                        </a>
-	                        <ul aria-expanded="false" class="collapse" >	                        	
+                      	<li class="mega-menu-sm"  id="allmenu">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" >
+	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
+	                        </a>                 
+							
+	                        <ul aria-expanded="false" class="collapse">
+	                        
 	                            <!-- <li><a href="list.bo">카테고리1</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리2</a></li> 
-	                            <li><a href="../board/boardView.jsp">카테고리3</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리4</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리5</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리6</a></li>
-	                            <li><a href="../board/boardView.jsp">카테고리7</a></li>     -->                      
-	                        </ul>	                        
+	                            <li><a href="list.bo">카테고리2</a></li>
+	                            <li><a href="list.bo">카테고리3</a></li>
+	                            <li><a href="list.bo">카테고리4</a></li>
+	                            <li><a href="list.bo">카테고리5</a></li>
+	                            <li><a href="list.bo">카테고리6</a></li>
+	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
+	                        </ul>
+
 						</li>
                     <%}else{ %>
-                       <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                       <li class="mega-menu-sm" id="allmenu">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
+<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
                         </ul>
+
                         <!-- 즐겨찾는 게시판 Ajax Script -->
 				        <script>
 				        
@@ -249,8 +265,15 @@
         				</script>
         				
 
+
                     	</li>
                       <%} %> 
+                      <% if(loginUser == null) {%> 
+                      <li class="mega-menu-sm">
+                        <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
+                            <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
+                        </a>
+                      <%}else{ %>
                       <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
@@ -262,6 +285,7 @@
                      
                         </ul>
                     </li>
+                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
@@ -274,8 +298,7 @@
                     </li>
                     <% if(loginUser == null) {%>  
                     <li class="mega-menu-sm">
-                        <!-- <a class="has-arrow" aria-expanded="false" onclick="msgLoginerror();"> -->
-                        <a class="has-arrow sweet-wrong" aria-expanded="false" data-toggle="modal" data-target="#myModal">
+                        <a class="has-arrow sweet-wrong" aria-expanded="false" id="needLogin" onclick="needLogin();">
                             <i class="icon-envelope menu-icon" ></i><span class="nav-text">쪽지</span>
                         </a>
                     </li>
@@ -371,52 +394,120 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
+        	
+        	function searchBoard(){
+        		var findBoard = $("#searchBoardForm input[name=findBoard]");
+        		if(findBoard.val() == ""){
+        			alert("검색할 내용을 입력하세요.");
+        			return false;
+        		}
+        		$.ajax({
+        			url:"search.bo",
+        			type:"post",
+        			data:{findBoard:findBoard.val()},
+        			success:function(result){
+        				if(result == "success"){
+        					$("#searchBoardForm").submit();
+        				}else{
+        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
+        				}
+        			},
+        			error:function(){
+        				console.log("통신오류.")
+        			}
+        		})
+        		
+        		
+        	}
+				        
+			$(function(){
+				$("#btn-like").eq(0).click(function(){
+				var favB = $("#input2").val();
+								
+				$.ajax({
+									
+				url: "myFavBoard.bo",
+				data: {input:input},
+				type: "post",
+				success: function(result){
+				$("#output2").val(result);
+				},
+				error: function(e){ 
+					console.log(e);
+				}
+				})
+				})
+				})
+				
+			function needLogin(){
+				Swal.fire({
+				  title: "로그인이 필요합니다.",
+				  icon: 'error',
+				  confirmButtonColor: "#78c2ad",
+				  confirmButtonBorder: "none",
+				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
+				})
+			}
+
         </script>
         
-                				<script>
+		<script>
         				
-                				/* $(function(){
-                			         $("#categoryList").click(function(){ */
-				       			 function caMenuList(){ 
-				       				console.log("aaaaaaaaaaaaa")
-				       				$.ajax({
-				       					url:"CategoryMenuBar.ca",
-				       					dataType:"json",
-				       					type:"post",
-				       					success:function(result){
-				       						console.log(result)
-				       						console.log("ajax 성공!!")
-				       						
-				       					/* 	var $ulBody = $("#categoryList > ul") 
-				       						
-				       						$ulBody.html("");
-				       						$.each(map["jArr"], function(index, value){
-				       							console.log(value);
-				     							var $li = $("<li>");							
-				     							var $a = $("<a>").text(value.name);
-				     							//var $nameLi = $("<>").text(value.name); //<li> 패션 </li>				       										 
-				       							
-				     							
-				     							$li.append($nameLi);
-				       							$ulBody.append($li);
-				       							console.log("######################") */
-				       						})				       					
-				       					},
-				       					error:function(e){
-				       						console.log("ajax 통신 실패함")
-				       					}
-                			         })
-               			            
-                		          } 
-                		     /*  })
-                			}) */
-	        				
-        				</script>
+              				  $(function(){
+              					 $("#categoryList").click(function(){     				       			                 			        
+              						 
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						var loginUser = "<%=loginUser%>";
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						var n = null;
+   				       						
+   				       						$liBody.html(""); 
+   				       	 					console.log(loginUser)
+   				       	 					$.each(list, function(i){
+   				       						if(loginUser == n){												
+												
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+												console.log("1")
+   				       						} else if(loginUser != n){ 
+												/* $.each(list, function(i){ */
+												
+    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       					
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							console.log("2")
+												/* }) */
+   				       						}
+   				       	 				})
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
         
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>
 	    <script src="js/gleek.js"></script>
 	    <script src="js/styleSwitcher.js"></script>
+	    
+	    
 </body>
 </html>

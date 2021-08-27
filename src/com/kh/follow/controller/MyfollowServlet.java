@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.category.model.vo.Category;
 import com.kh.follow.model.service.FollowService;
 import com.kh.follow.model.vo.Follow;
 import com.kh.follow.model.vo.FollowPageInfo;
@@ -39,6 +40,10 @@ public class MyfollowServlet extends HttpServlet {
 		
 		int followCount = new FollowService().followCount(userId);
 		request.setAttribute("followCount", followCount);
+		
+		ArrayList<Category> catList = new ArrayList<Category>();
+		catList = new FollowService().getCatList();
+		request.setAttribute("catList", catList);
 		
 		
 		int listCount;			

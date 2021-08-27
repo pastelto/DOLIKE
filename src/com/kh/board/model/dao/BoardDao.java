@@ -123,17 +123,15 @@ public class BoardDao {
 		
 		return result;
 	}
-	public int insertAttachment(Connection conn, Attachment at) {
+	public int increaseCount(Connection conn, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("insertAttachment");
+		String sql = prop.getProperty("increaseCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, at.getOriginName());
-			pstmt.setString(2, at.getChangeName());
-			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(1, bno);
 			
 			result = pstmt.executeUpdate();
 			
@@ -143,8 +141,42 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
+	}
+	public Board selectBoard(Connection conn, int bno) {
+		Board b = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			System.out.println(" bno dao값 확인 : "+ bno );
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b = new Board( rset.getInt("BOARD_NO"),
+							rset.getString("NICKNAME"),
+							rset.getString("TAG"),
+							rset.getString("BOARD_TITLE"),
+							rset.getDate("BOARD_DATE"),
+							rset.getString("BOARD_CONTENT"),
+							rset.getInt("VIEWS")
+							);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
 	}
 	public int deleteBoard(Connection conn, int bid) {
 		int result = 0;
@@ -166,26 +198,7 @@ public class BoardDao {
 		
 		return result;
 	}
-	public int deleteAttachment(Connection conn, int bid) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("deleteAttachment");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bid);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+	
 	public int updateBoard(Connection conn, Board b) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -256,21 +269,72 @@ public class BoardDao {
 		
 		return result;
 	}
-	public int insertReply(Connection conn, Reply r) {
-		int result = 0;
-		PreparedStatement pstmt = null;
+	public Attachment selectAttachment(Connection conn, int bno) {
+		Attachment at = null;
 		
-		String sql = prop.getProperty("insertReply");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, r.getReplyContent());
-			pstmt.setInt(2, r.getReplyBoardNo());
-			pstmt.setString(3, r.getReplyWriter());
-
+			
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment();
+				at.setFileNo(rset.getInt("B_FILENO"));
+				at.setOriginName(rset.getString("B_ORIGIN"));
+				at.setChangeName(rset.getString("B_NEWNAME"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("at : " + at);
+		return at;
+	}
+	public int insertAttachment(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getChangeName());
+			pstmt.setString(2, at.getOriginName());
+			pstmt.setString(3, at.getFilePath());
+			
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int deleteAttachment(Connection conn, int bid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -295,9 +359,9 @@ public class BoardDao {
 			list = new ArrayList<>();
 			
 			while(rset.next()) {
-				list.add(new Reply(rset.getInt("COMENT_NO"),
-								   rset.getString("CMT_CONTENT"),
-								   rset.getInt("BOARD_NO"),
+				list.add(new Reply(rset.getInt("REPLY_NO"),
+								   rset.getString("REPLY_CONTENT"),
+								   rset.getInt("REPLY_BNO"),
 								   rset.getString("NICKNAME")));
 			}
 		} catch (SQLException e) {
@@ -308,18 +372,21 @@ public class BoardDao {
 			close(pstmt);
 		}
 		
-		return list;
+		return list;      
 	}
-	public int increaseCount(Connection conn, int bno) {
+	public int insertReply(Connection conn, Reply r) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("increaseCount");
+		String sql = prop.getProperty("insertReply");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			
+
+			pstmt.setString(1, r.getReplyWriter());
+			pstmt.setString(2, r.getReplyContent());
+			pstmt.setInt(3, r.getReplyBoardNo());
+
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -328,32 +395,26 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		
 		return result;
 	}
-	public Board selectBoard(Connection conn, int bno) {
-		Board b = null;
-		
-		PreparedStatement pstmt = null;
+
+	public int searchBoard(Connection conn, String findBoard) {
+		int result = 0;
+		PreparedStatement pstmt =null;
 		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectBoard");
+		System.out.println("검색어dao : "+findBoard);
+		String sql = prop.getProperty("searchBoard");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, bno);
-			System.out.println(" bno dao값 확인 : "+ bno );
+			pstmt.setString(1, findBoard);
+			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				b = new Board( rset.getInt("BOARD_NO"),
-							rset.getString("NICKNAME"),
-							rset.getString("TAG"),
-							rset.getString("BOARD_TITLE"),
-							rset.getDate("BOARD_DATE"),
-							rset.getString("BOARD_CONTENT"),
-							rset.getInt("VIEWS")
-							);
+			if(rset.next()) { 
+				result = rset.getInt(1); 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -362,40 +423,7 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		return b;
-	}
-	public Attachment selectAttachment(Connection conn, int bno) {
-		Attachment at = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectAttachment");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				at = new Attachment();
-				
-				at.setFileNo(rset.getInt("FILE_NO"));
-				at.setOriginName(rset.getString("ORIGIN_NAME"));
-				at.setChangeName(rset.getString("CHANGE_NAME"));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return at;
+		return result;
 	}
 
 	

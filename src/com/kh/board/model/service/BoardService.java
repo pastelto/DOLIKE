@@ -12,6 +12,7 @@ import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.PageInfo;
 import com.kh.board.model.vo.Reply;
+import com.kh.follow.model.dao.FollowDao;
 
 
 public class BoardService {
@@ -124,6 +125,7 @@ public class BoardService {
 		
 		int result = new BoardDao().increaseCount(conn, bno);
 		
+		
 		Board b = null;
 		
 		if(result > 0) {
@@ -154,5 +156,30 @@ public class BoardService {
 		close(conn);
 		
 		return b;
+	}
+
+	public int insertImg(Board b, Attachment at) {
+		Connection conn = getConnection();
+		
+		
+		int result = new BoardDao().insertAttachment(conn, at);
+		
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int searchBoard(String findBoard) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().searchBoard(conn, findBoard);
+		
+		close(conn);
+		return result;
 	}
 }

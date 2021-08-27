@@ -135,18 +135,14 @@
 									<table class="table table-hover" id="msgListTB" style="text-align: center;">
 										<thead>
 											<tr style="background-color: #78c2ad; color: white;">
-												<th style="width:3rem;"></th>
-												<th style="width:5rem;">번호</th>
-												<th style="width:8rem;">보낸사람</th>
-												<th style="width:40rem;">제목</th>
-												<th style="width:12rem;">받은 날짜</th>
-												<th>상태</th>
+												<th style="width:3rem;"><input type="checkbox" value="<%=  %>"/>아이디</th>
+												<th style="width:5rem;">닉네임</th>
 											</tr>
 										</thead>
 										<tbody>					
 											<% if(list.isEmpty()){ %>
 										 	<tr>
-												<td colspan="6">받은 쪽지가 없습니다.</td>
+												<td colspan="6">검색 결과가 없습니다.</td>
 											</tr>
 										 <% }else{  %>
 										 	<% for(Message m : list){ %>

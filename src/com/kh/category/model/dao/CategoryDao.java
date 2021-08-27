@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
 import com.kh.category.model.vo.CategoryPageInfo;
 import com.kh.member.model.dao.MemberDao;
