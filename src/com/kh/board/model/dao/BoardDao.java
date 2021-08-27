@@ -409,7 +409,9 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, findBoard);
+			pstmt.setString(1, findBoard );
+					
+			//pstmt.setString(1, findBoard );
 			
 			rset = pstmt.executeQuery();
 			
@@ -424,6 +426,78 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Board> findBoard(Connection conn, String findBoard) {
+		ArrayList<Board> blist = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findBoard");
+		
+		//int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+		//int endRow = startRow + pi.getBoardLimit()-1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setInt(1, startRow);
+			//pstmt.setInt(2, endRow);
+			pstmt.setString(1, findBoard);
+			//pstmt.setString(1, findBoard );
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				blist.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getInt("CATEGORY_NO"),
+									rset.getString("BOARD_TITLE"),
+									rset.getString("NICKNAME"),
+									rset.getDate("BOARD_DATE"),
+									rset.getInt("VIEWS")
+									));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("blist :" + blist);
+		return blist;
+	
+	}
+
+	public Attachment searchAttachment(Connection conn, String findBoard) {
+		Attachment at = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, findBoard);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment();
+				at.setFileNo(rset.getInt("B_FILENO"));
+				at.setOriginName(rset.getString("B_ORIGIN"));
+				at.setChangeName(rset.getString("B_NEWNAME"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("at : " + at);
+		return at;
 	}
 
 	
