@@ -182,4 +182,21 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+
+	public ArrayList<Board> findBoard(String findBoard) {
+		Connection conn = getConnection();
+		ArrayList<Board> blist = new BoardDao().findBoard(conn, findBoard);
+		
+		close(conn);
+		return blist;
+	}
+
+	public Attachment searchAttachment(String findBoard) {
+		Connection conn = getConnection();
+		
+		Attachment at = new BoardDao().searchAttachment(conn, findBoard);
+		
+		close(conn);
+		return at;
+	}
 }

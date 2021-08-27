@@ -33,11 +33,12 @@
 
 			if (msg != "null") {
 				alert(msg);
-	<%session.removeAttribute("msg");%>
+		<%session.removeAttribute("msg");%>
 		} else{
+			console.log("Hi");
+		}
 			
-		}}
-		})
+	   })
 	</script>
 	<style>
 	#loginBtn, #loginBtnModal, #EnrollBtnModal {
@@ -93,7 +94,6 @@
       .boardMargin{
       	padding-left: 20px !important;
       }
-      
 
 	</style>
 </head>
@@ -166,7 +166,7 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/mypage.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
                                             <a href="<%= request.getContextPath() %>/list.ms">
