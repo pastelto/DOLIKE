@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Attachment;
 import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgAttachment;
 import com.kh.message.model.vo.MsgPageInfo;
@@ -61,7 +60,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -99,7 +98,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
@@ -269,7 +268,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -337,7 +336,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -406,7 +405,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
