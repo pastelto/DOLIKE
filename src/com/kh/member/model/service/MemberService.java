@@ -45,17 +45,13 @@ public class MemberService {
 	}
 	
 <<<<<<< HEAD
-<<<<<<< HEAD
 	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String interests) {
 =======
 	public Member updateMember(String userId, String userPwd, String nickname, String interests1, String interests2, String interests3) {
 >>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
-=======
-	public Member updateMember(String userId, String userPwd, String nickname, String interests) {
->>>>>>> parent of ad3e5c8 (Merge pull request #110 from pastelto/soyoung)
 		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests);
+		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests1, interests2, interests3);
 		
 		if (result > 0) {
 			commit(conn);
