@@ -110,8 +110,7 @@
                         </div>
                     </div>
                  </div>
-                </div>
-                
+               </div>              
 		<br><br>
 
 		
@@ -152,9 +151,7 @@
 				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
-		<%@ include file="../common/footer.jsp" %>
 		</div>
-		
 		<script>
 		<%if(!list.isEmpty()){ %>
 		$(function(){
