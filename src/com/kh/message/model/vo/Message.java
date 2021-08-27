@@ -9,7 +9,7 @@ public class Message {
 	private String senderId;
 	private String msgTitle;
 	private String msgContent;
-	private Date recvtime;
+	private String recvtime;
 	private String msgStatus;
 	private String msgDel;
 	private String msgFile;
@@ -19,7 +19,7 @@ public class Message {
 	}
 	
 	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent,
-			Date recvtime, String msgStatus, String msgDel) {
+			String recvtime, String msgStatus, String msgDel) {
 		super();
 		this.msgNo = msgNo;
 		this.recvId = recvId;
@@ -32,7 +32,7 @@ public class Message {
 	}
 	
 	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent,
-			Date recvtime, String msgStatus, String msgDel, String msgFile) {
+			String recvtime, String msgStatus, String msgDel, String msgFile) {
 		super();
 		this.msgNo = msgNo;
 		this.recvId = recvId;
@@ -46,7 +46,7 @@ public class Message {
 	}
 	
 	
-	public Message(int msgNo, String recvId, String senderId, String msgTitle, Date recvtime, String msgStatus) {
+	public Message(int msgNo, String recvId, String senderId, String msgTitle, String recvtime, String msgStatus) {
 		super();
 		this.msgNo = msgNo;
 		this.recvId = recvId;
@@ -56,7 +56,7 @@ public class Message {
 		this.msgStatus = msgStatus;
 	}
 	
-	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent, Date recvtime, String msgStatus) {
+	public Message(int msgNo, String recvId, String senderId, String msgTitle, String msgContent, String recvtime, String msgStatus) {
 		super();
 		this.msgNo = msgNo;
 		this.recvId = recvId;
@@ -107,11 +107,11 @@ public class Message {
 		this.msgContent = msgContent;
 	}
 
-	public Date getRecvtime() {
+	public String getRecvtime() {
 		return recvtime;
 	}
 
-	public void setRecvtime(Date recvtime) {
+	public void setRecvtime(String recvtime) {
 		this.recvtime = recvtime;
 	}
 
