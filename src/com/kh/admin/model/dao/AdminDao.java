@@ -83,11 +83,21 @@ public class AdminDao {
 			
 			rset = pstmt.executeQuery();
 			
-//			while(rset.next()) {
-//				list.add(new Member(rset.getInt("CATEGORY_NO"), 
-//								      rset.getString("CATEGORY_NAME")
-//						));
-//			}//
+			while(rset.next()) {
+				list.add(new Member(rset.getString("USER_ID"), 
+								      rset.getString("USER_NAME"),
+								      rset.getString("PASSWORD"),
+								      rset.getString("BIRTHDATE"),
+								      rset.getString("PHONE"),
+								      rset.getString("EMAIL"),
+								      rset.getString("NICKNAME"),
+								      rset.getString("INTERESTS"),
+								      rset.getDate("USER_CREATE_DATE"),
+								      rset.getString("USER_STATUS")
+						));
+			}
+			
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
