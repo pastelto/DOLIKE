@@ -162,9 +162,7 @@
     <!--*******************
         Preloader end
     ********************-->
-
     
-<<<<<<< HEAD
 	<div class="content-body">
      <div class="row page-titles mx-0">
          <div class="col p-md-0">
@@ -176,8 +174,6 @@
      </div>
 	
     <div class="container-fluid">
-=======
->>>>>>> parent of ad3e5c8 (Merge pull request #110 from pastelto/soyoung)
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
@@ -204,11 +200,10 @@
             </div>
         </div>
     </div>
-    <%@ include file="../common/footer.jsp" %>
-<<<<<<< HEAD
->>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
-=======
+    </div>
+    </div>
 	</div>
->>>>>>> parent of ad3e5c8 (Merge pull request #110 from pastelto/soyoung)
+    <%@ include file="../common/footer.jsp" %>
+>>>>>>> 4f3791dd8df80cd45b02856731c1724c6010d626
 </body>
 </html>
