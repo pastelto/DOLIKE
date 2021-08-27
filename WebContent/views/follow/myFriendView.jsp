@@ -425,7 +425,7 @@
 							followerCount = result[i].followerCount 
 							boardCount = result[i].boardCount
 						})
-						console.log(nickId)
+						//console.log(nickId)
 						console.log(followerCount)
 						$("#nonCheckFl").attr("style", "display:none")
 						$("#checkFl").attr("style", "display:block")

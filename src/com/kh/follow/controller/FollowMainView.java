@@ -33,12 +33,10 @@ public class FollowMainView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Follow> flist = new FollowService().selectFollowTop4User();
 		
+		ArrayList<Follow> flist = new FollowService().selectFollowTop4User(); 
 		request.setAttribute("flist", flist);
-		
-		
-		
+		 		
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
 		view.forward(request, response); 
 	}
