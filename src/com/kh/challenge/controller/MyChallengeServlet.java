@@ -37,6 +37,7 @@ public class MyChallengeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		System.out.println("servlet loginUser : " + loginUser);
 		
 		Challenge c = new ChallengeService().selectMyChallenge(loginUser);
 		System.out.println(c +": servlet");
