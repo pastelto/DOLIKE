@@ -60,7 +60,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -98,7 +98,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
@@ -268,7 +268,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -336,7 +336,7 @@ public class MessageDao {
 									 rset.getString("RECV_ID"),
 						 			 rset.getString("SENDER_ID"),
 						 			 rset.getString("MSG_TITLE"),
-						 			 rset.getDate("RECVTIME"),
+						 			 rset.getString("RECVTIME"),
 						 			 rset.getString("MSG_STATUS")));
 				
 				System.out.println("list? " + list);
@@ -405,7 +405,7 @@ public class MessageDao {
 							rset.getString("SENDER_ID"),
 							rset.getString("MSG_TITLE"),
 							rset.getString("MSG_CONTENT"),
-							rset.getDate("RECVTIME"),
+							rset.getString("RECVTIME"),
 							rset.getString("MSG_STATUS"));
 			}
 			
