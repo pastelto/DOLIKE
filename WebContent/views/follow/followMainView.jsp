@@ -142,7 +142,65 @@
 						    <div class="carousel-item active">
 						    	
 						    	
-						    	
+						    				<div class="col-lg-10" style="margin: 0 auto;">
+
+				<div id="interestDiv" style="margin: 0 auto;">
+					<span id="interestLabel" class="label label-pill label-primary"># 팔로워 TOP4</span>
+				</div>
+				<br>
+			
+			   <div class="row">
+			   
+			   
+			   
+			   
+			   
+			   
+			<% for(int i=0;i<flist.size();i++){ %>
+			   
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
+								<p id="<%=i%>id" style="margin-bottom: 0px"><%= flist.get(i).getFollowId() %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="<%=i%>fl">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span id="bospan"> <i id ="iconflB" class="fa fa-pencil gradient-3-text"></i>
+												<p id="<%=i%>bo">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+								
+								
+								<% if(loginUser == null){%>
+							 			<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
+							 		<%}else{%>
+							 			<form action="insert.fl" method="get">
+											<input id="insertFl" type="hidden" name="followId" value="<%= flist.get(i).getFollowId() %>">
+											<button id="addfr" type="submit" class="btn btn-sm btn-rounded">친구추가</button>
+										</form>
+							 		<%}%>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   <%} %>     
+			   
+			   
+			   
+			   </div>
+			</div>
 						    
 						    
 						    
