@@ -13,6 +13,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	String nickId = null;
+	System.out.println(catList);
 %>
 <!DOCTYPE html>
 <html>
@@ -418,7 +419,7 @@
 						$.each(result, function(i){
 							
 							nick = result[i].nickname
-							nickId = result[i].nickname
+							/* nickId = result[i].nickname */
 							flid = result[i].followUserId
 							followInterest = result[i].followInterest
 							followerCount = result[i].followerCount 

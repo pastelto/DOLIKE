@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%> 
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*"%>
+	
+<%
+	ArrayList<Follow> flist = (ArrayList<Follow>)request.getAttribute("flist");
+	System.out.println(flist);
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,23 +13,6 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
-<!-- Custom Stylesheet -->
-<!-- <link href="../../css/style.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script> -->
 
 
 <style>
@@ -71,16 +59,208 @@
                 </div>
             </div>
 
+<br> <br> <br> <br>
 
 
 
-
-		<br> <br>
-			
 			<div class="col-lg-10" style="margin: 0 auto;">
 
 				<div id="interestDiv" style="margin: 0 auto;">
-					<span id="interestLabel" class="label label-pill label-primary">여기에 로그인 유저 관심사 </span>
+					<span id="interestLabel" class="label label-pill label-primary"># 팔로워 TOP4</span>
+				</div>
+				<br>
+			
+			   <div class="row">
+			   
+			   
+			   
+			   <!-- 1번 -->
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p id="followId1"><%= flist.get(0).getFollowId()  %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount1">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount1">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   	<!-- 2번 -->
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p id="followId2"><%= flist.get(1).getFollowId()  %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount2">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount2">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   	<!-- 3번 -->
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p id="followId3"><%= flist.get(2).getFollowId()  %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount3">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount3">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   	<!-- 4번 -->
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p id="followId1"><%= flist.get(3).getFollowId()  %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount3">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount3">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+<%-- 			   <% for(Follow fl : flist){ %>
+			   
+			   	<div class="col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="text-center">
+								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
+								<p id="followId"><%= fl.getFollowId()  %></p>
+
+								<div class="card-footer border-0 bg-transparent">
+									<div class="row">
+										<div class="col-6 border-right-1">
+											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+												<p id="followerCount">팔로워 수</p>
+											</span>
+										</div>
+										<div class="col-6">
+											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
+												<p id="boardCount">게시글 수</p>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<button id="addfr" onclick="javascript:void()"
+									class="btn btn-sm btn-rounded ">친구추가</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   
+			   <%} %> --%>
+			   
+			   
+			   
+			   </div>
+			</div>
+			   
+
+
+
+
+
+
+
+		
+			
+<!-- 			<div class="col-lg-10" style="margin: 0 auto;">
+
+				<div id="interestDiv" style="margin: 0 auto;">
+					<span id="interestLabel" class="label label-pill label-primary"># 팔로워 TOP4</span>
 				</div>
 				<br>
 			
@@ -206,12 +386,126 @@
 				</div>
 				
 			</div>
-		</div>
+		</div> -->
+		
+		
+		
+		
 		</div>
 			
 	</div>
 <%@ include file="../common/footer.jsp" %> 
 
+<script>
+	window.onload = function(){
+		var followId1 = $("#followId1").text();
+		
+		console.log(followId1);
+		
+		$.ajax({
+			url:"userInfo.fl",
+			data:{followId:followId1},
+			type:"get",
+			dataType: "json",
+			success:function(result){
+				var followerCount1 = 0
+				var boardCount1 = 0
+				$.each(result, function(i){
+
+					followerCount1 = result[i].followerCount 
+					boardCount1 = result[i].boardCount
+					
+				})
+				$("#followerCount1").text(followerCount1)
+				$("#boardCount1").text(boardCount1)
+			},
+			error:function(){
+				console.log("추천 친구 통신오류!")
+			}
+		})
+	}
+window.onload = function(){
+		var followId2 = $("#followId2").text();
+		
+		console.log(followId2);
+		
+		$.ajax({
+			url:"userInfo.fl",
+			data:{followId:followId2},
+			type:"get",
+			dataType: "json",
+			success:function(result){
+				var followerCount2 = 0
+				var boardCount2 = 0
+				$.each(result, function(i){
+
+					followerCount2 = result[i].followerCount 
+					boardCount2 = result[i].boardCount
+					
+				})
+				$("#followerCount2").text(followerCount2)
+				$("#boardCount2").text(boardCount2)
+			},
+			error:function(){
+				console.log("추천 친구 통신오류!")
+			}
+		})
+	}
+/* 	window.onload = function(){
+		var followId3 = $("#followId3").text();
+		
+		console.log(followId3);
+		
+		$.ajax({
+			url:"userInfo.fl",
+			data:{followId:followId3},
+			type:"get",
+			dataType: "json",
+			success:function(result){
+				var followerCount3 = 0
+				var boardCount3 = 0
+				$.each(result, function(i){
+
+					followerCount3 = result[i].followerCount 
+					boardCount3 = result[i].boardCount
+					
+				})
+				$("#followerCount3").text(followerCount)
+				$("#boardCount3").text(boardCount)
+			},
+			error:function(){
+				console.log("추천 친구 통신오류!")
+			}
+		})
+	}
+	window.onload = function(){
+		var followId4 = $("#followId4").text();
+		
+		console.log(followId4);
+		
+		$.ajax({
+			url:"userInfo.fl",
+			data:{followId:followId4},
+			type:"get",
+			dataType: "json",
+			success:function(result){
+				var followerCount4 = 0
+				var boardCount4 = 0
+				$.each(result, function(i){
+
+					followerCount4 = result[i].followerCount 
+					boardCount4 = result[i].boardCount
+					
+				})
+				$("#followerCount4").text(followerCount)
+				$("#boardCount4").text(boardCount)
+			},
+			error:function(){
+				console.log("추천 친구 통신오류!")
+			}
+		})
+	}  */
+</script>
 
 
 </body>
