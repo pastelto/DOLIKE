@@ -21,6 +21,22 @@
 		background-color: #fff;
 		border-color: #78c2ad;
 	}
+	
+	#goMain:hover, #resetBtn:hover, #idCheckBtn:hover, #nickCheckBtn:hover, #phoneCheckBtn:hover, #emailCheckBtn:hover {
+		color: #fff;
+		background-color: #f3969a;
+		border-color: #f3969a;
+	}
+	
+	#userId, #userPwd, #checkPwd, #userName, #nickName, #birthDate, #phone, #email {
+		width: 350px;
+	}
+	
+	.checkFont {
+		margin-left: 300px;
+	}
+	
+
 	</style>
 </head>
 
@@ -59,75 +75,77 @@
                                 <div class="form-validation">
 									<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
+                                            <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span></label>
+                                            <div class="form-inline">
                                                 <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요." required>
-                                                <button type="button" class="btn btn-primary" id="idCheckBtn" onclick="checkId();">중복확인</button>
-                                                <div class="checkFont" id="idCheck"></div>
                                             </div>
+                                            <div class="form-inline">
+                                                <button type="button" class="btn btn-primary" id="idCheckBtn" onclick="checkId();">중복확인</button>
+                                            </div>
+                                            <div class="checkFont" id="idCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
+                                            <div class="form-inline">
                                                 <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
-                                                <div class="checkFont" id="pwdCheck"></div>
                                             </div>
+                                            <div class="checkFont" id="pwdCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
+                                            <div class="form-inline">
                                                 <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
-												<div class="checkFont" id="pwdCkCheck"></div>
                                             </div>
+											<div class="checkFont" id="pwdCkCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userName">이름 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
+                                            <div class="form-inline">
                                                 <input type="text" class="form-control" id="userName" name="userName" placeholder="실명을 입력하세요." required/>
-                                            	<div class="checkFont" id="nameCheck"></div>
                                             </div>
+                                            <div class="checkFont" id="nameCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
+                                            <div class="form-inline">
                                                 <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요." required>
                                             	<button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
-                                            	<div class="checkFont" id="nickCheck"></div>
                                             </div>
+                                            <div class="checkFont" id="nickCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="birthDate">생년월일 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
+                                            <div class="form-inline">
                                                 <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="생년월일을 입력하세요." required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="phone">연락처 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="(-)없이 입력하세요." required/>
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="(-)없이 입력하세요.   ex) 01011112222" required/>
                                                 <button type="button" class="btn btn-primary" id="phoneCheckBtn" onclick="checkPhone();">중복확인</button>
-                                            	<div class="checkFont" id="phoneCheck"></div>
                                             </div>
+                                            <div class="checkFont" id="phoneCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="email">이메일 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-6">
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요." required/>
+                                            <div class="form-inline">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요.   ex)abc@dolike.com" required/>
                                                 <button type="button" class="btn btn-primary" id="emailCheckBtn" onclick="checkEmail();">중복확인</button>
-                                                <div class="checkFont" id="emailCheck"></div>
                                             </div>
+                                            <div class="checkFont" id="emailCheck"></div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
-                                            <div class="col-lg-6">
+<!--                                             <div class="col-lg-6"> -->
+                                            <div class="form-inline">
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
@@ -163,7 +181,7 @@
 	                                    <div class="form-group row">
 	                                        <div class="col-lg-8 ml-auto">
 	                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-	                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력"/>
+	                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력" onclick="readAttrReset();"/>
 	                                            <button type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled>회원가입</button>
 	                                        </div>
 	                                    </div>
@@ -461,6 +479,22 @@
 			}
 		})
 	}
+  	
+  	
+	//==============================================
+  	// readonly reset
+  	//==============================================
+  	function readAttrReset() {
+  		var userId = $("#enrollForm input[name=userId]");
+  		var nickName = $("#enrollForm input[name=nickName]");
+  		var phone = $("#enrollForm input[name=phone]");
+  		var email = $("#enrollForm input[name=email]");
+  		
+  		userId.attr("readonly", false);
+  		nickName.attr("readonly", false);
+  		phone.attr("readonly", false);
+  		email.attr("readonly", false);
+  	}
 	
 	</script>
         <!--**********************************
