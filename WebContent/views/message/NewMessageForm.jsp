@@ -23,6 +23,7 @@
 	border-color: #78c2ad;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -68,7 +69,7 @@
 				<div class="col p-md-0">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-						<li class="breadcrumb-item active"><a href="write.ms">쪽지
+						<li class="breadcrumb-item active"><a onclick="submitMsg();"sss>쪽지
 								보내기</a></li>
 					</ol>
 				</div>
@@ -113,10 +114,12 @@
 												value="<%= loginUser.getUserId() %>">
 
 											<div class="form-group">
+												<div class="col-6">
 												<input type="text" class="form-control bg-transparent"
 													name="recvId" placeholder=" 받는 사람 아이디" style="width: 30%;">
-													<button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();">
-													<i class="mdi mdi-magnify"></i> 검색하기</button>	
+												<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp2();">
+													<i class="mdi mdi-magnify"></i> 검색하기</button>		
+													</div>
 											</div>
 											
 											<div class="form-group">
@@ -167,7 +170,7 @@
 
 	<script>
 		
-		function submitMsg(){
+	function submitMsg(){
             // 확인, 취소버튼에 따른 후속 처리 구현
             swal.fire({
                 title: '확인',
@@ -183,11 +186,36 @@
 		}
 
 
-		function searchPopUp(){
-			var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400"; 
-			var win = window.open("/findUser.fd", "_blank", "setting");
-	
+		function searchPopUp2(){
+			
+			var searchWord = $("input[name=recvId]").val();
+			
+			var search = confirm(searchWord);
+			
+			if(search == true){
+				
+				var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400"; 
+				var address = "/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord;
+				var win = window.open("address", "Do Like - 친구 찾기", "setting");
+				
+				} else {
+					swal.fire({
+		                title: '확인',
+		                text: "쪽지를 보낼 회원의 아이디 또는 별명을 입력해주세요.", 
+		                type: 'error',
+		                confirmButtonText: '확인',          
+		                confirmButtonColor: "#78c2ad",
+		            })
+				}
+
+			<%-- location.href="<%= contextPath %>/sread.ms?mno="+mno; --%>
+		})
 		}
+		
+/* 		$(function(){
+			$("#searchUserListBtn").click(function(){
+
+		}) */
 		</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

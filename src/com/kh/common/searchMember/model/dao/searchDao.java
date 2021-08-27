@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.member.model.vo.Member;
 import com.kh.message.model.vo.Message;
+import com.kh.message.model.vo.MsgPageInfo;
 
 public class searchDao {
 
@@ -31,7 +32,7 @@ public class searchDao {
 	}
 	
 	// 검색한 아이디 관련 리스트
-	public ArrayList<Member> selectSearchUserList(Connection conn, String userId) {
+	public ArrayList<Member> selectSearchUserList(Connection conn, String userId, String searchWord, MsgPageInfo pi) {
 		ArrayList<Member> list = new ArrayList<Member>();
 		
 		PreparedStatement pstmt = null;
@@ -45,7 +46,8 @@ public class searchDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			pstmt.setString(3, "%'" + userId + "%'");
+			pstmt.setString(3, userId);
+			pstmt.setString(4,  "%'" + searchWord + "%'");
 			
 			rset = pstmt.executeQuery();
 			System.out.println("sql? " + sql);
@@ -74,7 +76,7 @@ public class searchDao {
 	
 	
 	// 검색한 아이디 개수
-	public int getSearchUserListCount(Connection conn, String userId) {
+	public int getSearchUserListCount(Connection conn, String userId, String searchWord) {
 		int count = 0;
 		PreparedStatement pstmt =  null;
 		ResultSet rset = null;
@@ -84,7 +86,7 @@ public class searchDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, "%'" + userId + "%'");
+			pstmt.setString(2, "%'" + searchWord + "%'");
 			
 			rset = pstmt.executeQuery();
 			

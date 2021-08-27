@@ -49,7 +49,7 @@ public class findUserServlet extends HttpServlet {
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		String searchWord = (String) request.getAttribute("keyword");
-		listCount = new searchService().getSearchUserListCount(userId);
+		listCount = new searchService().getSearchUserListCount(userId, searchWord);
 		
 		currentPage = 1;
 		
@@ -72,12 +72,12 @@ public class findUserServlet extends HttpServlet {
 
 		
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
-		ArrayList<Member> list = new searchService().getUserList(userId);
+		
+		ArrayList<Member> list = new searchService().getUserList(userId, searchWord, pi);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/message/messageListView.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/common/searchFriend.jsp");
 		view.forward(request, response);
 
 	}

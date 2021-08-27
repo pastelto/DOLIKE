@@ -4,6 +4,9 @@
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
+	
+ 	System.out.println(loginUser);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -28,11 +31,12 @@
 
 			if (msg != "null") {
 				alert(msg);
-	<%session.removeAttribute("msg");%>
+		<%session.removeAttribute("msg");%>
 		} else{
+			console.log("Hi");
+		}
 			
-		}}
-		})
+	   })
 	</script>
 	<style>
 	#loginBtn, #loginBtnModal, #EnrollBtnModal {
