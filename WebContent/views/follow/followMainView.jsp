@@ -124,6 +124,9 @@
 			</div>
 			   
 
+<hr>
+
+
 
 						<div id="demo" class="carousel slide" data-ride="carousel">
 						
@@ -137,7 +140,13 @@
 						  <!-- The slideshow -->
 						  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						      <img src="la.jpg" alt="Los Angeles" width="1100" height="500">
+						    	
+						    	
+						    	
+						    
+						    
+						    
+						    
 						    </div>
 						    <div class="carousel-item">
 						      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
