@@ -39,6 +39,7 @@
 	<title>마이페이지 계정 관리</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	
 	<style>
 	#goMain, #deleteBtn {
@@ -212,7 +213,7 @@
                                     
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
-                                    	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
+                                    	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-2)" value="돌아가기"/>
                                     	<input type="submit" class="btn btn-primary" id="updateBtn" value="회원정보수정"/>
                                     </div>
                                 </div>
@@ -313,7 +314,7 @@
     			data:{nickName:nickName.val()},
     			success:function(result){
     				if(result == "fail"){
-    					alert("이미 사용 중인 닉네임입니다.");
+    					swal("이미 사용 중인 닉네임입니다.");
     					nickName.focus();
     				}else{
     					var check = confirm("사용가능한 닉네임입니다. 사용하시겠습니까?");

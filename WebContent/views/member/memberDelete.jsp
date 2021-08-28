@@ -11,6 +11,11 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	
 	<style>
+	#goBack {
+		color: #000000;
+		background-color: #fff;
+		border-color: #78c2ad;
+	}
 	#deleteMemBtn {
     	color: #fff;
     	background-color: #78c2ad;
@@ -73,7 +78,8 @@
                                    			<h5 style="text-align:center">탈퇴시 모든 정보를 잃을 수 있습니다.</h5>
                                    			<h5 style="text-align:center">정말로 두라이크를 떠나실건가요...?</h5>
                                    </div>
-                                   <button class="btn login-form__btn submit w-100" id="deleteMemBtn" >두라이크 떠나기</button>
+                                   <input type="button" class="btn login-form__btn submit w-100 mb-2" id="goBack" onclick="location.href='<%=contextPath%>/index2.jsp'" value="돌아가기">
+                                   <input type="submit" class="btn login-form__btn submit w-100" id="deleteMemBtn" value="두라이크 떠나기" />
                                </form>
                                </div>
                            </div>
