@@ -8,6 +8,15 @@
 	System.out.println("나의친구 카테고리 리스트 불러오기: "+catList);
 	HashMap<String, ArrayList<Follow>> hashmap = (HashMap<String, ArrayList<Follow>>)request.getAttribute("hashmap");
 	System.out.println("jsp hashmap 확인: "+hashmap);
+	
+	
+	Set<String> keySet = hashmap.keySet();
+	Iterator<String> keyInteger = keySet.iterator();
+
+	
+	System.out.println("jsp: "+hashmap.keySet().iterator().next());
+	
+	
 %> 
 <!DOCTYPE html>
 <html>
@@ -63,8 +72,7 @@
                 </div>
             </div>
 
-<br> <br> <br> 
-
+<br> <br>
 
 			<div class="col-lg-10" style="margin: 0 auto;">
 
@@ -129,7 +137,7 @@
 
 <hr>
 					<div class="col-lg-10" style="margin: 0 auto;">
-					<div class="card">
+					<div class="card" style="background: #EFFBF8;">
 
 						<div id="demo" class="carousel slide" data-ride="carousel">
 						
@@ -145,6 +153,16 @@
 						   <br>
 						   
 						   
+						   <div class="carousel-item active" style="height: 250px">
+						    <img src="./resources/images/followBanner.png" width="1300" height="220" alt="친구추가" title="미리캔버스">
+						    </div>
+						   
+						   
+						   
+						 <% while(keyInteger.hasNext()){ %>  
+						 <% String key = keyInteger.next();%>
+						 <% ArrayList<Follow> memList = hashmap.get(key); %>
+<%-- 						 <% if(key == hashmap.keySet().iterator().next()){ %>
 						    <div class="carousel-item active">
 						    	
 						    	
@@ -152,28 +170,29 @@
 				    				<div class="col-lg-10" style="margin: 0 auto;">
 
 										<div id="interestDiv" style="margin: 0 auto;">
-											<span id="catLabel" class="label label-pill label-primary">여기에 추천 카데고리 이름</span>
+											<span id="catLabel" class="label label-pill label-primary"># <%= key %></span>
 										</div>
 										<br>
 									
 									   <div class="row">
 									   
 									   
-									<% for(int i=0;i<flist.size();i++){ %>
+									<% for(int i=0;i<memList.size();i++){ %>
+									
 									   
 									   	<div class="col-lg-3">
 											<div class="card">
 												<div class="card-body">
 													<div class="text-center">
 														<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
-														<p id="<%=i%>id" style="margin-bottom: 0px"><%= flist.get(i).getFollowId() %></p>
+														<p id="categoryUser" style="margin-bottom: 0px"><%= memList.get(i).getFollowId() %></p>
 						
 														
 														<% if(loginUser == null){%>
 													 			<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
 													 		<%}else{%>
 													 			<form action="insert.fl" method="get">
-																	<input id="insertFl" type="hidden" name="followId" value="<%= flist.get(i).getFollowId() %>">
+																	<input id="insertFl" type="hidden" name="followId" value="<%= memList.get(i).getFollowId() %>">
 																	<button id="addfr" type="submit" class="btn btn-sm btn-rounded">친구추가</button>
 																</form>
 													 		<%}%>
@@ -187,19 +206,64 @@
 									   </div>
 									</div>
 						    </div>
-						  
-						  
-						  
-						  
-						  
-						  
-						    <div class="carousel-item">
-						      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
+						    <%}else{ %> --%>
+						    <div class="carousel-item" style="height: 250px">
+						    	
+						    	
+						    	<!-- 카테고리별 인기 유저 리스트 불러오기 VERSION -->
+				    				<div class="col-lg-10" style="margin: 0 auto;">
+
+										<div id="interestDiv" style="margin: 0 auto;">
+											<span id="catLabel" class="label label-pill label-primary"># <%= key %></span>
+										</div>
+										<br>
+									
+									   <div class="row">
+									   
+									   
+									<%if(memList.isEmpty()){ %>
+									<div>
+										<img src="./resources/images/findFollow.png" width="1150" height="210" alt="친구구함" title="미리캔버스" style="margin: 0 auto;" >
+									</div>
+									<%}else{ %>
+									   
+									   	<% for(int i=0;i<memList.size();i++){ %>
+									   	
+									   	<div class="col-lg-3">
+											<div class="card">
+												<div class="card-body">
+													<div class="text-center">
+														<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
+														<p id="categoryUser" style="margin-bottom: 0px"><%= memList.get(i).getFollowId() %></p>
+						
+														
+														<% if(loginUser == null){%>
+													 			<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
+													 		<%}else{%>
+													 			<form action="insert.fl" method="get">
+																	<input id="insertFl" type="hidden" name="followId" value="<%= memList.get(i).getFollowId() %>">
+																	<button id="addfr" type="submit" class="btn btn-sm btn-rounded">친구추가</button>
+																</form>
+													 		<%}%>
+													</div>
+												</div>
+											</div>
+										</div>
+									    <%} %> 
+									<%} %>    
+									   
+									   </div>
+									</div>
 						    </div>
-						    <div class="carousel-item">
-						      <img src="ny.jpg" alt="New York" width="1100" height="500">
-						    </div>
-						 
+						    
+						   <%--   <%} %> --%>
+						  <%} %>
+						  
+						  
+						  
+						  
+						  
+						    
 						 
 						 
 						 

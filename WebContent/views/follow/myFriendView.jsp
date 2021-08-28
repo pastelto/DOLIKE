@@ -110,9 +110,7 @@
                 </div>
             </div>
 	
-	
 	<br> <br> 
-
 			<%
 			if (loginUser == null) {
 			%>
@@ -120,7 +118,6 @@
 				<div class="col-10" style="margin: 0 auto;">
 					<img src="./resources/images/DOLIKE_LOGO.png" width="50%"
 						height="50%" title="임시용">
-
 
 				</div>
 			</div>
@@ -339,10 +336,6 @@
 											<%}%>
 										
 									</div>
-
-
-
-
 									
 
 								</div>
