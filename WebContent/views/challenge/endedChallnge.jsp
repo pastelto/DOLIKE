@@ -7,7 +7,7 @@
 	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	 
-	int listCount = pi.getRpCount();
+	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
@@ -169,118 +169,136 @@
 <body>
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
-
 	<div class="content-body">
+			<div class="container-fluid">
+				<div class="row" style="margin-bottom: 13%;">
+					<div class="topList col-10" align="center">
 
-	<div class="navbar">
-		<ul class="nav">
-			<li class="nav-item">
-				<a class="nav-link" href="">챌린지 투표</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="">이달의 챌린저</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="">마이 챌린지</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="">챌린지</a>
-			</li>
-		</ul>
-	</div>
-		<div class="root-container">
-			<div class="full-banner-style">
-				<div class="top-content">
-					<a href="투표하기 링크">
-					<div class="root-banner-wrap" style="background: "><!-- 색지정 -->
-						<a href="투표하기 링크">
-						<div class="banner-item-wide" style="background: ">
-							<div class="left">
-								<h6 class="label-text">Vote your Challenge!</h6>
-								<h4 class="headline"><!-- 투표타이틀 --></h4>
-								<h5 class="period"><!-- 기간 --></h5>
-							</div>
-							<div class="right">
-								<img src="투표이미지루트" alt="이달의 투표">
+						<div id="thumbList"
+							style="height: 10%; padding-left: 15%; padding-right: 5%">
+							<div class="card" style="width: 80%;">
+								<!--                             <div class="card-body"> -->
+
+								<div class="bootstrap-carousel" style="height: 5rem;">
+									<div id="carouselExampleIndicators" class="carousel slide"
+										data-ride="carousel">
+										<ol class="carousel-indicators">
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="0" class="active"></li>
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="1"></li>
+											<li data-target="#carouselExampleIndicators"
+												data-slide-to="2"></li>
+										</ol>
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+											<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
+												<img class="d-block w-100"
+													style="width: 10%; height: 18rem;"
+													src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
+											</a>
+											</div>
+											<div class="carousel-item">
+											<a href="<%=request.getContextPath()%>/challengeVote.ch">
+												<img class="d-block w-100"
+													style="width: 10%; height: 18rem;"
+													src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+											</a>
+											</div>
+										</div>
+										<a class="carousel-control-prev"
+											href="#carouselExampleIndicators" data-slide="prev"><span
+											class="carousel-control-prev-icon"></span> <span
+											class="sr-only">Previous</span> </a><a
+											class="carousel-control-next"
+											href="#carouselExampleIndicators" data-slide="next"><span
+											class="carousel-control-next-icon"></span> <span
+											class="sr-only">Next</span></a>
+									</div>
+								</div>
 							</div>
 						</div>
-						</a>
 					</div>
-					</a>
 				</div>
-			</div>
-			
-			<div class="container">
-				<div class="root-content">
-					<div class="root-section">
-						<section class="challenge-list">
-							<div class="section-header">
-								<h4>챌린지</h4>
+				<div class="root-container">
+					<%if (!list.isEmpty() && !fileList.isEmpty()) {%>
+					<div class="container ">
+						<div class="root-content">
+							<div class="root-section">
+								<section class="challenge-list">
+									<ul class="live-item-list">
+										<%
+										for (int i = 0; i < list.size(); i++) {
+										%>
+										<li class="item">
+											<div class="hide"><%=list.get(i).getChNo()%></div>
+											<div class="item-wrap">
+												<a href="<%=request.getContextPath()%>/challengedetail.ch"
+													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+												</a>
+												<div class="item-info">
+													<div>
+													<h4 class="title" style="float:left">
+														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
+													</h4></div> <br>
+													<div>									
+													<ul class="challenge-period">
+														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
+													</ul>
+													</div>
+												</div>
+											</div>
+										</li>
+										<%}%>
+									</ul>
+								</section>
 							</div>
-							<ul class="live-item-list">
-							<%for(int i=0; i< list.size(); i++) {%>
-								<li class="item">
-									<div class="item-wrap">
-										<a href="<%= request.getContextPath() %>/challengedetail.ch" class="item-click">
-											<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName() %>" 
-											alt="챌린지이미지" class="img-challenge">		
-										</a>
-										<div class="item-info">
-											<h4 class="title">
-												<a href="<%= request.getContextPath() %>/challengedetail.ch"><%= list.get(i).getChTitle()%></a>
-											</h4>
-											<ul class="challenge-period">
-												<li>진행일정 : <%= list.get(i).getStart() %> ~ <%= list.get(i).getEnd() %></li>
-												<li>카테고리 : <%= list.get(i).getCategoryTitle()%> </li>
-											</ul>
-										</div>
-									</div>
-								</li>	
-								<%} %>
-							</ul>
-						</section>
+						</div>
 					</div>
+					<%} %>
+				</div>
+				<div>
+					<ul class="pagination justify-content-center">
+						<!-- 맨앞으로 -->
+						<li><a id="pageTag" class="page-link" href="<%=contextPath%>/challengeEnd.ch?currentPage=1"> &laquo; </a></li>
+						
+						<!-- 이전페이지 -->
+						<% if(currentPage == 1) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+						<%} %>
+						
+						
+						<!-- 페이지 목록 -->
+						<%for(int p=startPage; p<=endPage; p++){ %>
+						
+							<%if(p == currentPage){ %>
+								<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+							<%}else{ %>
+								<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/challengeEnd.ch?currentPage=<%= p %>"><%= p %> </a></li>
+							<%} %>
+							
+						<%} %>
+						
+						
+						<!-- 다음페이지 -->
+						<% if(currentPage == maxPage) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+						<%} %>
+						
+						<!-- 맨뒤로 -->
+						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= maxPage %>"> &raquo; </a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 		
 		<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/challengeEnd.ch?currentPage=1"> &laquo; </a></li>
-				
-				<!-- 이전페이지 -->
-				<% if(currentPage == 1) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-				<%} %>
-				
-				
-				<!-- 페이지 목록 -->
-				<%for(int p=startPage; p<=endPage; p++){ %>
-				
-					<%if(p == currentPage){ %>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/challengeEnd.ch?currentPage=<%= p %>"><%= p %> </a></li>
-					<%} %>
-					
-				<%} %>
-				
-				
-				<!-- 다음페이지 -->
-				<% if(currentPage == maxPage) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-				<%} %>
-				
-				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/challengeEnd.ch?currentPage=<%= maxPage %>"> &raquo; </a></li>
-			</ul>
-		</div>
+		
 		
 	</div>
 <%@ include file="../common/footer.jsp" %>
