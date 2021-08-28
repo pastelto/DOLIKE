@@ -278,7 +278,7 @@ public class ChallengeService {
 		Connection conn = getConnection();
 		Challenge cu = new ChallengeDao().selectTdRp(conn, loginUser, chno);
 		close(conn);
-		System.out.println(cu + "service");
+		System.out.println(cu + "cu service");
 		return cu;
 	}
 	

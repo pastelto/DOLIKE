@@ -808,7 +808,7 @@ public class ChallengeDao {
 		 */
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,loginUser );
+			pstmt.setString(1,loginUser);
 			pstmt.setInt(2, chno);
 
 			rset = pstmt.executeQuery();
@@ -825,7 +825,7 @@ public class ChallengeDao {
 			close(rset);
 			close(pstmt);
 		}
-
+		System.out.println("dao cu : " + cu);
 		return cu;
 		
 	}

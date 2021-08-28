@@ -50,7 +50,7 @@ public class ReplyInsertServlet extends HttpServlet {
 			MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
 			int chno = Integer.parseInt(mr.getParameter("chno"));
-			String content = mr.getParameter("content");
+			String content = mr.getParameter("replyContent");
 			String wirter = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 
 			cp.setChNo(chno);
@@ -72,7 +72,7 @@ public class ReplyInsertServlet extends HttpServlet {
 
 			if (result > 0) {
 				response.sendRedirect("challengedetail.ch?chno="+chno);
-				
+				request.getSession().setAttribute("msg", "댓글 등록 성공");
 				result = 0;
 			} else {
 				if (cp != null) {
