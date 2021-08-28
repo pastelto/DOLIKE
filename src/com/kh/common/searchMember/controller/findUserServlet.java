@@ -1,4 +1,4 @@
-package com.kh.common.searchMember;
+package com.kh.common.searchMember.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.searchMember.model.service.searchService;
+import com.kh.common.searchMember.model.vo.SearchListPageInfo;
 import com.kh.member.model.vo.Member;
-import com.kh.message.model.service.MessageService;
-import com.kh.message.model.vo.Message;
-import com.kh.message.model.vo.MsgPageInfo;
 
 /**
  * Servlet implementation class findUserServlet
@@ -43,12 +41,12 @@ public class findUserServlet extends HttpServlet {
 		int maxPage;
 		
 		int pageLimit;	
-		int msgLimit;	
+		int findList;	
 		
 		
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		String searchWord = (String) request.getAttribute("keyword");
+		String searchWord = (String) request.getAttribute("searchWord");
 		listCount = new searchService().getSearchUserListCount(userId, searchWord);
 		
 		currentPage = 1;
@@ -58,9 +56,9 @@ public class findUserServlet extends HttpServlet {
 		}
 
 		pageLimit = 10;
-		msgLimit = 10;
+		findList = 10;
 
-		maxPage = (int)Math.ceil((double)listCount/msgLimit);
+		maxPage = (int)Math.ceil((double)listCount/findList);
 
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
@@ -71,7 +69,7 @@ public class findUserServlet extends HttpServlet {
 		}
 
 		
-		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);
+		SearchListPageInfo pi = new SearchListPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, findList);
 		
 		ArrayList<Member> list = new searchService().getUserList(userId, searchWord, pi);
 		request.setAttribute("list", list);
