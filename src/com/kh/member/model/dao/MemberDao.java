@@ -143,8 +143,7 @@ public class MemberDao {
 	
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
-	public int updateMember(Connection conn, String userId, String userPwd, String nickName, String interests) {
-		int result = 0;
+	public int updateMember(Connection conn, String userId, String userPwd, String nickName, String interests) {		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("updateMember");
@@ -156,6 +155,7 @@ public class MemberDao {
 			pstmt.setString(2, nickName);
 			pstmt.setString(3, interests);
 			pstmt.setString(4, userId);
+			pstmt.setString(6, userId);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
