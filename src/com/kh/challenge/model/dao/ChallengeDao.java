@@ -784,6 +784,29 @@ public class ChallengeDao {
 		
 	}
 
+	public int deleteChallenge(Connection conn, int chno) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, chno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
+	}
+
 	
 
 

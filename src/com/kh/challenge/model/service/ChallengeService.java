@@ -247,6 +247,7 @@ public class ChallengeService {
 		
 		return result;
 	}
+	
 	public Challenge selectTdRp(String loginUser, int chno) {
 		
 		Connection conn = getConnection();
@@ -254,6 +255,23 @@ public class ChallengeService {
 		close(conn);
 		System.out.println(cu + "service");
 		return cu;
+	}
+	
+	public int deleteChallenge(int chno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().deleteChallenge(conn, chno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
 	}
 
 	

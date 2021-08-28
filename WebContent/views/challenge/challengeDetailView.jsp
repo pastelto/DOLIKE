@@ -30,25 +30,25 @@ int startPage = pi.getStartPage();
 	height: 100%;
 }
 
-#addReply, #enroll {
+#addReply, #enrollBtn {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
 }
 
-#addReply:hover,  #enroll:hover{
+#addReply:hover,  #enrollBtn:hover{
 	color: #78c2ad;
 	background-color: #fff;
 	border-color: #78c2ad;
 }
 
-#updBtn, #deleteBtn {
+#deleteBtn {
 	color: #fff;
 	background-color: #f3969a;
 	border-color: #f3969a;
 }
 
-#updBtn:hover {
+#deleteBtn:hover {
 	color: #f3969a;
 	background-color: #fff;
 	border-color: #f3969a;
@@ -127,13 +127,20 @@ int startPage = pi.getStartPage();
 											<li class="list-group-item">진행기간: <%=c.getStart()%> ~ <%=c.getEnd()%></li>
 											<li class="list-group-item">카테고리: <%=c.getCategoryTitle()%></li>
 											<%if(loginUser !=null){ %>
-											<li class="list-group-item">											
-											<form action="<%=request.getContextPath()%>/enroll.ch" method="post">
-												<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
-												<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
-												<button class="btn btn-primary px-3 ml-4" type="submit" id="enroll">신청</button>
-											</form>
-											</li>
+												<li class="list-group-item">
+												<%if(loginUser.getUserId().equals("admin")) {%>
+												<form action="<%=request.getContextPath()%>/deleteChallenge.ch" method="post">											
+													<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
+													<button class="btn btn-primary px-3 ml-4" type="submit" id="deleteBtn">삭제</button>
+												</form>
+												<%} else{ %>										
+												<form action="<%=request.getContextPath()%>/enroll.ch" method="post">											
+													<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
+													<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
+													<button class="btn btn-primary px-3 ml-4" type="submit" id="enrollBtn">신청</button>
+												</form>
+												<%} %>
+												</li>
 											<%} %>
 										</ul>
 									</div>
@@ -211,11 +218,7 @@ int startPage = pi.getStartPage();
 												<%=rpList.get(i).getRpWriter()%>
 												<small class="text-muted ml-3"><%=rpList.get(i).getWriteDate()%></small>
 											<p>
-										</div>
-									<%--<%if(loginUser.getUserId().equals(rpList.get(i).getRpWriter())) {%>
-										<button id="updBtn" class="btn btn-sm px2" onclick="update();">수정</button>&nbsp;
-										<button id="deleteBtn" class="btn btn-sm px2" onclick="delete();">삭제</button>	
-									<%} %>--%>									
+										</div>							
 									</div>
 									<div class="card-mt4' style="text-align:left;">
 										<div class="media align-items-center">
