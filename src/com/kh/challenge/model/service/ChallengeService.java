@@ -111,8 +111,7 @@ public class ChallengeService {
 	public ArrayList<Challenge> selectMyEndChallenge(String loginUser) {
 
 		Connection conn = getConnection();
-		
-		
+		ArrayList<Challenge> list = new ChallengeDao().selectMyEndChallenge(conn, loginUser);		
 		
 		close(conn);
 		

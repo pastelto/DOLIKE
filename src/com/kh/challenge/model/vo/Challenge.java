@@ -78,9 +78,7 @@ public class Challenge {
 		this.rpCount = rpCount;
 		this.achieve = achieve;
 		this.nickname = nickname;
-	}
-
-	
+	}	
 	
 	public Challenge(int chNo, String chTitle, String start, String end,  String categoryTitle) {
 		super();
@@ -90,6 +88,8 @@ public class Challenge {
 		this.end = end;
 		this.categoryTitle = categoryTitle;
 	}
+	
+	
 	public int getChNo() {
 		return chNo;
 	}
