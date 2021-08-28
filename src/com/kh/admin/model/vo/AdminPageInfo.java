@@ -15,7 +15,7 @@ public class AdminPageInfo {
 	}
 
 	public AdminPageInfo(int listCount, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
-			int categoryLimit) {
+			int adminLimit) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
