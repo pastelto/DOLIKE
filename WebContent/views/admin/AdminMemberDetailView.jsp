@@ -1,6 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  buffer="100kb"
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*"%>
+ 
+ <%
+
+ 	Member am = (Member)request.getAttribute("am");
+ 
+ %>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +14,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유저 상세 보기</title>
+<title>카테고리 목록</title>
+
 <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -35,19 +41,11 @@
 }
 
 </style>
-
 </head>
 <body>
 <div id="main-wrapper">
-		<%@ include file="../common/menuSideBar.jsp"%>
-
-		        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
+		
+	<%@ include file="../common/menuSideBar.jsp" %> 
         <div class="content-body">
 
             <div class="row page-titles mx-0" >
@@ -59,7 +57,7 @@
                 </div>
             </div>
             <!-- row -->
-
+			
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-xl-3">
@@ -67,18 +65,17 @@
                             <div class="card-body">
                                 <div class="media align-items-center mb-4">                                   
                                     <div class="media-body">
-                                        <h3 class="mb-0">클릭한 유저 이름</h3>
-                                        <p class="text-muted mb-0">닉네임 표시</p>
+                                        <h3 class="mb-0"><%= am.getUserId() %></h3>
+                                        <p class="text-muted mb-0"><%= am.getNickName() %></p>
                                     </div>
                                 </div>
                                 
                                 <h4>계정 정보</h4>
                                 
                                 <ul class="card-profile__info">
-                                    <li class="mb-1"><strong class="text-dark mr-4">생년월일</strong> <span>00-00-00</span></li>
-                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>01793931609</span></li>                             	
-                                    <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
-                                    <li class="mb-1"><strong class="text-dark mr-4">생성일</strong> <span>0000-00-00</span></li>                                
+                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span><%= am.getPhone() %></span></li>                             	
+                                    <li><strong class="text-dark mr-4">Email</strong> <span><%= am.getEmail() %></span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">생성일</strong> <span><%= am.getUserCreateDate() %></span></li>                                
                                 </ul>
                                 
                                
@@ -102,11 +99,11 @@
                                     	
                                     	<td>
 	                                    	<div class="col-12 text-center" id="StatusBtn2">
-	                                        <button class="btn">탈퇴하기</button>
+	                                        <button class="btn">블랙리스트</button>
 	                                    	</div>
                                     	</td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                     	<td>
                                     		<div class="col-12 text-center" id="StatusBtn3">
                                         <button class="btn">댓글X</button>
@@ -125,7 +122,7 @@
 	                                        <button class="btn">댓,게시글X</button>
 	                                    	</div> 
                                     	</td>                                    
-                                    </tr>
+                                    </tr> -->
                                                                                                                                                                        
                                     </table> 
                                                                      
@@ -144,7 +141,7 @@
 								<div class="card-body" style="text-align: center;">
 									<div id="up">
 										<div id="down" class="input-group-prepend">
-											<form id="searchForm" class="form-inline" action="insert.fl"
+											<!-- <form id="searchForm" class="form-inline" action="insert.fl"
 												method="post">
 
 												<div class="input-group text-center mb-3">
@@ -156,7 +153,7 @@
 														<button id="byefr" class="btn" type="reset">취소</button>
 													</div>
 												</div>
-											</form>
+											</form> -->
 										</div>
 									</div>                                   
 									 </div>
@@ -184,7 +181,7 @@
                             <div class="card-body">
                                 <div class="container-fluid" >
                 <div class="row">
-                    <div class="col-lg-6" style="margin-left: auto; margin-right: auto;">
+                    <div class="col-lg-12" style="margin-left: auto; margin-right: auto;">
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
@@ -199,24 +196,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<%-- <%if(list.isEmpty()){ %> --%>
+                                        	
                                             <tr>
                                                 <td colspan="2">조회된 리스트가 없습니다.</td>                                                
                                             </tr>
-                                            <%-- <%}else{ %>
-												<% for(Category c : list){ %> --%>
+                                            
                                             <tr>
-                                                <td>1<%-- <%= c.getCategoryNo() %> --%></td>
-                                                <td>1<%-- <%= c.getCategoryName() %> --%></td>                                             
+                                                <td>1</td>
+                                                <td>1</td>                                             
                                             </tr>
-                                            	<%-- <%} %>
-											<%} %> --%>
+                                            	
                                         </tbody>
                                     </table>
                                 </div>
                              	<div class="general-button" align="right">
-                             		<%--<% if(loginUser != null){ --%>
-									<%--<% } --%>
+                             		
+									
 								</div>
                             </div>
                         </div>
@@ -230,9 +225,12 @@
             <!-- #/ container -->
         </div>
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-	<%@ include file="../common/footer.jsp"%>
+        </div>
+        </div>
+        <%@ include file="../common/footer.jsp"%>
+        </div>
+        
+		
+
 </body>
 </html>

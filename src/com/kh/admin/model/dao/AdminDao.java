@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.admin.model.vo.AdminPageInfo;
+import com.kh.category.model.vo.Category;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -107,6 +108,46 @@ public class AdminDao {
 		}
 		System.out.println("다오에서 list 값 : " + list);
 		return list;
+	}
+
+	public Member selectAdminMember(Connection conn, String amno) {
+		
+		Member am = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAdminMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, amno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				am = new Member(  rset.getString("USER_ID"), 
+					      		  rset.getString("USER_NAME"),
+							      rset.getString("PASSWORD"),
+							      rset.getString("BIRTHDATE"),
+							      rset.getString("PHONE"),
+							      rset.getString("EMAIL"),
+							      rset.getString("NICKNAME"),
+							      rset.getString("INTERESTS"),								      
+							      rset.getDate("USER_CREATE_DATE"),
+							      rset.getString("USER_STATUS")
+						);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return am;
 	}
 
 }

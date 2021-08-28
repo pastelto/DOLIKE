@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import com.kh.admin.model.dao.AdminDao;
 import com.kh.admin.model.vo.AdminPageInfo;
+import com.kh.category.model.dao.CategoryDao;
+import com.kh.category.model.vo.Category;
 import com.kh.member.model.vo.Member;
 
 public class AdminService {
@@ -32,5 +34,16 @@ public class AdminService {
 		close(conn);
 		
 		return listCount;
+	}
+
+	public Member selectAdminMember(String amno) {
+		
+		Connection conn = getConnection();
+		
+		Member result = new AdminDao().selectAdminMember(conn, amno);
+		
+		close(conn);
+		
+		return result;
 	}
 }
