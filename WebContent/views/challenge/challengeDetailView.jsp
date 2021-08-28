@@ -4,6 +4,7 @@
     		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo "%>
 <%
 Challenge c = (Challenge) request.getAttribute("c");
+Challenge cu = (Challenge) request.getAttribute("cu");
 int chno = Integer.parseInt(request.getParameter("chno"));
 ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
 ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
@@ -29,13 +30,13 @@ int startPage = pi.getStartPage();
 	height: 100%;
 }
 
-#addReply {
+#addReply, #enroll {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
 }
 
-#addReply:hover {
+#addReply:hover,  #enroll:hover{
 	color: #78c2ad;
 	background-color: #fff;
 	border-color: #78c2ad;
@@ -125,47 +126,22 @@ int startPage = pi.getStartPage();
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item">진행기간: <%=c.getStart()%> ~ <%=c.getEnd()%></li>
 											<li class="list-group-item">카테고리: <%=c.getCategoryTitle()%></li>
-											<li class="list-group-item">
+											<%if(loginUser !=null){ %>
+											<li class="list-group-item">											
 											<form action="<%=request.getContextPath()%>/enroll.ch" method="post">
 												<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
-												<input type="hidden" value="<%=c.getChNo()%>" name="chno" class="none"/>
+												<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
 												<button class="btn btn-primary px-3 ml-4" type="submit" id="enroll">신청</button>
 											</form>
 											</li>
+											<%} %>
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="card">
 								<div class="card-body text-center">
-									<%
-									if (loginUser != null) {
-									%>
-									<form action="<%=request.getContextPath()%>/rplyInsert.ch"
-										class="form-profile" method="post"
-										enctype="multipart/form-data">
-										<div class="form-group">
-											<input type="text" class="hidden" name="chno"
-												value="<%=chno%>" />
-											<textarea class="form-control" name="content"
-												id="replyContent" cols="30" rows="2"
-												placeholder="오늘의 챌린지를 인증해주세요"></textarea>
-										</div>
-										<div class="d-flex align-items-center">
-											<ul class="mb-0 form-profile__icons">
-												<li class="d-inline-block">
-													<div class="fallback">
-														<input class="l-border-1" name="file" type="file"
-															multiple="multiple">
-													</div>
-												</li>
-											</ul>
-											<button class="btn btn-primary px-3 ml-4" id="addReply" onclick="submit();">작성</button>
-										</div>
-									</form>
-									<%
-									} else {
-									%>
+									<%if (loginUser == null) {%>
 									<form action="#" class="form-profile">
 										<div class="form-group">
 											<textarea readonly class="form-control" name="textarea"
@@ -173,9 +149,40 @@ int startPage = pi.getStartPage();
 												placeholder="로그인한 사용자만 댓글 입력이 가능합니다.. 로그인 후 이용해주세요"></textarea>
 										</div>
 									</form>
-									<%
-									}
-									%>
+									<%} else {%>
+										<%if(cu != null) {%>																		
+											<form action="<%=request.getContextPath()%>/rplyInsert.ch"
+												class="form-profile" method="post"
+												enctype="multipart/form-data">
+												<div class="form-group">
+													<input type="text" class="hidden" name="chno"
+														value="<%=chno%>" />
+													<textarea class="form-control" name="content"
+														id="replyContent" cols="30" rows="2"
+														placeholder="오늘의 챌린지를 인증해주세요" ></textarea>
+												</div>
+												<div class="d-flex align-items-center">
+													<ul class="mb-0 form-profile__icons">
+														<li class="d-inline-block">
+															<div class="fallback">
+																<input class="l-border-1" name="file" type="file"
+																	multiple="multiple">
+															</div>
+														</li>
+													</ul>
+													<button class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpgg();">작성</button>
+												</div>
+											</form>
+										<%} else {%>
+											<form action="#" class="form-profile">
+												<div class="form-group">
+													<textarea readonly class="form-control" name="textarea"
+														id="textarea" cols="30" rows="2"
+														placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
+												</div>
+											</form>
+										<%} %>
+									<%}%>
 								</div>
 							</div>
 						</div>
@@ -234,36 +241,24 @@ int startPage = pi.getStartPage();
 												&laquo; </a></li>
 
 										<!-- 이전페이지 -->
-										<%
-												if (currentPage == 1) {
-												%>
+										<%if (currentPage == 1) {%>
 										<li class="page-item disabled"><a id="pageDisable"
 											class="page-link"> &lt; </a></li>
-										<%
-												} else {
-												%>
+										<%} else {%>
 										<li class="page-item"><a id="pageTag" class="page-link"
 											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=currentPage-1%>">
 												&lt; </a></li>
-										<%
-												}
-												%>
+										<%}%>
 
 
 										<!-- 페이지 목록 -->
-										<%
-												for (int p = startPage; p <= endPage; p++) {
-												%>
+										<%for (int p = startPage; p <= endPage; p++) {%>
 
-										<%
-												if (p == currentPage) {
-												%>
-										<li class="page-item disabled"><a id="pageDisable"
-											class="page-link"> <%=p%>
-										</a></li>
-										<%
-												} else {
-												%>
+										<%if (p == currentPage) {%>
+										<li class="page-item disabled">
+											<a id="pageDisable" class="page-link"> <%=p%></a>
+										</li>
+										<%} else {%>
 										<li class="page-item"><a id="pageTag" class="page-link"
 											href="<%=request.getContextPath()%>/challengedetail.ch?chno=<%=chno+"&currentPage="%><%=p%>"><%=p%>
 										</a></li>
@@ -341,7 +336,82 @@ int startPage = pi.getStartPage();
             }
         });
 		}
-		function submit(){
+		<%-- function rpsubmit(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            <%System.out.print("submit 확인");%>
+            
+            Swal.fire({
+                title: '등록',        // 제목
+                text: "댓글을 등록하시겠습니까?",  // 내용
+                type: 'question',                              // 종류
+                confirmButtonText: '등록',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+                
+            })
+           .then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우               
+                	$("#addReply").attr("action", "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno");
+                    $("#replyContent").val("");
+				Swal.fire(
+						{title: '등록',
+						 text: '성공적으로 등록되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#addReply").submit();
+				}); 
+                
+             } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                Swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        }); 
+		} --%>
+		function rpsubmit(){
+            // 확인, 취소버튼에 따른 후속 처리 구현
+            <%System.out.print("submit 확인");%>
+           
+            Swal.fire({
+                title: '등록',        // 제목
+                text: "댓글을 등록하시겠습니까?",  // 내용
+                type: 'question',                              // 종류
+                confirmButtonText: '등록',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+                
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우               
+                	$("#addReply").attr("action", "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno");
+                    $("#replyContent").val("");
+				Swal.fire(
+						{title: '등록',
+						 text: '성공적으로 등록되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"})			
+						$("#addReply").submit();
+				)}; 
+                
+             }.then(function(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                Swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        }); 
+		}
+		
+		function rpgg(){
             // 확인, 취소버튼에 따른 후속 처리 구현
             swal.fire({
                 title: '등록',        // 제목
@@ -353,16 +423,15 @@ int startPage = pi.getStartPage();
                 cancelButtonColor: "#f3969a",
                 confirmButtonColor: "#78c2ad"
             }).then(function(result) { 
-                if(result.value) {                 // 확인 버튼이 눌러진 경우               
+                if(result.value) {                 // 확인 버튼이 눌러진 경우
                 	$("#addReply").attr("action", "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno");
                     $("#replyContent").val("");
 				swal.fire(
 						{title: '등록',
-						 text: '성공적으로 등록되었습니다.',
-						 type: 'success',
-						 confirmButtonColor: "#78c2ad"}).then(function(result){
-		
-					$("#addReply").submit();
+							 text: '성공적으로 등록되었습니다.',
+							 type: 'success',
+							 confirmButtonColor: "#78c2ad"})			
+						$("#addReply").submit();
 				});
                 
             } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우

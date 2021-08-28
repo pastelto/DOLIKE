@@ -88,8 +88,13 @@ public class Challenge {
 		this.end = end;
 		this.categoryTitle = categoryTitle;
 	}
-	
-	
+
+	public Challenge(String user, int chNo) {
+		super();
+		this.user = user;
+		this.chNo = chNo;
+		
+	}
 	public int getChNo() {
 		return chNo;
 	}

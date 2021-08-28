@@ -40,6 +40,8 @@ public class EnrollChallenge extends HttpServlet {
 		cu.setUser(eUser);
 		cu.setChNo(chno);
 		
+		System.out.println("servlet user : " + eUser + " chno : " + chno);
+		
 		int result = new ChallengeService().enrollCh(cu);
 		
 		if (result > 0) {

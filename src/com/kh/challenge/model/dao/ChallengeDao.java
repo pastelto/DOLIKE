@@ -236,7 +236,7 @@ public class ChallengeDao {
 
 			while (rset.next()) {
 				list.add(new ChallengeReply(rset.getInt("CH_RP_NO"),
-											rset.getString("RP_USER"),
+											rset.getString("NICKNAME"),
 											rset.getDate("CREATE_DATE"),
 											rset.getString("RP_BODY"),
 											rset.getString("PH_ORIGINNAME"),
@@ -731,9 +731,7 @@ public class ChallengeDao {
 		
 		String sql = prop.getProperty("insertChUser");
 		System.out.println(sql);
-		System.out.println(cu.getChTitle());
 		
-		String title = cu.getChTitle();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -750,6 +748,40 @@ public class ChallengeDao {
 		}
 		System.out.println(result);
 		return result;
+	}
+
+	public Challenge selectTdRp(Connection conn, String loginUser, int chno) {
+		
+		Challenge cu = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectTdRp");
+		/*
+		 * selectTdRp = SELECT RP_USER, CH_NO FROM CHALLENGE_REPLY WHERE RP_USER = ? AND CH_NO=? AND CREATE_DATE = SYSDATE 
+		 */
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,loginUser );
+			pstmt.setInt(2, chno);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				cu = new Challenge(rset.getString("RP_USER"), 
+								  rset.getInt("CH_NO"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return cu;
+		
 	}
 
 	

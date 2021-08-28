@@ -15,6 +15,7 @@ import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ChallengeDetailServlet
@@ -39,6 +40,10 @@ public class ChallengeDetailServlet extends HttpServlet {
 				int chno = Integer.parseInt(request.getParameter("chno"));
 				Challenge c = new ChallengeService().selectDetail(chno);
 				request.setAttribute("c", c);
+				
+				String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+				Challenge cu = new ChallengeService().selectTdRp(loginUser,chno);
+				request.setAttribute("cu", cu);
 				
 				ChallengeAttachment at = new ChallengeService().selectAttach(chno);
 				request.setAttribute("at", at);

@@ -224,9 +224,6 @@ public class ChallengeService {
 		// 챌린지
 		int result = new ChallengeDao().insertReply(conn, cp);
 		
-		// 첨부파일
-
-		
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -249,6 +246,14 @@ public class ChallengeService {
 		close(conn);
 		
 		return result;
+	}
+	public Challenge selectTdRp(String loginUser, int chno) {
+		
+		Connection conn = getConnection();
+		Challenge cu = new ChallengeDao().selectTdRp(conn, loginUser, chno);
+		close(conn);
+		System.out.println(cu + "service");
+		return cu;
 	}
 
 	
