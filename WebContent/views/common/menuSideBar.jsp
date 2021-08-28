@@ -100,7 +100,7 @@
 		border-color: #78c2ad;
 	}
 	
-	#searchBtn:hover {
+	#searchBtn:hover, #loginBtn:hover {
 		color: #78c2ad;
     	background-color: #fff;
     	border-color: #78c2ad;

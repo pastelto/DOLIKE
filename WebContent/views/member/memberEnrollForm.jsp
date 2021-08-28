@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 	<title>회원가입</title>
 	<style>
 	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn, #joinBtn {
@@ -22,7 +24,13 @@
 		border-color: #78c2ad;
 	}
 	
-	#goMain:hover, #resetBtn:hover, #idCheckBtn:hover, #nickCheckBtn:hover, #phoneCheckBtn:hover, #emailCheckBtn:hover {
+	#resetBtn:hover {
+		color: #fff;
+		background-color: #000000;
+		border-color: #000000;
+	}
+	
+	#goMain:hover, #idCheckBtn:hover, #nickCheckBtn:hover, #phoneCheckBtn:hover, #emailCheckBtn:hover {
 		color: #fff;
 		background-color: #f3969a;
 		border-color: #f3969a;
@@ -34,6 +42,11 @@
 	
 	.checkFont {
 		margin-left: 300px;
+	}
+	
+	#joinTitle {
+		color: #ffce67;
+		font-family: 'Lobster', cursive;
 	}
 	
 	</style>
@@ -82,6 +95,9 @@
                             <div class="card-body">
                                 <div class="form-validation">
 									<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
+                                        <div class="mt-2 mb-5">
+                                        	<h2 id="joinTitle" align="center">Join Do Like!</h2>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span></label>
                                             <div class="form-inline">

@@ -8,12 +8,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
 	<title>로그인</title>
 	<style>
 	#loginBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
+	}
+	
+	#loginBtn:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	
+	#loginTitle {
+		color: #ffce67;
+		font-family: 'Lobster', cursive;
 	}
 	</style>
 </head>
@@ -59,7 +72,7 @@
 			                    <div class="form-input-content">
 			                        <div class="card login-form mb-0">
 			                            <div class="card-body pt-5">
-			                                <a class="text-center"> <h4>로그인</h4></a>
+			                                <a class="text-center"> <h2 id="loginTitle">Login</h2></a>
 			                                <form class="mt-5 mb-5 login-input" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
 			                                    <div class="form-group">
 			                                        <input id="userId" name="userId" type="text" class="form-control" placeholder="아이디">
@@ -69,8 +82,8 @@
 			                                    </div>
 			                                    <button id="loginBtn" class="btn login-form__btn submit w-100" type="submit">로그인</button>
 			                                </form>
-			                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary">회원가입</a> 하러가기</p>
-			                                <p class="mt-5 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary">공지사항</a> 보러가기</p>
+			                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary"> 회원가입</a> 하러가기</p>
+			                                <p class="mt-2 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary"> 공지사항</a> 보러가기</p>
 			                            </div>
 			                        </div>
 			                    </div>

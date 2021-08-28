@@ -68,14 +68,14 @@
            Content body start
        ***********************************-->
        <div class="content-body">
-           <div class="row page-titles mx-0">
+<!--            <div class="row page-titles mx-0">
                <div class="col p-md-0">
                    <ol class="breadcrumb">
                        <li class="breadcrumb-item"></li>
                        <li class="breadcrumb-item active">오류페이지</li>
                    </ol>
                </div>
-           </div>
+           </div> -->
            
 	        <div class="container-fluid"> 
 		        <div class="login-form-bg h-100">

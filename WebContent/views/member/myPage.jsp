@@ -40,6 +40,7 @@
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#goMain, #deleteBtn {
@@ -59,9 +60,15 @@
 		border-color: #f3969a;
 	}
 	
-	#deleteBtn:hover {
+	#deleteBtn {
 		color: #fff;
 		background-color: #000000;
+    	border-color: #000000;
+	}
+	
+	#deleteBtn:hover {
+		color: #000000;
+		background-color: #fff;
     	border-color: #000000;
 	}
 	
@@ -71,6 +78,10 @@
 	
 	.checkFont {
 		margin-left: 300px;
+	}
+	
+	#editTitle {
+		font-family: 'Gowun Dodum', sans-serif;
 	}
 	
 	</style>
@@ -118,6 +129,9 @@
                         <div class="card-body">
                             <div class="form-validation">
 							<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return editValidate();">
+                                    <div class="mt-2 mb-5">
+                                        	<h2 id="editTitle" align="center"><b>계정 관리</b></h2>
+                                        </div>
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="userId">아이디</label>
                                         <div class="form-inline">
@@ -212,13 +226,9 @@
                                     </div>
                                     
                                 <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
+                                    <div class="col-lg-8 ml-auto mr-3">
                                     	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-2)" value="돌아가기"/>
                                     	<input type="submit" class="btn btn-primary" id="updateBtn" value="회원정보수정"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
                                     	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="location.href='<%=contextPath%>/memberDeleteForm.me'" value="탈퇴하기"/>
                                     </div>
                                 </div>

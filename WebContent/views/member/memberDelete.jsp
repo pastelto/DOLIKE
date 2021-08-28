@@ -10,6 +10,8 @@
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+	
 	<style>
 	#goBack {
 		color: #000000;
@@ -32,6 +34,15 @@
 		color: #fff;
 		background-color: #000000;
     	border-color: #000000;
+	}
+	
+	#deleteTitle {
+		font-family: 'Gowun Dodum', sans-serif;
+	}
+	
+	.deleteMessage {
+		text-align: center;
+		font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
 </head>
@@ -77,14 +88,14 @@
                    <div class="form-input-content">
                        <div class="card login-form mb-0">
                            <div class="card-body pt-5">
-                               <a class="text-center"> <h4>회원 탈퇴</h4></a>
+                               <a class="text-center"> <h4 id="deleteTitle"><b>회원 탈퇴</b></h4></a>
                                <form class="mt-5 mb-3 login-input" id="accessMyPage" action="<%=request.getContextPath() %>/deleteMember.me">
                                    <div class="form-group">
                                    		<input type="hidden" id="userId" name="userId" value=<%= loginUser.getUserId() %>>
-                                   			<h5 style="text-align:center">탈퇴시 모든 정보를 잃을 수 있습니다.</h5>
-                                   			<h5 style="text-align:center">정말로 두라이크를 떠나실건가요...?</h5>
+                                   			<h5 class="deleteMessage">탈퇴시 모든 친구를 잃을 수 있습니다.</h5>
+                                   			<h5 class="deleteMessage">정말로 두라이크를 떠나실건가요...?</h5>
                                    </div>
-                                   <input type="button" class="btn login-form__btn submit w-100 mb-2" id="goBack" onclick="location.href='<%=contextPath%>/index2.jsp'" value="돌아가기">
+                                   <input type="button" class="btn login-form__btn submit w-100 mb-2 mt-3" id="goBack" onclick="location.href='<%=contextPath%>/index2.jsp'" value="돌아가기">
                                    <input type="submit" class="btn login-form__btn submit w-100" id="deleteMemBtn" value="두라이크 떠나기" />
                                </form>
                                </div>
