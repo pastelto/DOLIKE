@@ -259,7 +259,7 @@ public class FollowDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
@@ -267,6 +267,7 @@ public class FollowDao {
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -469,6 +470,35 @@ public class FollowDao {
 		System.out.println("dao: "+list);
 		
 		return list;
+	}
+
+
+	public ArrayList<Follow> selectFollowTop4User(Connection conn) {
+		ArrayList<Follow> flist = new ArrayList<Follow>();
+		Statement stmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFollowTop4User");
+		
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				flist.add(new Follow(
+						rset.getString("FOLLOW_ID")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(stmt);
+		}
+		return flist;
 	}
 
 }

@@ -164,5 +164,12 @@ public class FollowService {
 		return list;
 	}
 
+	public ArrayList<Follow> selectFollowTop4User() {
+		Connection conn = getConnection();
+		ArrayList<Follow> flist = new FollowDao().selectFollowTop4User(conn);
+		close(conn);
+		return flist;
+	}
+
 
 }
