@@ -108,7 +108,7 @@
 </script>
 </head>
 <body>
-
+	<div class="main-wrapper">
 	<div class="container">
 
 		<div class="panel page-header" style="text-align: center;">
@@ -299,8 +299,8 @@
 					</ul>
 				</div>
 		</div>
-		
-		
+		</div>
+		</div>
 	<script>
 		function searchPopUp11(){
 			console.log("찍히나?")

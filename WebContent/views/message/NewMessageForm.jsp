@@ -123,11 +123,28 @@
 											
 											
 											<div class="input-group text-center mb-3">
-												<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30% !important;">
-												<div class="input-group-append">
-													<!-- <button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();"> -->
-													<span class="input-group-text" id="basic-addon1" style="background: #78c2ad"><img src="./resources/images/loupe1.png" style="background: #78c2ad"></span><input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
-												</div>
+									<!--<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30% !important;">
+												
+												// 내 원래 아이디 검색창
+ 												<div class="input-group-append">
+													<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();">
+													<span class="input-group-text" id="basic-addon1" style="background: #78c2ad">
+													<img src="./resources/images/loupe1.png" style="background: #78c2ad">
+													</span>
+													<input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
+												</div> -->
+												
+												<!-- 전체 게시글 검색창 -->
+												<div class="input-group-prepend">
+						                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+						                        </div>
+												<div class="input-group text-center mb-3">
+						                        	<input name="findBoard" type="search" class="form-control" placeholder=" 받는 사람 아이디" aria-label="Search Dashboard">
+						                        	<div class="input-group-append">
+						                        		<button id="searchBtn" class="btn" type="submit" onclick="searchPopUp();">검색하기</button>
+						                        	</div>
+						                        </div>
+												
 											</div>
 											
 											<div class="input-group">
@@ -213,11 +230,7 @@
 			
 /* 			} */
 		}
-<<<<<<< HEAD
-		
 
-=======
->>>>>>> branch 'master' of https://github.com/pastelto/DOLIKE
 		</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

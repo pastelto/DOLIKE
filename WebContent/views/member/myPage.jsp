@@ -11,56 +11,20 @@
 	String email = m.getEmail();
 	String nickName = m.getNickName();
 	
-	String[] checkedInterest1 = new String[7];
-	String[] checkedInterest2 = new String[7];
-	String[] checkedInterest3 = new String[7];
+	String[] checkedInterest = new String[7];
 	
-	if (m.getInterests1() != null) {
-		String[] interests1 = m.getInterests1().split(",");
+	if (m.getInterests() != null) {
+		String[] interests = m.getInterests().split(",");
 		
-		for(int i = 0; i < interests1.length; i++) {
-			switch(interests1[i]) {
-			case "공부" : checkedInterest1[0] = "checked"; break;
-			case "건강" : checkedInterest1[1] = "checked"; break;
-			case "여행" : checkedInterest1[2] = "checked"; break;
-			case "요리" : checkedInterest1[3] = "checked"; break;
-			case "동물" : checkedInterest1[4] = "checked"; break;
-			case "패션뷰티" : checkedInterest1[5] = "checked"; break;
-			case "기타" : checkedInterest1[6] = "checked"; break;
-			}
-		}
-	}
-	
-
-	if (m.getInterests2() != null) {
-		String[] interests2 = m.getInterests2().split(",");
-		
-		for(int i = 0; i < interests2.length; i++) {
-			switch(interests2[i]) {
-			case "공부" : checkedInterest2[0] = "checked"; break;
-			case "건강" : checkedInterest2[1] = "checked"; break;
-			case "여행" : checkedInterest2[2] = "checked"; break;
-			case "요리" : checkedInterest2[3] = "checked"; break;
-			case "동물" : checkedInterest2[4] = "checked"; break;
-			case "패션뷰티" : checkedInterest2[5] = "checked"; break;
-			case "기타" : checkedInterest2[6] = "checked"; break;
-			}
-		}
-	}
-	
-	
-	if (m.getInterests3() != null) {
-		String[] interests3 = m.getInterests3().split(",");
-		
-		for(int i = 0; i < interests3.length; i++) {
-			switch(interests3[i]) {
-			case "공부" : checkedInterest3[0] = "checked"; break;
-			case "건강" : checkedInterest3[1] = "checked"; break;
-			case "여행" : checkedInterest3[2] = "checked"; break;
-			case "요리" : checkedInterest3[3] = "checked"; break;
-			case "동물" : checkedInterest3[4] = "checked"; break;
-			case "패션뷰티" : checkedInterest3[5] = "checked"; break;
-			case "기타" : checkedInterest3[6] = "checked"; break;
+		for(int i = 0; i < interests.length; i++) {
+			switch(interests[i]) {
+			case "공부" : checkedInterest[0] = "checked"; break;
+			case "건강" : checkedInterest[1] = "checked"; break;
+			case "여행" : checkedInterest[2] = "checked"; break;
+			case "요리" : checkedInterest[3] = "checked"; break;
+			case "동물" : checkedInterest[4] = "checked"; break;
+			case "패션뷰티" : checkedInterest[5] = "checked"; break;
+			case "기타" : checkedInterest[6] = "checked"; break;
 			}
 		}
 	}
@@ -152,7 +116,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-									<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return editValidate();">
+									<form id="updateForm">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userId">아이디</label>
                                             <div class="form-inline">
@@ -163,7 +127,7 @@
                                             <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-inline">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
+                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="변경할 비밀번호를 입력하세요." required>
                                             </div>
                                             <div class="checkFont" id="pwdCheck"></div>
                                         </div>
@@ -210,75 +174,37 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-
                                         <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                             <!-- <div class="col-lg-6"> -->
                                             <div class="form-inline">
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="공부"<%= checkedInterest2[0] %> required>공부</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="공부"<%= checkedInterest[0] %> required>공부</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="건강"<%= checkedInterest2[1] %>>건강</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="건강"<%= checkedInterest[1] %>>건강</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="여행"<%= checkedInterest2[2] %>>여행</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="여행"<%= checkedInterest[2] %>>여행</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="요리"<%= checkedInterest2[3] %>>요리</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="요리"<%= checkedInterest[3] %>>요리</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="동물"<%= checkedInterest2[4] %>>동물</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="동물"<%= checkedInterest[4] %>>동물</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="패션뷰티"<%= checkedInterest2[5] %>>패션뷰티</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티"<%= checkedInterest[5] %>>패션뷰티</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests2" value="기타"<%= checkedInterest2[6] %>>기타</label>
-		                                            </div>
-		                                        </div>
-	                                        </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="interests3">관심사3 <span class="text-danger">*</span></label>
-                                            <!-- <div class="col-lg-6"> -->
-                                            <div class="form-inline">
-		                                        <div class="form-group">
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="공부"<%= checkedInterest3[0] %> required>공부</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="건강"<%= checkedInterest3[1] %>>건강</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="여행"<%= checkedInterest3[2] %>>여행</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="요리"<%= checkedInterest3[3] %>>요리</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="동물"<%= checkedInterest3[4] %>>동물</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="패션뷰티"<%= checkedInterest3[5] %>>패션뷰티</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="기타"<%= checkedInterest3[6] %>>기타</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="기타"<%= checkedInterest[6] %>>기타</label>
 		                                            </div>
 		                                        </div>
 	                                        </div>
@@ -287,12 +213,12 @@
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
                                         	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-                                        	<input type="submit" class="btn btn-primary" id="updateBtn" value="회원정보수정"/>
+                                        	<input type="button" class="btn btn-primary" id="updateBtn" onclick="updateMember();" value="회원정보수정"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
-                                        	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="location.href='<%=contextPath%>/memberDeleteForm.me'" value="탈퇴하기"/>
+                                        	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="deleteMember();" value="탈퇴하기"/>
                                         </div>
                                     </div>
                                     </form>
@@ -349,7 +275,7 @@
     	//==============================================
     	// 회원정보수정버튼 클릭시 팝업으로 재검증
     	//==============================================
-       	function editValidate(){
+       	function updateMember(){
      		//비밀번호
     		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#updateForm input[name=userPwd]").val()))){
     			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
@@ -370,7 +296,6 @@
     			$("#enrollForm input[name=nickName]").focus();
     	        return false;
     		 }
-    		
     		return true;
     	}
         
@@ -403,7 +328,19 @@
     			}
     		})
     	}
-<%-- 	
+        
+		function updateMember(){
+			var val = confirm("회원정보를 수정하시겠습니까?");
+			
+			if(val){
+				$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
+				$("#updateForm").submit();
+				alert("회원정보가 수정되었습니다!")
+			}else{
+				alert("취소하였습니다.");
+			}
+		}
+	
 		function deleteMember(){
 			var val = confirm("정말로 두라이크를 떠나실건가요?");
 			
@@ -414,19 +351,7 @@
 			}else{
 				alert("취소하였습니다.");
 			}
-		} --%>
-		
-<%-- 		function deleteMember(){
-			var val = confirm("정말로 두라이크를 떠나실건가요?");
-			
-			if(val){
-				location.href = "<%= request.getContextPath()%>/deleteMember.me";
-				alert("안녕히가세요...");
-			}else{
-				alert("취소하였습니다.");
-			}
-		} --%>
-		
+		}
     	</script>
 	</div>
 	<%@ include file = "../common/footer.jsp" %>

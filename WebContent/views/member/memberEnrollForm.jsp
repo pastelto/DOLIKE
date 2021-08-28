@@ -36,7 +36,6 @@
 		margin-left: 300px;
 	}
 	
-
 	</style>
 </head>
 
@@ -151,41 +150,38 @@
                                             </div>
                                             <div class="checkFont" id="emailCheck"></div>
                                         </div>
-                                        
                                         <div class="form-group row">
-
                                             <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
-
 <!--                                             <div class="col-lg-6"> -->
                                             <div class="form-inline">
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="공부" required>공부</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="공부" required>공부</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="건강">건강</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="건강">건강</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="여행">여행</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="여행">여행</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="요리">요리</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="요리">요리</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="동물">동물</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="동물">동물</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="패션뷰티">패션뷰티</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티">패션뷰티</label>
 		                                            </div>
 		                                            <div class="form-check mb-3">
 		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests3" value="기타">기타</label>
+		                                                    <input type="radio" class="form-check-input" name="interests" value="기타">기타</label>
 		                                            </div>
 		                                        </div>
 	                                        </div>
@@ -310,7 +306,6 @@
 			$('#emailCheck').css('color', 'red');
 		}
 	});
-
 	
 	//==============================================
 	//회원가입버튼 클릭시 팝업으로 재검증
@@ -322,7 +317,6 @@
  			$("#enrollForm input[name=userId]").focus();
 	        return false;
 		}
-
  		//비밀번호
 		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#enrollForm input[name=userPwd]").val()))){
 			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
@@ -367,7 +361,6 @@
 		 
 		 return true;
 	}  
-
   	//==============================================
 	//중복확인
 	//==============================================
@@ -401,7 +394,6 @@
 			}
 		})
 	}
-
   	//닉네임 중복확인
 	function checkNick(){
 		var nickName = $("#enrollForm input[name=nickName]");
