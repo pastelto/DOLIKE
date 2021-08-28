@@ -90,9 +90,7 @@ public class AdminDao {
 								      rset.getString("PHONE"),
 								      rset.getString("EMAIL"),
 								      rset.getString("NICKNAME"),
-								      rset.getString("INTERESTS1"),
-								      rset.getString("INTERESTS2"),
-								      rset.getString("INTERESTS3"),
+								      rset.getString("INTERESTS"),								      
 								      rset.getDate("USER_CREATE_DATE"),
 								      rset.getString("USER_STATUS")
 						));
