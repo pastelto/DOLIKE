@@ -19,7 +19,7 @@
 <!-- Custom Stylesheet -->
 <link href="./css/style.css" rel="stylesheet">
 <style>
-#submitBtn, #resetBtn, #sendBtn {
+#submitBtn, #resetBtn, #sendBtn, #searchPopList {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
@@ -119,11 +119,10 @@
 											
 											
 											<div class="input-group text-center mb-3">
-												<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30%;">
+												<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30% !important;">
 												<div class="input-group-append">
 													<!-- <button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();"> -->
-													<i class="mdi mdi-magnify" onclick="searchPopUp();" > 검색하기</i>
-													<!-- </button>	 -->
+													<span class="input-group-text" id="basic-addon1" style="background: #78c2ad"><img src="./resources/images/loupe1.png" style="background: #78c2ad"></span><input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
 												</div>
 											</div>
 											
