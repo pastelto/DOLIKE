@@ -33,6 +33,20 @@ body {
 	color: #2363747;
 	text-align: left;
 }
+#mission{
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
+
+#mission:hover{
+	color: #78c2ad;
+	background-color: #fff;
+	border-color: #78c2ad;
+}
+#text-center{
+	text-align:center;
+}
 
 .navbar {
 	display: flex !important;
@@ -164,10 +178,18 @@ a {
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">진행중인 챌린지</a></li>
+                    </ol>
+                </div>
+            </div>		
 			<div class="container-fluid">
+			<%if(!list.isEmpty()) {%>
 				<div class="row" style="margin-bottom: 13%;">
 					<div class="topList col-10" align="center">
-
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">
 							<div class="card" style="width: 80%;">
@@ -214,10 +236,9 @@ a {
 						</div>
 					</div>
 				</div>
+				<%} %>
 				<div class="root-container">
-					<%
-					if (!list.isEmpty() && !fileList.isEmpty()) {
-					%>
+					<%if (!list.isEmpty() && !fileList.isEmpty()) {%>
 					<div class="container ">
 						<div class="root-content">
 							<div class="root-section">
@@ -256,6 +277,22 @@ a {
 							</div>
 						</div>
 					</div>
+					<%} else {%>
+					<br>
+					<br>
+					<div class="container col-5 ">
+							<div class="card" id="null-end">
+								<div class="card-header" id="text-center">새로운 챌린지 도착 하는 중</div>
+								<div class="card-body">
+									<div class="items-center" style="text-align:center;">
+										<a href="<%=request.getContextPath()%>/challengeApplyForm.ch" class="item-click"> 
+											<img src="./resources/challenge_upfiles/null-main.png" alt="null-main" class="null-main" width="300px" height="300px"><br><br>
+											<button class="btn btn-primary px-3 ml-4" id="mission">챌린지 신청하러 가기</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<%} %>
 				</div>
 			</div>
