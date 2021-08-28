@@ -16,6 +16,12 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+	
+	#deleteMemBtn:hover {
+    	color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
 	</style>
 </head>
 <body>
