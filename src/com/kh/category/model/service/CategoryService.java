@@ -122,6 +122,25 @@ public class CategoryService {
 	}
 
 
+	public ArrayList<Category> categoryMenuBarList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Category> list = new CategoryDao().categoryMenuBarList(conn);
+		
+		close(conn);
+		
+		System.out.println("CategoryService의 caList 값 : " +  list);
+		return list;
+	}
+
+
+	
+
+
+	
+
+
 
 }
 

@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.admin.model.vo.*"%>
+    pageEncoding="UTF-8" import = "com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
     
 <%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 	
-	AdminPageInfo ca = (AdminPageInfo)request.getAttribute("ca");
+	AdminPageInfo ami = (AdminPageInfo)request.getAttribute("ami");
 	
-	int listCount = ca.getListCount();
-	int currentPage = ca.getCurrentPage();
-	int maxPage = ca.getMaxPage();
-	int startPage = ca.getStartPage();
-	int endPage = ca.getEndPage();
+	int listCount = ami.getListCount();
+	int currentPage = ami.getCurrentPage();
+	int maxPage = ami.getMaxPage();
+	int startPage = ami.getStartPage();
+	int endPage = ami.getEndPage();
 %>
 
 <!DOCTYPE html>
@@ -75,36 +75,38 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>카테고리 목록</h4>
+                                    <h4>회원 목록</h4>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                                <th>번호</th>
-                                                <th>ID</th>
+                                            <tr>                                                
+                                                <th>유저ID</th>
+                                                <th>이름</th>
+                                                <th>생년월일</th>
+                                                <th>전화번호</th>
+                                                <th>이메일</th>
                                                 <th>닉네임</th>
                                                 <th>생성일</th>
-                                                <th>접속 권한</th>
-                                                <th>회원 상태</th>
-                                                <th>이용 권한</th>
-                                            </tr>
+                                                <th>유저 상태</th>
+                                             </tr>
                                         </thead>
                                         <tbody>
                                         	<%if(list.isEmpty()){ %>
                                             <tr>
-                                                <td colspan="2">조회된 리스트가 없습니다.</td>                                                
+                                                <td colspan="8">조회된 회원이 없습니다.</td>                                                
                                             </tr>
                                             <%}else{ %>
-												<% for(Category c : list){ %>
+												<% for(Member am : list){ %>
                                             <tr>
-                                                <td><%= c.getNo() %></td>
-                                                <td><%= c.getName() %></td> 
-                                                <td><%= c.getNickName() %></td>
-                                                <td><%= c.getCreateDate() %></td>
-                                                <td><%= c.getAccess() %></td>
-                                                <td><%= c.getStatus() %></td>
-                                                <td><%= c.getRights() %></td>                                             
+                                                <td><%= am.getUserId() %></td>
+                                                <td><%= am.getUserName() %></td> 
+                                                <td><%= am.getBirthDate() %></td>
+                                                <td><%= am.getPhone() %></td>
+                                                <td><%= am.getEmail() %></td>
+                                                <td><%= am.getNickName() %></td>
+                                                <td><%= am.getUserCreateDate() %></td>
+                                                <td><%= am.getUserStatus() %></td>                                             
                                             </tr>
                                             	<%} %>
 											<%} %>
@@ -113,8 +115,8 @@
                                 </div>
                              	<div class="general-button" align="right">
                              		<%--<% if(loginUser != null){ --%>
-                            		<button id="categoryCreateBtn" onclick="location.href='<%= contextPath %>/enrollForm.ca'"  class="btn mb-1 btn-primary">게시판 생성하기</button>
-									<%--<% } --%>
+                            		<%--<button id="따로 버튼이 필요하지 않음" onclick="location.href='<%= contextPath %>/enrollForm.ca'"  class="btn mb-1 btn-primary">게시판 생성하기</button>
+									<% } --%>
 								</div>
                             </div>
                         </div>
@@ -129,13 +131,13 @@
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/categoryList.ca?currentPage=1"> &laquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/adminMemberList.am?currentPage=1"> &laquo; </a></li>
 				
 				<!-- 이전페이지 -->
 				<% if(currentPage == 1) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
 				<%} %>
 				
 				
@@ -145,7 +147,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/categoryList.ca?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/adminMemberList.am?currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -155,11 +157,11 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
 		<%@ include file="../common/footer.jsp" %>
@@ -169,8 +171,8 @@
 		<%if(!list.isEmpty()){ %>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
-				var cno = $(this).children().eq(0).text();
-				location.href="<%= contextPath %>/detail.ca?cno=" +cno;
+				var amno = $(this).children().eq(0).text();
+				location.href="<%= contextPath %>/detail.am?amno=" +amno;
 			})
 		})
 		<%}%>
