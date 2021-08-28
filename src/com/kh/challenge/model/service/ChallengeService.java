@@ -273,6 +273,20 @@ public class ChallengeService {
 		return result;
 		
 	}
+	public int updateUserStatus(int chno) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().updateUserStatus(conn, chno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 
 	
 	

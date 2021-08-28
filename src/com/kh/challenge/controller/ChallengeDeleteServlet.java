@@ -32,12 +32,14 @@ public class ChallengeDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int chno = Integer.parseInt(request.getParameter("chno"));
 		
-		int result = new ChallengeService().deleteChallenge(chno);
+		int result1 = new ChallengeService().deleteChallenge(chno);
 		
-		if(result > 0) {
+		int result2 = new ChallengeService().updateUserStatus(chno);
+		
+		if(result1 * result2 > 0) {
 			response.sendRedirect("challengeMain.ch");
 		} else {
-			request.setAttribute("msg", "삭제에 실패했습니다.");
+			request.setAttribute("msg", "삭제 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
