@@ -39,19 +39,48 @@ public class ChallengeDao {
 
 	}
 
-	public int getListCount(Connection conn) {
+	public int getrpListCount(Connection conn, int chno) {
 		int listCount = 0;
-		Statement stmt = null; // 파라미터에서 받아오지 않아도 되기 떄문에 --> 전체 받아올 것
+		PreparedStatement pstmt = null; 
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("getListCount");
+		String sql = prop.getProperty("getrpListCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, chno);
+			
+			rset = pstmt.executeQuery(); 
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(listCount +" listcount dao");
+		return listCount;
+	}
+	
+	
+	public int getecListCount(Connection conn) {
+		
+		int listCount = 0;
+		Statement stmt = null; 
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("getecListCount");
 
 		try {
 			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql); // 쿼리실행
+			rset = stmt.executeQuery(sql);
 
 			if (rset.next()) {
-				listCount = rset.getInt("CH_NO"); // 컬럼명을 적어도 되고 컬럼인덱스로 적어도 된다.
+				listCount =  rset.getInt(1);  
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +92,7 @@ public class ChallengeDao {
 		System.out.println(listCount +" listcount dao");
 		return listCount;
 	}
+
 
 	public ArrayList<Challenge> selectList(Connection conn) {
 
@@ -117,14 +147,16 @@ public class ChallengeDao {
 		/*
 		 * SELECT * 
 		 * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT CH_NO, CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
-		 * FROM CHALLENGE WHERE CH_STATUS = 'N' ORDER BY CH_END DESC) A) 
+		 * FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO WHERE CH_STATUS = 'N' ORDER BY CH_END DESC) A) 
 		 * WHERE RNUM BETWEEN ? AND ?
 		 */
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);		
+			pstmt.setInt(2, endRow);	
+			
+			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
 				list.add(new Challenge(rset.getInt("CH_NO"),
@@ -842,6 +874,7 @@ public class ChallengeDao {
 				
 		return result;
 	}
+
 
 
 

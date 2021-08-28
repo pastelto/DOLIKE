@@ -124,6 +124,9 @@
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 	}
+	.hide{
+	 	display:none;
+	}
 	li, h5 {
 		font-size: 16px;
 		letter-spacing: -0.009em;
@@ -185,8 +188,6 @@
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">
 							<div class="card" style="width: 80%;">
-								<!--                             <div class="card-body"> -->
-
 								<div class="bootstrap-carousel" style="height: 5rem;">
 									<div id="carouselExampleIndicators" class="carousel slide"
 										data-ride="carousel">
@@ -306,10 +307,20 @@
 		</div>
 		
 		<!-- 페이지 처리 -->
-		
-		
+				
 	</div>
 <%@ include file="../common/footer.jsp" %>
+<script>
+	<% if(list != null){%>
+		$(function() {
+			$("#clickUl>.item").click(function(){
+				var chno = $(this).children().eq(0).text();				
+						
+						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+					})					
+				})
+	<% } %>
+</script>
 </div>
 </body>
 </html>

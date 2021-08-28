@@ -70,16 +70,27 @@ public class ChallengeService {
 	}
 	
 	//paging-listcount
-	public int getListCount() {
+	public int getrpListCount(int chno) {
 		
 		Connection conn = getConnection();
 		
-		int listCount = new ChallengeDao().getListCount(conn);
+		int listCount = new ChallengeDao().getrpListCount(conn,chno);
 		
 		close(conn);
 		
 		return listCount;
 	}
+	
+	public int getecListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new ChallengeDao().getecListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+	
 	
 	//detail-challenge
 	public Challenge selectDetail(int chno) {
@@ -301,5 +312,7 @@ public class ChallengeService {
 		
 		return result;
 	}
+
+	
 	
 }

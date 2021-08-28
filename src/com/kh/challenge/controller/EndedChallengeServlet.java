@@ -53,7 +53,7 @@ public class EndedChallengeServlet extends HttpServlet {
 				int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 				int listLimit;			// 한 페이지에 보여질 댓글 최대 갯수
 				
-				listCount = new ChallengeService().getListCount();
+				listCount = new ChallengeService().getecListCount();
 				
 				currentPage = 1;
 				
