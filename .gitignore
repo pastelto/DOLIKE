@@ -1,7 +1,10 @@
+git fetch origin
+git checkout -b KSW origin/KSW
+git merge master
+
 git rm -r --cached .
 git add . 
-git commit -m "Fixed .gitignore"
-
+git commit -m "Fixed .gitignore"'
 
 ### Java ###
 # Compiled class file

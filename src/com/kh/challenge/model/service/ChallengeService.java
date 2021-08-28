@@ -96,15 +96,29 @@ public class ChallengeService {
 		return list;
 	}
 
-	public ArrayList<Challenge> selectMyChallenge(String loginUser) {
+	public Challenge selectMyChallenge(String loginUser) {
 		Connection conn = getConnection();
 		
-		ArrayList<Challenge> list = new ChallengeDao().selectMyChallenge(conn, loginUser);
+		Challenge c = new ChallengeDao().selectMyChallenge(conn, loginUser);
+		
+		close(conn);
+		System.out.println(loginUser +" myc service user");
+		System.out.println(c +": myc service");
+		
+		return c;
+	}
+	
+	public ArrayList<Challenge> selectMyEndChallenge(String loginUser) {
+
+		Connection conn = getConnection();
+		
+		
 		
 		close(conn);
 		
 		return list;
 	}
+	
 
 	public Challenge selectDetail(int chno) {
 		Connection conn = getConnection();
@@ -222,5 +236,9 @@ public class ChallengeService {
 		System.out.println(result);
 		return result;
 	}
+
+	
+	
+
 
 }

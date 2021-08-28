@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MyEndedChallengeServlet
@@ -32,12 +33,15 @@ public class MyEndedChallengeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loginUser = String.valueOf(request.getParameter("loginUser"));
+
+		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
-		ArrayList<Challenge> list = new ChallengeService().selectMyChallenge(loginUser);
+		ArrayList<Challenge> list = new ChallengeService().selectMyEndChallenge(loginUser);
 		request.setAttribute("list", list);
+			
+		System.out.println(list +": myc servlet");
 				
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myEndedChallenge.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myChallenge.jsp");
 		view.forward(request, response);
 	}
 

@@ -199,6 +199,10 @@ int startPage = pi.getStartPage();
 												<small class="text-muted ml-3"><%=rpList.get(i).getWriteDate()%></small>
 											<p>
 										</div>
+									<%if(loginUser.getUserId().equals(rpList.get(i).getRpWriter())) {%>
+										<button id="updBtn" class="btn btn-sm px2" onclick="update();">수정</button>&nbsp;
+										<button id="deleteBtn" class="btn btn-sm px2" onclick="delete();">삭제</button>	
+									<%} %>									
 									</div>
 									<div class="card-mt4' style="text-align:left;">
 										<div class="media align-items-center">
@@ -298,6 +302,39 @@ int startPage = pi.getStartPage();
 </div>
 
 	<script>
+		function update(){
+			swal.fire({
+                title: '수정',        // 제목
+                text: "댓글을 수정하시겠습니까?",  // 내용
+                type: 'question',                              // 종류
+                confirmButtonText: '수정',               // 확인버튼 표시 문구
+                showCancelButton: true,                 // 취소버튼 표시 문구
+                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                cancelButtonColor: "#f3969a",
+                confirmButtonColor: "#78c2ad"
+            }).then(function(result) { 
+                if(result.value) {                 // 확인 버튼이 눌러진 경우               
+                	$("#addReply").attr("action", "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno");
+                    $("#replyContent").val("");
+				swal.fire(
+						{title: '등록',
+						 text: '성공적으로 등록되었습니다.',
+						 type: 'success',
+						 confirmButtonColor: "#78c2ad"}).then(function(result){
+		
+					$("#addReply").submit();
+				});
+                
+            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+                swal.fire(
+                	{title: '취소',
+					 text: '취소되었습니다',
+					 type: 'error',
+					 confirmButtonColor: "#78c2ad"});
+                
+            }
+        });
+		}
 		function submit(){
             // 확인, 취소버튼에 따른 후속 처리 구현
             swal.fire({

@@ -221,9 +221,6 @@ a {
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<div class="section-header">
-										<h4>챌린지</h4>
-									</div>
 									<ul class="live-item-list">
 										<%
 										for (int i = 0; i < list.size(); i++) {
