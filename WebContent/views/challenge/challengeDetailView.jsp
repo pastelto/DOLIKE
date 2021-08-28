@@ -134,7 +134,6 @@ int startPage = pi.getStartPage();
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item">진행기간: <%=c.getStart()%> ~ <%=c.getEnd()%></li>
 											<li class="list-group-item">카테고리: <%=c.getCategoryTitle()%></li>
-											<%if(loginUser !=null){ %>
 												<li class="list-group-item">
 												<%if(loginUser.getUserId().equals("admin")) {%>
 												<form action="<%=request.getContextPath()%>/deleteChallenge.ch" method="post">											
@@ -149,22 +148,13 @@ int startPage = pi.getStartPage();
 												</form>
 												<%} %>
 												</li>
-											<%} %>
+
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="card">
-								<div class="card-body text-center">
-									<%if (loginUser == null) {%>
-									<form action="#" class="form-profile">
-										<div class="form-group">
-											<textarea readonly class="form-control" name="textarea"
-												id="textarea" cols="30" rows="2"
-												placeholder="로그인한 사용자만 댓글 입력이 가능합니다.. 로그인 후 이용해주세요"></textarea>
-										</div>
-									</form>
-									<%} else {%>
+								<div class="card-body text-center">									
 										<%if(c.getStatus().equals("Y")) {%>
 											<%if(cu != null) {%>																		
 												<form action="<%=request.getContextPath()%>/rplyInsert.ch"
@@ -198,8 +188,7 @@ int startPage = pi.getStartPage();
 													</div>
 												</form>
 											<%}%>
-										<%} %>
-									<%}%>	
+										<%}%>
 								</div>
 							</div>
 						</div>
@@ -243,9 +232,7 @@ int startPage = pi.getStartPage();
 										<%}}%>
 									</div>					
 								<!-- 페이지 처리 -->
-								<%
-										if (!rpList.isEmpty()){
-										%>
+								<%if (!rpList.isEmpty()){%>
 								<div id="paging">
 									<ul class="pagination justify-content-center">
 										<!-- 맨앞으로 -->

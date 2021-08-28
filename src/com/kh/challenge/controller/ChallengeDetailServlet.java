@@ -39,10 +39,18 @@ public class ChallengeDetailServlet extends HttpServlet {
 								
 				int chno = Integer.parseInt(request.getParameter("chno"));
 				Challenge c = new ChallengeService().selectDetail(chno);
-				request.setAttribute("c", c);
+				request.setAttribute("c", c);								
 				
-				String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-				Challenge cu = new ChallengeService().selectTdRp(loginUser,chno);
+				Challenge cu = null;
+				String loginUser = null;
+				
+				if(((Member)request.getSession().getAttribute("loginUser")).getUserId() !=null) {
+					loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+					cu = new ChallengeService().selectTdRp(loginUser,chno);
+				} else {
+					cu = null;
+				}
+				
 				request.setAttribute("cu", cu);
 				
 				ChallengeAttachment at = new ChallengeService().selectAttach(chno);

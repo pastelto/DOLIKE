@@ -243,7 +243,7 @@ a {
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<ul class="live-item-list">
+									<ul class="live-item-list" id="clickUl">
 										<%
 										for (int i = 0; i < list.size(); i++) {
 										%>
@@ -304,7 +304,7 @@ a {
 	<script>
 	<% if(!list.isEmpty()){%>
 		$(function() {
-			$("ul>li").click(function(){
+			$("#clickUl>.item").click(function(){
 				var chno = $(this).children().eq(0).text();				
 						
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
