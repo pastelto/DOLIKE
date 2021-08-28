@@ -456,6 +456,7 @@
 			}
 		})
 	}
+  	
   	//닉네임 중복확인
 	function checkNick(){
 		var nickName = $("#enrollForm input[name=nickName]");

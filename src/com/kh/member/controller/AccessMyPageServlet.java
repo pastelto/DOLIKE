@@ -37,7 +37,6 @@ public class AccessMyPageServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		System.out.println("userId : " + userId);
-		System.out.println("userPwd : " + userPwd);
 		
 		int result = new MemberService().accessUpdate(userId, userPwd);
 		
