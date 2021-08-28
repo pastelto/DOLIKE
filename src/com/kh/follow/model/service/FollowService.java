@@ -171,5 +171,12 @@ public class FollowService {
 		return flist;
 	}
 
+	public ArrayList<Follow> selectCategoryTop4User(String categoryName) {
+		Connection conn = getConnection();
+		ArrayList<Follow> catFlTop = new FollowDao().selectCategoryTop4User(conn, categoryName);
+		close(conn);
+		return catFlTop;
+	}
+
 
 }

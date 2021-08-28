@@ -26,6 +26,94 @@
 	href="./images/do_32.png">
 
 <style>
+<<<<<<< HEAD
+	#fList{
+		height: 40rem;
+	}
+	
+	#iconMsg{
+		color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	#iconMsg:hover{
+		color: #78c2ad;
+    	background-color: #fff;
+    	border-color: #78c2ad;
+	}
+	#byefr, #deleteBtn{
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	
+	#byefr:hover{
+		color: #f3969a;
+    	background-color: #fff;
+    	border-color: #f3969a;
+	}
+	#jum{
+		padding:1rem 0.5rem;
+		margin-bottom:1rem;
+		background: #78c2ad;
+		color: #fff;
+		border-radius:.3rem;
+	}
+	#pageTag {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#pageTag:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	#pageDisable {
+		color: gray;
+    	background-color: #ced4da;
+    	border-color: #ced4da;
+	}
+	#up{
+		position: relative !important;
+	}
+	#down{
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	#interestLabel {
+		/* background: #78c2ad; */
+		background: gray;
+	}
+	#dia{
+		color: #78c2ad;
+	}
+	#iconfl{
+		color: #f3969a;
+	}
+	#categoryCard{
+	overflow-y : scroll;
+	height : 200px;
+	}
+	#categoryCard::-webkit-scrollbar{
+		width:10px;
+	}
+	#categoryCard::-webkit-scrollbar-thumb{
+		background-color: #78c2ad;
+		border-radius:10px;
+	}
+	
+	#categoryCard::-webkit-scrollbar-track{
+		background-color: #ffe6f2;
+		border-radius:10px;
+		box-shadow : inset 0px 0px 5px white;
+	}
+	
+</style>	
+	
+=======
 #fList {
 	height: 40rem;
 }
@@ -105,11 +193,27 @@
 }
 </style>
 
+>>>>>>> refs/heads/master
 </head>
 <body>
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 
+<<<<<<< HEAD
+	<div class="content-body">
+	
+	
+	        <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">팔로잉</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">나의 친구</a></li>
+                    </ol>
+                </div>
+            </div>
+	
+	<br> <br> 
+=======
 		<div class="content-body">
 
 
@@ -125,7 +229,10 @@
 
 
 			<br> <br>
+>>>>>>> refs/heads/master
 
+<<<<<<< HEAD
+=======
 			<%
 			if (loginUser == null) {
 			%>
@@ -140,6 +247,7 @@
 			} else {
 			%>
 
+>>>>>>> refs/heads/master
 			<div class="container-fluid">
 				<div class="col-10" style="margin: 0 auto;">
 
@@ -204,6 +312,41 @@ j
 											</div>
 										</div>
 									</div>
+<<<<<<< HEAD
+								</div>
+								</div>
+								
+								<hr>
+								<div class="card mt-4">
+									<div class="media align-items-center">
+					
+										<div class="card-body text-center" id="categoryCard">
+										<!-- <span id="interestLabel" class="label label-pill label-primary"></span> -->
+											<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
+										<!-- ----------------- -->
+										
+													<table id="catTable" class="table table-borderless" style="text-align: center;">
+															<% if(catList.isEmpty()){ %>
+														 	<tr>
+																<td colspan="3">등록 된 카테고리가 없습니다.</td>
+															</tr>
+														 <% }else{  %>
+														 	<% for(int i=0;i<catList.size();i++){ %>
+														 		<%if(i%3==0){ %>
+														 			<tr>
+														 				<td width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
+														 		<%}else if(i%3==1){ %>
+														 				<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
+														 		<%}else{ %>
+														 			<td  width="33.3%"><span id="<%= i %>" class="label label-pill label-primary"># <b><%= catList.get(i).getCategoryName() %></b></span></td>
+														 			</tr>
+														 		<%} %>
+														 	<% } %>
+														 <% } %>
+													</table>
+										
+										<!-- ----------------- -->
+=======
 
 									<hr>
 									<div class="card mt-4">
@@ -241,6 +384,7 @@ j
 												<!-- ----------------- -->
 											</div>
 
+>>>>>>> refs/heads/master
 										</div>
 
 									</div>
@@ -379,8 +523,12 @@ j
 											</ul>
 										</div>
 									</div>
+<<<<<<< HEAD
+									
+=======
 
 									<%}%>
+>>>>>>> refs/heads/master
 
 								</div>
 
@@ -396,7 +544,6 @@ j
 					</div>
 				</div>
 			</div>
-			<% } %>
 
 
 		</div>
@@ -406,7 +553,7 @@ j
 	<%@ include file="../common/footer.jsp"%>
 	<script>
 		function searchId(){
-			console.log("찍히나?")
+			console.log("찍히나?");
 			var followId = $("#searchForm input[name=followId]");
 			if(followId.val() == ""){
 				
@@ -483,7 +630,9 @@ j
 						//$("#followInterest").text(followInterest) //나중에 삭제
 						console.log(followInterest);
 						
-						switch (followInterest) {
+						
+						
+ 						switch (followInterest) {
 						case "공부":
 							$("#0").attr("style","background: #78c2ad;")
 							break;
@@ -507,7 +656,10 @@ j
 							break;
 						default:
 							break;
-						}	
+						}  
+						
+						
+						
 					},
 					error:function(){
 						console.log("통신오류!")
