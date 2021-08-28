@@ -5,7 +5,7 @@
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
 	
-	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");	
+	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");	
 %>
 <!DOCTYPE html>
 <html>
