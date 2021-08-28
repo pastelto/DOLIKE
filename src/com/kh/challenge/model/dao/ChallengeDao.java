@@ -292,11 +292,15 @@ public class ChallengeDao {
 		Challenge c = new Challenge();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
+		System.out.println("loginUser dao" + loginUser);
+		
 
-		String sql = prop.getProperty("myChallengeAt");
+		String sql = prop.getProperty("myChallenge");
 		/*
-		 * SELECT CH_NO, CH_TITLE, RP_COUNT, ACHIEVEMENT FROM CHALLENGE C JOIN
-		 * CHALLENGE_USER U ON C.CH_NO = U.CH_NO WEHRE CH_USER = ?
+		 *myChallenge = SELECT C.CH_NO, C.CH_TITLE, C.CH_START, C.CH_END, T.CATEGORY_NAME 
+		 *FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO 
+		 *JOIN CATEGORY T ON C.CATEGORY_NO = T.CATEGORY_NO WHERE U.CH_USER=? AND C.CH_STATUS = 'Y'
 		 */
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -304,12 +308,13 @@ public class ChallengeDao {
 
 			rset = pstmt.executeQuery();
 
-			while (rset.next()) {
-				c = new Challenge(rset.getInt("CH_NO"), 
-								  rset.getString("CH_TITLE"), 
-								  rset.getInt("RP_COUNT"),
-								  rset.getString("ACHIEVEMENT"),
-								  rset.getString("NICKNAME"));
+			while (rset.next()) {			
+				c = new Challenge(rset.getInt("CH_NO"),
+								  rset.getString("CH_TITLE"),
+								  rset.getString("CH_START"),
+								  rset.getString("CH_END"),
+								  rset.getString("CATEGORY_NAME"));
+
 			}
 
 		} catch (SQLException e) {
@@ -321,34 +326,38 @@ public class ChallengeDao {
 		}
 
 		System.out.println(c +": myc dao");
+				
 		return c;
 	}
 	
 	public ArrayList<Challenge> selectMyEndChallenge(Connection conn, String loginUser) {
+		
 		ArrayList<Challenge> list = new ArrayList<Challenge>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("myEndChallenge");
 		/*
 		 * myEndChallenge = SELECT CH_TITLE, CH_START, CH_END 
-		 * FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE CH_USER=? AND CH_STATUS = 'N' ORDER BY CH_END DESC
+		 * FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE CH_USER=? AND CH_STATUS = 'N' 
+		 * ORDER BY CH_END DESC
 		 */
+
+		String sql = prop.getProperty("myEndChallenge");
+		System.out.println(sql);
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, loginUser);
 
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Challenge c = new Challenge();
-				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getString("CH_START"));
-				c.setEnd(rset.getString("CH_END"));
-				
-				list.add(c);
+			rset = pstmt.executeQuery();			
+			
+			while (rset.next()) {									
+				list.add(new Challenge(rset.getInt("CH_NO"),
+									   rset.getString("CH_TITLE"), 
+									   rset.getString("CH_START"),
+									   rset.getString("CH_END"), 
+									   rset.getString("CATEGORY_NAME")));
 			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -356,11 +365,9 @@ public class ChallengeDao {
 			close(rset);
 			close(pstmt);
 		}
+		
+		System.out.println(list +": dao");
 
-		System.out.println(list +": myc dao");
-		
-		
-		
 		return list;
 	}
 	

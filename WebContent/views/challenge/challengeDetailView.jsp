@@ -100,7 +100,6 @@ int startPage = pi.getStartPage();
 	<div id="main-wrapper">
 		<%@include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
-			<!-- 댓글 읽기 -->
 			<div class="container-fluid">
 				<div class="col-10" style="margin: 0 auto;">
 					<div class="row">
@@ -126,6 +125,13 @@ int startPage = pi.getStartPage();
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item">진행기간: <%=c.getStart()%> ~ <%=c.getEnd()%></li>
 											<li class="list-group-item">카테고리: <%=c.getCategoryTitle()%></li>
+											<li class="list-group-item">
+											<form action="<%=request.getContextPath()%>/enroll.ch" method="post">
+												<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
+												<input type="hidden" value="<%=c.getChNo()%>" name="chno" class="none"/>
+												<button class="btn btn-primary px-3 ml-4" type="submit" id="enroll">신청</button>
+											</form>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -199,10 +205,10 @@ int startPage = pi.getStartPage();
 												<small class="text-muted ml-3"><%=rpList.get(i).getWriteDate()%></small>
 											<p>
 										</div>
-									<%if(loginUser.getUserId().equals(rpList.get(i).getRpWriter())) {%>
+									<%--<%if(loginUser.getUserId().equals(rpList.get(i).getRpWriter())) {%>
 										<button id="updBtn" class="btn btn-sm px2" onclick="update();">수정</button>&nbsp;
 										<button id="deleteBtn" class="btn btn-sm px2" onclick="delete();">삭제</button>	
-									<%} %>									
+									<%} %>--%>									
 									</div>
 									<div class="card-mt4' style="text-align:left;">
 										<div class="media align-items-center">

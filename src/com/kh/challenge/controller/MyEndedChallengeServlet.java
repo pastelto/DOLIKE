@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.Challenge;
+import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -38,10 +39,14 @@ public class MyEndedChallengeServlet extends HttpServlet {
 		
 		ArrayList<Challenge> list = new ChallengeService().selectMyEndChallenge(loginUser);
 		request.setAttribute("list", list);
-			
+		
+		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();						
+		request.setAttribute("fileList", fileList);
+		
 		System.out.println(list +": myc servlet");
-				
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myChallenge.jsp");
+		System.out.println(fileList +": servlet");
+							
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myEndedChallenge.jsp");
 		view.forward(request, response);
 	}
 
