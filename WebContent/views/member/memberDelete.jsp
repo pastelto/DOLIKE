@@ -22,10 +22,16 @@
     	border-color: #78c2ad;
 	}
 	
+	#goBack:hover {
+		color: #fff;
+		background-color: #f3969a;
+		border-color: #f3969a;
+	}
+	
 	#deleteMemBtn:hover {
-    	color: #fff;
-    	background-color: #f3969a;
-    	border-color: #f3969a;
+		color: #fff;
+		background-color: #000000;
+    	border-color: #000000;
 	}
 	</style>
 </head>

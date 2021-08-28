@@ -13,9 +13,12 @@
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
+	
 	<style>
 	#errorTitle {
-		color: #f3969a;
+		color: #ffce67;
+		font-family: 'Lobster', cursive;
 	}
 	
 	#goMain {
@@ -29,6 +32,15 @@
 		background-color: #f3969a;
 		border-color: #f3969a;
 	}
+	
+	#badMessage, #detailMessage {
+		font-family: 'Gowun Dodum', sans-serif;
+	}
+	
+	#footMessage {
+		font-family: 'Chakra Petch', sans-serif;
+	}
+	
 	</style>
 </head>
 <body>
@@ -73,16 +85,16 @@
 			                    <div class="error-content">
 			                        <div class="card mb-0">
 			                            <div class="card-body text-center pt-5">
-			                                <h3 class="error-text text-primary" id="errorTitle"><b>ERROR</b></h3>
-			                                <h4 class="mt-4"><i class="fa fa-thumbs-down text-danger"></i> 잘못된 접근입니다</h4>
-			                                <p><%= message %></p>
+			                                <h3 class="error-text" id="errorTitle"><b>ERROR</b></h3>
+			                                <h4 class="mt-4" id="badMessage"><i class="fa fa-thumbs-down text-danger"></i> 잘못된 접근입니다</h4>
+			                                <p id="detailMessage"><%= message %></p>
 			                                <form class="mt-5 mb-5">
 			                                    <div class="text-center mb-4 mt-4">
 			                                    	<a href="<%=request.getContextPath()%>/index2.jsp" class="btn btn-primary" id="goMain">메인으로</a>
 			                                    </div>
 			                                </form>
-			                                <div class="text-center">
-			                                    <p>Copyright © Designed by DoLike, Developed by DoLike 2021</p>
+			                                <div class="text-center" id="footMessage">
+			                                    <p>© TEAM DOLIKE 2021</p>
 			                                </div>
 			                            </div>
 			                        </div>
