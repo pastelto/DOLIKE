@@ -3,8 +3,7 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
-	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
-	
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");	
 %>
 <!DOCTYPE html>
 <html>
@@ -187,16 +186,18 @@ a {
 										</ol>
 										<div class="carousel-inner">
 											<div class="carousel-item active">
+											<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
 												<img class="d-block w-100"
 													style="width: 10%; height: 18rem;"
-													src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2f584176-70f3-4f90-b940-6df1b60cd0e1/%ED%88%AC%ED%91%9C_%EB%B0%B0%EB%84%88-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210826%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210826T011928Z&X-Amz-Expires=86400&X-Amz-Signature=6ee40b3e716402b105df0a867a7a10b1b5518f55b7c8be7bf431961c6e4e79bf&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25ED%2588%25AC%25ED%2591%259C%2520%25EB%25B0%25B0%25EB%2584%2588-001.png%22"
-													alt="First slide">
+													src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
+											</a>
 											</div>
 											<div class="carousel-item">
+											<a href="<%=request.getContextPath()%>/challengeVote.ch">
 												<img class="d-block w-100"
 													style="width: 10%; height: 18rem;"
-													src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/af158413-7cf3-4e68-bb99-4d9e2ce9ae7e/%EC%B1%8C%EB%A6%B0%EC%A7%80_%EC%8B%A0%EC%B2%AD-001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210826%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210826T012613Z&X-Amz-Expires=86400&X-Amz-Signature=7d255596af802ada91b32fceba5325b8eb76f11ad5dcc81e8b47b38d21d46d30&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%25B1%258C%25EB%25A6%25B0%25EC%25A7%2580%2520%25EC%258B%25A0%25EC%25B2%25AD-001.png%22"
-													alt="Second slide">
+													src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+											</a>
 											</div>
 										</div>
 										<a class="carousel-control-prev"
@@ -221,9 +222,6 @@ a {
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<div class="section-header">
-										<h4>챌린지</h4>
-									</div>
 									<ul class="live-item-list">
 										<%
 										for (int i = 0; i < list.size(); i++) {
