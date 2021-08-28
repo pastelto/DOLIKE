@@ -82,8 +82,6 @@
 									<button id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/noticeView.no'">돌아가기</button>
 									<!-- 로그인 세션 생성시 이부분 주석 풀기  -->
 									<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
-									<%-- <!-- 임시용 -->
-									<% if(loginUser != null && loginUser.equals("admin")) { %> --%>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" type="button" class="btn btn-sm" onclick="location.href='updatePage.no?nno=<%=n.getNoticeNo()%>'">수정하기</button>
