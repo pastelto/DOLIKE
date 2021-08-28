@@ -17,13 +17,13 @@
 <!-- Custom Stylesheet -->
 <link href="./css/style.css" rel="stylesheet">
 <style>
-#submitBtn, #resetBtn, #sendBtn, #searchPopList {
+#submitBtn, #resetBtn, #sendBtn {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -69,8 +69,7 @@
 				<div class="col p-md-0">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-						<li class="breadcrumb-item active"><a onclick="submitMsg();"sss>쪽지
-								보내기</a></li>
+						<li class="breadcrumb-item active"><a onclick="submitMsg();">쪽지 보내기</a></li>
 					</ol>
 				</div>
 			</div>
@@ -113,32 +112,13 @@
 											<input type="hidden" name="userId"
 												value="<%= loginUser.getUserId() %>">
 
-											
-											
-											<div class="input-group text-center mb-3">
-									<!--<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30% !important;">
-												
-												// 내 원래 아이디 검색창
- 												<div class="input-group-append">
-													<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();">
-													<span class="input-group-text" id="basic-addon1" style="background: #78c2ad">
-													<img src="./resources/images/loupe1.png" style="background: #78c2ad">
-													</span>
-													<input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
-												</div> -->
-												
-												<!-- 전체 게시글 검색창 -->
-												<div class="input-group-prepend">
-						                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-						                        </div>
-												<div class="input-group text-center mb-3">
-						                        	<input name="findBoard" type="search" class="form-control" placeholder=" 받는 사람 아이디" aria-label="Search Dashboard">
-						                        	<div class="input-group-append">
-						                        		<button id="searchBtn" class="btn" type="submit" onclick="searchPopUp();">검색하기</button>
-						                        	</div>
-						                        </div>
-												
-
+											<div class="form-group">
+												<div class="col-6">
+												<input type="text" class="form-control bg-transparent"
+													name="recvId" placeholder=" 받는 사람 아이디" style="width: 30%;">
+												<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();">
+													<i class="mdi mdi-magnify"></i> 검색하기</button>		
+													</div>
 											</div>
 											
 											<div class="form-group">
@@ -205,7 +185,7 @@
 		}
 
 
-		function searchPopUp2(){
+		function searchPopUp(){
 			
 			var searchWord = $("input[name=recvId]").val();
 			
@@ -230,7 +210,11 @@
 			<%-- location.href="<%= contextPath %>/sread.ms?mno="+mno; --%>
 		})
 		}
+		
+/* 		$(function(){
+			$("#searchUserListBtn").click(function(){
 
+		}) */
 		</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

@@ -1,21 +1,20 @@
-package com.kh.admin.model.vo;
+package com.kh.common.searchMember.model.vo;
 
-public class AdminPageInfo {
-
+public class SearchListPageInfo {
 	private int listCount;			// 총 게시글 갯수
 	private int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 	private int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 
 	private int endPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 끝 수
 	private int maxPage;			// 전체 페이지에서의 가장 마지막 페이지
 	private int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
-	private int adminLimit;			// 한 페이지에 보여질 게시글 최대 갯수
+	private int findList;			// 한 페이지에 보여질 게시글 최대 갯수
 	
-	public AdminPageInfo() {
-		// TODO Auto-generated constructor stub
+	public SearchListPageInfo() {
+		
 	}
 
-	public AdminPageInfo(int listCount, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
-			int adminLimit) {
+	public SearchListPageInfo(int listCount, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
+			int findList) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
@@ -23,7 +22,7 @@ public class AdminPageInfo {
 		this.endPage = endPage;
 		this.maxPage = maxPage;
 		this.pageLimit = pageLimit;
-		this.adminLimit = adminLimit;
+		this.findList = findList;
 	}
 
 	public int getListCount() {
@@ -74,21 +73,18 @@ public class AdminPageInfo {
 		this.pageLimit = pageLimit;
 	}
 
-	public int getAdminLimit() {
-		return adminLimit;
+	public int getMsgLimit() {
+		return findList;
 	}
 
-	public void setAdminLimit(int adminLimit) {
-		this.adminLimit = adminLimit;
+	public void setMsgLimit(int msgLimit) {
+		this.findList = msgLimit;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminPageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", maxPage=" + maxPage + ", pageLimit=" + pageLimit + ", adminLimit="
-				+ adminLimit + "]";
+		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", maxPage=" + maxPage + ", pageLimit=" + pageLimit + ", boardLimit="
+				+ findList + "]";
 	}
-	
-	
-	
 }

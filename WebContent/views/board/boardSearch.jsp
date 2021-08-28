@@ -36,6 +36,7 @@
 <body>
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	<div class="content-body">
+	 <div class="container-fluid">
 	 		<div class="row">
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thread readonly>
@@ -77,7 +78,7 @@
 		 				
 	 				</tbody>
 	 			</table>	
-	 			
+	 			</div>
 	 		</div>
         </div>
         <%@ include file="../common/footer.jsp" %>

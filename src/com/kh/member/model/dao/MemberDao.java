@@ -305,20 +305,13 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("accessUpdate");
 		
-		System.out.println("loginUserId11 : " + userId);
-		System.out.println("loginUserPwd11 : " + userPwd);
-		System.out.println("sql1 :" + sql);
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			System.out.println("sql2 :" + sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
 			System.out.println("loginUserId : " + userId);
-			System.out.println("loginUserPwd : " + userPwd);
 			rset = pstmt.executeQuery();
-			System.out.println("ResultSet : " + rset);
 			if (rset.next()) {
 				result = rset.getInt(1);
 			}
