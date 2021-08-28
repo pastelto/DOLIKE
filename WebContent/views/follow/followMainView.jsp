@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*"%>
 	
 <%
 	ArrayList<Follow> flist = (ArrayList<Follow>)request.getAttribute("flist");
-	System.out.println(flist);
+	System.out.println("나의친구 top4 유저 리스트 불러오기: "+flist);
+	ArrayList<Category> catList = (ArrayList<Category>)request.getAttribute("catList");
+	System.out.println("나의친구 카테고리 리스트 불러오기: "+catList);
+	HashMap<String, ArrayList<Follow>> hashmap = (HashMap<String, ArrayList<Follow>>)request.getAttribute("hashmap");
+	System.out.println("jsp hashmap 확인: "+hashmap);
 %> 
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@
 		text-align: center;
 	}
 	
-	#interestLabel {
+	#interestLabel, #catLabel{
 		background: #78c2ad;
 	}
 	#addfr{
@@ -59,8 +63,7 @@
                 </div>
             </div>
 
-<br> <br> <br> <br>
-
+<br> <br> <br> 
 
 
 			<div class="col-lg-10" style="margin: 0 auto;">
@@ -125,8 +128,8 @@
 			   
 
 <hr>
-
-
+					<div class="col-lg-10" style="margin: 0 auto;">
+					<div class="card">
 
 						<div id="demo" class="carousel slide" data-ride="carousel">
 						
@@ -139,6 +142,9 @@
 						  
 						  <!-- The slideshow -->
 						  <div class="carousel-inner">
+						   <br>
+						   
+						   
 						    <div class="carousel-item active">
 						    	
 						    	
@@ -146,7 +152,7 @@
 				    				<div class="col-lg-10" style="margin: 0 auto;">
 
 										<div id="interestDiv" style="margin: 0 auto;">
-											<span id="interestLabel" class="label label-pill label-primary"># 팔로워 TOP4</span>
+											<span id="catLabel" class="label label-pill label-primary">여기에 추천 카데고리 이름</span>
 										</div>
 										<br>
 									
@@ -180,17 +186,23 @@
 									   
 									   </div>
 									</div>
-						    
-						    
-						    
-						    
 						    </div>
+						  
+						  
+						  
+						  
+						  
+						  
 						    <div class="carousel-item">
 						      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
 						    </div>
 						    <div class="carousel-item">
 						      <img src="ny.jpg" alt="New York" width="1100" height="500">
 						    </div>
+						 
+						 
+						 
+						 
 						  </div>
 						  
 						  <!-- Left and right controls -->
@@ -202,142 +214,9 @@
 						  </a>
 						</div>
 
-
-
-
-		
-			
-<!-- 			<div class="col-lg-10" style="margin: 0 auto;">
-
-				<div id="interestDiv" style="margin: 0 auto;">
-					<span id="interestLabel" class="label label-pill label-primary"># 팔로워 TOP4</span>
-				</div>
-				<br>
-			
-			   <div class="row">
-				<div class="col-lg-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="text-center">
-								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
-								<p>유저 아이디</p>
-
-								<div class="card-footer border-0 bg-transparent">
-									<div class="row">
-										<div class="col-6 border-right-1">
-											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-												<p>팔로워 수</p>
-											</span>
-										</div>
-										<div class="col-6">
-											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
-												<p>게시글 수</p>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<button id="addfr" onclick="javascript:void()"
-									class="btn btn-sm btn-rounded ">친구추가</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="text-center">
-								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
-								<p>유저 아이디</p>
-
-								<div class="card-footer border-0 bg-transparent">
-									<div class="row">
-										<div class="col-6 border-right-1">
-											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-												<p>팔로워 수</p>
-											</span>
-										</div>
-										<div class="col-6">
-											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
-												<p>게시글 수</p>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<button id="addfr" onclick="javascript:void()"
-									class="btn btn-sm btn-rounded ">친구추가</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="text-center">
-								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
-								<p>유저 아이디</p>
-
-								<div class="card-footer border-0 bg-transparent">
-									<div class="row">
-										<div class="col-6 border-right-1">
-											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-												<p>팔로워 수</p>
-											</span>
-										</div>
-										<div class="col-6">
-											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
-												<p>게시글 수</p>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<button id="addfr" onclick="javascript:void()"
-									class="btn btn-sm btn-rounded ">친구추가</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-                <div class="col-lg-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="text-center">
-								<span class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i></span>
-								<p>유저 아이디</p>
-
-								<div class="card-footer border-0 bg-transparent">
-									<div class="row">
-										<div class="col-6 border-right-1">
-											<span><i id ="iconfl" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-												<p>팔로워 수</p>
-											</span>
-										</div>
-										<div class="col-6">
-											<span> <i id ="iconfl" class="fa fa-pencil gradient-3-text"></i>
-												<p>게시글 수</p>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<button id="addfr" onclick="javascript:void()"
-									class="btn btn-sm btn-rounded ">친구추가</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div> -->
-		
+					<br>
+					</div> <!-- 카드 종료 -->
+		</div>
 		
 		
 		
