@@ -116,7 +116,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-									<form id="updateForm">
+									<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return editValidate();">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userId">아이디</label>
                                             <div class="form-inline">
@@ -127,7 +127,7 @@
                                             <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-inline">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="변경할 비밀번호를 입력하세요." required>
+                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
                                             </div>
                                             <div class="checkFont" id="pwdCheck"></div>
                                         </div>
@@ -213,12 +213,12 @@
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
                                         	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-                                        	<input type="button" class="btn btn-primary" id="updateBtn" onclick="updateMember();" value="회원정보수정"/>
+                                        	<input type="submit" class="btn btn-primary" id="updateBtn" value="회원정보수정"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
-                                        	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="deleteMember();" value="탈퇴하기"/>
+                                        	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="location.href='<%=contextPath%>/memberDeleteForm.me'" value="탈퇴하기"/>
                                         </div>
                                     </div>
                                     </form>
@@ -275,7 +275,7 @@
     	//==============================================
     	// 회원정보수정버튼 클릭시 팝업으로 재검증
     	//==============================================
-       	function updateMember(){
+       	function editValidate(){
      		//비밀번호
     		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#updateForm input[name=userPwd]").val()))){
     			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
@@ -296,6 +296,7 @@
     			$("#enrollForm input[name=nickName]").focus();
     	        return false;
     		 }
+    		
     		return true;
     	}
         
@@ -328,19 +329,7 @@
     			}
     		})
     	}
-        
-		function updateMember(){
-			var val = confirm("회원정보를 수정하시겠습니까?");
-			
-			if(val){
-				$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
-				$("#updateForm").submit();
-				alert("회원정보가 수정되었습니다!")
-			}else{
-				alert("취소하였습니다.");
-			}
-		}
-	
+<%-- 	
 		function deleteMember(){
 			var val = confirm("정말로 두라이크를 떠나실건가요?");
 			
@@ -351,7 +340,19 @@
 			}else{
 				alert("취소하였습니다.");
 			}
-		}
+		} --%>
+		
+<%-- 		function deleteMember(){
+			var val = confirm("정말로 두라이크를 떠나실건가요?");
+			
+			if(val){
+				location.href = "<%= request.getContextPath()%>/deleteMember.me";
+				alert("안녕히가세요...");
+			}else{
+				alert("취소하였습니다.");
+			}
+		} --%>
+		
     	</script>
 	</div>
 	<%@ include file = "../common/footer.jsp" %>
