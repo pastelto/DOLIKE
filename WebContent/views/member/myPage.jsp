@@ -289,21 +289,33 @@
        	function editValidate(){
      		//비밀번호
     		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#updateForm input[name=userPwd]").val()))){
-    			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
+    			swal.fire({
+    				text: '비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력하세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
      			$("#updateForm input[name=userPwd]").focus();
     	        return false;
     		} 
     		
     		//비밀번호 확인
     		if($("#updateForm input[name=userPwd]").val() != $("#updateForm input[name=checkPwd]").val()){
-    			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+    			swal.fire({
+    				text: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			$("#updateForm input[name=checkPwd]").focus();
     			return false;			
     		}
     		
     		//닉네임
     		if(!(/^[가-힣a-zA-Z0-9]{3,12}$/.test($("#enrollForm input[name=nickName]").val()))){
-    			alert("닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력");
+    			swal.fire({
+    				text: '닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력하세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			$("#enrollForm input[name=nickName]").focus();
     	        return false;
     		 }
@@ -315,7 +327,11 @@
     	function checkNick(){
     		var nickName = $("#updateForm input[name=nickName]");
     		if(nickName.val() == ""){
-    			alert("닉네임을 입력해주세요.");
+    			swal.fire({
+    				text: '닉네임을 입력해주세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			return false;
     		}
     		$.ajax({
@@ -324,16 +340,29 @@
     			data:{nickName:nickName.val()},
     			success:function(result){
     				if(result == "fail"){
-    					swal("이미 사용 중인 닉네임입니다.");
+    					swal.fire({
+    						text: '사용할 수 없는 닉네임입니다.',
+    						icon: 'warning',
+    						confirmButtonColor: '#78c2ad'
+    					});
     					nickName.focus();
-    				}else{
-    					var check = confirm("사용가능한 닉네임입니다. 사용하시겠습니까?");
-    					if(check == true){
-    						nickName.attr("readonly","true");
-    					}else{
-    						nickName.focus();
-    						nickName.attr("readonly", false);
-    					}
+    				} else {
+    					var check = swal.fire({
+    						text: '사용가능한 닉네임입니다. 사용하시겠습니까?',
+    						icon: 'info',
+    						confirmButtonText: '확인',
+    						showCancelButton: true,
+    						cancelButtonText: '취소',
+    						confirmButtonColor: '#78c2ad',
+    						cancelButtonColor: '#f3969a'
+    					}).then(function(result) {
+    						if(result.value){
+    							nickName.attr("readonly","true");
+    						} else {
+    							nickName.focus();
+    							nickName.attr("readonly", false);
+    						}
+    					});
     				}
     			},error:function(){
     				consloe.log("서버통신 실패");

@@ -28,16 +28,21 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	   $(function(){
-	      var msg = "<%=msg%>";
-
-			if (msg != "null") {
-				alert(msg);
-		<%session.removeAttribute("msg");%>
-		} else{
-			console.log("Hi");
-		}
-			
-	   })
+		      var msg = "<%=msg%>";
+				if (msg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: msg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("msg");%>
+			} else{
+				console.log("Hi");
+			}
+		})
 	</script>
 	<style>
 	#loginBtn, #loginBtnModal, #EnrollBtnModal {

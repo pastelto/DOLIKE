@@ -95,20 +95,22 @@
 	    </div>
 	
 		<script>
-			$(function(){
-				if(msg != "null"){
-					alert(msg);
-					<%session.removeAttribute("msg");%>
-				}
-			})
 			function loginValidate(){
 				if($("#userId").val().trim().length == 0){
-					alert("아이디를 입력하세요.");
+					swal.fire({
+						text: '아이디를 입력하세요.',
+						icon: 'warning',
+						confirmButtonColor: "#78c2ad"
+					});
 					$("#userId").focus();
 					return false;
 				}
 				if($("#userPwd").val().trim().length == 0){
-					alert("비밀번호를 입력하세요.");
+					swal.fire({
+						text: '아이디를 입력하세요.',
+						icon: 'warning',
+						confirmButtonColor: "#78c2ad"
+					});
 					$("#userPwd").focus();
 					return false;
 				}
