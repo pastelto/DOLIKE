@@ -435,7 +435,7 @@
 				} else {
 					var check = swal.fire({
 						text: '사용가능한 아이디입니다. 사용하시겠습니까?',
-						icon: 'info',
+						icon: 'success',
 						confirmButtonText: '확인',
 						showCancelButton: true,
 						cancelButtonText: '취소',
@@ -482,7 +482,7 @@
 				} else {
 					var check = swal.fire({
 						text: '사용가능한 닉네임입니다. 사용하시겠습니까?',
-						icon: 'info',
+						icon: 'success',
 						confirmButtonText: '확인',
 						showCancelButton: true,
 						cancelButtonText: '취소',
@@ -529,7 +529,7 @@
 				} else {
 					var check = swal.fire({
 						text: '사용가능한 전화번호입니다. 등록하시겠습니까?',
-						icon: 'info',
+						icon: 'success',
 						confirmButtonText: '확인',
 						showCancelButton: true,
 						cancelButtonText: '취소',
@@ -576,7 +576,7 @@
 				} else {
 					var check = swal.fire({
 						text: '사용가능한 이메일입니다. 등록하시겠습니까?',
-						icon: 'info',
+						icon: 'success',
 						confirmButtonText: '확인',
 						showCancelButton: true,
 						cancelButtonText: '취소',

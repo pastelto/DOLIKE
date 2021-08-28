@@ -25,6 +25,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	   $(function(){
@@ -35,6 +36,12 @@
 				        text: msg,
 				        confirmButtonColor: "#78c2ad",
 						confirmButtonBorder: "none",
+						imageUrl: 'https://media.giphy.com/media/26FL4fdR9oRs2tdEA/giphy-downsized-large.gif?cid=ecf05e4727y1nhruedl90s1awfthl8e9kc0dcjl2oju92fhv&rid=giphy-downsized-large.gif&ct=g',
+						imageWidth: 400,
+						imageHeight: 400,
+						backdrop: `
+							rgba(243,150,154,0.4)
+						`
 				}).then(() => {
 					
 				});
@@ -168,7 +175,7 @@
                 
 	            <% if(loginUser == null) {%>  
 				<div class="header-right">
-					<button class="btn btn-primary px-3 ml-4 mt-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+					<button class="btn btn-primary px-3 mt-4 mr-3" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
 				</div>
 	
 	            <%}else{ %>

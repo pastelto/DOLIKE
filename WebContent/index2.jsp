@@ -50,17 +50,6 @@
 	margin: 0 auto;
 }
 
-#thumbList1 {
-	height: 10%; 
-	padding-left: 15%; 
-	padding-right: 15%
-}
-
-#thumbList2 {
-	height: 10%; 
-	padding-left: 80%; 
-	padding-right: 10%
-}
 </style>
 <body>
 
@@ -95,15 +84,9 @@
 		<div class="content-body">
 			<!-- style="display: flex; flex: 0 0 auto; felx-direction: row; padding: 50px;" -->
 			<div class="container-fluid">
-			<div class="row" style="margin-bottom: 13%;">
-				<div class="topList col-10" align="center" >
-
-					<div id="thumbList"
-						style="height: 10%; padding-left: 15%; padding-right: 15%">
-						<div class="card" style="width: 90%;">
-						<!-- <div class="card-body"> -->
-<!-- 					<div id="thumbList1">
-					<div class="card" style="width: 90%;"> -->
+			<div class="col-12">
+				<div class="row">
+					<div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
 						<div class="bootstrap-carousel" style="height: 5rem;">
 							<div id="carouselExampleIndicators" class="carousel slide"
 								data-ride="carousel">
@@ -150,20 +133,26 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div id="thumbList2">
-					<div class="card" style="width: 90%;">
-						<img class="d-block w-100" style="width: 10%; height: 15rem;" 
-						src="resources/images/submit.png" alt="Third slide">
+		
+					<div class="col-md-4" id="innerDiv" style="width: 40%">
+						<div class="card" style="width: 90%;">
+							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
+							src="resources/images/submit.png" alt="Third slide">
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-10">
+			
+			
+			<!-- ************************************************* -->
+			
+			
+			<div class="row" style="margin-bottom: 13%;">
+			<div class="col-12">
 			<div class="row">
-				
 					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; padding-right: 10%; padding-left: 10%;"> -->
 
-					<div class="col-md-6" style="width: 10%; padding-right: 30px;">
+					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 50px;">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title" style="color: #f3969a">

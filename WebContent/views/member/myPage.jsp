@@ -349,7 +349,7 @@
     				} else {
     					var check = swal.fire({
     						text: '사용가능한 닉네임입니다. 사용하시겠습니까?',
-    						icon: 'info',
+    						icon: 'success',
     						confirmButtonText: '확인',
     						showCancelButton: true,
     						cancelButtonText: '취소',
