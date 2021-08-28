@@ -17,13 +17,13 @@ import com.kh.member.model.vo.Member;
  * Servlet implementation class EnrollChallenge
  */
 @WebServlet("/enroll.ch")
-public class EnrollChallenge extends HttpServlet {
+public class EnrollChallengeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollChallenge() {
+    public EnrollChallengeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,9 +38,7 @@ public class EnrollChallenge extends HttpServlet {
 		Challenge cu = new Challenge();
 		
 		cu.setUser(eUser);
-		cu.setChNo(chno);
-		
-		System.out.println("servlet user : " + eUser + " chno : " + chno);
+		cu.setChNo(chno);		
 		
 		int result = new ChallengeService().enrollCh(cu);
 		
@@ -49,7 +47,7 @@ public class EnrollChallenge extends HttpServlet {
 			response.sendRedirect("challengeMain.ch");
 			System.out.println("챌린지 신청 성공!");
 		} else {
-			request.setAttribute("msg", "신청에 실패했습니다.");
+			request.setAttribute("msg", "신청 실패");
 
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

@@ -48,8 +48,6 @@ public class ChallengeDetailServlet extends HttpServlet {
 				ChallengeAttachment at = new ChallengeService().selectAttach(chno);
 				request.setAttribute("at", at);
 				
-				System.out.println(c + "c servlet");
-				System.out.println(at +"at servlet");
 				
 		// ---------------- 페이징 처리 -----------------
 				int rpCount;			// 총 댓글 갯수
