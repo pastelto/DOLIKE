@@ -5,8 +5,7 @@
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
 	
-	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");
-	
+	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");	
 %>
 <!DOCTYPE html>
 <html>
@@ -15,8 +14,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
@@ -24,6 +21,7 @@
 		
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -95,7 +93,19 @@
       .boardMargin{
       	padding-left: 20px !important;
       }
-
+	#searchBtn {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#searchBtn:hover {
+		color: #78c2ad;
+    	background-color: #fff;
+    	border-color: #78c2ad;
+	}	
+	.header-left .input-group{
+		margin-top:11px;
+	}	
 	</style>
 </head>
 <body>
@@ -123,7 +133,6 @@
         ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
-                
                 <div class="nav-control">
                     <div class="hamburger is-active">
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -138,7 +147,7 @@
                         <div class="input-group text-center mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        		<button id="searchBtn" class="btn" type="submit" onclick="search.bo">검색</button>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">
@@ -206,7 +215,7 @@
                     </li>
                     <% if(loginUser == null) {%> 
                       	<li class="mega-menu-sm"  id="allmenu">
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" >
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList1" >
 	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
 	                        </a>                 
 							
@@ -224,7 +233,7 @@
 						</li>
                     <%}else{ %>
                        <li class="mega-menu-sm" id="allmenu">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList2">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
@@ -395,7 +404,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	
+        	/*
         	function searchBoard(){
         		var findBoard = $("#searchBoardForm input[name=findBoard]");
         		if(findBoard.val() == ""){
@@ -419,7 +428,7 @@
         		})
         		
         		
-        	}
+        	}*/
 				        
 			$(function(){
 				$("#btn-like").eq(0).click(function(){

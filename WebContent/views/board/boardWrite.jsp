@@ -35,8 +35,10 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <div class="container-fluid">
 	 		<div class="row" style="margin:20px">
 	 			<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
+		 			<%--<input type="hidden" name="writer" value="<%= loginUser.getNickName %>"> --%>
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
 		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
@@ -59,37 +61,66 @@
 		 						<td style="text-align:center">내용</td>
 		 						<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
 		 					</tr>
-		 					<th>
-		 						<td colspan="3"><img id="titleImg" width="150" height="120"></td>
-		 					</th>
+		 					<tr>
+			 					<th>대표 이미지</th>
+			 					<td colspan="3"><img id="titleImg" width="150" height="120"></td>
+		 					</tr>
+		 					<tr>
+		 						<th>일반 이미지</th>
+			 					<td><img id="contentImg1" width="150" height="120"></td>
+			 					<td><img id="contentImg2" width="150" height="120"></td>
+			 					<td><img id="contentImg3" width="150" height="120"></td>
+		 					</tr>
 		 				</tbody>
 		 				
 		 			</table>
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
-		 			<div class="form-row float-right">
-		 				<input type="file" class="btn" name="upFile" value="첨부파일"/>
-		 				<input type="file" name="titleImg1" id="titleImg1" onchange="loadImg(this);" >
+		 			<div class="form-row float-right" id="fileArea">
+		 				<!--  <input type="file" class="btn" name="upFile" value="첨부파일"/>-->
+		 				<input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
+		 				<input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
+		 				<input type="file" name="file3" id="file3" onchange="loadImg(this, 2)">
+		 				<input type="file" name="file4" id="file4" onchange="loadImg(this, 2)">
 		 			</div>
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
 	 		</div>
+        </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
  	<%@ include file="../common/footer.jsp" %> 
  	<script>
+ 		
 	 	$(function(){
+	 		$("#fileArea").hide();
+	 		
 	 		$("#titleImg").click(function(){
-				$("#titleImg1").click();
+				$("#file1").click();
+			});	
+	 		$("#contentImg1").click(function(){
+				$("#file2").click();
+			});	
+	 		$("#contentImg2").click(function(){
+				$("#file3").click();
+			});	
+	 		$("#contentImg3").click(function(){
+				$("#file4").click();
 			});	
 	 	});
-	 	function loadImg(inputFile){
+	 	function loadImg(inputFile, num){
 	 		if(inputFile.files.length == 1){
 	 			var reader = new FileReader();
 	 			reader.readAsDataURL(inputFile.files[0]);
 	 			reader.onload = function(e){
-	 				$("#titleImg").attr("src", e.target.result);
+	 				switch(num){
+	 				case 1: $("titleImg").attr("src", e.target.result); break;
+	 				case 2: $("contentImg1").attr("src", e.target.result); break;
+	 				case 3: $("contentImg2").attr("src", e.target.result); break;
+	 				case 4: $("contentImg3").attr("src", e.target.result); break;
+	 				default: break;
+	 				}
 	 			}
 	 		}
 	 	}

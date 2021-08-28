@@ -48,8 +48,6 @@ public class Member {
 		this.interests = interests;
 	}
 
-
-
 	public String getUserId() {
 		return userId;
 	}
@@ -113,7 +111,7 @@ public class Member {
 	public void setInterests(String interests) {
 		this.interests = interests;
 	}
-		
+	
 	public Date getUserCreateDate() {
 		return userCreateDate;
 	}
