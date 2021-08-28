@@ -73,12 +73,12 @@
 			                    <div class="error-content">
 			                        <div class="card mb-0">
 			                            <div class="card-body text-center pt-5">
-			                                <h1 class="error-text text-primary" id="errorTitle">오류</h1>
+			                                <h3 class="error-text text-primary" id="errorTitle"><b>ERROR</b></h3>
 			                                <h4 class="mt-4"><i class="fa fa-thumbs-down text-danger"></i> 잘못된 접근입니다</h4>
 			                                <p><%= message %></p>
 			                                <form class="mt-5 mb-5">
 			                                    <div class="text-center mb-4 mt-4">
-			                                    	<a href="location.href='<%=request.getContextPath()%>/index2.jsp'" class="btn btn-primary" id="goMain">메인으로</a>
+			                                    	<a href="<%=request.getContextPath()%>/index2.jsp" class="btn btn-primary" id="goMain">메인으로</a>
 			                                    </div>
 			                                </form>
 			                                <div class="text-center">

@@ -46,29 +46,27 @@
     	border-color: #78c2ad;
 	}
 	
-	  #loginBtnModal:hover, #EnrollBtnModal:hover{
-      	background-color: #f3969a;
-      	border-color: #f3969a;
-      	
-      }
+  	#loginBtnModal:hover, #EnrollBtnModal:hover {
+     	background-color: #f3969a;
+     	border-color: #f3969a;
+    }
 	
 	#doLikeLogo{
-	 background: white;
-	 }
+	 	background: white;
+	}
 	 
-	  .favBoard {
-	  background-color: #fff;
-	  border: 2px none #2199e8;
-	  padding: 5px 5px;
-	  border-radius: 2px;
-	  color: #2199e8;
-	  background:rgba(0, 0, 0, 0.0);
+	.favBoard {
+	  	background-color: #fff;
+	  	border: 2px none #2199e8;
+	  	padding: 5px 5px;
+	  	border-radius: 2px;
+	  	color: #2199e8;
+	  	background:rgba(0, 0, 0, 0.0);
 	} 
 	
 	#mailIcon:hover{
 		color: #78c2ad;
 	}
-	
 	
 	.btn-like {
         color: transparent;
@@ -77,39 +75,43 @@
         background-color: rgba(0, 0, 0, 0);
         margin-left: 20px;
         margin-right: 20px;
-        
-       } 
-      .btn-like:hover {
+    } 
+    
+    .btn-like:hover {
         text-shadow: 0 0 0 #f3969a;
-      }
-      .btn-like.done {
+    }
+    
+    .btn-like.done {
         text-shadow:  0 0 0 #f3969a;
-      }
-      .btn-like.done:hover {
+    }
+    
+    .btn-like.done:hover {
         color: transparent;
         text-shadow: 0 0 0 #777;
-      }
+    }
       
-      .boardMargin{
+    .boardMargin{
       	padding-left: 20px !important;
-      }
+    }
+    
 	#searchBtn {
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
 	}
+	
 	#searchBtn:hover {
 		color: #78c2ad;
     	background-color: #fff;
     	border-color: #78c2ad;
 	}	
-	.header-left .input-group{
+	
+	.header-left .input-group {
 		margin-top:11px;
 	}	
 	</style>
 </head>
 <body>
-    
         <!--**********************************
             Nav header start  
         ***********************************-->
@@ -159,14 +161,14 @@
                     </div>
                 </div>
                 
-            <% if(loginUser == null) {%>  
-			<div class="loginArea">
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
-			</div>
-
-            <%}else{ %>
-            <div class="header-right">
-                    <ul class="clearfix">
+	            <% if(loginUser == null) {%>  
+				<div class="header-right">
+					<button class="btn btn-primary px-3 ml-4 mt-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+				</div>
+	
+	            <%}else{ %>
+	            <div class="header-right">
+	                 <ul class="clearfix">
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
@@ -196,10 +198,9 @@
                     </ul>
                 </div>
                	<%} %> 
-                
             </div>
-           </div>
-      <!--**********************************
+        </div>
+       <!--**********************************
                 Header end ti-comment-alt
         ***********************************-->
        <!--**********************************
