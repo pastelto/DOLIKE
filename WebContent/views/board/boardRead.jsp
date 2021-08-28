@@ -178,7 +178,6 @@
 						value += '<tr>'+
 									'<td width="100px">'+list[i].replyWriter+'</td>'+
 									'<td width="330px">'+list[i].replyContent+'</td>'+
-									
 								 '</tr>';
 					}
 					$("#replyList").html(value);

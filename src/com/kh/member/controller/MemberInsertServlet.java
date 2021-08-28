@@ -45,31 +45,24 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String nickName = request.getParameter("nickName");
+		String interests = request.getParameter("interests");
 		
-		String[] interests = request.getParameterValues("interests");
 		
-		String interestsArr = "";
-		
-		if(interests != null) {
-			interestsArr = String.join(",", interests);
-		}
-		
-//		for (int i = 0; i < interests.length; i++) {
-//			interestsArr += interests[i];
-//			
-//			if (i < interests.length - 1) {
-//				interestsArr += ',';
-//			}
+//		String[] interests = request.getParameterValues("interests");
+//		
+//		String interestsArr = "";
+//		
+//		if(interests != null) {
+//			interestsArr = String.join(",", interests);
 //		}
 		
-		
-		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interestsArr);
+		Member mem = new Member(userId, userName, userPwd, birthDate, phone, email, nickName, interests);
 		
 		int result = new MemberService().insertMember(mem);
 		
 		if (result > 0) {
 			request.getSession().setAttribute("msg", "회원가입 성공");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/index2.jsp");
 		} else {
 			request.setAttribute("msg", "회원가입 실패");
 			

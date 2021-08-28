@@ -1,29 +1,23 @@
-package com.kh.follow.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.follow.model.service.FollowService;
-import com.kh.follow.model.vo.Follow;
-
 /**
- * Servlet implementation class FollowMainView
+ * Servlet implementation class MemberUpdateForm
  */
-@WebServlet("/followMain.fl")
-public class FollowMainView extends HttpServlet {
+@WebServlet("/updateForm.me")
+public class MemberUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowMainView() {
+    public MemberUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +26,8 @@ public class FollowMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		ArrayList<Follow> flist = new FollowService().selectFollowTop4User(); 
-		request.setAttribute("flist", flist);
-		 		
-		RequestDispatcher view = request.getRequestDispatcher("views/follow/followMainView.jsp");
-		view.forward(request, response); 
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("views/member/memberUpdateForm.jsp").forward(request, response);
 	}
 
 	/**

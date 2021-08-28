@@ -41,7 +41,7 @@ public class MemberDeleteServlet extends HttpServlet {
 			session.removeAttribute("loginUser");
 			session.setAttribute("msg", "회원탈퇴가 완료되었습니다. 복구 관련사항은 관리자에게 문의하세요.");
 			
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/index2.jsp");
 		}else {
 			request.setAttribute("msg", "회원탈퇴에 실패했습니다.");
 			
