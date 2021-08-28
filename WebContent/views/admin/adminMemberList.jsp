@@ -75,7 +75,7 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>카테고리 목록</h4>
+                                    <h4>회원 목록</h4>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -94,7 +94,7 @@
                                         <tbody>
                                         	<%if(list.isEmpty()){ %>
                                             <tr>
-                                                <td colspan="2">조회된 리스트가 없습니다.</td>                                                
+                                                <td colspan="8">조회된 회원이 없습니다.</td>                                                
                                             </tr>
                                             <%}else{ %>
 												<% for(Member am : list){ %>
@@ -131,13 +131,13 @@
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/categoryList.ca?currentPage=1"> &laquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/adminMemberList.am?currentPage=1"> &laquo; </a></li>
 				
 				<!-- 이전페이지 -->
 				<% if(currentPage == 1) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
 				<%} %>
 				
 				
@@ -147,7 +147,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/categoryList.ca?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/adminMemberList.am?currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -157,11 +157,11 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
 		<%@ include file="../common/footer.jsp" %>

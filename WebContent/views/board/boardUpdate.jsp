@@ -54,6 +54,7 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <div class="container-fluid">
 	 		<div class="row" style="margin:20px">
 	 			<form id="updateForm" method="post" action="<%= contextPath %>/update.bo" style="width:100%; max-width:1000px" enctype="multipart/form-data">
 		 			<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
@@ -100,6 +101,7 @@
 		 			<input type="submit" class="btn btn-primary pull-right" value="수정하기"/>
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
+	 		</div>
 	 		</div>
         </div>
         <!--**********************************

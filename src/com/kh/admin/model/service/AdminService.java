@@ -12,6 +12,17 @@ import com.kh.member.model.vo.Member;
 
 public class AdminService {
 
+	public ArrayList<Member> adminMemberList(AdminPageInfo ami) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new AdminDao().adminMemberList(conn, ami);
+		System.out.println("서비스에서 list 값 : " + list);
+		close(conn);
+		
+		return list;
+	}
+
 	public int getListCount() {
 		
 		Connection conn = getConnection();
@@ -22,17 +33,4 @@ public class AdminService {
 		
 		return listCount;
 	}
-	
-	
-	public ArrayList<Member> adminMemberList(AdminPageInfo ami) {
-		
-		Connection conn = getConnection();
-		
-		ArrayList<Member> list = new AdminDao().adminMemberList(conn, ami);
-		
-		close(conn);
-		
-		return list;
-	}
-
 }
