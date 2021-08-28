@@ -18,6 +18,7 @@ public class Challenge {
 	private String user;
 	private int rpCount;
 	private String achieve;
+	private String nickname;
 	
 	private String atTitle;
 	
@@ -45,6 +46,7 @@ public class Challenge {
 		this.chNo = chNo;
 		this.rpCount = rpCount;
 		this.achieve = achieve;
+		
 	}
 	
 	// insert_category
@@ -69,15 +71,14 @@ public class Challenge {
 		this.categoryTitle = categoryTitle;
 	}
 	
-	public Challenge(int chNo, String chTitle, int rpCount, String achieve) {
+	public Challenge(int chNo, String chTitle, int rpCount, String achieve, String nickname) {
 		super();
 		this.chNo = chNo;
 		this.chTitle = chTitle;
 		this.rpCount = rpCount;
 		this.achieve = achieve;
-	}
-
-	
+		this.nickname = nickname;
+	}	
 	
 	public Challenge(int chNo, String chTitle, String start, String end,  String categoryTitle) {
 		super();
@@ -87,6 +88,8 @@ public class Challenge {
 		this.end = end;
 		this.categoryTitle = categoryTitle;
 	}
+	
+	
 	public int getChNo() {
 		return chNo;
 	}
@@ -184,20 +187,30 @@ public class Challenge {
 		this.achieve = achieve;
 	}
 	
-	
 	public String getAtTitle() {
 		return atTitle;
 	}
 	public void setAtTitle(String atTitle) {
 		this.atTitle = atTitle;
 	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Challenge [chNo=" + chNo + ", chTitle=" + chTitle + ", voteCount=" + voteCount + ", start=" + start
 				+ ", end=" + end + ", status=" + status + ", content=" + content + ", userCount=" + userCount
 				+ ", categoryNo=" + categoryNo + ", categoryTitle=" + categoryTitle + ", user=" + user + ", rpCount="
-				+ rpCount + ", achieve=" + achieve + ", atTitle=" + atTitle + "]";
+				+ rpCount + ", achieve=" + achieve + ", nickname=" + nickname + ", atTitle=" + atTitle + "]";
 	}
+	
+	
 	
 	
 	

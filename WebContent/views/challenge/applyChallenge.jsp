@@ -111,8 +111,9 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 					</div>
 				</div>
 			</div>
-			<%@ include file="../common/footer.jsp"%>
+			
 		</div>
 	</div>
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
