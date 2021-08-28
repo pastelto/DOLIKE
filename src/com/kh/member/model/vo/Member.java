@@ -111,7 +111,7 @@ public class Member {
 	public void setInterests(String interests) {
 		this.interests = interests;
 	}
-	
+
 	public Date getUserCreateDate() {
 		return userCreateDate;
 	}

@@ -95,6 +95,7 @@ public class CategoryDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println("카테고리 다오 list 값 : " + list);
 		return list;
 	}
 
