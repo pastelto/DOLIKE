@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member, com.kh.category.model.vo.Category, java.util.ArrayList"%>
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
+	
+	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
+    
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
@@ -19,6 +23,7 @@
 		
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -155,7 +160,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="resources/images/profile.png" height="40" width="40" alt=""> 
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -199,34 +204,67 @@
                         </a>
                     </li>
                     <% if(loginUser == null) {%> 
-                      	<li class="mega-menu-sm">
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                      	<li class="mega-menu-sm"  id="allmenu">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList" >
 	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
-	                        </a>
+	                        </a>                 
+							
 	                        <ul aria-expanded="false" class="collapse">
-	                            <li><a href="list.bo">카테고리1</a></li>
+	                        
+	                            <!-- <li><a href="list.bo">카테고리1</a></li>
 	                            <li><a href="list.bo">카테고리2</a></li>
 	                            <li><a href="list.bo">카테고리3</a></li>
 	                            <li><a href="list.bo">카테고리4</a></li>
 	                            <li><a href="list.bo">카테고리5</a></li>
 	                            <li><a href="list.bo">카테고리6</a></li>
-	                            <li><a href="list.bo">카테고리7</a></li>                           
+	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
 	                        </ul>
+
 						</li>
                     <%}else{ %>
-                       <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                       <li class="mega-menu-sm" id="allmenu">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
+<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
                             <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li>
+                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
                         </ul>
+
+                        <!-- 즐겨찾는 게시판 Ajax Script -->
+				        <script>
+				        
+							$(function(){
+								$("#btn-like").eq(0).click(function(){
+								var favB = $("#categoryList").val();
+								
+								$.ajax({
+									
+									url: "jqTest2.do",
+									data: {input:input},
+									type: "post",
+									success: function(result){
+										$("#output2").val(result);
+									},
+									error: function(e){ // 에러 내용을 e로 받아옴
+										console.log(e);
+									}
+								})
+							})
+						})
+				        	$(".btn-like").click(function() {
+				         	   $(this).toggleClass("done");
+				       		 })
+				       		 
+				       		 				       		
+        				</script>
+        				
+
 
                     	</li>
                       <%} %> 
@@ -316,8 +354,10 @@
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
-                    <% } %>
+                    <% } %>              
                 </ul>
+                
+                               
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
         
@@ -410,6 +450,58 @@
 			}
 
         </script>
+        
+		<script>
+        				
+              				  $(function(){
+              					 $("#categoryList").click(function(){     				       			                 			        
+              						 
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						var loginUser = "<%=loginUser%>";
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						var n = null;
+   				       						
+   				       						$liBody.html(""); 
+   				       	 					console.log(loginUser)
+   				       	 					$.each(list, function(i){
+   				       						if(loginUser == n){												
+												
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+												console.log("1")
+   				       						} else if(loginUser != n){ 
+												/* $.each(list, function(i){ */
+												
+    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       					
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							console.log("2")
+												/* }) */
+   				       						}
+   				       	 				})
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
+        
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>
