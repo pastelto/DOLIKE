@@ -94,7 +94,19 @@
       .boardMargin{
       	padding-left: 20px !important;
       }
-
+	#searchBtn {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#searchBtn:hover {
+		color: #78c2ad;
+    	background-color: #fff;
+    	border-color: #78c2ad;
+	}	
+	.header-left .input-group{
+		margin-top:11px;
+	}	
 	</style>
 </head>
 <body>
@@ -122,7 +134,6 @@
         ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
-                
                 <div class="nav-control">
                     <div class="hamburger is-active">
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -137,7 +148,7 @@
                         <div class="input-group text-center mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        		<button id="searchBtn" class="btn" type="submit" onclick="search.bo">검색</button>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">
@@ -394,7 +405,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	
+        	/*
         	function searchBoard(){
         		var findBoard = $("#searchBoardForm input[name=findBoard]");
         		if(findBoard.val() == ""){
@@ -418,7 +429,7 @@
         		})
         		
         		
-        	}
+        	}*/
 				        
 			$(function(){
 				$("#btn-like").eq(0).click(function(){
