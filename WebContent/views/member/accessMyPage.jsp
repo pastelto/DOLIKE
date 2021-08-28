@@ -44,6 +44,15 @@
         Content body start
     ***********************************-->
     <div class="content-body">
+     <div class="row page-titles mx-0">
+         <div class="col p-md-0">
+             <ol class="breadcrumb">
+                 <li class="breadcrumb-item">마이페이지</li>
+                 <li class="breadcrumb-item active">계정 접근</li>
+             </ol>
+         </div>
+     </div>
+    <div class="container-fluid">
    	<div class="login-form-bg h-100">
        <div class="container h-100">
            <div class="row justify-content-center h-100">
@@ -55,7 +64,7 @@
                                <form class="mt-5 mb-3 login-input" id="accessMyPage" action="<%=request.getContextPath() %>/access.me">
                                    <div class="form-group">
                                    		<input type="hidden" id="userId" name="userId" value=<%= loginUser.getUserId() %>>
-                                       <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="Password" required>
+                                       <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="비밀번호" required>
                                    </div>
                                    <button class="btn login-form__btn submit w-100" id="goMyPageBtn">계정 관리 들어가기</button>
                                </form>
@@ -67,8 +76,8 @@
            </div>
        </div>
     </div>
-       
-   	<%@ include file = "../common/footer.jsp" %>
+    </div>
 	</div>   
+   	<%@ include file = "../common/footer.jsp" %>
 </body>
 </html>

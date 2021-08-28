@@ -119,7 +119,6 @@ public class CategoryListServlet extends HttpServlet {
 		//request.getRequestDispatcher("views/category/categoryList.jsp").forward(request, response); // 담은 정보를 넘겨줌
 		RequestDispatcher view = request.getRequestDispatcher("views/category/categoryList.jsp");
 		System.out.println(list);
-		System.out.println("안녕하세요.");
 		view.forward(request, response);
 	}
 
