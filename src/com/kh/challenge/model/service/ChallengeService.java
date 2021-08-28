@@ -217,6 +217,7 @@ public class ChallengeService {
 		
 		return result;
 	}
+	
 	public int insertReply(ChallengeReply cp) {
 		Connection conn = getConnection();
 		
@@ -233,6 +234,20 @@ public class ChallengeService {
 		}
 		close(conn);
 		System.out.println(result);
+		return result;
+	}
+	
+	public int enrollCh(Challenge cu) {
+		Connection conn = getConnection();
+		int result = new ChallengeDao().enrollCh(conn, cu);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
 		return result;
 	}
 

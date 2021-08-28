@@ -722,6 +722,36 @@ public class ChallengeDao {
 		return result;
 	}
 
+	public int enrollCh(Connection conn, Challenge cu) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		//insertChUser = INSERT INTO CHALLENGE_USER VALUES(?, ?, 0, DEFAULT)
+		
+		String sql = prop.getProperty("insertChUser");
+		System.out.println(sql);
+		System.out.println(cu.getChTitle());
+		
+		String title = cu.getChTitle();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cu.getUser());
+			pstmt.setInt(2, cu.getChNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+
 	
 
 
