@@ -152,6 +152,7 @@
 			</ul>
 		</div>
 		<%@ include file="../common/footer.jsp"%>
+
 		</div>
 		<script>
 		<%if(!list.isEmpty()){ %>

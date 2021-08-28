@@ -12,9 +12,6 @@ import com.kh.member.model.vo.Member;
 
 public class AdminService {
 
-	
-	
-	
 	public ArrayList<Member> adminMemberList(AdminPageInfo ami) {
 		
 		Connection conn = getConnection();
@@ -36,7 +33,4 @@ public class AdminService {
 		
 		return listCount;
 	}
-
-	
-
 }

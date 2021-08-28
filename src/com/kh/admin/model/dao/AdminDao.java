@@ -45,6 +45,7 @@ public class AdminDao {
 		
 		String sql = prop.getProperty("getListCount");
 		System.out.println("갯 리스트 카우느"+sql);
+
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(sql);
@@ -97,8 +98,7 @@ public class AdminDao {
 								      rset.getString("USER_STATUS")
 						));
 			}
-			
-			
+
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

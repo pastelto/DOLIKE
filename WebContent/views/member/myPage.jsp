@@ -210,44 +210,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="interests1">관심사1 <span class="text-danger">*</span></label>
-                                            <!-- <div class="col-lg-6"> -->
-                                            <div class="form-inline">
-		                                        <div class="form-group">
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="공부"<%= checkedInterest1[0] %> required>공부</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="건강"<%= checkedInterest1[1] %>>건강</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="여행"<%= checkedInterest1[2] %>>여행</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="요리"<%= checkedInterest1[3] %>>요리</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="동물"<%= checkedInterest1[4] %>>동물</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="패션뷰티"<%= checkedInterest1[5] %>>패션뷰티</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests1" value="기타"<%= checkedInterest1[6] %>>기타</label>
-		                                            </div>
-		                                        </div>
-	                                        </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="interests2">관심사2 <span class="text-danger">*</span></label>
+
+                                        <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                             <!-- <div class="col-lg-6"> -->
                                             <div class="form-inline">
 		                                        <div class="form-group">

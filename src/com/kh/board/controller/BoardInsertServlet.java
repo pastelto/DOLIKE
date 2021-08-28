@@ -2,7 +2,7 @@ package com.kh.board.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,37 +61,54 @@ public class BoardInsertServlet extends HttpServlet {
 			b.setBoardContent(content);
 			b.setNickName(userId);
 			
-			Attachment at = null;
+			ArrayList<Attachment> fileList = new ArrayList<>();
 			
-			if(multiRequest.getOriginalFileName("upFile")  != null) {
-				String originName = multiRequest.getOriginalFileName("upFile");
-				String changeName = multiRequest.getFilesystemName("upFile");
-				System.out.println(originName);
-				System.out.println(changeName);
+			for(int i=1; i<=4; i++) {
+				String name = "file" + i;
+				
+				if(multiRequest.getOriginalFileName(name) != null) {
+					String originName = multiRequest.getOriginalFileName(name);
+					String changeName = multiRequest.getFilesystemName(name);
+					System.out.println("originName : "+originName);
+					System.out.println("changeName : "+changeName);
+						
+					Attachment at = new Attachment();
+					at.setFilePath(savePath);
+					at.setOriginName(originName);
+					at.setChangeName(changeName);
 					
-				at = new Attachment();
-				at.setFilePath(savePath);
-				at.setOriginName(originName);
-				at.setChangeName(changeName);
-					
+					fileList.add(at);
+						
+				}
 			}
 			
-			int result = new BoardService().insertBoard(b, at);
+			int result = new BoardService().insertBoard(b, fileList);
 			
 			if(result  > 0) {
+				response.sendRedirect("list.bo");
+				/*
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
 				response.sendRedirect("list.bo");
 				File successFile = new File(savePath+at.getChangeName());
 				System.out.println("successFile : " + successFile );
+				*/
 			}else {
-				if(at != null) {
+				for(int i =0; i<fileList.size(); i++) {
+					File failedFile = new File(savePath+ fileList.get(i).getChangeName());
+					failedFile.delete();
+				}
+				request.setAttribute("msg", "게시글 등록 실패");
+				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+				view.forward(request, response);
+				/*
+				 * if(at != null) {
 					File failedFile = new File(savePath+at.getChangeName());
 					failedFile.delete();
 					
 					request.setAttribute("msg", "게시글 등록 실패");
 					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 					view.forward(request, response);
-				}
+				*/
 			}
 			
 		}

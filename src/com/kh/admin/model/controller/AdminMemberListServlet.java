@@ -47,6 +47,7 @@ public class AdminMemberListServlet extends HttpServlet {
 				// * listCount : 총 게시글 갯수 
 				listCount = new AdminService().getListCount();
 				System.out.println("리스트카운트");
+
 				// * currentPage : 현재 페이지 (요청한 페이지)
 				currentPage = 1;
 				
