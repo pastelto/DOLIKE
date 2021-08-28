@@ -17,6 +17,9 @@
 		padding: 5px;
    		width: 100%;
 	}
+	#robster{
+		font-family: 'Lobster', cursive;		
+	}
 </style>
 </head>
 <body>
@@ -31,9 +34,14 @@
                     </ol>
                 </div>
             </div>
+            <div class="col-1"></div>
 			<div class="row">
+			
 				<div class="col-12 m-b-30">
-					<h4 class="d-inline">새롭게 참여하고싶은 챌린지를 뽑아주세요!</h4>
+				
+				<div class="col-5 m-b-30" style="text-align:center">
+					<h4 class="d-inline" id="robster">Vote me!</h4>
+				</div>
 					<div class="row">
 						<div class="col-md-6 col-lg-3">
 						<%if(!list.isEmpty()){%>
