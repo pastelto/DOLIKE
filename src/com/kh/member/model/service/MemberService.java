@@ -44,10 +44,10 @@ public class MemberService {
 		return mem;
 	}
 	
-	public Member updateMember(String newPwd, String userId, String userPwd, String nickname, String interests) {
+	public Member updateMember(String userId, String userPwd, String nickname, String interests) {
 		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MemberDao().updateMember(conn, newPwd, userId, userPwd, nickname, interests);
+		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests);
 		
 		if (result > 0) {
 			commit(conn);
@@ -113,6 +113,17 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		int result = new MemberDao().emailCheck(conn, email);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int accessUpdate(String userId, String userPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().accessUpdate(conn, userId, userPwd);
 		
 		close(conn);
 		

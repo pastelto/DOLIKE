@@ -115,6 +115,7 @@
 												<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp2();">
 													<i class="mdi mdi-magnify"></i> 검색하기</button>		
 													</div>
+
 											</div> -->
 											
 											
@@ -209,8 +210,6 @@
 			
 /* 			} */
 		}
-		
-
 		</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

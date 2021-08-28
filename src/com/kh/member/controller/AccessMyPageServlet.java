@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,21 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.model.service.BoardService;
-import com.kh.follow.model.service.FollowService;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardSearchServlet
+ * Servlet implementation class AccessMyPageServlet
  */
-@WebServlet("/search.bo")
-public class BoardSearchServlet extends HttpServlet {
+@WebServlet("/access.me")
+public class AccessMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSearchServlet() {
+    public AccessMyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +33,22 @@ public class BoardSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String findBoard = request.getParameter("findBoard");
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		System.out.println("userId : " + userId);
+		System.out.println("userPwd : " + userPwd);
 		
-		System.out.println("검색어 : "+findBoard);
-		response.setCharacterEncoding("UTF-8");
-		int result = new BoardService().searchBoard(findBoard);
-		PrintWriter out = response.getWriter();
+		int result = new MemberService().accessUpdate(userId, userPwd);
 		
-		System.out.println("result : " + result);
-		
-		if(result > 0) {
-			//response.sendRedirect("find.bo");
-			request.setAttribute("findBoard", findBoard);
-			out.print(findBoard);
-			request.getRequestDispatcher("find.bo").forward(request, response);
-		}else {
-			request.setAttribute("msg", "검색할 게시글을 불러오는데 실패했습니다.");
+		if (result > 0) {
+			response.sendRedirect(request.getContextPath() +"/mypage.me");
+		} else {
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
-		out.flush();
-		out.close(); 
-		
-		
 	}
 
 	/**

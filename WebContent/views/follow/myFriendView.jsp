@@ -13,6 +13,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	String nickId = null;
+	System.out.println(catList);
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@
 	
 <style>
 	#fList{
-		height: 600px;
+		height: 40rem;
 	}
 	
 	#iconMsg{
@@ -98,6 +99,19 @@
 		<%@ include file="../common/menuSideBar.jsp"%>
 
 	<div class="content-body">
+	
+	
+	        <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">팔로잉</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">나의 친구</a></li>
+                    </ol>
+                </div>
+            </div>
+	
+	
+	<br> <br> 
 
 			<%
 			if (loginUser == null) {
@@ -140,7 +154,7 @@
 						
 						
 						
-						<div class="card">
+						<div id="fList" class="card">
 							<div class="card-body">
 								<div class="media align-items-center mb-4">
 									<img class="mr-3" src="./resources/images/do_100.png" width="80"
@@ -213,141 +227,13 @@
 								<div class="col-12 text-center">
 									<form action="deleteFl2.fl" method="get">
 										<input type="hidden" id="flidinput" name="flidinput"> 
-										<button id="byefr" class="btn px-4" type="submit">친구 삭제하기</button>
+										<button id="byefr" class="btn px-4 mt-2" type="submit">친구 삭제하기</button>
 									</form>
 									
 								</div>
 							</div>
 						</div>
 					
-					<!-- 왼쪽 하단 -->
-<%-- 						<div class="card">
-							<div class="card-body text-center">
-							
-							<!-- 에시 -->
-								<table class="table table-hover " style="text-align: center;">
-							<thead>
-								<tr style="background-color: #78c2ad; color: white;">
-									<th>#</th>
-									<th>제목</th>
-									<th>날짜</th>
-								</tr>
-							</thead>
-					
-							<!-- 3개만 보이게  -->
-							<tbody>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-					
-								<% if(list.isEmpty()){ %>
-										 	<tr>
-												<td colspan="3">존재하는 게시글이 없습니다.</td>
-											</tr>
-										 <% }else{  %>
-										 	<% for(Notice n : list){ %>
-										 		<tr>
-										 			<td><%= n.getNoticeNo() %></td>
-													<td><%= n.getNoticeTitle() %></td>
-													<td><%= n.getCount() %></td>
-													<td><%= n.getCreateDate()%></td>
-										 		</tr>
-										 	<% } %>
-										 <% } %>
-							</tbody>
-						</table>
-						<!-- ----------------------------------------------------------------- -->
-						
-						
-						
-						<!-- ----------------------------------------------------------------- -->
-							</div>
-						</div> --%>
-					
-					
-					
-						<%-- 	<table class="table table-hover " style="text-align: center;">
-							<thead>
-								<tr style="background-color: #78c2ad; color: white;">
-									<th>#</th>
-									<th>제목</th>
-									<th>날짜</th>
-								</tr>
-							</thead>
-					
-							<!-- 3개만 보이게  -->
-							<tbody>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-								<tr>
-									<td colspan="3">존재하는 게시글이 없습니다.</td>
-								</tr>
-					
-								<% if(list.isEmpty()){ %>
-										 	<tr>
-												<td colspan="3">존재하는 게시글이 없습니다.</td>
-											</tr>
-										 <% }else{  %>
-										 	<% for(Notice n : list){ %>
-										 		<tr>
-										 			<td><%= n.getNoticeNo() %></td>
-													<td><%= n.getNoticeTitle() %></td>
-													<td><%= n.getCount() %></td>
-													<td><%= n.getCreateDate()%></td>
-										 		</tr>
-										 	<% } %>
-										 <% } %>
-							</tbody>
-						</table>
-						
-							<!-- 페이지 처리 -->
-							<div>
-								<ul class="pagination justify-content-center">
-									<!-- 맨앞으로 -->
-									<li><a id="pageTag" class="page-link" href="<%=contextPath%>/noticeView.no?currentPage=1"> &laquo; </a></li>
-									
-									<!-- 이전페이지 -->
-									<% if(currentPage == 1) {%>
-									<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-									<% }else{ %>
-									<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-									<%} %>
-									
-									
-									<!-- 페이지 목록 -->
-									<%for(int p=startPage; p<=endPage; p++){ %>
-									
-										<%if(p == currentPage){ %>
-											<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-										<%}else{ %>
-											<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/noticeView.no?currentPage=<%= p %>"><%= p %> </a></li>
-										<%} %>
-										
-									<%} %>
-									
-									
-									<!-- 다음페이지 -->
-									<% if(currentPage == maxPage) {%>
-									<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-									<% }else{ %>
-									<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-									<%} %>
-									
-									<!-- 맨뒤로 -->
-									<li><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= maxPage %>"> &raquo; </a></li>
-								</ul>
-							</div>
-							 --%>
 
 
 						</div>
@@ -362,7 +248,7 @@
 								<div id="jum" class="jumbotron text-center">
 									<b>나의 친구 (<%= followCount %>명)</b>
 								</div>
-								<div class="card-body" style="text-align: center;">
+								<div class="card-body" style=" text-align: center;">
 									<div id="up">
 									<div id="down" class="input-group-prepend">
 										<form id="searchForm" class="form-inline" action="insert.fl" method="post">
@@ -383,12 +269,14 @@
 									<br>
 									<hr>
 									<!-- 친구 목록 페이지 불러오기 -->
-									<div>
+									<!-- <div> -->
 											<%if (list.isEmpty()) {%>
 											<div id="down" style="text-align: center;">
 												<img src="./resources/images/friend.png" width="50%" height="50%">
 											</div>
 											<% } else {%>
+											
+											<div class="card-body" style="height: 360px; padding-top:10px; padding-bottom: 10px ">
 											<table id="flList" class="table table-hover table-borderless" style="text-align: center;">
 											
 												<% for (Follow fl : list) {%>
@@ -404,7 +292,12 @@
 												
 												<%}%>
 												</table>
+											</div>
+											<hr>
 													<!-- 페이지 처리 -->
+													
+													<div class="card-footer border-0 bg-transparent">
+													
 														<div>
 															<ul class="pagination justify-content-center">
 																<!-- 맨앞으로 -->
@@ -441,7 +334,7 @@
 																<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MyFollow.fl?currentPage=<%= maxPage %>"> &raquo; </a></li>
 															</ul>
 														</div>
-												
+												</div>
 												
 											<%}%>
 										
@@ -450,11 +343,12 @@
 
 
 
-									<div class="col-1"></div>
+									
 
 								</div>
-							</div>
+							
 						</div>
+						<div class="col-1"></div>
 					</div>
 				</div>
 			</div>
@@ -463,9 +357,9 @@
 
 		</div>
 
-			<%@ include file="../common/footer.jsp" %> 
+			
 	</div>
-	
+	<%@ include file="../common/footer.jsp" %> 
 	<script>
 		function searchId(){
 			console.log("찍히나?")
@@ -525,13 +419,13 @@
 						$.each(result, function(i){
 							
 							nick = result[i].nickname
-							nickId = result[i].nickname
+							/* nickId = result[i].nickname */
 							flid = result[i].followUserId
 							followInterest = result[i].followInterest
 							followerCount = result[i].followerCount 
 							boardCount = result[i].boardCount
 						})
-						console.log(nickId)
+						//console.log(nickId)
 						console.log(followerCount)
 						$("#nonCheckFl").attr("style", "display:none")
 						$("#checkFl").attr("style", "display:block")
@@ -570,12 +464,6 @@
 						default:
 							break;
 						}	
-					
-						/* if(followInterest == "공부"){
-							$("#interestLabel").text(followInterest)
-						}else if */
-						
-						
 					},
 					error:function(){
 						console.log("통신오류!")
@@ -591,13 +479,15 @@
 			$("#catTable>tbody>tr>td>span").click(function(){
 				var catTitle = $(this).children().text();
 				var followId = $("#flid").text();
-				alert("카테고리 클릭: "+catTitle+"followId:"+followId)
-				console.log(catTitle)
+				//alert("카테고리 클릭: "+catTitle+"followId:"+followId)
+				//console.log(catTitle)
+				console.log("카테고리 팔로워 이름: "+ followId)
 				
-				location.href="<%= contextPath %>/catBoard.fl?cbno="+catTitle;
+				location.href="<%= contextPath %>/catBoard.fl?catTitle="+catTitle+"&followId="+followId;
+				
 		
 			})
-		})
+		}) 
 	</script>
 
 </body>

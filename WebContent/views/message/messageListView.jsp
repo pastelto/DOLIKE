@@ -6,8 +6,6 @@
 	MsgPageInfo mpi = (MsgPageInfo)request.getAttribute("pi");
 	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");
-	
 	int listCount = mpi.getListCount();
 	int currentPage = mpi.getCurrentPage();
 	int endPage = mpi.getEndPage();
@@ -158,7 +156,7 @@
 										 			<%-- <td><%= m.getMsgNo()%></td> --%>
 													<td><%= m.getSenderId() %></td>
 													<td><%= m.getMsgTitle() %></td>
-													<td><%= sdf.format(m.getRecvtime()) %></td>
+													<td><%= m.getRecvtime() %></td>
 													<td><%= "읽음" %></td>	
 													</tr>
 													
@@ -169,7 +167,7 @@
 										 			<td><%= index++ %></td>
 													<td><%= m.getSenderId() %></td>
 													<td><span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a"> New </span> &nbsp; <%= m.getMsgTitle() %></td>
-													<td><%= sdf.format(m.getRecvtime()) %></td>
+													<td><%= m.getRecvtime() %></td>
 													<td><%= "읽지 않음" %></td>
 												</tr>
 										 	<% } %>
