@@ -22,20 +22,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - Do Whatever You Like, Community</title>
 	<style>
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-			padding:5px 0px 0px 30px;
-		}
+		
 		a, a:hover {
 			color : #000000;
 			text-decoration:none;
 		}
-		body{
-			margin-right : 100px ;
-			margin-left : 100px ;
-		}
+		
 		#insertBtn{
 	      	background-color: #78c2ad;
 	      	color:#fff;
@@ -58,32 +50,53 @@
 	      	color:#78c2ad;
 	      	border-color:#78c2ad;
      	}
+     	.body-wraper{
+     		margin-bottom:20px;
+     	}
+     	#pageTag {
+			color: #fff;
+			background-color: #78c2ad;
+			border-color: #78c2ad;
+		}
+		#pageTag:hover {
+			color: #fff;
+	    	background-color: #f3969a;
+	    	border-color: #f3969a;
+		}
+		#pageDisable {
+			color: gray;
+	    	background-color: #ced4da;
+	    	border-color: #ced4da;
+		}
 	
 	</style>
 </head>
 <body>
-
+<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
 
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
-        	<div class="container-fluid">
         
+        	<div class="container-fluid">
+       		
+       		<div class="col-12">
 	 		<div class="row">
+	 		
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
-	 				<thread>
+	 				<thead>
 	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
 	 						
-			 				<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
+			 				<th style="background-color:rgb(228, 243, 240); text-align:center;">태그 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성일 </th>
 	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">조회수 </th>
 	 					</tr>
-	 				</thread>
+	 				</thead>
 	 				<tbody>
 	 				
 						<% if(list.isEmpty()){ %>
@@ -94,15 +107,16 @@
 			 				<% for(Board b : list){ %>
 			 				<tr>
 			 				<% if(b.getTitleImg() != null ){ %>
-			 					<td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td>
 			 					<td><%= b.getBoardNo() %></td>
+			 					<!-- <td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td> -->
+			 					<td><%= b.getTagName() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 					<%} else{ %>
-			 					<td> image </td> 
 			 					<td><%= b.getBoardNo() %></td>
+			 					<td><%= b.getTagName() %> </td> 
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
@@ -116,8 +130,47 @@
 	 				</tbody>
 	 			</table>	
 	 		</div>
-	 		<% if(loginUser != null){ %>
+	 		
 	 		<div>
+	 			<ul class="pagination justify-content-center">
+					<!-- 맨앞으로 -->
+					<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?currentPage=1"> &laquo; </a></li>
+					
+					<!-- 이전페이지 -->
+					<% if(currentPage == 1) {%>
+					<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+					<% }else{ %>
+					<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+					<%} %>
+					
+					
+					<!-- 페이지 목록 -->
+					<%for(int p=startPage; p<=endPage; p++){ %>
+					
+						<%if(p == currentPage){ %>
+							<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+						<%}else{ %>
+							<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.bo?currentPage=<%= p %>"><%= p %> </a></li>
+						<%} %>
+						
+					<%} %>
+					
+					
+					<!-- 다음페이지 -->
+					<% if(currentPage == maxPage) {%>
+					<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+					<% }else{ %>
+					<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+					<%} %>
+					
+					<!-- 맨뒤로 -->
+					<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				</ul>
+	 			
+	 			
+	 			
+	 		<%--
+	 		
 	 			<div class="pagingArea" align="center">
 	 				<!-- 맨 처음페이지로  -->
 	 				<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=1'"> &lt;&lt; </button>
@@ -146,25 +199,31 @@
 				
 					<!-- 맨 끝으로 (>>) -->
 					<button class="btn btn-sm btn-rounded" name="btn-group" onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
-					
+					<% if(loginUser != null){ %>
 					<!-- 글작성하기 버튼 -->
 					<button id="insertBtn" class="btn btn-sm btn-rounded pull-right" onclick="location.href='enrollForm.bo'" >작성하기</button>
-	 			</div>
+	 			</div> 
+	 			<% } %>
+	 			--%>
 	 		</div>
 			
-			<% } %>
-        </div>
+			
+			</div>
+        	</div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
-	<%@ include file="../common/footer.jsp" %>
+        
+			<%@ include file="../common/footer.jsp" %>
+</div>
+       
 
 	<script>
 		<%if(!list.isEmpty()){%>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
-				var bno = $(this).children().eq(1).text();
+				var bno = $(this).children().eq(0).text();
 				location.href="<%= contextPath %>/detail.bo?bno="+bno;
 			})
 		})

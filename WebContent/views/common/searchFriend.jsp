@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.member.model.vo.*, com.kh.common.searchMember.model.vo.*, java.text.*" %>
+<%
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list"); 
+	SearchListPageInfo mpi = (SearchListPageInfo)request.getAttribute("pi");
+	String contextPath = request.getContextPath();
+	
+	int listCount = mpi.getListCount();
+	int currentPage = mpi.getCurrentPage();
+	int endPage = mpi.getEndPage();
+	int maxPage = mpi.getMaxPage();
+	int startPage = mpi.getStartPage();
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +108,7 @@
 </script>
 </head>
 <body>
-
+	<div class="main-wrapper">
 	<div class="container">
 
 		<div class="panel page-header" style="text-align: center;">
@@ -241,6 +254,7 @@
 				</div>
 
 			</div>
+			
 			<div class="btn-group down">
 				<button type="button" class="btn" value="${m.mid_}" id="choiceBtn">선택</button>
 			</div>
@@ -248,6 +262,44 @@
 				<button type="button" class="btn" value="${m.mid_}"
 				id="closeBtn">닫기</button>
 			</div>
+			<div>
+					<ul class="pagination justify-content-center">
+						<!-- 맨앞으로 -->
+						<li><a id="pageTag" class="page-link" href="<%=contextPath%>/findUser.fd?currentPage=1"> &laquo; </a></li>
+						
+						<!-- 이전페이지 -->
+						<% if(currentPage == 1) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/findUser.fd?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+						<%} %>
+						
+						
+						<!-- 페이지 목록 -->
+						<%for(int p=startPage; p<=endPage; p++){ %>
+						
+							<%if(p == currentPage){ %>
+								<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+							<%}else{ %>
+								<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/findUser.fd?currentPage=<%= p %>"><%= p %> </a></li>
+							<%} %>
+							
+						<%} %>
+						
+						
+						<!-- 다음페이지 -->
+						<% if(currentPage == maxPage) {%>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+						<% }else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/findUser.fd?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+						<%} %>
+						
+						<!-- 맨뒤로 -->
+						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/findUser.fd?currentPage=<%= maxPage %>"> &raquo; </a></li>
+					</ul>
+				</div>
+		</div>
+		</div>
 		</div>
 	<script>
 		function searchPopUp11(){
