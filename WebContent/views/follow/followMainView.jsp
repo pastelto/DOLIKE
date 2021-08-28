@@ -49,7 +49,8 @@
 	}
 	#dia{
 		color: #78c2ad;
-	}
+	
+	} 
 	#iconflF, #iconflB{
 		color: #f3969a;
 	}
@@ -94,7 +95,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="text-center">
-								<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
+								<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
 								<p id="<%=i%>id" style="margin-bottom: 0px"><%= flist.get(i).getFollowId() %></p>
 
 								<div class="card-footer border-0 bg-transparent">

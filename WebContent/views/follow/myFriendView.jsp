@@ -91,6 +91,24 @@
 	#iconfl{
 		color: #f3969a;
 	}
+	#categoryCard{
+	overflow-y : scroll;
+	height : 200px;
+	}
+	#categoryCard::-webkit-scrollbar{
+		width:10px;
+	}
+	#categoryCard::-webkit-scrollbar-thumb{
+		background-color: #78c2ad;
+		border-radius:10px;
+	}
+	
+	#categoryCard::-webkit-scrollbar-track{
+		background-color: #ffe6f2;
+		border-radius:10px;
+		box-shadow : inset 0px 0px 5px white;
+	}
+	
 </style>	
 	
 </head>
@@ -187,7 +205,7 @@
 								<div class="card mt-4">
 									<div class="media align-items-center">
 					
-										<div class="card-body text-center">
+										<div class="card-body text-center" id="categoryCard">
 										<!-- <span id="interestLabel" class="label label-pill label-primary"></span> -->
 											<!-- <p class="text-muted" id="followInterest">등록된 관심사가 없습니다.</p> -->
 										<!-- ----------------- -->
@@ -355,7 +373,7 @@
 	<%@ include file="../common/footer.jsp" %> 
 	<script>
 		function searchId(){
-			console.log("찍히나?")
+			console.log("찍히나?");
 			var followId = $("#searchForm input[name=followId]");
 			if(followId.val() == ""){
 				
@@ -432,7 +450,9 @@
 						//$("#followInterest").text(followInterest) //나중에 삭제
 						console.log(followInterest);
 						
-						switch (followInterest) {
+						
+						
+ 						switch (followInterest) {
 						case "공부":
 							$("#0").attr("style","background: #78c2ad;")
 							break;
@@ -456,7 +476,10 @@
 							break;
 						default:
 							break;
-						}	
+						}  
+						
+						
+						
 					},
 					error:function(){
 						console.log("통신오류!")
