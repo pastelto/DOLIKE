@@ -19,17 +19,30 @@ import com.kh.challenge.model.vo.PageInfo;
 
 public class ChallengeService {
 
+	//main-challenge
 	public ArrayList<Challenge> selectList() {
 		
 		Connection conn = getConnection();
 		
 		ArrayList<Challenge> list = new ChallengeDao().selectList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	//end-challenge
+	public ArrayList<Challenge> selectEndList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Challenge> list = new ChallengeDao().selectEndList(conn,pi);
 		System.out.println(list +": service");
 		
 		close(conn);
 		
 		return list;
 	}
+	
 	//main at
 	public ArrayList<ChallengeAttachment> selectAttach() {
 		
@@ -38,11 +51,11 @@ public class ChallengeService {
 		ArrayList<ChallengeAttachment> fileList = new ChallengeDao().selectAttach(conn);
 		
 		close(conn);
-		System.out.println(fileList +": servlet");
 		
 		return fileList;
 
 	}
+	
 	// detail at
 	public ChallengeAttachment selectAttach(int chNo) {
 		
@@ -51,21 +64,35 @@ public class ChallengeService {
 		ChallengeAttachment at = new ChallengeDao().selectAttach(conn, chNo);
 		
 		close(conn);
-		System.out.println(at +": servlet");
 		
 		return at;
 		
 	}
-
+	
+	//paging-listcount
 	public int getListCount() {
 		
 		Connection conn = getConnection();
 		
 		int listCount = new ChallengeDao().getListCount(conn);
+		
 		close(conn);
+		
 		return listCount;
 	}
+	
+	//detail-challenge
+	public Challenge selectDetail(int chno) {
+		Connection conn = getConnection();
+		
+		Challenge c = new ChallengeDao().selectDetail(conn, chno);
+		
+		close(conn);
+		
+		return c;
+	}
 
+	//detail-reply
 	public ArrayList<ChallengeReply> selectReply(PageInfo pi, int chno) {
 		Connection conn = getConnection();
 		
@@ -76,16 +103,7 @@ public class ChallengeService {
 		return list;
 	}
 
-	public ArrayList<Challenge> selectEndedList() {
-		Connection conn = getConnection();
-		
-		ArrayList<Challenge> list = new ChallengeDao().selectEndedList(conn);
-		
-		close(conn);
-		
-		return list;
-	}
-
+	// vote-user
 	public ArrayList<ChallengeVote> selectVote() {
 		Connection conn = getConnection();
 		
@@ -95,7 +113,32 @@ public class ChallengeService {
 		
 		return list;
 	}
+	
+	// vote-admin
+	public int insertVote(ChallengeVote cv) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertVote(conn, cv);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	//vote-apply-admin
+	public ArrayList<ChallengeApply> selectVoteApList() {
+		Connection conn = getConnection();
+		ArrayList<ChallengeApply> list = new ChallengeDao().selectVoteApList(conn);
+		close(conn);
+		return list;
+		}
 
+	//main-mychallenge
 	public Challenge selectMyChallenge(String loginUser) {
 		Connection conn = getConnection();
 		
@@ -108,6 +151,7 @@ public class ChallengeService {
 		return c;
 	}
 	
+	//end-mychallenge
 	public ArrayList<Challenge> selectMyEndChallenge(String loginUser) {
 
 		Connection conn = getConnection();
@@ -118,18 +162,7 @@ public class ChallengeService {
 		return list;
 	}
 	
-
-	public Challenge selectDetail(int chno) {
-		Connection conn = getConnection();
-		
-		Challenge c = new ChallengeDao().selectDetail(conn, chno);
-		
-		close(conn);
-		
-		return c;
-	}
-
-
+	//apply-user
 	public int insertApply(ChallengeApply ca) {
 		Connection conn = getConnection();
 		
@@ -145,6 +178,7 @@ public class ChallengeService {
 		return result;
 	}
 
+	//apply-select-admin
 	public ArrayList<ChallengeApply> selectApplyList(PageInfo pi) {
 		Connection conn = getConnection();
 		ArrayList<ChallengeApply> list = new ChallengeDao().selectApplyList(conn, pi);
@@ -152,27 +186,7 @@ public class ChallengeService {
 		return list;
 	}
 
-	public int insertVote(ChallengeVote cv) {
-		Connection conn = getConnection();
-		
-		int result = new ChallengeDao().insertVote(conn, cv);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return result;
-	}
-
-	public ArrayList<ChallengeApply> selectVoteApList() {
-		Connection conn = getConnection();
-		ArrayList<ChallengeApply> list = new ChallengeDao().selectVoteApList(conn);
-		close(conn);
-		return list;
-	}
+	
 
 	public ArrayList<ChallengeVote> selectChallengeVoteList() {
 		Connection conn = getConnection();
@@ -287,9 +301,5 @@ public class ChallengeService {
 		
 		return result;
 	}
-
 	
-	
-
-
 }

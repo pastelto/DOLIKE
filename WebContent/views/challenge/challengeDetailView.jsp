@@ -101,6 +101,14 @@ int startPage = pi.getStartPage();
 	<div id="main-wrapper">
 		<%@include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)"><%=c.getChTitle()%></a></li>
+                    </ol>
+                </div>
+            </div>	
 			<div class="container-fluid">
 				<div class="col-10" style="margin: 0 auto;">
 					<div class="row">
@@ -157,39 +165,41 @@ int startPage = pi.getStartPage();
 										</div>
 									</form>
 									<%} else {%>
-										<%if(cu != null) {%>																		
-											<form action="<%=request.getContextPath()%>/rplyInsert.ch"
-												class="form-profile" method="post"
-												enctype="multipart/form-data">
-												<div class="form-group">
-													<input type="text" class="hidden" name="chno"
-														value="<%=chno%>" />
-													<textarea class="form-control" name="content"
-														id="replyContent" cols="30" rows="2"
-														placeholder="오늘의 챌린지를 인증해주세요" ></textarea>
-												</div>
-												<div class="d-flex align-items-center">
-													<ul class="mb-0 form-profile__icons">
-														<li class="d-inline-block">
-															<div class="fallback">
-																<input class="l-border-1" name="file" type="file"
-																	multiple="multiple">
-															</div>
-														</li>
-													</ul>
-													<button class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpgg();">작성</button>
-												</div>
-											</form>
-										<%} else {%>
-											<form action="#" class="form-profile">
-												<div class="form-group">
-													<textarea readonly class="form-control" name="textarea"
-														id="textarea" cols="30" rows="2"
-														placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
-												</div>
-											</form>
+										<%if(c.getStatus().equals("Y")) {%>
+											<%if(cu != null) {%>																		
+												<form action="<%=request.getContextPath()%>/rplyInsert.ch"
+													class="form-profile" method="post"
+													enctype="multipart/form-data">
+													<div class="form-group">
+														<input type="text" class="hidden" name="chno"
+															value="<%=chno%>" />
+														<textarea class="form-control" name="content"
+															id="replyContent" cols="30" rows="2"
+															placeholder="오늘의 챌린지를 인증해주세요" ></textarea>
+													</div>
+													<div class="d-flex align-items-center">
+														<ul class="mb-0 form-profile__icons">
+															<li class="d-inline-block">
+																<div class="fallback">
+																	<input class="l-border-1" name="file" type="file"
+																		multiple="multiple">
+																</div>
+															</li>
+														</ul>
+														<button class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpgg();">작성</button>
+													</div>
+												</form>
+											<%} else {%>
+												<form action="#" class="form-profile">
+													<div class="form-group">
+														<textarea readonly class="form-control" name="textarea"
+															id="textarea" cols="30" rows="2"
+															placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
+													</div>
+												</form>
+											<%}%>
 										<%} %>
-									<%}%>
+									<%}%>	
 								</div>
 							</div>
 						</div>

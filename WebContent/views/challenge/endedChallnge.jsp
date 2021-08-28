@@ -170,6 +170,14 @@
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
+		<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">종료된 챌린지</a></li>
+                    </ol>
+                </div>
+            </div>	
 			<div class="container-fluid">
 				<div class="row" style="margin-bottom: 13%;">
 					<div class="topList col-10" align="center">

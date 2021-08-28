@@ -71,8 +71,9 @@ public class ChallengeDao {
 		ResultSet rset = null;
 
 		/*
-		 * selectChallengeList = SELECT CH_NO, CH_TITLE, CH_START, CH_END FROM CHALLENGE
-		 * WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC
+		 *	SELECT CH_NO, CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
+		 *	FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO 
+		 *	WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC
 		 */
 
 		String sql = prop.getProperty("selectChallengeList");
@@ -86,7 +87,8 @@ public class ChallengeDao {
 				list.add(new Challenge(rset.getInt("CH_NO"),
 									   rset.getString("CH_TITLE"), 
 									   rset.getString("CH_START"),
-									   rset.getString("CH_END"), 
+									   rset.getString("CH_END"),
+									   rset.getString("CH_STATUS"),
 									   rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
@@ -101,6 +103,49 @@ public class ChallengeDao {
 
 		return list;
 	}
+	
+	public ArrayList<Challenge> selectEndList(Connection conn, PageInfo pi) {
+		ArrayList<Challenge> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectEndChallenge");
+		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
+		int endRow = startRow + pi.getListLimit() - 1;
+		
+		/*
+		 * SELECT * 
+		 * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT CH_NO, CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
+		 * FROM CHALLENGE WHERE CH_STATUS = 'N' ORDER BY CH_END DESC) A) 
+		 * WHERE RNUM BETWEEN ? AND ?
+		 */
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);		
+
+			while (rset.next()) {
+				list.add(new Challenge(rset.getInt("CH_NO"),
+						   			   rset.getString("CH_TITLE"), 
+						   			   rset.getString("CH_BODY"), 
+						   			   rset.getString("CH_START"),
+						   			   rset.getString("CH_END"),
+						   			   rset.getString("CH_STATUS"),
+						   			   rset.getString("CATEGORY_NAME")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+	
 
 	//MAIN
 	public ArrayList<ChallengeAttachment> selectAttach(Connection conn) {
@@ -176,41 +221,6 @@ public class ChallengeDao {
 		return at;
 	}
 
-	public ArrayList<Challenge> selectEndedList(Connection conn) {
-		ArrayList<Challenge> list = new ArrayList<>();
-		Statement stmt = null;
-		ResultSet rset = null;
-
-		/*
-		 * selectChallengeList = SELECT CH_NO, CH_TITLE, CH_START, CH_END FROM CHALLENGE
-		 * WHERE CH_STATUS = 'N' ORDER BY CH_END ASC
-		 */
-
-		String sql = prop.getProperty("selectEndChallenge");
-
-		try {
-
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
-
-			while (rset.next()) {
-				Challenge c = new Challenge();
-				c.setChNo(rset.getInt("CH_NO"));
-				c.setChTitle(rset.getString("CH_TITLE"));
-				c.setStart(rset.getString("CH_START"));
-				c.setEnd(rset.getString("CH_END"));
-				list.add(c);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-
-		return list;
-	}
 
 	public ArrayList<ChallengeReply> selectReply(Connection conn, PageInfo pi, int chno) {
 		ArrayList<ChallengeReply> list = new ArrayList<ChallengeReply>();
@@ -310,10 +320,11 @@ public class ChallengeDao {
 
 			while (rset.next()) {			
 				c = new Challenge(rset.getInt("CH_NO"),
-								  rset.getString("CH_TITLE"),
-								  rset.getString("CH_START"),
-								  rset.getString("CH_END"),
-								  rset.getString("CATEGORY_NAME"));
+			   			   		  rset.getString("CH_TITLE"), 
+			   			   		  rset.getString("CH_START"),
+			   			   		  rset.getString("CH_END"),
+			   			   		  rset.getString("CH_STATUS"),
+			   			   		  rset.getString("CATEGORY_NAME"));
 
 			}
 
@@ -420,8 +431,8 @@ public class ChallengeDao {
 
 		String sql = prop.getProperty("selectChallengeInfo");
 		/*
-		 * SELECT CH_TITLE, CH_BODY, CATEGORY_NAME FROM CHALLENGE A JOIN CATEGORY B ON
-		 * A.CATEGORY_NO = B.CATEGORY_NO WHERE CH_NO= ?
+		 *	SELECT CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
+		 *	FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO  WHERE CH_NO= ?
 		 */
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -432,6 +443,9 @@ public class ChallengeDao {
 			while (rset.next()) {
 				c = new Challenge(rset.getString("CH_TITLE"), 
 								  rset.getString("CH_BODY"),
+								  rset.getString("CH_START"),
+								  rset.getString("CH_END"),
+								  rset.getString("CH_STATUS"),
 								  rset.getString("CATEGORY_NAME"));
 			}
 
@@ -828,6 +842,8 @@ public class ChallengeDao {
 				
 		return result;
 	}
+
+
 
 	
 
