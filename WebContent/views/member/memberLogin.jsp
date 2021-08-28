@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    
 	<title>로그인</title>
 	<script>
 		$(function(){
@@ -58,8 +57,18 @@
     <!--*******************
         Preloader end
     ********************-->
-
     
+	<div class="content-body">
+     <div class="row page-titles mx-0">
+         <div class="col p-md-0">
+             <ol class="breadcrumb">
+                 <li class="breadcrumb-item">메인</li>
+                 <li class="breadcrumb-item active">로그인</li>
+             </ol>
+         </div>
+     </div>
+	
+    <div class="container-fluid">
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
@@ -86,7 +95,9 @@
             </div>
         </div>
     </div>
-    <%@ include file="../common/footer.jsp" %>
+    </div>
+    </div>
 	</div>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

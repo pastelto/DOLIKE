@@ -45,10 +45,10 @@ public class CategoryInsertServlet extends HttpServlet {
 		System.out.println("categoryInsertServlet 확인중");
 		System.out.println(result);
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "새로운 개시판 등록 성공!");
+			request.getSession().setAttribute("msg", "새로운 게시판 등록 성공!");
 			response.sendRedirect("categoryList.ca");
 		}else {
-			request.setAttribute("msg", "새로운 개시판 등록 실패!!");
+			request.setAttribute("msg", "새로운 게시판 등록 실패!!");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	        view.forward(request, response);
 		}

@@ -49,7 +49,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
@@ -84,7 +84,7 @@ public class MemberDao {
 			pstmt.setString(1, m.getUserId());
 			pstmt.setString(2, m.getUserName());
 			pstmt.setString(3, m.getUserPwd());
-			pstmt.setDate(4, m.getBirthDate());
+			pstmt.setString(4, m.getBirthDate());
 			pstmt.setString(5, m.getPhone());
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getNickName());
@@ -121,7 +121,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
@@ -143,8 +143,7 @@ public class MemberDao {
 	
 	//회원정보수정 : 비밀번호, 닉네임, 관심사만 수정 가능
 	//update PASSWORD, NICKNAME, INTERESTS
-	public int updateMember(Connection conn, String newPwd, String userId, String userPwd, String nickName, String interests) {
-		int result = 0;
+	public int updateMember(Connection conn, String userId, String userPwd, String nickName, String interests) {		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("updateMember");
@@ -152,11 +151,11 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, newPwd);
+			pstmt.setString(1, userPwd);
 			pstmt.setString(2, nickName);
 			pstmt.setString(3, interests);
 			pstmt.setString(4, userId);
-			pstmt.setString(5, userPwd);
+			pstmt.setString(6, userId);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -296,6 +295,33 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
+		return result;
+	}
+	
+	public int accessUpdate(Connection conn, String userId, String userPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("accessUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+			System.out.println("loginUserId : " + userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(result);
 		return result;
 	}
 	 

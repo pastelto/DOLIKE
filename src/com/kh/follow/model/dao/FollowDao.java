@@ -259,7 +259,7 @@ public class FollowDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_NAME"),
 						rset.getString("PASSWORD"),
-						rset.getDate("BIRTHDATE"),
+						rset.getString("BIRTHDATE"),
 						rset.getString("PHONE"),
 						rset.getString("EMAIL"),
 						rset.getString("NICKNAME"),
@@ -267,6 +267,7 @@ public class FollowDao {
 						rset.getDate("USER_CREATE_DATE"),
 						rset.getString("USER_STATUS")
 						);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -429,9 +430,15 @@ public class FollowDao {
 		
 		String sql = prop.getProperty("selectFollowBoardList");
 		
+		System.out.println("dao(유저 카테고리별게시글 sql): "+sql);
+		
 		int startRow = (pi.getCurrentPage()-1)*pi.getCatBoardLimit()+1;
 		int endRow = startRow + pi.getCatBoardLimit()-1;
 		
+		System.out.println("dao(유저 카테고리별게시글 followId): "+followId);
+		System.out.println("dao(유저 카테고리별게시글 catTitle): "+catTitle);
+		System.out.println("dao(유저 카테고리별게시글 startRow): "+startRow);
+		System.out.println("dao(유저 카테고리별게시글 endRow): "+endRow);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, followId);
@@ -460,9 +467,38 @@ public class FollowDao {
 			close(pstmt);
 		}
 		
-		System.out.println("dao"+list);
+		System.out.println("dao: "+list);
 		
 		return list;
+	}
+
+
+	public ArrayList<Follow> selectFollowTop4User(Connection conn) {
+		ArrayList<Follow> flist = new ArrayList<Follow>();
+		Statement stmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFollowTop4User");
+		
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				flist.add(new Follow(
+						rset.getString("FOLLOW_ID")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(stmt);
+		}
+		return flist;
 	}
 
 }

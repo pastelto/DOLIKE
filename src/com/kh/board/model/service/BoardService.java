@@ -35,18 +35,16 @@ public class BoardService {
 		return listCount;
 	}
 
-	public int insertBoard(Board b, Attachment at) {
+	public int insertBoard(Board b, ArrayList<Attachment> fileList) {
 
 		Connection conn = getConnection();
 		
 		int result1 = new BoardDao().insertBoard(conn, b);
 		
-		int result2 = 1;   
-		if(at != null) {
-			result2 = new BoardDao().insertAttachment(conn, at);
-		}
+		int result2 = new BoardDao().insertAttachment(conn, fileList); 
 		
-		if(result1 * result2 > 0) {
+		
+		if(result1 >0 && result2 > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -157,7 +155,7 @@ public class BoardService {
 		
 		return b;
 	}
-
+/*
 	public int insertImg(Board b, Attachment at) {
 		Connection conn = getConnection();
 		
@@ -173,7 +171,7 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-
+*/
 	public int searchBoard(String findBoard) {
 		Connection conn = getConnection();
 		
@@ -181,5 +179,22 @@ public class BoardService {
 		
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Board> findBoard(String findBoard) {
+		Connection conn = getConnection();
+		ArrayList<Board> blist = new BoardDao().findBoard(conn, findBoard);
+		
+		close(conn);
+		return blist;
+	}
+
+	public Attachment searchAttachment(String findBoard) {
+		Connection conn = getConnection();
+		
+		Attachment at = new BoardDao().searchAttachment(conn, findBoard);
+		
+		close(conn);
+		return at;
 	}
 }

@@ -49,6 +49,7 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <div class="container-fluid">
 	 		<div class="row" style="margin:20px">
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
@@ -178,7 +179,6 @@
 						value += '<tr>'+
 									'<td width="100px">'+list[i].replyWriter+'</td>'+
 									'<td width="330px">'+list[i].replyContent+'</td>'+
-									
 								 '</tr>';
 					}
 					$("#replyList").html(value);
@@ -189,6 +189,7 @@
 			})
 		}
 	</script> 
+		</div>
         </div>
         <!--**********************************
             Content body end
