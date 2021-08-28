@@ -44,10 +44,11 @@ public class MemberService {
 		return mem;
 	}
 	
-	public Member updateMember(String userId, String userPwd, String nickname, String interests) {		
-		Connection conn = getConnection();		
+	public Member updateMember(String userId, String userPwd, String nickname, String interests) {
+		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests);		
+		int result = new MemberDao().updateMember(conn, userId, userPwd, nickname, interests);
+		
 		if (result > 0) {
 			commit(conn);
 			updateMem = new MemberDao().selectMember(conn, userId);
