@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.kh.common.searchMember.model.service.searchService;
 import com.kh.common.searchMember.model.vo.SearchListPageInfo;
 import com.kh.member.model.vo.Member;
@@ -46,8 +49,16 @@ public class findUserServlet extends HttpServlet {
 		
 		// 유저아이디 넘기기 
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		String searchWord = (String) request.getAttribute("searchWord");
-		listCount = new searchService().getSearchUserListCount(userId, searchWord);
+		/* String userId1 = (String)request.getAttribute("userIdValue"); */
+		System.out.println("로그인 유저 : " + userId);
+		// 검색한 아이디 또는 닉네임 값
+		String searchWord = (String)request.getAttribute("searchWord");
+		System.out.println("검색 단어 : " + searchWord);
+		// 검색 옵션
+		String choice = (String)request.getAttribute("selectIdorNN");
+		System.out.println("검색 옵션 : " + choice);
+		// 검색 결과 개수
+		listCount = new searchService().getSearchUserListCount(userId, searchWord, choice);
 		
 		currentPage = 1;
 		
@@ -70,14 +81,34 @@ public class findUserServlet extends HttpServlet {
 
 		
 		SearchListPageInfo pi = new SearchListPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, findList);
+		ArrayList<Member> list = new searchService().getUserList(userId, searchWord, choice, pi);
 		
-		ArrayList<Member> list = new searchService().getUserList(userId, searchWord, pi);
-		request.setAttribute("list", list);
-		request.setAttribute("pi", pi);
+		JSONArray jArr = new JSONArray();
+		JSONObject jsonUser = null;
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/common/searchFriend.jsp");
-		view.forward(request, response);
-
+		for(Member m : list) {
+			jsonUser = new JSONObject();
+			
+			jsonUser.put("userId", m.getUserId());
+			jsonUser.put("nickName", m.getNickName());
+			
+			jArr.add(jsonUser);
+			
+		}
+		/*
+		 * request.setAttribute("list", list); request.setAttribute("pi", pi);
+		 * 
+		 * RequestDispatcher view =
+		 * request.getRequestDispatcher("views/common/searchFriend.jsp");
+		 * view.forward(request, response);
+		 */
+		
+		JSONObject jsonMap = null;
+		
+		jsonMap = new JSONObject()
+		
+		response.setContentType("application/json; charset=utf-8");
+        response.getWriter().print(jsonMap);
 	}
 
 	/**

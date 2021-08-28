@@ -3,8 +3,6 @@
 	import="java.util.ArrayList, com.kh.message.model.vo.Message"%>
 <%
 	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
-
-	System.out.println(request.getContextPath());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +24,6 @@
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -106,7 +103,7 @@
 									<div class="compose-content mt-5">
 										<form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
 
-											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
+											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" id="hiddenLoginUserId">
 
 <!-- 											<div class="form-group">
 												<div class="col-6">
@@ -115,10 +112,6 @@
 												<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp2();">
 													<i class="mdi mdi-magnify"></i> 검색하기</button>		
 													</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/pastelto/DOLIKE
 											</div> -->
 											
 											
@@ -134,14 +127,15 @@
 													<input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
 												</div> -->
 												
-												<!-- 전체 게시글 검색창 -->
+												<!-- 회원 검색창 -->
+												
+												<div class="input-group text-center mb-3" style="width: 50% !important;">
 												<div class="input-group-prepend">
-						                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+						                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1" style="margin-right: 10px;"><i class="mdi mdi-magnify"></i></span>
 						                        </div>
-												<div class="input-group text-center mb-3">
-						                        	<input name="findBoard" type="search" class="form-control" placeholder=" 받는 사람 아이디" aria-label="Search Dashboard">
+						                        	<input name="findBoard" type="text" id="recvInput" class="form-control" placeholder=" 받는 사람 아이디 또는 닉네임" aria-label="Search Dashboard">
 						                        	<div class="input-group-append">
-						                        		<button id="searchBtn" class="btn" type="submit" onclick="searchPopUp();">검색하기</button>
+						                        		<input type="button" id="searchBtn" class="btn" value="검색하기" onclick="searchUserId();">
 						                        	</div>
 						                        </div>
 												
@@ -151,9 +145,10 @@
 												<input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
 											</div>
 											<div class="input-group">
-												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요."></textarea>
+												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요." style="resize: none;"></textarea>
 											</div>
-
+											<hr>
+											<div>
 											<h5 class="m-b-20">
 												<i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일
 											</h5>
@@ -162,14 +157,16 @@
 													<input class="l-border-1" name="upfile" type="file" multiple="multiple">
 												</div>
 											</div>
-
-											<div class="text-left m-t-15">
-												<button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="submitMsg();">
+											</div>
+											<div>
+											<div class="text-center m-t-15"  >
+												<button type="submit" id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10">
 													<i class="fa fa-paper-plane m-r-5"></i> 보내기
 												</button>
 												<button id="resetBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset">
 													<i class="ti-close m-r-5 f-s-12"></i> 취소
 												</button>
+											</div>
 											</div>
 										</form>
 									</div>
@@ -185,54 +182,32 @@
 
 	</div>
 
-
-	<script>
+		<script>
 		
-	function submitMsg(){
-            // 확인, 취소버튼에 따른 후속 처리 구현
-            swal.fire({
-                title: '확인',
-                text: "쪽지가 정상적으로 발송되었습니다.", 
-                type: 'success',
-                confirmButtonText: '확인',          
-                confirmButtonColor: "#78c2ad",
-            }).then(function(result) { 
-                if(result.isConfirmed) {                
-                $("#submitBtn").submit();  
-            }
-        });
-	}
-
-
-		function searchPopUp(){
+		window.screen.width;
+    	window.screen.height;
+    	var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+    	var popupY= (document.body.offsetHeight / 2) - (300 / 2);
+		
+		var openSearchPopUp;
+		var title = "Do Like - 친구 찾기";
+		/* var setting = "toolbar=yes,scrollbars=no,resizable=no,width=800,height=800, left="+ popupX + ", top="+ popupY;  */
+		
+        function searchUserId(){
+        	
+        	alert(document.getElementById("recvInput").value);
+        	
+			// 팝업 띄워주기 
+			window.name = "NewMessageForm";	
+			/* var url = "http://localhost:7070/DoLikeProject/views/common/searchFriend.jsp"; */
+			var openWin = window.open("http://localhost:8090/DoLikeProject/views/common/searchFriend.jsp", title, "toolbar=yes,scrollbars=yes,resizable=no,width=700,height=700, left="+ popupX + ", top="+ popupY);
 			
-			var searchWord = $("input[name=recvId]").val();
+			// 입력 값 받아와서 넘겨주기
+            /* openWin.document.getElementById("userIdValue").value = window.getElementById("hiddenLoginUserId").value; */
 			
-			var search = confirm(searchWord);
-			
-/* 			if(!search){
-					swal.fire({
-		                title: '확인',
-		                text: "쪽지를 보낼 회원의 아이디 또는 별명을 입력해주세요.", 
-		                type: 'error',
-		                confirmButtonText: '확인',          
-		                confirmButtonColor: "#78c2ad",
-		            })
-				} else if(search){ */
-			
-			var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=800,height=800"; 
-			<%-- var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord; --%>
-			 var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=user01&searchWord=user"; 
-			<%-- var url = <%= contextPath %> + "/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord; --%>
-			var title = "Do Like - 친구 찾기";
-			
-			window.open(url, title , setting);
-			
-/* 			} */
-		}
-
+        }
+		
 		</script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </body>
 
