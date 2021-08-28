@@ -1,5 +1,6 @@
 package com.kh.common.searchMember.model.dao;
 import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.searchMember.model.vo.SearchListPageInfo;
 import com.kh.member.model.vo.Member;
-import com.kh.message.model.vo.Message;
-import com.kh.message.model.vo.MsgPageInfo;
 
 public class searchDao {
 
@@ -32,7 +32,7 @@ public class searchDao {
 	}
 	
 	// 검색한 아이디 관련 리스트
-	public ArrayList<Member> selectSearchUserList(Connection conn, String userId, String searchWord, MsgPageInfo pi) {
+	public ArrayList<Member> selectSearchUserList(Connection conn, String userId, String searchWord, SearchListPageInfo pi) {
 		ArrayList<Member> list = new ArrayList<Member>();
 		
 		PreparedStatement pstmt = null;

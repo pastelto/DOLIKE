@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.member.model.vo.*, com.kh.common.searchMember.model.vo.*, java.text.*" %>
+<%
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list"); 
+	SearchListPageInfo mpi = (SearchListPageInfo)request.getAttribute("pi");
+	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
+	
+	int listCount = mpi.getListCount();
+	int currentPage = mpi.getCurrentPage();
+	int endPage = mpi.getEndPage();
+	int maxPage = mpi.getMaxPage();
+	int startPage = mpi.getStartPage();
+	
+	int index = 1;
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
