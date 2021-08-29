@@ -3,6 +3,7 @@
 <% 	
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
+	String sadMsg = (String)session.getAttribute("sadMsg"); 
 	String contextPath = request.getContextPath();
 	
 	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");	
@@ -28,6 +29,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
+	//기쁜일 했을 때 gif 팝업
 	   $(function(){
 		      var msg = "<%=msg%>";
 				if (msg != "null") {
@@ -48,6 +50,30 @@
 			<%session.removeAttribute("msg");%>
 			} else{
 				console.log("Hi");
+			}
+		})
+		
+	//슬픈일 했을 때 gif 팝업
+		$(function(){
+		      var sadMsg = "<%=sadMsg%>";
+				if (sadMsg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: sadMsg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						imageUrl: 'https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif?cid=ecf05e47bhioavjtu6amhxcthxywlke8lxhkffjeou5rth55&rid=giphy.gif&ct=g',
+						imageWidth: 400,
+						imageHeight: 400,
+						backdrop: `
+							rgba(0,0,123,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("sadMsg");%>
+			} else{
+				console.log("Sad");
 			}
 		})
 	</script>

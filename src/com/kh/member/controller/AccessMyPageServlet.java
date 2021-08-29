@@ -43,7 +43,7 @@ public class AccessMyPageServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect(request.getContextPath() +"/mypage.me");
 		} else {
-			request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
+			request.setAttribute("errMsg", "비밀번호가 일치하지 않습니다");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

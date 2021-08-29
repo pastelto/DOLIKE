@@ -39,11 +39,11 @@ public class MemberDeleteServlet extends HttpServlet {
 		if(result > 0) {
 			HttpSession session = request.getSession();
 			session.removeAttribute("loginUser");
-			session.setAttribute("msg", "회원탈퇴가 완료되었습니다. 복구 관련사항은 관리자에게 문의하세요.");
+			session.setAttribute("sadMsg", "안녕히가세요... 회원탈퇴가 완료되었습니다. 복구 관련사항은 관리자에게 문의하세요.");
 			
 			response.sendRedirect(request.getContextPath() + "/index2.jsp");
-		}else {
-			request.setAttribute("msg", "회원탈퇴에 실패했습니다.");
+		} else {
+			request.setAttribute("errMsg", "회원탈퇴 실패");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
