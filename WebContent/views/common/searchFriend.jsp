@@ -21,24 +21,11 @@
 <head>
 <meta charset="UTF-8">
 <title>DO LIKE - 회원 검색</title>
-<link href="./css/style.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 <style>
 	#choiceBtn{
 		background-color: #78c2ad;
@@ -114,8 +101,6 @@
         });    
         
     }); */
-    
-
 </script>
 </head>
 <body>
@@ -189,9 +174,9 @@
 			<div class="col-lg-12">
 				<div class="card" style="height: 550px;  width: 660px; ">
 					<div class="card-body" style="height: 100%;">
-						<form class="form-inline" method="post" action="searchUserList()">
+						<form class="form-inline" id="searchListForm" method="post">
 							<div class="form-group" style="width:100%;" >
-
+									<input type="hidden" id="loginUserId" value="<%= loginUser.getUserId() %>">
 									 <select class="form-control" style="width: 90px; margin-right: 10px; margin-left: 20%;" id="selectIdorNN" name="selectIdorNN">
 										<option value="USER_ID">아이디</option>
 										<option value="NICKNAME">닉네임</option>
@@ -199,9 +184,9 @@
 								<!-- </span> -->
 								<div class="input-group">
 								<!-- 검색 단어 입력 폼 -->
-								<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="아이디를 입력해주세요." style="width: 20rem;">
+								<input type="text" class="form-control" name="searchWord" placeholder="아이디를 입력해주세요." style="width: 20rem;">
 									<!-- 검색 진행 버튼 -->
-								<button type="button" id="searchBtn" class="btn" value="검색하기">검색하기</button>
+								<button id="searchBtn" class="btn">검색하기</button>
 							</div>
 							</div>
 
@@ -245,6 +230,77 @@
 					</div>
 
 				</div>
+				
+				<!-- -------------------------------------------------------- -->
+				  	<h3>6. 서버로 데이터 전송 후, 응답을 맵(map) 형태로 받아서 테이블에 출력하기</h3>
+ 	<h4>조회하고자 하는 회원의 이름 키워드를 입력해서 조회되는 회원들 정보와 전달된 키워드를 받아오기</h4>
+ 	
+ 	이름<input type="text" id="input6" width=300>
+ 	<button id="btn6">검색</button>
+ 	<table id="memberTable6" border="1" style="text-align:center">
+ 		<thead>
+ 			<th>번호</th>
+ 			<th>이름</th>
+ 			<th>나이</th>
+ 			<th>성별</th>
+ 		</thead>
+		<tbody>
+		
+		</tbody> 	
+	</table>
+<!-- 	<script>
+	
+		$(function(){
+			$("#btn6").click(function(){
+				var input = $("#input6").val();
+				$.ajax({
+					url:"http://localhost:8090/DoLikeProject/hello.aj",
+					data:{keyword:input},
+					type: "get",
+ 					dataType: "json",
+					success: function(map){
+						console.log(map)
+						console.log(map["jArr"])
+						console.log(map["keyword"])
+						
+						//변수 앞에 $를 붙인경우 jquery 변수로 jquery 내장함수 모두 사용가능
+						//안 붙이면 자바스크립트 변수
+						var $tableBody = $("#memberTable6 tbody")
+						
+						$tableBody.html("");
+						$.each(map["jArr"], function(index, value){
+							
+							console.log(value);
+							var $tr = $("<tr>");
+							
+							var $noTd = $("<td>").text(value.no); //no가 1인 경우 -> <td> 1 </td>
+							var $nameTd = $("<td>").text(value.name);
+							var $ageTd = $("<td>").text(value.age);
+							var $genTd = $("<td>").text(value.gender);
+							
+							//tr 안에 td 요소들이 들어감
+							$tr.append($noTd);
+							$tr.append($nameTd);
+							$tr.append($ageTd);
+							$tr.append($genTd);
+							
+							$tableBody.append($tr);
+						})
+					},
+					error:function(){
+						console.log("ajax 통신 실패")
+					}
+					
+				})
+			})
+		})
+	</script> -->	
+	<!-- ---------------------------------------------------------------- -->
+				
+				
+				
+				
+				
 			<div class="btn-group down">
 				<button type="button" class="btn" id="choiceBtn">선택</button>
 			</div>
@@ -292,7 +348,7 @@
 		</div>
 		</div>
 		</div>
-		<script type="text/javascript">
+		<script>
 		
 /* 		$(function(){
 			
@@ -315,59 +371,100 @@
 				})
 				*/
 		
-		
-		function searchUserList(){
-			
-			/* var searchWord = $("#searchWord"); */
-			/* var searchWord = $("input[name=searchWord]") */
-			/* var choice = $("option:select[name=selectIdorNN]").val(); */
-			
-			var searchWord = document.getElementById("searchWord").value;
-			var choice = $("#selectIdorNN option:selected").val();
-			
-			console.log(searchWord + ", " + choice);
-			
-			$.ajax({
-				url:"findUser.fd",
-				data:{searchWord:searchWord,
-					  choice:choice	
-				},
-				dataType:"json",
-	            type:"get",
-	            success: function(map){
-					console.log("map : " + map);
-					console.log("map[jArr] : " + map[jArr]);
-					console.log("map[pi] : " + map[pi]);
-					console.log("map[listCount] : " + map[listCount]);
+				$(function(){
+					$("#searchBtn").click(function(){
 					
-					<%-- var loginUser = <%= loginUser %>; --%>
-					var userList = ""
-					var $tableBody = $("#searchMemberList tbody")
+					/* var searchWord = $("#searchWord"); */
+					/* var searchWord = $("input[name=searchWord]") */
+					/* var choice = $("option:select[name=selectIdorNN]").val(); */
 					
-					$.each(map["jArr"], function(index, value){
-						
-						console.log(value);
-						
-	                     var $tr = $("<tr>");
-	                     var $noTd = $("<td>").text(index); //<td> 1(value.no) </td> 이렇게 넣어주겠다는 것 
-	                     var $idTd = $("<td>").text(value.userId); 
-	                     var $nickNameTd = $("<td>").text(value.nickName); 
-						
-	                     $tr.append($noTd);   
-	                     $tr.append($idTd);
-	                     $tr.append($nickNameTd);
-	                     
-	                     $tableBody.append($tr);
-					})
-				}, 
-				error:function(request,status,error){
-					console.log("ajax 통신 실패!");
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-			
-			});
-			
-		}
+					/* var searchWord = document.getElementById("searchWord").value; */
+					var $searchListForm = $("#searchListForm").serialize(); 
+					/* 		 var loginUserId = document.getElementById("#loginUserId").value;
+					var choice = $("#selectIdorNN option:selected").val();
+					var loginUserId = "user01";
+					console.log(searchWord + ", " + choice + "," + loginUserId);
+					
+					$.ajax({
+ 					type:"get",
+						url:"http://localhost:8090/DoLikeProject/findUser.fd",
+						data:{searchWord:searchWord,
+							  choice:choice,
+							  loginUserId:loginUserId
+						},
+						dataType:"json",
+			            success: function(map){
+							console.log("map : " + map);
+							console.log("map[jArr] : " + map[jArr]);
+							console.log("map[pi] : " + map[pi]);
+							console.log("map[listCount] : " + map[listCount]);
+
+							var userList = ""
+							var $tableBody = $("#searchMemberList tbody")
+							
+							$.each(map["jArr"], function(index, value){
+								
+								console.log(value);
+								
+			                     var $tr = $("<tr>");
+			                     var $noTd = $("<td>").text(index); //<td> 1(value.no) </td> 이렇게 넣어주겠다는 것 
+			                     var $idTd = $("<td>").text(value.userId); 
+			                     var $nickNameTd = $("<td>").text(value.nickName); 
+								
+			                     $tr.append($noTd);   
+			                     $tr.append($idTd);
+			                     $tr.append($nickNameTd);
+			                     
+			                     $tableBody.append($tr);
+							})
+						}, 
+						error:function(request,status,error){
+							console.log("ajax 통신 실패!");
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						} */
+						$.ajax({
+						type:"get", 
+						url:"http://localhost:8090/DoLikeProject/findList.se",
+						data:$searchListForm,
+						dataType:"json",
+						success: function(map){
+							alert("이거 타나??")
+							console.log(map["jArr"])
+							console.log(map["keyword"])
+							
+							//변수 앞에 $를 붙인경우 jquery 변수로 jquery 내장함수 모두 사용가능
+							//안 붙이면 자바스크립트 변수
+							var $tableBody = $("#memberTable6 tbody")
+							
+							$tableBody.html("");
+							$.each(map["jArr"], function(index, value){
+								
+								console.log(value);
+								var $tr = $("<tr>");
+								
+								var $noTd = $("<td>").text(value.no); //no가 1인 경우 -> <td> 1 </td>
+								var $nameTd = $("<td>").text(value.name);
+								var $ageTd = $("<td>").text(value.nick);
+								var $genTd = $("<td>").text(value.gender);
+								
+								//tr 안에 td 요소들이 들어감
+								$tr.append($noTd);
+								$tr.append($nameTd);
+								$tr.append($ageTd);
+								$tr.append($genTd);
+								
+								$tableBody.append($tr);
+							})
+						}, 
+						error:function(request,status,error){
+							console.log("ajax 통신 실패!");
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+						 
+					});
+					
+				});
+					})	;
 		
 		
 </script>
