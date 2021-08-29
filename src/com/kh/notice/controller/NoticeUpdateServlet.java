@@ -35,10 +35,12 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		String topView = request.getParameter("topView"); 
 		
 		Notice n = new Notice();
 		n.setNoticeNo(nno);
 		n.setNoticeTitle(title);
+		n.setNoticeTop(topView);
 		n.setNoticeContent(content.replaceAll("\n", "<br>"));
 		
 		int result = new NoticeService().updateNotice(n);
@@ -47,7 +49,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "공지사항이 성공적으로 수정되었습니다.");
 			response.sendRedirect("noticeView.no?nno="+nno);
 		}else {
-			request.getSession().setAttribute("msg", "공지사항 수정 실패");
+			request.getSession().setAttribute("errMsg", "공지사항 수정 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

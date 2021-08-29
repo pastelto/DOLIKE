@@ -34,10 +34,11 @@ public class NoticeInsertServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		String topView = request.getParameter("topView"); //추가함
 		
 		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
-		Notice n = new Notice(title, content.replaceAll("\n", "<br>"), writer);
+		Notice n = new Notice(title, content.replaceAll("\n", "<br>"), writer, topView);
 		
 		int result = new NoticeService().insertNotice(n);
 		
@@ -45,7 +46,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "공지사항이 성공적으로 등록되었습니다.");
 			response.sendRedirect("noticeView.no");
 		}else {
-			request.getSession().setAttribute("msg", "공지사항 등록 실패");
+			request.getSession().setAttribute("errMsg", "공지사항 등록 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
 		}
 	}

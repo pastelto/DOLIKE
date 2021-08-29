@@ -211,95 +211,116 @@
 	</div>
 	<%@ include file="../common/footer.jsp" %> 
 
-<script>
+	<script>
  	
- 	window.onload = function(){
- 		
-		var followId = $("#0id").text();
-		var followId1 = $("#1id").text();
-		var followId2 = $("#2id").text();
-		var followId3 = $("#3id").text();
-		
-		if(followId == ""||followId1 ==""||followId2 ==""||followId3 ==""){
-			var con = confirm("아직 TOP4 정산 전입니다! 친구를 추가해보세요~")
-			if(con==true){
-				location.href="<%= contextPath %>/MyFollow.fl";
-			}else{
-				location.href="<%= contextPath %>/index2.jsp";
-			}
-		}else{
-			console.log(followId);
-			console.log(followId1);
-			console.log(followId2);
-			console.log(followId3);
+	 	window.onload = function(){
+	 		
+			var followId = $("#0id").text();
+			var followId1 = $("#1id").text();
+			var followId2 = $("#2id").text();
+			var followId3 = $("#3id").text();
 			
-			$.ajax({
-				url:"followTop4.fl",
-				data:{followId:followId,
-					followId1:followId1,
-					followId2:followId2,
-					followId3:followId3},
-				type:"get",
-				dataType: "json",
-				success:function(result){
-					var nickname = 0
-					var followerCount = 0
-					var boardCount = 0
-					
-					var nickname1 = 0
-					var followerCount1 = 0
-					var boardCount1 = 0
-					
-					var nickname2 = 0
-					var followerCount2 = 0
-					var boardCount2 = 0
-					
-					var nickname3 = 0
-					var followerCount3 = 0
-					var boardCount3 = 0
-					$.each(result, function(i){
-
-						nickname = result[i].nickname 
-						followerCount = result[i].followerCount 
-						boardCount = result[i].boardCount
-						
-						nickname1 = result[i].nickname1
-						followerCount1 = result[i].followerCount1
-						boardCount1 = result[i].boardCount1
-						
-						nickname2 = result[i].nickname2
-						followerCount2 = result[i].followerCount2
-						boardCount2 = result[i].boardCount2
-						
-						nickname3 = result[i].nickname3
-						followerCount3 = result[i].followerCount3 
-						boardCount3 = result[i].boardCount3
+			if(followId == ""||followId1 ==""||followId2 ==""||followId3 ==""){
+<%-- 				var con = confirm("아직 TOP4 정산 전입니다! 친구를 추가해보세요~")
+				if(con==true){
+					location.href="<%= contextPath %>/MyFollow.fl";
+				}else{
+					location.href="<%= contextPath %>/index2.jsp";
+				} --%>
+				
+				Swal.fire({
+					  title: 'TOP4 정산 전입니다.',
+					  text: '친구를 추가해보세요!',
+					  icon: 'error',
+					  showCancelButton: true,
+					  confirmButtonColor: "#78c2ad",
+					  confirmButtonBorder: "none",
+					  cancelButtonColor: '#f3969a',
+					  cancelButtonBorder: "none",
+					  confirmButtonText: '친구추가',
+					  cancelButtonText: '돌아가기'
+					}).then((result) => {
+					  if (!result.isConfirmed) {
+						  location.href="<%= contextPath %>/index2.jsp";
+					 
+					  }else{
+						  location.href="<%= contextPath %>/MyFollow.fl";
+					  }
 					})
-					
-					$("#0nick").text(nickname)
-					$("#0fl").text(followerCount)
-					$("#0bo").text(boardCount)
-					
-					$("#1nick").text(nickname1)
-					$("#1fl").text(followerCount1)
-					$("#1bo").text(boardCount1)
-					
-					$("#2nick").text(nickname2)
-					$("#2fl").text(followerCount2)
-					$("#2bo").text(boardCount2)
-					
-					$("#3nick").text(nickname3)
-					$("#3fl").text(followerCount3)
-					$("#3bo").text(boardCount3)
-				},
-				error:function(){
-					console.log("추천 친구1 통신오류!")
-				}
-			})
+				
+			}else{
+				console.log(followId);
+				console.log(followId1);
+				console.log(followId2);
+				console.log(followId3);
+				
+				$.ajax({
+					url:"followTop4.fl",
+					data:{followId:followId,
+						followId1:followId1,
+						followId2:followId2,
+						followId3:followId3},
+					type:"get",
+					dataType: "json",
+					success:function(result){
+						var nickname = 0
+						var followerCount = 0
+						var boardCount = 0
+						
+						var nickname1 = 0
+						var followerCount1 = 0
+						var boardCount1 = 0
+						
+						var nickname2 = 0
+						var followerCount2 = 0
+						var boardCount2 = 0
+						
+						var nickname3 = 0
+						var followerCount3 = 0
+						var boardCount3 = 0
+						$.each(result, function(i){
+	
+							nickname = result[i].nickname 
+							followerCount = result[i].followerCount 
+							boardCount = result[i].boardCount
+							
+							nickname1 = result[i].nickname1
+							followerCount1 = result[i].followerCount1
+							boardCount1 = result[i].boardCount1
+							
+							nickname2 = result[i].nickname2
+							followerCount2 = result[i].followerCount2
+							boardCount2 = result[i].boardCount2
+							
+							nickname3 = result[i].nickname3
+							followerCount3 = result[i].followerCount3 
+							boardCount3 = result[i].boardCount3
+						})
+						
+						$("#0nick").text(nickname)
+						$("#0fl").text(followerCount)
+						$("#0bo").text(boardCount)
+						
+						$("#1nick").text(nickname1)
+						$("#1fl").text(followerCount1)
+						$("#1bo").text(boardCount1)
+						
+						$("#2nick").text(nickname2)
+						$("#2fl").text(followerCount2)
+						$("#2bo").text(boardCount2)
+						
+						$("#3nick").text(nickname3)
+						$("#3fl").text(followerCount3)
+						$("#3bo").text(boardCount3)
+					},
+					error:function(){
+						console.log("추천 친구1 통신오류!")
+					}
+				})
+			}
 		}
-	}
-
-</script>
+	
+	</script>
 
 </body>
 </html>
