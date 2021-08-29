@@ -302,18 +302,30 @@ a {
 	</div>
 	
 	
-	<script>
+<script>
 	<% if(!list.isEmpty()){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
-				var chno = $(this).children().eq(0).text();				
-						
+				var chno = $(this).children().eq(0).text();										
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
 					})					
 				})
 	<% } %>
-	</script>
+	
+	<%if(loginUser == null) {%>
+	$(function() {
+		$("#clickUl>.item").click(function(){	
+			Swal.fire({
+				  title: "로그인이 필요합니다.",
+				  icon: 'error',
+				  confirmButtonColor: "#78c2ad",
+				  confirmButtonBorder: "none",
+				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
+				})	
+			})
+		});		
 
-
+	<%} %>
+</script>
 </body>
 </html>
