@@ -33,6 +33,20 @@ body {
 	color: #2363747;
 	text-align: left;
 }
+#mission{
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
+
+#mission:hover{
+	color: #78c2ad;
+	background-color: #fff;
+	border-color: #78c2ad;
+}
+#text-center{
+	text-align:center;
+}
 
 .navbar {
 	display: flex !important;
@@ -164,10 +178,18 @@ a {
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">진행중인 챌린지</a></li>
+                    </ol>
+                </div>
+            </div>		
 			<div class="container-fluid">
+			<%if(!list.isEmpty()) {%>
 				<div class="row" style="margin-bottom: 13%;">
 					<div class="topList col-10" align="center">
-
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">
 							<div class="card" style="width: 80%;">
@@ -214,24 +236,29 @@ a {
 						</div>
 					</div>
 				</div>
+				<%} %>
 				<div class="root-container">
 					<%
-					if (!list.isEmpty() && !fileList.isEmpty()) {
+					if (!list.isEmpty() || !fileList.isEmpty()) {
 					%>
 					<div class="container ">
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<ul class="live-item-list">
+									<ul class="live-item-list" id="clickUl">
 										<%
 										for (int i = 0; i < list.size(); i++) {
 										%>
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
-											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>/challengedetail.ch"
-													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-												</a>
+											<div class="item-wrap">											
+												<%for(int j=0; j<fileList.size(); j++) {%>
+													<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
+														<a href="<%=request.getContextPath()%>/challengedetail.ch"
+															class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+														</a>
+													<%} %>
+												<%} %>
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
@@ -252,6 +279,22 @@ a {
 							</div>
 						</div>
 					</div>
+					<%} else {%>
+					<br>
+					<br>
+					<div class="container col-5 ">
+							<div class="card" id="null-end">
+								<div class="card-header" id="text-center">새로운 챌린지 도착 하는 중</div>
+								<div class="card-body">
+									<div class="items-center" style="text-align:center;">
+										<a href="<%=request.getContextPath()%>/challengeApplyForm.ch" class="item-click"> 
+											<img src="./resources/challenge_upfiles/null-main.png" alt="null-main" class="null-main" width="300px" height="300px"><br><br>
+											<button class="btn btn-primary px-3 ml-4" id="mission">챌린지 신청하러 가기</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<%} %>
 				</div>
 			</div>
@@ -263,7 +306,7 @@ a {
 	<script>
 	<% if(!list.isEmpty()){%>
 		$(function() {
-			$("ul>li").click(function(){
+			$("#clickUl>.item").click(function(){
 				var chno = $(this).children().eq(0).text();				
 						
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;

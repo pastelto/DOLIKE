@@ -22,18 +22,31 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	   $(function(){
-	      var msg = "<%=msg%>";
-
-			if (msg != "null") {
-				alert(msg);
-		<%session.removeAttribute("msg");%>
-		} else{
-			console.log("Hi");
-		}
-			
-	   })
+		      var msg = "<%=msg%>";
+				if (msg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: msg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						imageUrl: 'https://media.giphy.com/media/26FL4fdR9oRs2tdEA/giphy-downsized-large.gif?cid=ecf05e4727y1nhruedl90s1awfthl8e9kc0dcjl2oju92fhv&rid=giphy-downsized-large.gif&ct=g',
+						imageWidth: 400,
+						imageHeight: 400,
+						backdrop: `
+							rgba(243,150,154,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("msg");%>
+			} else{
+				console.log("Hi");
+			}
+		})
 	</script>
 	<style>
 	#loginBtn, #loginBtnModal, #EnrollBtnModal {
@@ -42,29 +55,27 @@
     	border-color: #78c2ad;
 	}
 	
-	  #loginBtnModal:hover, #EnrollBtnModal:hover{
-      	background-color: #f3969a;
-      	border-color: #f3969a;
-      	
-      }
+  	#loginBtnModal:hover, #EnrollBtnModal:hover {
+     	background-color: #f3969a;
+     	border-color: #f3969a;
+    }
 	
 	#doLikeLogo{
-	 background: white;
-	 }
+	 	background: white;
+	}
 	 
-	  .favBoard {
-	  background-color: #fff;
-	  border: 2px none #2199e8;
-	  padding: 5px 5px;
-	  border-radius: 2px;
-	  color: #2199e8;
-	  background:rgba(0, 0, 0, 0.0);
+	.favBoard {
+	  	background-color: #fff;
+	  	border: 2px none #2199e8;
+	  	padding: 5px 5px;
+	  	border-radius: 2px;
+	  	color: #2199e8;
+	  	background:rgba(0, 0, 0, 0.0);
 	} 
 	
 	#mailIcon:hover{
 		color: #78c2ad;
 	}
-	
 	
 	.btn-like {
         color: transparent;
@@ -73,39 +84,43 @@
         background-color: rgba(0, 0, 0, 0);
         margin-left: 20px;
         margin-right: 20px;
-        
-       } 
-      .btn-like:hover {
+    } 
+    
+    .btn-like:hover {
         text-shadow: 0 0 0 #f3969a;
-      }
-      .btn-like.done {
+    }
+    
+    .btn-like.done {
         text-shadow:  0 0 0 #f3969a;
-      }
-      .btn-like.done:hover {
+    }
+    
+    .btn-like.done:hover {
         color: transparent;
         text-shadow: 0 0 0 #777;
-      }
+    }
       
-      .boardMargin{
+    .boardMargin{
       	padding-left: 20px !important;
-      }
+    }
+    
 	#searchBtn {
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
 	}
-	#searchBtn:hover {
+	
+	#searchBtn:hover, #loginBtn:hover {
 		color: #78c2ad;
     	background-color: #fff;
     	border-color: #78c2ad;
 	}	
-	.header-left .input-group{
+	
+	.header-left .input-group {
 		margin-top:11px;
 	}	
 	</style>
 </head>
 <body>
-    
         <!--**********************************
             Nav header start  
         ***********************************-->
@@ -129,6 +144,7 @@
         ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
+                
                 <div class="nav-control">
                     <div class="hamburger is-active">
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -143,7 +159,7 @@
                         <div class="input-group text-center mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<button id="searchBtn" class="btn" type="submit" onclick="search.bo">검색</button>
+                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">
@@ -155,14 +171,14 @@
                     </div>
                 </div>
                 
-            <% if(loginUser == null) {%>  
-			<div class="loginArea">
-				<button class="btn btn-primary px-3 ml-4" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
-			</div>
-
-            <%}else{ %>
-            <div class="header-right">
-                    <ul class="clearfix">
+	            <% if(loginUser == null) {%>  
+				<div class="header-right">
+					<button class="btn btn-primary px-3 mt-4 mr-3" id="loginBtn" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
+				</div>
+	
+	            <%}else{ %>
+	            <div class="header-right">
+	                 <ul class="clearfix">
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
@@ -192,10 +208,9 @@
                     </ul>
                 </div>
                	<%} %> 
-                
             </div>
-           </div>
-      <!--**********************************
+        </div>
+       <!--**********************************
                 Header end ti-comment-alt
         ***********************************-->
        <!--**********************************
@@ -210,8 +225,8 @@
                         </a>
                     </li>
                     <% if(loginUser == null) {%> 
-                      	<li class="mega-menu-sm">
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                      	<li class="mega-menu-sm"  id="allmenu">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList1" >
 	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
 	                        </a>
 	                        <ul aria-expanded="false" class="collapse">
@@ -225,8 +240,8 @@
 	                        </ul>
 						</li>
                     <%}else{ %>
-                       <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                       <li class="mega-menu-sm" id="allmenu">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList2">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
@@ -365,7 +380,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	/*
+        	
         	function searchBoard(){
         		var findBoard = $("#searchBoardForm input[name=findBoard]");
         		if(findBoard.val() == ""){
@@ -389,7 +404,7 @@
         		})
         		
         		
-        	}*/
+        	}
 				        
 			$(function(){
 				$("#btn-like").eq(0).click(function(){

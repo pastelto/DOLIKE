@@ -52,8 +52,6 @@ public class ChallengeInsertServlet extends HttpServlet {
 
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
 			String savePath = resources + "\\challenge_upfiles";
-			
-			System.out.println("savePath : " + savePath);
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
@@ -69,9 +67,6 @@ public class ChallengeInsertServlet extends HttpServlet {
 				}
 			}	
 			
-			System.out.println(chTitle);
-			System.out.println(categoryNo);
-			
 			Challenge c = new Challenge();
 
 			c.setChTitle(chTitle);
@@ -81,10 +76,6 @@ public class ChallengeInsertServlet extends HttpServlet {
 			c.setEnd(end);
 			c.setVoteCount(votecount);
 			
-			System.out.println(votecount + "insert");
-
-			System.out.println("ChallengeInsertServlet : " + chTitle + ", " + content + ", " + categoryNo + ", " + start
-					+ ", " + end + ", " + votecount);
 
 			ChallengeAttachment cat = null;
 
@@ -115,7 +106,7 @@ public class ChallengeInsertServlet extends HttpServlet {
 					result = 0;
 				}
 
-				request.setAttribute("msg", "챌린지 등록이 실패했습니다.");
+				request.setAttribute("msg", "챌린지 등록 실패");
 
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);

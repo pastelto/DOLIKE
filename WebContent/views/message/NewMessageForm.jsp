@@ -3,8 +3,6 @@
 	import="java.util.ArrayList, com.kh.message.model.vo.Message"%>
 <%
 	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
-
-	System.out.println(request.getContextPath());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +17,13 @@
 <!-- Custom Stylesheet -->
 <link href="./css/style.css" rel="stylesheet">
 <style>
-#submitBtn, #resetBtn, #sendBtn {
+#submitBtn, #resetBtn, #sendBtn, #searchPopList {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -71,7 +68,7 @@
 				<div class="col p-md-0">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-						<li class="breadcrumb-item active"><a onclick="submitMsg();">쪽지
+						<li class="breadcrumb-item active"><a onclick="submitMsg();"sss>쪽지
 								보내기</a></li>
 					</ol>
 				</div>
@@ -87,15 +84,19 @@
 									<a href="<%= request.getContextPath() %>/write.ms" id="sendBtn"
 										class="btn btn-primary btn-block">쪽지보내기</a>
 									<div class="mail-list mt-4">
-										<a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0">
-										<i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> 
-										
-										<%if(newMsgCount > 0){ %> 
-										<span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left: 10px;"> <%= newMsgCount %></span> <%} %></a>
-										 <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0">
-										 <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
-										 <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0">
-										 <i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+										<a href="<%= request.getContextPath() %>/list.ms"
+											class="list-group-item border-0 text-primary p-r-0"><i
+											class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은
+												쪽지함</b> <%if(newMsgCount > 0){ %> <span
+											class="badge badge-primary badge-sm float-none m-t-5"
+											style="background-color: #f3969a; margin-left: 10px;">
+												<%= newMsgCount %>
+										</span> <%} %></a> <a href="<%= request.getContextPath() %>/slist.ms"
+											class="list-group-item border-0 p-r-0"><i
+											class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸
+											쪽지함</a> <a href="<%= request.getContextPath() %>/dlist.ms"
+											class="list-group-item border-0 p-r-0"><i
+											class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
 								</div>
 
@@ -104,10 +105,10 @@
 										<h4>쪽지 보내기</h4>
 									</div>
 									<div class="compose-content mt-5">
-										<form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
-
-											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
-
+										<form id="newMessageInsertForm"
+											action="<%= request.getContextPath() %>/write.ms"
+											method="post" enctype="multipart/form-data">
+											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" id="hiddenLoginUserId">
 <!-- 											<div class="form-group">
 												<div class="col-6">
 												<input type="text" class="form-control bg-transparent"
@@ -115,42 +116,65 @@
 												<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp2();">
 													<i class="mdi mdi-magnify"></i> 검색하기</button>		
 													</div>
-
 											</div> -->
 											
 											
 											<div class="input-group text-center mb-3">
-												<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30%;">
-												<div class="input-group-append">
-													<!-- <button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();"> -->
-													<i class="mdi mdi-magnify" onclick="searchPopUp();" > 검색하기</i>
-													<!-- </button>	 -->
-												</div>
+									<!--<input type="text" class="form-control" placeholder=" 받는 사람 아이디" name="recvId" style="width: 30% !important;">
+												
+												// 내 원래 아이디 검색창
+ 												<div class="input-group-append">
+													<button id="searchUserListBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="searchPopUp();">
+													<span class="input-group-text" id="basic-addon1" style="background: #78c2ad">
+													<img src="./resources/images/loupe1.png" style="background: #78c2ad">
+													</span>
+													<input class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button" value="검색하기" id="searchPopList" onclick="searchPopUp();">
+												</div> -->
+												
+												<!-- 회원 검색창 -->
+												
+												<div class="input-group text-center mb-3" style="width: 50% !important;">
+												<div class="input-group-prepend">
+						                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1" style="margin-right: 10px;"><i class="mdi mdi-magnify"></i></span>
+						                        </div>
+						                        	<input name="findBoard" type="text" id="recvInput" class="form-control" placeholder=" 받는 사람 아이디 또는 닉네임" aria-label="Search Dashboard">
+						                        	<div class="input-group-append">
+						                        		<input type="button" id="searchBtn" class="btn" value="검색하기" onclick="searchUserId();">
+						                        	</div>
+						                        </div>
+												
+
 											</div>
 											
-											<div class="input-group">
-												<input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
+											<div class="form-group">
+												<input type="text" name="messageTitle"
+													class="form-control bg-transparent" placeholder=" 제목">
 											</div>
 											<div class="input-group">
-												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요."></textarea>
-											</div>
+												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요." style="resize: none;"></textarea>
 
+											</div>
+											<hr>
+											<div>
 											<h5 class="m-b-20">
 												<i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일
 											</h5>
-											<div class="input-group">
+											<div class="form-group">
 												<div class="fallback">
-													<input class="l-border-1" name="upfile" type="file" multiple="multiple">
+													<input class="l-border-1" name="upfile" type="file"
+														multiple="multiple">
 												</div>
 											</div>
-
-											<div class="text-left m-t-15">
-												<button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="submitMsg();">
+											</div>
+											<div>
+											<div class="text-center m-t-15">
+												<button type="submit" id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10">
 													<i class="fa fa-paper-plane m-r-5"></i> 보내기
 												</button>
 												<button id="resetBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset">
 													<i class="ti-close m-r-5 f-s-12"></i> 취소
 												</button>
+											</div>
 											</div>
 										</form>
 									</div>
@@ -166,53 +190,30 @@
 
 	</div>
 
-
-	<script>
+		<script>
 		
-	function submitMsg(){
-            // 확인, 취소버튼에 따른 후속 처리 구현
-            swal.fire({
-                title: '확인',
-                text: "쪽지가 정상적으로 발송되었습니다.", 
-                type: 'success',
-                confirmButtonText: '확인',          
-                confirmButtonColor: "#78c2ad",
-            }).then(function(result) { 
-                if(result.isConfirmed) {                
-                $("#submitBtn").submit();  
-            }
-        });
-	}
-
-
-		function searchPopUp(){
+		window.screen.width;
+    	window.screen.height;
+    	var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+    	var popupY= (document.body.offsetHeight / 2) - (300 / 2);
+		
+		var openSearchPopUp;
+		var title = "Do Like - 친구 찾기";
+		/* var setting = "toolbar=yes,scrollbars=no,resizable=no,width=800,height=800, left="+ popupX + ", top="+ popupY;  */
+		
+        function searchUserId(){
+        	
+        	alert(document.getElementById("recvInput").value);
+        	
+			// 팝업 띄워주기 
+			window.name = "NewMessageForm";	
+			/* var url = "http://localhost:7070/DoLikeProject/views/common/searchFriend.jsp"; */
+			var openWin = window.open("http://localhost:8090/DoLikeProject/views/common/searchFriend.jsp", title, "toolbar=yes,scrollbars=yes,resizable=no,width=700,height=700, left="+ popupX + ", top="+ popupY);
 			
-			var searchWord = $("input[name=recvId]").val();
-			
-			var search = confirm(searchWord);
-			
-/* 			if(!search){
-					swal.fire({
-		                title: '확인',
-		                text: "쪽지를 보낼 회원의 아이디 또는 별명을 입력해주세요.", 
-		                type: 'error',
-		                confirmButtonText: '확인',          
-		                confirmButtonColor: "#78c2ad",
-		            })
-				} else if(search){ */
-			
-			var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=800,height=800"; 
-			<%-- var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord; --%>
-			 var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=user01&searchWord=user"; 
-			<%-- var url = <%= contextPath %> + "/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord; --%>
-			var title = "Do Like - 친구 찾기";
-			
-			window.open(url, title , setting);
-			
-/* 			} */
-		}
+			// 입력 값 받아와서 넘겨주기
+            /* openWin.document.getElementById("userIdValue").value = window.getElementById("hiddenLoginUserId").value; */
+        }
 		</script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </body>
 

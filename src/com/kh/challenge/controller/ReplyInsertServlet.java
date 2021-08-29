@@ -45,46 +45,34 @@ public class ReplyInsertServlet extends HttpServlet {
 			int maxSize = 10 * 1024 * 1024;
 
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			String savePath = resources + "\\challenge_upfiles";
-			
-			System.out.println("savePath : " + savePath);
+			String savePath = resources + "\\challenge_upfiles";			
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
 			int chno = Integer.parseInt(mr.getParameter("chno"));
-			String content = mr.getParameter("content");
+			String content = mr.getParameter("replyContent");
 			String wirter = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-
-			System.out.println(chno + " rp servlet");
-			System.out.println(content + "rp servlet");
-			System.out.println(wirter + "rp servlet");
 
 			cp.setChNo(chno);
 			cp.setContent(content);
 			cp.setRpWriter(wirter);
 			
 
-			System.out.println("RplyInsertServlet : " + chno + ", " + content + ", " + wirter );
-
 			if (mr.getOriginalFileName("file") != null) {
 
 				String originName = mr.getOriginalFileName("file");
 				String changeName = mr.getFilesystemName("file");
 
-				System.out.println("originName ? " + originName);
-				System.out.println("changeName ? " + changeName);
-
 				cp.setLocation(savePath);
 				cp.setOriginName(originName);
 				cp.setNewName(changeName);
-			}
-			System.out.println(cp + " cp servlet");
+
 
 			result = new ChallengeService().insertReply(cp);
 
 			if (result > 0) {
 				response.sendRedirect("challengedetail.ch?chno="+chno);
-				
+				request.getSession().setAttribute("msg", "댓글 등록 성공");
 				result = 0;
 			} else {
 				if (cp != null) {
@@ -93,12 +81,11 @@ public class ReplyInsertServlet extends HttpServlet {
 					result = 0;
 				}
 
-				//request.setAttribute("msg", "댓글등록이 실패했습니다.");
 
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 			}
-
+			}
 		}
 	}
 

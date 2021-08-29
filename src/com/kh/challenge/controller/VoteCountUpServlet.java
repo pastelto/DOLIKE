@@ -37,7 +37,6 @@ public class VoteCountUpServlet extends HttpServlet {
 		ChallengeVote cv = new ChallengeVote();
 		
 		cv.setChTitle(chTitle);
-		System.out.println(chTitle + "!!!");
 		int result = new ChallengeService().voteCountUp(cv);
 
 		if (result > 0) {
@@ -45,7 +44,7 @@ public class VoteCountUpServlet extends HttpServlet {
 			response.sendRedirect("challengeVote.ch");
 			System.out.println("투표 성공!");
 		} else {
-			request.setAttribute("msg", "투표에 실패했습니다.");
+			request.setAttribute("msg", "투표 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
