@@ -201,7 +201,7 @@
 		font-family: 'Gowun Dodum', sans-serif;
 	}
 	
-	html{
+	*{
 	font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
