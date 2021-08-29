@@ -264,13 +264,7 @@
 							
 	                        <ul aria-expanded="false" class="collapse">
 	                        
-	                            <!-- <li><a href="list.bo">카테고리1</a></li>
-	                            <li><a href="list.bo">카테고리2</a></li>
-	                            <li><a href="list.bo">카테고리3</a></li>
-	                            <li><a href="list.bo">카테고리4</a></li>
-	                            <li><a href="list.bo">카테고리5</a></li>
-	                            <li><a href="list.bo">카테고리6</a></li>
-	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
+	                                              
 	                        </ul>
 
 						</li>
@@ -280,13 +274,7 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
+
                         </ul>
 
                         <!-- 즐겨찾는 게시판 Ajax Script -->
