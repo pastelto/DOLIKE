@@ -80,7 +80,6 @@
 								<hr>
 								<div align="center">
 									<button id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/noticeView.no'">돌아가기</button>
-									<!-- 로그인 세션 생성시 이부분 주석 풀기  -->
 									<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
 										<br>
 										<div class="float-right">

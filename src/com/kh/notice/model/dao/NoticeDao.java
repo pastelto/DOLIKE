@@ -59,7 +59,8 @@ public class NoticeDao {
 				list.add(new Notice(rset.getInt("NOTICE_NO"),
 									rset.getString("NOTICE_TITLE"),
 									rset.getInt("COUNT"),
-									rset.getDate("CREATE_DATE")));
+									rset.getDate("CREATE_DATE"),
+									rset.getString("NOTICE_TOP"))); 
 			}
 			
 		} catch (SQLException e) {
@@ -113,7 +114,8 @@ public class NoticeDao {
 							rset.getString("NOTICE_TITLE"),
 							rset.getString("NOTICE_CONTENT"),
 							rset.getInt("COUNT"),
-							rset.getDate("CREATE_DATE"));
+							rset.getDate("CREATE_DATE"),
+							rset.getString("NOTICE_TOP"));
 			}
 			
 		} catch (SQLException e) {
@@ -138,6 +140,7 @@ public class NoticeDao {
 			pstmt.setString(1, n.getNoticeTitle());
 			pstmt.setString(2, n.getNoticeContent());
 			pstmt.setString(3, n.getNoticeWriter());
+			pstmt.setString(4, n.getNoticeTop()); 
 			
 			result = pstmt.executeUpdate();
 			
@@ -185,7 +188,8 @@ public class NoticeDao {
 			
 			pstmt.setString(1, n.getNoticeTitle());
 			pstmt.setString(2, n.getNoticeContent());
-			pstmt.setInt(3, n.getNoticeNo());
+			pstmt.setString(3, n.getNoticeTop());
+			pstmt.setInt(4, n.getNoticeNo());
 			
 			result = pstmt.executeUpdate();
 			

@@ -11,6 +11,7 @@ public class Notice {
 	private int count;				//	COUNT	NUMBER
 	private Date createDate;		//	CREATE_DATE	DATE
 	private String noticeStatus;	//	NOTICE_STATUS	VARCHAR2(1 BYTE)
+	private String noticeTop;		//  NOTICE_TOP VARCHAR2(1 BYTE) 
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub
@@ -53,6 +54,51 @@ public class Notice {
 		this.createDate = createDate;
 	}
 
+	//추가
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
+			Date createDate, String noticeStatus, String noticeTop) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+		this.noticeStatus = noticeStatus;
+		this.noticeTop = noticeTop;
+	}
+
+	public Notice(String noticeTitle, String noticeContent, String noticeWriter, String noticeTop) {
+		super();
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.noticeTop = noticeTop;
+	}
+
+	public Notice(int noticeNo, String noticeTitle, int count, Date createDate, String noticeTop) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.count = count;
+		this.createDate = createDate;
+		this.noticeTop = noticeTop;
+	}
+	
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, int count, Date createDate, String noticeTop) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.count = count;
+		this.createDate = createDate;
+		this.noticeTop = noticeTop;
+	}
+	
+	
+	
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -109,12 +155,29 @@ public class Notice {
 		this.noticeStatus = noticeStatus;
 	}
 
+	//추가
+	public String getNoticeTop() {
+		return noticeTop;
+	}
+
+	public void setNoticeTop(String noticeTop) {
+		this.noticeTop = noticeTop;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
 				+ ", noticeWriter=" + noticeWriter + ", count=" + count + ", createDate=" + createDate
-				+ ", noticeStatus=" + noticeStatus + "]";
+				+ ", noticeStatus=" + noticeStatus + ", noticeTop=" + noticeTop + "]";
 	}
 
+	/*
+	 * @Override public String toString() { return "Notice [noticeNo=" + noticeNo +
+	 * ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent +
+	 * ", noticeWriter=" + noticeWriter + ", count=" + count + ", createDate=" +
+	 * createDate + ", noticeStatus=" + noticeStatus + "]"; }
+	 */
+
+	
 	
 }

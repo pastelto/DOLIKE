@@ -37,7 +37,7 @@ public class NoticeReadServlet extends HttpServlet {
 			request.setAttribute("notice", notice);
 			view = "views/notice/noticeReadView.jsp";
 		}else {
-			request.setAttribute("msg", "공지사항 조회에 실패하였습니다.");
+			request.setAttribute("errMsg", "공지사항 조회에 실패하였습니다.");
 			view = "views/common/errPage.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);
