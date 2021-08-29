@@ -52,10 +52,10 @@ public class findUserServlet extends HttpServlet {
 		/* String userId1 = (String)request.getAttribute("userIdValue"); */
 		System.out.println("로그인 유저 : " + userId);
 		// 검색한 아이디 또는 닉네임 값
-		String searchWord = (String)request.getAttribute("searchWord");
+		String searchWord = (String)request.getParameter("searchWord");
 		System.out.println("검색 단어 : " + searchWord);
 		// 검색 옵션
-		String choice = (String)request.getAttribute("selectIdorNN");
+		String choice = (String)request.getParameter("choice");
 		System.out.println("검색 옵션 : " + choice);
 		// 검색 결과 개수
 		listCount = new searchService().getSearchUserListCount(userId, searchWord, choice);
@@ -105,7 +105,11 @@ public class findUserServlet extends HttpServlet {
 		
 		JSONObject jsonMap = null;
 		
-		jsonMap = new JSONObject()
+		jsonMap = new JSONObject();
+		
+		jsonMap.put("jArr", jArr);
+		jsonMap.put("pi", pi);
+		jsonMap.put("listCount", listCount);
 		
 		response.setContentType("application/json; charset=utf-8");
         response.getWriter().print(jsonMap);

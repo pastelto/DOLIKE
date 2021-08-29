@@ -22,7 +22,7 @@
 <meta charset="UTF-8">
 <title>DO LIKE - 회원 검색</title>
 <link href="./css/style.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -189,7 +189,7 @@
 			<div class="col-lg-12">
 				<div class="card" style="height: 550px;  width: 660px; ">
 					<div class="card-body" style="height: 100%;">
-						<form class="form-inline" method="post">
+						<form class="form-inline" method="post" action="searchUserList()">
 							<div class="form-group" style="width:100%;" >
 
 									 <select class="form-control" style="width: 90px; margin-right: 10px; margin-left: 20%;" id="selectIdorNN" name="selectIdorNN">
@@ -199,9 +199,9 @@
 								<!-- </span> -->
 								<div class="input-group">
 								<!-- 검색 단어 입력 폼 -->
-								<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="아이디를 입력해주세요." style="width: 20rem;"/>
+								<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="아이디를 입력해주세요." style="width: 20rem;">
 									<!-- 검색 진행 버튼 -->
-									<input type="button" id="searchBtn" class="btn" value="검색하기" onclick="searchUserList();">
+								<button type="button" id="searchBtn" class="btn" value="검색하기">검색하기</button>
 							</div>
 							</div>
 
@@ -228,11 +228,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+<!-- 									<tr>
 									<td>1</td>
 									<td>user01</td>
 									<td>안녕하세요</td>
-									</tr>
+									</tr> -->
 								</tbody>
 								</table>
 
@@ -292,7 +292,7 @@
 		</div>
 		</div>
 		</div>
-		<script>
+		<script type="text/javascript">
 		
 /* 		$(function(){
 			
@@ -329,28 +329,29 @@
 			
 			$.ajax({
 				url:"findUser.fd",
-				type:"post",
 				data:{searchWord:searchWord,
 					  choice:choice	
 				},
 				dataType:"json",
-				type:"get",
-				success: function(map){
+	            type:"get",
+	            success: function(map){
 					console.log("map : " + map);
 					console.log("map[jArr] : " + map[jArr]);
+					console.log("map[pi] : " + map[pi]);
+					console.log("map[listCount] : " + map[listCount]);
 					
-					var loginUser = "<%= loginUser %>";
+					<%-- var loginUser = <%= loginUser %>; --%>
 					var userList = ""
 					var $tableBody = $("#searchMemberList tbody")
 					
-					$.each(ma["jArr"], function(index, value){
+					$.each(map["jArr"], function(index, value){
 						
 						console.log(value);
 						
 	                     var $tr = $("<tr>");
-	                     var $noTd = $("<td>").text(value.no); //<td> 1(value.no) </td> 이렇게 넣어주겠다는 것 
-	                     var $idTd = $("<td>").text(value.name); 
-	                     var $nickNameTd = $("<td>").text(value.age); 
+	                     var $noTd = $("<td>").text(index); //<td> 1(value.no) </td> 이렇게 넣어주겠다는 것 
+	                     var $idTd = $("<td>").text(value.userId); 
+	                     var $nickNameTd = $("<td>").text(value.nickName); 
 						
 	                     $tr.append($noTd);   
 	                     $tr.append($idTd);
@@ -359,16 +360,16 @@
 	                     $tableBody.append($tr);
 					})
 				}, 
-				error:function(e){
+				error:function(request,status,error){
 					console.log("ajax 통신 실패!");
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
-				
-			})
+			
+			});
 			
 		}
 		
 		
-		
-		</script>
+</script>
 </body>
 </html>
