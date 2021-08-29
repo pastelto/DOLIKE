@@ -52,7 +52,7 @@ public class MemberInsertServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "회원가입 성공");
 			response.sendRedirect(request.getContextPath() + "/index2.jsp");
 		} else {
-			request.setAttribute("msg", "회원가입 실패");
+			request.setAttribute("errMsg", "회원가입 실패");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

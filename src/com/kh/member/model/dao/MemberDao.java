@@ -41,9 +41,7 @@ public class MemberDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
 			System.out.println("loginUserId : " + userId);
-			//System.out.println("loginUserPwd : " + userPwd);
 			rset = pstmt.executeQuery();
-			//System.out.println("ResultSet : " + rset);
 			if (rset.next()) {
 				loginUser = new Member(
 						rset.getString("USER_ID"),
@@ -189,8 +187,8 @@ public class MemberDao {
 		return result;
 	}
 
+	//아이디 중복체크
 	public int idCheck(Connection conn, String userId) {
-		// TODO Auto-generated method stub
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -208,7 +206,6 @@ public class MemberDao {
 				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -217,6 +214,7 @@ public class MemberDao {
 		return result;
 	}
 
+	//닉네임 중복체크
 	public int nickCheck(Connection conn, String nickName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -235,7 +233,6 @@ public class MemberDao {
 				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -244,6 +241,7 @@ public class MemberDao {
 		return result;
 	}
 
+	//전화번호 중복체크
 	public int phoneCheck(Connection conn, String phone) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -262,7 +260,6 @@ public class MemberDao {
 				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -271,6 +268,8 @@ public class MemberDao {
 		return result;
 	}
 
+	
+	//이메일 중복체크
 	public int emailCheck(Connection conn, String email) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -289,7 +288,6 @@ public class MemberDao {
 				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -298,6 +296,7 @@ public class MemberDao {
 		return result;
 	}
 	
+	//계정 관리 접근
 	public int accessUpdate(Connection conn, String userId, String userPwd) {
 		int result = 0;
 		PreparedStatement pstmt = null;
