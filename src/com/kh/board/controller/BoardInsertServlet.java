@@ -51,6 +51,9 @@ public class BoardInsertServlet extends HttpServlet {
 			String tag = multiRequest.getParameter("tag");
 			String title = multiRequest.getParameter("boardTitle");
 			String content = multiRequest.getParameter("boardContent");
+			System.out.println("tag : " + tag);
+			System.out.println("title : " + title);
+			System.out.println("content : " + content);
 			
 			String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 			
@@ -60,7 +63,7 @@ public class BoardInsertServlet extends HttpServlet {
 			b.setBoardTitle(title);
 			b.setBoardContent(content);
 			b.setNickName(userId);
-			
+			/*
 			ArrayList<Attachment> fileList = new ArrayList<>();
 			
 			for(int i=1; i<=4; i++) {
@@ -81,25 +84,45 @@ public class BoardInsertServlet extends HttpServlet {
 						
 				}
 			}
+			*/
+			Attachment at = null;
 			
-			int result = new BoardService().insertBoard(b, fileList);
+			if(multiRequest.getOriginalFileName("upfile") != null) {
+				String originName = multiRequest.getOriginalFileName("upfile");
+				String changeName = multiRequest.getFilesystemName("upfile");
+				System.out.println("originName : "+originName);
+				System.out.println("changeName : "+changeName);
+						
+				at = new Attachment();
+				at.setFilePath(savePath);
+				at.setOriginName(originName);
+				at.setChangeName(changeName);
+				
+				
+			}
+			
+			int result = new BoardService().insertBoard(b, at);
 			
 			if(result  > 0) {
 				response.sendRedirect("list.bo");
-				/*
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
+				/*
+				
 				response.sendRedirect("list.bo");
 				File successFile = new File(savePath+at.getChangeName());
 				System.out.println("successFile : " + successFile );
 				*/
 			}else {
-				for(int i =0; i<fileList.size(); i++) {
-					File failedFile = new File(savePath+ fileList.get(i).getChangeName());
+				//for(int i =0; i<fileList.size(); i++) {
+				if(at != null) {
+					File failedFile = new File(savePath+ at.getChangeName());
 					failedFile.delete();
 				}
+				
 				request.setAttribute("msg", "게시글 등록 실패");
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
+			}
 				/*
 				 * if(at != null) {
 					File failedFile = new File(savePath+at.getChangeName());
@@ -109,7 +132,7 @@ public class BoardInsertServlet extends HttpServlet {
 					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 					view.forward(request, response);
 				*/
-			}
+			
 			
 		}
 		

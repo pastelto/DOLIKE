@@ -1,28 +1,23 @@
-package com.kh.member.controller;
+package com.kh.admin.model.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-
 /**
- * Servlet implementation class MemberPageServlet
+ * Servlet implementation class AdminMemberInfoServlet
  */
-@WebServlet("/mypage.me")
-public class MemberPageServlet extends HttpServlet {
+@WebServlet("/MemberInfo.am")
+public class AdminMemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberPageServlet() {
+    public AdminMemberInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +27,7 @@ public class MemberPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		String userId = loginUser.getUserId();
-		
-		Member member = new MemberService().selectMember(userId);
-		
-		System.out.println("member : " + member);
-		
-		RequestDispatcher view = null;
-		
-		if(member != null) {
-			request.setAttribute("loginUser", loginUser); 
-			view = request.getRequestDispatcher("views/member/myPage.jsp");
-		}else {
-			request.setAttribute("errMsg", "조회 실패");
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-		}
-		
-		view.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

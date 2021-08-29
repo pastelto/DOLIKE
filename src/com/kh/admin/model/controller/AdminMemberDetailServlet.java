@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.admin.model.controller;
 
 import java.io.IOException;
 
@@ -9,45 +9,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Attachment;
-import com.kh.board.model.vo.Board;
+import com.kh.admin.model.service.AdminService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class AdminMemberDetailServlet
  */
-@WebServlet("/detail.bo")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/MemberDetail.am")
+public class AdminMemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailServlet() {
+    public AdminMemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**.replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>")
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		Board b = new BoardService().selectBoard(bno);
-		Attachment at = new BoardService().selectAttachment(bno);
+		String amno = request.getParameter("amno");
+		System.out.println("회원 목록에서 선택하여 가져오는 값 amno : " + amno);
+		Member am = new AdminService().selectAdminMember(amno);
 		
-		
-		if(b != null) {
-			request.setAttribute("b", b);
-			request.setAttribute("at", at);
-			request.getRequestDispatcher("views/board/boardRead.jsp").forward(request, response);
+		if(am != null) {
+			request.setAttribute("am", am);
+			request.getRequestDispatcher("views/admin/adminMemberDetailView.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("msg", "게시판 상세 조회 실패");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			request.setAttribute("msg", "회원 조회 실패");
+	         
+	        RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+	        view.forward(request, response);
 		}
 	}
 

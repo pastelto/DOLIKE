@@ -41,10 +41,11 @@ public class Board {
 		this.views = views;
 		this.categoryNo = categoryNo;
 	}
-	public Board(int boardNo, int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
+	public Board(int boardNo, String tagName,int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
 		//select list 
 		super();
 		this.boardNo = boardNo;
+		this.tagName = tagName;
 		this.nickName = nickName;
 		this.boardTitle = boardTitle;
 		this.boardDate = boardDate;

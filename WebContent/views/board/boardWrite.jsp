@@ -21,6 +21,16 @@
 	.title-class{
 		width:100%;
 	}
+	#subBtn, #clBtn{
+		color: #fff;
+	    background-color: #78c2ad;
+	    border-color: #78c2ad;
+	}
+	#subBtn:hover, #clBtn:hover{
+		color: #78c2ad;
+	    background-color: #fff;
+	    border-color: #78c2ad;
+	}
 </style>
 <link href="../../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -30,24 +40,95 @@
 </head>
 
 <body>
+<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+	<div class="content-body">
         <div class="container-fluid">
-	 		<div class="row" style="margin:20px">
+	 		<div class="row">
+	 			<div class="col-lg-10" style="margin: 0 auto; max-width:800px;">
+	 				<h1 style="text-align: center; color: #78c2ad">
+	 					<b>게시글 작성</b>
+	 					
+	 				</h1>
+	 				<br>
+	 				<div class="card">
+	 					<div class="card-body" style="background: rgb(248, 249, 250)">
+		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
+		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
+		 						<div class="toolbar" role="toolbar">  
+		 							<select name="tag" class="btn btn-light dropdown-toggle">
+		 								<option class="dropdown-item" value="1">옵션1</option>
+		 								<option class="dropdown-item" value="2">옵션2</option>
+		 								<option class="dropdown-item" value="3">옵션3</option>
+		 								<option class="dropdown-item" value="4">옵션4</option>
+		 							</select>
+		 						
+			 						<div class="media pt-1">
+			 							<div class="media-body">
+			 								<h2 class="m-0" style="text-align:center">
+			 									<b><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></b>
+			 							</div>
+			 						</div>
+			 					</div>	
+			 					<div class="compose-content mt-5">
+			 							<div class="form-group">
+			 								<textarea name="boardContent" class="textarea_editor form-control bg-light" rows="15" placeholder="글 내용을 입력하세요."></textarea>
+			 							</div>
+			 						<h5 class="m-b-20">
+			 							<i class="fa fa-paperclip m-r-5 f-s-18"></i>
+			 							첨부파일
+			 							 <img id="titleImg" width="150" height="120" class="pull-right">
+			 						</h5>
+			 							<div class="form-group" id="fileArea">
+			 								<div class="fallback">
+			 									<input class="l-border-1" name="upfile" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
+			 								</div>
+			 							</div>
+			 					</div>
+			 					<div class="text-left m-t-15">
+			 					
+			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
+			 							<i class="bi bi-pencil"></i>
+			 							글쓰기
+			 						</button>
+			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+			 							<i class="ti-close m-r-5 f-s-12"></i>
+			 							취소
+			 						</button>
+			 					</div>
+			 				</form>
+	 					</div>
+	 				</div> 
+	 			</div>
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		
+	 		<!--
 	 			<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
 		 			<%--<input type="hidden" name="writer" value="<%= loginUser.getNickName %>"> --%>
 		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 		 				<thread>
 		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-		 						<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글쓰기 양식 </th>
+		 						<!--<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글쓰기 양식 </th>
 		 					</tr>
 		 				</thread>
 		 				<tbody>
 		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<td class="tag-class">
+		 						<!--<td class="tag-class">
 		 							<select name="tag">
 		 								<option value="1">옵션1</option>
 		 								<option value="2">옵션2</option>
@@ -77,16 +158,19 @@
 		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
 		 			<div class="form-row float-right" id="fileArea">
 		 				<!--  <input type="file" class="btn" name="upFile" value="첨부파일"/>-->
-		 				<input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
+		 			<!--	<input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
 		 				<input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
 		 				<input type="file" name="file3" id="file3" onchange="loadImg(this, 2)">
 		 				<input type="file" name="file4" id="file4" onchange="loadImg(this, 2)">
 		 			</div>
 		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
 	 			</form>	
+	 			 -->
 	 		</div>
+	 		 
         </div>
-        </div>
+	</div>
+</div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -98,7 +182,7 @@
 	 		
 	 		$("#titleImg").click(function(){
 				$("#file1").click();
-			});	
+			});	/*
 	 		$("#contentImg1").click(function(){
 				$("#file2").click();
 			});	
@@ -107,8 +191,9 @@
 			});	
 	 		$("#contentImg3").click(function(){
 				$("#file4").click();
-			});	
+			});	*/
 	 	});
+	 	/*
 	 	function loadImg(inputFile, num){
 	 		if(inputFile.files.length == 1){
 	 			var reader = new FileReader();
@@ -124,7 +209,7 @@
 	 			}
 	 		}
 	 	}
- 	
+ 	*/
  	</script>
 </body>
 </html> 

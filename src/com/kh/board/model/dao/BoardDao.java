@@ -93,12 +93,13 @@ public class BoardDao {
 				*/
 				
 				list.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getString("TAG"),
 									rset.getInt("CATEGORY_NO"),
 									rset.getString("BOARD_TITLE"),
 									rset.getString("USER_ID"),
 									rset.getDate("BOARD_DATE"),
 									rset.getInt("VIEWS")
-									//rset.getString("B_NEWNAME")
+									
 									));
 				
 			}
@@ -115,7 +116,7 @@ public class BoardDao {
 	public int insertBoard(Connection conn, Board b) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
+		System.out.println("dao : " + b);
 		String sql = prop.getProperty("insertBoard");
 		
 		try {
@@ -134,7 +135,7 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
-		
+		System.out.println("result" + result);
 		return result;
 	}
 	public int increaseCount(Connection conn, int bno) {
@@ -315,23 +316,23 @@ public class BoardDao {
 		System.out.println("at : " + at);
 		return at;
 	}
-	public int insertAttachment(Connection conn, ArrayList<Attachment> fileList) {
+	public int insertAttachment(Connection conn, Attachment at) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertAttachment");
 		
 		try {
-			for(int i=0; i<fileList.size(); i++) {
-				Attachment at = fileList.get(i);
+			//for(int i=0; i<fileList.size(); i++) {
+				//Attachment at = fileList.get(i);
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, at.getChangeName());
 				pstmt.setString(2, at.getOriginName());
 				pstmt.setString(3, at.getFilePath());
 				
-				result += pstmt.executeUpdate();
-			}
+				result = pstmt.executeUpdate();
+			
 			
 			
 		} catch (SQLException e) {
@@ -467,6 +468,7 @@ public class BoardDao {
 			
 			while(rset.next()) {
 				blist.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getString("TAG"),
 									rset.getInt("CATEGORY_NO"),
 									rset.getString("BOARD_TITLE"),
 									rset.getString("NICKNAME"),
