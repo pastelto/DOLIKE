@@ -26,6 +26,14 @@
 	<%@ include file="../common/menuSideBar.jsp" %> 
 
 	<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">신청받은 챌린지</a></li>
+                    </ol>
+                </div>
+            </div>	
 		<br>
 		<div class="col-lg-8" style="margin: 0 auto;">
 			<div class="table-responsive">

@@ -68,7 +68,7 @@
 				<div class="col p-md-0">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-						<li class="breadcrumb-item active"><a onclick="submitMsg();">쪽지
+						<li class="breadcrumb-item active"><a onclick="submitMsg();"sss>쪽지
 								보내기</a></li>
 					</ol>
 				</div>
@@ -84,15 +84,19 @@
 									<a href="<%= request.getContextPath() %>/write.ms" id="sendBtn"
 										class="btn btn-primary btn-block">쪽지보내기</a>
 									<div class="mail-list mt-4">
-										<a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0">
-										<i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> 
-										
-										<%if(newMsgCount > 0){ %> 
-										<span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left: 10px;"> <%= newMsgCount %></span> <%} %></a>
-										 <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0">
-										 <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
-										 <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0">
-										 <i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+										<a href="<%= request.getContextPath() %>/list.ms"
+											class="list-group-item border-0 text-primary p-r-0"><i
+											class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은
+												쪽지함</b> <%if(newMsgCount > 0){ %> <span
+											class="badge badge-primary badge-sm float-none m-t-5"
+											style="background-color: #f3969a; margin-left: 10px;">
+												<%= newMsgCount %>
+										</span> <%} %></a> <a href="<%= request.getContextPath() %>/slist.ms"
+											class="list-group-item border-0 p-r-0"><i
+											class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸
+											쪽지함</a> <a href="<%= request.getContextPath() %>/dlist.ms"
+											class="list-group-item border-0 p-r-0"><i
+											class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
 								</div>
 
@@ -101,10 +105,10 @@
 										<h4>쪽지 보내기</h4>
 									</div>
 									<div class="compose-content mt-5">
-										<form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
-
+										<form id="newMessageInsertForm"
+											action="<%= request.getContextPath() %>/write.ms"
+											method="post" enctype="multipart/form-data">
 											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>" id="hiddenLoginUserId">
-
 <!-- 											<div class="form-group">
 												<div class="col-6">
 												<input type="text" class="form-control bg-transparent"
@@ -139,27 +143,31 @@
 						                        	</div>
 						                        </div>
 												
+
 											</div>
 											
-											<div class="input-group">
-												<input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
+											<div class="form-group">
+												<input type="text" name="messageTitle"
+													class="form-control bg-transparent" placeholder=" 제목">
 											</div>
 											<div class="input-group">
 												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요." style="resize: none;"></textarea>
+
 											</div>
 											<hr>
 											<div>
 											<h5 class="m-b-20">
 												<i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일
 											</h5>
-											<div class="input-group">
+											<div class="form-group">
 												<div class="fallback">
-													<input class="l-border-1" name="upfile" type="file" multiple="multiple">
+													<input class="l-border-1" name="upfile" type="file"
+														multiple="multiple">
 												</div>
 											</div>
 											</div>
 											<div>
-											<div class="text-center m-t-15"  >
+											<div class="text-center m-t-15">
 												<button type="submit" id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10">
 													<i class="fa fa-paper-plane m-r-5"></i> 보내기
 												</button>
@@ -204,9 +212,7 @@
 			
 			// 입력 값 받아와서 넘겨주기
             /* openWin.document.getElementById("userIdValue").value = window.getElementById("hiddenLoginUserId").value; */
-			
         }
-		
 		</script>
 
 </body>

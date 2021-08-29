@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 	<title>회원가입</title>
 	<style>
 	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn, #joinBtn {
@@ -22,7 +24,13 @@
 		border-color: #78c2ad;
 	}
 	
-	#goMain:hover, #resetBtn:hover, #idCheckBtn:hover, #nickCheckBtn:hover, #phoneCheckBtn:hover, #emailCheckBtn:hover {
+	#resetBtn:hover {
+		color: #fff;
+		background-color: #000000;
+		border-color: #000000;
+	}
+	
+	#goMain:hover, #idCheckBtn:hover, #nickCheckBtn:hover, #phoneCheckBtn:hover, #emailCheckBtn:hover {
 		color: #fff;
 		background-color: #f3969a;
 		border-color: #f3969a;
@@ -34,6 +42,11 @@
 	
 	.checkFont {
 		margin-left: 300px;
+	}
+	
+	#joinTitle {
+		color: #ffce67;
+		font-family: 'Lobster', cursive;
 	}
 	
 	</style>
@@ -82,6 +95,9 @@
                             <div class="card-body">
                                 <div class="form-validation">
 									<form id="enrollForm" action="<%=request.getContextPath() %>/memberInsert.me" method="post" onsubmit="return joinValidate();">
+                                        <div class="mt-2 mb-5">
+                                        	<h2 id="joinTitle" align="center">Join Do Like!</h2>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="userId">아이디 <span class="text-danger">*</span></label>
                                             <div class="form-inline">
@@ -152,7 +168,6 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
-<!--                                             <div class="col-lg-6"> -->
                                             <div class="form-inline">
 		                                        <div class="form-group">
 		                                            <div class="form-check mb-3">
@@ -191,7 +206,7 @@
 	                                        <div class="col-lg-8 ml-auto">
 	                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
 	                                            <input type="reset" class="btn btn-primary" id="resetBtn" value="다시 입력" onclick="readAttrReset();"/>
-	                                            <button type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" disabled>회원가입</button>
+	                                            <button type="submit" class="btn btn-primary" id="joinBtn" value="회원가입" onclick="reAction();" disabled>회원가입</button>
 	                                        </div>
 	                                    </div>
                                     </form>
@@ -308,67 +323,101 @@
 	});
 	
 	//==============================================
-	//회원가입버튼 클릭시 팝업으로 재검증
+	// 회원가입버튼 클릭시 팝업으로 재검증
 	//==============================================
    	function joinValidate(){
  		//아이디
  		if(!(/^[a-z0-9]{4,10}$/.test($("#enrollForm input[name=userId]").val()))){
-			alert("아이디는 숫자, 영어소문자 조합으로 4~10자리로 입력하세요.");
+			swal.fire({
+				text: '아이디는 숫자, 영어소문자 조합으로 4~10자리로 입력하세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
  			$("#enrollForm input[name=userId]").focus();
 	        return false;
 		}
  		//비밀번호
 		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#enrollForm input[name=userPwd]").val()))){
-			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
+			swal.fire({
+				text: '비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력하세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
  			$("#enrollForm input[name=userPwd]").focus();
 	        return false;
 		} 
 		
 		//비밀번호 확인
 		if($("#enrollForm input[name=userPwd]").val() != $("#enrollForm input[name=checkPwd]").val()){
-			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			swal.fire({
+				text: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			$("#enrollForm input[name=checkPwd]").focus();
 			return false;			
 		}
 		
 		//이름
 		if(!(/^[가-힣]{2,8}$/.test($("#enrollForm input[name=userName]").val()))){
-			alert("닉네임은 한글로 2자리 이상 입력해야 합니다.");
+			swal.fire({
+				text: '닉네임은 한글로 2자리 이상 입력해야 합니다.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			$("#enrollForm input[name=userName]").focus();
 	        return false;
 		 }
 		
 		//닉네임
 		if(!(/^[가-힣a-zA-Z0-9]{3,12}$/.test($("#enrollForm input[name=nickName]").val()))){
-			alert("닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력");
+			swal.fire({
+				text: '닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력하세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			$("#enrollForm input[name=nickName]").focus();
 	        return false;
 		 }
 		 
 		//전화번호
 		 if(!(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/.test($("#enrollForm input[name=phone]").val()))){
-			alert("전화번호는 (-)없이 입력해주세요.");
+			swal.fire({
+				text: '전화번호는 (-)없이 입력해주세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			$("#enrollForm input[name=phone]").focus();
 	        return false;
 		 }
 		 
 		 //이메일
 		 if(!(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test($("#enrollForm input[name=email]").val()))){
-			alert("올바른 이메일 형식이 아닙니다.");
+			swal.fire({
+				text: '올바른 이메일 형식이 아닙니다.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			$("#enrollForm input[name=email]").focus();
 	        return false;
 		 }
 		 
 		 return true;
 	}  
+	
+	
   	//==============================================
-	//중복확인
+	// 중복확인
 	//==============================================
 	//아이디 중복확인
  	function checkId(){
 		var userId = $("#enrollForm input[name=userId]");
 		if(userId.val() == ""){
-			alert("아이디를 입력해주세요.");
+			swal.fire({
+				text: '아이디를 입력해주세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			return false;
 		}
 		$.ajax({
@@ -377,17 +426,30 @@
 			data:{userId:userId.val()},
 			success:function(result){
 				if(result == "fail"){
-					alert("사용할 수 없는 아이디입니다.");
+					swal.fire({
+						text: '사용할 수 없는 아이디입니다.',
+						icon: 'warning',
+						confirmButtonColor: '#78c2ad'
+					});
 					userId.focus();
-				}else{
-					var check = confirm("사용가능한 아이디입니다. 사용하시겠습니까?");
-					if(check == true){
-						userId.attr("readonly","true");
-						$("#joinBtn").removeAttr("disabled"); //회원가입버튼 활성화
-					}else{
-						userId.focus();
-						userId.attr("readonly", false);
-					}
+				} else {
+					var check = swal.fire({
+						text: '사용가능한 아이디입니다. 사용하시겠습니까?',
+						icon: 'success',
+						confirmButtonText: '확인',
+						showCancelButton: true,
+						cancelButtonText: '취소',
+						confirmButtonColor: '#78c2ad',
+						cancelButtonColor: '#f3969a'
+					}).then(function(result) {
+						if(result.value){
+							userId.attr("readonly","true");
+							$("#joinBtn").removeAttr("disabled"); //회원가입버튼 활성화
+						} else {
+							userId.focus();
+							userId.attr("readonly", false);
+						}
+					});
 				}
 			},error:function(){
 				consloe.log("서버통신 실패");
@@ -398,7 +460,11 @@
 	function checkNick(){
 		var nickName = $("#enrollForm input[name=nickName]");
 		if(nickName.val() == ""){
-			alert("닉네임을 입력해주세요.");
+			swal.fire({
+				text: '닉네임을 입력해주세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			return false;
 		}
 		$.ajax({
@@ -407,16 +473,29 @@
 			data:{nickName:nickName.val()},
 			success:function(result){
 				if(result == "fail"){
-					alert("이미 사용 중인 닉네임입니다.");
+					swal.fire({
+						text: '사용할 수 없는 닉네임입니다.',
+						icon: 'warning',
+						confirmButtonColor: '#78c2ad'
+					});
 					nickName.focus();
-				}else{
-					var check = confirm("사용가능한 닉네임입니다. 사용하시겠습니까?");
-					if(check == true){
-						nickName.attr("readonly","true");
-					}else{
-						nickName.focus();
-						nickName.attr("readonly", false);
-					}
+				} else {
+					var check = swal.fire({
+						text: '사용가능한 닉네임입니다. 사용하시겠습니까?',
+						icon: 'success',
+						confirmButtonText: '확인',
+						showCancelButton: true,
+						cancelButtonText: '취소',
+						confirmButtonColor: '#78c2ad',
+						cancelButtonColor: '#f3969a'
+					}).then(function(result) {
+						if(result.value){
+							nickName.attr("readonly","true");
+						} else {
+							nickName.focus();
+							nickName.attr("readonly", false);
+						}
+					});
 				}
 			},error:function(){
 				consloe.log("서버통신 실패");
@@ -428,26 +507,42 @@
 	function checkPhone(){
 		var phone = $("#enrollForm input[name=phone]");
 		if(phone.val() == ""){
-			alert("전화번호를 입력해주세요.");
+			swal.fire({
+				text: '전화번호를 입력해주세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			return false;
 		}
-		
 		$.ajax({
 			url:"phoneCheck.me",
 			type:"post",
 			data:{phone:phone.val()},
 			success:function(result){
 				if(result == "fail"){
-					alert("이미 가입된 전화번호입니다.");
+					swal.fire({
+						text: '사용할 수 없는 전화번호입니다.',
+						icon: 'warning',
+						confirmButtonColor: '#78c2ad'
+					});
 					phone.focus();
-				} else{
-					var check = confirm("사용가능한 전화번호입니다. 등록하시겠습니까?");
-					if(check == true){
-						phone.attr("readonly","true");
-					}else{
-						phone.focus();
-						phone.attr("readonly", false);
-					}
+				} else {
+					var check = swal.fire({
+						text: '사용가능한 전화번호입니다. 등록하시겠습니까?',
+						icon: 'success',
+						confirmButtonText: '확인',
+						showCancelButton: true,
+						cancelButtonText: '취소',
+						confirmButtonColor: '#78c2ad',
+						cancelButtonColor: '#f3969a'
+					}).then(function(result) {
+						if(result.value){
+							phone.attr("readonly","true");
+						} else {
+							phone.focus();
+							phone.attr("readonly", false);
+						}
+					});
 				}
 			},error:function(){
 				consloe.log("서버통신 실패");
@@ -459,7 +554,11 @@
 	function checkEmail(){
 		var email = $("#enrollForm input[name=email]");
 		if(email.val() == ""){
-			alert("이메일을 입력해주세요.");
+			swal.fire({
+				text: '이메일을 입력해주세요.',
+				icon: 'warning',
+				confirmButtonColor: "#78c2ad"
+			});
 			return false;
 		}
 		$.ajax({
@@ -468,16 +567,29 @@
 			data:{email:email.val()},
 			success:function(result){
 				if(result == "fail"){
-					alert("이미 가입된 이메일입니다.");
+					swal.fire({
+						text: '사용할 수 없는 이메일입니다.',
+						icon: 'warning',
+						confirmButtonColor: '#78c2ad'
+					});
 					email.focus();
-				} else{
-					var check = confirm("사용가능한 이메일입니다. 등록하시겠습니까?");
-					if(check == true){
-						email.attr("readonly","true");
-					}else{
-						email.focus();
-						email.attr("readonly", false);
-					}
+				} else {
+					var check = swal.fire({
+						text: '사용가능한 이메일입니다. 등록하시겠습니까?',
+						icon: 'success',
+						confirmButtonText: '확인',
+						showCancelButton: true,
+						cancelButtonText: '취소',
+						confirmButtonColor: '#78c2ad',
+						cancelButtonColor: '#f3969a'
+					}).then(function(result) {
+						if(result.value){
+							email.attr("readonly","true");
+						} else {
+							email.focus();
+							email.attr("readonly", false);
+						}
+					});
 				}
 			},error:function(){
 				consloe.log("서버통신 실패");
@@ -502,18 +614,18 @@
   	}
 	
 	</script>
-        <!--**********************************
-            Content body end
-        ***********************************-->
+    <!--**********************************
+        Content body end
+    ***********************************-->
         
         
-        <!--**********************************
-            Footer start
-        ***********************************-->
+    <!--**********************************
+        Footer start
+    ***********************************-->
 	<%@ include file="../common/footer.jsp"%>
-        <!--**********************************
-            Footer end
-        ***********************************-->
+    <!--**********************************
+        Footer end
+    ***********************************-->
 
 
     <!--**********************************
@@ -521,6 +633,5 @@
     ***********************************-->
     <script src="./plugins/validation/jquery.validate.min.js"></script>
     <script src="./plugins/validation/jquery.validate-init.js"></script>
-
 </body>
 </html>

@@ -27,7 +27,26 @@ body {
 	color: #2363747;
 	text-align: left;
 }
+#mission{
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
 
+#mission:hover{
+	color: #78c2ad;
+	background-color: #fff;
+	border-color: #78c2ad;
+}
+#text-center{
+	text-align:center;
+}
+#m-challenge{
+	color:#78c2ad;
+}
+#e-challenge{
+	color:#f3969a;
+}
 .navbar {
 	display: flex !important;
 	flex-basis: auto;
@@ -120,6 +139,9 @@ body {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
+.media {
+	text-align:center;
+}
 
 li, h5 {
 	font-size: 16px;
@@ -157,18 +179,30 @@ a {
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">마이 챌리지</a></li>
+                    </ol>
+                </div>
+            </div>
+        <div class="container-fluid">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link"
 				data-bs-toggle="tab" href="<%= request.getContextPath() %>/myChallenge.ch" id="m-challenge">참여중인 챌린지</a></li>
-			<li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
+			<li class="nav-item" id="pink-text"><a class="nav-link active" data-bs-toggle="tab"
 				href="#ch-body-e" id="e-challenge">종료된 챌린지</a></li>			
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade" id="ch-body-m" >
-				
+			<div class="tab-pane fade" id="ch-body-m" >	
 			</div>
 			<div class="tab-pane fade show active" id="ch-body-e">
-				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>				
+			<br>
+			<br>
+				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
+					<br>
+					<br>
 					<div class="root-container">
 					<%
 					if (!list.isEmpty() && !fileList.isEmpty()) {
@@ -184,13 +218,13 @@ a {
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>/challengedetail.ch"
+												<a href="<%=request.getContextPath()%>//challengedetail.ch"
 													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												</a>
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
+														<a href="<%=request.getContextPath()%>/challengeEndDetail.ch"><%=list.get(i).getChTitle()%></a>
 													</h4></div> <br>
 													<div>									
 													<ul class="challenge-period">
@@ -207,23 +241,38 @@ a {
 							</div>
 						</div>
 					</div>
+					<%} else{%>
+						<div class="container col-5 ">
+							<div class="card" id="null-end">
+								<div class="card-header" id="text-center">참여한 챌린지가 없습니다</div>
+								<div class="card-body">
+									<div class="items-center" style="text-align:center;">
+										<a href="<%=request.getContextPath()%>/myChallenge.ch" class="item-click"> 
+											<img src="./resources/challenge_upfiles/null-end.png" alt="null-end" class="null-end" width="300px" height="300px"><br><br>
+											<button class="btn btn-primary px-3 ml-4" id="mission">내 챌린지 정복하러 가기</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<%} %>
 				</div>
 			</div>				
 		</div>
+		</div>
 	</div>
-	<script>
-	$(".nav a").click(function(){
-		$(this).parent().addClass("active").
-				siblings().removeClass("active");
-		
-		var id=$(this).attr("href");
-		$(id).show().siblings().hide();
-		
-		return false;
-	});
-	</script>
 	<%@ include file="../common/footer.jsp"%>
 </div>
+	<script>
+	<% if(!list.isEmpty()){%>
+		$(function() {
+			$("ul>li").click(function(){
+				var chno = $(this).children().eq(0).text();				
+						
+						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+					})					
+				})
+	<% } %>
+	</script>
 </body>
 </html>

@@ -39,6 +39,8 @@
 	<title>마이페이지 계정 관리</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#goMain, #deleteBtn {
@@ -58,9 +60,15 @@
 		border-color: #f3969a;
 	}
 	
-	#deleteBtn:hover {
+	#deleteBtn {
 		color: #fff;
 		background-color: #000000;
+    	border-color: #000000;
+	}
+	
+	#deleteBtn:hover {
+		color: #000000;
+		background-color: #fff;
     	border-color: #000000;
 	}
 	
@@ -70,6 +78,10 @@
 	
 	.checkFont {
 		margin-left: 300px;
+	}
+	
+	#editTitle {
+		font-family: 'Gowun Dodum', sans-serif;
 	}
 	
 	</style>
@@ -96,139 +108,138 @@
 	<div id="main-wrapper">
     <%@ include file="../common/menuSideBar.jsp" %> 
     
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">마이페이지</li>
-                        <li class="breadcrumb-item active">계정 관리</li>
-                    </ol>
-                </div>
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div class="content-body">
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">마이페이지</li>
+                    <li class="breadcrumb-item active">계정 관리</li>
+                </ol>
             </div>
-        
-            <!-- row -->
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-validation">
-									<form id="updateForm">
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userId">아이디</label>
-                                            <div class="form-inline">
-                                                <input type="text" class="form-control" id="userId" name="userId" value="<%= userId %>" readonly>
-                                            </div>
+        </div>
+    
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-validation">
+							<form id="updateForm" action="<%=request.getContextPath() %>/memberUpdate.me" method="post" onsubmit="return editValidate();">
+                                    <div class="mt-2 mb-5">
+                                        	<h2 id="editTitle" align="center"><b>계정 관리</b></h2>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-inline">
-                                                <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="변경할 비밀번호를 입력하세요." required>
-                                            </div>
-                                            <div class="checkFont" id="pwdCheck"></div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-inline">
-                                                <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
-                                            </div>
-                                            <div class="checkFont" id="pwdCkCheck"></div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="userName">이름 </label>
-                                            <div class="form-inline">
-                                                <input type="text" class="form-control" id="userName" name="userName" value="<%= userName %>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span></label>
-                                            <div class="form-inline">
-                                                <input type="text" class="form-control" id="nickName" name="nickName" value="<%= nickName %>" required />
-                                            </div>
-                                            <div class="form-inline">
-                                                <button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
-                                            </div>
-                                            <div class="checkFont" id="nickCheck"></div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="birthDate">생년월일 </label>
-                                            <div class="form-inline">
-                                                <input type="text" class="form-control" id="birthDate" name="birthDate" placeholder="<%= birthDate %>" readonly/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="phone">연락처 </label>
-                                            <div class="form-inline">
-                                                <input type="text" class="form-control" id="phone" name="phone" value="<%= phone %>" readonly/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="email">이메일 </label>
-                                            <div class="form-inline">
-                                                <input type="email" class="form-control" id="email" name="email" value="<%= email %>" readonly/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
-                                            <!-- <div class="col-lg-6"> -->
-                                            <div class="form-inline">
-		                                        <div class="form-group">
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="공부"<%= checkedInterest[0] %> required>공부</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="건강"<%= checkedInterest[1] %>>건강</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="여행"<%= checkedInterest[2] %>>여행</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="요리"<%= checkedInterest[3] %>>요리</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="동물"<%= checkedInterest[4] %>>동물</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="패션뷰티"<%= checkedInterest[5] %>>패션뷰티</label>
-		                                            </div>
-		                                            <div class="form-check mb-3">
-		                                                <label class="radio-inline mr-3">
-		                                                    <input type="radio" class="form-check-input" name="interests" value="기타"<%= checkedInterest[6] %>>기타</label>
-		                                            </div>
-		                                        </div>
-	                                        </div>
-                                        </div>
-                                        
                                     <div class="form-group row">
-                                        <div class="col-lg-8 ml-auto">
-                                        	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-1)" value="돌아가기"/>
-                                        	<input type="button" class="btn btn-primary" id="updateBtn" onclick="updateMember();" value="회원정보수정"/>
+                                        <label class="col-lg-4 col-form-label" for="userId">아이디</label>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="userId" name="userId" value="<%= userId %>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-lg-8 ml-auto">
-                                        	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="deleteMember();" value="탈퇴하기"/>
+                                        <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="form-inline">
+                                            <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
+                                        </div>
+                                        <div class="checkFont" id="pwdCheck"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="form-inline">
+                                            <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
+                                        </div>
+                                        <div class="checkFont" id="pwdCkCheck"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="userName">이름 </label>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="userName" name="userName" value="<%= userName %>" readonly>
                                         </div>
                                     </div>
-                                    </form>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span></label>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="nickName" name="nickName" value="<%= nickName %>" required />
+                                        </div>
+                                        <div class="form-inline">
+                                            <button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
+                                        </div>
+                                        <div class="checkFont" id="nickCheck"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="birthDate">생년월일 </label>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="birthDate" name="birthDate" placeholder="<%= birthDate %>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="phone">연락처 </label>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="phone" name="phone" value="<%= phone %>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="email">이메일 </label>
+                                        <div class="form-inline">
+                                            <input type="email" class="form-control" id="email" name="email" value="<%= email %>" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
+                                        <!-- <div class="col-lg-6"> -->
+                                        <div class="form-inline">
+	                                      <div class="form-group">
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="공부"<%= checkedInterest[0] %> required>공부</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="건강"<%= checkedInterest[1] %>>건강</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="여행"<%= checkedInterest[2] %>>여행</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="요리"<%= checkedInterest[3] %>>요리</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="동물"<%= checkedInterest[4] %>>동물</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="패션뷰티"<%= checkedInterest[5] %>>패션뷰티</label>
+	                                          </div>
+	                                          <div class="form-check mb-3">
+	                                              <label class="radio-inline mr-3">
+	                                                  <input type="radio" class="form-check-input" name="interests" value="기타"<%= checkedInterest[6] %>>기타</label>
+	                                          </div>
+	                                      </div>
+                                     	</div>
+                                    </div>
+                                    
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto mr-3">
+                                    	<input type="button" class="btn btn-primary" id="goMain" onclick="history.go(-2)" value="돌아가기"/>
+                                    	<input type="submit" class="btn btn-primary" id="updateBtn" value="회원정보수정"/>
+                                    	<input type="button" class="btn btn-primary" id="deleteBtn" onclick="location.href='<%=contextPath%>/memberDeleteForm.me'" value="탈퇴하기"/>
+                                    </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
+        </div>
+        <!-- #/ container -->
         </div>
         
         <script>
@@ -275,27 +286,40 @@
     	//==============================================
     	// 회원정보수정버튼 클릭시 팝업으로 재검증
     	//==============================================
-       	function updateMember(){
+       	function editValidate(){
      		//비밀번호
     		if(!(/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-]).{4,12}$/.test($("#updateForm input[name=userPwd]").val()))){
-    			alert("비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력");
+    			swal.fire({
+    				text: '비밀번호는 특수문자를 반드시 포함하여 숫자, 영문자 조합으로 8자리 이상 입력하세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
      			$("#updateForm input[name=userPwd]").focus();
     	        return false;
     		} 
     		
     		//비밀번호 확인
     		if($("#updateForm input[name=userPwd]").val() != $("#updateForm input[name=checkPwd]").val()){
-    			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+    			swal.fire({
+    				text: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			$("#updateForm input[name=checkPwd]").focus();
     			return false;			
     		}
     		
     		//닉네임
     		if(!(/^[가-힣a-zA-Z0-9]{3,12}$/.test($("#enrollForm input[name=nickName]").val()))){
-    			alert("닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력");
+    			swal.fire({
+    				text: '닉네임은 한글, 영어, 숫자 사용하여 3~12자리 입력하세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			$("#enrollForm input[name=nickName]").focus();
     	        return false;
     		 }
+    		
     		return true;
     	}
         
@@ -303,7 +327,11 @@
     	function checkNick(){
     		var nickName = $("#updateForm input[name=nickName]");
     		if(nickName.val() == ""){
-    			alert("닉네임을 입력해주세요.");
+    			swal.fire({
+    				text: '닉네임을 입력해주세요.',
+    				icon: 'warning',
+    				confirmButtonColor: "#78c2ad"
+    			});
     			return false;
     		}
     		$.ajax({
@@ -312,46 +340,36 @@
     			data:{nickName:nickName.val()},
     			success:function(result){
     				if(result == "fail"){
-    					alert("이미 사용 중인 닉네임입니다.");
+    					swal.fire({
+    						text: '사용할 수 없는 닉네임입니다.',
+    						icon: 'warning',
+    						confirmButtonColor: '#78c2ad'
+    					});
     					nickName.focus();
-    				}else{
-    					var check = confirm("사용가능한 닉네임입니다. 사용하시겠습니까?");
-    					if(check == true){
-    						nickName.attr("readonly","true");
-    					}else{
-    						nickName.focus();
-    						nickName.attr("readonly", false);
-    					}
+    				} else {
+    					var check = swal.fire({
+    						text: '사용가능한 닉네임입니다. 사용하시겠습니까?',
+    						icon: 'success',
+    						confirmButtonText: '확인',
+    						showCancelButton: true,
+    						cancelButtonText: '취소',
+    						confirmButtonColor: '#78c2ad',
+    						cancelButtonColor: '#f3969a'
+    					}).then(function(result) {
+    						if(result.value){
+    							nickName.attr("readonly","true");
+    						} else {
+    							nickName.focus();
+    							nickName.attr("readonly", false);
+    						}
+    					});
     				}
     			},error:function(){
     				consloe.log("서버통신 실패");
     			}
     		})
     	}
-        
-		function updateMember(){
-			var val = confirm("회원정보를 수정하시겠습니까?");
-			
-			if(val){
-				$("#updateForm").attr("action","<%= request.getContextPath()%>/memberUpdate.me");
-				$("#updateForm").submit();
-				alert("회원정보가 수정되었습니다!")
-			}else{
-				alert("취소하였습니다.");
-			}
-		}
-	
-		function deleteMember(){
-			var val = confirm("정말로 두라이크를 떠나실건가요?");
-			
-			if(val){
-				$("#updateForm").attr("action","<%= request.getContextPath()%>/deleteMember.me");
-				$("#updateForm").submit();
-				alert("안녕히가세요...");
-			}else{
-				alert("취소하였습니다.");
-			}
-		}
+		
     	</script>
 	</div>
 	<%@ include file = "../common/footer.jsp" %>

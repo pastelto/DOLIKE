@@ -36,22 +36,16 @@ public class MyChallengeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		System.out.println("servlet loginUser : " + loginUser);
-		
-		Challenge c = new ChallengeService().selectMyChallenge(loginUser);
-		System.out.println(c +": servlet");
+		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();		
+		Challenge c = new ChallengeService().selectMyChallenge(loginUser);		
 		
 		int chno = c.getChNo();
 				
 		ChallengeAttachment at = new ChallengeService().selectAttach(chno);						
-		request.setAttribute("at", at);
-		System.out.println(at +": servlet");
 		
+		request.setAttribute("at", at);		
 		request.setAttribute("c", c);
 		request.setAttribute("at", at);
-		
-		
 				
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myChallenge.jsp");
 		view.forward(request, response);

@@ -35,7 +35,6 @@ public class VoteApplyListServlet extends HttpServlet {
 		
 		ArrayList<ChallengeApply> list = new ChallengeService().selectVoteApList();
 		request.setAttribute("list", list);
-		System.out.println(list);
 		
 	}
 
