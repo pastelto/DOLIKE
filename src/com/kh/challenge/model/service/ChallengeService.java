@@ -91,6 +91,25 @@ public class ChallengeService {
 		return listCount;
 	}
 	
+	public int getApListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new ChallengeDao().getApListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+	
+	public int getMyApListCount(String loginUser) {
+		Connection conn = getConnection();
+		
+		int listCount = new ChallengeDao().getMyApListCount(conn, loginUser);
+		
+		close(conn);
+		
+		return listCount;
+	}
 	
 	//detail-challenge
 	public Challenge selectDetail(int chno) {
@@ -170,6 +189,14 @@ public class ChallengeService {
 		
 		close(conn);
 		
+		return list;
+	}
+	
+	//apply-mychallenge
+	public ArrayList<ChallengeApply> selectMyApplyList(PageInfo pi, String loginUser) {
+		Connection conn = getConnection();
+		ArrayList<ChallengeApply> list = new ChallengeDao().selectMyApplyList(conn, pi, loginUser);
+		close(conn);
 		return list;
 	}
 	
@@ -312,6 +339,12 @@ public class ChallengeService {
 		
 		return result;
 	}
+
+
+
+	
+
+	
 
 	
 	

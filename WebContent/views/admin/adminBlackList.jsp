@@ -69,6 +69,17 @@
 <%@ include file="../common/menuSideBar.jsp" %> 
 
 <div class="container-fluid" >
+
+			<div class="row page-titles mx-0" >
+			
+                <div class="col p-md-0" >
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">회원 관리</li>
+                        <li class="breadcrumb-item active">블랙리스트</li>
+                    </ol>
+                </div>
+            </div>
+
 			<form id="size1">
                 <div class="row">               
                     <div class="col-lg-8" style="margin-left: auto; margin-right: auto;">
@@ -173,7 +184,7 @@
 		$(function(){
 			$(".table>tbody>tr").click(function(){
 				var amno = $(this).children().eq(0).text();
-				location.href="<%= contextPath %>/memberBlackDetail.am?ambno=" +ambno;
+				location.href="<%= contextPath %>/MemberDetail.am?amno=" +amno;
 				console.log("amno 값을 알려줘!"+amno)
 			})
 		})

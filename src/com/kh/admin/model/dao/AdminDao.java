@@ -221,7 +221,7 @@ public class AdminDao {
 		
 		return listCount;
 	}
-
+//보드 내용 끌어써와야함
 
 
 }

@@ -13,20 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.ChallengeApply;
 import com.kh.challenge.model.vo.PageInfo;
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class ApplyListServlet
+ * Servlet implementation class MyApplyListServlet
  */
-@WebServlet("/applyList.ch")
-public class ApplyListServlet extends HttpServlet {
+@WebServlet("/myApList.ch")
+public class MyApplyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApplyListServlet() {
+    public MyApplyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +35,8 @@ public class ApplyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+			
 		int listCount;			
 		int currentPage;		
 		int startPage;			
@@ -45,7 +46,7 @@ public class ApplyListServlet extends HttpServlet {
 		int pageLimit;
 		int listLimit;
 		
-		listCount = new ChallengeService().getApListCount();
+		listCount = new ChallengeService().getMyApListCount(loginUser);
 		
 		currentPage = 1;
 		
@@ -71,12 +72,12 @@ public class ApplyListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, listLimit);
 		
 		
-		ArrayList<ChallengeApply> list = new ChallengeService().selectApplyList(pi);
+		ArrayList<ChallengeApply> list = new ChallengeService().selectMyApplyList(pi, loginUser);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/challenge/applyList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myApplyList.jsp");
 		view.forward(request, response);
 	}
 

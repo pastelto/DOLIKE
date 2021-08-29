@@ -49,7 +49,9 @@ body {
 #e-challenge{
 	color:#f3969a;
 }
-
+#a-challenge{
+	color:#f3969a;
+}
 .navbar {
 	display: flex !important;
 	flex-basis: auto;
@@ -74,6 +76,8 @@ body {
 .root-content .root-section {
 	display: flex;
 	padding-top: 0.5rem;
+	text-align:center;
+	padding-left:110px;
 }
 
 .challenge-list {
@@ -175,12 +179,6 @@ a {
 	cursor: pointer;
 }
 </style>
-<!-- 
-<i class="fab fa-fort-awesome-alt"></i> // 원+성
-<i class="fas fa-truck"></i> // 트럭
-<i class="fas fa-heart"></i> //하트
- -->
-
 </head>
 
 <div id="main-wrapper">
@@ -189,8 +187,8 @@ a {
 		<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">마이 챌리지</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">마이 챌린지</li>
                     </ol>
                 </div>
             </div>	
@@ -199,7 +197,9 @@ a {
 			<li class="nav-item"><a class="nav-link active"
 				data-bs-toggle="tab" href="#ch-body-m" id="m-challenge">참여중인 챌린지</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-				href="<%= request.getContextPath() %>/myEndedChallenge.ch" id="e-challenge">종료된 챌린지</a></li>			
+				href="<%= request.getContextPath() %>/myEndedChallenge.ch" id="e-challenge">종료된 챌린지</a></li>
+			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
+				href="<%= request.getContextPath() %>/myApList.ch" id="a-challenge">신청 리스트</a></li>				
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade show active" id="ch-body-m" >
@@ -208,7 +208,7 @@ a {
 				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
 					<br>
 					<br>
-				<div class="root-container">
+				<div class="root-container" align="center">
 					<%
 					if (c != null && at != null) {
 					%>
