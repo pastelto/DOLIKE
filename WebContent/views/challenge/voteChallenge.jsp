@@ -45,8 +45,7 @@
 				<div class="votingBanner" style="text-align:center">
 					<img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center"><br><br>				
 					</div>
-					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;'">
-						
+					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;'">						
 						<%if(!list.isEmpty()){%>
 							<% for(int i = 0; i < list.size(); i++) { %>
 							<div class="col-md-6 col-lg-3" id="inline-vote">
@@ -67,8 +66,7 @@
 								</form>
 								</div>
 							 <%}%>
-							<%} %>
-										
+						<%} %>										
 					</div>
 				</div>
 			</div>
