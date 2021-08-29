@@ -11,20 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
-import com.kh.message.model.vo.Message;
-import com.kh.message.model.vo.MsgAttachment;
 
 /**
- * Servlet implementation class RecvMessageDetailServlet
+ * Servlet implementation class DeleteMyMessageServlet
  */
-@WebServlet("/sread.ms")
-public class SendMessageDetailServlet extends HttpServlet {
+@WebServlet("/dmmsg.ms")
+public class DeleteMyMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMessageDetailServlet() {
+    public DeleteMyMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +31,18 @@ public class SendMessageDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 유저아이디 넘기기 
 		int mno = Integer.parseInt(request.getParameter("mno"));
-		System.out.println("mno : " + mno);
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-		
-		
-		int newMsgCount; newMsgCount = new
-		MessageService().getNewMessageCount(userId);
-		
-		
-		Message message = new MessageService().selectSendMsg(mno, userId);
-		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
-		System.out.println("SendMessageDetailServlet : " + userId);
-		if(message != null) {
-			request.setAttribute("message", message);
-			request.setAttribute("mat", mat);
-			request.setAttribute("newMsgCount", newMsgCount);
-			
-			request.getRequestDispatcher("views/message/SendMessageDetailView.jsp").forward(request, response);
+				
+		int result = new MessageService().deleteMyMsg(mno, userId);
+		if(result > 0) {
+			response.sendRedirect("mlist.ms");
 		} else {
-			request.setAttribute("msg", "보낸쪽지 상세조회 실패");
-			
+			request.setAttribute("errMsg", "보낸쪽지 삭제에 실패했습니다." );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-		}
+				}
 	}
 
 	/**

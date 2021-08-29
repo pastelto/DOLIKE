@@ -197,6 +197,44 @@ public class MessageService {
 		
 		return result;
 	}
+	
+	// 나에게 보낸 쪽지 개수
+	public int getMyMessageCount(String userId) {
+		Connection conn = getConnection();
+		
+		int count = new MessageDao().getMyMessageCount(conn, userId);
+		close(conn);
+		
+		return count;
+	}
+	
+	// 나에게 보낸 쪽지 디테일
+	public ArrayList<Message> selectMyMessageList(MsgPageInfo pi, String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Message> list = new MessageDao().selectMyMessageList(conn, pi, userId);
+		close(conn);
+		
+		return list;
+	}
+	
+	// 나에게 보낸 쪽지 삭제하기
+	public int deleteMyMsg(int mno, String userId) {
+		Connection conn = getConnection();
+		
+		int result1 = new MessageDao().deleteMyMessageOne(conn, mno, userId);
+		int result2 = new MessageDao().deleteMyAttachment(conn, mno, userId);
+		
+		// 첨부파일 유무에 따라
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1;
+	}
 
 
 	

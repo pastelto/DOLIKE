@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.message.model.service.MessageService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		
 		System.out.println("loginUser : " + loginUser);
-		
+
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

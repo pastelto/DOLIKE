@@ -1,11 +1,13 @@
 package com.kh.message.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.vo.Member;
 import com.kh.message.model.service.MessageService;
@@ -34,6 +36,9 @@ public class NewMessageCountServlet extends HttpServlet {
 		int newMsgCount;
 		newMsgCount = new MessageService().getNewMessageCount(userId);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("newMsgCountMenu", newMsgCount);
+
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(newMsgCount);
 		

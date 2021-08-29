@@ -13,12 +13,12 @@
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	
-	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
+ 	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#errorTitle {
 		color: #ffce67;
-		font-family: 'Lobster', cursive;
+		font-family: 'Lobster', cursive !important;
 	}
 	
 	#goMain {
@@ -95,6 +95,7 @@
 			        </div>
 			    </div>
 		    </div>
+	</div>
 	</div>
 	<%@ include file = "../common/footer.jsp" %>
 	
