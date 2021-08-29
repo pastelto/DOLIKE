@@ -238,7 +238,9 @@ a {
 				</div>
 				<%} %>
 				<div class="root-container">
-					<%if (!list.isEmpty() && !fileList.isEmpty()) {%>
+					<%
+					if (!list.isEmpty() || !fileList.isEmpty()) {
+					%>
 					<div class="container ">
 						<div class="root-content">
 							<div class="root-section">

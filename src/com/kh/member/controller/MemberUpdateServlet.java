@@ -36,8 +36,9 @@ public class MemberUpdateServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		String nickName = request.getParameter("nickName");
 		String interests = request.getParameter("interests");
-				
-		Member updateMem = new MemberService().updateMember(userId, userPwd, nickName, interests);		
+		
+		Member updateMem = new MemberService().updateMember(userId, userPwd, nickName, interests);
+		
 		if(updateMem != null) {
 			request.getSession().setAttribute("msg", "성공적으로 회원정보를 수정하였습니다.");
 			request.getSession().setAttribute("loginUser", updateMem);

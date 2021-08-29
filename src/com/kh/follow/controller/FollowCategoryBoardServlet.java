@@ -44,11 +44,7 @@ public class FollowCategoryBoardServlet extends HttpServlet {
 		
 		String followId = request.getParameter("followId");
 		
-		//임시용
-//		String followId = "user13";
-		
 		String catTitle = request.getParameter("catTitle");
-		
 		
 		System.out.println("FollowCategoryBoard(followId): "+followId);
 		System.out.println("FollowCategoryBoard(catTitle): "+catTitle);
@@ -87,7 +83,6 @@ public class FollowCategoryBoardServlet extends HttpServlet {
 		request.setAttribute("pi", pi);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/follow/followCategory.jsp");
-//		RequestDispatcher view = request.getRequestDispatcher("/followCategoryList.fl");
 		view.forward(request, response);
 	}
 

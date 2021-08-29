@@ -199,8 +199,8 @@
                         </a>
                     </li>
                     <% if(loginUser == null) {%> 
-                      	<li class="mega-menu-sm">
-	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                      	<li class="mega-menu-sm"  id="allmenu">
+	                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList1" >
 	                            <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
 	                        </a>
 	                        <ul aria-expanded="false" class="collapse">
@@ -214,8 +214,8 @@
 	                        </ul>
 						</li>
                     <%}else{ %>
-                       <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active">
+                       <li class="mega-menu-sm" id="allmenu">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList2">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
