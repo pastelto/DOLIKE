@@ -30,4 +30,13 @@ public class searchService {
 		return count;
 	}
 
+	public ArrayList<Member> getUserList1(String userId, String searchWord, String choice) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new searchDao().selectSearchUserList1(conn, userId, searchWord, choice);
+		close(conn);
+		
+		return list;
+	}
+
 }
