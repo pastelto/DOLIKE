@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.AdminBlackInfo;
 import com.kh.admin.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Member;
 

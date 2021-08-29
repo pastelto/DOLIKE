@@ -20,6 +20,25 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
+<style>
+#pageTag {
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
+
+#pageTag:hover {
+	color: #fff;
+	background-color: #f3969a;
+	border-color: #f3969a;
+}
+
+#pageDisable {
+	color: gray;
+	background-color: #ced4da;
+	border-color: #ced4da;
+}
+</style>
 </head>
 <body>
 	<div id="main-wrapper">
@@ -29,12 +48,13 @@
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">신청받은 챌린지</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">신청리스트</li>
                     </ol>
                 </div>
             </div>	
 		<br>
+		<div style="height:40rem;">
 		<div class="col-lg-8" style="margin: 0 auto;">
 			<div class="table-responsive">
 			<div>
@@ -70,7 +90,7 @@
 			</div>
 			</div>
 		</div>
-		
+		</div>
 		
 		<!-- 페이지 처리 -->
 		<div>
@@ -92,7 +112,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/noticeView.no?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/applyList.ch?currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -102,11 +122,11 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/applyList.ch?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/noticeView.no?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/applyList.ch?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>		
 	</div>
