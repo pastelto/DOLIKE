@@ -87,14 +87,14 @@
 									</div>
 								</div>
 								<div class="email-right-box">
-									<form action="<%=contextPath%>/voteInsert.ch" method="post">
+									<form action="<%=contextPath%>/voteInsert.ch" method="post" id="inVoteForm">
 										<div class="toolbar" role="toolbar">
 											<div class="btn-group m-b-20">
 												<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지선택</label> 
 													<select class="form-select" id="category" name="apNo">
-														<%for(int i = 0; i <list.size(); i++) {%>
-														<option value=<%=list.get(i).getApNo()%>><%=list.get(i).getApNo()%></option>
+														<%for(int i = 0; i<List.size(); i++) {%>
+															<option value="<%=List.get(i).getCategoryNo()%>"><%=List.get(i).getCategoryName() %></option>
 														<%} %>
 													</select>
 												</div>
@@ -124,7 +124,7 @@
 													<div class="row form-material">
 														<div class="col-md-6" >
 															<label class="m-t-20">투표 시작 날짜</label> 
-															<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="mdate">
+															<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="sdate">
 														</div>
 													</div>
 													<div class="row form-material">
@@ -138,7 +138,7 @@
 											<div class="text-left m-t-15">
 												<button
 													class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10"
-													type="submit" id="applyBtn">
+													type="button" id="applyBtn" onclick="inVote()">
 													<i class="fa fa-paper-plane m-r-5"></i> 작성완료
 												</button>
 												<button
@@ -159,5 +159,30 @@
 		</div>
 	</div>
 <script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script>
+	function inVote(){			
+			Swal.fire({
+				 text: '투표를 등록하시겠습니까?',  
+	             icon: 'question',                              
+	             confirmButtonText: '등록',               
+	             showCancelButton: true,                 
+	             cancelButtonText: '취소',                
+	             cancelButtonColor: "#f3969a",
+	             confirmButtonColor: "#78c2ad",
+            }).then((result) =>{ 
+               if(result.value) {                              
+                	$("#inVoteForm").submit();         
+	            } else if(result.dismiss === 'cancel') {    
+	            	Swal.fire({
+						 text: '취소되었습니다',
+						 icon: 'error',
+						 confirmButtonColor: "#78c2ad"
+					});
+   				} 
+            });
+       	          	  
+		}	
+	
+</script>	
 </body>
 </html>

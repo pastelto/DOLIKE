@@ -96,7 +96,7 @@
 											<p class="card-text"><%= list.get(i).getContent()%></p><!-- 챌린지 설명 -->
 										</div>
 										<div class="card-footer" id="footer-vt">									
-											<button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="submit" id="voteBtn">
+											<button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" id="voteBtn" onclick="voteMe()";>
 													<i class="fa fa-paper-plane m-r-5"></i> Vote ME!
 											</button>
 																			
@@ -114,4 +114,31 @@
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 </body>
+
+<script>
+	function voteMe(){			
+			Swal.fire({
+				 text: '투표하시겠습니까?',  
+	             icon: 'question',                              
+	             confirmButtonText: '확인',               
+	             showCancelButton: true,                 
+	             cancelButtonText: '취소',                
+	             cancelButtonColor: "#f3969a",
+	             confirmButtonColor: "#78c2ad",
+            }).then((result) =>{ 
+               if(result.value) {                              
+                	$("#voteMe").submit();
+                	$("#voteBtn").attr("disabled",true);
+	            } else if(result.dismiss === 'cancel') {    
+	            	Swal.fire({
+						 text: '취소되었습니다',
+						 icon: 'error',
+						 confirmButtonColor: "#78c2ad"
+					});
+   				} 
+            });
+       	          	  
+		}	
+	
+</script>	
 </html>

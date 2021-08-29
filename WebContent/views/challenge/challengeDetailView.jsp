@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
-    		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo "%>
+    		com.kh.challenge.model.vo.ChallengeReply, com.kh.challenge.model.vo.PageInfo, java.text.SimpleDateFormat,
+    		 java.util.Date"%>
 <%
-Challenge c = (Challenge) request.getAttribute("c");
-Challenge cu = (Challenge) request.getAttribute("cu");
-int chno = Integer.parseInt(request.getParameter("chno"));
-ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
-ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
-PageInfo pi = (PageInfo) request.getAttribute("pi");
+	Challenge c = (Challenge) request.getAttribute("c");
+	Challenge cu = (Challenge) request.getAttribute("cu");
+	int chno = Integer.parseInt(request.getParameter("chno"));
+	ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
+	ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	
+	SimpleDateFormat  sf = new SimpleDateFormat("yyyy-MM-dd");
+	Date today = sf.parse(sf.format(new Date()));
+	Date start = sf.parse(c.getStart());
 
-
-
-int listCount = pi.getListCount();
-int currentPage = pi.getCurrentPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
-int startPage = pi.getStartPage();
+	boolean gap = today.before(start);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -100,7 +106,7 @@ int startPage = pi.getStartPage();
 </head>
 <body>
 	<div id="main-wrapper">
-		<%@include file="../common/menuSideBar.jsp"%>
+	<%@include file="../common/menuSideBar.jsp"%>
 		<div class="content-body">
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
@@ -139,16 +145,18 @@ int startPage = pi.getStartPage();
 											<li class="list-group-item">카테고리: <%=c.getCategoryTitle()%></li>
 											<li class="list-group-item">
 											<%if(loginUser.getUserId().equals("admin")) {%>
-												<form action="<%=request.getContextPath()%>/deleteChallenge.ch" method="post">											
+												<form action="<%=request.getContextPath()%>/deleteChallenge.ch" method="post" id="ch-end">											
 													<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
-													<button class="btn btn-primary px-3 ml-4" type="submit" id="deleteBtn">삭제</button>
+													<button class="btn btn-primary px-3 ml-4" type="button" id="endBtn" onclick="endCh();">마감</button>
 												</form>
-											<%} else{ %>										
+											<%} else{ %>
+												<%if(gap == true) {%>										
 												<form action="<%=request.getContextPath()%>/enroll.ch" method="post" id="enroll-ch">											
 													<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
 													<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
 													<button type="button" class="btn btn-primary px-3 ml-4" id="enrollBtn" onclick="chEnroll();">신청</button>
 												</form>
+												<%} %>
 											<%} %>
 											</li>											
 										</ul>
@@ -156,9 +164,9 @@ int startPage = pi.getStartPage();
 								</div>
 							</div>
 							<div class="card">
-								<div class="card-body text-center">									
-								<%if(c.getStatus().equals("Y")) {%>
-									<%-- <%if(cu == null) {%> --%>																		
+							<%if(c.getStatus().equals("Y")) {%>
+								<div class="card-body text-center">																	
+									<%if(cu == null) {%>																		
 									<form id="rpInsert" action="<%=request.getContextPath()%>/rplyInsert.ch" class="form-profile" method="post" enctype="multipart/form-data">
 										<div class="form-group">
 											<input type="text" class="hidden" name="chno" value="<%=chno%>"  id="chno"/>
@@ -175,15 +183,15 @@ int startPage = pi.getStartPage();
 											<button  type="button" class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpsubmit();">작성</button>
 										</div>
 									</form>							
-									<%--} else {--%>
-									<%-- <form action="#" class="form-profile">
+									<%} else {%>
+									<form action="#" class="form-profile">
 										<div class="form-group">
 											<textarea readonly class="form-control" name="textarea"id="textarea" cols="30" rows="2" placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
 										</div>
 									</form>
-									<%}%> --%>
-								<%}%>
+									<%}%>								
 								</div>
+								<%}%>
 							</div>
 						</div>
 
@@ -222,8 +230,9 @@ int startPage = pi.getStartPage();
 										<%} %>
 									<%}%>	
 												
-									<!-- 페이지 처리 -->
-									<%if (!rpList.isEmpty()){%>
+							<!-- 페이지 처리 -->
+							
+								<%if (!rpList.isEmpty()){%>
 									<div id="paging">
 										<ul class="pagination justify-content-center">
 											
@@ -274,6 +283,7 @@ int startPage = pi.getStartPage();
 										</ul>
 									</div>
 									<%} %>
+									
 								</div>
 							</div>
 						</div>
@@ -283,6 +293,7 @@ int startPage = pi.getStartPage();
 		</div>
 	<%@ include file="../common/footer.jsp"%>
 </div>
+<!-- alert -->
 	<script>
 		function rpsubmit(){
 			var content = document.getElementById("replyContent").value;
@@ -310,16 +321,7 @@ int startPage = pi.getStartPage();
                if(result.value) {                              
                 	$("#rpInsert").submit();
     				$("#replyContent").val("");
-    				$("#rpInsert input[name=file]").val("");
-    				location.href ="<%=contextPath%>/challengedetail.ch?chno=<%=chno%>";
-                	/* Swal.fire({
-                		 title: '댓글 등록 성공!',
-						 icon: 'success',
-						 confirmButtonText: '확인',
-						 confirmButtonColor: "#78c2ad"
-					}).then((result1) =>{								
-						
-					});   */              
+    				$("#rpInsert input[name=file]").val("");           
 	            } else if(result.dismiss === 'cancel') {    
 	            	Swal.fire({
 						 text: '취소되었습니다',
@@ -343,8 +345,7 @@ int startPage = pi.getStartPage();
 				}).then((result) =>{
 					 if(result.value) {
 						$("#enroll-ch").submit();
-						location.href ="<%=contextPath%>/challengedetail.ch?chno=<%=chno%>";
-					} else if(result.dismiss === 'cancel') { 
+					} else if(result.dismiss === 'cancel'){ 
 						Swal.fire({
 							 text: '취소되었습니다',
 							 icon: 'error',
@@ -352,11 +353,32 @@ int startPage = pi.getStartPage();
 						});	
 					} 
 				}); 
-		}		
-	 
-	   
-	   
-	</script>		
+		}
+		
+		function endCh(){				
+			Swal.fire({
+				text: '마감하시겠습니끼?',
+				icon: 'question',
+				showCancelButton: true, 
+				confirmButtonColor:"#78c2ad",
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',                
+		        cancelButtonColor: "#f3969a"
+			}).then((result) =>{
+				 if(result.value) {
+					$("#ch-end").submit();
+				} else if(result.dismiss === 'cancel'){ 
+					Swal.fire({
+						 text: '취소되었습니다',
+						 icon: 'error',
+						 confirmButtonColor: "#78c2ad"
+					});	
+				} 
+			}); 
+	}		
+	 	   
+	</script>	
+		
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

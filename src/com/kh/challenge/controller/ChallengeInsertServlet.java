@@ -96,7 +96,7 @@ public class ChallengeInsertServlet extends HttpServlet {
 			result = new ChallengeService().insertChallenge(c, cat);
 
 			if (result > 0) {
-				request.getSession().setAttribute("msg", "챌린지 등록이 완료됐습니다.");
+				request.getSession().setAttribute("adMsg", "챌린지 등록이 완료됐습니다.");
 				response.sendRedirect("index2.jsp");	
 				result = 0;
 			} else {
@@ -106,7 +106,7 @@ public class ChallengeInsertServlet extends HttpServlet {
 					result = 0;
 				}
 
-				request.setAttribute("msg", "챌린지 등록 실패");
+				request.setAttribute("errMsg", "챌린지 등록 실패");
 
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);

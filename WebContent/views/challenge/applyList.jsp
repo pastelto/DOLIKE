@@ -54,6 +54,7 @@
                 </div>
             </div>	
 		<br>
+		<div style="height:40rem;">
 		<div class="col-lg-8" style="margin: 0 auto;">
 			<div class="table-responsive">
 			<div>
@@ -89,7 +90,7 @@
 			</div>
 			</div>
 		</div>
-		
+		</div>
 		
 		<!-- 페이지 처리 -->
 		<div>

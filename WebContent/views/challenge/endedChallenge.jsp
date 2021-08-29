@@ -231,27 +231,27 @@
 						</div>
 					</div>
 				</div>
+				<div style="height:40rem;">
 				<div class="root-container">
 					<%if (!list.isEmpty() && !fileList.isEmpty()) {%>
-					<div class="container ">
+					<div class="container">
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<ul class="live-item-list">
+									<ul class="live-item-list" id="clickUl">
 										<%
 										for (int i = 0; i < list.size(); i++) {
 										%>
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>/challengedetail.ch"
-													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-												</a>
+											 <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												<div class="item-info">
 													<div>
-													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
-													</h4></div> <br>
+														<h4 class="title" style="float:left">
+															<%=list.get(i).getChTitle()%>
+														</h4>
+													</div> <br>
 													<div>									
 													<ul class="challenge-period">
 														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
@@ -268,6 +268,7 @@
 						</div>
 					</div>
 					<%} %>
+				</div>
 				</div>
 				<div>
 					<ul class="pagination justify-content-center">
@@ -306,14 +307,14 @@
 					</ul>
 				</div>
 			</div>
-		</div>
-		
-		<!-- 페이지 처리 -->
-				
+		</div>			
 	</div>
 <%@ include file="../common/footer.jsp" %>
+</div>
+
+
 <script>
-	<% if(list != null){%>
+	<% if(!list.isEmpty()){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
 				var chno = $(this).children().eq(0).text();				
@@ -323,6 +324,6 @@
 				})
 	<% } %>
 </script>
-</div>
+
 </body>
 </html>

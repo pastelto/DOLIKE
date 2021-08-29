@@ -69,8 +69,8 @@ public class ReplyInsertServlet extends HttpServlet {
 				result = new ChallengeService().insertReply(cp);
 
 				if (result > 0) {
+					request.getSession().setAttribute("msg", "오늘도 고생했어요! ");
 					response.sendRedirect("challengedetail.ch?chno=" + chno);
-					request.getSession().setAttribute("msg", "댓글 등록 성공");
 					result = 0;
 				} else {
 					if (cp != null) {
