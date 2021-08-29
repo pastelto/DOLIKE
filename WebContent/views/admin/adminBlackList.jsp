@@ -4,7 +4,7 @@
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 	
-	AdminBlackInfo amb = (AdminBlackInfo)request.getAttribute("amb");
+	AdminPageInfo amb = (AdminPageInfo)request.getAttribute("amb");
 	
 	int listCount = amb.getListCount();
 	int currentPage = amb.getCurrentPage();
@@ -22,15 +22,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
 <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
 <style>
 	#writeBtn {
@@ -101,16 +97,16 @@
                                                 <td colspan="8">조회된 회원이 없습니다.</td>                                                
                                             </tr>
                                             <%}else{ %>
-												<% for(Member am : list){ %>
+												<% for(Member mb : list){ %>
                                             <tr>
-                                                <td><%= am.getUserId() %></td>
-                                                <td><%= am.getUserName() %></td> 
-                                                <td><%= am.getBirthDate() %></td>
-                                                <td><%= am.getPhone() %></td>
-                                                <td><%= am.getEmail() %></td>
-                                                <td><%= am.getNickName() %></td>
-                                                <td><%= am.getUserCreateDate() %></td>
-                                                <th>&emsp;&emsp;<%= am.getUserStatus() %></th>                                             
+                                                <td><%= mb.getUserId() %></td>
+                                                <td><%= mb.getUserName() %></td> 
+                                                <td><%= mb.getBirthDate() %></td>
+                                                <td><%= mb.getPhone() %></td>
+                                                <td><%= mb.getEmail() %></td>
+                                                <td><%= mb.getNickName() %></td>
+                                                <td><%= mb.getUserCreateDate() %></td>
+                                                <th>&emsp;&emsp;<%= mb.getUserStatus() %></th>                                             
                                             </tr>
                                             	<%} %>
 											<%} %>
@@ -136,13 +132,13 @@
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/adminMemberList.am?currentPage=1"> &laquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/blackList.am?currentPage=1"> &laquo; </a></li>
 				
 				<!-- 이전페이지 -->
 				<% if(currentPage == 1) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/blackList.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
 				<%} %>
 				
 				
@@ -152,7 +148,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/adminMemberList.am?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/blackList.am?currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -162,11 +158,11 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/blackList.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/adminMemberList.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/blackList.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
 		<%@ include file="../common/footer.jsp" %>
