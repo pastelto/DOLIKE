@@ -37,7 +37,7 @@ public class FollowInsertServlet extends HttpServlet {
 		System.out.println("insert: "+followId);
 		
 		if(userId.equals(followId)) {
-			request.getSession().setAttribute("msg","나 자신은 영원한 인생의 친구입니다.");
+			request.getSession().setAttribute("flMsg","나 자신은 영원한 인생의 친구입니다.");
 			response.sendRedirect("MyFollow.fl");
 		}else {
 			Follow fl = new Follow(userId, followId);

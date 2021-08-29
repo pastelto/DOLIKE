@@ -4,6 +4,8 @@
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String sadMsg = (String)session.getAttribute("sadMsg"); 
+	String flMsg = (String)session.getAttribute("flMsg"); 
+	String adMsg = (String)session.getAttribute("adMsg"); 
 	String contextPath = request.getContextPath();
 	
 	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");
@@ -75,6 +77,51 @@
 			<%session.removeAttribute("sadMsg");%>
 			} else{
 				console.log("Sad");
+			}
+		})
+
+	//본인 팔로우시 gif 팝업
+		$(function(){
+		      var flMsg = "<%=flMsg%>";
+				if (flMsg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: flMsg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						imageUrl: 'https://media.giphy.com/media/gRkJb7UhnzlHpWDSKc/giphy.gif?cid=ecf05e47jpp708i3cfgdagyqovto8t918v0r08ql9yikf7b5&rid=giphy.gif&ct=g',
+						imageWidth: 400,
+						imageHeight: 200,
+						backdrop: `
+							rgba(217,229,255,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("flMsg");%>
+			} else{
+				console.log("Hello, My Friend!");
+			}
+		})
+	
+	//관리자용 일반 메세지
+		$(function(){
+		      var adMsg = "<%=adMsg%>";
+				if (adMsg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: adMsg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						backdrop: `
+							rgba(217,229,255,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("adMsg");%>
+			} else{
+				console.log("LoveYourself");
 			}
 		})
 	</script>
@@ -333,8 +380,11 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="<%= request.getContextPath() %>/followMain.fl">추천 친구</a></li>
-                            <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
-                   
+                            <% if(loginUser == null) {%>  
+                           
+                   			<%}else{ %> 
+                   				 <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
+                   			<%} %> 
                         </ul>
                     </li>
                     <% if(loginUser == null) {%>  

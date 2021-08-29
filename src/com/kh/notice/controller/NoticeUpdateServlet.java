@@ -46,7 +46,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 		int result = new NoticeService().updateNotice(n);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "공지사항이 성공적으로 수정되었습니다.");
+			request.getSession().setAttribute("adMsg", "공지사항이 성공적으로 수정되었습니다.");
 			response.sendRedirect("noticeView.no?nno="+nno);
 		}else {
 			request.getSession().setAttribute("errMsg", "공지사항 수정 실패");

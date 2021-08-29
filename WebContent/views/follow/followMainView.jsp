@@ -221,7 +221,7 @@
 				</div>
 	
 				<br>
-				</div> <!-- 카드 종료 -->
+				</div> 
 			</div>
 		</div>
 	</div>
@@ -239,23 +239,14 @@
 			if(followId == ""||followId1 ==""||followId2 ==""||followId3 ==""){
 
 				Swal.fire({
-					  title: 'TOP4 정산 전입니다.',
-					  text: '친구를 추가해보세요!',
-					  icon: 'error',
-					  showCancelButton: true,
-					  confirmButtonColor: "#78c2ad",
-					  confirmButtonBorder: "none",
-					  cancelButtonColor: '#f3969a',
-					  cancelButtonBorder: "none",
-					  confirmButtonText: '친구추가',
-					  cancelButtonText: '돌아가기'
+						title: 'TOP4 정산 전입니다.',
+						text: '나중에 방문해주세요!',
+						icon: 'error',
+						confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						confirmButtonText: '돌아가기',
 					}).then((result) => {
-					  if (!result.isConfirmed) {
-						  location.href="<%= contextPath %>/index2.jsp";
-					 
-					  }else{
-						  location.href="<%= contextPath %>/MyFollow.fl";
-					  }
+						location.href="<%= contextPath %>/index2.jsp";
 					})
 				
 			}else{

@@ -43,7 +43,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		int result = new NoticeService().insertNotice(n);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "공지사항이 성공적으로 등록되었습니다.");
+			request.getSession().setAttribute("adMsg", "공지사항이 성공적으로 등록되었습니다.");
 			response.sendRedirect("noticeView.no");
 		}else {
 			request.getSession().setAttribute("errMsg", "공지사항 등록 실패");
