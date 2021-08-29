@@ -41,7 +41,7 @@ public class CategoryUpdateFormServlet extends HttpServlet {
 			request.setAttribute("category", category);
 			view = "views/category/categoryUpdateForm.jsp";
 		} else {
-			request.setAttribute("msg", "수정할 카테고리를 불러오는데 실패했습니다.");	         
+			request.setAttribute("errMsg", "수정할 카테고리를 불러오는데 실패했습니다.");	         
 	        view = "views/common/errorPage.jsp";	         
 		}
 		request.getRequestDispatcher(view).forward(request, response);

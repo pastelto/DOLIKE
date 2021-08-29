@@ -55,10 +55,12 @@
 			padding: 0.75rem;
 			vertical-align:top;
 			border-top:1px solid #dee2e6;
-			
 		}
 		#contentArea{
 			min-height: 200px;
+		}
+		.Thum{
+			width:200px; height:auto;
 		}
 	</style>
 </head>
@@ -101,11 +103,15 @@
 								<div align="center">
 									<h6 class="p-t-15">
 										<i class="fa fa-download mb-2"></i>
-										<span>첨부파일</span>
+										<label for="titleImg">이미지</label>
+										<!-- <span>첨부파일</span> -->
 									</h6>
 									<% if(at != null){ %>
 									<div class="row m-b-30">
-										<div class="col-auto"><a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a></div>
+										<div class="col-auto">
+											<img src="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="Thum" >
+											<!-- <a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a> -->
+										</div>
 									</div>
 									<% }else{ %>
 									<span>등록된 첨부파일이 없습니다.</span>
@@ -157,7 +163,15 @@
 		</div>
 	
 	<script>
-	
+		$("#titleImg").change(function(){
+	 		if(this.files && this.files[0]){
+	 			var reader = new FileReader;
+	 			reader.onload = function(data){
+	 				$(".select_img img").attr("src", data.target.result);
+	 			}
+	 			reader.readAsDataURL(this.files[0]);
+	 		}
+	 	})
 	 	function updateForm(){
 			$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
 			$("#postForm").submit();

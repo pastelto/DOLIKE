@@ -36,10 +36,10 @@ public class CategoryDeleteServlet extends HttpServlet {
 		int result = new CategoryService().deleteCategory(cid);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "성공적으로 카테고리가 삭제되었습니다.");
+			request.getSession().setAttribute("sadMsg", "성공적으로 카테고리가 삭제되었습니다.");
 			response.sendRedirect("categoryList.ca");
 		}else {
-			 request.setAttribute("msg", "카테고리 삭제 실패");
+			 request.setAttribute("errMsg", "카테고리 삭제 실패");
 	         
 	         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	         view.forward(request, response);
