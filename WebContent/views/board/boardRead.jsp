@@ -150,8 +150,7 @@
 		</div>
 	
 	<script>
-	var content = $('#replyContent').val();
-	var bId = <%= b.getBoardNo()%>;
+	
 	 	function updateForm(){
 			$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
 			$("#postForm").submit();
@@ -168,7 +167,8 @@
 		$(function(){
 			selectReplyList(); 
 			$('#addReply').click(function(){
-				
+				var content = $('#replyContent').val();
+				var bId = <%= b.getBoardNo()%>;
 				
 				$.ajax({
 					url:"rinsert.bo",
@@ -194,9 +194,7 @@
 			
 			$.ajax({
 				url:"rList.bo",
-				data:{
-					bId : bId
-				},
+				data:{bId : <%= b.getBoardNo()%>},
 				type:"get",
 				success:function(list){
 					console.log(list)
