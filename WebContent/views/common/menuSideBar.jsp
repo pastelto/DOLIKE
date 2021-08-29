@@ -4,11 +4,6 @@
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String contextPath = request.getContextPath();
-<<<<<<< HEAD
-	
-	ArrayList<Category> caList = (ArrayList<Category>)request.getAttribute("caList");	
-=======
->>>>>>> refs/heads/master
 %>
 <!DOCTYPE html>
 <html>
@@ -343,7 +338,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="categoryList.ca">카테고리 목록</a></li>
-                            <li><a href="userAdminList.ua">회원 목록</a></li>
+                            <li><a href="adminMemberList.am">회원 목록</a></li>
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
@@ -525,8 +520,7 @@
              		          	        				
         </script>
         
-=======
->>>>>>> refs/heads/master
+
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>

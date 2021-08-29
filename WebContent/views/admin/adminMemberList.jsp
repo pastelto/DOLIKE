@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
     
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");

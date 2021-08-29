@@ -38,7 +38,7 @@ public class AdminMemberDetailServlet extends HttpServlet {
 		
 		if(am != null) {
 			request.setAttribute("am", am);
-			request.getRequestDispatcher("views/admin/AdminMemberDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/admin/adminMemberDetailView.jsp").forward(request, response);
 			
 		}else {
 			request.setAttribute("msg", "회원 조회 실패");
