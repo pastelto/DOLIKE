@@ -39,10 +39,10 @@ public class DeleteAllMessageServlet extends HttpServlet {
 		
 		int result = new MessageService().clearMsgBin(userId);
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "휴지통을 비웠습니다.");
+			request.getSession().setAttribute("msg", "휴지통 비우기 완료!");
 			response.sendRedirect("dlist.ms");
 		} else {
-			request.setAttribute("msg", "휴지통을 비우지 못했습니다." );
+			request.setAttribute("errMsg", "휴지통을 비우지 못했습니다." );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

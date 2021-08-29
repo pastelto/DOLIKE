@@ -51,6 +51,7 @@ public class MessageDao {
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			pstmt.setString(3, userId);
+			pstmt.setString(4, userId);
 			
 			rset = pstmt.executeQuery();
 			System.out.println("sql? " + sql);
@@ -419,7 +420,8 @@ public class MessageDao {
 		
 		return m;
 	}
-
+	
+	// 받은 쪽지 삭제하기
 	public int deleteRecvMsg(Connection conn, int mno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -486,7 +488,8 @@ public class MessageDao {
 		
 		return result;
 	}
-
+	
+	// 보낸 쪽지의 첨부파일 삭제
 	public int deleteSendAttachment(Connection conn, int mno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -518,6 +521,7 @@ public class MessageDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
 			
 			rset = pstmt.executeQuery();
 			
@@ -551,6 +555,120 @@ public class MessageDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 나에게 보낸 쪽지 개수
+	public int getMyMessageCount(Connection conn, String userId) {
+		int count = 0;
+		PreparedStatement pstmt =  null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getMyMessageCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	// 나에게 보낸 쪽지 리스트
+	public ArrayList<Message> selectMyMessageList(Connection conn, MsgPageInfo pi, String userId) {
+		ArrayList<Message> list = new ArrayList<Message>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getMyMessageList");
+		int startRow = (pi.getCurrentPage()-1)*pi.getMsgLimit()+1;
+		int endRow = startRow + pi.getMsgLimit()-1;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, userId);
+			pstmt.setString(4, userId);
+			
+			rset = pstmt.executeQuery();
+			System.out.println("sql? " + sql);
+			System.out.println("rset? " + rset);
+			while(rset.next()) {
+				list.add(new Message(rset.getInt("MSG_NO"),
+									 rset.getString("RECV_ID"),
+						 			 rset.getString("SENDER_ID"),
+						 			 rset.getString("MSG_TITLE"),
+						 			 rset.getString("RECVTIME"),
+						 			 rset.getString("MSG_STATUS")));
+				
+				System.out.println("list? " + list);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list dao ? " + list);
+		return list;
+	}
+
+	public int deleteMyMessageOne(Connection conn, int mno, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMyMessage");
+		System.out.println("dao mno? " + mno);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteMyAttachment(Connection conn, int mno, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMyMsgAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		

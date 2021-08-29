@@ -31,8 +31,10 @@ public class NewMessageFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int newMsgCount;
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+		
 		newMsgCount = new MessageService().getNewMessageCount(userId);
 		request.setAttribute("newMsgCount", newMsgCount);
+
 		request.getRequestDispatcher("views/message/NewMessageForm.jsp").forward(request, response);
 	}
 

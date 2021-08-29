@@ -21,7 +21,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -29,8 +29,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
+	
 	<script>
 	//기쁜일 했을 때 gif 팝업
 	   $(function(){
@@ -199,12 +200,14 @@
 	#myPageDrop {
 		font-family: 'Gowun Dodum', sans-serif;
 	}
+	
+	*{
+	font-family: 'Gowun Dodum', sans-serif;
+	}
 	</style>
 </head>
 <body>
-        <!--**********************************
-            Nav header start  
-        ***********************************-->
+
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index2.jsp" style="background:#fff">
@@ -216,13 +219,7 @@
                 </a>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
                 <div class="nav-control">
@@ -289,12 +286,7 @@
                	<%} %> 
             </div>
         </div>
-       <!--**********************************
-                Header end ti-comment-alt
-        ***********************************-->
-       <!--**********************************
-               Sidebar start
-        ***********************************-->
+
        <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
@@ -324,7 +316,6 @@
 
                         </ul>
 
-                        <!-- 즐겨찾는 게시판 Ajax Script -->
 				        <script>
 				        
 							$(function(){
@@ -339,7 +330,7 @@
 									success: function(result){
 										$("#output2").val(result);
 									},
-									error: function(e){ // 에러 내용을 e로 받아옴
+									error: function(e){ 
 										console.log(e);
 									}
 								})
@@ -455,14 +446,7 @@
                 <div class="modal" id="myModal">
                 <div class="modal-dialog">
                 <div class="modal-content">
-            
-                    <!-- Modal Header -->
-<!--                     <div class="modal-header">
-                    <h4 class="modal-title" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div> -->
-            
-                    <!-- Modal body -->
+
                     <div class="modal-body justify-content-center">
                      <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
                     	<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -485,32 +469,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	/*
-        	function searchBoard(){
-        		var findBoard = $("#searchBoardForm input[name=findBoard]");
-        		if(findBoard.val() == ""){
-        			alert("검색할 내용을 입력하세요.");
-        			return false;
-        		}
-        		$.ajax({
-        			url:"search.bo",
-        			type:"post",
-        			data:{findBoard:findBoard.val()},
-        			success:function(result){
-        				if(result == "success"){
-        					$("#searchBoardForm").submit();
-        				}else{
-        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
-        				}
-        			},
-        			error:function(){
-        				console.log("통신오류.")
-        			}
-        		})
-        		
-        		
-        	}*/
-				        
+        	
 			$(function(){
 				$("#btn-like").eq(0).click(function(){
 				var favB = $("#input2").val();
