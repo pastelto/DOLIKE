@@ -71,9 +71,6 @@
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -81,41 +78,21 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
 
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
 		<%@ include file="../common/menuSideBar.jsp" %> 
 
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">휴지통</a></li>
+                        <li class="breadcrumb-item">쪽지</li>
+                        <li class="breadcrumb-item">휴지통</li>
                     </ol>
                 </div>
             </div>
-            <!-- row -->
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -224,39 +201,23 @@
 				</div>
             </div>
 		
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
 		<%@ include file="../common/footer.jsp" %> 
-        <!--**********************************
-            Footer end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 		<script>
 		
 		function deleteAllMsg(){
-            // 확인, 취소버튼에 따른 후속 처리 구현
             swal.fire({
-                title: '삭제',        // 제목
-                text: "정말 휴지통을 비우겠습니까?",  // 내용
-                type: 'warning',                              // 종류
-                confirmButtonText: '삭제',               // 확인버튼 표시 문구
-                showCancelButton: true,                 // 취소버튼 표시 문구
-                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                title: '삭제',   
+                text: "정말 휴지통을 비우겠습니까?",
+                type: 'warning',                           
+                confirmButtonText: '삭제',           
+                showCancelButton: true,  
+                cancelButtonText: '취소',          
                 cancelButtonColor: "#f3969a",
                 confirmButtonColor: "#78c2ad"
             }).then(function(result) { 
-                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                if(result.value) {          
                 
                 	$("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
 				swal.fire(
@@ -268,7 +229,7 @@
 					$("#msgAllDel").submit();
 				});
                 
-            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+            } else if(result.dismiss === 'cancel') {  
                 swal.fire(
                 	{title: '취소',
 					 text: '취소되었습니다',

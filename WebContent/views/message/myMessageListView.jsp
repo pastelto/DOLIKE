@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - 쪽지함</title>
+    <title>DO LIKE - 내게 쓴 쪽지함</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     <!-- Custom Stylesheet -->
@@ -78,7 +78,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">쪽지</li>
-                        <li class="breadcrumb-item active">내게쓴쪽지함</li>
+                        <li class="breadcrumb-item active">내게 쓴 쪽지함</li>
                     </ol>
                 </div>
             </div>

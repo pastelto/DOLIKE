@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - 쪽지함</title>
+    <title>DO LIKE - 받은 쪽지함</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     <!-- Custom Stylesheet -->
@@ -60,46 +60,17 @@
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
 
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
 		<%@ include file="../common/menuSideBar.jsp" %> 
 
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">받은쪽지함</a></li>
+                        <li class="breadcrumb-item">쪽지</li>
+                        <li class="breadcrumb-item active">받은 쪽지함</li>
                     </ol>
                 </div>
             </div>
@@ -234,23 +205,9 @@
 		
             <!-- #/ container -->
         </div>
-        
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
+
 		<%@ include file="../common/footer.jsp" %> 
-        <!--**********************************
-            Footer end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 	<script>
 		<% if(!list.isEmpty()){%>
 		$(function(){

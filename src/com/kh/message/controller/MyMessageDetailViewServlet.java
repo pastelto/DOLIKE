@@ -46,7 +46,7 @@ public class MyMessageDetailViewServlet extends HttpServlet {
 			request.setAttribute("mat", mat);
 			request.setAttribute("newMsgCount", newMsgCount);
 
-			request.getRequestDispatcher("views/message/recvMessageDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/message/myMessageDetailView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errMsg", "쪽지 상세조회 실패");
 			

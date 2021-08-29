@@ -59,8 +59,8 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">쪽지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">보낸 쪽지 읽기</a></li>
+                        <li class="breadcrumb-item">쪽지</li>
+                        <li class="breadcrumb-item active">보낸 쪽지 읽기</li>
                     </ol>
                 </div>
             </div>

@@ -217,6 +217,24 @@ public class MessageService {
 		
 		return list;
 	}
+	
+	// 나에게 보낸 쪽지 삭제하기
+	public int deleteMyMsg(int mno, String userId) {
+		Connection conn = getConnection();
+		
+		int result1 = new MessageDao().deleteMyMessageOne(conn, mno, userId);
+		int result2 = new MessageDao().deleteMyAttachment(conn, mno, userId);
+		
+		// 첨부파일 유무에 따라
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1;
+	}
 
 
 	

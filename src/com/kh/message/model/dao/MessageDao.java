@@ -631,6 +631,50 @@ public class MessageDao {
 		return list;
 	}
 
+	public int deleteMyMessageOne(Connection conn, int mno, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMyMessage");
+		System.out.println("dao mno? " + mno);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteMyAttachment(Connection conn, int mno, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMyMsgAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mno);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 	
 
