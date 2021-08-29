@@ -197,6 +197,26 @@ public class MessageService {
 		
 		return result;
 	}
+	
+	// 나에게 보낸 쪽지 개수
+	public int getMyMessageCount(String userId) {
+		Connection conn = getConnection();
+		
+		int count = new MessageDao().getMyMessageCount(conn, userId);
+		close(conn);
+		
+		return count;
+	}
+	
+	// 나에게 보낸 쪽지 디테일
+	public ArrayList<Message> selectMyMessageList(MsgPageInfo pi, String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Message> list = new MessageDao().selectMyMessageList(conn, pi, userId);
+		close(conn);
+		
+		return list;
+	}
 
 
 	

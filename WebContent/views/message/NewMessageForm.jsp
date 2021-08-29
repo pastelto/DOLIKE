@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.message.model.vo.Message"%>
 <%
-	int newMsgCount = (int)(request.getAttribute("newMsgCount"));
+	int newMsgCount = (int)(request.getAttribute("newMsgCount")); 
 
 	System.out.println(request.getContextPath());
 %>
@@ -93,7 +93,9 @@
 										<%if(newMsgCount > 0){ %> 
 										<span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left: 10px;"> <%= newMsgCount %></span> <%} %></a>
 										 <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0">
-										 <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
+										 <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a>
+										 <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0">
+										 <i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
 										 <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0">
 										 <i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
@@ -104,7 +106,7 @@
 										<h4>쪽지 보내기</h4>
 									</div>
 									<div class="compose-content mt-5">
-										<form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data">
+										<form id="newMessageInsertForm" action="<%= request.getContextPath() %>/write.ms" method="post" enctype="multipart/form-data" onsubmit="submitMsg();">
 
 											<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>">
 
@@ -131,9 +133,9 @@
 												<input type="text" name="messageTitle" class="form-control bg-transparent" placeholder=" 제목">
 											</div>
 											<div class="input-group">
-												<textarea class="textarea_editor form-control bg-light" name="messageContent" rows="15" placeholder="메세지를 입력해주세요."></textarea>
+												<textarea class="textarea_editor form-control bg-light" id="messageContent" name="messageContent" rows="15" placeholder="메세지를 입력해주세요."></textarea>
 											</div>
-
+											<hr>
 											<h5 class="m-b-20">
 												<i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일
 											</h5>
@@ -142,9 +144,9 @@
 													<input class="l-border-1" name="upfile" type="file" multiple="multiple">
 												</div>
 											</div>
-
+											<hr>
 											<div class="text-right m-t-15">
-												<button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" onclick="submitMsg();">
+												<button id="submitBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10">
 													<i class="fa fa-paper-plane m-r-5"></i> 보내기
 												</button>
 												<button id="resetBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="reset">
@@ -167,10 +169,10 @@
 
 
 	<script>
-		
-	function submitMsg(){
+		function submitMsg(){
+			
             // 확인, 취소버튼에 따른 후속 처리 구현
-            swal.fire({
+/*             swal.fire({
                 title: '확인',
                 text: "쪽지가 정상적으로 발송되었습니다.", 
                 type: 'success',
@@ -180,7 +182,46 @@
                 if(result.isConfirmed) {                
                 $("#submitBtn").submit();  
             }
-        });
+        }); */
+            
+            var recvId = $("#newMessageInsertForm input[name=recvId]");
+			var messageTitle = $("#newMessageInsertForm input[name=messageTitle]");
+			var messageContent = document.getElementById("messageContent");
+			
+			var noRecvId = "<%= loginUser.getUserId() %>"
+			var noTitle = "<%= "제목이 없습니다."  %>";
+			var noContent = "<%= "쪽지 내용이 없습니다." %>";
+			
+			if(recvId.val() != ""){
+				
+				
+			} else {
+					recvId.attr("value",  noRecvId);
+				if(messageTitle.val() != ""){
+					
+					
+				} else{
+					messageTitle.attr("value" , noTitle);
+						if(messageContent.value != ""){
+							
+						} else{
+							
+							messageContent.value = noContent;
+
+						}
+						
+						
+				}
+				
+				
+			}
+			
+			console.log("recvId?? " + recvId.val)
+			console.log("noTitle?? " + noTitle.val)
+			console.log("messageContent?? " + messageContent.value) 
+			
+			alert("AAA 1. " + recvId.val() + "/ 2. " + messageTitle.val() + "/ 3. " + messageContent.value)
+			
 	}
 
 
