@@ -329,7 +329,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                         <!-- 나중에 코드로 구현할 부분 -->
-                            <li><a href="./layout-blank.html">카테고리1</a></li>
+                            <li><a href="list.bo">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
                      
                         </ul>

@@ -16,7 +16,7 @@
 	case "옵션4": selected[3] = "selected"; break;
 	case "옵션5": selected[4] = "selected"; break;
 	case "옵션6": selected[5] = "selected"; break;
-	case "옵션7": selected[6] = "selected"; break;
+	case "옵션7": selected[6] = "selected"; break; 
 	}
 %>
 <!DOCTYPE html>
