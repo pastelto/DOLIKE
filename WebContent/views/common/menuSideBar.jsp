@@ -404,7 +404,7 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="categoryList.ca">카테고리 목록</a></li>
                             <li><a href="adminMemberList.am">회원 목록</a></li>
-                            <li><a href="userBlackList.bl">블랙리스트</a></li>
+                            <li><a href="blackList.am">블랙리스트</a></li>
                         </ul>
                     </li>
                     <%-- <% } %> --%>         
