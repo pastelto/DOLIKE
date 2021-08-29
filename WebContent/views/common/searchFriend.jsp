@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, com.kh.member.model.vo.*, com.kh.common.searchMember.model.vo.*, java.text.*" %>
 <%
-	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list"); 
+/* 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list"); 
 	SearchListPageInfo mpi = (SearchListPageInfo)request.getAttribute("pi");
-	String contextPath = request.getContextPath();
+	
 	
 	int listCount = mpi.getListCount();
 	int currentPage = mpi.getCurrentPage();
 	int endPage = mpi.getEndPage();
 	int maxPage = mpi.getMaxPage();
-	int startPage = mpi.getStartPage();
+	int startPage = mpi.getStartPage(); */
 	
+	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	System.out.println("여기는 searchFriend.jsp입니다. 로그인 아이디는 : " + loginUser.getUserId());
 	
 %>
 <!DOCTYPE html>
@@ -19,6 +22,7 @@
 <meta charset="UTF-8">
 <title>DO LIKE - 회원 검색</title>
 <link href="./css/style.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -34,6 +38,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <style>
 	#choiceBtn{
 		background-color: #78c2ad;
@@ -49,20 +54,26 @@
 	
 	.down{
 			position: absolute;
-			top:80%;
-			left:45%;
+			top:95%;
+			left:38%;
 			transform: translate(-50%,-50%);
 		}
 		
 	.left{
 			position: absolute;
-			top:80%;
-			left:55%;
+			top:95%;
+			left:60%;
 			transform: translate(-50%,-50%);
 		}
+		
+	#searchBtn {
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
 </style>
 <script>
-    $(document).ready(function() {
+/*     $(document).ready(function() {
         //검색 진행 후 상태값 유지를 위한 설정 필요
         //<select> 태그에 대한 상태값 설정
         $("#key option[value='${key}']").attr("selected", "selected");
@@ -102,14 +113,14 @@
             
         });    
         
-    });
+    }); */
     
 
 </script>
 </head>
 <body>
 	<div class="main-wrapper">
-	<div class="container">
+	<div class="container-fluid">
 
 		<div class="panel page-header" style="text-align: center;">
 			<h3 style="color: #78c2ad">
@@ -176,42 +187,25 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-body" style="height: 50rem;">
-						<form class="form-inline" method="POST">
-							<div class="form-group">
-								<%--                         <!-- 전체 자료 갯수 -->
-                        <button type="button" class="btn btn-default">
-                           조회된 회원 수  <span class="badge" id="totalcount">${totalcount} </span> 명입니다.
-                        </button> --%>
-								<span style="margin-left: 5rem; margin-right: 1rem;"> <!-- 검색 기준 선택 항목 -->
+				<div class="card" style="height: 550px;  width: 660px; ">
+					<div class="card-body" style="height: 100%;">
+						<form class="form-inline" method="post" action="searchUserList()">
+							<div class="form-group" style="width:100%;" >
 
-
-
-
-									<img
-									src="${pageContext.request.contextPath}/resources/images/do_32.png"
-									alt=""> <select class="form-control"
-									style="width: 100px;" id="key" name="key">
-										<option value="all">아이디</option>
-										<option value="mid_">닉네임</option>
-								</select>
-								</span>
-
-							</div>
-
-							<div class="input-group">
+									 <select class="form-control" style="width: 90px; margin-right: 10px; margin-left: 20%;" id="selectIdorNN" name="selectIdorNN">
+										<option value="USER_ID">아이디</option>
+										<option value="NICKNAME">닉네임</option>
+									</select>
+								<!-- </span> -->
+								<div class="input-group">
 								<!-- 검색 단어 입력 폼 -->
-								<input type="text" class="form-control" id="value" name="value"
-									placeholder="아이디 또는 별명을 입력해주세요." style="width: 35rem;">
-								<div class="input-group-btn">
+								<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="아이디를 입력해주세요." style="width: 20rem;">
 									<!-- 검색 진행 버튼 -->
-									<button type="submit" class="btn btn-default" id="searchId">
-										<i class="glyphicon glyphicon-search"> 검색하기 </i>
-									</button>
-								</div>
-
+								<button type="button" id="searchBtn" class="btn" value="검색하기">검색하기</button>
 							</div>
+							</div>
+
+							
 							<br>
 
 						</form>
@@ -219,28 +213,27 @@
 						<div class="panel panel-default" id="output">
 							<div>
 								<!-- 검색 결과 자료 갯수 -->
-								<button type="button" class="btn btn-default"
-									style="border: none;">
-									조회된 회원 수 <span class="badge" id="count">${count}</span> 명입니다.
+								<button type="button" class="btn btn-default" style="border: none;">
+									조회된 회원 수는 총 <span id="count" style="color: #f3969a;"><b> 3 </b></span> 명입니다.
 								</button>
 							</div>
 							<div class="panel-body">
 
-								<table id="members" class="table">
+								<table id="searchMemberList" class="table">
+								<thead>
 									<tr>
-										<th></th>
+										<th>번호</th>
 										<th>아이디</th>
 										<th>닉네임</th>
 									</tr>
-									<%-- JSTL를 이용한 반복문 처리 --%>
-									<c:forEach var="m" items="${list}">
-										<tr>
-											<td>${m.mid_}</td>
-											<td>${m.name_}</td>
-											<td></td>
-										</tr>
-									</c:forEach>
-
+								</thead>
+								<tbody>
+<!-- 									<tr>
+									<td>1</td>
+									<td>user01</td>
+									<td>안녕하세요</td>
+									</tr> -->
+								</tbody>
 								</table>
 
 
@@ -252,17 +245,15 @@
 					</div>
 
 				</div>
-
-			</div>
-			
 			<div class="btn-group down">
-				<button type="button" class="btn" value="${m.mid_}" id="choiceBtn">선택</button>
+				<button type="button" class="btn" id="choiceBtn">선택</button>
 			</div>
 			<div class="btn-group left">
-				<button type="button" class="btn" value="${m.mid_}"
-				id="closeBtn">닫기</button>
+				<button type="button" class="btn" id="closeBtn" onclick="window.close()">닫기</button>
 			</div>
-			<div>
+			</div>
+
+<%-- 			<div>
 					<ul class="pagination justify-content-center">
 						<!-- 맨앞으로 -->
 						<li><a id="pageTag" class="page-link" href="<%=contextPath%>/findUser.fd?currentPage=1"> &laquo; </a></li>
@@ -297,49 +288,88 @@
 						<!-- 맨뒤로 -->
 						<li><a id="pageTag" class="page-link" href="<%= contextPath %>/findUser.fd?currentPage=<%= maxPage %>"> &raquo; </a></li>
 					</ul>
-				</div>
+				</div> --%>
 		</div>
 		</div>
 		</div>
-	<script>
-		function searchPopUp11(){
-			console.log("찍히나?")
-			var followId = $("#searchForm input[name=followId]");
-			if(followId.val() == ""){
-				
-				alert("친구 아이디를 입력하세요!");
-				return false;
-			}
-			$.ajax({
-				url:"search.fl",
-				type:"post",
-				data:{followId:followId.val()},
-				success:function(result){
-					if(result == "success"){
-						var check = confirm(followId.val()+"님을 친구 추가하겠습니까?");
-						if(check == true){
-							$("#searchForm").submit();
-						}else{
-							alert("취소되었습니다.");
-						}
-						
-						
-					}else{
-						alert(followId.val()+"님은 존재하지 않는 유저입니다.");
-					}
-				},
-				error:function(){
-					console.log("통신오류!")
-				}
-			})
+		<script type="text/javascript">
+		
+/* 		$(function(){
 			
+			$("#searchBtn").click(function(){
+				
+/* 				var searchWord;
+				var choice;
+				var selectIdorNN; */
+				
+				/* var searchWord = $("input[name=searchInput]").val();
+				var choice = $("option:select[name=selectIdorNN]").val();
+					
+				alert(searchWord + ", " + choice);
+				 */
+				
+				/* $.ajax({
+					url:"findUser.fd",
+				})	
+				}) 
+				})
+				*/
+		
+		
+		function searchUserList(){
+			
+			/* var searchWord = $("#searchWord"); */
+			/* var searchWord = $("input[name=searchWord]") */
+			/* var choice = $("option:select[name=selectIdorNN]").val(); */
+			
+			var searchWord = document.getElementById("searchWord").value;
+			var choice = $("#selectIdorNN option:selected").val();
+			
+			console.log(searchWord + ", " + choice);
+			
+			$.ajax({
+				url:"findUser.fd",
+				data:{searchWord:searchWord,
+					  choice:choice	
+				},
+				dataType:"json",
+	            type:"get",
+	            success: function(map){
+					console.log("map : " + map);
+					console.log("map[jArr] : " + map[jArr]);
+					console.log("map[pi] : " + map[pi]);
+					console.log("map[listCount] : " + map[listCount]);
+					
+					<%-- var loginUser = <%= loginUser %>; --%>
+					var userList = ""
+					var $tableBody = $("#searchMemberList tbody")
+					
+					$.each(map["jArr"], function(index, value){
+						
+						console.log(value);
+						
+	                     var $tr = $("<tr>");
+	                     var $noTd = $("<td>").text(index); //<td> 1(value.no) </td> 이렇게 넣어주겠다는 것 
+	                     var $idTd = $("<td>").text(value.userId); 
+	                     var $nickNameTd = $("<td>").text(value.nickName); 
+						
+	                     $tr.append($noTd);   
+	                     $tr.append($idTd);
+	                     $tr.append($nickNameTd);
+	                     
+	                     $tableBody.append($tr);
+					})
+				}, 
+				error:function(request,status,error){
+					console.log("ajax 통신 실패!");
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			
+			});
 			
 		}
-		</script>
-		<script src="plugins/common/common.min.js"></script>
-		<script src="js/custom.min.js"></script>
-		<script src="js/settings.js"></script>
-		<script src="js/gleek.js"></script>
-		<script src="js/styleSwitcher.js"></script>
+		
+		
+</script>
 </body>
 </html>

@@ -15,6 +15,7 @@ import com.kh.challenge.model.vo.Challenge;
 import com.kh.challenge.model.vo.ChallengeAttachment;
 import com.kh.challenge.model.vo.ChallengeReply;
 import com.kh.challenge.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ChallengeDetailServlet
@@ -38,25 +39,28 @@ public class ChallengeDetailServlet extends HttpServlet {
 								
 				int chno = Integer.parseInt(request.getParameter("chno"));
 				Challenge c = new ChallengeService().selectDetail(chno);
-				request.setAttribute("c", c);
+				request.setAttribute("c", c);					
+				
+				String loginUser = ((Member)request.getSession().getAttribute("loginUser")).getUserId();				
+				Challenge cu = new ChallengeService().selectTdRp(loginUser,chno);
+
+				request.setAttribute("cu", cu);
 				
 				ChallengeAttachment at = new ChallengeService().selectAttach(chno);
 				request.setAttribute("at", at);
 				
-				System.out.println(c + "c servlet");
-				System.out.println(at +"at servlet");
 				
 		// ---------------- 페이징 처리 -----------------
-				int rpCount;			// 총 댓글 갯수
+				int listCount;			// 총 댓글 갯수
 				int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 				int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 
 				int endPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 끝 수
 				int maxPage;			// 전체 페이지에서의 가장 마지막 페이지
 				
 				int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
-				int rpLimit;			// 한 페이지에 보여질 댓글 최대 갯수
+				int listLimit;			// 한 페이지에 보여질 댓글 최대 갯수
 				
-				rpCount = new ChallengeService().getListCount();
+				listCount = new ChallengeService().getrpListCount(chno);
 				
 				currentPage = 1;
 				
@@ -69,10 +73,10 @@ public class ChallengeDetailServlet extends HttpServlet {
 				pageLimit = 10;
 				
 				// * rpLimit : 한 페이지에 보여질 게시글 최대 갯수
-				rpLimit = 10;
+				listLimit = 10;
 				
 				// * maxPage : 총 페이지 수
-				maxPage = (int)Math.ceil((double)rpCount/rpLimit);
+				maxPage = (int)Math.ceil((double)listCount/listLimit);
 				
 				// * startPage : 현재 페이지에 보여지는 페이징 바의 시작 수				
 				startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -86,7 +90,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 					endPage = maxPage;
 				}
 								
-				PageInfo pi = new PageInfo(rpCount, currentPage, startPage, endPage, maxPage, pageLimit, rpLimit);
+				PageInfo pi = new PageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, listLimit);
 				request.setAttribute("pi", pi);
 				
 				ArrayList<ChallengeReply> rpList = new ChallengeService().selectReply(pi,chno);				
@@ -96,10 +100,6 @@ public class ChallengeDetailServlet extends HttpServlet {
 				view.forward(request, response);
 	}
 
-	private String getParameter(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

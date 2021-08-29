@@ -5,9 +5,7 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	String today = sdf.format(date);
-	
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -44,6 +42,16 @@
 	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
+	
+		     <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">팔로잉</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">공지사항 등록</a></li>
+                    </ol>
+                </div>
+            </div>
+	
 		<br>
 		<div class="container-fluid">
 			<div class="row">
@@ -66,12 +74,14 @@
 											name="content"></textarea>
 									</div>
 									<div class="text-center m-t-15">
-										<button id="returnBtn" type="reset" class="btn btn-sm" onclick="location.href='<%=contextPath%>/noticeView.no'">돌아가기</button>
-										<br>
-										<div class="float-right">
+										
+										<div>
 											<button type="submit" id="enrollBtn" class="btn btn-sm">등록하기</button>
 											<button type="reset" id="resetBtn" class="btn btn-sm">취소하기</button>
 										</div>
+										<br>
+										<button id="returnBtn" type="reset" class="btn btn-sm float-right" onclick="location.href='<%=contextPath%>/noticeView.no'">돌아가기</button>
+										
 									</div>
 								</form>
 							</div>

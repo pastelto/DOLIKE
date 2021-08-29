@@ -65,18 +65,6 @@ public class FollowUserInfoServlet extends HttpServlet {
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(jArr);
 		
-		
-//		String view = "";
-//		if(m != null) {
-//			request.setAttribute("m", m);
-////			response.sendRedirect(request.getContextPath());
-//			view = "MyFollow.fl";
-//		}else {
-//			request.setAttribute("msg", "친구 조회에 실패하였습니다.");
-//			view = "views/common/errorPage.jsp";
-//			
-//		}
-//		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

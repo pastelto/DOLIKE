@@ -41,11 +41,7 @@ public class VoteInsertServlet extends HttpServlet {
 		String chTitle = request.getParameter("chTitle");
 		String content = request.getParameter("content");
 		String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		
-		System.out.println(apNo+ categoryNo+ chTitle+ content);
-		System.out.println(start);
-		System.out.println(end);
+		String end = request.getParameter("end");	
 		
 		ChallengeVote cv = new ChallengeVote();
 
@@ -63,7 +59,7 @@ public class VoteInsertServlet extends HttpServlet {
 			response.sendRedirect("index2.jsp");
 			System.out.println("투표 등록 성공!");
 		} else {
-			request.setAttribute("msg", "투표 등록에 실패했습니다.");
+			request.setAttribute("msg", "투표 등록 살패");
 
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

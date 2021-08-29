@@ -84,70 +84,75 @@
 		<div class="content-body">
 			<!-- style="display: flex; flex: 0 0 auto; felx-direction: row; padding: 50px;" -->
 			<div class="container-fluid">
-			<div class="row" style="margin-bottom: 13%;">
-				<div class="topList col-10" align="center" >
-
-					<div id="thumbList"
-						style="height: 10%; padding-left: 15%; padding-right: 15%">
-						<div class="card" style="width: 90%;">
-							<!--                             <div class="card-body"> -->
-
-							<div class="bootstrap-carousel" style="height: 5rem;">
-								<div id="carouselExampleIndicators" class="carousel slide"
-									data-ride="carousel">
-									<ol class="carousel-indicators">
-										<li data-target="#carouselExampleIndicators" data-slide-to="0"
-											class="active"></li>
-										<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-										<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-										<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-										<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-									</ol>
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="resources/images/summer.png"
-												alt="First slide">
-										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="resources/images/runday.png"
-												alt="Second slide">
-										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="resources/images/submit.png" alt="Third slide">
-										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="resources/images/vege.png" alt="Fourth slide">
-										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100" style="width: 10%; height: 15rem;"
-												src="resources/images/animal.png" alt="Fifth slide">
-										</div>
+			<div class="col-12">
+				<div class="row">
+					<div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
+						<div class="bootstrap-carousel" style="height: 5rem;">
+							<div id="carouselExampleIndicators" class="carousel slide"
+								data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carouselExampleIndicators" data-slide-to="0"
+										class="active"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img class="d-block w-100" style="width: 10%; height: 15rem;"
+											src="resources/images/summer.png"
+											alt="First slide">
 									</div>
-									<a class="carousel-control-prev"
-										href="#carouselExampleIndicators" data-slide="prev"><span
-										class="carousel-control-prev-icon"></span> <span
-										class="sr-only">Previous</span> </a><a
-										class="carousel-control-next"
-										href="#carouselExampleIndicators" data-slide="next"><span
-										class="carousel-control-next-icon"></span> <span
-										class="sr-only">Next</span></a>
+									<div class="carousel-item">
+										<img class="d-block w-100" style="width: 10%; height: 15rem;"
+											src="resources/images/runday.png"
+											alt="Second slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" style="width: 10%; height: 15rem;"
+											src="resources/images/submit.png" alt="Third slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" style="width: 10%; height: 15rem;"
+											src="resources/images/vege.png" alt="Fourth slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" style="width: 10%; height: 15rem;"
+											src="resources/images/animal.png" alt="Fifth slide">
+									</div>
 								</div>
+								<a class="carousel-control-prev"
+									href="#carouselExampleIndicators" data-slide="prev"><span
+									class="carousel-control-prev-icon"></span> <span
+									class="sr-only">Previous</span> </a><a
+									class="carousel-control-next"
+									href="#carouselExampleIndicators" data-slide="next"><span
+									class="carousel-control-next-icon"></span> <span
+									class="sr-only">Next</span></a>
 							</div>
+						</div>
+					</div>
+		
+					<div class="col-md-4" id="innerDiv" style="width: 40%">
+						<div class="card" style="width: 90%;">
+							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
+							src="resources/images/submit.png" alt="Third slide">
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-10">
+			
+			
+			<!-- ************************************************* -->
+			
+			
+			<div class="row" style="margin-bottom: 13%;">
+			<div class="col-12">
 			<div class="row">
-				
-					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; paading-right: 10%; padding-left: 10%;"> -->
+					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; padding-right: 10%; padding-left: 10%;"> -->
 
-
-					<div class="col-md-6" style="width: 10%; padding-right: 30px;">
+					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 50px;">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title" style="color: #f3969a">

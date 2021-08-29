@@ -32,7 +32,7 @@ public class searchDao {
 	}
 	
 	// 검색한 아이디 관련 리스트
-	public ArrayList<Member> selectSearchUserList(Connection conn, String userId, String searchWord, SearchListPageInfo pi) {
+	public ArrayList<Member> selectSearchUserList(Connection conn, String userId, String searchWord, String choice, SearchListPageInfo pi) {
 		ArrayList<Member> list = new ArrayList<Member>();
 		
 		PreparedStatement pstmt = null;
@@ -44,19 +44,18 @@ public class searchDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, choice);
+			pstmt.setString(2,  "%'" + searchWord + "%'");
 			pstmt.setString(3, userId);
-			pstmt.setString(4,  "%'" + searchWord + "%'");
+			pstmt.setString(4, choice);
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
 			
 			rset = pstmt.executeQuery();
-			System.out.println("sql? " + sql);
-			System.out.println("rset? " + rset);
 			
 			while(rset.next()) {
 				
 				Member m = new Member();
-				
 				m.setUserId(rset.getString("USER_ID"));
 				m.setNickName(rset.getString("NICKNAME"));
 				list.add(m);
@@ -76,7 +75,7 @@ public class searchDao {
 	
 	
 	// 검색한 아이디 개수
-	public int getSearchUserListCount(Connection conn, String userId, String searchWord) {
+	public int getSearchUserListCount(Connection conn, String userId, String searchWord, String choice) {
 		int count = 0;
 		PreparedStatement pstmt =  null;
 		ResultSet rset = null;
@@ -85,8 +84,10 @@ public class searchDao {
 			
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, "%'" + searchWord + "%'");
+			pstmt.setString(1, choice);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, choice);
+			pstmt.setString(4, "%'" + searchWord + "%'");
 			
 			rset = pstmt.executeQuery();
 			
@@ -100,6 +101,7 @@ public class searchDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println("count? : " + count);
 		return count;
 	}
 

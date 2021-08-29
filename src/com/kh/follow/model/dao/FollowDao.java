@@ -501,4 +501,36 @@ public class FollowDao {
 		return flist;
 	}
 
+
+	public ArrayList<Follow> selectCategoryTop4User(Connection conn, String categoryName) {
+		ArrayList<Follow> catFlTop = new ArrayList<Follow>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCategoryTop4User");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, categoryName);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				catFlTop.add(new Follow(
+						rset.getString("FOLLOW_ID")));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return catFlTop;
+	}
+
 }
