@@ -46,8 +46,8 @@
 			<div class="row page-titles mx-0">
 				<div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">공지사항</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">공지사항 등록</a></li>
+                        <li class="breadcrumb-item">공지사항</li>
+                        <li class="breadcrumb-item active">공지사항 등록</li>
                     </ol>
                 </div>
             </div>
