@@ -29,6 +29,26 @@ body {
 	color: #2363747;
 	text-align: left;
 }
+#mission{
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
+
+#mission:hover{
+	color: #78c2ad;
+	background-color: #fff;
+	border-color: #78c2ad;
+}
+#text-center{
+	text-align:center;
+}
+#m-challenge{
+	color:#78c2ad;
+}
+#e-challenge{
+	color:#f3969a;
+}
 
 .navbar {
 	display: flex !important;
@@ -166,6 +186,14 @@ a {
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp"%>
 	<div class="content-body">
+		<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">마이 챌리지</a></li>
+                    </ol>
+                </div>
+            </div>	
 		<div class="container-fluid">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active"
@@ -175,8 +203,11 @@ a {
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade show active" id="ch-body-m" >
+				<br>
+				<br>
 				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
-				<div height="20px"></div>
+					<br>
+					<br>
 				<div class="root-container">
 					<%
 					if (c != null && at != null) {
@@ -185,7 +216,7 @@ a {
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<ul class="live-item-list">
+									<ul class="live-item-list" id="clickUl">
 										<li class="item">
 											<div class="hide"><%=c.getChNo()%></div>
 											<div class="item-wrap">
@@ -211,6 +242,20 @@ a {
 							</div>
 						</div>
 					</div>
+					<%} else {%>
+						<div class="container col-5 ">
+							<div class="card" id="null-end">
+								<div class="card-header" id="text-center">참여중인 챌린지가 없습니다</div>
+								<div class="card-body">
+									<div class="items-center" style="text-align:center;">
+										<a href="<%=request.getContextPath()%>/challengeMain.ch" class="item-click"> 
+											<img src="./resources/challenge_upfiles/null-my.png" alt="null-my" class="null-my" width="300px" height="300px"><br><br>
+											<button class="btn btn-primary px-3 ml-4" id="mission">챌린지 도전하러 가기</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<%} %>
 				</div>
 						
@@ -219,7 +264,17 @@ a {
 	</div>
 	</div>
 	<%@ include file="../common/footer.jsp"%>
-</div>
-<
+	</div>
+	<script>
+	<% if(c != null){%>
+		$(function() {
+			$("#clickUl>.item").click(function(){
+				var chno = $(this).children().eq(0).text();				
+						
+						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
+					})					
+				})
+	<% } %>
+	</script>
 </body>
 </html>

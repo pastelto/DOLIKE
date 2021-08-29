@@ -48,6 +48,8 @@ public class MyEndedChallengeServlet extends HttpServlet {
 							
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/myEndedChallenge.jsp");
 		view.forward(request, response);
+		
+		
 	}
 
 	/**
