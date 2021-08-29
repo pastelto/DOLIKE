@@ -9,8 +9,7 @@
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	
-	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
-	<title>로그인</title>
+	<title>DO LIKE - 로그인</title>
 	<style>
 	#loginBtn1 {
     	color: #fff;
