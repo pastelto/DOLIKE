@@ -55,7 +55,12 @@
 			padding: 0.75rem;
 			vertical-align:top;
 			border-top:1px solid #dee2e6;
-			
+		}
+		#contentArea{
+			min-height: 200px;
+		}
+		.Thum{
+			width:200px; height:auto;
 		}
 	</style>
 </head>
@@ -79,28 +84,34 @@
 									<div class="media-body">
 										<h2 class="m-0" style="text-align: center">
 										<!-- 글 제목 -->
-											<b><%= b.getBoardTitle().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></b>
-											<h5 class="m-b-3" style="text-align: center"><%= b.getNickName() %></h5>
+											<%= b.getBoardTitle() %>
+											
 										</h2>
+										<small class="float-left" style="text-align: center">태그 : <%= b.getTagName() %></small>
 									</div>
 								</div>
 								<hr>
 								<div class="media mb-4 mt-1">
 									<div class="media-body">
+										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										<p style="text-align: center"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+										<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
 									</div>
 								</div>
 								<hr>
 								<div align="center">
 									<h6 class="p-t-15">
 										<i class="fa fa-download mb-2"></i>
-										<span>첨부파일</span>
+										<label for="titleImg">이미지</label>
+										<!-- <span>첨부파일</span> -->
 									</h6>
 									<% if(at != null){ %>
 									<div class="row m-b-30">
-										<div class="col-auto"><a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a></div>
+										<div class="col-auto">
+											<img src="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="Thum" >
+											<!-- <a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a> -->
+										</div>
 									</div>
 									<% }else{ %>
 									<span>등록된 첨부파일이 없습니다.</span>
@@ -123,7 +134,7 @@
 									<br><br>
 									<div id="replyAdd">
 									<% if(loginUser != null) {%>
-										<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:70%; border:none; outline:none;"></textarea>
+										<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:93%; border:none; outline:none;"></textarea>
 										<button id="addReply" class="btn btn-sm" >댓글등록</button>
 									<% } else{ %>
 										<textarea readonly rows="1" cols="60" id="replyContent" style="resize:none; width:70%; border:none; outline:none;">로그인한 사용자만 가능합니다.</textarea>
@@ -132,7 +143,8 @@
 								</div>
 								
 								<div class="bottom-btns" >
-									
+									<form id="postForm">
+									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
 									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
@@ -140,6 +152,7 @@
 		 								<button id="deleteBtn" class="btn btn-sm" type="button" onclick="deleteBoard();">삭제 </button>
 										</div>
 									<% }%>
+									</form>
 									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/list.bo'">돌아가기</button>
 								</div>
 							</div>
@@ -150,8 +163,15 @@
 		</div>
 	
 	<script>
-	var content = $('#replyContent').val();
-	var bId = <%= b.getBoardNo()%>;
+		$("#titleImg").change(function(){
+	 		if(this.files && this.files[0]){
+	 			var reader = new FileReader;
+	 			reader.onload = function(data){
+	 				$(".select_img img").attr("src", data.target.result);
+	 			}
+	 			reader.readAsDataURL(this.files[0]);
+	 		}
+	 	})
 	 	function updateForm(){
 			$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
 			$("#postForm").submit();
@@ -168,7 +188,8 @@
 		$(function(){
 			selectReplyList(); 
 			$('#addReply').click(function(){
-				
+				var content = $('#replyContent').val();
+				var bId = <%= b.getBoardNo()%>;
 				
 				$.ajax({
 					url:"rinsert.bo",
@@ -194,9 +215,7 @@
 			
 			$.ajax({
 				url:"rList.bo",
-				data:{
-					bId : bId
-				},
+				data:{bId : <%= b.getBoardNo()%>},
 				type:"get",
 				success:function(list){
 					console.log(list)

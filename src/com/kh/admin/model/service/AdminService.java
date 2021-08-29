@@ -28,9 +28,44 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		int listCount = new AdminDao().getListCount(conn);
-		
+		System.out.println("서비스에서 listCount 값 : " + listCount);
 		close(conn);
 		
 		return listCount;
 	}
+
+	public Member selectAdminMember(String amno) {
+		
+		Connection conn = getConnection();
+		
+		Member result = new AdminDao().selectAdminMember(conn, amno);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Member> adminBlackList(AdminPageInfo amb) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new AdminDao().adminBlackList(conn, amb);
+		System.out.println("서비스에서 black list 값 : " + list);
+		close(conn);
+		
+		return list;
+	}
+
+	public int getBlackListCount() {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new AdminDao().getBlackListCount(conn);
+		System.out.println("서비스에서 listCount 값 : " + listCount);
+		close(conn);
+		
+		return listCount;
+	}
+
+	
 }

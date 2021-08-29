@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
+import com.kh.admin.model.vo.AdminBlackInfo;
 import com.kh.admin.model.vo.AdminPageInfo;
 import com.kh.member.model.vo.Member;
 
@@ -46,7 +47,7 @@ public class AdminMemberListServlet extends HttpServlet {
 				
 				// * listCount : 총 게시글 갯수 
 				listCount = new AdminService().getListCount();
-				System.out.println("리스트카운트");
+				System.out.println("리스트카운트" + listCount);
 
 				// * currentPage : 현재 페이지 (요청한 페이지)
 				currentPage = 1;

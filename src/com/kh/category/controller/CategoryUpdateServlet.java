@@ -47,7 +47,7 @@ public class CategoryUpdateServlet extends HttpServlet {
 			//request.getSession().setAttribute("loginUser", updateCat);
 			response.sendRedirect("categoryList.ca?cno"+cno);
 		}else {	
-	         request.setAttribute("msg", "카테고리 수정 실패");
+	         request.setAttribute("errMsg", "카테고리 수정 실패");
 	         
 	         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	         view.forward(request, response);	

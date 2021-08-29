@@ -46,7 +46,7 @@ public class MemberPageServlet extends HttpServlet {
 			request.setAttribute("loginUser", loginUser); 
 			view = request.getRequestDispatcher("views/member/myPage.jsp");
 		}else {
-			request.setAttribute("msg", "조회에 실패했습니다.");
+			request.setAttribute("errMsg", "조회 실패");
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 		
