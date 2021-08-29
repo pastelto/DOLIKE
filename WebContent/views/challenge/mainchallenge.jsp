@@ -261,7 +261,7 @@ a {
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
+														<%=list.get(i).getChTitle()%>
 													</h4></div> <br>
 													<div>									
 													<ul class="challenge-period">
