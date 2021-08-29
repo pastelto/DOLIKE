@@ -108,22 +108,13 @@
 		 				<% }else{ %>
 			 				<% for(Board b : list){ %>
 			 				<tr>
-			 				<% if(b.getTitleImg() != null ){ %>
+			 			
 			 					<td><%= b.getBoardNo() %></td>
-			 					<!-- <td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td> -->
 			 					<td><%= b.getTagName() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
-			 					<%} else{ %>
-			 					<td><%= b.getBoardNo() %></td>
-			 					<td><%= b.getTagName() %> </td> 
-			 					<td><%= b.getBoardTitle() %></td>
-			 					<td><%= b.getNickName() %></td>
-			 					<td><%= b.getBoardDate() %></td>
-			 					<td><%= b.getViews() %></td> 
-			 					<%} %>
 			 					
 			 				</tr>
 			 				<% } %>

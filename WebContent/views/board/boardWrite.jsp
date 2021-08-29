@@ -51,11 +51,13 @@
 	 			<div class="col-lg-10" style="margin: 0 auto; max-width:800px;">
 	 				<h1 style="text-align: center; color: #78c2ad">
 	 					<b>게시글 작성</b>
+	 					
 	 				</h1>
 	 				<br>
 	 				<div class="card">
 	 					<div class="card-body" style="background: rgb(248, 249, 250)">
 		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
+		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
 		 								<option class="dropdown-item" value="1">옵션1</option>
@@ -82,31 +84,9 @@
 			 						</h5>
 			 							<div class="form-group" id="fileArea">
 			 								<div class="fallback">
-			 									<input class="l-border-1" name="file1" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
+			 									<input class="l-border-1" name="upfile" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
 			 								</div>
 			 							</div>
-			 							
-			 						<!--	
-			 						<th>대표 이미지</th>
-					 					<td colspan="3"><img id="titleImg" width="150" height="120"></td>
-				 					</tr>
-				 					<tr>
-				 						<th>일반 이미지</th>
-					 					<td><img id="contentImg1" width="150" height="120"></td>
-					 					<td><img id="contentImg2" width="150" height="120"></td>
-					 					<td><img id="contentImg3" width="150" height="120"></td>
-				 					</tr>
-			 						
-					 				<div class="form-row float-right" id="fileArea">
-					 				<input type="file" class="btn" name="upFile" value="첨부파일"/>
-					 				<input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
-					 				<input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
-					 				<input type="file" name="file3" id="file3" onchange="loadImg(this, 2)">
-					 				<input type="file" name="file4" id="file4" onchange="loadImg(this, 2)">
-					 				</div>
-					 				-->
-						 							
-			 						
 			 					</div>
 			 					<div class="text-left m-t-15">
 			 					
@@ -202,7 +182,7 @@
 	 		
 	 		$("#titleImg").click(function(){
 				$("#file1").click();
-			});	
+			});	/*
 	 		$("#contentImg1").click(function(){
 				$("#file2").click();
 			});	
@@ -211,8 +191,9 @@
 			});	
 	 		$("#contentImg3").click(function(){
 				$("#file4").click();
-			});	
+			});	*/
 	 	});
+	 	/*
 	 	function loadImg(inputFile, num){
 	 		if(inputFile.files.length == 1){
 	 			var reader = new FileReader();
@@ -228,7 +209,7 @@
 	 			}
 	 		}
 	 	}
- 	
+ 	*/
  	</script>
 </body>
 </html> 

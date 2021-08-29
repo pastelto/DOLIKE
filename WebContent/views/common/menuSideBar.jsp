@@ -159,7 +159,7 @@
                         <div class="input-group text-center mb-3">
                         	<input name="findBoard" type="search" class="form-control" placeholder="전체 게시글 검색하기" aria-label="Search Dashboard">
                         	<div class="input-group-append">
-                        		<button id="searchBtn" class="btns" type="button" onclick="searchBoard();">검색</button>
+                        		<button id="searchBtn" class="btn" type="button" onclick="searchBoard();">검색</button>
                         	</div>
                         </div>
                         <div class="drop-down animated flipInX d-md-none">

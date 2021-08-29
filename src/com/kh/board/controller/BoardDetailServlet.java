@@ -28,7 +28,7 @@ public class BoardDetailServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/**.replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>")
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

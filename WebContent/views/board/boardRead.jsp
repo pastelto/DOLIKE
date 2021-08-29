@@ -57,6 +57,9 @@
 			border-top:1px solid #dee2e6;
 			
 		}
+		#contentArea{
+			min-height: 200px;
+		}
 	</style>
 </head>
 <body>
@@ -79,17 +82,19 @@
 									<div class="media-body">
 										<h2 class="m-0" style="text-align: center">
 										<!-- 글 제목 -->
-											<b><%= b.getBoardTitle().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></b>
-											<h5 class="m-b-3" style="text-align: center"><%= b.getNickName() %></h5>
+											<%= b.getBoardTitle() %>
+											
 										</h2>
+										<small class="float-left" style="text-align: center">태그 : <%= b.getTagName() %></small>
 									</div>
 								</div>
 								<hr>
 								<div class="media mb-4 mt-1">
 									<div class="media-body">
+										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										<p style="text-align: center"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+										<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
 									</div>
 								</div>
 								<hr>
@@ -123,7 +128,7 @@
 									<br><br>
 									<div id="replyAdd">
 									<% if(loginUser != null) {%>
-										<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:70%; border:none; outline:none;"></textarea>
+										<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:93%; border:none; outline:none;"></textarea>
 										<button id="addReply" class="btn btn-sm" >댓글등록</button>
 									<% } else{ %>
 										<textarea readonly rows="1" cols="60" id="replyContent" style="resize:none; width:70%; border:none; outline:none;">로그인한 사용자만 가능합니다.</textarea>
@@ -132,7 +137,8 @@
 								</div>
 								
 								<div class="bottom-btns" >
-									
+									<form id="postForm">
+									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
 									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
@@ -140,6 +146,7 @@
 		 								<button id="deleteBtn" class="btn btn-sm" type="button" onclick="deleteBoard();">삭제 </button>
 										</div>
 									<% }%>
+									</form>
 									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/list.bo'">돌아가기</button>
 								</div>
 							</div>
