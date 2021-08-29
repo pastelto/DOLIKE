@@ -37,14 +37,13 @@ public class AccessMyPageServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		System.out.println("userId : " + userId);
-		System.out.println("userPwd : " + userPwd);
 		
 		int result = new MemberService().accessUpdate(userId, userPwd);
 		
 		if (result > 0) {
 			response.sendRedirect(request.getContextPath() +"/mypage.me");
 		} else {
-			request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
+			request.setAttribute("errMsg", "비밀번호가 일치하지 않습니다");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

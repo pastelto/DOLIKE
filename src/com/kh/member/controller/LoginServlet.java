@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
 			response.sendRedirect(request.getContextPath() + "/index2.jsp"); //index2로 넘기기
 		} else {
-			request.setAttribute("msg", "로그인 실패");
+			request.setAttribute("errMsg", "로그인 실패");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

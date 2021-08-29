@@ -2,10 +2,10 @@
 <%@ page import="com.kh.board.model.vo.*, com.kh.board.model.dao.BoardDao" %>
 <% 
 	
-	Board board = (Board)request.getAttribute("board");
+	Board b = (Board)request.getAttribute("board");
 	Attachment at = (Attachment)request.getAttribute("at");
 
-	String tag = board.getTagName();
+	String tag = b.getTagName();
 	
 	String[] selected = new String[7];
 	
@@ -53,57 +53,77 @@
 	 <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+	<div class="content-body">
         <div class="container-fluid">
-	 		<div class="row" style="margin:20px">
-	 			<form id="updateForm" method="post" action="<%= contextPath %>/update.bo" style="width:100%; max-width:1000px" enctype="multipart/form-data">
-		 			<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
-		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
-		 				<thread>
-		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-		 						<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글수정 양식 </th>
-		 					</tr>
-		 				</thread>
-		 				<tbody>
-		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<td class="tag-class">
-		 							<select name="tag">
-		 								<option value="1" <%= selected[0] %>>옵션1</option>
-		 								<option value="2" <%= selected[1] %>>옵션2</option>
-		 								<option value="3" <%= selected[2] %>>옵션3</option>
-		 								<option value="4" <%= selected[3] %>>옵션4</option>
+	 		<div class="row">
+		 		<form id="updateForm" method="post" action="<%= contextPath %>/update.bo" style="width:100%; max-width:1000px" enctype="multipart/form-data">
+		 		<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+		 		<div class="col-lg-10" style="margin: 0 auto; max-width:800px;">
+	 				<h1 style="text-align: center; color: #78c2ad">
+	 					<b>게시글 수정</b>
+	 					
+	 				</h1>
+	 				<br>
+	 				<div class="card">
+	 					<div class="card-body" style="background: rgb(248, 249, 250)">
+		 						<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
+		 						<div class="toolbar" role="toolbar">  
+		 							<select name="tag" class="btn btn-light dropdown-toggle">
+		 								<option class="dropdown-item" value="1" <%= selected[0] %>>옵션1</option>
+		 								<option class="dropdown-item" value="2" <%= selected[0] %>>옵션2</option>
+		 								<option class="dropdown-item" value="3" <%= selected[0] %>>옵션3</option>
+		 								<option class="dropdown-item" value="4" <%= selected[0] %>>옵션4</option>
 		 							</select>
-		 						</td>
-		 						<td><input type="text" name="title" maxlength="100" value="<%= board.getBoardTitle() %>"></td>
-		 					</tr>
-		 					<tr>
-		 						<td colspan="2"><textarea name="content" maxlength="2048" style="border-style:none; width:90%; height:350px"><%= board.getBoardContent() %></textarea></td>
-		 					</tr>
-		 					<tr>
 		 						
-		 						<% if(at != null){ %> <!--  기존의 첨부파일이 존재할 경우  -->
-		 						<th colspan="2">첨부파일</th>
-		 					</tr>
-		 					<tr>
-		 						<th>
-			 						<%= at.getOriginName() %>
-			 						<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
-			 						<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
-			 						<%} else {%>
-			 					</th>
-		 						<th colspan="2">등록된 첨부파일이 없습니다. </th>
-		 						<% } %>
-		 						<input type="file" name="upFile">
-		 					</tr>
-		 				</tbody>
-		 				
-		 			</table>
-		 			<input type="submit" class="btn btn-primary pull-right" value="수정하기"/>
-		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
-	 			</form>	
+			 						<div class="media pt-1">
+			 							<div class="media-body">
+			 								<span class="m-0" style="text-align:center">
+			 									<b><input type="text" class="form-control" value="<%= b.getBoardTitle() %>" name="title" maxlength="50"></b>
+			 								</span>
+			 							</div>
+			 						</div>
+			 					</div>	
+			 					<div class="compose-content mt-5">
+			 							<div class="form-group">
+			 								<textarea name="content" class="textarea_editor form-control bg-light" rows="15"><%= b.getBoardContent() %></textarea>
+			 							</div>
+			 						<h5 class="m-b-20">
+			 						<% if(at != null){ %>
+			 							<i class="fa fa-paperclip m-r-5 f-s-18"></i>
+			 							첨부파일
+			 							 <img id="titleImg" width="150" height="120" class="pull-right">
+			 						</h5>
+			 							<div class="form-group" id="fileArea">
+			 								<div class="fallback">
+			 									<%= at.getOriginName() %>
+			 									<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
+						 						<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
+						 						<% } else { %>
+						 						<p>등록된 첨부파일이 없습니다.</p>	
+							 					<% } %>
+			 									<input class="l-border-1" name="upfile" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
+			 								</div>
+			 							</div>
+			 					</div>
+			 					<div class="text-left m-t-15">
+			 					
+			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
+			 							<i class="bi bi-pencil"></i>
+			 							수정
+			 						</button>
+			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">
+			 							<i class="ti-close m-r-5 f-s-12"></i>
+			 							취소
+			 						</button>
+				 				</div>
+		 					</div>
+		 				</div> 
+		 			</div>
+		 		</form>
 	 		</div>
-	 		</div>
-        </div>
+		</div>
+	</div>
         <!--**********************************
             Content body end
         ***********************************-->

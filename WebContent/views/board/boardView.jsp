@@ -68,7 +68,9 @@
 	    	background-color: #ced4da;
 	    	border-color: #ced4da;
 		}
-	
+		.text-right {
+	    	text-align: right !important;
+		}
 	</style>
 </head>
 <body>
@@ -106,22 +108,13 @@
 		 				<% }else{ %>
 			 				<% for(Board b : list){ %>
 			 				<tr>
-			 				<% if(b.getTitleImg() != null ){ %>
+			 			
 			 					<td><%= b.getBoardNo() %></td>
-			 					<!-- <td><img src="<%=contextPath %>/resources/board_upfiles/<%= b.getTitleImg() %>" width="200px" height="150px"> </td> -->
 			 					<td><%= b.getTagName() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
-			 					<%} else{ %>
-			 					<td><%= b.getBoardNo() %></td>
-			 					<td><%= b.getTagName() %> </td> 
-			 					<td><%= b.getBoardTitle() %></td>
-			 					<td><%= b.getNickName() %></td>
-			 					<td><%= b.getBoardDate() %></td>
-			 					<td><%= b.getViews() %></td> 
-			 					<%} %>
 			 					
 			 				</tr>
 			 				<% } %>
@@ -165,7 +158,15 @@
 					
 					<!-- 맨뒤로 -->
 					<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= maxPage %>"> &raquo; </a></li>
+					
 				</ul>
+				<% if(loginUser != null){ %>
+					<!-- 글작성하기 버튼 -->
+					<div class="text-right"><button id="insertBtn" class="btn btn-primaryw-md m-b-30" onclick="location.href='enrollForm.bo'">작성</button>
+						<!-- <button id="insertBtn" class="btn btn-sm btn-rounded pull-right" onclick="location.href='enrollForm.bo'" >작성하기</button> -->
+	 				</div>
+	 			<% } %>
+				
 	 			
 	 			
 	 			
