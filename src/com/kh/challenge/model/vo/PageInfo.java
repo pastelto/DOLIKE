@@ -30,7 +30,7 @@ public class PageInfo {
 		return listCount;
 	}
 
-	public void setListCount(int rpCount) {
+	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
 
@@ -78,7 +78,7 @@ public class PageInfo {
 		return listLimit;
 	}
 
-	public void setListLimit(int rpLimit) {
+	public void setListLimit(int listLimit) {
 		this.listLimit = listLimit;
 	}
 

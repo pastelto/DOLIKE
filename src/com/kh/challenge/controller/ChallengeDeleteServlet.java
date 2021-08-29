@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeVote;
 
 /**
- * Servlet implementation class VoteCountUpServlet
+ * Servlet implementation class ChallengeDeleteServlet
  */
-@WebServlet("/upVote.ch")
-public class VoteCountUpServlet extends HttpServlet {
+@WebServlet("/deleteChallenge.ch")
+public class ChallengeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteCountUpServlet() {
+    public ChallengeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +30,19 @@ public class VoteCountUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int chno = Integer.parseInt(request.getParameter("chno"));
 		
-		String chTitle = request.getParameter("chTitle");
+		int result1 = new ChallengeService().deleteChallenge(chno);
 		
-		ChallengeVote cv = new ChallengeVote();
+		int result2 = new ChallengeService().updateUserStatus(chno);
 		
-		cv.setChTitle(chTitle);
-		int result = new ChallengeService().voteCountUp(cv);
-
-		if (result > 0) {
-			request.setAttribute("msg", "투표가 완료되었습니다!");
-			response.sendRedirect("challengeVote.ch");
-			System.out.println("투표 성공!");
+		if(result1 * result2 > 0) {
+			response.sendRedirect("challengeMain.ch");
 		} else {
-			request.setAttribute("msg", "투표 실패");
+			request.setAttribute("msg", "삭제 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**
