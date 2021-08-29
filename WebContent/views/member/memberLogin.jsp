@@ -12,13 +12,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
 	<title>로그인</title>
 	<style>
-	#loginBtn {
+	#loginBtn1 {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
 	
-	#loginBtn:hover {
+	#loginBtn1:hover {
 		color: #fff;
     	background-color: #f3969a;
     	border-color: #f3969a;
@@ -80,7 +80,7 @@
 			                                    <div class="form-group">
 			                                        <input id="userPwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호">
 			                                    </div>
-			                                    <button id="loginBtn" class="btn login-form__btn submit w-100" type="submit">로그인</button>
+			                                    <button id="loginBtn1" class="btn login-form__btn submit w-100" type="submit">로그인</button>
 			                                </form>
 			                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary"> 회원가입</a> 하러가기</p>
 			                                <p class="mt-2 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary"> 공지사항</a> 보러가기</p>

@@ -6,7 +6,7 @@
 	String sadMsg = (String)session.getAttribute("sadMsg"); 
 	String contextPath = request.getContextPath();
 	
-	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");	
+	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");
 %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	<script>
 	//기쁜일 했을 때 gif 팝업
 	   $(function(){
@@ -147,6 +148,10 @@
 	.header-left .input-group {
 		margin-top:11px;
 	}	
+	
+	#myPageDrop {
+		font-family: 'Gowun Dodum', sans-serif;
+	}
 	</style>
 </head>
 <body>
@@ -208,26 +213,25 @@
 	            <div class="header-right">
 	                 <ul class="clearfix">
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative mt-2 mr-3" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="resources/images/profile.png" height="40" width="40" alt="">
                             </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu mr-3">
                                 <div class="dropdown-content-body">
-                                    <ul>
+                                    <ul id="myPageDrop">
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-lock"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
                                             <a href="<%= request.getContextPath() %>/list.ms">
-                                                <i class="icon-envelope-open"></i> <span>쪽지함</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                                <i class="icon-envelope-open"></i> <span>쪽지함</span>
                                             </a>
                                         </li>
-                                        
-                                        <hr class="my-2">
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-lock"></i> <span>진행중인 챌린지</span></a>
+                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-user"></i> <span>진행중인 챌린지</span></a>
                                         </li>
+                                        <hr class="my-2">
                                         <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
@@ -329,7 +333,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                         <!-- 나중에 코드로 구현할 부분 -->
-                            <li><a href="./layout-blank.html">카테고리1</a></li>
+                            <li><a href="list.bo">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
                      
                         </ul>
