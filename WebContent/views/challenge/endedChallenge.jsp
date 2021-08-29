@@ -60,6 +60,8 @@
 	.root-content .root-section{
 		display: flex;
 		padding-top: 0.5rem;
+		text-align:center;
+		padding-left:85px;
 	}
 	.challenge-list{
 		padding:0 0 2.5rem 0;
@@ -176,13 +178,13 @@
 		<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">종료된 챌린지</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">종료된 챌린지</li>
                     </ol>
                 </div>
             </div>	
 			<div class="container-fluid">
-				<div class="row" style="margin-bottom: 13%;">
+				<div class="row" style="margin-bottom: 13%;padding-left: 70px;">
 					<div class="topList col-10" align="center">
 
 						<div id="thumbList"
@@ -229,27 +231,27 @@
 						</div>
 					</div>
 				</div>
+				<div style="height:40rem;">
 				<div class="root-container">
 					<%if (!list.isEmpty() && !fileList.isEmpty()) {%>
-					<div class="container ">
+					<div class="container">
 						<div class="root-content">
 							<div class="root-section">
 								<section class="challenge-list">
-									<ul class="live-item-list">
+									<ul class="live-item-list" id="clickUl">
 										<%
 										for (int i = 0; i < list.size(); i++) {
 										%>
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>/challengedetail.ch"
-													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-												</a>
+											 <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												<div class="item-info">
 													<div>
-													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
-													</h4></div> <br>
+														<h4 class="title" style="float:left">
+															<%=list.get(i).getChTitle()%>
+														</h4>
+													</div> <br>
 													<div>									
 													<ul class="challenge-period">
 														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
@@ -266,6 +268,7 @@
 						</div>
 					</div>
 					<%} %>
+				</div>
 				</div>
 				<div>
 					<ul class="pagination justify-content-center">
@@ -304,14 +307,13 @@
 					</ul>
 				</div>
 			</div>
-		</div>
-		
-		<!-- 페이지 처리 -->
-				
+		</div>			
 	</div>
 <%@ include file="../common/footer.jsp" %>
+</div>
+
 <script>
-	<% if(list != null){%>
+	<% if(!list.isEmpty()){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
 				var chno = $(this).children().eq(0).text();				
@@ -320,7 +322,23 @@
 					})					
 				})
 	<% } %>
+	
+	<%if(loginUser == null) {%>
+		$(function() {
+		$("")
+		$("#clickUl>.item").click(function(){	
+			Swal.fire({
+				  title: "로그인이 필요합니다.",
+				  icon: 'error',
+				  confirmButtonColor: "#78c2ad",
+				  confirmButtonBorder: "none",
+				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
+				})	
+			})
+		});		
+
+	<%} %>
 </script>
-</div>
+
 </body>
 </html>

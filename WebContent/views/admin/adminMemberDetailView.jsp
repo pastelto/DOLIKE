@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  buffer="100kb"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*, com.kh.board.model.vo.*
+									,com.kh.admin.model.vo.*"    
+%>
  
  <%
 
  	Member am = (Member)request.getAttribute("am");
+ 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+ 	
+	AdminPageInfo amb = (AdminPageInfo)request.getAttribute("amb");
+	
+	int listCount = amb.getListCount();
+	int currentPage = amb.getCurrentPage();
+	int maxPage = amb.getMaxPage();
+	int startPage = amb.getStartPage();
+	int endPage = amb.getEndPage();
  
  %>
 
@@ -14,7 +25,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>카테고리 목록</title>
+<title>회원 상세보기</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
@@ -24,31 +35,82 @@
 
 <style>
 
-#iconMsg, #StatusBtn1 {
+#iconMsg, #comment1 {
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad; 
+}
+
+#StatusBtn1 {
 	color: #fff;
 	background-color: #78c2ad;
 	border-color: #78c2ad;
+	
+	top: 30px;
 }
 
-#byefr , #StatusBtn2, #StatusBtn3, #StatusBtn4, #StatusBtn5{
+#StatusBtn2 {
+	color: #fff;
+	background-color: #f3969a;
+	border-color: #f3969a;
+	
+	top: 30px;
+}
+
+#StatusBtn3 {
+
+	color: #fff;
+	background-color: #f3969a;
+	border-color: #f3969a;
+	
+	top: 40px;
+	left: 65px;
+}
+#byefr , #StatusBtn3, #StatusBtn4, #StatusBtn5, #comment2 {
 	color: #fff;
 	background-color: #f3969a;
 	border-color: #f3969a;
 }
+
+#comment3 {
+	color: #fff;
+	background-color: #5F5C5C;
+	border-color: #5F5C5C;
+}
+
+#status1, #status2, #status3 {
+	height: 30px;
+	width: 30px;
+}
+
+#statusCard {
+	position: relative;
+	height: 130px;
+	width: 220px;
+}
+
 
 </style>
 </head>
 <body>
 <div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
-
+			
         <div class="content-body">
-
+		
             <div class="row page-titles mx-0" >
                 <div class="col p-md-0" >
                     <ol class="breadcrumb" >
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">회원 관리</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">회원 목록</a></li>
+                    <%if(am.getUserStatus().equals("Y")) { %>
+                        <li class="breadcrumb-item">회원 목록</li>
+                        <li class="breadcrumb-item active">회원 상세보기</li>
+                    <%} else if(am.getUserStatus().equals("N")) { %>
+                    	<li class="breadcrumb-item">블랙리스트</li>
+                        <li class="breadcrumb-item active">회원 상세보기</li>
+                    <%} else if(am.getUserStatus().equals("B")) { %>
+                    	<li class="breadcrumb-item">블랙리스트</li>
+                        <li class="breadcrumb-item active">회원 상세보기</li>
+                    <% } %>        
                     </ol>
                 </div>
             </div>
@@ -77,14 +139,26 @@
                                
                                 <div class="row mb-5">
                                     <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                            <h3 class="mb-0">정상(상태)</h3>
+                                        <div class="card card-profile text-center" id="statusCard">
+                                        <%if(am.getUserStatus().equals("Y")) { %>
+                                            <span class="mb-1 text-primary"><img src="./resources/images/MemberListStatusGood.png" id="status1"></span>
+                                            <h3 class="mb-0" id="comment1">정상(Good!)</h3>
                                             <p class="text-muted px-4">상태 정보</p>
+                                        <%}else if(am.getUserStatus().equals("N")){ %>
+                                        	<span class="mb-1 text-primary"><img src="./resources/images/MemberOut.png" id="status2"></span>
+                                            <h3 class="mb-0" id="comment2">삭제(탈퇴)</h3>
+                                            <p class="text-muted px-4">상태 정보</p>
+                                        <%}else if(am.getUserStatus().equals("B")){ %>
+                                        	<span class="mb-1 text-primary"><img src="./resources/images/blackListMemberStatus.png" id="status3"></span>
+                                            <h3 class="mb-0" id="comment3">블랙리스트(정지)</h3>
+                                            <p class="text-muted px-4">상태 정보</p>
+										<% } %>
+										                                       
                                         </div>
-                                    </div>
+                                    </div>                                  
                                     
-                                    <table>
+                                    
+                                    <table align="center">
                                     
                                     <tr>
                                     	<td>
@@ -95,49 +169,34 @@
                                     	
                                     	<td>
 	                                    	<div class="col-12 text-center" id="StatusBtn2">
-	                                        <button class="btn">블랙리스트</button>
+	                                        <button class="btn">삭제하기</button>
 	                                    	</div>
                                     	</td>
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                     	<td>
                                     		<div class="col-12 text-center" id="StatusBtn3">
-                                        <button class="btn">댓글X</button>
+                                        <button class="btn">블랙리스트</button>
                                     </div>
-                                    	</td>
-                                    		
-                                    	<td>
-	                                    	<div class="col-12 text-center" id="StatusBtn4">
-	                                        <button class="btn">게시글X</button>
-	                                   		 </div>
-                                    	</td>
-                                   	</tr>
-                                    <tr>
-                                    	<td colspan="2">
-	                                    	<div class="col-12 text-center" id="StatusBtn5">
-	                                        <button class="btn">댓,게시글X</button>
-	                                    	</div> 
-                                    	</td>                                    
-                                    </tr> -->
-                                                                                                                                                                       
+                                    	</td>                                 		                                   	                                                                                                                                                                       
                                     </table> 
-                                                                     
+                                   </div>                                  
                                     
-                                </div>
+                                
 
                                 
                             </div>
                         </div>  
                     </div>
-                    <div class="col-lg-8 col-xl-9">
+                    <div class="col-lg-7 col-xl-9">
                         <div class="card">
                             <div class="card-body">
                                 <form action="#" class="form-profile">
-								
+								<h4>게시글 검색하기</h3>
 								<div class="card-body" style="text-align: center;">
 									<div id="up">
 										<div id="down" class="input-group-prepend">
-											<!-- <form id="searchForm" class="form-inline" action="insert.fl"
+											<form id="searchForm" class="form-inline" action="insert.fl"
 												method="post">
 
 												<div class="input-group text-center mb-3">
@@ -149,26 +208,11 @@
 														<button id="byefr" class="btn" type="reset">취소</button>
 													</div>
 												</div>
-											</form> -->
+											</form> 
 										</div>
 									</div>                                   
 									 </div>
-                                    <div class="d-flex align-items-center">
-                                        <ul class="mb-0 form-profile__icons">
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                   
                                 </form>
                             </div>
                         </div>
@@ -188,7 +232,9 @@
                                         <thead>
                                             <tr>
                                                 <th>번호</th>
-                                                <th>카테고리</th>
+                                                <th>제목</th>
+                                                <th>작성자</th>
+                                                <th>생성일</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -198,6 +244,8 @@
                                             </tr>
                                             
                                             <tr>
+                                                <td>1</td>
+                                                <td>1</td>
                                                 <td>1</td>
                                                 <td>1</td>                                             
                                             </tr>
