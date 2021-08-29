@@ -9,7 +9,7 @@ public class Challenge {
 	private int voteCount;
 	private String start;
 	private String end;
-	private char status;
+	private String status;
 	private String content;
 	private int userCount;
 	private int categoryNo;
@@ -26,7 +26,7 @@ public class Challenge {
 		// TODO Auto-generated constructor stub
 	}
 	// select challenge
-	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, char status, String content,
+	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, String status, String content,
 			int userCount, String categoryTitle) {
 		super();
 		this.chNo = chNo;
@@ -50,7 +50,7 @@ public class Challenge {
 	}
 	
 	// insert_category
-	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, char status, String content,
+	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, String status, String content,
 			int userCount, int categoryNo) {
 		super();
 		this.chNo = chNo;
@@ -63,13 +63,39 @@ public class Challenge {
 		this.userCount = userCount;
 		this.categoryNo = categoryNo;
 	}
+
 	
-	public Challenge(String chTitle, String content, String categoryTitle) {
+	public Challenge(int chNo, String chTitle, String start, String end, String status, String content, String categoryTitle) {
 		super();
+		this.chNo = chNo;
 		this.chTitle = chTitle;
+		this.start = start;
+		this.end = end;
+		this.status = status;
 		this.content = content;
 		this.categoryTitle = categoryTitle;
 	}
+		
+	public Challenge(int chNo, String chTitle, String start, String end, String status, String categoryTitle) {
+		super();
+		this.chNo = chNo;
+		this.chTitle = chTitle;
+		this.start = start;
+		this.end = end;
+		this.status = status;
+		this.categoryTitle = categoryTitle;
+	}
+	
+	public Challenge(String chTitle, String content, String start, String end, String status, String categoryTitle) {
+		super();
+		this.chTitle = chTitle;
+		this.content = content;
+		this.start = start;
+		this.end = end;
+		this.status = status;
+		this.categoryTitle = categoryTitle;
+	}
+	
 	
 	public Challenge(int chNo, String chTitle, int rpCount, String achieve, String nickname) {
 		super();
@@ -88,8 +114,13 @@ public class Challenge {
 		this.end = end;
 		this.categoryTitle = categoryTitle;
 	}
-	
-	
+
+	public Challenge(String user, int chNo) {
+		super();
+		this.user = user;
+		this.chNo = chNo;
+		
+	}
 	public int getChNo() {
 		return chNo;
 	}
@@ -130,11 +161,11 @@ public class Challenge {
 		this.end = end;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

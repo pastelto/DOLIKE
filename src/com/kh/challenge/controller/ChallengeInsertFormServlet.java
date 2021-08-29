@@ -33,7 +33,7 @@ public class ChallengeInsertFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
 		request.setAttribute("list", list);		
-		System.out.println(list);
+		
 		request.getRequestDispatcher("views/challenge/insertChallenge.jsp").forward(request, response);
 	}
 
