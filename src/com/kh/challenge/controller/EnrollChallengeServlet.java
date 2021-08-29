@@ -43,12 +43,11 @@ public class EnrollChallengeServlet extends HttpServlet {
 		int result = new ChallengeService().enrollCh(cu);
 		
 		if (result > 0) {
-			request.getSession().setAttribute("msg", "신청이 완료되었습니다.");
-			response.sendRedirect("challengeMain.ch");
+			request.getSession().setAttribute("msg", "신청완료!");
+			response.sendRedirect("challengedetail.ch?chno="+chno);
 			System.out.println("챌린지 신청 성공!");
 		} else {
 			request.setAttribute("msg", "신청 실패");
-
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

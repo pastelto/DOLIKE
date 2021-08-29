@@ -10,6 +10,8 @@ ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
 ArrayList<ChallengeReply> rpList = (ArrayList<ChallengeReply>) request.getAttribute("rpList");
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
+
+
 int listCount = pi.getListCount();
 int currentPage = pi.getCurrentPage();
 int endPage = pi.getEndPage();
@@ -142,10 +144,10 @@ int startPage = pi.getStartPage();
 													<button class="btn btn-primary px-3 ml-4" type="submit" id="deleteBtn">삭제</button>
 												</form>
 											<%} else{ %>										
-												<form action="<%=request.getContextPath()%>/enroll.ch" method="post">											
+												<form action="<%=request.getContextPath()%>/enroll.ch" method="post" id="enroll-ch">											
 													<input type="hidden" value="<%=loginUser.getUserId()%>" name="userId" class="none"/>
 													<input type="hidden" value="<%=chno%>" name="chno" class="none"/>
-													<button type="button" class="btn btn-primary px-3 ml-4" type="submit" id="enrollBtn">신청</button>
+													<button type="button" class="btn btn-primary px-3 ml-4" id="enrollBtn" onclick="chEnroll();">신청</button>
 												</form>
 											<%} %>
 											</li>											
@@ -156,7 +158,7 @@ int startPage = pi.getStartPage();
 							<div class="card">
 								<div class="card-body text-center">									
 								<%if(c.getStatus().equals("Y")) {%>
-									<%if(cu == null) {%>																		
+									<%-- <%if(cu == null) {%> --%>																		
 									<form id="rpInsert" action="<%=request.getContextPath()%>/rplyInsert.ch" class="form-profile" method="post" enctype="multipart/form-data">
 										<div class="form-group">
 											<input type="text" class="hidden" name="chno" value="<%=chno%>"  id="chno"/>
@@ -170,16 +172,16 @@ int startPage = pi.getStartPage();
 													</div>
 												</li>
 											</ul>
-											<button  class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpsubmit();">작성</button>
+											<button  type="button" class="btn btn-primary px-3 ml-4" id="addReply" onclick="rpsubmit();">작성</button>
 										</div>
-									</form>
-									<%} else {%>
-									<form action="#" class="form-profile">
+									</form>							
+									<%--} else {--%>
+									<%-- <form action="#" class="form-profile">
 										<div class="form-group">
 											<textarea readonly class="form-control" name="textarea"id="textarea" cols="30" rows="2" placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
 										</div>
 									</form>
-									<%}%>
+									<%}%> --%>
 								<%}%>
 								</div>
 							</div>
@@ -283,20 +285,18 @@ int startPage = pi.getStartPage();
 </div>
 	<script>
 		function rpsubmit(){
-			//var content = $("#replyContent");
 			var content = document.getElementById("replyContent").value;
 			var file = $("#rpInsert input[name=file]");
-			
-			alert(chno);
-
-			
+					
 			 if(content == "" || file.val() == ""){
 				Swal.fire({
 					text: '댓글을 입력해주세요.',
 					icon: 'warning',
-					confirmButtonColor:"#78c2ad"
+					confirmButtonColor:"#78c2ad",
+					confirmButtonText: '확인'
+				}).then((result)=>{
+				 $("#replyContent").focus();
 				});
-				//$("#replyContent").focus();
 			} else {			
 			Swal.fire({
 				 text: '댓글을 등록하시겠습니까?',  
@@ -305,22 +305,21 @@ int startPage = pi.getStartPage();
 	             showCancelButton: true,                 
 	             cancelButtonText: '취소',                
 	             cancelButtonColor: "#f3969a",
-	             confirmButtonColor: "#78c2ad"
+	             confirmButtonColor: "#78c2ad",
             }).then((result) =>{ 
                if(result.value) {                              
                 	$("#rpInsert").submit();
     				$("#replyContent").val("");
     				$("#rpInsert input[name=file]").val("");
-    				<%--var msg = <%=msg%>;--%>
-                	Swal.fire({
-                		 title: '축하합니다!',
-						<%-- text: msg,--%>
+    				location.href ="<%=contextPath%>/challengedetail.ch?chno=<%=chno%>";
+                	/* Swal.fire({
+                		 title: '댓글 등록 성공!',
 						 icon: 'success',
 						 confirmButtonText: '확인',
 						 confirmButtonColor: "#78c2ad"
 					}).then((result1) =>{								
-						location.href ="<%=contextPath%>/challengedetail.ch?chno=<%=chno%>";
-					});                
+						
+					});   */              
 	            } else if(result.dismiss === 'cancel') {    
 	            	Swal.fire({
 						 text: '취소되었습니다',
@@ -329,8 +328,30 @@ int startPage = pi.getStartPage();
 					});
    				} 
             });
-       	  }  
-       	  
+       	  }        	  
+		}	
+		
+		function chEnroll(){				
+				Swal.fire({
+					text: '신청하시겠습니까?',
+					icon: 'question',
+					showCancelButton: true, 
+					confirmButtonColor:"#78c2ad",
+					confirmButtonText: '확인',
+					cancelButtonText: '취소',                
+			        cancelButtonColor: "#f3969a"
+				}).then((result) =>{
+					 if(result.value) {
+						$("#enroll-ch").submit();
+						location.href ="<%=contextPath%>/challengedetail.ch?chno=<%=chno%>";
+					} else if(result.dismiss === 'cancel') { 
+						Swal.fire({
+							 text: '취소되었습니다',
+							 icon: 'error',
+							 confirmButtonColor: "#78c2ad"
+						});	
+					} 
+				}); 
 		}		
 	 
 	   

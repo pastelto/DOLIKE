@@ -47,6 +47,9 @@ body {
 #text-center{
 	text-align:center;
 }
+#centerrow{
+	text-align:center;
+}	
 
 .navbar {
 	display: flex !important;
@@ -72,6 +75,8 @@ body {
 .root-content .root-section {
 	display: flex;
 	padding-top: 0.5rem;
+	text-align:center;
+	padding-left:85px;
 }
 
 .challenge-list {
@@ -124,6 +129,7 @@ body {
 	border-image-repeat: initial;
 	border-radius: 0.5rem;
 }
+
 
 .item {
 	width: 800px;
@@ -185,10 +191,10 @@ a {
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">진행중인 챌린지</a></li>
                     </ol>
                 </div>
-            </div>		
-			<div class="container-fluid">
+            </div>	
+			<div class="container-fluid" id="centerrow">
 			<%if(!list.isEmpty()) {%>
-				<div class="row" style="margin-bottom: 13%;">
+				<div class="row" style="margin-bottom: 13%; padding-left: 70px">
 					<div class="topList col-10" align="center">
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">

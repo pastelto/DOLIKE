@@ -74,6 +74,8 @@ body {
 .root-content .root-section {
 	display: flex;
 	padding-top: 0.5rem;
+	text-align:center;
+	padding-left:110px;
 }
 
 .challenge-list {
@@ -208,7 +210,7 @@ a {
 				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
 					<br>
 					<br>
-				<div class="root-container">
+				<div class="root-container" align="center">
 					<%
 					if (c != null && at != null) {
 					%>

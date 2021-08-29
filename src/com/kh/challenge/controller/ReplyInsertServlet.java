@@ -37,26 +37,25 @@ public class ReplyInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int result = 0;
 		ChallengeReply cp = new ChallengeReply();
-		
+
 		if (ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10 * 1024 * 1024;
 
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			String savePath = resources + "\\challenge_upfiles";			
+			String savePath = resources + "\\challenge_upfiles";
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
 			int chno = Integer.parseInt(mr.getParameter("chno"));
 			String content = mr.getParameter("replyContent");
-			String wirter = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+			String wirter = ((Member) request.getSession().getAttribute("loginUser")).getUserId();
 
 			cp.setChNo(chno);
 			cp.setContent(content);
 			cp.setRpWriter(wirter);
-			
 
 			if (mr.getOriginalFileName("file") != null) {
 
@@ -67,24 +66,22 @@ public class ReplyInsertServlet extends HttpServlet {
 				cp.setOriginName(originName);
 				cp.setNewName(changeName);
 
+				result = new ChallengeService().insertReply(cp);
 
-			result = new ChallengeService().insertReply(cp);
-
-			if (result > 0) {
-				response.sendRedirect("challengedetail.ch?chno="+chno);
-				request.getSession().setAttribute("msg", "댓글 등록 성공");
-				result = 0;
-			} else {
-				if (cp != null) {
-					File failedFile = new File(savePath + cp.getNewName());
-					failedFile.delete();
+				if (result > 0) {
+					response.sendRedirect("challengedetail.ch?chno=" + chno);
+					request.getSession().setAttribute("msg", "댓글 등록 성공");
 					result = 0;
+				} else {
+					if (cp != null) {
+						File failedFile = new File(savePath + cp.getNewName());
+						failedFile.delete();
+						result = 0;
+					}
+
+					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+					view.forward(request, response);
 				}
-
-
-				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-				view.forward(request, response);
-			}
 			}
 		}
 	}

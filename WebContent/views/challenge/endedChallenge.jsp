@@ -60,6 +60,8 @@
 	.root-content .root-section{
 		display: flex;
 		padding-top: 0.5rem;
+		text-align:center;
+		padding-left:85px;
 	}
 	.challenge-list{
 		padding:0 0 2.5rem 0;
@@ -182,7 +184,7 @@
                 </div>
             </div>	
 			<div class="container-fluid">
-				<div class="row" style="margin-bottom: 13%;">
+				<div class="row" style="margin-bottom: 13%;padding-left: 70px;">
 					<div class="topList col-10" align="center">
 
 						<div id="thumbList"

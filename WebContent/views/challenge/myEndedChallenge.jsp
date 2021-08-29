@@ -71,6 +71,8 @@ body {
 .root-content .root-section {
 	display: flex;
 	padding-top: 0.5rem;
+	text-align:center;
+	padding-left:110px;
 }
 
 .challenge-list {
