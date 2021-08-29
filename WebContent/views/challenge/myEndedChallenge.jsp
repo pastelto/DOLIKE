@@ -42,9 +42,12 @@ body {
 	text-align:center;
 }
 #m-challenge{
-	color:#78c2ad;
+	color:#f3969a;
 }
 #e-challenge{
+	color:#78c2ad;
+}
+#a-challenge{
 	color:#f3969a;
 }
 .navbar {
@@ -194,7 +197,9 @@ a {
 			<li class="nav-item"><a class="nav-link"
 				data-bs-toggle="tab" href="<%= request.getContextPath() %>/myChallenge.ch" id="m-challenge">참여중인 챌린지</a></li>
 			<li class="nav-item" id="pink-text"><a class="nav-link active" data-bs-toggle="tab"
-				href="#ch-body-e" id="e-challenge">종료된 챌린지</a></li>			
+				href="#ch-body-e" id="e-challenge">종료된 챌린지</a></li>
+			<li class="nav-item"><a class="nav-link " data-bs-toggle="tab"
+				href="<%= request.getContextPath() %>/myApList.ch" id="a-challenge">신청 리스트</a></li>				
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade" id="ch-body-m" >	

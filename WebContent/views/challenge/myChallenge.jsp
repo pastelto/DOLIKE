@@ -49,7 +49,9 @@ body {
 #e-challenge{
 	color:#f3969a;
 }
-
+#a-challenge{
+	color:#f3969a;
+}
 .navbar {
 	display: flex !important;
 	flex-basis: auto;
@@ -177,12 +179,6 @@ a {
 	cursor: pointer;
 }
 </style>
-<!-- 
-<i class="fab fa-fort-awesome-alt"></i> // 원+성
-<i class="fas fa-truck"></i> // 트럭
-<i class="fas fa-heart"></i> //하트
- -->
-
 </head>
 
 <div id="main-wrapper">
@@ -201,7 +197,9 @@ a {
 			<li class="nav-item"><a class="nav-link active"
 				data-bs-toggle="tab" href="#ch-body-m" id="m-challenge">참여중인 챌린지</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-				href="<%= request.getContextPath() %>/myEndedChallenge.ch" id="e-challenge">종료된 챌린지</a></li>			
+				href="<%= request.getContextPath() %>/myEndedChallenge.ch" id="e-challenge">종료된 챌린지</a></li>
+			<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
+				href="<%= request.getContextPath() %>/myApList.ch" id="a-challenge">신청 리스트</a></li>				
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade show active" id="ch-body-m" >
