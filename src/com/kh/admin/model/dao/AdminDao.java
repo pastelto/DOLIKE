@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
 import com.kh.admin.model.vo.AdminPageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -60,7 +61,7 @@ public class AdminDao {
 			close(rset);
 			close(stmt);
 		}
-		
+		System.out.println("어드민다오에서 listCount의 값은 : " + listCount);
 		
 		return listCount;
 	}
@@ -194,13 +195,14 @@ public class AdminDao {
 	}
 
 	public int getBlackListCount(Connection conn) {
+		
 		int listCount = 0;
 		Statement stmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getBlackListCount");
 		System.out.println("갯 리스트 카운트"+sql);
-		//쿼리문을 수정해보자
+
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(sql);
@@ -215,9 +217,11 @@ public class AdminDao {
 			close(rset);
 			close(stmt);
 		}
-		
+		System.out.println("어드민다오에서 listCount의 값은 : " + listCount);
 		
 		return listCount;
 	}
+
+
 
 }

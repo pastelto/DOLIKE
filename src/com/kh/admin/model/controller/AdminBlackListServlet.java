@@ -43,9 +43,9 @@ public class AdminBlackListServlet extends HttpServlet {
 		int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 		int blackLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 		
-		// * listCount : 총 게시글 갯수 
+		// * blackListCount : 총 게시글 갯수 
 		listCount = new AdminService().getBlackListCount();
-		System.out.println("리스트카운트");
+		System.out.println("리스트카운트" + listCount);
 
 		// * currentPage : 현재 페이지 (요청한 페이지)
 		currentPage = 1;
@@ -110,7 +110,7 @@ public class AdminBlackListServlet extends HttpServlet {
 		
 		// 다 담아 줬으면 조회를 해야한다.
 		ArrayList<Member> list = new AdminService().adminBlackList(amb); //페이지 정보를 가지고 넘길것이다.
-		
+		System.out.println("어드민블랙리스트서블릿 amd와 list 값" + amb + list);
 		request.setAttribute("list", list);
 		request.setAttribute("amb", amb); // 페이지 정보를 담음
 		
