@@ -66,6 +66,17 @@
 <%@ include file="../common/menuSideBar.jsp" %> 
 
 <div class="container-fluid" >
+		
+				<div class="row page-titles mx-0" >
+			
+                <div class="col p-md-0" >
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">회원 관리</li>
+                        <li class="breadcrumb-item active">카테고리 목록</li>
+                    </ol>
+                </div>
+           		 </div>
+		
                 <div class="row">
                     <div class="col-lg-6" style="margin-left: auto; margin-right: auto;">
                         <div class="card" >

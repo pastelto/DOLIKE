@@ -33,8 +33,20 @@
     	background-color: #fff;
     	border-color: #78c2ad;
 	}
+	#bodyScroll::-webkit-scrollbar{
+		width:10px;
+	}
+	#bodyScroll::-webkit-scrollbar-thumb{
+		background-color: #78c2ad;
+		border-radius:10px;
+	}
+	
+	#bodyScroll::-webkit-scrollbar-track{
+		background-color: #ffe6f2;
+		border-radius:10px;
+		box-shadow : inset 0px 0px 5px white;
+	}
 </style>
-
 
 </head>
 <body>
@@ -74,7 +86,9 @@
 									<div class="media-body">
 										<small class="float-right" style="color: #888">등록일: <%= n.getCreateDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= n.getCount() %></small>
 										<br><br>
+										<div id="bodyScroll" style="overflow:auto; height:400px;">
 										<p style="text-align: center"><%= n.getNoticeContent() %></p>
+										</div>
 									</div>
 								</div>
 								<hr>
