@@ -200,7 +200,7 @@ public class AdminDao {
 		
 		String sql = prop.getProperty("getBlackListCount");
 		System.out.println("갯 리스트 카운트"+sql);
-
+		//쿼리문을 수정해보자
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(sql);
