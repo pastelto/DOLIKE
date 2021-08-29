@@ -316,14 +316,14 @@
 
 <script>
 	<% if(!list.isEmpty()){%>
+	 <%if(loginUser !=null){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
-				var chno = $(this).children().eq(0).text();				
-						
+				var chno = $(this).children().eq(0).text();										
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
 					})					
 				})
-	<% } %>
+	<% }} %>
 	
 	<%if(loginUser == null) {%>
 		$(function() {
