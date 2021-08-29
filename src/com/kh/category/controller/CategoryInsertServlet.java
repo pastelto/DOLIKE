@@ -48,7 +48,7 @@ public class CategoryInsertServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "새로운 게시판 등록 성공!");
 			response.sendRedirect("categoryList.ca");
 		}else {
-			request.setAttribute("msg", "새로운 게시판 등록 실패!!");
+			request.setAttribute("errMsg", "새로운 게시판 등록 실패!!");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	        view.forward(request, response);
 		}

@@ -4,9 +4,11 @@
  	Member loginUser = (Member)session.getAttribute("loginUser");
 	String msg = (String)session.getAttribute("msg"); 
 	String sadMsg = (String)session.getAttribute("sadMsg"); 
+	String flMsg = (String)session.getAttribute("flMsg"); 
+	String adMsg = (String)session.getAttribute("adMsg"); 
 	String contextPath = request.getContextPath();
 	
-	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");	
+	ArrayList<Category> List = (ArrayList<Category>)request.getAttribute("List");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +21,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     
     <!-- Custom Stylesheet -->
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -27,7 +29,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
+	
 	<script>
 	//기쁜일 했을 때 gif 팝업
 	   $(function(){
@@ -74,6 +78,51 @@
 			<%session.removeAttribute("sadMsg");%>
 			} else{
 				console.log("Sad");
+			}
+		})
+
+	//본인 팔로우시 gif 팝업
+		$(function(){
+		      var flMsg = "<%=flMsg%>";
+				if (flMsg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: flMsg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						imageUrl: 'https://media.giphy.com/media/gRkJb7UhnzlHpWDSKc/giphy.gif?cid=ecf05e47jpp708i3cfgdagyqovto8t918v0r08ql9yikf7b5&rid=giphy.gif&ct=g',
+						imageWidth: 400,
+						imageHeight: 200,
+						backdrop: `
+							rgba(217,229,255,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("flMsg");%>
+			} else{
+				console.log("Hello, My Friend!");
+			}
+		})
+	
+	//관리자용 일반 메세지
+		$(function(){
+		      var adMsg = "<%=adMsg%>";
+				if (adMsg != "null") {
+					Swal.fire({
+				        icon: "success",
+				        text: adMsg,
+				        confirmButtonColor: "#78c2ad",
+						confirmButtonBorder: "none",
+						backdrop: `
+							rgba(217,229,255,0.4)
+						`
+				}).then(() => {
+					
+				});
+			<%session.removeAttribute("adMsg");%>
+			} else{
+				console.log("LoveYourself");
 			}
 		})
 	</script>
@@ -147,12 +196,18 @@
 	.header-left .input-group {
 		margin-top:11px;
 	}	
+	
+	#myPageDrop {
+		font-family: 'Gowun Dodum', sans-serif;
+	}
+	
+	*{
+	font-family: 'Gowun Dodum', sans-serif;
+	}
 	</style>
 </head>
 <body>
-        <!--**********************************
-            Nav header start  
-        ***********************************-->
+
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index2.jsp" style="background:#fff">
@@ -164,13 +219,7 @@
                 </a>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">    
             <div class="header-content clearfix">
                 <div class="nav-control">
@@ -208,26 +257,25 @@
 	            <div class="header-right">
 	                 <ul class="clearfix">
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative mt-2 mr-3" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="resources/images/profile.png" height="40" width="40" alt="">
                             </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu mr-3">
                                 <div class="dropdown-content-body">
-                                    <ul>
+                                    <ul id="myPageDrop">
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-user"></i> <span><%= loginUser.getNickName() %>님</span></a>
+                                            <a href="<%= request.getContextPath() %>/accessForm.me"><i class="icon-lock"></i> <span><%= loginUser.getNickName() %>님</span></a>
                                         </li>
                                         <li>
                                             <a href="<%= request.getContextPath() %>/list.ms">
-                                                <i class="icon-envelope-open"></i> <span>쪽지함</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                                <i class="icon-envelope-open"></i> <span>쪽지함</span>
                                             </a>
                                         </li>
-                                        
-                                        <hr class="my-2">
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-lock"></i> <span>진행중인 챌린지</span></a>
+                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-user"></i> <span>진행중인 챌린지</span></a>
                                         </li>
+                                        <hr class="my-2">
                                         <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
@@ -238,12 +286,7 @@
                	<%} %> 
             </div>
         </div>
-       <!--**********************************
-                Header end ti-comment-alt
-        ***********************************-->
-       <!--**********************************
-               Sidebar start
-        ***********************************-->
+
        <div class="nk-sidebar">           
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
@@ -260,13 +303,7 @@
 							
 	                        <ul aria-expanded="false" class="collapse">
 	                        
-	                            <!-- <li><a href="list.bo">카테고리1</a></li>
-	                            <li><a href="list.bo">카테고리2</a></li>
-	                            <li><a href="list.bo">카테고리3</a></li>
-	                            <li><a href="list.bo">카테고리4</a></li>
-	                            <li><a href="list.bo">카테고리5</a></li>
-	                            <li><a href="list.bo">카테고리6</a></li>
-	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
+	                                              
 	                        </ul>
 
 						</li>
@@ -276,16 +313,9 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
+
                         </ul>
 
-                        <!-- 즐겨찾는 게시판 Ajax Script -->
 				        <script>
 				        
 							$(function(){
@@ -300,7 +330,7 @@
 									success: function(result){
 										$("#output2").val(result);
 									},
-									error: function(e){ // 에러 내용을 e로 받아옴
+									error: function(e){ 
 										console.log(e);
 									}
 								})
@@ -329,7 +359,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                         <!-- 나중에 코드로 구현할 부분 -->
-                            <li><a href="./layout-blank.html">카테고리1</a></li>
+                            <li><a href="list.bo">카테고리1</a></li>
                             <li><a href="./layout-one-column.html">카테고리2</a></li>
                      
                         </ul>
@@ -341,8 +371,11 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="<%= request.getContextPath() %>/followMain.fl">추천 친구</a></li>
-                            <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
-                   
+                            <% if(loginUser == null) {%>  
+                           
+                   			<%}else{ %> 
+                   				 <li><a href="<%= request.getContextPath() %>/MyFollow.fl">나의 친구</a></li>
+                   			<%} %> 
                         </ul>
                     </li>
                     <% if(loginUser == null) {%>  
@@ -400,7 +433,7 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="categoryList.ca">카테고리 목록</a></li>
                             <li><a href="adminMemberList.am">회원 목록</a></li>
-                            <li><a href="userBlackList.bl">블랙리스트</a></li>
+                            <li><a href="blackList.am">블랙리스트</a></li>
                         </ul>
                     </li>
                     <%-- <% } %> --%>         
@@ -413,14 +446,7 @@
                 <div class="modal" id="myModal">
                 <div class="modal-dialog">
                 <div class="modal-content">
-            
-                    <!-- Modal Header -->
-<!--                     <div class="modal-header">
-                    <h4 class="modal-title" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div> -->
-            
-                    <!-- Modal body -->
+
                     <div class="modal-body justify-content-center">
                      <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
                     	<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -443,32 +469,7 @@
         	function msgLoginerror(){
         		alert("로그인 후 이용 가능합니다.");
         	}
-        	/*
-        	function searchBoard(){
-        		var findBoard = $("#searchBoardForm input[name=findBoard]");
-        		if(findBoard.val() == ""){
-        			alert("검색할 내용을 입력하세요.");
-        			return false;
-        		}
-        		$.ajax({
-        			url:"search.bo",
-        			type:"post",
-        			data:{findBoard:findBoard.val()},
-        			success:function(result){
-        				if(result == "success"){
-        					$("#searchBoardForm").submit();
-        				}else{
-        					alert(findBoard.val()+" 이라는 검색어와 일치하는 게시글이 없습니다.");
-        				}
-        			},
-        			error:function(){
-        				console.log("통신오류.")
-        			}
-        		})
-        		
-        		
-        	}*/
-				        
+        	
 			$(function(){
 				$("#btn-like").eq(0).click(function(){
 				var favB = $("#input2").val();
@@ -500,10 +501,51 @@
 
         </script>
         
+        <script>
+        				
+              				  $(function(){
+              					 $("#categoryList1").click(function(){     				       			                 			        
+   				       				console.log("aaaaaaaaaaaaa")
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						
+   				       					 	
+   				       						$liBody.html(""); 
+   				       						console.log("@@@@@@@") 
+   				       						$.each(list, function(i){
+
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							
+   				       							
+   				       						})
+   				       					 
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
+        
 		<script>
         				
               				  $(function(){
-              					 $("#categoryList").click(function(){     				       			                 			        
+              					 $("#categoryList2").click(function(){     				       			                 			        
               						 
    				       				$.ajax({
    				       					url:"CategoryMenuBar.ca",
@@ -512,33 +554,23 @@
    				       					success:function(list){
    				       						console.log(list)
    				       						console.log("ajax 성공!!")
-   				       						var loginUser = "<%=loginUser%>";
+   				       						
    				       						var result = ""
    				       						var $liBody = $("#allmenu ul")
-   				       						var n = null;
+   				       						
    				       						
    				       						$liBody.html(""); 
-   				       	 					console.log(loginUser)
+   				       	 					
    				       	 					$.each(list, function(i){
-   				       						if(loginUser == n){												
-												
-   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
-   				       							
-   				       							$liBody.append(result)
-   				       							
-   				       							console.log(result)
-												console.log("1")
-   				       						} else if(loginUser != n){ 
-												/* $.each(list, function(i){ */
-												
+   				       																														
     				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
     				       					
    				       							$liBody.append(result)
    				       							
    				       							console.log(result)
    				       							console.log("2")
-												/* }) */
-   				       						}
+												
+   				       						
    				       	 				})
    				       					},
    				       					error:function(e){

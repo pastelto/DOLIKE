@@ -41,7 +41,7 @@ public class AdminMemberDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("views/admin/adminMemberDetailView.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("msg", "회원 조회 실패");
+			request.setAttribute("errMsg", "회원 조회 실패");
 	         
 	        RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	        view.forward(request, response);

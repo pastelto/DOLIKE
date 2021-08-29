@@ -71,6 +71,7 @@ public class MessageListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		
 		newMsgCount = new MessageService().getNewMessageCount(userId);
 		
 		MsgPageInfo pi = new MsgPageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, msgLimit);

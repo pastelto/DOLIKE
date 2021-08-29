@@ -40,7 +40,7 @@ public class CategoryDetailServlet extends HttpServlet {
 			request.setAttribute("c", c);
 			request.getRequestDispatcher("views/category/categoryDetailView.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "카테고리 조회 실패");
+			request.setAttribute("errMsg", "카테고리 조회 실패");
 	         
 	        RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	        view.forward(request, response);

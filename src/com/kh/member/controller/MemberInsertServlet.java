@@ -49,7 +49,7 @@ public class MemberInsertServlet extends HttpServlet {
 		int result = new MemberService().insertMember(mem);
 		
 		if (result > 0) {
-			request.getSession().setAttribute("msg", "회원가입 성공");
+			request.getSession().setAttribute("msg", "두라이크 회원이 되신 것을 축하합니다!");
 			response.sendRedirect(request.getContextPath() + "/index2.jsp");
 		} else {
 			request.setAttribute("errMsg", "회원가입 실패");

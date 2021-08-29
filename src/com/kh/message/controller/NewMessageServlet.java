@@ -48,8 +48,6 @@ public class NewMessageServlet extends HttpServlet {
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-//			String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
-			
 			Message m = new Message();
 			
 			String userId = mr.getParameter("userId");
@@ -82,7 +80,7 @@ public class NewMessageServlet extends HttpServlet {
 			int result = new MessageService().insertNewMessage(m, mat);
 			
 			if(result > 0) {
-				request.getSession().setAttribute("msg", "쪽지를 성공적으로 발송했습니다.");
+				request.getSession().setAttribute("msg", "쪽지 발송 완료!");
 				response.sendRedirect("list.ms");
 				System.out.println("쪽지 발송 성공!");
 			} else {
@@ -91,7 +89,7 @@ public class NewMessageServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "쪽지 발송에 실패했습니다.");
+				request.setAttribute("errMsg", "쪽지 발송에 실패했습니다.");
 				
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);

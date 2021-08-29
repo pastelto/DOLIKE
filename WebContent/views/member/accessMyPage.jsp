@@ -19,6 +19,12 @@
     	border-color: #78c2ad;
 	}
 	
+	#goMyPageBtn:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	
 	#accessTitle {
 		font-family: 'Gowun Dodum', sans-serif;
 	}

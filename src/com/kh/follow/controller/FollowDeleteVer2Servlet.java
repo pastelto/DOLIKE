@@ -34,10 +34,10 @@ public class FollowDeleteVer2Servlet extends HttpServlet {
 		int result = new FollowService().deleteFollowVer2(userId, followId);
 		
 		if(result>0) {
-			request.getSession().setAttribute("msg", "친구 삭제 성공");
+			request.getSession().setAttribute("sadMsg", "친구와 헤어졌습니다.");
 			response.sendRedirect("MyFollow.fl");
 		}else {
-			request.setAttribute("msg", "친구 삭제에 실패했습니다. ");
+			request.setAttribute("errMsg", "친구 삭제에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}

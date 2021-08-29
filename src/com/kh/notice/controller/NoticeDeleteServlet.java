@@ -32,10 +32,10 @@ public class NoticeDeleteServlet extends HttpServlet {
 		int result = new NoticeService().deleteNotice(nno);
 		
 		if(result>0) {
-			request.getSession().setAttribute("msg", "공지사항 삭제 성공");
+			request.getSession().setAttribute("adMsg", "공지사항 삭제 성공");
 			response.sendRedirect("noticeView.no");
 		}else {
-			request.setAttribute("msg", "공지사항 삭제에 실패했습니다. ");
+			request.setAttribute("errMsg", "공지사항 삭제에 실패했습니다. ");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}

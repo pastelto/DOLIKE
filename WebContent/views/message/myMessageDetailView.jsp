@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - 받은 쪽지</title>
+    <title>DO LIKE - 내게 쓴 쪽지</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     <!-- Custom Stylesheet -->
@@ -28,9 +28,6 @@
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -38,33 +35,22 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
 
 
      		<%@ include file="../common/menuSideBar.jsp" %> 
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">쪽지</li>
-                        <li class="breadcrumb-item active">받은 쪽지 읽기</li>
+                        <li class="breadcrumb-item active">내게 쓴 쪽지</li>
                     </ol>
                 </div>
             </div>
-            <!-- row -->
 
             <div class="container-fluid">
                 <div class="row">
@@ -85,19 +71,19 @@
                                 </div>
                                 <div class="email-right-box"  style="height: 40rem">
                                    <div class="toolbar" role="toolbar">
-										<h4> 받은 쪽지 </h4>
+										<h4> 내게 쓴 쪽지함 </h4>
                                     </div>
                                     <div class="read-content">
                                         <div class="media pt-5">
                                             <div class="media-body">
-                                                <p class="m-b-3"><b>보낸 사람</b> &nbsp; <%= mesg.getSenderId() %> <br>
-                                               					 <b>받은 날짜</b>  &nbsp;  <%= mesg.getRecvtime() %></p>
+                                                <p class="m-b-3" style="color: #78c2ad"><b><%= loginUser.getNickName() %></b>님</p>
                                             </div>
                                             
                                         </div>
                                         <hr>
                                         <div class="media mb-4 mt-1">
                                             <div class="media-body"><span class="float-right"></span></div>
+                                            <small class="float-right" style="color: gray"><b>작성 시간</b>  &nbsp;  <%= mesg.getRecvtime() %></small>
                                         </div>
                                         <h4 class="m-0" style="color: #78c2ad"><%= mesg.getMsgTitle() %></h4>
                                         <br>
@@ -141,18 +127,18 @@
 		function deleteMsg(){
             // 확인, 취소버튼에 따른 후속 처리 구현
             swal.fire({
-                title: '확인',        // 제목
-                text: "정말 쪽지를 삭제하시겠습니까?",  // 내용
-                type: 'warning',                              // 종류
-                confirmButtonText: '삭제',               // 확인버튼 표시 문구
-                showCancelButton: true,                 // 취소버튼 표시 문구
-                cancelButtonText: '취소',                 // 취소버튼 표시 문구
+                title: '확인', 
+                text: "정말 쪽지를 삭제하시겠습니까?", 
+                type: 'warning', 
+                confirmButtonText: '삭제', 
+                showCancelButton: true,     
+                cancelButtonText: '취소', 
                 cancelButtonColor: "#f3969a",
                 confirmButtonColor: "#78c2ad"
             }).then(function(result) { 
-                if(result.value) {                 // 확인 버튼이 눌러진 경우
+                if(result.value) {             
                 
-                $("#msgDel").attr("action", "<%=contextPath%>/dmsg.ms");
+                $("#msgDel").attr("action", "<%=contextPath%>/dmmsg.ms");
 				swal.fire(
 						{title: '삭제',
 						 text: '성공적으로 삭제되었습니다.',
@@ -162,7 +148,7 @@
 					$("#msgDel").submit();
 				});
                 
-            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
+            } else if(result.dismiss === 'cancel') { 
                 swal.fire('취소', '삭제가 취소되었습니다.', 'error');
          
             }

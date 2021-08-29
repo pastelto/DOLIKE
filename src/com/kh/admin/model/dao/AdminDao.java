@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
 import com.kh.admin.model.vo.AdminPageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -60,7 +61,7 @@ public class AdminDao {
 			close(rset);
 			close(stmt);
 		}
-		
+		System.out.println("어드민다오에서 listCount의 값은 : " + listCount);
 		
 		return listCount;
 	}
@@ -148,5 +149,79 @@ public class AdminDao {
 		
 		return am;
 	}
+
+	public ArrayList<Member> adminBlackList(Connection conn, AdminPageInfo amb) {
+		
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("adminMemberBlackList");
+		System.out.println("쿼리문 : " + sql);
+		int startRow = (amb.getCurrentPage()-1)*amb.getAdminLimit()+1;
+		int endRow = startRow + amb.getAdminLimit()-1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Member(rset.getString("USER_ID"), 
+								      rset.getString("USER_NAME"),
+								      rset.getString("PASSWORD"),
+								      rset.getString("BIRTHDATE"),
+								      rset.getString("PHONE"),
+								      rset.getString("EMAIL"),
+								      rset.getString("NICKNAME"),
+								      rset.getString("INTERESTS"),								      
+								      rset.getDate("USER_CREATE_DATE"),
+								      rset.getString("USER_STATUS")
+						));
+			}
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("다오에서 list 값 : " + list);
+		return list;
+	}
+
+	public int getBlackListCount(Connection conn) {
+		
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getBlackListCount");
+		System.out.println("갯 리스트 카운트"+sql);
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) { // 결과 값이 있으면 화면에 전체를 출력한다.
+				listCount = rset.getInt(1); // 컬럼명을 적어주던가 , 숫자를 적어주면 된다.(컬럼명을 적는 것이 좋음)
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		System.out.println("어드민다오에서 listCount의 값은 : " + listCount);
+		
+		return listCount;
+	}
+
+
 
 }

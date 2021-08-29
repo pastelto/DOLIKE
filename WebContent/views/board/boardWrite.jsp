@@ -31,6 +31,9 @@
 	    background-color: #fff;
 	    border-color: #78c2ad;
 	}
+	.Thum{
+		width:200px; height:auto;
+	}
 </style>
 <link href="../../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -78,17 +81,21 @@
 			 								<textarea name="boardContent" class="textarea_editor form-control bg-light" rows="15" placeholder="글 내용을 입력하세요."></textarea>
 			 							</div>
 			 						<h5 class="m-b-20">
-			 							<i class="fa fa-paperclip m-r-5 f-s-18"></i>
-			 							첨부파일
-			 							 <img id="titleImg" width="150" height="120" class="pull-right">
+			 							<i class="fa fa-paperclip m-r-5 f-s-18 float-left"></i>
+			 							<label for="titleImg">이미지 업로드</label>
 			 						</h5>
+			 						<div class="select_img">
+			 							<img src="" class="Thum"/>
+			 						</div>
+			 						<!-- <img id="titleImg" width="150" height="120" class="pull-left"> -->
 			 							<div class="form-group" id="fileArea">
+			 									
 			 								<div class="fallback">
-			 									<input class="l-border-1" name="upfile" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
+			 									<input name="upfile" type="file" id="titleImg">
 			 								</div>
 			 							</div>
 			 					</div>
-			 					<div class="text-left m-t-15">
+			 					<div class="text-right m-t-15">
 			 					
 			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
 			 							<i class="bi bi-pencil"></i>
@@ -179,10 +186,10 @@
  		
 	 	$(function(){
 	 		$("#fileArea").hide();
-	 		
+	 		/*
 	 		$("#titleImg").click(function(){
 				$("#file1").click();
-			});	/*
+			});	
 	 		$("#contentImg1").click(function(){
 				$("#file2").click();
 			});	
@@ -193,22 +200,28 @@
 				$("#file4").click();
 			});	*/
 	 	});
+	 	$("#titleImg").change(function(){
+	 		if(this.files && this.files[0]){
+	 			var reader = new FileReader;
+	 			reader.onload = function(data){
+	 				$(".select_img img").attr("src", data.target.result);
+	 			}
+	 			reader.readAsDataURL(this.files[0]);
+	 		}
+	 	})
+	 	
 	 	/*
-	 	function loadImg(inputFile, num){
+	 	
+	 	function loadImg(this){
 	 		if(inputFile.files.length == 1){
 	 			var reader = new FileReader();
-	 			reader.readAsDataURL(inputFile.files[0]);
-	 			reader.onload = function(e){
-	 				switch(num){
-	 				case 1: $("titleImg").attr("src", e.target.result); break;
-	 				case 2: $("contentImg1").attr("src", e.target.result); break;
-	 				case 3: $("contentImg2").attr("src", e.target.result); break;
-	 				case 4: $("contentImg3").attr("src", e.target.result); break;
-	 				default: break;
-	 				}
+	 			reader.readAsDataURL(this.files[0]);
+	 			reader.onload = function(data){
+	 				case 1: $("titleImg").attr("src", data.target.result);
 	 			}
 	 		}
 	 	}
+	 }
  	*/
  	</script>
 </body>
