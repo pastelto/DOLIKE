@@ -264,13 +264,7 @@
 							
 	                        <ul aria-expanded="false" class="collapse">
 	                        
-	                            <!-- <li><a href="list.bo">카테고리1</a></li>
-	                            <li><a href="list.bo">카테고리2</a></li>
-	                            <li><a href="list.bo">카테고리3</a></li>
-	                            <li><a href="list.bo">카테고리4</a></li>
-	                            <li><a href="list.bo">카테고리5</a></li>
-	                            <li><a href="list.bo">카테고리6</a></li>
-	                            <li><a href="list.bo">카테고리7</a></li>    -->                        
+	                                              
 	                        </ul>
 
 						</li>
@@ -280,13 +274,7 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-<!--                             <li><a href="list.bo" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리1</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리2</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리3</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리4</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리5</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리6</a></li>
-                            <li><a href="../board/boardView.jsp" class="boardMargin"><span><button class="btn-like" name="myFavBoard">⭐</button></span>카테고리7</a></li> -->
+
                         </ul>
 
                         <!-- 즐겨찾는 게시판 Ajax Script -->
@@ -504,10 +492,51 @@
 
         </script>
         
+        <script>
+        				
+              				  $(function(){
+              					 $("#categoryList1").click(function(){     				       			                 			        
+   				       				console.log("aaaaaaaaaaaaa")
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						
+   				       					 	
+   				       						$liBody.html(""); 
+   				       						console.log("@@@@@@@") 
+   				       						$.each(list, function(i){
+
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							
+   				       							
+   				       						})
+   				       					 
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
+        
 		<script>
         				
               				  $(function(){
-              					 $("#categoryList").click(function(){     				       			                 			        
+              					 $("#categoryList2").click(function(){     				       			                 			        
               						 
    				       				$.ajax({
    				       					url:"CategoryMenuBar.ca",
@@ -516,33 +545,23 @@
    				       					success:function(list){
    				       						console.log(list)
    				       						console.log("ajax 성공!!")
-   				       						var loginUser = "<%=loginUser%>";
+   				       						
    				       						var result = ""
    				       						var $liBody = $("#allmenu ul")
-   				       						var n = null;
+   				       						
    				       						
    				       						$liBody.html(""); 
-   				       	 					console.log(loginUser)
+   				       	 					
    				       	 					$.each(list, function(i){
-   				       						if(loginUser == n){												
-												
-   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
-   				       							
-   				       							$liBody.append(result)
-   				       							
-   				       							console.log(result)
-												console.log("1")
-   				       						} else if(loginUser != n){ 
-												/* $.each(list, function(i){ */
-												
+   				       																														
     				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
     				       					
    				       							$liBody.append(result)
    				       							
    				       							console.log(result)
    				       							console.log("2")
-												/* }) */
-   				       						}
+												
+   				       						
    				       	 				})
    				       					},
    				       					error:function(e){
