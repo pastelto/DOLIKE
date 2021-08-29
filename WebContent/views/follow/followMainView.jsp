@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*"%>
 	
 <%
+	Member loginMem = (Member)request.getAttribute("loginUser");
 	ArrayList<Follow> flist = (ArrayList<Follow>)request.getAttribute("flist");
 	System.out.println("나의친구 top4 유저 리스트 불러오기: "+flist);
 	ArrayList<Category> catList = (ArrayList<Category>)request.getAttribute("catList");
@@ -45,11 +46,26 @@
     	border-color: #78c2ad;
 	}
 	#dia{
-		color: #78c2ad;
+		/*color: #78c2ad;*/
+		background: linear-gradient(90deg, rgba(0,236,255,1) 0%, rgba(100,29,253,1) 50%, rgba(252,152,69,1) 100%);
+	    -webkit-background-clip: text;
+	    -webkit-text-fill-color: transparent;
 	
 	} 
 	#iconflF, #iconflB{
 		color: #f3969a;
+	}
+	#disBtn{
+		background: gray;
+		color: #fff;
+	}
+	#flag{
+		background: linear-gradient(90deg, rgba(158,0,255,1) 0%, rgba(229,253,29,1) 50%, rgba(69,252,188,1) 100%);
+	    -webkit-background-clip: text;
+	    -webkit-text-fill-color: transparent;
+
+
+
 	}
 </style>
 </head>
@@ -105,7 +121,7 @@
 									</div>
 								
 									<% if(loginUser == null){%>
-						 				<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
+						 				<button id="disBtn" type="button" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
 						 			<%}else{%>
 						 				<form action="insert.fl" method="get">
 											<input id="insertFl" type="hidden" name="followId" value="<%= flist.get(i).getFollowId() %>">
@@ -174,8 +190,8 @@
 									<div class="card">
 										<div class="card-body">
 											<div class="text-center">
-												<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
-												<p id="categoryUser" style="margin-bottom: 0px"><%= memList.get(i).getFollowId() %></p>
+												<span id="idspan" class="display-5"><i id="flag" class="icon-flag gradient-4-text"></i><b><h5 id="<%=i%>nick"></h5></b></span>
+												<p id="categoryUser" style="margin-bottom: 5px;"><%= memList.get(i).getFollowId() %></p>
 						
 												<% if(loginUser == null){%>
 													<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
@@ -221,13 +237,7 @@
 			var followId3 = $("#3id").text();
 			
 			if(followId == ""||followId1 ==""||followId2 ==""||followId3 ==""){
-<%-- 				var con = confirm("아직 TOP4 정산 전입니다! 친구를 추가해보세요~")
-				if(con==true){
-					location.href="<%= contextPath %>/MyFollow.fl";
-				}else{
-					location.href="<%= contextPath %>/index2.jsp";
-				} --%>
-				
+
 				Swal.fire({
 					  title: 'TOP4 정산 전입니다.',
 					  text: '친구를 추가해보세요!',
