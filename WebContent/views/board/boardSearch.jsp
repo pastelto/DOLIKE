@@ -6,15 +6,15 @@
 	System.out.println("화면단 : " + blist);
 	System.out.println("썸넬 : " + at);
 %>
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - Do Whatever You Like, Community</title>
+    <title>DO LIKE - 게시글 검색</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    <link href="../../css/style.css" rel="stylesheet">
 	<style>
 		.nk-sidebar{
 			padding:30px;
@@ -34,8 +34,16 @@
 	
 </head>
 <body>
-	<%@ include file="../common/menuSideBar.jsp" %> 
+<%@ include file="../common/menuSideBar.jsp" %> 
 	<div class="content-body">
+		<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">카테고리</li>
+                        <li class="breadcrumb-item">게시판 검색</li>
+                    </ol>
+                </div>
+            </div>
 	 <div class="container-fluid">
 	 		<div class="row">
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
@@ -52,7 +60,6 @@
 	 				</thread>
 	 				<tbody>
 	 				<% if(!blist.isEmpty()){ %>
-						
 			 				<% for(Board b : blist){ %>
 			 				<tr>
 			 				<% if(b.getTitleImg() != null ){ %>
@@ -70,18 +77,15 @@
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 					<%} %>
-			 			
 			 				</tr>
 			 				<% } %>
-		 			
 		 			<% } %>
-		 				
 	 				</tbody>
 	 			</table>	
 	 			</div>
 	 		</div>
         </div>
-        <%@ include file="../common/footer.jsp" %>
+<%@ include file="../common/footer.jsp" %>
         <script>
 			<%if(!blist.isEmpty()){%>
 			$(function(){
@@ -91,7 +95,6 @@
 				})
 			})
 			<%}%>
-		
 		</script>
 </body>
 </html>
