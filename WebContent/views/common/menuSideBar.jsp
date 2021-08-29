@@ -29,8 +29,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap&family=Chakra+Petch:wght@300&family=Lobster&display=swap" rel="stylesheet">
 	
 	<script>
 	//기쁜일 했을 때 gif 팝업
@@ -197,12 +196,8 @@
 		margin-top:11px;
 	}	
 	
-	#myPageDrop {
+	* {
 		font-family: 'Gowun Dodum', sans-serif;
-	}
-	
-	*{
-	font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
 </head>

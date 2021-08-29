@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    
 	<title>DO LIKE - 회원가입</title>
 	<style>
 	#idCheckBtn, #nickCheckBtn, #phoneCheckBtn, #emailCheckBtn, #joinBtn {
