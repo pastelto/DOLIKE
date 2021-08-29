@@ -8,6 +8,8 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
+	int cno = (int)request.getAttribute("cno");
+	System.out.println("boardVIew : "+cno);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -111,6 +113,7 @@
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 				</tr>
+			 				
 			 				<% } %>
 		 				<% } %>
 	 				</tbody>
@@ -145,7 +148,7 @@
 				</ul>
 				<% if(loginUser != null){ %>
 					<!-- 글작성하기 버튼 -->
-					<div class="text-right"><button id="insertBtn" class="btn btn-primaryw-md m-b-30" onclick="location.href='enrollForm.bo'">작성</button></div>
+					<div class="text-right"><button id="insertBtn" class="btn btn-primaryw-md m-b-30" onclick="location.href='<%=contextPath%>/enrollForm.bo?cno=<%= cno %>'">작성</button></div>
 	 			<% } %>
 	 		</div>
 			</div>

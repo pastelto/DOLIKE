@@ -98,7 +98,7 @@ public class BoardUpdateServlet extends HttpServlet {
 				System.out.println("리턴 후 받는 bno 값 " + bno);
 			}else {
 					
-				request.setAttribute("msg", "게시판 수정 실패");
+				request.setAttribute("errMsg", "게시판 수정 실패");
 				
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);

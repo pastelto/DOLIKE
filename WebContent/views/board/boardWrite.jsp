@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
+<% int cno = (int)request.getAttribute("cno"); 
+	System.out.println("write : " + cno);
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,7 +64,7 @@
 	 				<br>
 	 				<div class="card">
 	 					<div class="card-body" style="background: rgb(248, 249, 250)">
-		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
+		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo?cno=<%= cno %>" enctype="multipart/form-data" style="width:100%; max-width:1000px" >
 		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
@@ -95,7 +99,7 @@
 			 							</div>
 			 					</div>
 			 					<div class="text-right m-t-15">
-			 					
+			 						<input type="hidden" value="<%= cno %>">
 			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
 			 							<i class="bi bi-pencil"></i>
 			 							글쓰기
@@ -127,6 +131,13 @@
 	 			reader.readAsDataURL(this.files[0]);
 	 		}
 	 	})
+	 	<%-- 
+	 	function subForm(){
+	 		var cno = "<%= cno %>";
+	 		alert(cno);
+	 		location.href="<%= contextPath %>/insert.bo?cno="+cno;
+	 	}*/ --%>
+	 	
  	</script>
 </body>
 </html> 
