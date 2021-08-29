@@ -364,7 +364,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="categoryList.ca">카테고리 목록</a></li>
-                            <li><a href="userAdminList.ua">회원 목록</a></li>
+                            <li><a href="adminMemberList.am">회원 목록</a></li>
                             <li><a href="userBlackList.bl">블랙리스트</a></li>
                         </ul>
                     </li>
@@ -462,6 +462,91 @@
 			}
 
         </script>
+<<<<<<< HEAD
+        
+		<script>
+        				
+              				  $(function(){
+              					 $("#categoryList1").click(function(){     				       			                 			        
+   				       				console.log("aaaaaaaaaaaaa")
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						
+   				       					 	
+   				       						$liBody.html(""); 
+   				       						console.log("@@@@@@@") 
+   				       						$.each(list, function(i){
+
+   				       							result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'>" +list[i].categoryName +"</a></li>"
+   				       							
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							
+   				       							
+   				       						})
+   				       					 
+   				       					},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
+        
+        <script>
+        				
+              				  $(function(){
+              					 $("#categoryList2").click(function(){     				       			                 			        
+              						 
+   				       				$.ajax({
+   				       					url:"CategoryMenuBar.ca",
+   				       					
+   				       					type:"get",
+   				       					success:function(list){
+   				       						console.log(list)
+   				       						console.log("ajax 성공!!")
+   				       						
+   				       						var result = ""
+   				       						var $liBody = $("#allmenu ul")
+   				       						
+   				       						
+   				       						$liBody.html(""); 
+   				       	 					
+   				       	 					$.each(list, function(i){
+   				     																								
+    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       					
+   				       							$liBody.append(result)
+   				       							
+   				       							console.log(result)
+   				       							console.log("2")
+												
+   				       						
+   				       	 				})
+   				       				},
+   				       					error:function(e){
+   				       						console.log("ajax 통신 실패함")
+   				       					}               			       			       			  
+   				       			  })  
+                		         }) 
+              				  })
+             			       	
+             		          	        				
+        </script>
+        
+
 		<script src="plugins/common/common.min.js"></script>
 	    <script src="js/custom.min.js"></script>
 	    <script src="js/settings.js"></script>

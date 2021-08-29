@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
     
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
@@ -62,6 +62,9 @@
 		background-color: #78c2ad;
 		border-color: #78c2ad;
 	}
+	#size1 {
+		height: 110%
+	}
 </style>
 
 </head>
@@ -70,8 +73,9 @@
 <%@ include file="../common/menuSideBar.jsp" %> 
 
 <div class="container-fluid" >
-                <div class="row">
-                    <div class="col-lg-6" style="margin-left: auto; margin-right: auto;">
+			<form id="size1">
+                <div class="row">               
+                    <div class="col-lg-8" style="margin-left: auto; margin-right: auto;">
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
@@ -106,7 +110,7 @@
                                                 <td><%= am.getEmail() %></td>
                                                 <td><%= am.getNickName() %></td>
                                                 <td><%= am.getUserCreateDate() %></td>
-                                                <td><%= am.getUserStatus() %></td>                                             
+                                                <th>&emsp;&emsp;<%= am.getUserStatus() %></th>                                             
                                             </tr>
                                             	<%} %>
 											<%} %>
@@ -120,8 +124,9 @@
 								</div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                  </div>
+                 </form>
                 </div>
                 
 		<br><br>
@@ -172,7 +177,8 @@
 		$(function(){
 			$(".table>tbody>tr").click(function(){
 				var amno = $(this).children().eq(0).text();
-				location.href="<%= contextPath %>/detail.am?amno=" +amno;
+				location.href="<%= contextPath %>/MemberDetail.am?amno=" +amno;
+				console.log("amno 값을 알려줘!"+amno)
 			})
 		})
 		<%}%>
