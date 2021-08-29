@@ -15,16 +15,16 @@ import com.kh.message.model.vo.Message;
 import com.kh.message.model.vo.MsgAttachment;
 
 /**
- * Servlet implementation class RecvMessageDetailServlet
+ * Servlet implementation class MyMessageDetailViewServlet
  */
-@WebServlet("/sread.ms")
-public class SendMessageDetailServlet extends HttpServlet {
+@WebServlet("/mread.ms")
+public class MyMessageDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMessageDetailServlet() {
+    public MyMessageDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +34,21 @@ public class SendMessageDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mno = Integer.parseInt(request.getParameter("mno"));
-		System.out.println("mno : " + mno);
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
+		int newMsgCount; newMsgCount = new MessageService().getNewMessageCount(userId);
 		
-		int newMsgCount; newMsgCount = new
-		MessageService().getNewMessageCount(userId);
-		
-		
-		Message message = new MessageService().selectSendMsg(mno, userId);
+		Message m = new MessageService().msgReadStatus(mno, userId);
 		MsgAttachment mat = new MessageService().selectMsgAttachment(mno);
-		System.out.println("SendMessageDetailServlet : " + userId);
-		if(message != null) {
-			request.setAttribute("message", message);
+		
+		if(m != null) {
+			request.setAttribute("message", m);
 			request.setAttribute("mat", mat);
 			request.setAttribute("newMsgCount", newMsgCount);
-			
-			request.getRequestDispatcher("views/message/SendMessageDetailView.jsp").forward(request, response);
+
+			request.getRequestDispatcher("views/message/myMessageDetailView.jsp").forward(request, response);
 		} else {
-			request.setAttribute("msg", "보낸쪽지 상세조회 실패");
+			request.setAttribute("errMsg", "쪽지 상세조회 실패");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
