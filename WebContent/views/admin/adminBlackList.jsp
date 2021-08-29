@@ -3,7 +3,7 @@
     
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
-	
+
 	AdminPageInfo amb = (AdminPageInfo)request.getAttribute("amb");
 	
 	int listCount = amb.getListCount();
