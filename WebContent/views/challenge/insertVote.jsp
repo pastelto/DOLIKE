@@ -12,6 +12,53 @@
 <title>DO LIKE - 챌린지</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+<style>
+#applyBtn {
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+}
+
+#applyBtn:hover {
+	color: #78c2ad;
+	background-color: #fff;
+}
+
+#resetBtn, #backBtn {
+	color: #fff;
+	background-color: #f3969a;
+	border-color: #f3969a;
+}
+
+#resetBtn:hover, #backBtn:hover {
+	color: #f3969a;
+	background-color: #fff;
+}
+#margin-delete{
+	margin-top:0 !important;
+}
+#category {
+	margin-left:10px;
+	margin-right:30px;
+	padding-top: 0.375rem;
+	padding-right: 2.25rem;
+	padding-bottom: 0.375rem;
+	padding-left: 0.75rem;
+	fint-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #888;
+	border: 1px solid #ced4da;
+	border-radius: 0.4rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#apList{
+	color:gray !important;
+}
+#apList:hover{
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 	<div id="main-wrapper">
@@ -20,8 +67,8 @@
 		 	<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">투표 등록</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">투표 등록</li>
                     </ol>
                 </div>
             </div>	
@@ -35,8 +82,8 @@
 										id="backBtn" class="btn btn-primary btn-block">뒤로가기</a>
 									<div class="mail-list mt-4">
 										<a href="<%= request.getContextPath() %>/applyList.ch"
-											class="list-group-item border-0 text-primary p-r-0"><i
-											class="fa fa-inbox font-18 align-middle mr-2"></i>신청함</a>
+											class="list-group-item border-0 text-primary p-r-0" id="apList"><i
+											class="fa fa-inbox font-18 align-middle mr-2"></i>신청리스트</a>
 									</div>
 								</div>
 								<div class="email-right-box">
@@ -63,7 +110,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="compose-content mt-5">
+										<div class="compose-content mt-5" id="margin-delete" margin-top="0px !important">
 											<div class="form-group">
 												<input type="text" name="chTitle"
 													class="form-control bg-transparent" placeholder="제목">

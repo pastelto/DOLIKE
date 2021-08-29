@@ -12,13 +12,6 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
-<!-- Custom Stylesheet -->
-<!-- <link href="../css/style.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
-
 <style>
 * {
 	box-sizing: border-box;
@@ -187,8 +180,8 @@ a {
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">진행중인 챌린지</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">진행중인 챌린지</li>
                     </ol>
                 </div>
             </div>	

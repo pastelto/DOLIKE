@@ -13,6 +13,9 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
 <style>
+	* {
+	box-sizing: border-box;
+}
 	#voteBtn{
 		padding: 5px;
    		width: 100%;
@@ -24,6 +27,40 @@
 	#inline-vote_common{
 		display:inline-block; !important
 	}
+	.container, .container-fluid{
+		display: block;
+	}
+
+	#borderPink{
+		border:1px;
+		border-color:#f3969a;
+	}
+
+	#voteBtn {
+		vertical-align: middle;
+		border-radius: 0.25rem;
+		background-color : #f3969a;
+		border-color:#f3969a;
+		color: #fff;
+		width:100px;
+	}
+	#voteBtn:hover{
+		background-color:#fff;
+		color: #f3969a;
+		border-color:#f3969a;
+	}
+	#card-vt{
+		background-color:#fff;
+		border-color:#f3969a;
+	}
+	#header-vt, #body-vt, #footer-vt{
+		background-color:#fff;
+		border: none;
+	}
+	#footer-vt{
+		text-align :center;
+	}
+	
 </style>
 </head>
 <body>
@@ -33,8 +70,8 @@
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">챌린지 투표</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">챌린지 투표</li>
                     </ol>
                 </div>
             </div>
@@ -44,23 +81,25 @@
 				<div class="col-12 m-b-30">				
 				<div class="votingBanner" style="text-align:center">
 					<img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center" width="1350px"><br><br>				
-					</div>
+					</div>					
 					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;" width="100%">						
 						<%if(!list.isEmpty()){%>
 							<% for(int i = 0; i < list.size(); i++) { %>
 							<div class="col-lg-4" id="inline-vote">
 								<form action="<%=contextPath%>/upVote.ch" method="post" id="voteMe">
-									<div class="card">
-										<div class="card-header bg-white">
+									<div class="card" id="card-vt">
+										<div class="card-header bg-white" id="header-vt">
+											<img src="./resources/challenge_upfiles/check.png" alt="null-my" class="null-my" width="30px" height="30px">
 											<h5 align="center"><input type="hidden" class="card-title" style="text-align:center" name="chTitle" value="<%= list.get(i).getChTitle()%>"/><%= list.get(i).getChTitle()%></h5><!-- 챌린지 타이틀 -->
 										</div>
-										<div class="card-body">
+										<div class="card-body" id="body-vt">
 											<p class="card-text"><%= list.get(i).getContent()%></p><!-- 챌린지 설명 -->
 										</div>
-										<div class="card-footer">									
-											<button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit" id="voteBtn">
+										<div class="card-footer" id="footer-vt">									
+											<button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="submit" id="voteBtn">
 													<i class="fa fa-paper-plane m-r-5"></i> Vote ME!
-											</button>								
+											</button>
+																			
 										</div>
 									</div>
 								</form>

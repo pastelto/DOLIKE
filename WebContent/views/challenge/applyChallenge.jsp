@@ -34,9 +34,12 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 	color: #f3969a;
 	background-color: #fff;
 }
-
+#margin-delete{
+	margin-top:0 !important;
+}
 #category {
-	display: block;
+	margin-left:10px;
+	margin-right:30px;
 	padding-top: 0.375rem;
 	padding-right: 2.25rem;
 	padding-bottom: 0.375rem;
@@ -49,6 +52,12 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 	border-radius: 0.4rem;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+#apList{
+	color:gray !important;
+}
+#apList:hover{
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -58,8 +67,8 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">챌린지</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">챌린지 신청</a></li>
+                        <li class="breadcrumb-item">챌린지</li>
+                        <li class="breadcrumb-item active">챌린지 신청</li>
                     </ol>
                 </div>
             </div>	
@@ -73,8 +82,8 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 										id="backBtn" class="btn btn-primary btn-block">뒤로가기</a>
 									<div class="mail-list mt-4">
 										<a href="<%=request.getContextPath()%>/myApList.ch"
-											class="list-group-item border-0 text-primary p-r-0"><i
-											class="fa fa-inbox font-18 align-middle mr-2"></i>신청함</a>
+											class="list-group-item border-0 text-primary p-r-0" id="apList"><i
+											class="fa fa-inbox font-18 align-middle mr-2" ></i>신청함</a>
 									</div>
 								</div>
 								<div class="email-right-box">
@@ -94,7 +103,7 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 												</div>
 											</div>
 										</div>
-										<div class="compose-content mt-5">
+										<div class="compose-content mt-5" id="margin-delete">
 											<div class="form-group">
 												<textarea class="textarea_editor form-control bg-light"
 													rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
