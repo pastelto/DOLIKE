@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.admin.model.vo.AdminPageInfo;
-import com.kh.category.model.vo.Category;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
