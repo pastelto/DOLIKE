@@ -43,12 +43,12 @@
 				<div class="row">	
 				<div class="col-12 m-b-30">				
 				<div class="votingBanner" style="text-align:center">
-					<img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center"><br><br>				
+					<img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center" width="1350px"><br><br>				
 					</div>
-					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;'">						
+					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;" width="100%">						
 						<%if(!list.isEmpty()){%>
 							<% for(int i = 0; i < list.size(); i++) { %>
-							<div class="col-md-6 col-lg-3" id="inline-vote">
+							<div class="col-lg-4" id="inline-vote">
 								<form action="<%=contextPath%>/upVote.ch" method="post" id="voteMe">
 									<div class="card">
 										<div class="card-header bg-white">
