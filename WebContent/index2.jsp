@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.board.model.vo.*"%>
+<% 
+	ArrayList<Board> topList = (ArrayList<Board>)request.getAttribute("topList");
+	ArrayList<Category> cList = (ArrayList<Category>)request.getAttribute("cList");
+	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
+	
+	
+	System.out.println("topList :" + topList);
+	System.out.println("cList :" + cList);
+	System.out.println("hashmap : " + hashmap);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,15 +28,50 @@
 <link rel="stylesheet"
 	href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
 </head>
+<script>
+
+	var popOnce = false;
+	var targetTitle = "_DoChanlleng";
+	var popupWidth = 900;
+	var popupHeight = 860;
+	var top = (screen.availHeight - popupHeight) / 2 - 10;
+	// 듀얼 모니터 기준
+	var left = (screen.availWidth - popupWidth) / 2;
+	if( window.screenLeft < 0){
+	left += window.screen.width*-1;
+	}
+	else if ( window.screenLeft > window.screen.width ){
+	left += window.screen.width;
+	}
+	var options = 'resizable=no, left=' + left + ',top=' + top +', width=' + popupWidth+ ',height=' + popupHeight +',menubar=no, status=no, toolbar=no, location=no, scrollbars=yes';
+
+	$(document).ready(function(){
+	if(!popOnce){
+
+	window.open("www.naver.com",targetTitle,options);
+	
+	}
+
+})
+
+</script>
 <style>
 .carousel-inner {
 	height: 15rem;
 }
-
+/* 
 .card-body {
 	flex: 0 0 auto;
-	padding: 1rem;
+	padding:50em;
 	border: none;
+	height: 30px;
+} */
+
+ #allBoardTop{
+	flex: 0 0 auto;
+	padding: 150px;
+	border: none;
+	height: 50px;
 }
 
 .carousel-inner {
@@ -52,10 +97,6 @@
 
 </style>
 <body>
-
-	<!--*******************
-        Preloader start
-    ********************-->
 	<div id="preloader">
 		<div class="loader">
 			<svg class="circular" viewBox="25 25 50 50">
@@ -64,26 +105,15 @@
             </svg>
 		</div>
 	</div>
-	<!--*******************
-	        Preloader end
-	    ********************-->
 	<div id="main-wrapper">
-		<!--**********************************
-            Sidebar start
-        ***********************************-->
 		<%@ include file="../views/common/menuSideBar.jsp"%>
-		<!--**********************************
-            Sidebar end
-        ***********************************-->
-
-		<!--**********************************
-            Content body start
-        ***********************************-->
 
 
 		<div class="content-body">
 			<!-- style="display: flex; flex: 0 0 auto; felx-direction: row; padding: 50px;" -->
 			<div class="container-fluid">
+			
+			<!-- 상단 캐로셀 -->
 			<div class="col-12">
 				<div class="row">
 					<div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
@@ -151,45 +181,61 @@
 			<div class="col-12">
 			<div class="row">
 					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; padding-right: 10%; padding-left: 10%;"> -->
-
+				<!-- 첫번째 메인 인기글 카드 -->
 					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 50px;">
-						<div class="card">
+						<div class="card col-12"  style="height: 600px">
 							<div class="card-body">
 								<h4 class="card-title" style="color: #f3969a">
 									<b>전체 인기 게시글</b>
 								</h4>
+								<hr>
 								<!-- Nav tabs -->
-								<div class="custom-tab-2">
-<!-- 									<ul class="nav nav-tabs mb-3">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#home1">카테고리1</a></li>
-									</ul> -->
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home2"
-											role="tabpanel">
-											<div class="p-t-15">
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="custom-tab-2">
+ 					<div class="col-12 m-b-30">
+                        <div class="row">
+                            <!-- End Col -->
+                            <div class="col-md-6 col-lg-6" style="height: 80px;">
+                                <div class="card">
+                                    <img class="img" src="images/big/img3.jpg" alt="">
+                                    <div class="card-body" id="allBoardTop">
+                                    </div>
+                                  <div class="row">
 
+                                        <%= topList.get(0).getBoardTitle() %>
+                                        <p class="card-text"><%= topList.get(0).getBoardContent() %></p>
+                                        <p class="card-text"><small class="text-muted"><b>작성자 : </b> <%= topList.get(0).getNickName() %> / <b> 조회수 : </b>   <p class="card-text"><%= topList.get(0).getViews() %></p> </small>
+                                        </p>
+                                      
+                                        </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                            <div class="col-md-6 col-lg-6" style="height: 80px;">
+                                <div class="card">
+                                    <img class="img" src="images/big/img4.jpg" alt="">
+                                    <div class="card-body" id="allBoardTop">
+                                        <h5 class="card-title">제목1</h5>
+                                        <hr>
+                                        <p class="card-text">내용 입니다.</p>
+                                        <p class="card-text"><small class="text-muted"><b>작성자 : </b> 팀널뛰기 / <b> 조회수 : </b> 100 </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                        </div>
+                        
+                    </div>
+
+				</div>
+
+			</div>
+							
+			</div>
+	</div>
+	
+	
+				<!-- 카테고리별 인기글 -->
 					<div class="col-md-6" id="innerDiv" style="width: 40%">
 						<div class="card">
 							<div class="card-body">
@@ -200,20 +246,12 @@
 								<div class="custom-tab-2">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#home1">카테고리1</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#profile1">카테고리2</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#contact1">카테고리3</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리4</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리5</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리6</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리7</a></li>
-
+											data-toggle="tab" href="#1"><%= cList.get(0).getCategoryName() %></a></li>
+										<% for(int i = 1; i < cList.size(); i++){ %>
+										<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#<%= cList.get(i).getCategoryNo() %>">
+										<%= cList.get(i).getCategoryName() %></a>
+										</li>
+										<% } %>
 									</ul>
 									<div class="tab-content">
 										<div class="tab-pane fade show active" id="home1"
@@ -274,7 +312,7 @@
 </div>
 
 </div>
-
+</div>
 	<%@ include file="./views/common/footer.jsp"%>
 
 

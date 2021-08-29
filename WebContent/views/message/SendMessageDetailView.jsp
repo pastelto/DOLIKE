@@ -167,14 +167,15 @@
                 if(result.value) {                 // 확인 버튼이 눌러진 경우
                 
                 	$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
-				swal.fire(
+                	$("#msgDel").submit();
+                /*	swal.fire(
 						{title: '삭제',
 						 text: '성공적으로 삭제되었습니다.',
 						 type: 'success',
 						 confirmButtonColor: "#78c2ad"}).then(function(result){
 		
-					$("#msgDel").submit();
-				});
+					
+				}); */
                 
             } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
                 swal.fire('취소', '삭제가 취소되었습니다.', 'error');
