@@ -47,10 +47,11 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println("savePath : " + savePath);
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
-			
+			int cno = Integer.parseInt(multiRequest.getParameter("cno"));
 			String tag = multiRequest.getParameter("tag");
 			String title = multiRequest.getParameter("boardTitle");
 			String content = multiRequest.getParameter("boardContent");
+			System.out.println("cno : "+cno);
 			System.out.println("tag : " + tag);
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
@@ -59,6 +60,7 @@ public class BoardInsertServlet extends HttpServlet {
 			
 			
 			Board b = new Board();
+			b.setCategoryNo(cno);
 			b.setTagName(tag);
 			b.setBoardTitle(title);
 			b.setBoardContent(content);
@@ -104,8 +106,10 @@ public class BoardInsertServlet extends HttpServlet {
 			int result = new BoardService().insertBoard(b, at);
 			
 			if(result  > 0) {
-				response.sendRedirect("list.bo");
+				request.setAttribute("cno", cno);
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
+				response.sendRedirect("list.bo?cno="+cno);
+				
 				/*
 				
 				response.sendRedirect("list.bo");
@@ -119,7 +123,7 @@ public class BoardInsertServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "게시글 등록 실패");
+				request.setAttribute("errMsg", "게시글 등록 실패");
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 			}

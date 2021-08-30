@@ -12,18 +12,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - Do Whatever You Like, Community</title>
+    <title>DO LIKE - 게시글 </title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
     <link href="../../css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<style>
+		html, body{
+			width:100%;
+			height:100%;
+		}
 		.nk-sidebar{
 			padding:30px;
 		}
 		.content-body{
-			padding:5px 0px 0px 30px;
+		padding:5px 0px 0px 30px;	
+		
+		
 		}
 		#updateBtn, #deleteBtn, #addReply, #returnBtn{
 			color: #fff;
@@ -69,6 +72,15 @@
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	
 	<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">카테고리</li>
+                        <li class="breadcrumb-item">게시판</li>
+                        <li class="breadcrumb-item active">게시글</li>
+                    </ol>
+                </div>
+            </div>
 		<br>
 		<div class="container-fluid">
 			<div class="row">
@@ -85,7 +97,6 @@
 										<h2 class="m-0" style="text-align: center">
 										<!-- 글 제목 -->
 											<%= b.getBoardTitle() %>
-											
 										</h2>
 										<small class="float-left" style="text-align: center">태그 : <%= b.getTagName() %></small>
 									</div>
@@ -96,7 +107,9 @@
 										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+										<div id="bodyScroll" style="overflow:auto; height:400px;">
+											<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+										</div>
 									</div>
 								</div>
 								<hr>
@@ -116,7 +129,6 @@
 									<% }else{ %>
 									<span>등록된 첨부파일이 없습니다.</span>
 									<% } %>
-									
 								</div>
 								<br>
 								<hr>
@@ -141,7 +153,6 @@
 									<% } %>
 									</div>
 								</div>
-								
 								<div class="bottom-btns" >
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
@@ -234,10 +245,7 @@
 			})
 		}
 	</script> 
-		 </div> 
-        <!--**********************************
-            Content body end
-        ***********************************-->
+</div> 
 	<%@ include file="../common/footer.jsp" %>
 </div>
 </body>

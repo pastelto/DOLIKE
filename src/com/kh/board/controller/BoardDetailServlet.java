@@ -44,7 +44,7 @@ public class BoardDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("views/board/boardRead.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("msg", "게시판 상세 조회 실패");
+			request.setAttribute("errMsg", "게시판 상세 조회 실패");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
