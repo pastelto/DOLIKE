@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.board.model.vo.*"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.dlmain.model.vo.*"%>
 <% 
-	ArrayList<Board> topList = (ArrayList<Board>)request.getAttribute("topList");
+	ArrayList<DLMain> topList = (ArrayList<DLMain>)request.getAttribute("topList");
 	ArrayList<Category> cList = (ArrayList<Category>)request.getAttribute("cList");
-	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
+	HashMap<String, ArrayList<DLMain>> hashmap = (HashMap<String, ArrayList<DLMain>>)request.getAttribute("hashmap");
 	
 	
 	System.out.println("전체 인기 게시글 :" + topList);
@@ -215,13 +215,13 @@
 						
 							<div class="card-body"  style="margin-bottom: 0; padding:0;">
 								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" class="Thum" ></span>
 									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
 										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
 											<div class="row">
 												<div class="col-6 border-right-1">
 													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+													<p id="<%=i%>fl"><%= topList.get(i).getWriter() %> </p>
 												</span>
 											</div>
 											<div class="col-6">
@@ -248,13 +248,13 @@
 						
 							<div class="card-body"  style="margin-bottom: 0; padding:0;">
 								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" class="Thum" ></span>
 									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
 										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
 											<div class="row">
 												<div class="col-6 border-right-1">
 													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+													<p id="<%=i%>fl"><%= topList.get(i).getWriter() %> </p>
 												</span>
 											</div>
 											<div class="col-6">
@@ -304,10 +304,10 @@
 										<% } %>
 									</ul>
 									<div class="tab-content">
-								<%-- 	<% while(keyInteger.hasNext()){ %>  
+									<% while(keyInteger.hasNext()){ %>  
 									<% String key = keyInteger.next();%>
-									<% ArrayList<Board> eList = hashmap.get(key); %> --%>
-										<%-- <div class="tab-pane fade show active" id="<%= key %>" --%>
+									<% ArrayList<Board> eList = hashmap.get(key); %>
+										 <div class="tab-pane fade show active" id="<%= key %>">
 										<div class="tab-pane fade show active" id="home1" role="tabpanel">
 											<div class="p-t-15">
 												<h4>This is profile title</h4>
@@ -319,6 +319,8 @@
 													texts. Separated they live in Bookmarksgrove.</p>
 											</div>
 										</div>
+										
+									<%} %>
 										<div class="tab-pane fade" id="profile1">
 											<div class="p-t-15">
 												<h4>This is profile title</h4>

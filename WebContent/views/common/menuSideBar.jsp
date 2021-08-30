@@ -32,6 +32,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap&family=Chakra+Petch:wght@300&family=Lobster&display=swap" rel="stylesheet">
 	
 	<script>
+	
 	//기쁜일 했을 때 gif 팝업
 	   $(function(){
 		      var msg = "<%=msg%>";
@@ -307,60 +308,28 @@
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList2">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
-                        <ul aria-expanded="false" class="collapse">
+                        <ul aria-expanded="false" class="collapse" >
 
                         </ul>
 
-				        <script>
-				        
-/* 							$(function(){
-								$("#btn-like").eq(0).click(function(){
-								var favB = $("#categoryList").val();
-								
-								$.ajax({
-									
-									url: "jqTest2.do",
-									data: {input:input},
-									type: "post",
-									success: function(result){
-										$("#output2").val(result);
-									},
-									error: function(e){ 
-										console.log(e);
-									}
-								})
-							})
-						}) */
-				        
-/* 						$(function(){
-							
-						$(".btn-like").eq(0).click(function() {
-				         	   $(this).addClass('done');
-				       		 });
-							
-						}) */
-				       		 
-				       		 				       		
-        				</script>
-        				
-
-
                     	</li>
                       <%} %> 
+                      
+                      <!-- 즐겨찾는 게시판 로그인 값이 없으면 로그인 후 이용하라고 안내 -->
                       <% if(loginUser == null) {%> 
-                      <li class="mega-menu-sm">
+                      <li class="mega-menu-sm"> 
                         <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
                         </a>
+                       <!-- 로그인 값이 있으면 해당 유저의 즐겨찾기 게시판 목록 보여줌 -->
                       <%}else{ %>
-                      <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                      <li class="mega-menu-sm" id="favBoard"> 
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="myFavBoardList">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                        <!-- 나중에 코드로 구현할 부분 -->
-                            <li><a href="list.bo">카테고리1</a></li>
-                            <li><a href="./layout-one-column.html">카테고리2</a></li>
+                        
+                        <!-- Ajax로 즐겨찾는 게시판 카테고리 값이 붙을 곳 -->
                      
                         </ul>
                     </li>
@@ -467,40 +436,7 @@
             </div>
         <script>
         // DH -- 즐겨찾기 
-	<%-- 		$(function(){
-				$("#btn-like").eq(0).click(function(){
-					
-		            // 확인, 취소버튼에 따른 후속 처리 구현
-		            swal.fire({
-		                title: '확인', 
-		                text: "즐겨찾는 게시판으로 등록하시겠습니까?", 
-		                type: 'question', 
-		                confirmButtonText: '추가', 
-		                showCancelButton: true,     
-		                cancelButtonText: '취소', 
-		                cancelButtonColor: "#f3969a",
-		                confirmButtonColor: "#78c2ad"
-		            })
-		            .then(function(result) { 
-		                if(result.value) {             
-		                
-		                $("#msgDel").attr("action", "<%=contextPath%>/dmmsg.ms");
-						swal.fire(
-								{title: '삭제',
-								 text: '성공적으로 삭제되었습니다.',
-								 type: 'success',
-								 confirmButtonColor: "#78c2ad"}).then(function(result){
-				
-							$("#msgDel").submit();
-						});
-		                
-		            } else if(result.dismiss === 'cancel') { 
-		                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
-		         
-		            }
-		        });
-		      }
-			}); --%>
+
 		
         // 로그인 후 이용 가능 팝업창
 			function needLogin(){
@@ -575,7 +511,7 @@
    				       	 					
    				       	 					$.each(list, function(i){
    				       																														
-    				       						result = "<li><table><tr><th><button class='btn-like' name='myFavBoard' id=''"+list[i].categoryNo+"fb' value='"+list[i].categoryNo+"'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"'>" + list[i].categoryName +"</a></td></tr></table></li>"
+    				       						result = "<li><table><tr><th><button class='btn-like' id='"+list[i].categoryNo+"fb' value='"+list[i].categoryNo+"'style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
     				       					
    				       							$liBody.append(result)
    				       							
@@ -592,7 +528,41 @@
                 		         }) 
               				  })
              			       	
-             		          	        				
+          // 즐겨찾기 카테고리 리스트 값 가져오기
+			  $(function(){
+					 $("#myFavBoardList").click(function(){     				       			                 			        
+						 
+	       				$.ajax({
+	       					url:"gmfb.fb",
+	       					type:"post",
+	       					success:function(fav){
+	       						console.log(fav)
+	       						console.log("ajax 성공!!")
+	       						
+	       						var newFav = ""
+	       						var $favLiBody = $("#favBoard ul")
+	       						
+	       						
+	       						$favLiBody.html(""); 
+	       	 					
+	       	 					$.each(fav, function(i){
+	       																														
+		       						newFav =  "<li><table><tr><th><button class='btn-like done' name='addFavB' id='"+fav[i].categoryNo+"fb' value='"+fav[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+fav[i].categoryNo+"' style='padding-left:10px;'>" + fav[i].fbTitle +"</a></td></tr></table></li>"
+		       					
+	       							$favLiBody.append(newFav)
+	       							
+	       							console.log(newFav)
+	       							console.log("즐겨찾는 게시판!")
+									
+	       						
+	       	 				})
+	       					},
+	       					error:function(e){
+	       						console.log("ajax 통신 실패함")
+	       					}               			       			       			  
+	       			  })  
+ 		         }) 
+				  })
         </script>
         
 		<script src="plugins/common/common.min.js"></script>
