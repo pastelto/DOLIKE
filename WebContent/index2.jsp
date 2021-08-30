@@ -6,9 +6,13 @@
 	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
 	
 	
-	System.out.println("topList :" + topList);
-	System.out.println("cList :" + cList);
-	System.out.println("hashmap : " + hashmap);
+	System.out.println("전체 인기 게시글 :" + topList);
+	System.out.println("카테고리 리스트 :" + cList);
+	System.out.println("카테고리 별 인기게시글 : " + hashmap);
+	
+	Set<String> keySet = hashmap.keySet();
+	Iterator<String> keyInteger = keySet.iterator();
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -114,6 +118,7 @@
 			<!-- <div class="container-fluid"> -->
 			<!-- 가장 상단 캐러셀 -->
 			<div class="row">
+			<div class="container-fluid" style="height: 50%;">
 			<!-- 상단 캐로셀 -->
 			<div class="col-12">
 				<div class="row">
@@ -173,73 +178,116 @@
 					</div>
 				</div>
 			</div>
+			</div>
 			
 			</div>
-			<!-- ************************************************* -->
-			
-			
-<%-- 			<div class="row" style="margin-bottom: 13%;"> 
+	
+	<!-- ----------------------------------------------------------------------------------------------------------  -->
+	
+	<div class="row">
+		<div class="container-fluid">
+			<!-- 상단 캐로셀 -->
 			<div class="col-12">
+    <!-- -----------------------------------------------------------------------------------  -->
 			
-					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; padding-right: 10%; padding-left: 10%;"> -->
-				<!-- 첫번째 메인 인기글 카드 -->
-					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 50px;">
-					<div class="row">
-						<div class="card col-12"  style="height: 600px">
-							<div class="card-body">
-								<h4 class="card-title" style="color: #f3969a">
-									<b>전체 인기 게시글</b>
-								</h4>
-								<hr>
-								<!-- Nav tabs -->
-				<div class="custom-tab-2">
- 					<div class="col-12 m-b-30">
-                        <div class="row">
-                            <!-- End Col -->
-                            <div class="col-md-6 col-lg-6" style="height: 80px;">
-                                <div class="card">
-                                    <img class="img" src="images/big/img3.jpg" alt="">
-                                    <div class="card-body" id="allBoardTop">
-                                    </div>
-                                  <div class="row">
-
-                                        <%= topList.get(0).getBoardTitle() %>
-                                        <p class="card-text"><%= topList.get(0).getBoardContent() %></p>
-                                        <p class="card-text"><small class="text-muted"><b>작성자 : </b> <%= topList.get(0).getNickName() %> / <b> 조회수 : </b>   <p class="card-text"><%= topList.get(0).getViews() %></p> </small>
-                                        </p>
-                                      
-                                        </div>
-                                </div>
-                            </div>
-                            <!-- End Col -->
-                            <div class="col-md-6 col-lg-6" style="height: 80px;">
-                                <div class="card">
-                                    <img class="img" src="images/big/img4.jpg" alt="">
-                                    <div class="card-body" id="allBoardTop">
-                                        <h5 class="card-title">제목1</h5>
-                                        <hr>
-                                        <p class="card-text">내용 입니다.</p>
-                                        <p class="card-text"><small class="text-muted"><b>작성자 : </b> 팀널뛰기 / <b> 조회수 : </b> 100 </small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Col -->
-                        </div>
-                        
-                    </div>
-
-				</div>
-
-			</div>
-							
-			</div>
-	</div>
-	
-	
-				<!-- 카테고리별 인기글 -->
-					<div class="col-md-6" id="innerDiv" style="width: 40%">
+			<div class="row">
+			<div class="container-fluid" style="height: 50%;">
+			<!-- 상단 캐로셀 -->
+			<div class="col-12">
+				<div class="row">
+					
+				<div class="col-6">	
+					
+					
+					
 						<div class="card">
+			   		
+			   		
+			   		
+			   		
+			   <!-- 메인 전체 인기게시글  상단 게시글 카드 2분할 -->
+			   	<div class="row">
+			   		
+			   		
+				   	<% for(int i=0;i < 2;i++){ %>
+				   	<div class="col-6">
+						<div class="card">
+						
+							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
+											<div class="row">
+												<div class="col-6 border-right-1">
+													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+												</span>
+											</div>
+											<div class="col-6">
+												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
+												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+					<%}%>
+
+			   </div>
+		
+			  	 <!-- 메인 하단 게시글 카드 2분할 -->
+				<div class="row">
+				   	<% for(int i=2;i < 4;i++){ %>
+				   	<div class="col-6" style="margin-right: 0;">
+						<div class="card">
+						
+							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
+											<div class="row">
+												<div class="col-6 border-right-1">
+													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+												</span>
+											</div>
+											<div class="col-6">
+												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
+												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+					<%}%>
+			  	 </div>
+			</div>
+		</div>				
+					
+			
+					
+					
+					
+					
+					
+		
+					<div class="col-6" id="innerDiv" style="width: 40%">
+						<!-- <div class="card" style="width: 90%;">
+							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
+							src="resources/images/submit.png" alt="Third slide">
+						</div> -->
+
+												<div class="card">
 							<div class="card-body">
 								<h4 class="card-title" style="color: #f3969a">
 									<b>카테고리별 인기 게시글</b>
@@ -256,10 +304,13 @@
 										<% } %>
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home1"
+									<% while(keyInteger.hasNext()){ %>  
+									<% String key = keyInteger.next();%>
+									<% ArrayList<Board> eList = hashmap.get(key); %>
+										<div class="tab-pane fade show active" id="<%= key %>"
 											role="tabpanel">
 											<div class="p-t-15">
-												<h4>This is home title</h4>
+												<h4><%=    %></h4>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind
 													texts. Separated they live in Bookmarksgrove.</p>
@@ -304,83 +355,32 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				<div>
-			</div>
-		</div>
-	</div>
-	</div> --%>
-	
-	
-	<!-- ----------------------------------------------------------------------------------------------------------  -->
-	
-	<div class="row">
-			<!-- 상단 캐로셀 -->
-			<div class="col-12">
-				<div class="row">
-					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 30px;">
-						<div class="bootstrap-carousel" style="height: 5rem;">
-							<div id="carouselExampleIndicators" class="carousel slide"
-								data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0"
-										class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-								</ol>
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/summer.png"
-											alt="First slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/runday.png"
-											alt="Second slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/submit.png" alt="Third slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/vege.png" alt="Fourth slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/animal.png" alt="Fifth slide">
-									</div>
-								</div>
-								<a class="carousel-control-prev"
-									href="#carouselExampleIndicators" data-slide="prev"><span
-									class="carousel-control-prev-icon"></span> <span
-									class="sr-only">Previous</span> </a><a
-									class="carousel-control-next"
-									href="#carouselExampleIndicators" data-slide="next"><span
-									class="carousel-control-next-icon"></span> <span
-									class="sr-only">Next</span></a>
-							</div>
-						</div>
-					</div>
-		
-					<div class="col-md-6" id="innerDiv" style="width: 40%">
-						<div class="card" style="width: 90%;">
-							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
-							src="resources/images/submit.png" alt="Third slide">
-						</div>
+						
+						
 					</div>
 				</div>
+			</div>
+			</div>
+			
+			</div>
+			
+			
+			
+			
+		
+		
+		
+		
+		
+
+				
 			</div>
 			
 			</div>
 	
 	
 		<!-- ----------------------------------------------------------------------------------------------------------  -->
-	
+	</div>
 </div>
 
 </div>

@@ -52,8 +52,8 @@ public class MainDao {
 			
 			while(rset.next()) {
 				bTopList.add(new Board(rset.getInt("BOARD_NO"), 
+									  rset.getString("NICKNAME"),
 								      rset.getString("BOARD_TITLE"),
-								      rset.getString("NICKNAME"),
 								      rset.getInt("VIEWS"),
 								      rset.getInt("CATEGORY_NO")
 						));
@@ -118,8 +118,8 @@ public class MainDao {
 			
 			while(rset.next()) {
 				eList.add(new Board(rset.getInt("BOARD_NO"), 
+						  rset.getString("NICKNAME"),
 					      rset.getString("BOARD_TITLE"),
-					      rset.getString("NICKNAME"),
 					      rset.getInt("VIEWS"),
 					      rset.getInt("CATEGORY_NO")
 					      ));
