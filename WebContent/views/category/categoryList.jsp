@@ -20,10 +20,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>카테고리 목록</title>
+<title>DO LIKE - 카테고리 목록</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
+<!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+ 
 <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -58,15 +60,24 @@
 		background-color: #78c2ad;
 		border-color: #78c2ad;
 	}
+	
+	#window {
+		/* posision: absolute;
+		left: 130px; */
+	}
+	
+	#contentBody {
+		
+	}
+	
 </style>
 
 </head>
 <body>
 <div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-
+<div class="content-body" id="contentBody" style="min-height: 600px">
 <div class="container-fluid" >
-		
 				<div class="row page-titles mx-0" >
 			
                 <div class="col p-md-0" >
@@ -76,9 +87,10 @@
                     </ol>
                 </div>
            		 </div>
-		
+				
                 <div class="row">
-                    <div class="col-lg-6" style="margin-left: auto; margin-right: auto;">
+                
+                    <div class="col-lg-6 mt-5" style="margin-left: auto; margin-right: auto;" id="window">
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
@@ -117,13 +129,10 @@
                         </div>
                     </div>
                  </div>
-               </div>              
-		<br><br>
-
-		
-			<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
+                 
+                 				<!-- 페이지 처리 -->
+		<div id="pageBar">
+			<ul class="pagination justify-content-center"  >
 				<!-- 맨앞으로 -->
 				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/categoryList.ca?currentPage=1"> &laquo; </a></li>
 				
@@ -158,14 +167,24 @@
 				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/categoryList.ca?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
-		<%@ include file="../common/footer.jsp"%>
-
+                 
+               </div>              
+		<br><br>
+	
 		</div>
+		
+	
+		
+		<%@ include file="../common/footer.jsp"%>
+		</div>
+		
+		
+		
 		<script>
 		<%if(!list.isEmpty()){ %>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
-				var cno = $(this).children().eq(0).text();
+				var cno = $(this).children().eq(0).text();		
 				location.href="<%= contextPath %>/detail.ca?cno=" +cno;
 			})
 		})

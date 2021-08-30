@@ -94,8 +94,8 @@
 												<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지선택</label> 
 													<select class="form-select" id="category" name="apNo">
-														<%for(int i = 0; i<List.size(); i++) {%>
-															<option value="<%=List.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
+														<%for(int i = 0; i<list.size(); i++) {%>
+															<option value="<%=list.get(i).getApNo()%>"><%=list.get(i).getApNo()%></option>
 														<%} %>
 													</select>
 												</div>
@@ -126,6 +126,7 @@
 															<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="sdate">
 														</div>
 													</div>
+													<br>
 													<div class="row form-material">
 														<div class="col-md-6">
 															<label class="m-t-20">투표 마감 날짜</label> <input type="date"

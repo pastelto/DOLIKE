@@ -1,4 +1,4 @@
-package com.kh.challenge.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeVote;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class VoteCountUpServlet
+ * Servlet implementation class FindPwdServlet
  */
-@WebServlet("/upVote.ch")
-public class VoteCountUpServlet extends HttpServlet {
+@WebServlet("/findPwd.me")
+public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteCountUpServlet() {
+    public FindPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +31,29 @@ public class VoteCountUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		
-		String chTitle = request.getParameter("chTitle");
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
+		String phone = request.getParameter("phone");
 		
-		ChallengeVote cv = new ChallengeVote();
+		Member mem = new MemberService().findPwd(userId, userName, phone);
+		System.out.println("mem : " + mem);
 		
-		cv.setChTitle(chTitle);
-		int result = new ChallengeService().voteCountUp(cv);
-
-		if (result > 0) {
-			request.getSession().setAttribute("msg", "투표해주셔서 감사합니다!");
-			response.sendRedirect("challengeVote.ch");
-			System.out.println("투표 성공!");
-		} else {
-			request.setAttribute("errMsg", "투표 실패");
+		String userPwd = null;
+		
+		if (mem == null) {
+			request.setAttribute("errMsg", "일치하는 회원 정보가 없습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
+		} else {
+			userPwd = mem.getUserPwd();
+			System.out.println("userPwd : " + userPwd);
+			request.setAttribute("userPwd", userPwd);
+			RequestDispatcher view = request.getRequestDispatcher("/findPwdResult.me");
+			view.forward(request, response);
 		}
-		
 	}
 
 	/**

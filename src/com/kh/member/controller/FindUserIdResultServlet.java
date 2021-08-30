@@ -1,33 +1,23 @@
-package com.kh.category.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
-import com.kh.category.model.service.CategoryService;
-import com.kh.category.model.vo.Category;
-
 /**
- * Servlet implementation class CategoryAjaxMenuBarServlet
+ * Servlet implementation class FindUserIdResultServlet
  */
-@WebServlet("/CategoryMenuBar.ca")
-public class CategoryAjaxMenuBarServlet extends HttpServlet {
+@WebServlet("/findUserIdResult.me")
+public class FindUserIdResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryAjaxMenuBarServlet() {
+    public FindUserIdResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,15 +26,8 @@ public class CategoryAjaxMenuBarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Category> list = new CategoryService().categoryMenuBarList();
-						
-
-		response.setContentType("application/json; charset=utf-8");
-		System.out.println("서블릿 전송에 성공하였습니다. list 값 :" + list);
-		new Gson().toJson(list, response.getWriter());
-		
-		
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("views/member/findUserIdResult.jsp").forward(request, response);
 	}
 
 	/**
