@@ -59,7 +59,7 @@ public class VoteInsertServlet extends HttpServlet {
 			response.sendRedirect("index2.jsp");
 			System.out.println("투표 등록 성공!");
 		} else {
-			request.setAttribute("msg", "투표 등록 살패");
+			request.setAttribute("errMsg", "투표 등록 살패");
 
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

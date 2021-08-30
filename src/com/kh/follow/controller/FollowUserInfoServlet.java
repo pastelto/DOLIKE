@@ -35,7 +35,7 @@ public class FollowUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//int fno=Integer.parseInt(request.getParameter("fno"));
+		
 		String followId = request.getParameter("followId");
 		System.out.println("userInfo의 followId: "+followId);
 		Member m = new FollowService().selectFollowInfo(followId);

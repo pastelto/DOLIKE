@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%  String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 	<p class="type_text" style="text-align:center; color:#d5d4f7; font-size:18pt"></p>
 	
 	<div id="indexBtn" class="center">
-		<button id="visual-btn" onclick="javascript:location.href='index2.jsp';">Visit our Site!</button>
+		<button id="visual-btn" onclick="location.href='<%=contextPath%>/main.do'">Visit our Site!</button>
 	</div>
 	
 	<div class="video-background">
@@ -111,7 +112,6 @@
 			 
 		});
 	</script> -->
-	
 	  
 	
 </body>

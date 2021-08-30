@@ -41,7 +41,7 @@ public class Board {
 		this.views = views;
 		this.categoryNo = categoryNo;
 	}
-	public Board(int boardNo, String tagName,int categoryNo, String boardTitle, String nickName, Date boardDate, int views) {
+	public Board(int boardNo, String tagName,int categoryNo, String boardTitle, String nickName, Date boardDate, int views ) {
 		//select list 
 		super();
 		this.boardNo = boardNo;
@@ -66,7 +66,7 @@ public class Board {
 		this.titleImg = titleImg;
 	}
 
-	public Board(int boardNo, String nickName, String tagName, String boardTitle, Date boardDate, String boardContent, int views) {
+	public Board(int boardNo, String nickName, String tagName, String boardTitle, Date boardDate, String boardContent, int views, int categoryNo) {
 		super();
 		this.boardNo = boardNo;
 		this.nickName = nickName;
@@ -75,7 +75,16 @@ public class Board {
 		this.boardDate = boardDate;
 		this.boardContent = boardContent;
 		this.views = views;
-		
+		this.categoryNo = categoryNo;
+	}
+
+	public Board(int boardNo, String nickName, String boardTitle, int views, int categoryNo) {
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.boardTitle = boardTitle;
+		this.views = views;
+		this.categoryNo = categoryNo;
 	}
 
 	public String getTitleImg() {

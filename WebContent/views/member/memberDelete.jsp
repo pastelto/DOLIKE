@@ -6,11 +6,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>회원 탈퇴</title>
+	<title>DO LIKE - 회원 탈퇴</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#goBack {
@@ -36,13 +34,8 @@
     	border-color: #000000;
 	}
 	
-	#deleteTitle {
-		font-family: 'Gowun Dodum', sans-serif;
-	}
-	
 	.deleteMessage {
 		text-align: center;
-		font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
 </head>
@@ -95,7 +88,7 @@
                                    			<h5 class="deleteMessage">탈퇴시 모든 친구를 잃을 수 있습니다.</h5>
                                    			<h5 class="deleteMessage">정말로 두라이크를 떠나실건가요...?</h5>
                                    </div>
-                                   <input type="button" class="btn login-form__btn submit w-100 mb-2 mt-3" id="goBack" onclick="location.href='<%=contextPath%>/index2.jsp'" value="돌아가기">
+                                   <input type="button" class="btn login-form__btn submit w-100 mb-2 mt-3" id="goBack" onclick="location.href='<%=contextPath%>/main.do'" value="돌아가기">
                                    <input type="submit" class="btn login-form__btn submit w-100" id="deleteMemBtn" value="두라이크 떠나기" />
                                </form>
                                </div>

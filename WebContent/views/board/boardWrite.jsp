@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
-<% //String contextPath = request.getContextPath(); %>
+<% 
+	int cno = (int)request.getAttribute("cno"); 
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - Do Whatever You Like, Community</title>
+    <title>DO LIKE - 게시글 작성 </title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <style>
-	.nk-sidebar{
-		padding:30px;
-	}
-	.content-body{
-		padding:5px 0px 0px 30px;
-	}
+	
 	.tag-class{
 		width:10%;
 	}
@@ -35,44 +34,71 @@
 		width:200px; height:auto;
 	}
 </style>
-<link href="../../css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </head>
-
 <body>
 <div id="main-wrapper">
-	<%@ include file="../common/menuSideBar.jsp" %> 
-        <!--**********************************
-            Content body start
-        ***********************************-->
+<%@ include file="../common/menuSideBar.jsp" %> 
 	<div class="content-body">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">카테고리</li>
+                        <li class="breadcrumb-item">게시판</li>
+                        <li class="breadcrumb-item">게시글</li>
+                        <li class="breadcrumb-item active">게시글 생성</li>
+                    </ol>
+                </div>
+            </div>
         <div class="container-fluid">
 	 		<div class="row">
 	 			<div class="col-lg-10" style="margin: 0 auto; max-width:800px;">
 	 				<h1 style="text-align: center; color: #78c2ad">
 	 					<b>게시글 작성</b>
-	 					
 	 				</h1>
 	 				<br>
 	 				<div class="card">
 	 					<div class="card-body" style="background: rgb(248, 249, 250)">
-		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
-		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
+		 					<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo?cno=<%= cno %>" enctype="multipart/form-data" style="width:100%; max-width:1000px" >
+		 						<input type="hidden" name="writer" value="<%= loginUser.getUserId() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
-		 								<option class="dropdown-item" value="1">옵션1</option>
-		 								<option class="dropdown-item" value="2">옵션2</option>
-		 								<option class="dropdown-item" value="3">옵션3</option>
-		 								<option class="dropdown-item" value="4">옵션4</option>
+		 							<% if(cno == 1){ %>
+		 								<option class="dropdown-item" value="프로그래밍">프로그래밍</option>
+		 								<option class="dropdown-item" value="외국어">외국어</option>
+		 								<option class="dropdown-item" value="학교">학교</option>
+		 								<option class="dropdown-item" value="자기계발">자기계발</option>
+		 							<% } else if(cno ==2 ){ %>
+		 								<option class="dropdown-item" value="운동">운동</option>
+		 								<option class="dropdown-item" value="다이어트">다이어트</option>
+		 								<option class="dropdown-item" value="생활">생활</option>
+		 							<% } else if(cno ==3){ %>
+		 								<option class="dropdown-item" value="국내여행">국내여행</option>
+		 								<option class="dropdown-item" value="해외여행">해외여행</option>
+		 								<option class="dropdown-item" value="여행팁">여행팁</option>
+		 							<% } else if(cno ==4 ){ %>
+		 								<option class="dropdown-item" value="맛집">맛집</option>
+		 								<option class="dropdown-item" value="레시피">레시피</option>
+		 								<option class="dropdown-item" value="음료">음료</option>
+		 								<option class="dropdown-item" value="주전부리">주전부리</option>
+		 							<% } else if(cno ==5){ %>
+		 								<option class="dropdown-item" value="동물건강">동물건강</option>
+		 								<option class="dropdown-item" value="반려문화">반려문화</option>
+		 								<option class="dropdown-item" value="교육/훈련">교육/훈련</option>
+		 								<option class="dropdown-item" value="반려용품">반려용품</option>
+		 							<% } else if(cno ==6 ){ %>
+		 								<option class="dropdown-item" value="도메스틱">도메스틱</option>
+		 								<option class="dropdown-item" value="디자이너브랜드">디자이너브랜드</option>
+		 								<option class="dropdown-item" value="SPA브랜드">SPA브랜드</option>
+		 								<option class="dropdown-item" value="명품">명품</option>
+		 							<% } else { %>
+		 								<option class="dropdown-item" value="기타">기타</option>
+		 							<% } %>
 		 							</select>
 		 						
 			 						<div class="media pt-1">
 			 							<div class="media-body">
 			 								<h2 class="m-0" style="text-align:center">
-			 									<b><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></b>
+			 									<b><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="100"></b>
 			 							</div>
 			 						</div>
 			 					</div>	
@@ -87,21 +113,19 @@
 			 						<div class="select_img">
 			 							<img src="" class="Thum"/>
 			 						</div>
-			 						<!-- <img id="titleImg" width="150" height="120" class="pull-left"> -->
 			 							<div class="form-group" id="fileArea">
-			 									
 			 								<div class="fallback">
 			 									<input name="upfile" type="file" id="titleImg">
 			 								</div>
 			 							</div>
 			 					</div>
 			 					<div class="text-right m-t-15">
-			 					
+			 						<input type="hidden" value="<%= cno %>">
 			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
 			 							<i class="bi bi-pencil"></i>
 			 							글쓰기
 			 						</button>
-			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">
 			 							<i class="ti-close m-r-5 f-s-12"></i>
 			 							취소
 			 						</button>
@@ -110,95 +134,14 @@
 	 					</div>
 	 				</div> 
 	 			</div>
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		
-	 		<!--
-	 			<form id="insertForm" method="post" action="<%= contextPath %>/insert.bo" enctype="multipart/form-data" style="width:100%; max-width:1000px">
-		 			<%--<input type="hidden" name="writer" value="<%= loginUser.getNickName %>"> --%>
-		 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
-		 				<thread>
-		 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-		 						<!--<th colspan="2" style="background-color:rgb(228, 243, 240); text-align:center;">글쓰기 양식 </th>
-		 					</tr>
-		 				</thread>
-		 				<tbody>
-		 					<tr> <!-- 게시글리스트 테이블의 바디 -->
-		 						<!--<td class="tag-class">
-		 							<select name="tag">
-		 								<option value="1">옵션1</option>
-		 								<option value="2">옵션2</option>
-		 								<option value="3">옵션3</option>
-		 								<option value="4">옵션4</option>
-		 							</select>
-		 						</td>
-		 						<td class="title-class"><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"></td>
-		 					</tr>
-		 					<tr>
-		 						<td style="text-align:center">내용</td>
-		 						<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height:350px"></textarea></td>
-		 					</tr>
-		 					<tr>
-			 					<th>대표 이미지</th>
-			 					<td colspan="3"><img id="titleImg" width="150" height="120"></td>
-		 					</tr>
-		 					<tr>
-		 						<th>일반 이미지</th>
-			 					<td><img id="contentImg1" width="150" height="120"></td>
-			 					<td><img id="contentImg2" width="150" height="120"></td>
-			 					<td><img id="contentImg3" width="150" height="120"></td>
-		 					</tr>
-		 				</tbody>
-		 				
-		 			</table>
-		 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"/>
-		 			<div class="form-row float-right" id="fileArea">
-		 				<!--  <input type="file" class="btn" name="upFile" value="첨부파일"/>-->
-		 			<!--	<input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
-		 				<input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
-		 				<input type="file" name="file3" id="file3" onchange="loadImg(this, 2)">
-		 				<input type="file" name="file4" id="file4" onchange="loadImg(this, 2)">
-		 			</div>
-		 			<input type="button" class="btn btn-primary" value="뒤로가기" onclick="history.back();"/>
-	 			</form>	
-	 			 -->
 	 		</div>
-	 		 
         </div>
 	</div>
 </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
  	<%@ include file="../common/footer.jsp" %> 
  	<script>
- 		
 	 	$(function(){
 	 		$("#fileArea").hide();
-	 		/*
-	 		$("#titleImg").click(function(){
-				$("#file1").click();
-			});	
-	 		$("#contentImg1").click(function(){
-				$("#file2").click();
-			});	
-	 		$("#contentImg2").click(function(){
-				$("#file3").click();
-			});	
-	 		$("#contentImg3").click(function(){
-				$("#file4").click();
-			});	*/
 	 	});
 	 	$("#titleImg").change(function(){
 	 		if(this.files && this.files[0]){
@@ -209,20 +152,6 @@
 	 			reader.readAsDataURL(this.files[0]);
 	 		}
 	 	})
-	 	
-	 	/*
-	 	
-	 	function loadImg(this){
-	 		if(inputFile.files.length == 1){
-	 			var reader = new FileReader();
-	 			reader.readAsDataURL(this.files[0]);
-	 			reader.onload = function(data){
-	 				case 1: $("titleImg").attr("src", data.target.result);
-	 			}
-	 		}
-	 	}
-	 }
- 	*/
  	</script>
 </body>
 </html> 

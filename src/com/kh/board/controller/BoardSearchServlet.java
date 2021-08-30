@@ -42,12 +42,11 @@ public class BoardSearchServlet extends HttpServlet {
 		System.out.println("result : " + result);
 		
 		if(result > 0) {
-			//response.sendRedirect("find.bo");
 			request.setAttribute("findBoard", findBoard);
 			out.print(findBoard);
 			request.getRequestDispatcher("find.bo").forward(request, response);
 		}else {
-			request.setAttribute("msg", "검색할 게시글을 불러오는데 실패했습니다.");
+			request.setAttribute("errMsg", "검색할 게시글을 불러오는데 실패했습니다.");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

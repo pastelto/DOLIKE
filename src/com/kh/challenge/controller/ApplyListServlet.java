@@ -35,6 +35,7 @@ public class ApplyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int listCount;			
 		int currentPage;		
 		int startPage;			
@@ -44,7 +45,7 @@ public class ApplyListServlet extends HttpServlet {
 		int pageLimit;
 		int listLimit;
 		
-		listCount = new NoticeService().getListCount();
+		listCount = new ChallengeService().getApListCount();
 		
 		currentPage = 1;
 		

@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.category.model.vo.Category;
 import com.kh.challenge.model.service.ChallengeService;
 import com.kh.challenge.model.vo.ChallengeVote;
+import com.kh.follow.model.service.FollowService;
 
 /**
  * Servlet implementation class ChallengeInsertFormServlet
@@ -33,6 +35,10 @@ public class ChallengeInsertFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ChallengeVote> list = new ChallengeService().selectChallengeVoteList();
 		request.setAttribute("list", list);		
+		
+		ArrayList<Category> catList = new ArrayList<Category>();
+		catList = new FollowService().getCatList();
+		request.setAttribute("catList", catList);
 		
 		request.getRequestDispatcher("views/challenge/insertChallenge.jsp").forward(request, response);
 	}

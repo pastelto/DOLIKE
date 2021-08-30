@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.board.model.vo.*"%>
+<% 
+	ArrayList<Board> topList = (ArrayList<Board>)request.getAttribute("topList");
+	ArrayList<Category> cList = (ArrayList<Category>)request.getAttribute("cList");
+	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
+	
+	
+	System.out.println("전체 인기 게시글 :" + topList);
+	System.out.println("카테고리 리스트 :" + cList);
+	System.out.println("카테고리 별 인기게시글 : " + hashmap);
+	
+	Set<String> keySet = hashmap.keySet();
+	Iterator<String> keyInteger = keySet.iterator();
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,15 +32,50 @@
 <link rel="stylesheet"
 	href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
 </head>
+<script>
+
+	var popOnce = false;
+	var targetTitle = "_DoChanlleng";
+	var popupWidth = 900;
+	var popupHeight = 860;
+	var top = (screen.availHeight - popupHeight) / 2 - 10;
+	// 듀얼 모니터 기준
+	var left = (screen.availWidth - popupWidth) / 2;
+	if( window.screenLeft < 0){
+	left += window.screen.width*-1;
+	}
+	else if ( window.screenLeft > window.screen.width ){
+	left += window.screen.width;
+	}
+	var options = 'resizable=no, left=' + left + ',top=' + top +', width=' + popupWidth+ ',height=' + popupHeight +',menubar=no, status=no, toolbar=no, location=no, scrollbars=yes';
+
+	$(document).ready(function(){
+	if(!popOnce){
+
+	window.open("www.naver.com",targetTitle,options);
+	
+	}
+
+})
+
+</script>
 <style>
 .carousel-inner {
 	height: 15rem;
 }
-
+/* 
 .card-body {
 	flex: 0 0 auto;
-	padding: 1rem;
+	padding:50em;
 	border: none;
+	height: 30px;
+} */
+
+ #allBoardTop{
+	flex: 0 0 auto;
+	padding: 150px;
+	border: none;
+	height: 50px;
 }
 
 .carousel-inner {
@@ -52,10 +101,6 @@
 
 </style>
 <body>
-
-	<!--*******************
-        Preloader start
-    ********************-->
 	<div id="preloader">
 		<div class="loader">
 			<svg class="circular" viewBox="25 25 50 50">
@@ -64,26 +109,17 @@
             </svg>
 		</div>
 	</div>
-	<!--*******************
-	        Preloader end
-	    ********************-->
 	<div id="main-wrapper">
-		<!--**********************************
-            Sidebar start
-        ***********************************-->
 		<%@ include file="../views/common/menuSideBar.jsp"%>
-		<!--**********************************
-            Sidebar end
-        ***********************************-->
-
-		<!--**********************************
-            Content body start
-        ***********************************-->
 
 
 		<div class="content-body">
 			<!-- style="display: flex; flex: 0 0 auto; felx-direction: row; padding: 50px;" -->
-			<div class="container-fluid">
+			<!-- <div class="container-fluid"> -->
+			<!-- 가장 상단 캐러셀 -->
+			<div class="row">
+			<div class="container-fluid" style="height: 50%;">
+			<!-- 상단 캐로셀 -->
 			<div class="col-12">
 				<div class="row">
 					<div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
@@ -142,56 +178,116 @@
 					</div>
 				</div>
 			</div>
+			</div>
 			
-			
-			<!-- ************************************************* -->
-			
-			
-			<div class="row" style="margin-bottom: 13%;">
+			</div>
+	
+	<!-- ----------------------------------------------------------------------------------------------------------  -->
+	
+	<div class="row">
+		<div class="container-fluid">
+			<!-- 상단 캐로셀 -->
 			<div class="col-12">
+    <!-- -----------------------------------------------------------------------------------  -->
+			
 			<div class="row">
-					<!-- style="min-height: 800px; width: 100%; height: 50%; padding-top: 10%; padding-right: 10%; padding-left: 10%;"> -->
-
-					<div class="col-md-6" style="width: 10%; padding-right: 30px; padding-left: 50px;">
+			<div class="container-fluid" style="height: 50%;">
+			<!-- 상단 캐로셀 -->
+			<div class="col-12">
+				<div class="row">
+					
+				<div class="col-6">	
+					
+					
+					
 						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title" style="color: #f3969a">
-									<b>전체 인기 게시글</b>
-								</h4>
-								<!-- Nav tabs -->
-								<div class="custom-tab-2">
-<!-- 									<ul class="nav nav-tabs mb-3">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#home1">카테고리1</a></li>
-									</ul> -->
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home2"
-											role="tabpanel">
-											<div class="p-t-15">
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<h4>This is home title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
+			   		
+			   		
+			   		
+			   		
+			   <!-- 메인 전체 인기게시글  상단 게시글 카드 2분할 -->
+			   	<div class="row">
+			   		
+			   		
+				   	<% for(int i=0;i < 2;i++){ %>
+				   	<div class="col-6">
+						<div class="card">
+						
+							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
+											<div class="row">
+												<div class="col-6 border-right-1">
+													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+												</span>
+											</div>
+											<div class="col-6">
+												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
+												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+												</span>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+						
 						</div>
 					</div>
+					<%}%>
 
-					<div class="col-md-6" id="innerDiv" style="width: 40%">
+			   </div>
+		
+			  	 <!-- 메인 하단 게시글 카드 2분할 -->
+				<div class="row">
+				   	<% for(int i=2;i < 4;i++){ %>
+				   	<div class="col-6" style="margin-right: 0;">
 						<div class="card">
+						
+							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><i id="dia" class="icon-diamond gradient-2-text"></i><b><h5 id="<%=i%>nick">이미지</h5></b></span>
+									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
+											<div class="row">
+												<div class="col-6 border-right-1">
+													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
+													<p id="<%=i%>fl"><%= topList.get(i).getNickName() %> </p>
+												</span>
+											</div>
+											<div class="col-6">
+												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
+												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+					<%}%>
+			  	 </div>
+			</div>
+		</div>				
+					
+			
+					
+					
+					
+					
+					
+		
+					<div class="col-6" id="innerDiv" style="width: 40%">
+						<!-- <div class="card" style="width: 90%;">
+							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
+							src="resources/images/submit.png" alt="Third slide">
+						</div> -->
+
+												<div class="card">
 							<div class="card-body">
 								<h4 class="card-title" style="color: #f3969a">
 									<b>카테고리별 인기 게시글</b>
@@ -200,26 +296,21 @@
 								<div class="custom-tab-2">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#home1">카테고리1</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#profile1">카테고리2</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#contact1">카테고리3</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리4</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리5</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리6</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#message1">카테고리7</a></li>
-
+											data-toggle="tab" href="#1"><%= cList.get(0).getCategoryName() %></a></li>
+										<% for(int i = 1; i < cList.size(); i++){ %>
+										<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#<%= cList.get(i).getCategoryNo() %>">
+										<%= cList.get(i).getCategoryName() %></a>
+										</li>
+										<% } %>
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane fade show active" id="home1"
-											role="tabpanel">
+								<%-- 	<% while(keyInteger.hasNext()){ %>  
+									<% String key = keyInteger.next();%>
+									<% ArrayList<Board> eList = hashmap.get(key); %> --%>
+										<%-- <div class="tab-pane fade show active" id="<%= key %>" --%>
+										<div class="tab-pane fade show active" id="home1" role="tabpanel">
 											<div class="p-t-15">
-												<h4>This is home title</h4>
+												<h4>This is profile title</h4>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind
 													texts. Separated they live in Bookmarksgrove.</p>
@@ -264,17 +355,35 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
+						
 					</div>
-				<div>
+				</div>
 			</div>
-		</div>
-	</div>
+			</div>
+			
+			</div>
+			
+			
+			
+			
+		
+		
+		
+		
+		
+
+				
+			</div>
+			
+			</div>
+	
+	
+		<!-- ----------------------------------------------------------------------------------------------------------  -->
 	</div>
 </div>
 
 </div>
-
 	<%@ include file="./views/common/footer.jsp"%>
 
 

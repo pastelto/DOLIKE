@@ -47,44 +47,25 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println("savePath : " + savePath);
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); //명시하지 않으면 디폴트로 생성해주는게 있다고 함
-			
+			int cno = Integer.parseInt(multiRequest.getParameter("cno"));
 			String tag = multiRequest.getParameter("tag");
 			String title = multiRequest.getParameter("boardTitle");
 			String content = multiRequest.getParameter("boardContent");
+			System.out.println("cno : "+cno);
 			System.out.println("tag : " + tag);
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
 			
-			String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+			String nickName = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 			
 			
 			Board b = new Board();
+			b.setCategoryNo(cno);
 			b.setTagName(tag);
 			b.setBoardTitle(title);
 			b.setBoardContent(content);
-			b.setNickName(userId);
-			/*
-			ArrayList<Attachment> fileList = new ArrayList<>();
+			b.setNickName(nickName);
 			
-			for(int i=1; i<=4; i++) {
-				String name = "file" + i;
-				
-				if(multiRequest.getOriginalFileName(name) != null) {
-					String originName = multiRequest.getOriginalFileName(name);
-					String changeName = multiRequest.getFilesystemName(name);
-					System.out.println("originName : "+originName);
-					System.out.println("changeName : "+changeName);
-						
-					Attachment at = new Attachment();
-					at.setFilePath(savePath);
-					at.setOriginName(originName);
-					at.setChangeName(changeName);
-					
-					fileList.add(at);
-						
-				}
-			}
-			*/
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("upfile") != null) {
@@ -104,35 +85,21 @@ public class BoardInsertServlet extends HttpServlet {
 			int result = new BoardService().insertBoard(b, at);
 			
 			if(result  > 0) {
-				response.sendRedirect("list.bo");
+				request.setAttribute("cno", cno);
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
-				/*
+				response.sendRedirect("list.bo?cno="+cno);
 				
-				response.sendRedirect("list.bo");
-				File successFile = new File(savePath+at.getChangeName());
-				System.out.println("successFile : " + successFile );
-				*/
 			}else {
-				//for(int i =0; i<fileList.size(); i++) {
+				
 				if(at != null) {
 					File failedFile = new File(savePath+ at.getChangeName());
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "게시글 등록 실패");
+				request.setAttribute("errMsg", "게시글 등록 실패");
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 			}
-				/*
-				 * if(at != null) {
-					File failedFile = new File(savePath+at.getChangeName());
-					failedFile.delete();
-					
-					request.setAttribute("msg", "게시글 등록 실패");
-					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-					view.forward(request, response);
-				*/
-			
 			
 		}
 		

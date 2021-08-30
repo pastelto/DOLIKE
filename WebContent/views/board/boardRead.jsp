@@ -4,7 +4,10 @@
 	Board b = (Board)request.getAttribute("b");
 	Attachment at = (Attachment)request.getAttribute("at");
 	Reply r = (Reply)request.getAttribute("r");
+	int cno = b.getCategoryNo();
+	System.out.println("cno read : " + cno);
 %>  
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,19 +15,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DO LIKE - Do Whatever You Like, Community</title>
-    <link href="../../css/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>DO LIKE - 게시글 </title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<style>
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-			padding:5px 0px 0px 30px;
-		}
 		#updateBtn, #deleteBtn, #addReply, #returnBtn{
 			color: #fff;
 	    	background-color: #78c2ad;
@@ -69,6 +63,16 @@
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	
 	<div class="content-body">
+	<div id="bodyScroll" style="overflow:auto; min-height:1200px;">
+			<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">카테고리</li>
+                        <li class="breadcrumb-item">게시판</li>
+                        <li class="breadcrumb-item active">게시글</li>
+                    </ol>
+                </div>
+            </div>
 		<br>
 		<div class="container-fluid">
 			<div class="row">
@@ -85,7 +89,6 @@
 										<h2 class="m-0" style="text-align: center">
 										<!-- 글 제목 -->
 											<%= b.getBoardTitle() %>
-											
 										</h2>
 										<small class="float-left" style="text-align: center">태그 : <%= b.getTagName() %></small>
 									</div>
@@ -96,7 +99,7 @@
 										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+											<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
 									</div>
 								</div>
 								<hr>
@@ -104,19 +107,16 @@
 									<h6 class="p-t-15">
 										<i class="fa fa-download mb-2"></i>
 										<label for="titleImg">이미지</label>
-										<!-- <span>첨부파일</span> -->
 									</h6>
 									<% if(at != null){ %>
 									<div class="row m-b-30">
 										<div class="col-auto">
 											<img src="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="Thum" >
-											<!-- <a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a> -->
 										</div>
 									</div>
 									<% }else{ %>
 									<span>등록된 첨부파일이 없습니다.</span>
 									<% } %>
-									
 								</div>
 								<br>
 								<hr>
@@ -141,10 +141,10 @@
 									<% } %>
 									</div>
 								</div>
-								
 								<div class="bottom-btns" >
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+									<input type="hidden" name="cno" value="<%= b.getCategoryNo() %>">
 									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
@@ -153,7 +153,8 @@
 										</div>
 									<% }%>
 									</form>
-									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/list.bo'">돌아가기</button>
+									<br>
+									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="history.back();">돌아가기</button>
 								</div>
 							</div>
 						</div>
@@ -161,7 +162,6 @@
 				</div>
 			</div>
 		</div>
-	
 	<script>
 		$("#titleImg").change(function(){
 	 		if(this.files && this.files[0]){
@@ -178,13 +178,34 @@
 		}
 			
 		function deleteBoard(){
-			if(confirm('게시글을 삭제하시겠습니까 ?')){
-				$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
-				$("#postForm").submit();
-			} 
-			return;
-		}
+			  swal.fire({
+	                title: '확인', 
+	                text: "정말 쪽지를 삭제하시겠습니까?", 
+	                type: 'warning', 
+	                confirmButtonText: '삭제', 
+	                showCancelButton: true,     
+	                cancelButtonText: '취소', 
+	                cancelButtonColor: "#f3969a",
+	                confirmButtonColor: "#78c2ad"
+	            }).then(function(result) { 
+	                if(result.value) {             
+	                
+	                $("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
+					swal.fire(
+							{title: '삭제',
+							 text: '성공적으로 삭제되었습니다.',
+							 type: 'success',
+							 confirmButtonColor: "#78c2ad"}).then(function(result){
 			
+						$("#postForm").submit();
+					});
+	                
+	            } else if(result.dismiss === 'cancel') { 
+	                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+	         
+	            }
+	        });
+			}
 		$(function(){
 			selectReplyList(); 
 			$('#addReply').click(function(){
@@ -234,10 +255,8 @@
 			})
 		}
 	</script> 
-		 </div> 
-        <!--**********************************
-            Content body end
-        ***********************************-->
+	</div>
+</div> 
 	<%@ include file="../common/footer.jsp" %>
 </div>
 </body>

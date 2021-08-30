@@ -63,14 +63,10 @@
 		background: linear-gradient(90deg, rgba(158,0,255,1) 0%, rgba(229,253,29,1) 50%, rgba(69,252,188,1) 100%);
 	    -webkit-background-clip: text;
 	    -webkit-text-fill-color: transparent;
-
-
-
 	}
 </style>
 </head>
 <body>
-<!-- 확인용! -->
 	<div id="main-wrapper">
 		<%@ include file="../common/menuSideBar.jsp"%>
 
@@ -246,7 +242,7 @@
 						confirmButtonBorder: "none",
 						confirmButtonText: '돌아가기',
 					}).then((result) => {
-						location.href="<%= contextPath %>/index2.jsp";
+						location.href="<%= contextPath %>/main.do";
 					})
 				
 			}else{

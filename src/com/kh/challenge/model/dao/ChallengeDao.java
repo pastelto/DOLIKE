@@ -93,6 +93,58 @@ public class ChallengeDao {
 		return listCount;
 	}
 
+	public int getApListCount(Connection conn) {
+		
+		int listCount = 0;
+		Statement stmt = null; 
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("getapListCount");
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+
+			if (rset.next()) {
+				listCount =  rset.getInt(1);  
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		System.out.println(listCount +" listcount dao");
+		return listCount;
+	}
+	
+	public int getMyApListCount(Connection conn, String loginUser) {
+		int listCount = 0;
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("getmaListCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loginUser);
+			
+			rset = pstmt.executeQuery(); 
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(listCount +" listcount dao");
+		return listCount;
+	}
 
 	public ArrayList<Challenge> selectList(Connection conn) {
 
@@ -373,24 +425,29 @@ public class ChallengeDao {
 		return c;
 	}
 	
-	public ArrayList<Challenge> selectMyEndChallenge(Connection conn, String loginUser) {
+	public ArrayList<Challenge> selectMyEndChallenge(Connection conn, PageInfo pi, String loginUser) {
 		
 		ArrayList<Challenge> list = new ArrayList<Challenge>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		/*
-		 * myEndChallenge = SELECT CH_TITLE, CH_START, CH_END 
-		 * FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE CH_USER=? AND CH_STATUS = 'N' 
-		 * ORDER BY CH_END DESC
+		 *  SELECT *
+		 *  FROM (SELECT ROWNUM RNUM, A.* 
+		 *  FROM (SELECT CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME FROM CHALLENGE 
+		 *  WHERE CH_STATUS = 'N' AND CH_USER=? ORDER BY CH_END DESC) A)
+		 *  WHERE RNUM BETWEEN ? AND ?
 		 */
 
-		String sql = prop.getProperty("myEndChallenge");
-		System.out.println(sql);
+		String sql = prop.getProperty("myEndChallenge");		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
+		int endRow = startRow + pi.getListLimit() - 1;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, loginUser);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();			
 			
@@ -617,6 +674,52 @@ public class ChallengeDao {
 
 		return list;
 	}
+	
+	public ArrayList<ChallengeApply> selectMyApplyList(Connection conn, PageInfo pi, String loginUser) {
+		ArrayList<ChallengeApply> list = new ArrayList<ChallengeApply>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("myApplyList");
+		/*
+		 *  SELECT * 
+		 *  FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT AP_NO, AP_BODY, AP_DATE, AP_USER, C.CATEGORY_NAME 
+		 *  FROM CHALLENGE_APPLY P JOIN CATEGORY C ON P.CATEGORY_NO = C.CATEGORY_NO 
+		 *  WHERE AP_USER=? ORDER BY AP_DATE DESC) A) 
+		 *  WHERE RNUM BETWEEN ? AND ?
+		 */
+
+		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
+		int endRow = startRow + pi.getListLimit() - 1;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loginUser);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				list.add(new ChallengeApply(rset.getInt("AP_NO"), 
+											rset.getString("AP_BODY"),
+											rset.getDate("AP_DATE"),
+											rset.getString("AP_USER"), 
+											rset.getString("CATEGORY_NAME")));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
 
 	public ArrayList<ChallengeVote> selectChallengeVoteList(Connection conn) {
 		ArrayList<ChallengeVote> list = new ArrayList<>();
@@ -874,6 +977,11 @@ public class ChallengeDao {
 				
 		return result;
 	}
+
+	
+
+
+
 
 
 

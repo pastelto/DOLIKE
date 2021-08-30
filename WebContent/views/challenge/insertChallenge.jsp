@@ -5,6 +5,7 @@
 	Challenge c = new Challenge();	
 	ChallengeAttachment at = new ChallengeAttachment();
 	ArrayList<ChallengeVote> list = (ArrayList<ChallengeVote>)request.getAttribute("list");
+	ArrayList<Category> catList = (ArrayList<Category>) request.getAttribute("catList");
 	System.out.println(list);
 	int voteCount = 0;
 	
@@ -39,9 +40,12 @@
 	color: #f3969a;
 	background-color: #fff;
 }
-
-#category {
-	display: block;
+#margin-delete{
+	margin-top:0 !important;
+}
+#categoryT , #categoryNo{
+	margin-left:10px;
+	margin-right:30px;
 	padding-top: 0.375rem;
 	padding-right: 2.25rem;
 	padding-bottom: 0.375rem;
@@ -53,6 +57,12 @@
 	border: 1px solid #ced4da;
 	border-radius: 0.4rem;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#apList, #voteList{
+	color:gray !important;
+}
+#apList:hover, #voteList:hover{
+	font-weight: bold;
 }
 </style>
 </head>
@@ -74,46 +84,40 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="email-left-box">
-									<a href="email-compose.html" class="btn btn-primary btn-block">Compose</a>
+									<a href="<%= request.getContextPath() %>/challengeMain.ch" id="backBtn" class="btn btn-primary btn-block">뒤로가기</a>
 									<div class="mail-list mt-4">
-										<a href="email-inbox.html"
-											class="list-group-item border-0 text-primary p-r-0"><i
-											class="fa fa-inbox font-18 align-middle mr-2"></i> <b>Inbox</b>
-											<span class="badge badge-primary badge-sm float-right m-t-5">198</span>
-										</a> <a href="#" class="list-group-item border-0 p-r-0"><i
-											class="fa fa-paper-plane font-18 align-middle mr-2"></i>Sent</a>
-										<a href="#" class="list-group-item border-0 p-r-0"><i
-											class="fa fa-star-o font-18 align-middle mr-2"></i>Important
-											<span class="badge badge-danger badge-sm float-right m-t-5">47</span>
-										</a> <a href="#" class="list-group-item border-0 p-r-0"><i
-											class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a><a
-											href="#" class="list-group-item border-0 p-r-0"><i
-											class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+										<a href="<%= request.getContextPath() %>/applyList.ch"
+											class="list-group-item border-0 text-primary p-r-0" id="apList">
+											<i class="fa fa-inbox font-18 align-middle mr-2"></i> 신청리스트
+										</a> 
+										<a href="<%= request.getContextPath() %>/challengeVote.ch" class="list-group-item border-0 p-r-0" id="voteList"><i
+											class="fa fa-paper-plane font-18 align-middle mr-2"></i>챌린지 투표
+										</a>
+						
 									</div>
 								</div>
 								<div class="email-right-box">									
-									<div class="compose-content mt-5">
-										<form action="<%=request.getContextPath()%>/challengeInsert.ch" method="post" enctype="multipart/form-data">
+									<div class="compose-content mt-5" id="margin-delete">
+										<form action="<%=request.getContextPath()%>/challengeInsert.ch" method="post" enctype="multipart/form-data" id="inChForm">
 											<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지 타이틀</label> 
-													<select class="form-select" id="title"  name="chTitle">
+													<select class="form-select" id="categoryT"  name="chTitle">
 														<%for(int i = 0; i <list.size(); i++) {%>
 														<option value="<%=list.get(i).getChTitle()%>"><%=list.get(i).getChTitle()%></option>
 														<%System.out.println(list.get(i).getChTitle());%>														
 														<%} %>
 													</select>
 											</div>
-											<div class="compose-content mt-5">
+											<div class="compose-content mt-5" id="margin-delete">
 												<div class="form-group">
 													<textarea class="textarea_editor form-control bg-light"
 														rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
 												</div>												
-												<div class="form-group"> 카테고리 번호													
+												<div class="form-group"> 												
 													<label for="exampleSelect1" class="form-label mt-4">카테고리 번호	</label> 
 													<select class="form-select" id="categoryNo"  name="categoryNo">
-														<%for(int i = 0; i <list.size(); i++) {%>
-														<option value="<%=list.get(i).getCategoryNo()%>"><%=list.get(i).getCategoryNo()%></option>	
-														<%System.out.println(list.get(i).getCategoryNo()); %>													
+														<%for(int i = 0; i<catList.size(); i++) {%>
+															<option value="<%=catList.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
 														<%} %>
 													</select>
 												</div>
@@ -122,7 +126,7 @@
 														<div class="row form-material">
 															<div class="col-md-6" >
 																<label class="m-t-20">투표 시작 날짜</label> 
-																<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="mdate">
+																<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="sdate">
 															</div>
 														</div>
 														<div class="row form-material">
@@ -143,13 +147,13 @@
 												<div class="text-left m-t-15">
 													<button
 														class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10"
-														type="submit" id="applyBtn">
+														type="button" id="applyBtn" onclick="inChBtn();">
 														<i class="fa fa-paper-plane m-r-5"></i> 신청하기
 													</button>
 													<button
 														class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20"
 														type="reset" id="resetBtn">
-														<i class="ti-close m-r-5 f-s-12"></i> 취소하기
+														<i class="ti-close m-r-5 f-s-12"></i> 재작성
 													</button>
 												</div>
 											</div>
@@ -164,5 +168,31 @@
 			<%@ include file="../common/footer.jsp"%>
 		</div>
 	</div>
+	
+<script>
+	function inChBtn(){	
+		
+			Swal.fire({
+				 text: '챌린지를 등록하시겠습니까?',  
+	             icon: 'question',
+	             showCancelButton: true,  
+	             cancelButtonColor: "#f3969a",
+	             confirmButtonColor: "#78c2ad",
+	             confirmButtonText: '등록',               	                           
+	             cancelButtonText: '취소'                
+            }) .then((result) =>{ 
+                if(result.value) {                              
+                	$("#inChForm").submit();         
+	            } else if(result.dismiss === 'cancel') {    
+	            	Swal.fire({
+						 text: '취소되었습니다',
+						 icon: 'error',
+						 confirmButtonColor: "#78c2ad"
+					});
+   				}  
+            });         	  
+		}	
+	
+</script>	
 </body>
 </html>

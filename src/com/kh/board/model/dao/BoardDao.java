@@ -62,7 +62,7 @@ public class BoardDao {
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, int cno) {
 		ArrayList<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -74,32 +74,19 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
+			pstmt.setInt(1, cno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				/*
-				Board b = new Board();
-				b.setBoardNo(rset.getInt("B.BOARD_NO"));
-				b.setCategoryNo(rset.getInt("B.CATEGORY_NO"));
-				b.setBoardTitle(rset.getString("B.BOARD_TITLE"));
-				b.setNickName(rset.getString("B.USER_ID"));
-				b.setBoardDate(rset.getDate("B.BOARD_DATE"));
-				b.setViews(rset.getInt("B.VIEWS"));
-				//b.setTitleImg(rset.getString("T.B_NEWNAME"));
-				list.add(b);
-				*/
-				
 				list.add(new Board(rset.getInt("BOARD_NO"),
 									rset.getString("TAG"),
 									rset.getInt("CATEGORY_NO"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("USER_ID"),
+									rset.getString("NICKNAME"),
 									rset.getDate("BOARD_DATE"),
 									rset.getInt("VIEWS")
-									
 									));
 				
 			}
@@ -125,6 +112,7 @@ public class BoardDao {
 			pstmt.setString(2, b.getTagName());
 			pstmt.setString(3, b.getBoardTitle());
 			pstmt.setString(4, b.getBoardContent());
+			pstmt.setInt(5, b.getCategoryNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -180,7 +168,8 @@ public class BoardDao {
 							rset.getString("BOARD_TITLE"),
 							rset.getDate("BOARD_DATE"),
 							rset.getString("BOARD_CONTENT"),
-							rset.getInt("VIEWS")
+							rset.getInt("VIEWS"),
+							rset.getInt("CATEGORY_NO")
 							);
 			}
 		} catch (SQLException e) {
@@ -323,9 +312,7 @@ public class BoardDao {
 		String sql = prop.getProperty("insertAttachment");
 		
 		try {
-			//for(int i=0; i<fileList.size(); i++) {
-				//Attachment at = fileList.get(i);
-				
+
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, at.getChangeName());
 				pstmt.setString(2, at.getOriginName());
@@ -430,9 +417,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, findBoard );
-					
-			//pstmt.setString(1, findBoard );
-			
+
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) { 
@@ -454,10 +439,7 @@ public class BoardDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("findBoard");
-		
-		//int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-		//int endRow = startRow + pi.getBoardLimit()-1;
-		
+	
 		try {
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1, startRow);

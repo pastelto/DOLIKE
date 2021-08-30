@@ -37,8 +37,6 @@ public class EndedChallengeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-	
-	
 		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();						
 		request.setAttribute("fileList", fileList);
 		
@@ -66,7 +64,7 @@ public class EndedChallengeServlet extends HttpServlet {
 				pageLimit = 5;
 				
 				// * rpLimit : 한 페이지에 보여질 게시글 최대 갯수
-				listLimit = 5;
+				listLimit = 3;
 				
 				// * maxPage : 총 페이지 수
 				maxPage = (int)Math.ceil((double)listCount/listLimit);

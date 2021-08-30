@@ -48,12 +48,11 @@ public class ApplyChallengeServlet extends HttpServlet {
 		int result = new ChallengeService().insertApply(ca);
 
 		if (result > 0) {
-			request.getSession().setAttribute("msg", "신청이 완료되었습니다.");
-			response.sendRedirect("index2.jsp");
+			request.getSession().setAttribute("msg", "이달의 챌린지가 될 때까지 지켜봐주세요!");
+			response.sendRedirect("challengeMain.ch");
 
 		} else {
-			request.setAttribute("msg", "신청 실패");
-
+			request.setAttribute("errMsg", "신청 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

@@ -131,18 +131,18 @@
 			var noTitle = "<%= "제목이 없습니다."  %>";
 			var noContent = "<%= "쪽지 내용이 없습니다." %>";
 			
-			if(recvId.val() != ""){
-			} else {
-					recvId.attr("value",  noRecvId);
-				if(messageTitle.val() != ""){
-				} else{
-					messageTitle.attr("value" , noTitle);
-						if(messageContent.value != ""){	
-						} else{
-							messageContent.value = noContent;
-						}	
-				}
+			
+			if(recvId.val() == ""){ <%-- 받는 아이디가 비어있을 경우 --%>
+				recvId.attr("value",  noRecvId); <%-- 자기 자신에게 전송 --%>
+			} 
+			
+			if(messageTitle.val() == ""){ <%-- 제목 비어있을 경우 --%>
+				messageTitle.attr("value" , noTitle);
 			}
+			
+			if(messageContent.value == ""){	<%-- 내용 비어있을 경우 --%>
+				messageContent.value = noContent;
+			}	
 			console.log("recvId?? " + recvId.val)
 			console.log("noTitle?? " + noTitle.val)
 			console.log("messageContent?? " + messageContent.value) 

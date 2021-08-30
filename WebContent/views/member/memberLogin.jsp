@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Lobster&display=swap&family=Gowun+Dodum&display=swap" rel="stylesheet">
-	<title>로그인</title>
+	<title>DO LIKE - 로그인</title>
 	<style>
 	#loginBtn1 {
     	color: #fff;
@@ -70,7 +68,7 @@
 			            <div class="row justify-content-center h-100">
 			                <div class="col-xl-6">
 			                    <div class="form-input-content">
-			                        <div class="card login-form mb-0">
+			                        <div class="card login-form mb-0 mt-5">
 			                            <div class="card-body pt-5">
 			                                <a class="text-center"> <h2 id="loginTitle">Login</h2></a>
 			                                <form class="mt-5 mb-5 login-input" action="<%= request.getContextPath() %>/login.me" method="post" onsubmit="return loginValidate();">
