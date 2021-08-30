@@ -64,7 +64,6 @@
 					<tr style="background-color: #78c2ad; color: white;">
 						<th>#</th>
 						<th>신청내용</th>
-						<th>카테고리</th>
 						<th>신청유저</th>
 						<th>날짜</th>
 					</tr>
@@ -79,7 +78,6 @@
 				 		<tr>
 				 			<td><%= ca.getApNo() %></td>
 							<td><%= ca.getContent() %></td>
-							<td><%= ca.getCategoryNo() %></td>
 							<td><%= ca.getApUser() %></td>
 							<td><%= ca.getApDate() %></td>
 				 		</tr>

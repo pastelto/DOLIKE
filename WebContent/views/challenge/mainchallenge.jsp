@@ -3,7 +3,7 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
-	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");	
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 %>
 <!DOCTYPE html>
 <html>
@@ -192,8 +192,6 @@ a {
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">
 							<div class="card" style="width: 80%;">
-								<!--                             <div class="card-body"> -->
-
 								<div class="bootstrap-carousel" style="height: 5rem;">
 									<div id="carouselExampleIndicators" class="carousel slide"
 										data-ride="carousel">
@@ -263,7 +261,7 @@ a {
 															</h4></div> <br>
 															<div>									
 															<ul class="challenge-period">
-																<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+																<li>진행일정 : <%=list.get(i).getStart().substring(2,10)%> ~ <%=list.get(i).getEnd().substring(2,10)%></li>
 																<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
 															</ul>
 															</div>

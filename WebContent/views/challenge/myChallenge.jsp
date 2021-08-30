@@ -1,11 +1,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.challenge.model.vo.*, java.util.Date, java.text.SimpleDateFormat"%>
+	import="java.util.ArrayList, com.kh.challenge.model.vo.*, java.util.Date"%>
 <%
 	Challenge c = (Challenge)request.getAttribute("c");
 	ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -230,7 +229,7 @@ a {
 													</h4></div> <br>
 													<div>									
 													<ul class="challenge-period">
-														<li>진행일정 : <%=c.getStart()%> ~ <%=c.getEnd()%></li>
+														<li>진행일정 : <%=c.getStart().substring(2,10)%> ~ <%=c.getEnd().substring(2,10)%></li>
 														<li>카테고리 : <%=c.getCategoryTitle()%></li>
 													</ul>
 													</div>
