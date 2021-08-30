@@ -15,6 +15,7 @@ import java.util.Properties;
 
 
 import com.kh.admin.model.vo.AdminPageInfo;
+import com.kh.board.model.vo.Board;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -221,7 +222,76 @@ public class AdminDao {
 		
 		return listCount;
 	}
-//보드 내용 끌어써와야함
+
+
+	public int getBoardListCount(Connection conn) {
+
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getBoardListCount");
+		System.out.println("갯 리스트 카운트"+sql);
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) { // 결과 값이 있으면 화면에 전체를 출력한다.
+				listCount = rset.getInt(1); // 컬럼명을 적어주던가 , 숫자를 적어주면 된다.(컬럼명을 적는 것이 좋음)
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		System.out.println("어드민다오에서 listCount의 값은 : " + listCount);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> adminBoardList(Connection conn, AdminPageInfo amb) {
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("adminBoardList");
+		System.out.println("쿼리문 : " + sql);
+		int startRow = (amb.getCurrentPage()-1)*amb.getAdminLimit()+1;
+		int endRow = startRow + amb.getAdminLimit()-1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Board(rset.getInt("BOARD_NO"),
+						rset.getString("TAG"),
+						rset.getInt("CATEGORY_NO"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("USER_ID"),
+						rset.getDate("BOARD_DATE"),
+						rset.getInt("VIEWS")
+						));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("다오에서 list 값 : " + list);
+		return list;
+	}
 
 
 }
