@@ -304,13 +304,13 @@
 										<% } %>
 									</ul>
 									<div class="tab-content">
-									<% while(keyInteger.hasNext()){ %>  
+								<%-- 	<% while(keyInteger.hasNext()){ %>  
 									<% String key = keyInteger.next();%>
-									<% ArrayList<Board> eList = hashmap.get(key); %>
-										<div class="tab-pane fade show active" id="<%= key %>"
-											role="tabpanel">
+									<% ArrayList<Board> eList = hashmap.get(key); %> --%>
+										<%-- <div class="tab-pane fade show active" id="<%= key %>" --%>
+										<div class="tab-pane fade show active" id="home1" role="tabpanel">
 											<div class="p-t-15">
-												<h4><%=    %></h4>
+												<h4>This is profile title</h4>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind
 													texts. Separated they live in Bookmarksgrove.</p>
