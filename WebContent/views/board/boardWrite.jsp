@@ -98,7 +98,7 @@
 			 							<i class="bi bi-pencil"></i>
 			 							글쓰기
 			 						</button>
-			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">
 			 							<i class="ti-close m-r-5 f-s-12"></i>
 			 							취소
 			 						</button>
@@ -125,13 +125,6 @@
 	 			reader.readAsDataURL(this.files[0]);
 	 		}
 	 	})
-	 	<%-- 
-	 	function subForm(){
-	 		var cno = "<%= cno %>";
-	 		alert(cno);
-	 		location.href="<%= contextPath %>/insert.bo?cno="+cno;
-	 	}*/ --%>
-	 	
  	</script>
 </body>
 </html> 

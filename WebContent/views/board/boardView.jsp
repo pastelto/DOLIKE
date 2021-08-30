@@ -9,7 +9,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int cno = (int)request.getAttribute("cno");
-	System.out.println("boardVIew : "+cno);
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
