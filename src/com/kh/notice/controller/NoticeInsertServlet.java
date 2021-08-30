@@ -34,7 +34,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String topView = request.getParameter("topView"); //추가함
+		String topView = request.getParameter("topView"); 
 		
 		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
