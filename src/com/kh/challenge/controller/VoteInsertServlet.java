@@ -56,7 +56,7 @@ public class VoteInsertServlet extends HttpServlet {
 
 		if (result > 0) {
 			request.getSession().setAttribute("adMsg", "투표 등록이 완료되었습니다.");
-			response.sendRedirect("index2.jsp");
+			response.sendRedirect("challengeVote.ch");
 			System.out.println("투표 등록 성공!");
 		} else {
 			request.setAttribute("errMsg", "투표 등록 살패");
