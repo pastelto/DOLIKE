@@ -130,5 +130,25 @@ public class MemberService {
 		return result;
 	}
 
+
+	public Member findUserId(String userName, String phone) {
+		Connection conn = getConnection();
+		
+		Member mem = new MemberDao().findUserId(conn, userName, phone);
+		close(conn);
+		
+		return mem;
+	}
+
+
+	public Member findPwd(String userId, String userName, String phone) {
+		Connection conn = getConnection();
+		
+		Member mem = new MemberDao().findPwd(conn, userId, userName, phone);
+		close(conn);
+		
+		return mem;
+	}
+
 	
 }
