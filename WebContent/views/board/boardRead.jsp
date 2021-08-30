@@ -4,8 +4,10 @@
 	Board b = (Board)request.getAttribute("b");
 	Attachment at = (Attachment)request.getAttribute("at");
 	Reply r = (Reply)request.getAttribute("r");
-	
+	int cno = b.getCategoryNo();
+	System.out.println("cno read : " + cno);
 %>  
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,6 +17,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시글 </title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<style>
 		#updateBtn, #deleteBtn, #addReply, #returnBtn{
 			color: #fff;
@@ -96,9 +99,7 @@
 										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										
 											<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
-									
 									</div>
 								</div>
 								<hr>
@@ -106,7 +107,6 @@
 									<h6 class="p-t-15">
 										<i class="fa fa-download mb-2"></i>
 										<label for="titleImg">이미지</label>
-										<!-- <span>첨부파일</span> -->
 									</h6>
 									<% if(at != null){ %>
 									<div class="row m-b-30">
@@ -144,7 +144,8 @@
 								<div class="bottom-btns" >
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
-									<% if (loginUser != null && loginUser.getNickName().equals(b.getNickName())){ %>
+									<input type="hidden" name="cno" value="<%= b.getCategoryNo() %>">
+									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" class="btn btn-sm" type="button" onclick="updateForm();">수정 </button>
@@ -161,7 +162,6 @@
 				</div>
 			</div>
 		</div>
-	
 	<script>
 		$("#titleImg").change(function(){
 	 		if(this.files && this.files[0]){
@@ -178,13 +178,34 @@
 		}
 			
 		function deleteBoard(){
-			if(confirm('게시글을 삭제하시겠습니까 ?')){
-				$("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
-				$("#postForm").submit();
-			} 
-			return;
-		}
+			  swal.fire({
+	                title: '확인', 
+	                text: "정말 쪽지를 삭제하시겠습니까?", 
+	                type: 'warning', 
+	                confirmButtonText: '삭제', 
+	                showCancelButton: true,     
+	                cancelButtonText: '취소', 
+	                cancelButtonColor: "#f3969a",
+	                confirmButtonColor: "#78c2ad"
+	            }).then(function(result) { 
+	                if(result.value) {             
+	                
+	                $("#postForm").attr("action", "<%=contextPath%>/deleteB.bo");
+					swal.fire(
+							{title: '삭제',
+							 text: '성공적으로 삭제되었습니다.',
+							 type: 'success',
+							 confirmButtonColor: "#78c2ad"}).then(function(result){
 			
+						$("#postForm").submit();
+					});
+	                
+	            } else if(result.dismiss === 'cancel') { 
+	                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+	         
+	            }
+	        });
+			}
 		$(function(){
 			selectReplyList(); 
 			$('#addReply').click(function(){

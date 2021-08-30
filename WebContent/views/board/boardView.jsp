@@ -112,7 +112,6 @@
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 				</tr>
-			 				
 			 				<% } %>
 		 				<% } %>
 	 				</tbody>
@@ -162,6 +161,7 @@
 				var bno = $(this).children().eq(0).text();
 				location.href="<%= contextPath %>/detail.bo?bno="+bno;
 			})
+			
 		})
 		<%}%>
 	</script>

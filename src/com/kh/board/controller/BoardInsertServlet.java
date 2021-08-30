@@ -89,14 +89,8 @@ public class BoardInsertServlet extends HttpServlet {
 				request.getSession().setAttribute("msg", "게시글 등록 성공");
 				response.sendRedirect("list.bo?cno="+cno);
 				
-				/*
-				
-				response.sendRedirect("list.bo");
-				File successFile = new File(savePath+at.getChangeName());
-				System.out.println("successFile : " + successFile );
-				*/
 			}else {
-				//for(int i =0; i<fileList.size(); i++) {
+				
 				if(at != null) {
 					File failedFile = new File(savePath+ at.getChangeName());
 					failedFile.delete();
@@ -106,16 +100,6 @@ public class BoardInsertServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 			}
-				/*
-				 * if(at != null) {
-					File failedFile = new File(savePath+at.getChangeName());
-					failedFile.delete();
-					
-					request.setAttribute("msg", "게시글 등록 실패");
-					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-					view.forward(request, response);
-				*/
-			
 			
 		}
 		
