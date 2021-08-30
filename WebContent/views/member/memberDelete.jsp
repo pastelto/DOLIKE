@@ -88,7 +88,7 @@
                                    			<h5 class="deleteMessage">탈퇴시 모든 친구를 잃을 수 있습니다.</h5>
                                    			<h5 class="deleteMessage">정말로 두라이크를 떠나실건가요...?</h5>
                                    </div>
-                                   <input type="button" class="btn login-form__btn submit w-100 mb-2 mt-3" id="goBack" onclick="location.href='<%=contextPath%>/index2.jsp'" value="돌아가기">
+                                   <input type="button" class="btn login-form__btn submit w-100 mb-2 mt-3" id="goBack" onclick="location.href='<%=contextPath%>/main.do'" value="돌아가기">
                                    <input type="submit" class="btn login-form__btn submit w-100" id="deleteMemBtn" value="두라이크 떠나기" />
                                </form>
                                </div>
