@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
@@ -61,13 +62,22 @@ public class firstMainServlet extends HttpServlet {
 		}
 		
 		
+		
+		// 만약 게시글이 0개라면, 게시글 없는 곳으로!
+		if(topList.isEmpty() || hashmap.isEmpty()) {
+			RequestDispatcher view = request.getRequestDispatcher("/alterIndex2.jsp");
+			view.forward(request, response);
+		} else {
+		
 		request.setAttribute("topList", topList);
 		request.setAttribute("cList", cList);
 		request.setAttribute("hashmap", hashmap);
+		
 		System.out.println(hashmap);
 
 		RequestDispatcher view = request.getRequestDispatcher("/index2.jsp");
 		view.forward(request, response); 
+	}
 	}
 
 	/**
