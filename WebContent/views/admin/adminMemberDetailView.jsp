@@ -205,20 +205,20 @@
                                     <tr>
                                     	<td>
 	                                    	<div class="col-12 text-center" id="StatusBtn1">                 	
-	                                        <button class="btn" onclick="Restore();" type="button">복구하기</button>	               
+	                                        <button class="btn" onclick="Restore();" type="button" style="color: #fff">복구하기</button>	               
 	                                    	</div>
                                     	</td>
                                     	
                                     	<td>
 	                                    	<div class="col-12 text-center" id="StatusBtn2">
-	                                        <button class="btn" onclick="Delete();" type="button">삭제하기</button>
+	                                        <button class="btn" onclick="Delete();" type="button" style="color: #fff">삭제하기</button>
 	                                    	</div>
                                     	</td>
                                     </tr>
                                     <tr>
                                     	<td>
                                     		<div class="col-12 text-center" id="StatusBtn3">
-                                        <button class="btn" onclick="BlackList();" type="button">블랙리스트</button>
+                                        <button class="btn" onclick="BlackList();" type="button" style="color: #fff">블랙리스트</button>
                                     </div>
                                     	</td>                                 		                                   	                                                                                                                                                                       
                                     </table> 
@@ -393,11 +393,6 @@
     				dataType: "json",
     				success:function(result){
     					console.log(result)
-/*     					var realStatus = "";
-    					$.each(result, function(i){
-    						realStatus = result[i].userStatus
-    						console.log(result)
-    					})	*/
     					location.href="<%= contextPath %>/MemberDetail.am?amno=" + userId
     					},error:function(){
         				consloe.log("서버통신 실패");
@@ -489,10 +484,20 @@
         </div>
         </div>
         </div>
-        </div>
         <%@ include file="../common/footer.jsp"%>
+        </div>
         
         
+      <script>
+		<%if(!list.isEmpty()){ %>
+		$(function(){
+			$(".table>tbody>tr").click(function(){
+				var bno = $(this).children().eq(0).text();
+				location.href="<%= contextPath %>/detail.bo?bno=" +bno;
+			})
+		})
+		<%}%>
+	</script>  
 
 
 </body>

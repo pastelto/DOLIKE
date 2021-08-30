@@ -1,11 +1,15 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*, com.kh.admin.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.member.model.vo.*, com.kh.admin.model.vo.*, java.text.SimpleDateFormat"%>
     
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 	
 	AdminPageInfo ami = (AdminPageInfo)request.getAttribute("ami");
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+	
+		
 	int listCount = ami.getListCount();
 	int currentPage = ami.getCurrentPage();
 	int maxPage = ami.getMaxPage();
@@ -87,7 +91,7 @@
             </div>
 			
                 <div class="row">               
-                    <div class="col-lg-8 mt-5" style="margin-left: auto; margin-right: auto;">
+                    <div class="col-lg-10 mt-5" style="margin-left: auto; margin-right: auto;">
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
