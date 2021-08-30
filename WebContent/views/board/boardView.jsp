@@ -112,7 +112,6 @@
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td> 
 			 				</tr>
-			 				
 			 				<% } %>
 		 				<% } %>
 	 				</tbody>

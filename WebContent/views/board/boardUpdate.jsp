@@ -11,7 +11,7 @@
 	case "프로그래밍": selected[0] = "selected"; break;
 	case "외국어": selected[1] = "selected"; break;
 	case "학교": selected[2] = "selected"; break;
-	case "자기개발": selected[3] = "selected"; break;
+	case "자기계발": selected[3] = "selected"; break;
 	case "운동": selected[4] = "selected"; break;
 	case "다이어트": selected[5] = "selected"; break;
 	case "생활": selected[6] = "selected"; break; 
@@ -84,7 +84,7 @@
 		 								<option class="dropdown-item" value="프로그래밍"<%= selected[0] %>>프로그래밍</option>
 		 								<option class="dropdown-item" value="외국어"<%= selected[1] %>>외국어</option>
 		 								<option class="dropdown-item" value="학교"<%= selected[2] %>>학교</option>
-		 								<option class="dropdown-item" value="자기개발"<%= selected[3] %>>자기개발</option>
+		 								<option class="dropdown-item" value="자기계발"<%= selected[3] %>>자기계발</option>
 		 							<% } else if(cno ==2 ){ %>
 		 								<option class="dropdown-item" value="운동"<%= selected[4] %>>운동</option>
 		 								<option class="dropdown-item" value="다이어트"<%= selected[5] %>>다이어트</option>
