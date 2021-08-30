@@ -95,7 +95,7 @@
 												<div class="form-group">
 													<textarea class="textarea_editor form-control bg-light"
 														rows="15" style="resize: none;"
-														name="content"> <%= n.getNoticeContent() %> </textarea>
+														name="content"> <%= n.getNoticeContent().replaceAll("<br>", "\n") %> </textarea>
 												</div>
 											</div>
 										</div>
