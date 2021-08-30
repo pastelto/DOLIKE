@@ -89,7 +89,7 @@
 								<form action="<%=contextPath%>/upVote.ch" method="post" id="voteMe">
 									<div class="card" id="card-vt">
 										<div class="card-header bg-white" id="header-vt">
-											<img src="./resources/challenge_upfiles/check.png" alt="null-my" class="null-my" width="30px" height="30px">
+											<img src="./resources/challenge_upfiles/check.png" alt="check" class="check" width="30px" height="30px">
 											<h5 align="center"><input type="hidden" class="card-title" style="text-align:center" name="chTitle" value="<%= list.get(i).getChTitle()%>"/><%= list.get(i).getChTitle()%></h5><!-- 챌린지 타이틀 -->
 										</div>
 										<div class="card-body" id="body-vt">
@@ -97,7 +97,7 @@
 										</div>
 										<div class="card-footer" id="footer-vt">									
 											<button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" id="voteBtn" onclick="voteMe()";>
-													<i class="fa fa-paper-plane m-r-5"></i> Vote ME!
+													<i class="fa fa-paper-plane m-r-5" name="voteme"></i> Vote ME!
 											</button>
 																			
 										</div>
@@ -128,7 +128,7 @@
             }).then((result) =>{ 
                if(result.value) {                              
                 	$("#voteMe").submit();
-                	$("#voteBtn").attr("disabled",true);
+                	$("#voteBtn").attr("type","disabled");
 	            } else if(result.dismiss === 'cancel') {    
 	            	Swal.fire({
 						 text: '취소되었습니다',

@@ -165,7 +165,8 @@
 							</div>
 							<div class="card">
 							<%if(c.getStatus().equals("Y")) {%>
-								<div class="card-body text-center">																	
+								<div class="card-body text-center">
+								<%if(gap == false){ %>																	
 									<%if(cu == null) {%>																		
 									<form id="rpInsert" action="<%=request.getContextPath()%>/rplyInsert.ch" class="form-profile" method="post" enctype="multipart/form-data">
 										<div class="form-group">
@@ -189,7 +190,14 @@
 											<textarea readonly class="form-control" name="textarea"id="textarea" cols="30" rows="2" placeholder="오늘은 이미 인증해주셨네요! 내일의 도전도 화이팅!"></textarea>
 										</div>
 									</form>
-									<%}%>								
+									<%}%>
+								<%} else {%>
+								<form action="#" class="form-profile">
+										<div class="form-group">
+											<textarea readonly class="form-control" name="textarea"id="textarea" cols="30" rows="2" placeholder="아직 챌린지가 시작되지 않았습니다. 조금만 기다려주세요!"></textarea>
+										</div>
+								</form>
+								<%} %>								
 								</div>
 								<%}%>
 							</div>

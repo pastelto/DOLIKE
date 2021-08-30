@@ -138,7 +138,7 @@ body {
 }
 
 .item-info {
-	width: 54%;
+	width: 70%;
 	padding-left: 1.5rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
@@ -225,14 +225,14 @@ a {
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>//challengedetail.ch"
-													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-												</a>
+												 <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												<div class="item-info">
 													<div>
-													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengeEndDetail.ch"><%=list.get(i).getChTitle()%></a>
-													</h4></div> <br>
+														<h4 class="title" style="float:left">
+															<%=list.get(i).getChTitle()%></a>
+														</h4>
+													</div> 
+													<br><br>
 													<div>									
 													<ul class="challenge-period">
 														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>

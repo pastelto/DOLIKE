@@ -94,8 +94,8 @@
 												<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">챌린지선택</label> 
 													<select class="form-select" id="category" name="apNo">
-														<%for(int i = 0; i<List.size(); i++) {%>
-															<option value="<%=List.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
+														<%for(int i = 0; i<list.size(); i++) {%>
+															<option value="<%=list.get(i).getApNo()%>"><%=list.get(i).getApNo()%></option>
 														<%} %>
 													</select>
 												</div>
