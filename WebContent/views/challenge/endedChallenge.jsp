@@ -245,7 +245,9 @@
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-											 <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+											 <a href="<%=request.getContextPath()%>/challengedetail.ch" class="item-click">
+											 	<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+											 	</a>
 												<div class="item-info">
 													<div>
 														<h4 class="title" style="float:left">
@@ -314,14 +316,14 @@
 
 <script>
 	<% if(!list.isEmpty()){%>
+	 <%if(loginUser !=null){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
-				var chno = $(this).children().eq(0).text();				
-						
+				var chno = $(this).children().eq(0).text();										
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
 					})					
 				})
-	<% } %>
+	<% }} %>
 	
 	<%if(loginUser == null) {%>
 		$(function() {

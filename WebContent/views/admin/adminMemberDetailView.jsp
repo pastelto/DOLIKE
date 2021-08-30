@@ -6,16 +6,21 @@
  <%
 
  	Member am = (Member)request.getAttribute("am");
+ 	Board ab = (Board)request.getAttribute("ab");
  	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
- 	
-	AdminPageInfo amb = (AdminPageInfo)request.getAttribute("amb");
+ 	System.out.println("어드민디테일jps 보드의 list 값 : " + list);
+ 	System.out.println("어드민디테일jps 맴버의 list 값 : " + am);
 	
+ 	
+ 	AdminPageInfo amb = (AdminPageInfo)request.getAttribute("amb");
+ 	System.out.println("어드민디테일jps amb 값 : " + amb);
+
 	int listCount = amb.getListCount();
 	int currentPage = amb.getCurrentPage();
 	int maxPage = amb.getMaxPage();
 	int startPage = amb.getStartPage();
 	int endPage = amb.getEndPage();
- 
+ 	int i = 0;
  %>
 
 <!DOCTYPE html>
@@ -235,21 +240,29 @@
                                                 <th>제목</th>
                                                 <th>작성자</th>
                                                 <th>생성일</th>
+                                                <th>카테고리 번호</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	
+                                        	<% if(list.isEmpty()){ %>
                                             <tr>
                                                 <td colspan="2">조회된 리스트가 없습니다.</td>                                                
                                             </tr>
-                                            
+                                            <%} else if(!list.isEmpty()){ %>
+                                           	<% for(Board b : list) { %>
+                                           	<% System.out.println("b.getNickName, am.getNickName : " + b.getNickName()+ am.getNickName()); %>
+                                            <%if(b.getNickName().equals(am.getUserId())) {%> 
                                             <tr>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>                                             
+                                                <td><%= b.getBoardNo() %></td>
+                                                <td><%= b.getBoardTitle() %></td>
+                                                <td><%= b.getNickName() %></td>
+                                                <td><%= b.getBoardDate() %></td>
+                                                <td><%= b.getCategoryNo() %></td>                                             
                                             </tr>
-                                            	
+                                            
+                                           <% } %>
+                                         <%} %>
+                                         <%} %> 	
                                         </tbody>
                                     </table>
                                 </div>
@@ -260,6 +273,60 @@
                             </div>
                         </div>
                     </div>
+                    
+                    	<!-- 페이지 처리 -->
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 맨앞으로 -->
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?currentPage=1"> &laquo; </a></li>
+				
+				<!-- 이전페이지 -->
+				<% if(currentPage == 1) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<%} %>
+				
+				
+				<!-- 페이지 목록 -->
+				<%for(int p=startPage; p<=endPage; p++){ %>
+				
+					<%if(p == currentPage){ %>
+						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
+					<%}else{ %>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?currentPage=<%= p %>"><%= p %> </a></li>
+					<%} %>
+					
+				<%} %>
+				
+				
+				<!-- 다음페이지 -->
+				<% if(currentPage == maxPage) {%>
+				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
+				<% }else{ %>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<%} %>
+				
+				<!-- 맨뒤로 -->
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
+			</ul>
+		</div>
+		<%@ include file="../common/footer.jsp" %>
+		</div>
+		
+		<script>
+		<%if(!list.isEmpty()){ %>
+		$(function(){
+			$(".table>tbody>tr").click(function(){
+				var amno = $(this).children().eq(0).text();
+				location.href="<%= contextPath %>/MemberDetail.am?amno=" +amno;
+				console.log("amno 값을 알려줘!"+amno)
+			})
+		})
+		<%}%>
+	</script>
+                    
+                    
                  </div>
                </div> 
                                 </div>

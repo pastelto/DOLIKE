@@ -425,24 +425,29 @@ public class ChallengeDao {
 		return c;
 	}
 	
-	public ArrayList<Challenge> selectMyEndChallenge(Connection conn, String loginUser) {
+	public ArrayList<Challenge> selectMyEndChallenge(Connection conn, PageInfo pi, String loginUser) {
 		
 		ArrayList<Challenge> list = new ArrayList<Challenge>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		/*
-		 * myEndChallenge = SELECT CH_TITLE, CH_START, CH_END 
-		 * FROM CHALLENGE C JOIN CHALLENGE_USER U ON C.CH_NO = U.CH_NO WHERE CH_USER=? AND CH_STATUS = 'N' 
-		 * ORDER BY CH_END DESC
+		 *  SELECT *
+		 *  FROM (SELECT ROWNUM RNUM, A.* 
+		 *  FROM (SELECT CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME FROM CHALLENGE 
+		 *  WHERE CH_STATUS = 'N' AND CH_USER=? ORDER BY CH_END DESC) A)
+		 *  WHERE RNUM BETWEEN ? AND ?
 		 */
 
-		String sql = prop.getProperty("myEndChallenge");
-		System.out.println(sql);
+		String sql = prop.getProperty("myEndChallenge");		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
+		int endRow = startRow + pi.getListLimit() - 1;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, loginUser);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();			
 			

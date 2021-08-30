@@ -43,7 +43,7 @@ public class BoardUpdateFormServlet extends HttpServlet {
 			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/board/boardUpdate.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "수정할 게시글을 불러오는데 실패했습니다.");
+			request.setAttribute("errMsg", "수정할 게시글을 불러오는데 실패했습니다.");
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

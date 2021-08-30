@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
-ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
+	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
+	ArrayList<Category> catList = (ArrayList<Category>) request.getAttribute("catList");
 %>
 <!DOCTYPE html>
 <html>
@@ -93,8 +94,8 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 												<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">카테고리 선택</label> 
 													<select class="form-select" id="category" name="categoryNo">
-													<%for(int i = 0; i<List.size(); i++) {%>
-														<option value="<%=List.get(i).getCategoryNo()%>"><%=List.get(i).getCategoryName() %></option>
+													<%for(int i = 0; i<catList.size(); i++) {%>
+														<option value="<%=catList.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
 													<%} %>
 													</select>
 												</div>
@@ -133,10 +134,16 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 <script>
 	function apChallenge(){
 			var content = document.getElementById("apContent").value;
-			var category = document.getElementById("cateogry");
+			var category = document.getElementById("category");
 			var caNo = category.options[category.selectedIndex].value;
+			
+			console.log(content);
+			console.log(category);
+			console.log(caNo);
+			
+			
 					
-			 if(content == "" || caNo == ""){
+			  if(content == "" || caNo == ""){
 				Swal.fire({
 					text: '내용을 입력해주세요.',
 					icon: 'warning',
@@ -165,7 +172,7 @@ ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 					});
    				} 
             });
-       	  }        	  
+       	  }        	   
 		}	
 	
 </script>	

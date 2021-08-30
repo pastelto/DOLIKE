@@ -223,7 +223,7 @@ a {
 					<div class="table-responsive">
 					<div>
 					
-					<h2 align="center"><%= loginUser.getNickName()%> 님의 신청 리스트</h2>
+					<h2 align="center"><b><%= loginUser.getNickName()%></b> 님의 챌린지</h2>
 					<br><br>
 						<table class="table table-hover" style="text-align: center;">						
 							<thead>

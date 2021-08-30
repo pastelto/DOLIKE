@@ -37,8 +37,6 @@ public class EndedChallengeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-	
-	
 		ArrayList<ChallengeAttachment> fileList = new ChallengeService().selectAttach();						
 		request.setAttribute("fileList", fileList);
 		

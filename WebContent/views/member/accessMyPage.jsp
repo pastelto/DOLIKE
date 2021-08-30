@@ -6,11 +6,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>마이페이지 접근</title>
+	<title>DO LIKE - 마이페이지 접근</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#goMyPageBtn {
@@ -23,10 +21,6 @@
 		color: #fff;
     	background-color: #f3969a;
     	border-color: #f3969a;
-	}
-	
-	#accessTitle {
-		font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
 </head>

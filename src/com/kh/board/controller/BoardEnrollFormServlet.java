@@ -27,6 +27,8 @@ public class BoardEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		request.setAttribute("cno", cno);
 		request.getRequestDispatcher("views/board/boardWrite.jsp").forward(request, response);
 	}
 
