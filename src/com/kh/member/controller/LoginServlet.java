@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 
-			response.sendRedirect(request.getContextPath() + "/index2.jsp"); //index2로 넘기기
+			response.sendRedirect(request.getContextPath() + "/main.do"); //index2로 넘기기
 		} else {
 			request.setAttribute("errMsg", "로그인 실패");
 			
