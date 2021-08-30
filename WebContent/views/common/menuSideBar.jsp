@@ -425,7 +425,7 @@
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
-                    <%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> --%>
+                     <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">회원 관리</span>
@@ -436,7 +436,7 @@
                             <li><a href="blackList.am">블랙리스트</a></li>
                         </ul>
                     </li>
-                    <%-- <% } %> --%>         
+                     <% } %> 
                 </ul>
                 
                                

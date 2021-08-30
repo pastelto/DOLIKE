@@ -40,7 +40,7 @@ public class VoteCountUpServlet extends HttpServlet {
 		int result = new ChallengeService().voteCountUp(cv);
 
 		if (result > 0) {
-			request.setAttribute("msg", "투표해주셔서 감사합니다!");
+			request.getSession().setAttribute("msg", "투표해주셔서 감사합니다!");
 			response.sendRedirect("challengeVote.ch");
 			System.out.println("투표 성공!");
 		} else {

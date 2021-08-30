@@ -50,8 +50,7 @@ public class Challenge {
 	}
 	
 	// insert_category
-	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, String status, String content,
-			int userCount, int categoryNo) {
+	public Challenge(int chNo, String chTitle, int voteCount, String start, String end, String status, String content, int userCount, int categoryNo) {
 		super();
 		this.chNo = chNo;
 		this.chTitle = chTitle;

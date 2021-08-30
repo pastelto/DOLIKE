@@ -47,7 +47,7 @@ public class AdminRestoreServlet extends HttpServlet {
 		Member mem = new AdminService().selectAdminMember(userId);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("adMsg", "복구가 성공적으로 이루어졌습니다.");
+			request.getSession().setAttribute("adMsg", "요청이 완료되었습니다.");
 			response.setContentType("application/json; charset=utf-8");
 			System.out.println("서블릿 전송에 성공하였습니다. am 값 :" + mem);
 			new Gson().toJson(mem, response.getWriter());
