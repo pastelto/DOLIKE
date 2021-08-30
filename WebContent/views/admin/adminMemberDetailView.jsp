@@ -52,6 +52,31 @@
 
 <style>
 
+#writeBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	#writeBtn:hover {
+		color: #78c2ad;
+		background-color: #fff;
+	}
+	#pageTag {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#pageTag:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	#pageDisable {
+		color: gray;
+    	background-color: #ced4da;
+    	border-color: #ced4da;
+	}
+
 #iconMsg, #comment1 {
 	color: #fff;
 	background-color: #78c2ad;
@@ -254,7 +279,7 @@
                                         <tbody>
                                         	<% if(list.isEmpty()){ %>
                                             <tr>
-                                                <td colspan="2">조회된 리스트가 없습니다.</td>                                                
+                                                <td colspan="5">조회된 리스트가 없습니다.</td>                                                
                                             </tr>
                                             <%} else if(!list.isEmpty()){ %>
                                            	<% for(Board b : list) { %>
@@ -280,19 +305,17 @@
 								</div>
                             </div>
                         </div>
-                    </div>
-                    
-                    	<!-- 페이지 처리 -->
+                                           	<!-- 페이지 처리 -->
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?currentPage=1"> &laquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=1"> &laquo; </a></li>
 				
 				<!-- 이전페이지 -->
 				<% if(currentPage == 1) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage-1 %>"> &lt; </a></li>
 				<%} %>
 				
 				
@@ -302,7 +325,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -312,14 +335,14 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
-		
+                    </div>
 		</div>
 		
 	<script>

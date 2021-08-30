@@ -70,7 +70,7 @@
 <body>
 <div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-
+<div class="content-body">
 <div class="container-fluid" >
 
 			<div class="row page-titles mx-0" >
@@ -83,9 +83,10 @@
                 </div>
             </div>
 
-			<form id="size1">
+			
                 <div class="row">               
-                    <div class="col-lg-8" style="margin-left: auto; margin-right: auto;">
+                    <div class="col-lg-10 mt-5" style="margin-left: auto; margin-right: auto;">
+                       <form  id="size1">
                         <div class="card" >
                             <div class="card-body">
                                 <div class="card-title">
@@ -134,15 +135,8 @@
 								</div>
                             </div>
                         </div>
-                    </div>                    
-                 </div>
-                 </form>
-                </div>
-                
-		<br><br>
-
-		
-			<!-- 페이지 처리 -->
+                    
+                    	<!-- 페이지 처리 -->
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
@@ -179,9 +173,19 @@
 				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/blackList.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
+                    
+                    </form>
+                    </div>                    
+                 </div>
+                 
+                </div>
+                
+		
+		
+		
+		</div>
 		<%@ include file="../common/footer.jsp" %>
 		</div>
-		
 		<script>
 		<%if(!list.isEmpty()){ %>
 		$(function(){
