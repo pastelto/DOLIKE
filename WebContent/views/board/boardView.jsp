@@ -9,7 +9,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int cno = (int)request.getAttribute("cno");
-	System.out.println("boardVIew : "+cno);
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,7 +19,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시판 </title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <link href="../../css/style.css" rel="stylesheet">
 	<style>
 		
 		a, a:hover {

@@ -4,6 +4,7 @@
 	Board b = (Board)request.getAttribute("b");
 	Attachment at = (Attachment)request.getAttribute("at");
 	Reply r = (Reply)request.getAttribute("r");
+	
 %>  
 
 <!DOCTYPE html>
@@ -14,20 +15,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시글 </title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <link href="../../css/style.css" rel="stylesheet">
 	<style>
-		html, body{
-			width:100%;
-			height:100%;
-		}
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-		padding:5px 0px 0px 30px;	
-		
-		
-		}
 		#updateBtn, #deleteBtn, #addReply, #returnBtn{
 			color: #fff;
 	    	background-color: #78c2ad;
@@ -72,6 +60,7 @@
 	<%@ include file="../common/menuSideBar.jsp" %> 
 	
 	<div class="content-body">
+	<div id="bodyScroll" style="overflow:auto; min-height:1200px;">
 			<div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
@@ -107,9 +96,9 @@
 										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-										<div id="bodyScroll" style="overflow:auto; height:400px;">
+										
 											<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
-										</div>
+									
 									</div>
 								</div>
 								<hr>
@@ -123,7 +112,6 @@
 									<div class="row m-b-30">
 										<div class="col-auto">
 											<img src="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="Thum" >
-											<!-- <a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a> -->
 										</div>
 									</div>
 									<% }else{ %>
@@ -156,7 +144,7 @@
 								<div class="bottom-btns" >
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
-									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
+									<% if (loginUser != null && loginUser.getNickName().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" class="btn btn-sm" type="button" onclick="updateForm();">수정 </button>
@@ -164,7 +152,8 @@
 										</div>
 									<% }%>
 									</form>
-									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="location.href='<%=contextPath%>/list.bo'">돌아가기</button>
+									<br>
+									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="history.back();">돌아가기</button>
 								</div>
 							</div>
 						</div>
@@ -245,6 +234,7 @@
 			})
 		}
 	</script> 
+	</div>
 </div> 
 	<%@ include file="../common/footer.jsp" %>
 </div>

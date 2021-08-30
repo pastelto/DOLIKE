@@ -23,14 +23,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>DO LIKE - 게시글 수정 </title>
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <link href="../../css/style.css" rel="stylesheet">
 	<style>
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-			padding:5px 0px 0px 30px;
-		}
+		
 		.tag-class{
 			width:10%;
 		}

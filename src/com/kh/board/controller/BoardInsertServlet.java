@@ -56,7 +56,7 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
 			
-			String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
+			String nickName = ((Member)request.getSession().getAttribute("loginUser")).getNickName();
 			
 			
 			Board b = new Board();
@@ -64,29 +64,8 @@ public class BoardInsertServlet extends HttpServlet {
 			b.setTagName(tag);
 			b.setBoardTitle(title);
 			b.setBoardContent(content);
-			b.setNickName(userId);
-			/*
-			ArrayList<Attachment> fileList = new ArrayList<>();
+			b.setNickName(nickName);
 			
-			for(int i=1; i<=4; i++) {
-				String name = "file" + i;
-				
-				if(multiRequest.getOriginalFileName(name) != null) {
-					String originName = multiRequest.getOriginalFileName(name);
-					String changeName = multiRequest.getFilesystemName(name);
-					System.out.println("originName : "+originName);
-					System.out.println("changeName : "+changeName);
-						
-					Attachment at = new Attachment();
-					at.setFilePath(savePath);
-					at.setOriginName(originName);
-					at.setChangeName(changeName);
-					
-					fileList.add(at);
-						
-				}
-			}
-			*/
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("upfile") != null) {
