@@ -169,7 +169,8 @@ public class BoardDao {
 							rset.getString("BOARD_TITLE"),
 							rset.getDate("BOARD_DATE"),
 							rset.getString("BOARD_CONTENT"),
-							rset.getInt("VIEWS")
+							rset.getInt("VIEWS"),
+							rset.getInt("CATEGORY_NO")
 							);
 			}
 		} catch (SQLException e) {
