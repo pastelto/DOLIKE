@@ -64,7 +64,7 @@ public class firstMainServlet extends HttpServlet {
 		
 		
 		// 만약 게시글이 0개라면, 게시글 없는 곳으로!
-		if(topList.isEmpty() || hashmap.isEmpty()) {
+		if(topList.size() < 4 || hashmap.size() < 4 ) {
 			RequestDispatcher view = request.getRequestDispatcher("/alterIndex2.jsp");
 			view.forward(request, response);
 		} else {
