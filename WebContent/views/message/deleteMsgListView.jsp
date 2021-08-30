@@ -220,15 +220,15 @@
                 if(result.value) {          
                 
                 	$("#msgAllDel").attr("action", "<%=contextPath%>/dAllmsg.ms");
-				swal.fire(
+                	$("#msgAllDel").submit();
+				
+               	/*	swal.fire(
 						{title: '삭제',
 						 text: '성공적으로 삭제되었습니다.',
 						 type: 'success',
 						 confirmButtonColor: "#78c2ad"}).then(function(result){
-		
-					$("#msgAllDel").submit();
-				});
-                
+					});
+                 */
             } else if(result.dismiss === 'cancel') {  
                 swal.fire(
                 	{title: '취소',

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.kh.admin.model.dao.AdminDao;
 import com.kh.admin.model.vo.AdminPageInfo;
+import com.kh.board.model.vo.Board;
 import com.kh.member.model.vo.Member;
 
 public class AdminService {
@@ -65,6 +66,28 @@ public class AdminService {
 		close(conn);
 		
 		return listCount;
+	}
+
+	public int getBoardListCount() {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new AdminDao().getBoardListCount(conn);
+		System.out.println("서비스에서 listCount 값 : " + listCount);
+		close(conn);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> adminBoardList(AdminPageInfo amb) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new AdminDao().adminBoardList(conn, amb);
+		System.out.println("서비스에서 board list 값 : " + list);
+		close(conn);
+		
+		return list;
 	}
 
 	

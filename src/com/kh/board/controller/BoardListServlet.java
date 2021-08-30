@@ -32,8 +32,8 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				//int bno = Integer.parseInt(request.getParameter("bno"));
-				//System.out.println("bno : "+bno);
+				int cno = Integer.parseInt(request.getParameter("cno"));
+				System.out.println("cno : "+cno);
 				int listCount;			// 총 게시글 갯수
 				int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 				int startPage;			// 현재 페이지에 하단에 보여지는 페이징 바의 시작 수 
@@ -59,11 +59,12 @@ public class BoardListServlet extends HttpServlet {
 					endPage = maxPage;
 				}
 				PageInfo pi = new PageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, boardLimit);
-				ArrayList<Board> list = new BoardService().selectList(pi);
+				ArrayList<Board> list = new BoardService().selectList(pi, cno);
 				
 				
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
+				request.setAttribute("cno", cno);
 				
 				request.getRequestDispatcher("views/board/boardView.jsp").forward(request, response);
 	}

@@ -6,11 +6,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>회원 탈퇴</title>
+	<title>DO LIKE - 회원 탈퇴</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	
 	<style>
 	#goBack {
@@ -36,13 +34,8 @@
     	border-color: #000000;
 	}
 	
-	#deleteTitle {
-		font-family: 'Gowun Dodum', sans-serif;
-	}
-	
 	.deleteMessage {
 		text-align: center;
-		font-family: 'Gowun Dodum', sans-serif;
 	}
 	</style>
 </head>
