@@ -126,6 +126,7 @@
 															<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="sdate">
 														</div>
 													</div>
+													<br>
 													<div class="row form-material">
 														<div class="col-md-6">
 															<label class="m-t-20">투표 마감 날짜</label> <input type="date"

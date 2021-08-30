@@ -114,7 +114,7 @@
 														rows="15" placeholder="챌린지 설명 작성...." name="content"></textarea>
 												</div>												
 												<div class="form-group"> 												
-													<label for="exampleSelect1" class="form-label mt-4">카테고리 번호	</label> 
+													<label for="exampleSelect1" class="form-label mt-4">카테고리</label> 
 													<select class="form-select" id="categoryNo"  name="categoryNo">
 														<%for(int i = 0; i<catList.size(); i++) {%>
 															<option value="<%=catList.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
@@ -125,13 +125,14 @@
 													<div class="card-body">
 														<div class="row form-material">
 															<div class="col-md-6" >
-																<label class="m-t-20">투표 시작 날짜</label> 
+																<label class="m-t-20">시작 날짜</label> 
 																<input type="date" name="start" class="form-control" placeholder="2017-06-04" id="sdate">
 															</div>
 														</div>
+														<br>
 														<div class="row form-material">
 															<div class="col-md-6">
-																<label class="m-t-20">투표 마감 날짜</label> <input type="date"
+																<label class="m-t-20">마감 날짜</label> <input type="date"
 																	name="end" class="form-control" placeholder="2017-06-04" id="mdate">
 															</div>														
 														</div>
@@ -148,7 +149,7 @@
 													<button
 														class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10"
 														type="button" id="applyBtn" onclick="inChBtn();">
-														<i class="fa fa-paper-plane m-r-5"></i> 신청하기
+														<i class="fa fa-paper-plane m-r-5"></i> 등록하기
 													</button>
 													<button
 														class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20"

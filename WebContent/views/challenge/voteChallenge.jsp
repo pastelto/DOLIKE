@@ -3,6 +3,7 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.*"%>
 <%
 	ArrayList<ChallengeVote> list = (ArrayList<ChallengeVote>)request.getAttribute("list"); 
+
 %>
 <!DOCTYPE html>
 <html>
