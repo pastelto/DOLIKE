@@ -184,7 +184,7 @@
 		<%if(!list.isEmpty()){ %>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
-				var cno = $(this).children().eq(0).text();
+				var cno = $(this).children().eq(0).text();		
 				location.href="<%= contextPath %>/detail.ca?cno=" +cno;
 			})
 		})
