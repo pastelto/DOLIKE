@@ -28,9 +28,7 @@
 	</style>
 </head>
 <body>
-	<!--*******************
-        Preloader start
-    ********************-->
+
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -38,19 +36,10 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-    
-	<!--**********************************
-        Main wrapper start
-    ***********************************-->
+
 	<div id="main-wrapper">
     <%@ include file="../common/menuSideBar.jsp" %> 
-    
-       <!--**********************************
-           Content body start
-       ***********************************-->
+
        <div class="content-body">
 	        <div class="container-fluid"> 
 		        <div class="login-form-bg h-100">

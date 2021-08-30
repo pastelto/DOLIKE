@@ -205,7 +205,7 @@
 
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index2.jsp" style="background:#fff">
+                <a href="main.do" style="background:#fff">
                     <b class="logo-abbr"><img src="images/do_32.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/mainLogo_text.png" alt=""></span>
                     <span class="brand-title">
@@ -286,7 +286,7 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
                     <li>
-                        <a href="index2.jsp" aria-expanded="false">
+                        <a href="main.do" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">메인</span>
                         </a>
                     </li>
