@@ -66,7 +66,7 @@
 		 								<option class="dropdown-item" value="프로그래밍">프로그래밍</option>
 		 								<option class="dropdown-item" value="외국어">외국어</option>
 		 								<option class="dropdown-item" value="학교">학교</option>
-		 								<option class="dropdown-item" value="자기개발">자기개발</option>
+		 								<option class="dropdown-item" value="자기계발">자기계발</option>
 		 							<% } else if(cno ==2 ){ %>
 		 								<option class="dropdown-item" value="운동">운동</option>
 		 								<option class="dropdown-item" value="다이어트">다이어트</option>

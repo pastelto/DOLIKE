@@ -87,7 +87,6 @@ public class BoardDao {
 									rset.getString("NICKNAME"),
 									rset.getDate("BOARD_DATE"),
 									rset.getInt("VIEWS")
-									
 									));
 				
 			}
@@ -313,9 +312,7 @@ public class BoardDao {
 		String sql = prop.getProperty("insertAttachment");
 		
 		try {
-			//for(int i=0; i<fileList.size(); i++) {
-				//Attachment at = fileList.get(i);
-				
+
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, at.getChangeName());
 				pstmt.setString(2, at.getOriginName());
@@ -420,9 +417,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, findBoard );
-					
-			//pstmt.setString(1, findBoard );
-			
+
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) { 
@@ -444,10 +439,7 @@ public class BoardDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("findBoard");
-		
-		//int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-		//int endRow = startRow + pi.getBoardLimit()-1;
-		
+	
 		try {
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1, startRow);

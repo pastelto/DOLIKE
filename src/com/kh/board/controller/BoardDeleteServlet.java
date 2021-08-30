@@ -30,12 +30,17 @@ public class BoardDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		System.out.println("delete : " + cno );
 		int bid = Integer.parseInt(request.getParameter("bno"));
 		int result = new BoardService().deleteBoard(bid);
 		
 		if(result > 0) {
-			response.sendRedirect("list.bo");
+			
+			request.setAttribute("cno", cno);
+			
+			response.sendRedirect("list.bo?cno="+cno);
+		
 		}else {
 			request.setAttribute("msg", "게시글 삭제 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");

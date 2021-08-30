@@ -159,23 +159,7 @@ public class BoardService {
 		
 		return b;
 	}
-/*
-	public int insertImg(Board b, Attachment at) {
-		Connection conn = getConnection();
-		
-		
-		int result = new BoardDao().insertAttachment(conn, at);
-		
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-*/
+
 	public int searchBoard(String findBoard) {
 		Connection conn = getConnection();
 		
