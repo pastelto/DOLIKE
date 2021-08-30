@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment,
-	java.util.Date, java.text.SimpleDateFormat"%>
+	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
 	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>) request.getAttribute("fileList");
@@ -138,7 +137,7 @@ body {
 }
 
 .item-info {
-	width: 54%;
+	width: 70%;
 	padding-left: 1.5rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
@@ -192,6 +191,7 @@ a {
                     </ol>
                 </div>
             </div>
+            <br>
         <div class="container-fluid">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link"
@@ -225,17 +225,17 @@ a {
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>//challengedetail.ch"
+												<a href="<%=request.getContextPath()%>/challengedetail.ch"
 													class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 												</a>
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengeEndDetail.ch"><%=list.get(i).getChTitle()%></a>
+														<%=list.get(i).getChTitle()%>
 													</h4></div> <br>
 													<div>									
 													<ul class="challenge-period">
-														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+														<li>진행일정 : <%=list.get(i).getStart().substring(2,10)%> ~ <%=list.get(i).getEnd().substring(2,10)%></li>
 														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
 													</ul>
 													</div>

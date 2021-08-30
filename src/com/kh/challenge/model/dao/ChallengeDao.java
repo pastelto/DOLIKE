@@ -212,11 +212,11 @@ public class ChallengeDao {
 
 			while (rset.next()) {
 				list.add(new Challenge(rset.getInt("CH_NO"),
-						   			   rset.getString("CH_TITLE"), 
-						   			   rset.getString("CH_BODY"), 
+						   			   rset.getString("CH_TITLE"), 						   			  
 						   			   rset.getString("CH_START"),
-						   			   rset.getString("CH_END"),
+						   			   rset.getString("CH_END"),						   			   
 						   			   rset.getString("CH_STATUS"),
+						   			   rset.getString("CH_BODY"),
 						   			   rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {

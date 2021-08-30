@@ -97,7 +97,7 @@ public class ChallengeInsertServlet extends HttpServlet {
 
 			if (result > 0) {
 				request.getSession().setAttribute("adMsg", "챌린지 등록이 완료됐습니다.");
-				response.sendRedirect("index2.jsp");	
+				response.sendRedirect("challengeMain.ch");	
 				result = 0;
 			} else {
 				if (cat != null) {
