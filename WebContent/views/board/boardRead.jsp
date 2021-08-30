@@ -14,20 +14,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시글 </title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <link href="../../css/style.css" rel="stylesheet">
 	<style>
-		html, body{
-			width:100%;
-			height:100%;
-		}
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-		padding:5px 0px 0px 30px;	
-		
-		
-		}
 		#updateBtn, #deleteBtn, #addReply, #returnBtn{
 			color: #fff;
 	    	background-color: #78c2ad;
@@ -123,7 +110,6 @@
 									<div class="row m-b-30">
 										<div class="col-auto">
 											<img src="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="Thum" >
-											<!-- <a href="<%=contextPath%>/resources/board_upfiles/<%=at.getChangeName()%>" class="text-muted"><%= at.getOriginName() %></a> -->
 										</div>
 									</div>
 									<% }else{ %>

@@ -14,14 +14,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시글 검색</title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <link href="../../css/style.css" rel="stylesheet">
 	<style>
-		.nk-sidebar{
-			padding:30px;
-		}
-		.content-body{
-			padding:5px 0px 0px 30px;
-		}
+		
 		a, a:hover {
 			color : #000000;
 			text-decoration:none;
