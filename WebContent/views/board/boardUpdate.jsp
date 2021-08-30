@@ -31,7 +31,7 @@
 	case "SPA브랜드": selected[20] = "selected"; break; 
 	case "명품": selected[21] = "selected"; break; 
 	case "기타": selected[22] = "selected"; break; 
-
+	
 	}
 %>
 <!DOCTYPE html>
