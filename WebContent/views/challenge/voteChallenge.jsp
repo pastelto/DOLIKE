@@ -60,7 +60,28 @@
 	#footer-vt{
 		text-align :center;
 	}
+	#text-center{
+	text-align:center;
+	}
+	#mission{
+	color: #fff;
+	background-color: #78c2ad;
+	border-color: #78c2ad;
+	}
+
+	#mission:hover{
+		color: #78c2ad;
+		background-color: #fff;
+		border-color: #78c2ad;
+	}
 	
+	.item>img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: auto;
+	height: 100% transform: translate(-50%, -50%);
+}
 </style>
 </head>
 <body>
@@ -78,12 +99,12 @@
             <div class="col-1"></div>
              <div class="container-fluid">
 				<div class="row">	
-				<div class="col-12 m-b-30">				
-				<div class="votingBanner" style="text-align:center">
-					<img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center" width="1350px"><br><br>				
+				<div class="col-12 m-b-30">
+				<%if(!list.isEmpty()){%>				
+					<div class="votingBanner" style="text-align:center">
+				      <img src="./resources/challenge_upfiles/투표진행중.png" alt="vote banner" class="voting" align="center" width="1350px"><br><br>				
 					</div>					
-					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;" width="100%">						
-						<%if(!list.isEmpty()){%>
+					<div class="row" style="margin-left:130px; margin-right:130px; margin-top:30px;" width="100%">												
 							<% for(int i = 0; i < list.size(); i++) { %>
 							<div class="col-lg-4" id="inline-vote">
 								<form action="<%=contextPath%>/upVote.ch" method="post" id="voteMe">
@@ -105,6 +126,21 @@
 								</form>
 								</div>
 							 <%}%>
+						<%} else {%>
+						<div style="height:80px"></div>
+						<div class="container col-5 ">
+							<div class="card" id="null-end">
+								<div class="card-header" id="text-center">지금은 투표기간이 아닙니다.</div>
+								<div class="card-body">
+									<div class="items-center" style="text-align:center;">
+										<a href="<%=request.getContextPath()%>/challengeMain.ch" class="item-click"> 
+											<img src="./resources/challenge_upfiles/null-vote.png" alt="null-vote" class="null-my" width="300px" height="300px"><br><br>
+											<button class="btn btn-primary px-3 ml-4" id="mission">챌린지 메인으로 돌아가기</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>						
 						<%} %>										
 					</div>
 				</div>
