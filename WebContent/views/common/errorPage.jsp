@@ -55,7 +55,7 @@
 			                                <p id="detailMessage"><%= message %></p>
 			                                <form class="mt-5 mb-5">
 			                                    <div class="text-center mb-4 mt-4">
-			                                    	<a href="<%=request.getContextPath()%>/index2.jsp" class="btn btn-primary" id="goMain">메인으로</a>
+			                                    	<a href="<%=request.getContextPath()%>/main.do" class="btn btn-primary" id="goMain">메인으로</a>
 			                                    </div>
 			                                </form>
 			                                <div class="text-center" id="footMessage">
