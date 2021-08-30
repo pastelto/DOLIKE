@@ -5,7 +5,9 @@
 	Attachment at = (Attachment)request.getAttribute("at");
 	Reply r = (Reply)request.getAttribute("r");
 	
+	System.out.println("cno : " + b.getCategoryNo());
 %>  
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -106,7 +108,7 @@
 									<h6 class="p-t-15">
 										<i class="fa fa-download mb-2"></i>
 										<label for="titleImg">이미지</label>
-										<!-- <span>첨부파일</span> -->
+										<input type="hidden" value="<%= b.getCategoryNo() %>">
 									</h6>
 									<% if(at != null){ %>
 									<div class="row m-b-30">
@@ -144,7 +146,7 @@
 								<div class="bottom-btns" >
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
-									<% if (loginUser != null && loginUser.getNickName().equals(b.getNickName())){ %>
+									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" class="btn btn-sm" type="button" onclick="updateForm();">수정 </button>

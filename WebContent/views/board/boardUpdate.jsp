@@ -4,15 +4,34 @@
 	Board b = (Board)request.getAttribute("board");
 	Attachment at = (Attachment)request.getAttribute("at");
 	String tag = b.getTagName();
-	String[] selected = new String[7];
+	int cno = b.getCategoryNo();
+	System.out.println("cno update page : " + cno);
+	String[] selected = new String[22];
 	switch(tag){
-	case "옵션1": selected[0] = "selected"; break;
-	case "옵션2": selected[1] = "selected"; break;
-	case "옵션3": selected[2] = "selected"; break;
-	case "옵션4": selected[3] = "selected"; break;
-	case "옵션5": selected[4] = "selected"; break;
-	case "옵션6": selected[5] = "selected"; break;
-	case "옵션7": selected[6] = "selected"; break; 
+	case "프로그래밍": selected[0] = "selected"; break;
+	case "외국어": selected[1] = "selected"; break;
+	case "학교": selected[2] = "selected"; break;
+	case "자기개발": selected[3] = "selected"; break;
+	case "운동": selected[4] = "selected"; break;
+	case "다이어트": selected[5] = "selected"; break;
+	case "생활": selected[6] = "selected"; break; 
+	case "국내여행": selected[7] = "selected"; break; 
+	case "해외여행": selected[8] = "selected"; break; 
+	case "여행팁": selected[9] = "selected"; break; 
+	case "한식": selected[10] = "selected"; break; 
+	case "일식": selected[11] = "selected"; break; 
+	case "양식": selected[12] = "selected"; break; 
+	case "중식": selected[13] = "selected"; break; 
+	case "동물건강": selected[14] = "selected"; break; 
+	case "반려문화": selected[15] = "selected"; break; 
+	case "교육/훈련": selected[16] = "selected"; break; 
+	case "반려용품": selected[17] = "selected"; break; 
+	case "도메스틱": selected[18] = "selected"; break; 
+	case "디자이너브랜드": selected[19] = "selected"; break; 
+	case "SPA브랜드": selected[20] = "selected"; break; 
+	case "명품": selected[21] = "selected"; break; 
+	case "기타": selected[22] = "selected"; break; 
+	
 	}
 %>
 <!DOCTYPE html>
@@ -61,10 +80,37 @@
 		 						<input type="hidden" name="writer" value="<%= loginUser.getUserId() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
-		 								<option class="dropdown-item" value="1" <%= selected[0] %>>옵션1</option>
-		 								<option class="dropdown-item" value="2" <%= selected[0] %>>옵션2</option>
-		 								<option class="dropdown-item" value="3" <%= selected[0] %>>옵션3</option>
-		 								<option class="dropdown-item" value="4" <%= selected[0] %>>옵션4</option>
+		 							<% if(cno == 1){ %>
+		 								<option class="dropdown-item" value="프로그래밍"<%= selected[0] %>>프로그래밍</option>
+		 								<option class="dropdown-item" value="외국어"<%= selected[1] %>>외국어</option>
+		 								<option class="dropdown-item" value="학교"<%= selected[2] %>>학교</option>
+		 								<option class="dropdown-item" value="자기개발"<%= selected[3] %>>자기개발</option>
+		 							<% } else if(cno ==2 ){ %>
+		 								<option class="dropdown-item" value="운동"<%= selected[4] %>>운동</option>
+		 								<option class="dropdown-item" value="다이어트"<%= selected[5] %>>다이어트</option>
+		 								<option class="dropdown-item" value="생활"<%= selected[6] %>>생활</option>
+		 							<% } else if(cno ==3){ %>
+		 								<option class="dropdown-item" value="국내여행"<%= selected[7] %>>국내여행</option>
+		 								<option class="dropdown-item" value="해외여행"<%= selected[8] %>>해외여행</option>
+		 								<option class="dropdown-item" value="여행팁"<%= selected[9] %>>여행팁</option>
+		 							<% } else if(cno ==4 ){ %>
+		 								<option class="dropdown-item" value="맛집"<%= selected[10] %>>맛집</option>
+		 								<option class="dropdown-item" value="레시피"<%= selected[11] %>>레시피</option>
+		 								<option class="dropdown-item" value="음료"<%= selected[12] %>>음료</option>
+		 								<option class="dropdown-item" value="주전부리"<%= selected[13] %>>주전부리</option>
+		 							<% } else if(cno ==5){ %>
+		 								<option class="dropdown-item" value="동물건강"<%= selected[14] %>>동물건강</option>
+		 								<option class="dropdown-item" value="반려문화"<%= selected[15] %>>반려문화</option>
+		 								<option class="dropdown-item" value="교육/훈련"<%= selected[16] %>>교육/훈련</option>
+		 								<option class="dropdown-item" value="반려용품"<%= selected[17] %>>반려용품</option>
+		 							<% } else if(cno ==6 ){ %>
+		 								<option class="dropdown-item" value="도메스틱"<%= selected[18] %>>도메스틱</option>
+		 								<option class="dropdown-item" value="디자이너브랜드"<%= selected[19] %>>디자이너브랜드</option>
+		 								<option class="dropdown-item" value="SPA브랜드"<%= selected[20] %>>SPA브랜드</option>
+		 								<option class="dropdown-item" value="명품"<%= selected[21] %>>명품</option>
+		 							<% } else { %>
+		 								<option class="dropdown-item" value="기타"<%= selected[2] %>>기타</option>
+		 							<% } %>
 		 							</select>
 		 						
 			 						<div class="media pt-1">

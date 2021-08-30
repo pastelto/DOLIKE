@@ -62,10 +62,37 @@
 		 						<input type="hidden" name="writer" value="<%= loginUser.getUserId() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
-		 								<option class="dropdown-item" value="1">옵션1</option>
-		 								<option class="dropdown-item" value="2">옵션2</option>
-		 								<option class="dropdown-item" value="3">옵션3</option>
-		 								<option class="dropdown-item" value="4">옵션4</option>
+		 							<% if(cno == 1){ %>
+		 								<option class="dropdown-item" value="프로그래밍">프로그래밍</option>
+		 								<option class="dropdown-item" value="외국어">외국어</option>
+		 								<option class="dropdown-item" value="학교">학교</option>
+		 								<option class="dropdown-item" value="자기개발">자기개발</option>
+		 							<% } else if(cno ==2 ){ %>
+		 								<option class="dropdown-item" value="운동">운동</option>
+		 								<option class="dropdown-item" value="다이어트">다이어트</option>
+		 								<option class="dropdown-item" value="생활">생활</option>
+		 							<% } else if(cno ==3){ %>
+		 								<option class="dropdown-item" value="국내여행">국내여행</option>
+		 								<option class="dropdown-item" value="해외여행">해외여행</option>
+		 								<option class="dropdown-item" value="여행팁">여행팁</option>
+		 							<% } else if(cno ==4 ){ %>
+		 								<option class="dropdown-item" value="맛집">맛집</option>
+		 								<option class="dropdown-item" value="레시피">레시피</option>
+		 								<option class="dropdown-item" value="음료">음료</option>
+		 								<option class="dropdown-item" value="주전부리">주전부리</option>
+		 							<% } else if(cno ==5){ %>
+		 								<option class="dropdown-item" value="동물건강">동물건강</option>
+		 								<option class="dropdown-item" value="반려문화">반려문화</option>
+		 								<option class="dropdown-item" value="교육/훈련">교육/훈련</option>
+		 								<option class="dropdown-item" value="반려용품">반려용품</option>
+		 							<% } else if(cno ==6 ){ %>
+		 								<option class="dropdown-item" value="도메스틱">도메스틱</option>
+		 								<option class="dropdown-item" value="디자이너브랜드">디자이너브랜드</option>
+		 								<option class="dropdown-item" value="SPA브랜드">SPA브랜드</option>
+		 								<option class="dropdown-item" value="명품">명품</option>
+		 							<% } else { %>
+		 								<option class="dropdown-item" value="기타">기타</option>
+		 							<% } %>
 		 							</select>
 		 						
 			 						<div class="media pt-1">
