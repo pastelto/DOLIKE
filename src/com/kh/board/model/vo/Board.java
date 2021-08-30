@@ -78,6 +78,15 @@ public class Board {
 		
 	}
 
+	public Board(int boardNo, String nickName, String boardTitle, int views, int categoryNo) {
+		super();
+		this.boardNo = boardNo;
+		this.nickName = nickName;
+		this.boardTitle = boardTitle;
+		this.views = views;
+		this.categoryNo = categoryNo;
+	}
+
 	public String getTitleImg() {
 		return titleImg;
 	}

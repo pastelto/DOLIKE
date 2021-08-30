@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList, com.kh.challenge.model.vo.ChallengeApply, com.kh.challenge.model.vo.ChallengeVote"%>
 <%
-	ArrayList<ChallengeApply> list = (ArrayList<ChallengeApply>)request.getAttribute("list"); 
+	ArrayList<ChallengeApply> list = (ArrayList<ChallengeApply>)request.getAttribute("list");
+	ArrayList<Category> catList = (ArrayList<Category>) request.getAttribute("catList");
 	ChallengeVote cv = new ChallengeVote();
 %>
 <!DOCTYPE html>
@@ -94,18 +95,16 @@
 													<label for="exampleSelect1" class="form-label mt-4">챌린지선택</label> 
 													<select class="form-select" id="category" name="apNo">
 														<%for(int i = 0; i<List.size(); i++) {%>
-															<option value="<%=List.get(i).getCategoryNo()%>"><%=List.get(i).getCategoryName() %></option>
+															<option value="<%=List.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
 														<%} %>
 													</select>
 												</div>
 												<div class="form-group">
 													<label for="exampleSelect1" class="form-label mt-4">카테고리 선택</label> 
 													<select class="form-select" id="category" name="categoryNo">
-														<option value='1'>카테고리1</option>
-														<option value='2'>2</option>
-														<option value='3'>3</option>
-														<option value='4'>4</option>
-														<option value='5'>5</option>
+													<%for(int i = 0; i<catList.size(); i++) {%>
+														<option value="<%=catList.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
+													<%} %>
 													</select>
 												</div>
 											</div>

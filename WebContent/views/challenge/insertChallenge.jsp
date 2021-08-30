@@ -5,6 +5,7 @@
 	Challenge c = new Challenge();	
 	ChallengeAttachment at = new ChallengeAttachment();
 	ArrayList<ChallengeVote> list = (ArrayList<ChallengeVote>)request.getAttribute("list");
+	ArrayList<Category> catList = (ArrayList<Category>) request.getAttribute("catList");
 	System.out.println(list);
 	int voteCount = 0;
 	
@@ -115,8 +116,8 @@
 												<div class="form-group"> 												
 													<label for="exampleSelect1" class="form-label mt-4">카테고리 번호	</label> 
 													<select class="form-select" id="categoryNo"  name="categoryNo">
-														<%for(int i = 0; i<List.size(); i++) {%>
-															<option value="<%=List.get(i).getCategoryNo()%>"><%=List.get(i).getCategoryName() %></option>
+														<%for(int i = 0; i<catList.size(); i++) {%>
+															<option value="<%=catList.get(i).getCategoryNo()%>"><%=catList.get(i).getCategoryName() %></option>
 														<%} %>
 													</select>
 												</div>
@@ -146,7 +147,7 @@
 												<div class="text-left m-t-15">
 													<button
 														class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10"
-														type="button" id="applyBtn" onclick="inChBtn">
+														type="button" id="applyBtn" onclick="inChBtn();">
 														<i class="fa fa-paper-plane m-r-5"></i> 신청하기
 													</button>
 													<button
@@ -169,17 +170,18 @@
 	</div>
 	
 <script>
-	function inChBtn(){			
+	function inChBtn(){	
+		
 			Swal.fire({
 				 text: '챌린지를 등록하시겠습니까?',  
-	             icon: 'question',                              
-	             confirmButtonText: '등록',               
-	             showCancelButton: true,                 
-	             cancelButtonText: '취소',                
+	             icon: 'question',
+	             showCancelButton: true,  
 	             cancelButtonColor: "#f3969a",
 	             confirmButtonColor: "#78c2ad",
-            }).then((result) =>{ 
-               if(result.value) {                              
+	             confirmButtonText: '등록',               	                           
+	             cancelButtonText: '취소'                
+            }) .then((result) =>{ 
+                if(result.value) {                              
                 	$("#inChForm").submit();         
 	            } else if(result.dismiss === 'cancel') {    
 	            	Swal.fire({
@@ -187,9 +189,8 @@
 						 icon: 'error',
 						 confirmButtonColor: "#78c2ad"
 					});
-   				} 
-            });
-       	          	  
+   				}  
+            });         	  
 		}	
 	
 </script>	

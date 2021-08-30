@@ -207,7 +207,7 @@ a {
 			<div class="tab-pane fade show active" id="ch-body-e">
 			<br>
 			<br>
-				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
+				<h2 align="center"><b><%= loginUser.getNickName()%></b> 님의 챌린지</h2>
 					<br>
 					<br>
 					<div class="root-container">
