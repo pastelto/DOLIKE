@@ -237,47 +237,46 @@ a {
 				</div>
 				<%} %>
 				<div class="root-container">
-					<%
-					if (!list.isEmpty() || !fileList.isEmpty()) {
-					%>
-					<div class="container ">
-						<div class="root-content">
-							<div class="root-section">
-								<section class="challenge-list">
-									<ul class="live-item-list" id="clickUl">
-										<%
-										for (int i = 0; i < list.size(); i++) {
-										%>
-										<li class="item">
-											<div class="hide"><%=list.get(i).getChNo()%></div>
-											<div class="item-wrap">											
-												<%for(int j=0; j<fileList.size(); j++) {%>
-													<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"
-															class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-														</a>
-													<%} %>
-												<%} %>
-												<div class="item-info">
-													<div>
-													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=list.get(i).getChTitle()%></a>
-													</h4></div> <br>
-													<div>									
-													<ul class="challenge-period">
-														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
-														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
-													</ul>
+					<%if (!list.isEmpty() || !fileList.isEmpty()) {%>
+							<div class="container ">
+								<div class="root-content">
+									<div class="root-section">
+										<section class="challenge-list">
+											<ul class="live-item-list" id="clickUl">
+												<%
+												for (int i = 0; i < list.size(); i++) {
+												%>
+												<li class="item">
+													<div class="hide"><%=list.get(i).getChNo()%></div>
+													<div class="item-wrap">											
+														<%for(int j=0; j<fileList.size(); j++) {%>
+															<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
+																<a href="<%=request.getContextPath()%>/challengedetail.ch"
+																	class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge">
+																</a>
+															<%} %>
+														<%} %>
+														<div class="item-info">
+															<div>
+															<h4 class="title" style="float:left">
+																<%=list.get(i).getChTitle()%>
+															</h4></div> <br>
+															<div>									
+															<ul class="challenge-period">
+																<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+																<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
+															</ul>
+															</div>
+														</div>
 													</div>
-												</div>
-											</div>
-										</li>
-										<%}%>
-									</ul>
-								</section>
+												</li>
+												<%}%>
+											</ul>
+										</section>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
+		
 					<%} else {%>
 					<br>
 					<br>
@@ -304,13 +303,14 @@ a {
 	
 <script>
 	<% if(!list.isEmpty()){%>
+	 <%if(loginUser !=null){%>
 		$(function() {
 			$("#clickUl>.item").click(function(){
 				var chno = $(this).children().eq(0).text();										
 						location.href = "<%=request.getContextPath()%>/challengedetail.ch?chno="+chno;
 					})					
 				})
-	<% } %>
+	<% }} %>
 	
 	<%if(loginUser == null) {%>
 	$(function() {

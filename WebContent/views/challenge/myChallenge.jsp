@@ -205,7 +205,7 @@ a {
 			<div class="tab-pane fade show active" id="ch-body-m" >
 				<br>
 				<br>
-				<h2 align="center"><%= loginUser.getNickName()%> 님의 챌린지</h2>
+				<h2 align="center"><b><%= loginUser.getNickName()%></b> 님의 챌린지</h2>
 					<br>
 					<br>
 				<div class="root-container" align="center">
@@ -226,7 +226,7 @@ a {
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
-														<a href="<%=request.getContextPath()%>/challengedetail.ch"><%=c.getChTitle()%></a>
+														<%=c.getChTitle()%>
 													</h4></div> <br>
 													<div>									
 													<ul class="challenge-period">
