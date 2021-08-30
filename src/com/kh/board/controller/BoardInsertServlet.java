@@ -56,7 +56,7 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println("title : " + title);
 			System.out.println("content : " + content);
 			
-			String nickName = ((Member)request.getSession().getAttribute("loginUser")).getNickName();
+			String nickName = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 			
 			
 			Board b = new Board();
