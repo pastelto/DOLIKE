@@ -313,7 +313,7 @@
 
 				        <script>
 				        
-							$(function(){
+/* 							$(function(){
 								$("#btn-like").eq(0).click(function(){
 								var favB = $("#categoryList").val();
 								
@@ -330,10 +330,15 @@
 									}
 								})
 							})
-						})
-				        	$(".btn-like").click(function() {
-				         	   $(this).toggleClass("done");
-				       		 })
+						}) */
+				        
+/* 						$(function(){
+							
+						$(".btn-like").eq(0).click(function() {
+				         	   $(this).addClass('done');
+				       		 });
+							
+						}) */
 				       		 
 				       		 				       		
         				</script>
@@ -461,29 +466,43 @@
                 </div>
             </div>
         <script>
-        	function msgLoginerror(){
-        		alert("로그인 후 이용 가능합니다.");
-        	}
-        	
-			$(function(){
+        // DH -- 즐겨찾기 
+	<%-- 		$(function(){
 				$("#btn-like").eq(0).click(function(){
-				var favB = $("#input2").val();
-								
-				$.ajax({
-									
-				url: "myFavBoard.bo",
-				data: {input:input},
-				type: "post",
-				success: function(result){
-				$("#output2").val(result);
-				},
-				error: function(e){ 
-					console.log(e);
-				}
-				})
-				})
-				})
+					
+		            // 확인, 취소버튼에 따른 후속 처리 구현
+		            swal.fire({
+		                title: '확인', 
+		                text: "즐겨찾는 게시판으로 등록하시겠습니까?", 
+		                type: 'question', 
+		                confirmButtonText: '추가', 
+		                showCancelButton: true,     
+		                cancelButtonText: '취소', 
+		                cancelButtonColor: "#f3969a",
+		                confirmButtonColor: "#78c2ad"
+		            })
+		            .then(function(result) { 
+		                if(result.value) {             
+		                
+		                $("#msgDel").attr("action", "<%=contextPath%>/dmmsg.ms");
+						swal.fire(
+								{title: '삭제',
+								 text: '성공적으로 삭제되었습니다.',
+								 type: 'success',
+								 confirmButtonColor: "#78c2ad"}).then(function(result){
 				
+							$("#msgDel").submit();
+						});
+		                
+		            } else if(result.dismiss === 'cancel') { 
+		                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+		         
+		            }
+		        });
+		      }
+			}); --%>
+		
+        // 로그인 후 이용 가능 팝업창
 			function needLogin(){
 				Swal.fire({
 				  title: "로그인이 필요합니다.",
@@ -493,6 +512,8 @@
 				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
 				})
 			}
+        
+      	
 
         </script>
         
@@ -534,11 +555,7 @@
                 		         }) 
               				  })
              			       	
-             		          	        				
-        </script>
-        
-		<script>
-        				
+	
               				  $(function(){
               					 $("#categoryList2").click(function(){     				       			                 			        
               						 
@@ -558,7 +575,7 @@
    				       	 					
    				       	 					$.each(list, function(i){
    				       																														
-    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       						result = "<li><table><tr><th><button class='btn-like' name='myFavBoard' id=''"+list[i].categoryNo+"fb' value='"+list[i].categoryNo+"'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"'>" + list[i].categoryName +"</a></td></tr></table></li>"
     				       					
    				       							$liBody.append(result)
    				       							

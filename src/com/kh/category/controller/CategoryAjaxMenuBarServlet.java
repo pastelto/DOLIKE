@@ -36,54 +36,15 @@ public class CategoryAjaxMenuBarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
 		ArrayList<Category> list = new CategoryService().categoryMenuBarList();
 						
-//		JSONArray jArr = new JSONArray();
-//		
-//		JSONObject jsonUser = null;
-//		System.out.println("ajax 서블릿 list 값 :" + list);
-////		for(Category caMenu: list) {
-////			
-////				jsonUser.put("name", caMenu.getCategoryName());
-////				
-////				jArr.add(jsonUser);
-////			
-////		}
-//		Category ca = null;
-//		
-//		for(int i = 0; i < list.size(); i++) {
-//			ca = list.get(i);
-//			jsonUser = new JSONObject();
-//			
-//			jsonUser.put("name", ca.getCategoryName());
-//			jArr.add(jsonUser);
-//		}
-//		
-////		JSONObject jsonMap = null;
-////		
-////		if(jArr != null) {
-////			jsonMap = new JSONObject();
-////			
-////			jsonMap.put("jArr", jArr);
-////			
-////			
-////		}
-//		
-//		
-//		System.out.println("jArr 값 : " + jArr);
-//		System.out.println("list 값 : " + list);
-		
-		
-//		response.setContentType("application/json; charset=utf-8");
-//		response.getWriter().print(jArr);
-//		System.out.println("Gson### : " + list);
+
 		response.setContentType("application/json; charset=utf-8");
 		System.out.println("서블릿 전송에 성공하였습니다. list 값 :" + list);
 		new Gson().toJson(list, response.getWriter());
 		
-		//RequestDispatcher view = request.getRequestDispatcher("views/category/menuSideBar.jsp");
-		//view.forward(request, response);
+		
 	}
 
 	/**

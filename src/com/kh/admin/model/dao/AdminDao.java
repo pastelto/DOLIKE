@@ -293,5 +293,32 @@ public class AdminDao {
 		return list;
 	}
 
+	public int restoreMember(Connection conn, String status, String userId) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		
+		String sql = prop.getProperty("memberStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }
