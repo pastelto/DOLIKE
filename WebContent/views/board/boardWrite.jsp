@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.dao.BoardDao" %>
-<% int cno = (int)request.getAttribute("cno"); 
-	System.out.println("write : " + cno);
+<% 
+	int cno = (int)request.getAttribute("cno"); 
 %>
 
 <!DOCTYPE html>
@@ -11,13 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 게시글 작성 </title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <style>
-	.nk-sidebar{
-		padding:30px;
-	}
-	.content-body{
-		padding:5px 0px 0px 30px;
-	}
+	
 	.tag-class{
 		width:10%;
 	}
@@ -38,8 +34,6 @@
 		width:200px; height:auto;
 	}
 </style>
-<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-<link href="../../css/style.css" rel="stylesheet">
 </head>
 <body>
 <div id="main-wrapper">
@@ -104,7 +98,7 @@
 			 							<i class="bi bi-pencil"></i>
 			 							글쓰기
 			 						</button>
-			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button">
+			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">
 			 							<i class="ti-close m-r-5 f-s-12"></i>
 			 							취소
 			 						</button>
@@ -131,13 +125,6 @@
 	 			reader.readAsDataURL(this.files[0]);
 	 		}
 	 	})
-	 	<%-- 
-	 	function subForm(){
-	 		var cno = "<%= cno %>";
-	 		alert(cno);
-	 		location.href="<%= contextPath %>/insert.bo?cno="+cno;
-	 	}*/ --%>
-	 	
  	</script>
 </body>
 </html> 

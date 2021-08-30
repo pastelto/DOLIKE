@@ -1,17 +1,12 @@
 package com.kh.board.model.vo;
 
 import java.sql.Date;
-/*
-COMMENT_NO	NUMBER	No		1	댓글번호
-NICKNAME	VARCHAR2(30 BYTE)	No		2	댓글작성자
-CMT_CONTENT	VARCHAR2(1024 BYTE)	Yes		3	댓글내용
-BOARD_NO	NUMBER	Yes		4	글번호
-*/
+
 public class Reply {
-	private int replyNo;		// 댓글 번호 
-	private String replyContent;// 댓글 내용 
-	private int replyBoardNo;		// 게시글 번호 
-	private String replyWriter; // 조회시 : 작성자 이름,  댓글작성시 : 회원번호로 쓰일 것!!
+	private int replyNo;		
+	private String replyContent; 
+	private int replyBoardNo;		
+	private String replyWriter; 
 	
 	
 	public Reply() {

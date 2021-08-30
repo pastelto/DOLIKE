@@ -84,7 +84,7 @@ public class BoardDao {
 									rset.getString("TAG"),
 									rset.getInt("CATEGORY_NO"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("USER_ID"),
+									rset.getString("NICKNAME"),
 									rset.getDate("BOARD_DATE"),
 									rset.getInt("VIEWS")
 									
