@@ -246,7 +246,7 @@
 						confirmButtonBorder: "none",
 						confirmButtonText: '돌아가기',
 					}).then((result) => {
-						location.href="<%= contextPath %>/index2.jsp";
+						location.href="<%= contextPath %>/main.do";
 					})
 				
 			}else{
