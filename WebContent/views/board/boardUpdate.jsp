@@ -58,7 +58,7 @@
 	 				<div class="card">
 	 					<div class="card-body" style="background: rgb(248, 249, 250)">
 		 						<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
-		 						<input type="hidden" name="writer" value="<%= loginUser.getNickName() %>">
+		 						<input type="hidden" name="writer" value="<%= loginUser.getUserId() %>">
 		 						<div class="toolbar" role="toolbar">  
 		 							<select name="tag" class="btn btn-light dropdown-toggle">
 		 								<option class="dropdown-item" value="1" <%= selected[0] %>>옵션1</option>

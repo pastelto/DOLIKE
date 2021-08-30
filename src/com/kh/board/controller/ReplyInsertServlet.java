@@ -34,7 +34,7 @@ public class ReplyInsertServlet extends HttpServlet {
 		
 		String content = request.getParameter("content");
 		int bId = Integer.parseInt(request.getParameter("bId"));
-		String writer = ((Member)request.getSession().getAttribute("loginUser")).getNickName();
+		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
 		Reply r = new Reply();
 		r.setReplyWriter(writer);
