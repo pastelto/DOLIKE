@@ -21,6 +21,7 @@
 	int startPage = amb.getStartPage();
 	int endPage = amb.getEndPage();
  	int i = 0;
+ 	
  %>
 
 <!DOCTYPE html>
@@ -30,15 +31,51 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 상세보기</title>
+<title>DO LIKE - 회원 상세보기</title>
 
+<!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
+
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
 <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+
+
+
+
 <style>
+
+#writeBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	#writeBtn:hover {
+		color: #78c2ad;
+		background-color: #fff;
+	}
+	#pageTag {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
+	#pageTag:hover {
+		color: #fff;
+    	background-color: #f3969a;
+    	border-color: #f3969a;
+	}
+	#pageDisable {
+		color: gray;
+    	background-color: #ced4da;
+    	border-color: #ced4da;
+	}
 
 #iconMsg, #comment1 {
 	color: #fff;
@@ -167,21 +204,21 @@
                                     
                                     <tr>
                                     	<td>
-	                                    	<div class="col-12 text-center" id="StatusBtn1">
-	                                        <button class="btn">복구하기</button>
+	                                    	<div class="col-12 text-center" id="StatusBtn1">                 	
+	                                        <button class="btn" onclick="Restore();" type="button">복구하기</button>	               
 	                                    	</div>
                                     	</td>
                                     	
                                     	<td>
 	                                    	<div class="col-12 text-center" id="StatusBtn2">
-	                                        <button class="btn">삭제하기</button>
+	                                        <button class="btn" onclick="Delete();" type="button">삭제하기</button>
 	                                    	</div>
                                     	</td>
                                     </tr>
                                     <tr>
                                     	<td>
                                     		<div class="col-12 text-center" id="StatusBtn3">
-                                        <button class="btn">블랙리스트</button>
+                                        <button class="btn" onclick="BlackList();" type="button">블랙리스트</button>
                                     </div>
                                     	</td>                                 		                                   	                                                                                                                                                                       
                                     </table> 
@@ -201,19 +238,15 @@
 								<div class="card-body" style="text-align: center;">
 									<div id="up">
 										<div id="down" class="input-group-prepend">
-											<form id="searchForm" class="form-inline" action="insert.fl"
-												method="post">
+											<!-- <form id="searchForm" class="form-inline" action="insert.fl"
+												method="post"> -->
 
 												<div class="input-group text-center mb-3">
 													<input type="text" class="form-control"
-														placeholder="검색할 게시글 작성" name="followId" size="35%">
-													<div class="input-group-append">
-														<button id="iconMsg" class="btn" type="button"
-															onclick="searchId();">검색</button>
-														<button id="byefr" class="btn" type="reset">취소</button>
-													</div>
+														placeholder="검색할 게시글 제목 작성" name="followId" size="35%" id="titleKeyword">
+													
 												</div>
-											</form> 
+											<!-- </form>  -->
 										</div>
 									</div>                                   
 									 </div>
@@ -233,7 +266,7 @@
                                     <h4>카테고리 목록</h4>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" id="board-table">
                                         <thead>
                                             <tr>
                                                 <th>번호</th>
@@ -246,7 +279,7 @@
                                         <tbody>
                                         	<% if(list.isEmpty()){ %>
                                             <tr>
-                                                <td colspan="2">조회된 리스트가 없습니다.</td>                                                
+                                                <td colspan="5">조회된 리스트가 없습니다.</td>                                                
                                             </tr>
                                             <%} else if(!list.isEmpty()){ %>
                                            	<% for(Board b : list) { %>
@@ -272,19 +305,17 @@
 								</div>
                             </div>
                         </div>
-                    </div>
-                    
-                    	<!-- 페이지 처리 -->
+                                           	<!-- 페이지 처리 -->
 		<div>
 			<ul class="pagination justify-content-center">
 				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?currentPage=1"> &laquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=1"> &laquo; </a></li>
 				
 				<!-- 이전페이지 -->
 				<% if(currentPage == 1) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage-1 %>"> &lt; </a></li>
 				<%} %>
 				
 				
@@ -294,7 +325,7 @@
 					<%if(p == currentPage){ %>
 						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?currentPage=<%= p %>"><%= p %> </a></li>
+						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= p %>"><%= p %> </a></li>
 					<%} %>
 					
 				<%} %>
@@ -304,44 +335,165 @@
 				<% if(currentPage == maxPage) {%>
 				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage+1 %>"> &gt; </a></li>
 				<%} %>
 				
 				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?currentPage=<%= maxPage %>"> &raquo; </a></li>
+				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= maxPage %>"> &raquo; </a></li>
 			</ul>
 		</div>
-		<%@ include file="../common/footer.jsp" %>
+                    </div>
 		</div>
 		
-		<script>
+	<script>
 		<%if(!list.isEmpty()){ %>
 		$(function(){
 			$(".table>tbody>tr").click(function(){
 				var amno = $(this).children().eq(0).text();
-				location.href="<%= contextPath %>/MemberDetail.am?amno=" +amno;
+				location.href="<%= contextPath %>/detail.bo?amno=" +amno;
 				console.log("amno 값을 알려줘!"+amno)
 			})
 		})
 		<%}%>
 	</script>
                     
+    <script> 
+    $(function(){
+          	    $("#titleKeyword").keyup(function() { 
+    		   var k = $(this).val();
+    		   $("#board-table > tbody > tr").hide();
+    		   var temp = $("#board-table > tbody > tr > td:nth-child(5n+2):contains('" + k + "')");
+    		   
+    		   $(temp).parent().show();
+    		   
+    	   		    	   })
+       })
+    </script>
+    
+    <script>
+    function Restore(){
+    	var status = "<%= am.getUserStatus() %>";
+    	var userId = "<%= am.getUserId() %>";
+    	var changeStatus = "Y";
+    	if(status == "N" || status == "B") {
+    		swal.fire({
+    			text: '계정을 복구하시겠습니까?',
+    			icon: 'warning',
+    			confirmButtonText: '확인',
+    			confirmButtonColor: '#78c2ad',
+    			showCancelButton: true,
+    			cancelButtonText: '취소',
+    			cancelButtonColor: '#f3969a', 
+    	}).then(function(result){
+    		if(result.value){
+    			$.ajax({
+    				url: "restore.am",
+    				data: {status:changeStatus, userId:userId},
+    				type: "get",
+    				dataType: "json",
+    				success:function(result){
+    					console.log(result)
+/*     					var realStatus = "";
+    					$.each(result, function(i){
+    						realStatus = result[i].userStatus
+    						console.log(result)
+    					})	*/
+    					location.href="<%= contextPath %>/MemberDetail.am?amno=" + userId
+    					},error:function(){
+        				consloe.log("서버통신 실패");
+        			}
+    			})
+    		}  		
+    	});
+    }
+   }
+    
+     
+    
+    
+    </script>
+    
+    <script>
+    function Delete(){
+    	var status = "<%= am.getUserStatus() %>";
+       	var userId = "<%= am.getUserId() %>";
+    	var changeStatus = "N";
+    	if(status == "Y") {
+    		swal.fire({
+    			text: '계정을 삭제하시겠습니까?',
+    			icon: 'warning',
+    			confirmButtonText: '확인',
+    			confirmButtonColor: '#78c2ad',
+    			showCancelButton: true,
+    			cancelButtonText: '취소',
+    			cancelButtonColor: '#f3969a'
+    		}).then(function(result){
+        		if(result.value){
+        			$.ajax({
+        				url: "restore.am",
+        				data: {status:changeStatus, userId:userId},
+        				type: "get",
+        				dataType: "json",
+        				success:function(result){
+        				location.href="<%= contextPath %>/MemberDetail.am?amno=" + userId
+        				},error:function(){
+            				consloe.log("서버통신 실패");
+            			}
+        			})
+        		}  		
+        	});
+        }
+       }
+    </script>
+    
+    <script>
+    function BlackList(){
+    	var status = "<%= am.getUserStatus() %>";
+       	var userId = "<%= am.getUserId() %>";
+    	var changeStatus = "B";
+    	if(status == "Y" || status == "") {
+    		swal.fire({
+    			text: '계정을 블랙리스트로 만드시겠습니까?',
+    			icon: 'warning',
+    			confirmButtonText: '확인',
+    			confirmButtonColor: '#78c2ad',
+    			showCancelButton: true,
+    			cancelButtonText: '취소',
+    			cancelButtonColor: '#f3969a'
+    		}).then(function(result){
+        		if(result.value){
+        			$.ajax({
+        				url: "restore.am",
+        				data: {status:changeStatus, userId:userId},
+        				type: "get",
+        				dataType: "json",
+        				success:function(result){
+        					location.href="<%= contextPath %>/MemberDetail.am?amno=" + userId
+        				},error:function(){
+            				consloe.log("서버통신 실패");
+            			}
+        			})
+        		}  		
+        	});
+        }
+       } 
+    </script>
                     
                  </div>
                </div> 
-                                </div>
-                            </div>
+             </div>
+        	</div>
                             
              
-            <!-- #/ container -->
+          
         </div>
         </div>
         </div>
         </div>
         <%@ include file="../common/footer.jsp"%>
-        </div>
         
-		
+        
+
 
 </body>
 </html>
