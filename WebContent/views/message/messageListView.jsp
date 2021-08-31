@@ -55,6 +55,24 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
+	
+	#resetBtn:hover, #sendBtn:hover, #deleteBtn:hover {
+		color: #78c2ad;
+    	background-color: #fff;
+    	border-color: #78c2ad;
+	}
+	
+	#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn {
+    	color: #fff;
+    	background-color: #78c2ad;
+    	border-color: #78c2ad;
+	}
+	
+	#deleteAllBtn:hover, #sendMsgLink:hover{
+		color: #78c2ad !important;
+    	background-color: #fff !important;
+    	border-color: #78c2ad !important;
+	}
 </style>
 </head>
 

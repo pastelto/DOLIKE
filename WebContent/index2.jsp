@@ -107,6 +107,10 @@
 	color: #f3969a !important;
 	
 }
+
+.cursor {
+ 	cursor:pointer;
+}
 </style>
 <body>
 	<div id="preloader">
@@ -128,8 +132,10 @@
 			<div class="row">
 			<div class="container-fluid" style="height: 50%;">
 			<!-- 상단 캐로셀 -->
+			
 			<div class="col-12">
 				<div class="row">
+				<% if(loginUser == null) { %>
 					<div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
 						<div class="bootstrap-carousel" style="height: 5rem;">
 							<div id="carouselExampleIndicators" class="carousel slide"
@@ -139,31 +145,21 @@
 										class="active"></li>
 									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 								</ol>
 								<div class="carousel-inner">
-									<div class="carousel-item active">
+									<div class="carousel-item active"  >
 										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/summer.png"
+											src="resources/images/1.png"
 											alt="First slide">
 									</div>
 									<div class="carousel-item">
 										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/runday.png"
+											src="resources/images/2.png"
 											alt="Second slide">
 									</div>
 									<div class="carousel-item">
 										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/submit.png" alt="Third slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/vege.png" alt="Fourth slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" style="width: 10%; height: 15rem;"
-											src="resources/images/animal.png" alt="Fifth slide">
+											src="resources/images/3.png" alt="Third slide">
 									</div>
 								</div>
 								<a class="carousel-control-prev"
@@ -177,13 +173,61 @@
 							</div>
 						</div>
 					</div>
-		
+					
+					
 					<div class="col-md-4" id="innerDiv" style="width: 40%">
 						<div class="card" style="width: 90%;">
 							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
-							src="resources/images/submit.png" alt="Third slide">
+							src="resources/images/apply.png" alt="챌린지 지원하세요">
 						</div>
 					</div>
+				    <% } else{  %>
+				    <div class="col-md-8" style="width: 10%; padding-right: 30px; padding-left: 30px;">
+						<div class="bootstrap-carousel" style="height: 5rem;">
+							<div id="carouselExampleIndicators" class="carousel slide"
+								data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carouselExampleIndicators" data-slide-to="0"
+										class="active"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="carousel-item active" onclick="location.href='<%=contextPath%>/challengedetail.ch?chno=6'" >
+										<img class="d-block w-100 cursor" style="width: 10%; height: 15rem;"
+											src="resources/images/1.png"
+											alt="First slide">
+									</div>
+									<div class="carousel-item" onclick="location.href='<%=contextPath%>/challengedetail.ch?chno=7'" >
+										<img class="d-block w-100 cursor" style="width: 10%; height: 15rem;"
+											src="resources/images/2.png"
+											alt="Second slide">
+									</div>
+									<div class="carousel-item"  onclick="location.href='<%=contextPath%>/challengedetail.ch?chno=5'" >
+										<img class="d-block w-100 cursor" style="width: 10%; height: 15rem;"
+											src="resources/images/3.png" alt="Third slide">
+									</div>
+								</div>
+								<a class="carousel-control-prev"
+									href="#carouselExampleIndicators" data-slide="prev"><span
+									class="carousel-control-prev-icon"></span> <span
+									class="sr-only">Previous</span> </a><a
+									class="carousel-control-next"
+									href="#carouselExampleIndicators" data-slide="next"><span
+									class="carousel-control-next-icon"></span> <span
+									class="sr-only">Next</span></a>
+							</div>
+						</div>
+					</div>
+				 
+				    
+					<div class="col-md-4" id="innerDiv" style="width: 40%">
+						<div class="card cursor" style="width: 90%;" onclick="location.href='<%=contextPath%>/challengeApplyForm.ch'" style="cursor:pointer">
+							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
+							src="resources/images/apply.png" alt="챌린지 지원하세요">
+						</div>
+					</div>
+				<% } %>	
 				</div>
 			</div>
 			</div>

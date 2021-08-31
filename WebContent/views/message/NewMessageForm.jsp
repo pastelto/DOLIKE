@@ -24,6 +24,18 @@
 	background-color: #78c2ad;
 	border-color: #78c2ad;
 }
+
+#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn, #submitBtn{
+    color: #fff;
+    background-color: #78c2ad;
+    border-color: #78c2ad;
+}
+	
+#deleteAllBtn:hover, #sendMsgLink:hover, #sendBtn:hover, #resetBtn:hover, #submitBtn:hover{
+	color: #78c2ad !important;
+    background-color: #fff !important;
+    border-color: #78c2ad !important;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
