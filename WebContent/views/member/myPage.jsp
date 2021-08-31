@@ -76,7 +76,7 @@
 	}
 	
 	.checkFont {
-		margin-left: 300px;
+		margin-left: 510px;
 	}
 	
 	</style>
@@ -113,34 +113,38 @@
                                     <div class="mt-2 mb-5">
                                         	<h2 id="editTitle" align="center"><b>계정 관리</b></h2>
                                         </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-4">
                                         <label class="col-lg-4 col-form-label" for="userId">아이디</label>
                                         <div class="form-inline">
                                             <input type="text" class="form-control" id="userId" name="userId" value="<%= userId %>" readonly>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="userPwd">비밀번호 <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-inline">
                                             <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required>
                                         </div>
-                                        <div class="checkFont" id="pwdCheck"></div>
                                     </div>
+                                    <div class="checkFont mb-4" id="pwdCheck"></div>
+                                    
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="checkPwd">비밀번호 확인 <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-inline">
                                             <input type="password" class="form-control" id="checkPwd" name="checkPwd" placeholder="비밀번호를 한 번 더 입력하세요." required>
                                         </div>
-                                        <div class="checkFont" id="pwdCkCheck"></div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="checkFont mb-4" id="pwdCkCheck"></div>
+                                    
+                                    <div class="form-group row mb-4">
                                         <label class="col-lg-4 col-form-label" for="userName">이름 </label>
                                         <div class="form-inline">
                                             <input type="text" class="form-control" id="userName" name="userName" value="<%= userName %>" readonly>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="nickName">닉네임 <span class="text-danger">*</span></label>
                                         <div class="form-inline">
@@ -149,26 +153,30 @@
                                         <div class="form-inline">
                                             <button type="button" class="btn btn-primary" id="nickCheckBtn" onclick="checkNick();">중복확인</button>
                                         </div>
-                                        <div class="checkFont" id="nickCheck"></div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="checkFont mb-4" id="nickCheck"></div>
+                                    
+                                    <div class="form-group row mb-4">
                                         <label class="col-lg-4 col-form-label" for="birthDate">생년월일 </label>
                                         <div class="form-inline">
                                             <input type="text" class="form-control" id="birthDate" name="birthDate" placeholder="<%= birthDate %>" readonly/>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    
+                                    <div class="form-group row mb-4">
                                         <label class="col-lg-4 col-form-label" for="phone">연락처 </label>
                                         <div class="form-inline">
                                             <input type="text" class="form-control" id="phone" name="phone" value="<%= phone %>" readonly/>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    
+                                    <div class="form-group row mb-4">
                                         <label class="col-lg-4 col-form-label" for="email">이메일 </label>
                                         <div class="form-inline">
                                             <input type="email" class="form-control" id="email" name="email" value="<%= email %>" readonly/>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
                                         <div class="form-inline">
