@@ -341,7 +341,7 @@
 												<% for(int i = 0 ; i< eList.size() ;i++){ %>
 													<div class="p-t-15">
 														<br>
-														<h5><%= eList.get(i).getBoardTitle() %></h5> 
+														<a href="<%= contextPath %>/detail.bo?bno=<%= eList.get(i).getBoardNo() %>"><h5><%= eList.get(i).getBoardTitle() %></h5></a> 
 														<p> <%= eList.get(i).getNickName() %></p>
 														<%-- <p><%= eList.get(i).getBoardContent() %></p> --%>
 														<hr>
