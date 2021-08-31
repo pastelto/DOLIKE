@@ -43,7 +43,16 @@
 	<title>DO LIKE - 게시글 수정 </title>
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<style>
-		
+		#subBtn, #clBtn{
+			color: #fff;
+	    	background-color: #78c2ad;
+	    	border-color: #78c2ad;
+		}
+		#subBtn:hover, #clBtn:hover{
+			color: #78c2ad;
+	    	background-color: #fff;
+	    	border-color: #78c2ad;
+		}
 		.tag-class{
 			width:10%;
 		}
@@ -126,27 +135,18 @@
 			 								<textarea name="content" class="textarea_editor form-control bg-light" rows="15"><%= b.getBoardContent() %></textarea>
 			 							</div>
 			 						<h5 class="m-b-20">
-			 						<% if(at != null){ %>
+			 						<% if(at == null){ %>
 			 							<i class="fa fa-paperclip m-r-5 f-s-18"></i>
 			 							첨부파일
-			 							 <img id="titleImg" width="150" height="120" class="pull-right">
-			 						</h5>
-			 							<div class="form-group" id="fileArea">
-			 								<div class="fallback">
-			 									<%= at.getOriginName() %>
-			 									<input type="hidden" name="originFile" value='<%= at.getChangeName() %>'>
-						 						<input type="hidden" name="originFileNo" value='<%= at.getFileNo() %>'>
-						 						<% } else { %>
-						 						<p>등록된 첨부파일이 없습니다.</p>	
-							 					<% } %>
-			 									<input class="l-border-1" name="upfile" type="file" id="file1" onchange="loadImg(this, 1);" multiple="multiple">
-			 								</div>
-			 							</div>
+			 							 
+			 									<p>등록된 첨부파일이 없습니다.</p>	
+			 							<% } %>
+			 							</h5>
 			 					</div>
 			 					<div class="text-left m-t-15">
 			 					
 			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
-			 							<i class="bi bi-pencil"></i>
+			 							<i class="fa fa-paper-plane m-r-5"></i>
 			 							수정
 			 						</button>
 			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">

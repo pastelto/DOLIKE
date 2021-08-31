@@ -122,7 +122,7 @@
 			 					<div class="text-right m-t-15">
 			 						<input type="hidden" value="<%= cno %>">
 			 						<button id="subBtn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="submit">
-			 							<i class="bi bi-pencil"></i>
+			 							<i class="fa fa-paper-plane m-r-5"></i>
 			 							글쓰기
 			 						</button>
 			 						<button id="clBtn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button" onclick="history.back();">
