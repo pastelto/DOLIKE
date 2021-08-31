@@ -60,6 +60,7 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+
 		
   	#loginBtnModal:hover, #EnrollBtnModal:hover {
      	background-color: #f3969a;
