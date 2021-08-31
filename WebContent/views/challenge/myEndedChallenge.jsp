@@ -227,7 +227,7 @@ a {
 											<div class="item-wrap">
 												<%for(int j=0; j<fileList.size(); j++) {%>							
 													<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
-														 <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge" style="width:362px", style="height:162px">
+														 <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge" style="width:362px" style="height:162px">
 													<%} %>
 												<%} %>
 												<div class="item-info">
