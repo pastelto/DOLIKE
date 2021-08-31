@@ -1,4 +1,4 @@
-package com.kh.main.model.service;
+package com.kh.dlmain.model.service;
 
 import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.getConnection;
@@ -8,16 +8,15 @@ import java.util.ArrayList;
 
 import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
-import com.kh.follow.model.dao.FollowDao;
-import com.kh.follow.model.vo.Follow;
-import com.kh.main.model.dao.MainDao;
+import com.kh.dlmain.model.dao.MainDao;
+import com.kh.dlmain.model.vo.DLMain;
 
 public class MainService {
 
-	public ArrayList<Board> selectTopList() {
+	public ArrayList<DLMain> selectTopList() {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> bAllList = new MainDao().selectTopList(conn);
+		ArrayList<DLMain> bAllList = new MainDao().selectTopList(conn);
 		close(conn);
 		return bAllList;
 	}

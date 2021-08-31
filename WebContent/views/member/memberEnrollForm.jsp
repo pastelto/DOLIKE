@@ -39,7 +39,7 @@
 	}
 	
 	.checkFont {
-		margin-left: 300px;
+		margin-left: 350px;
 	}
 	
 	#joinTitle {
@@ -51,9 +51,6 @@
 </head>
 
 <body>
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -61,20 +58,10 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
     <%@ include file="../common/menuSideBar.jsp" %> 
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body" style="height:1200px">
 	    <div class="row page-titles mx-0">
 	         <div class="col p-md-0">
@@ -85,7 +72,6 @@
 	         </div>
 	     </div>
         
-            <!-- row -->
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -216,10 +202,6 @@
                     </div>
                 </div>
             </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-            <!-- #/ container -->
         
     <script>
   	//==============================================
@@ -613,23 +595,8 @@
   	}
 	
 	</script>
-    <!--**********************************
-        Content body end
-    ***********************************-->
-        
-        
-    <!--**********************************
-        Footer start
-    ***********************************-->
 	<%@ include file="../common/footer.jsp"%>
-    <!--**********************************
-        Footer end
-    ***********************************-->
 
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
     <script src="./plugins/validation/jquery.validate.min.js"></script>
     <script src="./plugins/validation/jquery.validate-init.js"></script>
 </body>

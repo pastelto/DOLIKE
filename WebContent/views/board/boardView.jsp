@@ -88,13 +88,13 @@
 	 		<div class="row">
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thead>
-	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
-			 				<th style="background-color:rgb(228, 243, 240); text-align:center;">태그 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성일 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">조회수 </th>
+	 					<tr style="background-color: #78c2ad; color: white;"> <!-- 게시글리스트 테이블의 헤더  -->
+	 						<th style="width:5rem; text-align:center;">번호 </th>
+			 				<th style="width:8rem; text-align:center;">태그 </th>
+	 						<th style="width:25rem; text-align:center;">제목 </th>
+	 						<th style="width:10rem; text-align:center;">작성자 </th>
+	 						<th style="width:10rem; text-align:center;">작성일 </th>
+	 						<th style="width:8rem; text-align:center;">조회수 </th>
 	 					</tr>
 	 				</thead>
 	 				<tbody>

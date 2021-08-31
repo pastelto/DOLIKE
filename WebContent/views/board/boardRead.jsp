@@ -150,21 +150,25 @@
 									<form id="postForm">
 									<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
 									<input type="hidden" name="cno" value="<%= b.getCategoryNo() %>">
-									<% if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
+									
+									<% if (loginUser == null) { %>
+									
+									<% } else if (loginUser != null && loginUser.getUserId().equals(b.getNickName())){ %>
 										<br>
 										<div class="float-right">
 										<button id="updateBtn" class="btn btn-sm" type="button" onclick="updateForm();">수정 </button>
 		 								<button id="deleteBtn" class="btn btn-sm" type="button" onclick="deleteBoard();">삭제 </button>
 										</div>
-									<% }else if(loginUser.getUserId().equals("admin")) {%>
-									<br><br>
+									<% } else if(loginUser.getUserId().equals("admin")) {%>
+									 <br><br>
 									<div class="float-right">
 		 								<button id="deleteBtnAM" class="btn btn-sm" type="button" onclick="deleteBoard();" style="margin-top: 25px">삭제 </button>
 										</div>
 									<% } %>
+									
 									</form>
 									<br>
-									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="history.back();">돌아가기</button>
+									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="returnList();">돌아가기</button>
 								</div>
 							</div>
 						</div>
@@ -184,6 +188,10 @@
 	 	})
 	 	function updateForm(){
 			$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
+			$("#postForm").submit();
+		}
+	 	function returnList(){
+			$("#postForm").attr("action", "<%=contextPath%>/list.bo");
 			$("#postForm").submit();
 		}
 			
