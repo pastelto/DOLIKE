@@ -93,7 +93,7 @@
                                     <h4>회원 블랙리스트</h4>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <thead>
                                             <tr>                                                
                                                 <th>유저ID</th>

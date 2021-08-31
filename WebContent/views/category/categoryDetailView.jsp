@@ -33,8 +33,7 @@
 		
 	 	display: grid;
  	 	place-items: center;
- 	 	min-height: 70vh;
-		
+ 	 	min-height: 70vh;		
 	}
 	
 	#caFormDetail {
@@ -59,6 +58,8 @@
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
+		position: absolute;
+		left: 30px;
 	}
 </style>
 
@@ -66,8 +67,18 @@
 <body>
 <div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-<div class="content-body">
+
 <div class="container-fluid" id="formSizeDetail">
+
+<div class="row page-titles mx-0" >			
+                <div class="col p-md-0" >
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">카테고리 목록</li>
+                        <li class="breadcrumb-item active">카테고리 확인</li>
+                    </ol>
+                </div>
+           		 </div>
+
 	<div class="row">
 <div id="detailCategoryForm" style="margin-left: auto; margin-right: auto;">
 <div class="col-lg-12" >
@@ -78,15 +89,15 @@
                                 <div class="basic-form">
                                         <div class="form-group">
                                             <label>카테고리를 확인하세요.</label>
-                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caSelectName" value="<%= c.getCategoryName() %>"></input>
+                                            <input type="text" class="form-control bg-transparent"  id="comment" name="caSelectName" value="<%= c.getCategoryName() %>" readonly></input>
                                         </div>
                                     <div class="general-button" align="right">
                                     <button type="reset" id="categoryListBtn" class="btn mb-1 btn-primary" onclick="location.href='<%=contextPath%>/categoryList.ca'" >돌아가기</button>
-                                   	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									<%--<% if(loginUser != null && loginUser.getUserId().equals(b.getCategoryCreater())){ --%>
+                                   	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									
                             		<button id="categoryUpdateBtn"  type="button" class="btn mb-1 btn-primary" onclick="updateCategoryForm()">수정하기</button>
 									<button id="categoryDeleteBtn"  type="button" class="btn mb-1 btn-primary" onclick="deleteCategory()">삭제하기</button>									
-									<%--<% } --%>
+									
 								</div>
                                 </div>
                                  </form>
@@ -116,7 +127,7 @@
 			<%@ include file="../common/footer.jsp" %>
 			</div>
 			
-		</div>
+		
 		
 </body>
 </html>

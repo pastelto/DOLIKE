@@ -132,11 +132,7 @@
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
-	
-  	#loginBtnModal:hover, #EnrollBtnModal:hover {
-     	background-color: #f3969a;
-     	border-color: #f3969a;
-    }
+
 	
 	#doLikeLogo{
 	 	background: white;
@@ -393,28 +389,6 @@
             </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 5533.32px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div>
         
-                <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-body justify-content-center">
-                     <h4 class="modal-title" align="center" style="color: #f3969a">로그인 후 이용 가능합니다!</h4>
-                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
-                    	<div class="row" style="margin-top: 30px;">
-                    	<div class="col-2"></div>
-                        <button class="btn btn-primary px-3 ml-4 col-3" id="loginBtnModal" type="button" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인</button>
-                        <button class="btn btn-primary px-3 ml-4 col-3" id="EnrollBtnModal" type="button" onclick="location.href='<%=contextPath%>/enrollForm.me'">회원가입</button>
-                   		</div>
-                    </div>
-            
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" style="background-color: #f3969a; border: 0" data-dismiss="modal">닫기</button>
-                    </div>
-            
-                </div>
-                </div>
-            </div>
         <script>
         // 로그인 후 이용 가능 팝업창
 			function needLogin(){

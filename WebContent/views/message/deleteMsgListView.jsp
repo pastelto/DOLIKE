@@ -55,16 +55,16 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
-	#sendMsgLink, #resetBtn, #sendBtn {
+	#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
-	
-	#deleteAllBtn{
-		color: #fff;
-    	background-color: #78c2ad;
-    	border-color: #78c2ad;
+
+		
+  	#loginBtnModal:hover, #EnrollBtnModal:hover {
+     	background-color: #f3969a;
+     	border-color: #f3969a;
 	}
 </style>
 </head>
