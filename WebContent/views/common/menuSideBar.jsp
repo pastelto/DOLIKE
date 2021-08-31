@@ -269,7 +269,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<%= request.getContextPath() %>/challengeMain.ch"><i class="icon-user"></i> <span>진행중인 챌린지</span></a>
+                                            <a href="<%= request.getContextPath() %>/myChallenge.ch"><i class="icon-user"></i> <span>마이 챌린지</span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li><a href="<%= request.getContextPath() %>/logout.me"><i class="icon-key"></i> <span>로그아웃</span></a></li>
@@ -511,7 +511,7 @@
    				       	 					
    				       	 					$.each(list, function(i){
    				       																														
-    				       						result = "<li><table><tr><th><button class='btn-like' id='"+list[i].categoryNo+"fb' value='"+list[i].categoryNo+"'style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
+    				       						result = "<li><table><tr><th><button class='btn-like' id='myFavBtn' onclick='addFB();' value='"+list[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
     				       					
    				       							$liBody.append(result)
    				       							
@@ -562,15 +562,8 @@
 	       					}               			       			       			  
 	       			  })  
  		         }) 
-				  })
-              				  
-             
-             // 즐겨찾기 카테고리 리스트 
-              	$(function(){
-              		$("#")
-              		
-              	})
-              	
+				  });
+              				                	
         </script>
         
 		<script src="plugins/common/common.min.js"></script>
