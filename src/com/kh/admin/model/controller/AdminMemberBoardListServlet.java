@@ -49,7 +49,7 @@ public class AdminMemberBoardListServlet extends HttpServlet {
 				int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 				int blackLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 				System.out.println("!!!!!!11111111111");
-				// * blackListCount : 총 게시글 갯수 
+				 
 				listCount = new AdminService().getBoardListCount();
 				System.out.println("리스트카운트" + listCount);
 				
@@ -65,7 +65,7 @@ public class AdminMemberBoardListServlet extends HttpServlet {
 				pageLimit = 10;
 						
 				// * boardLimit : 한 페이지에 보여질 게시글 최대 갯수
-				blackLimit = 10;
+				blackLimit = 100;
 				
 				// * maxPage : 총 페이지 수
 						/*
@@ -116,7 +116,8 @@ public class AdminMemberBoardListServlet extends HttpServlet {
 				Member am = new AdminService().selectAdminMember(amno);
 				// 다 담아 줬으면 조회를 해야한다.
 				ArrayList<Board> list = new AdminService().adminBoardList(amb); //페이지 정보를 가지고 넘길것이다.
-				System.out.println("어드민보드리스트 서블릿 amd와 list 값" + amb + list);
+				System.out.println("어드민보드리스트 서블릿 amd와 list 값" + amb +"//"+ list);
+				System.out.println("어드민보드리스트 서블릿 amd와 list 값" + amno +"//"+ am);
 				
 				if(am != null) {
 					request.setAttribute("am", am);
