@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.dlmain.model.vo.*"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.follow.model.vo.*, com.kh.category.model.vo.*, com.kh.dlmain.model.vo.*, com.kh.board.model.vo.*"%>
 <% 
 	ArrayList<DLMain> topList = (ArrayList<DLMain>)request.getAttribute("topList");
 	ArrayList<Category> cList = (ArrayList<Category>)request.getAttribute("cList");
-	HashMap<String, ArrayList<DLMain>> hashmap = (HashMap<String, ArrayList<DLMain>>)request.getAttribute("hashmap");
+	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
 	
 	
 	System.out.println("전체 인기 게시글 :" + topList);
@@ -12,6 +12,10 @@
 	
 	Set<String> keySet = hashmap.keySet();
 	Iterator<String> keyInteger = keySet.iterator();
+	
+	String first = hashmap.keySet().iterator().next();
+	
+	System.out.println("first : " + first);
 
 %>
 <!DOCTYPE html>
@@ -213,9 +217,16 @@
 				   	<div class="col-6">
 						<div class="card">
 						
-							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+						
+						<% if (topList.get(i).getnFileName() == null) { %>
+							<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
 								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" class="Thum" ></span>
+									<span id="idspan" class="display-5"><img src="./images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
+						<% } else { %>	
+						<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
+						<% } %>		
 									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
 										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
 											<div class="row">
@@ -246,9 +257,15 @@
 				   	<div class="col-6" style="margin-right: 0;">
 						<div class="card">
 						
-							<div class="card-body"  style="margin-bottom: 0; padding:0;">
+						<% if (topList.get(i).getnFileName() == null) { %>
+							<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
 								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" class="Thum" ></span>
+									<span id="idspan" class="display-5"><img src="./resources/images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
+						<% } else { %>	
+						<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+								<div class="text-center" style="padding: 10px;">
+									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
+						<% } %>	
 									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
 										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
 											<div class="row">
@@ -296,66 +313,55 @@
 								<div class="custom-tab-2">
 									<ul class="nav nav-tabs mb-3">
 										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#1"><%= cList.get(0).getCategoryName() %></a></li>
+											data-toggle="tab" href="<%= first %>"><%= cList.get(0).getCategoryName() %></a></li>
 										<% for(int i = 1; i < cList.size(); i++){ %>
-										<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#<%= cList.get(i).getCategoryNo() %>">
+										<li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= cList.get(i).getCategoryName() %>">
 										<%= cList.get(i).getCategoryName() %></a>
 										</li>
 										<% } %>
 									</ul>
-									<div class="tab-content">
+
+
+									<!-- 첫번째 카테고리 탭 -->
+										 <div class="tab-pane fade show active" id="<%= first %>">
+										<!-- <div class="tab-pane fade show active" id="home1" role="tabpanel"> -->
+											<div class="p-t-15">
+												<%-- <h5><%= eList.get(i).getBoardTitle() %></h5>
+												<p> <%= eList.get(i).getNickName() %></p>
+												<p><%= eList.get(i).getBoardContent() %></p> --%>
+												<img src="./resources/images/do_100.png">
+											</div>
+										</div>
+
+
+
+									
+									<!-- 1번 부터 -->
 									<% while(keyInteger.hasNext()){ %>  
 									<% String key = keyInteger.next();%>
 									<% ArrayList<Board> eList = hashmap.get(key); %>
-										 <div class="tab-pane fade show active" id="<%= key %>">
-										<div class="tab-pane fade show active" id="home1" role="tabpanel">
-											<div class="p-t-15">
-												<h4>This is profile title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-											</div>
-										</div>
+									<div class="tab-content">
+										<% for(int i = 0 ; i< eList.size() ;i++){ %>
 										
-									<%} %>
-										<div class="tab-pane fade" id="profile1">
+<%-- 										<% if(key.equals(first)) { %>
+										<%} else { %> --%>
+										<div class="tab-pane fade" id="<%= key %>">
 											<div class="p-t-15">
-												<h4>This is profile title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
+												<div class="p-t-15">
+												<h5><%= eList.get(i).getBoardTitle() %></h5> 
+												<p> <%= eList.get(i).getNickName() %></p>
+												<p><%= eList.get(i).getBoardContent() %></p>
+											</div>
 											</div>
 										</div>
-										<div class="tab-pane fade" id="contact1">
-											<div class="p-t-15">
-												<h4>This is contact title</h4>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts. Separated they live in Bookmarksgrove.</p>
-											</div>
-										</div>
-										<div class="tab-pane fade" id="message1">
-											<div class="p-t-15">
-												<h4>This is message title</h4>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-												<p>Raw denim you probably haven't heard of them jean
-													shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-													master cleanse. Mustache cliche tempor.</p>
-											</div>
-										</div>
+										<%-- <%} %> --%>
+										
 									</div>
+									<%} %>
 								</div>
+							<%} %>
+								
+								
 							</div>
 						
 						

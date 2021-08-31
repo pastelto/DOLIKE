@@ -563,6 +563,14 @@
 	       			  })  
  		         }) 
 				  })
+              				  
+             
+             // 즐겨찾기 카테고리 리스트 
+              	$(function(){
+              		$("#")
+              		
+              	})
+              	
         </script>
         
 		<script src="plugins/common/common.min.js"></script>

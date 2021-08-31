@@ -44,27 +44,24 @@ public class MainDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectTopList1");
-		
+		/*
+		 * String bno = "BNO"; String bno = "BTITLE"; String bno = "WRITER"; String bno
+		 * = "VCOUNT"; String bno = "CNO"; String bno = "FNO"; String bno = "FONAME";
+		 * String bno = "FNNAME";
+		 */
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "BNO");
-			pstmt.setString(2, "BTITLE");
-			pstmt.setString(3, "WRITER");
-			pstmt.setString(4, "VCOUNT");
-			pstmt.setString(5, "CNO");
-			pstmt.setString(6, "FNO");
-			pstmt.setString(7, "FONAME");
-			pstmt.setString(8, "FNNAME");
-			pstmt.setString(9, "BNO");
-			pstmt.setString(10, "BTITLE");
-			pstmt.setString(11, "WRITER");
-			pstmt.setString(12, "VCOUNT");
-			pstmt.setString(13, "CNO");
-			pstmt.setString(14, "FNO");
-			pstmt.setString(15, "FONAME");
-			pstmt.setString(16, "FNNAME");
-			pstmt.setString(17, "VCOUNT");
+			/*
+			 * pstmt.setString(1, "BNO"); pstmt.setString(2, "BTITLE"); pstmt.setString(3,
+			 * "WRITER"); pstmt.setString(4, "VCOUNT"); pstmt.setString(5, "CNO");
+			 * pstmt.setString(6, "CNAME"); pstmt.setString(7, "FNO"); pstmt.setString(8,
+			 * "FONAME"); pstmt.setString(9, "FNNAME"); pstmt.setString(10, "BNO");
+			 * pstmt.setString(11, "BTITLE"); pstmt.setString(12, "WRITER");
+			 * pstmt.setString(13, "VCOUNT"); pstmt.setString(14, "CNO");
+			 * pstmt.setString(15, "CNAME"); pstmt.setString(16, "FNO"); pstmt.setString(17,
+			 * "FONAME"); pstmt.setString(18, "FNNAME"); pstmt.setString(19, "VCOUNT");
+			 */
 			
 			rset = pstmt.executeQuery();
 			System.out.println("1. rset? " + rset);
@@ -74,6 +71,7 @@ public class MainDao {
 								      rset.getString("WRITER"),
 								      rset.getInt("VCOUNT"),
 								      rset.getInt("CNO"),
+								      rset.getString("CNAME"),
 								      rset.getInt("FNO"),
 								      rset.getString("FONAME"),
 								      rset.getString("FNNAME")
@@ -141,8 +139,8 @@ public class MainDao {
 
 			while(rset.next()) {
 				eList.add(new Board(rset.getInt("BOARD_NO"), 
-					      rset.getString("BOARD_TITLE"),
 					      rset.getString("NICKNAME"),
+					      rset.getString("BOARD_TITLE"),
 					      rset.getInt("VIEWS"),
 					      rset.getInt("CATEGORY_NO")
 					      ));

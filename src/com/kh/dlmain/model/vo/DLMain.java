@@ -16,7 +16,7 @@ public class DLMain {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DLMain(int boardNo, String boardTitle, String writer, int views, int cNo, int fNo,
+	public DLMain(int boardNo, String boardTitle, String writer, int views, int cNo, String cName, int fNo,
 			String oFileName, String nFileName) {
 		super();
 		this.boardNo = boardNo;
