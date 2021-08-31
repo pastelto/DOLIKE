@@ -108,9 +108,7 @@
 	
 }
 
-.cursor {
- 	cursor:pointer;
-}
+
 </style>
 <body>
 	<div id="preloader">
@@ -126,8 +124,7 @@
 
 
 		<div class="content-body">
-			<!-- style="display: flex; flex: 0 0 auto; felx-direction: row; padding: 50px;" -->
-			<!-- <div class="container-fluid"> -->
+
 			<!-- 가장 상단 캐러셀 -->
 			<div class="row">
 			<div class="container-fluid" style="height: 50%;">
@@ -234,215 +231,211 @@
 			
 			</div>
 	
-	<!-- ----------------------------------------------------------------------------------------------------------  -->
-	
-	<div class="row">
-		<div class="container-fluid">
-			<!-- 상단 캐로셀 -->
-			<div class="col-12">
-    <!-- -----------------------------------------------------------------------------------  -->
-			
-			<div class="row">
-			<div class="container-fluid" style="height: 50%;">
-			<!-- 상단 캐로셀 -->
-			<div class="col-12">
-				<div class="row">
-					
-				<div class="col-6">	
-					
-					
-					
-						<div style="height: 750px">
-			   		
-			   		
-			   		
-			   		
-			   <!-- 메인 전체 인기게시글  상단 게시글 카드 2분할 -->
-			   	<div class="row">
-			   		
-			   		
-				   	<% for(int i=0;i < 2;i++){ %>
-				   	<div class="col-6">
-						<div class="card">
-						
-						
-						<% if (topList.get(i).getnFileName() == null) { %>
-							<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
-								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="./resources/images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
-						<% } else { %>	
-						<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
-								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
-						<% } %>		
-									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
-										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
-											<div class="row">
-												<div class="col-6 border-right-1">
-													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-													<p id="<%=i%>fl"><%= topList.get(i).getWriter() %> </p>
-												</span>
-											</div>
-											<div class="col-6">
-												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
-												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-					</div>
-					<%}%>
 
-			   </div>
-		
-			  	 <!-- 메인 하단 게시글 카드 2분할 -->
-				<div class="row">
-				   	<% for(int i=2;i < 4;i++){ %>
-				   	<div class="col-6" style="margin-right: 0;">
-						<div class="card">
-						
-						<% if (topList.get(i).getnFileName() == null) { %>
-							<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
-								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="./resources/images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
-						<% } else { %>	
-						<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
-								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
-						<% } %>	
-									<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
-										<div class="card-footer border-0 bg-transparent" style="margin: 0; padding:0;">
+<div class="row">
+	<div class="container-fluid">
+		<!-- 상단 캐로셀 -->
+		<div class="col-12">
+					<div class="row">
+						<div class="container-fluid" style="height: 50%;">
+							<!-- 상단 캐로셀 -->
+							<div class="col-12">
+								<div class="row">
+									<div class="col-6">
+										<div style="height: 750px">
+											<!-- 메인 전체 인기게시글  상단 게시글 카드 2분할 -->
 											<div class="row">
-												<div class="col-6 border-right-1">
-													<span id="flspan"><i id ="iconflF" class="fa fa-user gradient-1-text" aria-hidden="true"></i>
-													<p id="<%=i%>fl"><%= topList.get(i).getWriter() %> </p>
-												</span>
-											</div>
-											<div class="col-6">
-												<span id="bospan"> <i id ="iconflB" class="fa fa-eye gradient-3-text"></i>
-												<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-					</div>
-					<%}%>
-			  	 </div>
-			</div>
-		</div>				
-					
-			
-					
-					
-					
-					
-					
-		
-					<div class="col-6" id="innerDiv" style="width: 40%">
-					
-					<div class="card" style="height: 750px">
-						<div class="card-body">
-							<h4 class="card-title" style="color: #f3969a">
-								<h4  style="color: #f3969a"><b>카테고리별 인기 게시글</b></h4>
-							</h4>
-							<br>
-							
-							<ul class="nav nav-tabs">
-							    <li class="nav-item">
-							      <a class="nav-link active" href="#mainTab">DoLike</a>
-							    </li>
-							  <% while(keyIntegerCat.hasNext()){ %>  
-								<% String keyCat = keyIntegerCat.next();%>
-								<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#<%= keyCat %>"><%= keyCat %></a>
-								</li>
-								<% } %>
-							 </ul>
-							
-							<div class="tab-content">
-							
-							<div id="mainTab" role="tablist" class="container tab-pane active"><br>
-								<div align="center">
-									<img src ="./resources/images/mainLogo.png">
-							    </div>
-						    </div>
-							
-							<% while(keyInteger.hasNext()){ %>  
-							<% String key = keyInteger.next();%>
-							<% ArrayList<Board> eList = hashmap.get(key); %>
-							
-							    	<div id="<%= key %>" class="container tab-pane fade"><br>
-									<div class="p-t-15">
-												<% for(int i = 0 ; i< eList.size() ;i++){ %>
-													<div class="p-t-15">
-														<br>
-														<a href="<%= contextPath %>/detail.bo?bno=<%= eList.get(i).getBoardNo() %>" style="text-decoration-line: none; "><h5><p id="caLink"><%= eList.get(i).getBoardTitle() %></p></h5></a> 
-														<p id="caName"> <%= eList.get(i).getNickName() %></p>
-														<%-- <p><%= eList.get(i).getBoardContent() %></p> --%>
-														<hr>
+												<% for(int i=0;i < 2;i++){ %>
+												<div class="col-6">
+													<div class="card">
+														<% if (topList.get(i).getnFileName() == null) { %>
+														<div class="card-body cursor"
+															style="margin-bottom: 0; padding: 0;"
+															onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+															<div class="text-center" style="padding: 10px;">
+																<span id="idspan" class="display-5"><img
+																	src="./resources/images/do_100.png" alt="사진"
+																	class="Thum" style="width: 250px; height: 250px;"></span>
+																<% } else { %>
+																<div class="card-body  cursor"
+																	style="margin-bottom: 0; padding: 0;"
+																	onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+																	<div class="text-center" style="padding: 10px;">
+																		<span id="idspan" class="display-5"><img
+																			src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>"
+																			alt="사진" class="Thum"
+																			style="width: 250px; height: 250px;"></span>
+																		<% } %>
+																		<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+																		<div class="card-footer border-0 bg-transparent"
+																			style="margin: 0; padding: 0;">
+																			<div class="row">
+																				<div class="col-6 border-right-1">
+																					<span id="flspan"><i id="iconflF"
+																						class="fa fa-user gradient-1-text"
+																						aria-hidden="true"></i>
+																						<p id="<%=i%>fl"><%= topList.get(i).getWriter() %>
+																						</p> </span>
+																				</div>
+																				<div class="col-6">
+																					<span id="bospan"> <i id="iconflB"
+																						class="fa fa-eye gradient-3-text"></i>
+																						<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+																					</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+														<%}%>
+
+													</div>
+
+													<!-- 메인 하단 게시글 카드 2분할 -->
+													<div class="row">
+														<% for(int i=2;i < 4;i++){ %>
+														<div class="col-6" style="margin-right: 0;">
+															<div class="card">
+
+																<% if (topList.get(i).getnFileName() == null) { %>
+																<div class="card-body  cursor"
+																	style="margin-bottom: 0; padding: 0;"
+																	onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+																	<div class="text-center" style="padding: 10px;">
+																		<span id="idspan" class="display-5"><img
+																			src="./resources/images/do_100.png" alt="사진"
+																			class="Thum" style="width: 250px; height: 250px;"></span>
+																		<% } else { %>
+																		<div class="card-body cursor"
+																			style="margin-bottom: 0; padding: 0;"
+																			onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
+																			<div class="text-center" style="padding: 10px;">
+																				<span id="idspan" class="display-5"><img
+																					src="<%=contextPath%>/resources/board_upfiles/<%=topList.get(i).getnFileName()%>"
+																					alt="사진" class="Thum"
+																					style="width: 250px; height: 250px;"></span>
+																				<% } %>
+																				<p id="<%=i%>id" style="margin-bottom: 0px"><%= topList.get(i).getBoardTitle() %></p>
+																				<div class="card-footer border-0 bg-transparent"
+																					style="margin: 0; padding: 0;">
+																					<div class="row">
+																						<div class="col-6 border-right-1">
+																							<span id="flspan"><i id="iconflF"
+																								class="fa fa-user gradient-1-text"
+																								aria-hidden="true"></i>
+																								<p id="<%=i%>fl"><%= topList.get(i).getWriter() %>
+																								</p> </span>
+																						</div>
+																						<div class="col-6">
+																							<span id="bospan"> <i id="iconflB"
+																								class="fa fa-eye gradient-3-text"></i>
+																								<p id="<%=i %>bp"><%= topList.get(i).getViews() %></p>
+																							</span>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+
+																	</div>
+																</div>
+																<%}%>
+															</div>
+														</div>
+													</div>
+
+												<!-- 카테고리 오른쪽 페이지 -->
+													<div class="col-6" id="innerDiv" style="width: 40%">
+
+														<div class="card" style="height: 750px">
+															<div class="card-body">
+																<h4 class="card-title" style="color: #f3969a">
+																	<h4 style="color: #f3969a">
+																		<b>카테고리별 인기 게시글</b>
+																	</h4>
+																</h4>
+																<br>
+
+																<ul class="nav nav-tabs">
+																	<li class="nav-item"><a class="nav-link active"
+																		href="#mainTab">DoLike</a></li>
+																	<% while(keyIntegerCat.hasNext()){ %>
+																	<% String keyCat = keyIntegerCat.next();%>
+																	<li class="nav-item"><a class="nav-link"
+																		data-toggle="tab" href="#<%=keyCat%>"><%=keyCat%></a>
+																	</li>
+																	<%
+																	}
+																	%>
+																</ul>
+
+																<div class="tab-content">
+
+																	<div id="mainTab" role="tablist"
+																		class="container tab-pane active">
+																		<br>
+																		<div align="center">
+																			<img src="./resources/images/mainLogo.png">
+																		</div>
+																	</div>
+
+																	<% while(keyInteger.hasNext()){ %>
+																	<% String key = keyInteger.next();%>
+																	<% ArrayList<Board> eList = hashmap.get(key); %>
+
+																	<div id="<%= key %>" class="container tab-pane fade">
+																		<br>
+																		<div class="p-t-15">
+																			<% for(int i = 0 ; i< eList.size() ;i++){ %>
+																			<div class="p-t-15">
+																				<br> <a
+																					href="<%= contextPath %>/detail.bo?bno=<%= eList.get(i).getBoardNo() %>"
+																					style="text-decoration-line: none;"><h5>
+																						<p id="caLink"><%= eList.get(i).getBoardTitle() %></p>
+																					</h5></a>
+																				<p id="caName">
+																					<%= eList.get(i).getNickName() %></p>
+																				<hr>
+																			</div>
+																			<%} %>
+																		</div>
+																	</div>
+
+
+																	<% } %>
+
+
+
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+
 												</div>
-												<%} %>
+											</div>
+
 										</div>
-								    </div>
-						   
-						   
-						    <% } %>
-							    
-							    
-							
+
+									</div>
+								</div>
+
 							</div>
-							
 						</div>
+
 					</div>
-							
-					
-					
-					
-					
-					
-					
+
+
 				</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			</div>
-			</div>
-			
-			</div>
-			
-			
-			
-			
-		</div>
-		</div>
-		
-		</div>
-		
-		
-
-				
-			</div>
-			
-			</div>
-	
-	
-		<!-- ----------------------------------------------------------------------------------------------------------  -->
-	</div>
 </div>
 
-</div>
+</div></div>
+			
+			</div>
 	<%@ include file="./views/common/footer.jsp"%>
 
 

@@ -196,6 +196,10 @@
 	* {
 		font-family: 'Gowun Dodum', sans-serif;
 	}
+	
+	.cursor {
+ 	cursor:pointer;
+	}
 	</style>
 </head>
 <body>

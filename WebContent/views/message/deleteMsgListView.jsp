@@ -72,18 +72,18 @@
     	background-color: #fff !important;
     	border-color: #78c2ad !important;
 	}
+	
+	#recvMenu, #sendMenu, #myMenu, #binMenu{
+		color: #78c2ad !important;	
+	}
+	
+	#recvMenu:hover, #sendMenu:hover, #myMenu:hover, #binMenu:hover{
+		color: #f3969a !important;	
+	}	
 </style>
 </head>
 
 <body>
-
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
 
     <div id="main-wrapper">
 
@@ -105,13 +105,13 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함                                    
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0" id="recvMenu"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함                                    
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
                                     <%} %></a>
-                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
-                                        <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
-                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i><b>휴지통</b></a>
+                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0" id="sendMenu"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a> 
+                                        <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0" id="myMenu"><i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
+                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0" id="binMenu"><i class="fa fa-trash font-18 align-middle mr-2"></i><b>휴지통</b></a>
                                     </div>
                                    
                                 </div>

@@ -13,32 +13,35 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DO LIKE - 쪽지 보내기</title>
-<!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="./images/do_32.png">
-<!-- Custom Stylesheet -->
+<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 <link href="./css/style.css" rel="stylesheet">
-<style>
-#submitBtn, #resetBtn, #sendBtn {
-	color: #fff;
-	background-color: #78c2ad;
-	border-color: #78c2ad;
-}
-
-#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn, #submitBtn{
-    color: #fff;
-    background-color: #78c2ad;
-    border-color: #78c2ad;
-}
+	<style>
+	#submitBtn, #resetBtn, #sendBtn {
+		color: #fff;
+		background-color: #78c2ad;
+		border-color: #78c2ad;
+	}
 	
-#deleteAllBtn:hover, #sendMsgLink:hover, #sendBtn:hover, #resetBtn:hover, #submitBtn:hover{
-	color: #78c2ad !important;
-    background-color: #fff !important;
-    border-color: #78c2ad !important;
-}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+	#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn, #submitBtn{
+	    color: #fff;
+	    background-color: #78c2ad;
+	    border-color: #78c2ad;
+	}
+		
+	#deleteAllBtn:hover, #sendMsgLink:hover, #sendBtn:hover, #resetBtn:hover, #submitBtn:hover{
+		color: #78c2ad !important;
+	    background-color: #fff !important;
+	    border-color: #78c2ad !important;
+	}
+	
+	#recvMenu, #sendMenu, #myMenu, #binMenu{
+		color: #78c2ad !important;	
+	}
+	
+	#recvMenu:hover, #sendMenu:hover, #myMenu:hover, #binMenu:hover{
+		color: #f3969a !important;	
+	}
+	</style>
 </head>
 
 <body>
@@ -65,15 +68,15 @@
 									<a href="<%= request.getContextPath() %>/write.ms" id="sendBtn"
 										class="btn btn-primary btn-block">쪽지보내기</a>
 									<div class="mail-list mt-4">
-										<a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0">
-										<i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 쪽지함</b> 
+										<a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"  id="recvMenu">
+										<i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함 
 										<%if(newMsgCount > 0){ %> 
 										<span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left: 10px;"> <%= newMsgCount %></span> <%} %></a>
-										 <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0">
+										 <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"  id="sendMenu">
 										 <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 쪽지함</a>
-										 <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0">
+										 <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0"  id="myMenu">
 										 <i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
-										 <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0">
+										 <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"  id="binMenu">
 										 <i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
 								</div>
@@ -167,16 +170,6 @@
 			
 			var search = confirm(searchWord);
 			
-/* 			if(!search){
-					swal.fire({
-		                title: '확인',
-		                text: "쪽지를 보낼 회원의 아이디 또는 별명을 입력해주세요.", 
-		                type: 'error',
-		                confirmButtonText: '확인',          
-		                confirmButtonColor: "#78c2ad",
-		            })
-				} else if(search){ */
-			
 			var setting = "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=800,height=800"; 
 			<%-- var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=" + <%= loginUser.getUserId() %> + "&searchWord=" + searchWord; --%>
 			 var url = "http://localhost:7070/DoLikeProject/findUser.fd?userId=user01&searchWord=user"; 
@@ -184,8 +177,7 @@
 			var title = "Do Like - 친구 찾기";
 			
 			window.open(url, title , setting);
-			
-/* 			} */
+
 		}
 		
 

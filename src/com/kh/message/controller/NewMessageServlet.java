@@ -54,12 +54,11 @@ public class NewMessageServlet extends HttpServlet {
 			String recvId = mr.getParameter("recvId");
 			String title = mr.getParameter("messageTitle");
 			String messageContent = mr.getParameter("messageContent");
-			
+								
 			m.setSenderId(userId);
 			m.setRecvId(recvId);
 			m.setMsgTitle(title);
-			m.setMsgContent(messageContent);
-			System.out.println("NewMessageServlet : " + userId + ", " + recvId + ", " + title + ", " + messageContent);
+			m.setMsgContent(messageContent.replaceAll("\n", "<br>"));
 			
 			MsgAttachment mat = null;
 			
