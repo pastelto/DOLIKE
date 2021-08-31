@@ -207,8 +207,8 @@ a {
 	        <br>
 		<div class="container-fluid">
 			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link "
-					data-bs-toggle="tab" href="#ch-body-m" id="m-challenge">참여중인 챌린지</a></li>
+				<li class="nav-item"><a class="nav-link "data-bs-toggle="tab" 
+					href="<%= request.getContextPath() %>/myChallenge.ch" id="m-challenge">참여중인 챌린지</a></li>
 				<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
 					href="<%= request.getContextPath() %>/myEndedChallenge.ch" id="e-challenge">종료된 챌린지</a></li>
 				<li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
