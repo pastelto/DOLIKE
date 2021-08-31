@@ -66,6 +66,8 @@ public class Message {
 		this.recvtime = recvtime;
 		this.msgStatus = msgStatus;
 	}
+	
+	
 
 	public int getMsgNo() {
 		return msgNo;

@@ -14,9 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DO LIKE - 보낸 쪽지</title>
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-    <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
 <style>
 	#deleteBtn{
@@ -35,37 +33,23 @@
 	    background-color: #fff !important;
 	    border-color: #78c2ad !important;
 	}
+
+	#recvMenu, #sendMenu, #myMenu, #binMenu{
+		color: #78c2ad !important;	
+	}
+	
+	#recvMenu:hover, #sendMenu:hover, #myMenu:hover, #binMenu:hover{
+		color: #f3969a !important;	
+	}
 </style>
 </head>
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
-
 
      		<%@ include file="../common/menuSideBar.jsp" %> 
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
 
             <div class="row page-titles mx-0">
@@ -84,14 +68,14 @@
                         <div class="card" >
                             <div class="card-body">
                                 <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
-                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 받은 쪽지함
+                                    <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0" id="recvMenu"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 받은 쪽지함
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
                                     <%} %>
                                      </a>
-                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i><b>보낸 쪽지함</b></a> 
-                                        <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
-                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+                                        <a href="<%= request.getContextPath() %>/slist.ms" class="list-group-item border-0 p-r-0" id="sendMenu"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i><b>보낸 쪽지함</b></a> 
+                                        <a href="<%= request.getContextPath() %>/mlist.ms" class="list-group-item border-0 p-r-0" id="myMenu"><i class="fa fa-star font-18 align-middle mr-2"></i>내게 쓴 쪽지함</a> 
+                                        <a href="<%= request.getContextPath() %>/dlist.ms" class="list-group-item border-0 p-r-0" id="binMenu"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                    
                                 </div>
@@ -115,6 +99,9 @@
                                         <br>
                                         <div style="height:15rem">
                                         <p><%= mesg.getMsgContent() %></p>
+                                        <% if(mat != null) { %>
+                                      		<img src="<%=contextPath%>/resources/message_upfiles/<%=mat.getMatNewName()%>" class="Thum" >
+                                        <% } %>
                                         </div>
                                         </div>
                                         <hr>
@@ -144,63 +131,45 @@
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
 
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
-      		<%@ include file="../common/footer.jsp" %> 
-        <!--**********************************
-            Footer end
-        ***********************************-->
+      	<%@ include file="../common/footer.jsp" %> 
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-		<script>
-		
-		function deleteSMsg(){
-            // 확인, 취소버튼에 따른 후속 처리 구현
-            swal.fire({
-                title: '확인',        // 제목
-                text: "정말 쪽지를 삭제하시겠습니까?",  // 내용
-                type: 'warning',                              // 종류
-                confirmButtonText: '삭제',               // 확인버튼 표시 문구
-                showCancelButton: true,                 // 취소버튼 표시 문구
-                cancelButtonText: '취소',                 // 취소버튼 표시 문구
-                cancelButtonColor: "#f3969a",
-                confirmButtonColor: "#78c2ad"
-            }).then(function(result) { 
-                if(result.value) {                 // 확인 버튼이 눌러진 경우
-                
-                	$("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
-                	$("#msgDel").submit();
-                /*	swal.fire(
-						{title: '삭제',
-						 text: '성공적으로 삭제되었습니다.',
-						 type: 'success',
-						 confirmButtonColor: "#78c2ad"}).then(function(result){
-		
-					
-				}); */
-                
-            }  else if(result.dismiss === 'cancel') { 
-                swal.fire(
-                		{title: '취소',
-                		text: '삭제가 취소되었습니다.',
-                		type:'error',
-                		confirmButtonColor: "#78c2ad"
-                		});
-         
-            }
-        });
-		}
-		</script>
+
+	<script>
+	
+	function deleteSMsg(){
+           // 확인, 취소버튼에 따른 후속 처리 구현
+           swal.fire({
+               title: '확인',        // 제목
+               text: "정말 쪽지를 삭제하시겠습니까?",  // 내용
+               type: 'warning',                              // 종류
+               confirmButtonText: '삭제',               // 확인버튼 표시 문구
+               showCancelButton: true,                 // 취소버튼 표시 문구
+               cancelButtonText: '취소',                 // 취소버튼 표시 문구
+               cancelButtonColor: "#f3969a",
+               confirmButtonColor: "#78c2ad"
+           }).then(function(result) { 
+               if(result.value) {                 // 확인 버튼이 눌러진 경우
+               
+               $("#msgDel").attr("action", "<%=contextPath%>/dsmsg.ms");
+               $("#msgDel").submit();
+/*       			swal.fire(
+				{title: '삭제',
+				 text: '성공적으로 삭제되었습니다.',
+				 type: 'success',
+			     confirmButtonColor: "#78c2ad"}) */					 
+           }  else if(result.dismiss === 'cancel') { 
+               swal.fire(
+               		{title: '취소',
+               		text: '삭제가 취소되었습니다.',
+               		type:'error',
+               		confirmButtonColor: "#78c2ad"
+               		});
+        
+           }
+       });
+	}
+	</script>
 
 </body>
 
