@@ -149,7 +149,12 @@
 				});
                 
             } else if(result.dismiss === 'cancel') { 
-                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+                swal.fire(
+                		title: '취소',
+                		text: '삭제가 취소되었습니다.',
+                		type:'error',
+                		confirmButtonColor: "#78c2ad"
+                		);
          
             }
         });
