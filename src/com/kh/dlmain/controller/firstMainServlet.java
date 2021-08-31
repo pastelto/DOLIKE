@@ -51,12 +51,12 @@ public class firstMainServlet extends HttpServlet {
 		
 		for(int i = 0; i < cList.size(); i++) {
 			
-			String cTitle = cList.get(i).getCategoryName();
-			System.out.println("카테고리 번호 : " + i + "번 이름 : " + cList.get(i).getCategoryName());
+		String cTitle = cList.get(i).getCategoryName();
+		System.out.println("카테고리 번호 : " + i + "번 이름 : " + cList.get(i).getCategoryName());
 			
-			ArrayList<Board> eachBoardTopList = new MainService().selectEachBoardTopList(cTitle);
-			// 카테고리별 인기게시글 
-			hashmap.put(cTitle, eachBoardTopList);
+		ArrayList<Board> eachBoardTopList = new MainService().selectEachBoardTopList(cTitle);
+		// 카테고리별 인기게시글 
+		hashmap.put(cTitle, eachBoardTopList);
 			
 		}
 		

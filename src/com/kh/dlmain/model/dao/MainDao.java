@@ -52,17 +52,7 @@ public class MainDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			/*
-			 * pstmt.setString(1, "BNO"); pstmt.setString(2, "BTITLE"); pstmt.setString(3,
-			 * "WRITER"); pstmt.setString(4, "VCOUNT"); pstmt.setString(5, "CNO");
-			 * pstmt.setString(6, "CNAME"); pstmt.setString(7, "FNO"); pstmt.setString(8,
-			 * "FONAME"); pstmt.setString(9, "FNNAME"); pstmt.setString(10, "BNO");
-			 * pstmt.setString(11, "BTITLE"); pstmt.setString(12, "WRITER");
-			 * pstmt.setString(13, "VCOUNT"); pstmt.setString(14, "CNO");
-			 * pstmt.setString(15, "CNAME"); pstmt.setString(16, "FNO"); pstmt.setString(17,
-			 * "FONAME"); pstmt.setString(18, "FNNAME"); pstmt.setString(19, "VCOUNT");
-			 */
-			
+
 			rset = pstmt.executeQuery();
 			System.out.println("1. rset? " + rset);
 			while(rset.next()) {
