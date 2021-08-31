@@ -287,7 +287,7 @@
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
                 <ul class="metismenu in" id="menu">
                     <li>
-                        <a href="<%= contextPath %>main.do" aria-expanded="false">
+                        <a href="<%= contextPath %>/main.do" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">메인</span>
                         </a>
                     </li>
