@@ -42,36 +42,28 @@
 	 		<div class="row">
 	 			<table name="listArea" class="table table-hover" style="text-align:center; border:1px solid #dddddd">
 	 				<thread readonly>
-	 					<tr> <!-- 게시글리스트 테이블의 헤더  -->
-	 						
-			 				<th style="background-color:rgb(228, 243, 240); text-align:center;">이미지 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">번호 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">제목 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성자 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">작성일 </th>
-	 						<th style="background-color:rgb(228, 243, 240); text-align:center;">조회수 </th>
+	 					<tr style="background-color: #78c2ad; color: white;"> <!-- 게시글리스트 테이블의 헤더  -->
+	 						<th style="width:5rem; text-align:center;">번호 </th>
+			 				<th style="width:8rem; text-align:center;">태그 </th>
+	 						<th style="width:25rem; text-align:center;">제목 </th>
+	 						<th style="width:10rem; text-align:center;">작성자 </th>
+	 						<th style="width:10rem; text-align:center;">작성일 </th>
+	 						<th style="width:8rem; text-align:center;">조회수 </th>
 	 					</tr>
 	 				</thread>
 	 				<tbody>
 	 				<% if(!blist.isEmpty()){ %>
 			 				<% for(Board b : blist){ %>
 			 				<tr>
-			 				<% if(b.getTitleImg() != null ){ %>
-			 					<td><img src="./resources/board_upfiles/<%= b.getTitleImg() %>.png" width="200px" height="150px"> </td>
 			 					<td><%= b.getBoardNo() %></td>
+			 					<td><%= b.getTagName() %></td>
 			 					<td><%= b.getBoardTitle() %></td>
 			 					<td><%= b.getNickName() %></td>
 			 					<td><%= b.getBoardDate() %></td>
 			 					<td><%= b.getViews() %></td>
-			 					<%} else{ %>
-			 					<td> 111</td>
-			 					<td><%= b.getBoardNo() %></td>
-			 					<td><%= b.getBoardTitle() %></td>
-			 					<td><%= b.getNickName() %></td>
-			 					<td><%= b.getBoardDate() %></td>
-			 					<td><%= b.getViews() %></td> 
-			 					<%} %>
+			 					
 			 				</tr>
+			 				
 			 				<% } %>
 		 			<% } %>
 	 				</tbody>
@@ -82,12 +74,12 @@
 <%@ include file="../common/footer.jsp" %>
         <script>
 			<%if(!blist.isEmpty()){%>
-			$(function(){
-				$(".table>tbody>tr").click(function(){
-					var bno = $(this).children().eq(1).text();
-					location.href="<%= contextPath %>/detail.bo?bno="+bno;
+				$(function(){
+					$(".table>tbody>tr").click(function(){
+						var bno = $(this).children().eq(0).text();
+						location.href="<%= contextPath %>/detail.bo?bno="+bno;
+					})
 				})
-			})
 			<%}%>
 		</script>
 </body>
