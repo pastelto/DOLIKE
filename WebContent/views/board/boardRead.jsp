@@ -52,6 +52,8 @@
 		}
 		#contentArea{
 			min-height: 200px;
+			margin-left:20px;
+			margin-right:20px;
 		}
 		.Thum{
 			width:200px; height:auto;
@@ -104,7 +106,7 @@
 										<small class="float-left" style="text-align: center">작성자 : <%= b.getNickName() %></small>
 										<small class="float-right" style="color: #888">등록일: <%= b.getBoardDate() %>&nbsp;&nbsp;&nbsp;조회수: <%= b.getViews() %></small>
 										<br><br>
-											<p style="text-align: center" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
+											<p style="text-align: left" id="contentArea"><%= b.getBoardContent().replace(" ", "&nbsp;").replace("<","&lt;").replace(">","&gt;").replace("\n","<br>") %></p>
 									</div>
 								</div>
 								<hr>
