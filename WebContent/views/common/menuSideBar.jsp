@@ -315,25 +315,6 @@
                     	</li>
                       <%} %> 
                       
-                      <!-- 즐겨찾는 게시판 로그인 값이 없으면 로그인 후 이용하라고 안내 -->
-                      <% if(loginUser == null) {%> 
-                      <li class="mega-menu-sm"> 
-                        <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
-                            <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
-                        </a>
-                       <!-- 로그인 값이 있으면 해당 유저의 즐겨찾기 게시판 목록 보여줌 -->
-                      <%}else{ %>
-                      <li class="mega-menu-sm" id="favBoard"> 
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="myFavBoardList">
-                            <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse">
-                        
-                        <!-- Ajax로 즐겨찾는 게시판 카테고리 값이 붙을 곳 -->
-                     
-                        </ul>
-                    </li>
-                    <%} %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">팔로잉</span>
@@ -435,9 +416,6 @@
                 </div>
             </div>
         <script>
-        // DH -- 즐겨찾기 
-
-		
         // 로그인 후 이용 가능 팝업창
 			function needLogin(){
 				Swal.fire({
@@ -448,12 +426,6 @@
 				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
 				})
 			}
-        
-      	
-
-        </script>
-        
-        <script>
         				
               				  $(function(){
               					 $("#categoryList1").click(function(){     				       			                 			        
@@ -511,7 +483,7 @@
    				       	 					
    				       	 					$.each(list, function(i){
    				       																														
-    				       						result = "<li><table><tr><th><button class='btn-like' id='myFavBtn' onclick='addFB();' value='"+list[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
+    				       						result = "<li><table><tr><th><button class='btn-like done' id='myFavBtn' onclick='addFB();' value='"+list[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
     				       					
    				       							$liBody.append(result)
    				       							
@@ -527,43 +499,7 @@
    				       			  })  
                 		         }) 
               				  })
-             			       	
-          // 즐겨찾기 카테고리 리스트 값 가져오기
-			  $(function(){
-					 $("#myFavBoardList").click(function(){     				       			                 			        
-						 
-	       				$.ajax({
-	       					url:"gmfb.fb",
-	       					type:"post",
-	       					success:function(fav){
-	       						console.log(fav)
-	       						console.log("ajax 성공!!")
-	       						
-	       						var newFav = ""
-	       						var $favLiBody = $("#favBoard ul")
-	       						
-	       						
-	       						$favLiBody.html(""); 
-	       	 					
-	       	 					$.each(fav, function(i){
-	       																														
-		       						newFav =  "<li><table><tr><th><button class='btn-like done' name='addFavB' id='"+fav[i].categoryNo+"fb' value='"+fav[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+fav[i].categoryNo+"' style='padding-left:10px;'>" + fav[i].fbTitle +"</a></td></tr></table></li>"
-		       					
-	       							$favLiBody.append(newFav)
-	       							
-	       							console.log(newFav)
-	       							console.log("즐겨찾는 게시판!")
-									
-	       						
-	       	 				})
-	       					},
-	       					error:function(e){
-	       						console.log("ajax 통신 실패함")
-	       					}               			       			       			  
-	       			  })  
- 		         }) 
-				  });
-              				                	
+             			       		                	
         </script>
         
 		<script src="plugins/common/common.min.js"></script>
