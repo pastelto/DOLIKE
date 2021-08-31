@@ -31,15 +31,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
-	#writeBtn {
-    	color: #fff;
-    	background-color: #78c2ad;
-    	border-color: #78c2ad;
-	}
-	#writeBtn:hover {
-		color: #78c2ad;
-		background-color: #fff;
-	}
+	
 	#pageTag {
 		color: #fff;
 		background-color: #78c2ad;
@@ -61,14 +53,12 @@
 		border-color: #78c2ad;
 	}
 	
-	#window {
-		/* posision: absolute;
-		left: 130px; */
-	}
 	
-	#contentBody {
-		
-	}
+	
+	
+	
+
+
 	
 </style>
 
@@ -78,8 +68,7 @@
 <%@ include file="../common/menuSideBar.jsp" %> 
 <div class="content-body" id="contentBody" style="min-height: 600px">
 <div class="container-fluid" >
-				<div class="row page-titles mx-0" >
-			
+				<div class="row page-titles mx-0" >			
                 <div class="col p-md-0" >
                     <ol class="breadcrumb" >
                         <li class="breadcrumb-item">회원 관리</li>
@@ -97,7 +86,7 @@
                                     <h4>카테고리 목록</h4>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table table-hover" >
                                         <thead>
                                             <tr>
                                                 <th>번호</th>

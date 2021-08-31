@@ -50,6 +50,9 @@
 		color: #fff;
 		background-color: #78c2ad;
 		border-color: #78c2ad;
+		
+		position: absolute;
+		left: 30px;
 	}
 </style>
 
@@ -58,6 +61,16 @@
 	<div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
 <div class="container-fluid" id="formSizeUpdate">
+
+	<div class="row page-titles mx-0" >			
+                <div class="col p-md-0" >
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">카테고리 확인</li>
+                        <li class="breadcrumb-item active">카테고리 수정</li>
+                    </ol>
+                </div>
+           		 </div>
+
 	<div class="row">
 <div id="updateCategoryForm" style="margin-left: auto; margin-right: auto;">
 <div class="col-lg-12" >
