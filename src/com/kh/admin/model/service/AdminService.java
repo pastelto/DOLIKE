@@ -51,7 +51,7 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		ArrayList<Member> list = new AdminDao().adminBlackList(conn, amb);
-		System.out.println("서비스에서 black list 값 : " + list);
+		System.out.println("서비스에서 black list의 값 : " + list);
 		close(conn);
 		
 		return list;

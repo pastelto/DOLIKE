@@ -131,6 +131,31 @@
 	width: 220px;
 }
 
+#AdScroll {
+	overflow-y : scroll;
+	height : 500px;
+}
+
+#AdScroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+#AdScroll::-webkit-scrollbar-thumb{
+	background-color: #78c2ad;
+	border-radius:10px;
+}
+
+#AdScroll::-webkit-scrollbar-track{
+	background-color: #ffe6f2;
+	border-radius:10px;
+	box-shadow : inset 0px 0px 5px white;
+}
+
+#MemberInfo {
+ 	position: absolute;
+  	left: 50%;
+  	transform: translateX(-50%);
+}
 
 </style>
 </head>
@@ -161,8 +186,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-xl-3">
-                        <div class="card">
+                        <div class="card" id="MemberInfo">
                             <div class="card-body">
+                            <div>
                                 <div class="media align-items-center mb-4">                                   
                                     <div class="media-body">
                                         <h3 class="mb-0"><%= am.getUserId() %></h3>
@@ -228,6 +254,7 @@
 
                                 
                             </div>
+                          </div>
                         </div>  
                     </div>
                     <div class="col-lg-7 col-xl-9">
@@ -256,14 +283,15 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <div class="container-fluid" >
                 <div class="row">
-                    <div class="col-lg-12" style="margin-left: auto; margin-right: auto;">
+                    <div class="col-lg-12" style="margin-left: auto; margin-right: auto;" >
                         <div class="card" >
-                            <div class="card-body">
+                        <div id="AdScroll">
+                            <div class="card-body" >
                                 <div class="card-title">
-                                    <h4>카테고리 목록</h4>
+                                    <h4><%= am.getUserId() %>이 작성한 게시글</h4>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table" id="board-table">
@@ -304,44 +332,9 @@
 									
 								</div>
                             </div>
+                            </div>
                         </div>
-                                           	<!-- 페이지 처리 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 맨앞으로 -->
-				<li><a id="pageTag" class="page-link" href="<%=contextPath%>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=1"> &laquo; </a></li>
-				
-				<!-- 이전페이지 -->
-				<% if(currentPage == 1) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage-1 %>"> &lt; </a></li>
-				<%} %>
-				
-				
-				<!-- 페이지 목록 -->
-				<%for(int p=startPage; p<=endPage; p++){ %>
-				
-					<%if(p == currentPage){ %>
-						<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
-					<%}else{ %>
-						<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= p %>"><%= p %> </a></li>
-					<%} %>
-					
-				<%} %>
-				
-				
-				<!-- 다음페이지 -->
-				<% if(currentPage == maxPage) {%>
-				<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
-				<% }else{ %>
-				<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= currentPage+1 %>"> &gt; </a></li>
-				<%} %>
-				
-				<!-- 맨뒤로 -->
-				<li><a id="pageTag" class="page-link" href="<%= contextPath %>/MemberDetail.am?amno=<%= am.getUserId() %>&currentPage=<%= maxPage %>"> &raquo; </a></li>
-			</ul>
-		</div>
+      
                     </div>
 		</div>
 		
