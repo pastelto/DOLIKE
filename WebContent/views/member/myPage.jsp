@@ -82,9 +82,6 @@
 	</style>
 </head>
 <body>
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -92,20 +89,10 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
 	<div id="main-wrapper">
     <%@ include file="../common/menuSideBar.jsp" %> 
     
-    <!--**********************************
-        Content body start
-    ***********************************-->
     <div class="content-body">
         <div class="row page-titles mx-0">
             <div class="col p-md-0">
@@ -116,7 +103,6 @@
             </div>
         </div>
     
-        <!-- row -->
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -185,7 +171,6 @@
                                     </div>
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="interests">관심사 <span class="text-danger">*</span></label>
-                                        <!-- <div class="col-lg-6"> -->
                                         <div class="form-inline">
 	                                      <div class="form-group">
 	                                          <div class="form-check mb-3">
@@ -234,8 +219,7 @@
                 </div>
             </div>
         </div>
-        <!-- #/ container -->
-        </div>
+     </div>
         
         <script>
     	//==============================================
@@ -319,6 +303,9 @@
     	}
         
         
+    	//==============================================
+    	// 닉네임 중복확인
+    	//==============================================
     	function checkNick(){
     		var nickName = $("#updateForm input[name=nickName]");
     		if(nickName.val() == ""){

@@ -218,7 +218,7 @@ a {
 				<div class="tab-pane fade show active" id="ch-body-a" >
 					<br>
 					<br>
-				<div style="height:40rem;">
+				<div style="height:60rem;">
 				<div class="col-lg-8" style="margin: 0 auto;">
 					<div class="table-responsive">
 					<div>

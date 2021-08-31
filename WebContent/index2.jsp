@@ -4,6 +4,7 @@
 	ArrayList<DLMain> topList = (ArrayList<DLMain>)request.getAttribute("topList");
 	ArrayList<Category> cList = (ArrayList<Category>)request.getAttribute("cList");
 	HashMap<String, ArrayList<Board>> hashmap = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
+	HashMap<String, ArrayList<Board>> hashmapCat = (HashMap<String, ArrayList<Board>>)request.getAttribute("hashmap");
 	
 	
 	System.out.println("전체 인기 게시글 :" + topList);
@@ -12,6 +13,11 @@
 	
 	Set<String> keySet = hashmap.keySet();
 	Iterator<String> keyInteger = keySet.iterator();
+	
+	
+	Set<String> keySetCat = hashmapCat.keySet();
+	Iterator<String> keyIntegerCat = keySetCat.iterator();
+	
 	
 	String first = hashmap.keySet().iterator().next();
 	
@@ -204,7 +210,7 @@
 					
 					
 					
-						<div class="card">
+						<div style="height: 750px">
 			   		
 			   		
 			   		
@@ -221,7 +227,7 @@
 						<% if (topList.get(i).getnFileName() == null) { %>
 							<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
 								<div class="text-center" style="padding: 10px;">
-									<span id="idspan" class="display-5"><img src="./images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
+									<span id="idspan" class="display-5"><img src="./resources/images/do_100.png" alt="사진" class="Thum" style="width: 250px; height: 250px;" ></span>
 						<% } else { %>	
 						<div class="card-body"  style="margin-bottom: 0; padding:0;"   onclick="location.href='<%= contextPath %>/detail.bo?bno=<%= topList.get(i).getBoardNo() %>'">
 								<div class="text-center" style="padding: 10px;">
@@ -299,85 +305,88 @@
 					
 		
 					<div class="col-6" id="innerDiv" style="width: 40%">
-						<!-- <div class="card" style="width: 90%;">
-							<img class="d-block w-100" style="width: 10%; height: 15rem;" 
-							src="resources/images/submit.png" alt="Third slide">
-						</div> -->
-
-												<div class="card">
-							<div class="card-body">
-								<h4 class="card-title" style="color: #f3969a">
-									<b>카테고리별 인기 게시글</b>
-								</h4>
-								<!-- Nav tabs -->
-								<div class="custom-tab-2">
-									<ul class="nav nav-tabs mb-3">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="<%= first %>"><%= cList.get(0).getCategoryName() %></a></li>
-										<% for(int i = 1; i < cList.size(); i++){ %>
-										<li class="nav-item"><a class="nav-link" data-toggle="tab" href="<%= cList.get(i).getCategoryName() %>">
-										<%= cList.get(i).getCategoryName() %></a>
-										</li>
-										<% } %>
-									</ul>
-
-
-									<!-- 첫번째 카테고리 탭 -->
-										 <div class="tab-pane fade show active" id="<%= first %>">
-										<!-- <div class="tab-pane fade show active" id="home1" role="tabpanel"> -->
-											<div class="p-t-15">
-												<%-- <h5><%= eList.get(i).getBoardTitle() %></h5>
-												<p> <%= eList.get(i).getNickName() %></p>
-												<p><%= eList.get(i).getBoardContent() %></p> --%>
-												<img src="./resources/images/do_100.png">
-											</div>
+					
+					<div class="card" style="height: 750px">
+						<div class="card-body">
+							<h4 class="card-title" style="color: #f3969a">
+								<h4  style="color: #f3969a"><b>카테고리별 인기 게시글</b></h4>
+							</h4>
+							<br>
+							
+							<ul class="nav nav-tabs">
+							    <li class="nav-item">
+							      <a class="nav-link active" href="#mainTab">DoLike</a>
+							    </li>
+							  <% while(keyIntegerCat.hasNext()){ %>  
+								<% String keyCat = keyIntegerCat.next();%>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#<%= keyCat %>"><%= keyCat %></a>
+								</li>
+								<% } %>
+							 </ul>
+							
+							<div class="tab-content">
+							
+							<div id="mainTab" role="tablist" class="container tab-pane active"><br>
+								<div align="center">
+									<img src ="./resources/images/mainLogo.png">
+							    </div>
+						    </div>
+							
+							<% while(keyInteger.hasNext()){ %>  
+							<% String key = keyInteger.next();%>
+							<% ArrayList<Board> eList = hashmap.get(key); %>
+							
+							    	<div id="<%= key %>" class="container tab-pane fade"><br>
+									<div class="p-t-15">
+												<% for(int i = 0 ; i< eList.size() ;i++){ %>
+													<div class="p-t-15">
+														<br>
+														<h5><%= eList.get(i).getBoardTitle() %></h5> 
+														<p> <%= eList.get(i).getNickName() %></p>
+														<%-- <p><%= eList.get(i).getBoardContent() %></p> --%>
+														<hr>
+												</div>
+												<%} %>
 										</div>
-
-
-
-									
-									<!-- 1번 부터 -->
-									<% while(keyInteger.hasNext()){ %>  
-									<% String key = keyInteger.next();%>
-									<% ArrayList<Board> eList = hashmap.get(key); %>
-									<div class="tab-content">
-										<% for(int i = 0 ; i< eList.size() ;i++){ %>
-										
-<%-- 										<% if(key.equals(first)) { %>
-										<%} else { %> --%>
-										<div class="tab-pane fade" id="<%= key %>">
-											<div class="p-t-15">
-												<div class="p-t-15">
-												<h5><%= eList.get(i).getBoardTitle() %></h5> 
-												<p> <%= eList.get(i).getNickName() %></p>
-												<p><%= eList.get(i).getBoardContent() %></p>
-											</div>
-											</div>
-										</div>
-										<%-- <%} %> --%>
-										
-									</div>
-									<%} %>
-								</div>
-							<%} %>
-								
-								
+								    </div>
+						   
+						   
+						    <% } %>
+							    
+							    
+							
 							</div>
-						
-						
+							
+						</div>
 					</div>
+							
+					
+					
+					
+					
+					
+					
 				</div>
-			</div>
-			</div>
+			
+			
+			
+			
+			
+			
+			
 			
 			</div>
+			</div>
+			
+			</div>
 			
 			
 			
 			
+		</div>
+		</div>
 		
-		
-		
+		</div>
 		
 		
 
