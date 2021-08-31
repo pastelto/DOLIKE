@@ -20,11 +20,11 @@ import com.kh.challenge.model.vo.PageInfo;
 public class ChallengeService {
 
 	//main-challenge
-	public ArrayList<Challenge> selectList() {
+	public ArrayList<Challenge> selectList(PageInfo pi) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Challenge> list = new ChallengeDao().selectList(conn);
+		ArrayList<Challenge> list = new ChallengeDao().selectList(conn,pi);
 		
 		close(conn);
 		
@@ -90,6 +90,17 @@ public class ChallengeService {
 		
 		return listCount;
 	}
+	
+	public int getchListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new ChallengeDao().getchListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+
 	
 	public int getApListCount() {
 		Connection conn = getConnection();
@@ -339,6 +350,7 @@ public class ChallengeService {
 		
 		return result;
 	}
+
 
 
 
