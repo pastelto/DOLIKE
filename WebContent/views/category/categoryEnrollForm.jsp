@@ -28,8 +28,9 @@
 	#insertCategoryForm {		
 		
 	 	display: grid;
- 	 	place-items: center;
- 	 	min-height: 70vh;
+ 	 	place-items: center; 
+ 	 	min-height: 70vh; 
+
 		
 	}
 	
@@ -50,9 +51,19 @@
 <body>
 <div id="main-wrapper">
 <%@ include file="../common/menuSideBar.jsp" %> 
-<div class="content-body">
-<div class="content-body">
+
+
 <div class="container-fluid" id="formSize">
+
+<div class="row page-titles mx-0" >			
+                <div class="col p-md-0" >
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">카테고리 상세보기</li>
+                        <li class="breadcrumb-item active">카테고리 생성하기</li>
+                    </ol>
+                </div>
+           		 </div>
+
 	<div class="row">
 <div id="insertCategoryForm" style="margin-left: auto; margin-right: auto;">
 <div class="col-lg-12" >
@@ -79,8 +90,8 @@
 				</div>
 			</div>
 			</div>
-			</div>
+			
 		<%@ include file="../common/footer.jsp" %>
-		</div>
+		
 </body>
 </html>
