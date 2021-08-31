@@ -73,13 +73,6 @@
 .carousel-inner {
 	height: 15rem;
 }
-/* 
-.card-body {
-	flex: 0 0 auto;
-	padding:50em;
-	border: none;
-	height: 30px;
-} */
 
  #allBoardTop{
 	flex: 0 0 auto;
@@ -109,6 +102,11 @@
 	margin: 0 auto;
 }
 
+#caLink:hover {
+	font-size: 20px !important;
+	color: #f3969a !important;
+	
+}
 </style>
 <body>
 	<div id="preloader">
@@ -341,8 +339,8 @@
 												<% for(int i = 0 ; i< eList.size() ;i++){ %>
 													<div class="p-t-15">
 														<br>
-														<a href="<%= contextPath %>/detail.bo?bno=<%= eList.get(i).getBoardNo() %>"><h5><%= eList.get(i).getBoardTitle() %></h5></a> 
-														<p> <%= eList.get(i).getNickName() %></p>
+														<a href="<%= contextPath %>/detail.bo?bno=<%= eList.get(i).getBoardNo() %>" style="text-decoration-line: none; "><h5><p id="caLink"><%= eList.get(i).getBoardTitle() %></p></h5></a> 
+														<p id="caName"> <%= eList.get(i).getNickName() %></p>
 														<%-- <p><%= eList.get(i).getBoardContent() %></p> --%>
 														<hr>
 												</div>
