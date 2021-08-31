@@ -17,10 +17,10 @@ import com.kh.follow.model.dao.FollowDao;
 
 public class BoardService {
 
-	public int getListCount() {
+	public int getListCount(int cno) {
 		Connection conn = getConnection();
 		
-		int listCount = new BoardDao().getListCount(conn);
+		int listCount = new BoardDao().getListCount(conn, cno);
 		
 		close(conn);
 		return listCount;

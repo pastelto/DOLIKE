@@ -42,7 +42,7 @@ public class BoardListServlet extends HttpServlet {
 				int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 				int boardLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 
-				listCount = new BoardService().getListCount();
+				listCount = new BoardService().getListCount(cno);
 
 				currentPage = 1;
 
