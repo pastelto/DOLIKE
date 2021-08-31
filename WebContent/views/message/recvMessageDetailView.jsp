@@ -162,8 +162,13 @@
 					$("#msgDel").submit();
 				});
                 
-            } else if(result.dismiss === 'cancel') {     // 취소버튼이 눌러진 경우
-                swal.fire('취소', '삭제가 취소되었습니다.', 'error');
+            }  else if(result.dismiss === 'cancel') { 
+                swal.fire(
+                		title: '취소',
+                		text: '삭제가 취소되었습니다.',
+                		type:'error',
+                		confirmButtonColor: "#78c2ad"
+                		);
          
             }
         });
