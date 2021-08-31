@@ -23,6 +23,24 @@
 	background-color:#78c2ad;
 	color: white;
 	}
+	
+	#resetBtn:hover, #sendBtn:hover, #deleteBtn:hover ,#sendMsgLink:hover{
+		color: #78c2ad !important;
+    	background-color: #fff !important;
+    	border-color: #78c2ad !important;
+	}
+	
+	#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn, #submitBtn{
+	    color: #fff;
+	    background-color: #78c2ad;
+	    border-color: #78c2ad;
+	}
+		
+	#deleteAllBtn:hover, #sendMsgLink:hover, #sendBtn:hover, #resetBtn:hover, #submitBtn:hover{
+		color: #78c2ad !important;
+	    background-color: #fff !important;
+	    border-color: #78c2ad !important;
+	}
 </style>
 </head>
 
@@ -36,7 +54,7 @@
         </div>
     </div>
 
-    <div id="main-wrapper">
+    <div id="main-wrapper">	
 
 
      		<%@ include file="../common/menuSideBar.jsp" %> 
@@ -57,7 +75,7 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;  border: none;">쪽지보내기</a>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
                                     <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>
@@ -150,11 +168,11 @@
                 
             } else if(result.dismiss === 'cancel') { 
                 swal.fire(
-                		title: '취소',
+                		{title: '취소',
                 		text: '삭제가 취소되었습니다.',
                 		type:'error',
                 		confirmButtonColor: "#78c2ad"
-                		);
+                		});
          
             }
         });
