@@ -120,34 +120,34 @@
 	 		<div>
 	 			<ul class="pagination justify-content-center">
 					<!-- 맨앞으로 -->
-					<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?currentPage=1"> &laquo; </a></li>
+					<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?cno=<%= cno + "&currentPage=1" %>"> &laquo; </a></li>
 					<!-- 이전페이지 -->
 					<% if(currentPage == 1) {%>
 					<li class="page-item disabled"><a id="pageDisable" class="page-link"> &lt; </a></li>
 					<% }else{ %>
-					<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= currentPage-1 %>"> &lt; </a></li>
+					<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?cno=<%= cno + "&currentPage=" %><%= currentPage-1 %>"> &lt; </a></li>
 					<%} %>
 					<!-- 페이지 목록 -->
 					<%for(int p=startPage; p<=endPage; p++){ %>
 						<%if(p == currentPage){ %>
 							<li class="page-item disabled"><a id="pageDisable" class="page-link"> <%= p %> </a></li>
 						<%}else{ %>
-							<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.bo?currentPage=<%= p %>"><%= p %> </a></li>
+							<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath %>/list.bo?cno=<%= cno + "&currentPage=" %><%= p %>"><%= p %> </a></li>
 						<%} %>
 					<%} %>		
 					<!-- 다음페이지 -->
 					<% if(currentPage == maxPage) {%>
 					<li class="page-item disabled"><a id="pageDisable" class="page-link"> &gt; </a></li>
 					<% }else{ %>
-					<li class="page-item"><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= currentPage+1 %>"> &gt; </a></li>
+					<li class="page-item"><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?cno=<%= cno + "&currentPage=" %><%= currentPage+1 %>"> &gt; </a></li>
 					<%} %>
 					<!-- 맨뒤로 -->
-					<li><a id="pageTag" class="page-link" href="<%= contextPath %>/list.bo?currentPage=<%= maxPage %>"> &raquo; </a></li>
+					<li><a id="pageTag" class="page-link" href="<%=contextPath%>/list.bo?cno=<%= cno + "&currentPage=" %><%= maxPage %>"> &raquo; </a></li>
 				</ul>
 				<% if(loginUser != null){ %>
 					<!-- 글작성하기 버튼 -->
 					<div class="text-right"><button id="insertBtn" class="btn btn-primaryw-md m-b-30" onclick="location.href='<%=contextPath%>/enrollForm.bo?cno=<%= cno %>'">작성</button></div>
-	 			<% } %>
+	 			<% } %>	
 	 		</div>
 			</div>
         	</div>
