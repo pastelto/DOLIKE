@@ -1,28 +1,30 @@
-package com.kh.challenge.controller;
+package com.kh.myFavBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeVote;
+import com.google.gson.Gson;
+import com.kh.member.model.vo.Member;
+import com.kh.myFavBoard.model.service.myFBService;
+import com.kh.myFavBoard.model.vo.myFavBoard;
 
 /**
- * Servlet implementation class VoteCountUpServlet
+ * Servlet implementation class getMyFavBoardListServlet
  */
-@WebServlet("/upVote.ch")
-public class VoteCountUpServlet extends HttpServlet {
+@WebServlet("/gmfb.fb")
+public class getMyFavBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteCountUpServlet() {
+    public getMyFavBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +34,14 @@ public class VoteCountUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String chTitle = request.getParameter("chTitle");
+		System.out.println("getMyFavBoard 접속 완료!");
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getUserId();
 		
-		ChallengeVote cv = new ChallengeVote();
+		ArrayList<myFavBoard> fav = new myFBService().getMyFavBoardList(userId);
 		
-		cv.setChTitle(chTitle);
-		int result = new ChallengeService().voteCountUp(cv);
-
-		if (result > 0) {
-			request.getSession().setAttribute("msg", "투표해주셔서 감사합니다!");
-			response.sendRedirect("challengeVote.ch");
-			System.out.println("투표 성공!");
-		} else {
-			request.setAttribute("errMsg", "투표 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
-		
+		response.setContentType("application/json; charset=utf-8");
+		System.out.println("서블릿에 전송한 내 즐겨찾기 게시판 : " + fav);
+		new Gson().toJson(fav, response.getWriter());
 	}
 
 	/**

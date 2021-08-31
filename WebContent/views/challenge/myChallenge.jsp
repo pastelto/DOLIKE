@@ -1,11 +1,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.challenge.model.vo.*, java.util.Date, java.text.SimpleDateFormat"%>
+	import="java.util.ArrayList, com.kh.challenge.model.vo.*, java.util.Date"%>
 <%
 	Challenge c = (Challenge)request.getAttribute("c");
 	ChallengeAttachment at = (ChallengeAttachment) request.getAttribute("at");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -140,7 +139,7 @@ body {
 }
 
 .item-info {
-	width: 54%;
+	width: 70%;
 	padding-left: 1.5rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
@@ -192,6 +191,7 @@ a {
                     </ol>
                 </div>
             </div>	
+            <br>
 		<div class="container-fluid">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active"
@@ -220,17 +220,17 @@ a {
 										<li class="item">
 											<div class="hide"><%=c.getChNo()%></div>
 											<div class="item-wrap">
-												<a href="<%=request.getContextPath()%>/challengedetail.ch"
-													class="item-click"> <img src="./resources/challenge_upfiles/<%=at.getNewName()%>" alt="챌린지이미지" class="img-challenge">
-												</a>
+												 <img src="./resources/challenge_upfiles/<%=at.getNewName()%>" alt="챌린지이미지" class="img-challenge">												
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">
 														<%=c.getChTitle()%>
-													</h4></div> <br>
+													</h4>
+													</div> 
+													<br><br>
 													<div>									
 													<ul class="challenge-period">
-														<li>진행일정 : <%=c.getStart()%> ~ <%=c.getEnd()%></li>
+														<li>진행일정 : <%=c.getStart().substring(2,10)%> ~ <%=c.getEnd().substring(2,10)%></li>
 														<li>카테고리 : <%=c.getCategoryTitle()%></li>
 													</ul>
 													</div>

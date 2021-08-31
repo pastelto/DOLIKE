@@ -3,7 +3,7 @@
 	import="java.util.ArrayList, com.kh.challenge.model.vo.Challenge, com.kh.challenge.model.vo.ChallengeAttachment"%>
 <%
 	ArrayList<Challenge> list = (ArrayList<Challenge>) request.getAttribute("list");
-	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");	
+	ArrayList<ChallengeAttachment> fileList = (ArrayList<ChallengeAttachment>)request.getAttribute("fileList");
 %>
 <!DOCTYPE html>
 <html>
@@ -133,7 +133,7 @@ body {
 }
 
 .item-info {
-	width: 54%;
+	width: 70%;
 	padding-left: 1.5rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
@@ -192,8 +192,6 @@ a {
 						<div id="thumbList"
 							style="height: 10%; padding-left: 15%; padding-right: 5%">
 							<div class="card" style="width: 80%;">
-								<!--                             <div class="card-body"> -->
-
 								<div class="bootstrap-carousel" style="height: 5rem;">
 									<div id="carouselExampleIndicators" class="carousel slide"
 										data-ride="carousel">
@@ -206,19 +204,30 @@ a {
 												data-slide-to="2"></li>
 										</ol>
 										<div class="carousel-inner">
-											<div class="carousel-item active">
-											<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
-												<img class="d-block w-100"
-													style="width: 10%; height: 18rem;"
-													src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
-											</a>
-											</div>
-											<div class="carousel-item">
-											<a href="<%=request.getContextPath()%>/challengeVote.ch">
-												<img class="d-block w-100"
-													style="width: 10%; height: 18rem;"
-													src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
-											</a>
+											<div class="carousel-item active" id="apBanner">
+											<%if(loginUser != null) {%>
+												<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
+												</a>
+												</div>
+												<div class="carousel-item"  id="vtBanner">
+												<a href="<%=request.getContextPath()%>/challengeVote.ch">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+												</a>
+											<%} else {%>
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">									
+												</div>
+												<div class="carousel-item"  id="vtBanner">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+											<%} %>
 											</div>
 										</div>
 										<a class="carousel-control-prev"
@@ -248,22 +257,22 @@ a {
 												%>
 												<li class="item">
 													<div class="hide"><%=list.get(i).getChNo()%></div>
-													<div class="item-wrap">											
+													<div class="item-wrap">													
 														<%for(int j=0; j<fileList.size(); j++) {%>
 															<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
-																<a href="<%=request.getContextPath()%>/challengedetail.ch"
-																	class="item-click"> <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-																</a>
+																 <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge">
 															<%} %>
 														<%} %>
 														<div class="item-info">
 															<div>
-															<h4 class="title" style="float:left">
-																<%=list.get(i).getChTitle()%>
-															</h4></div> <br>
+																<h4 class="title" style="float:left">
+																	<b><%=list.get(i).getChTitle()%></b>
+																</h4>
+															</div>
+															<br><br>
 															<div>									
 															<ul class="challenge-period">
-																<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+																<li>진행일정 : <%=list.get(i).getStart().substring(2,10)%> ~ <%=list.get(i).getEnd().substring(2,10)%></li>
 																<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
 															</ul>
 															</div>
@@ -302,6 +311,7 @@ a {
 	
 	
 <script>
+
 	<% if(!list.isEmpty()){%>
 	 <%if(loginUser !=null){%>
 		$(function() {
@@ -324,7 +334,6 @@ a {
 				})	
 			})
 		});		
-
 	<%} %>
 </script>
 </body>

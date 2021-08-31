@@ -1,4 +1,4 @@
-package com.kh.challenge.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.challenge.model.service.ChallengeService;
-import com.kh.challenge.model.vo.ChallengeVote;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class VoteCountUpServlet
+ * Servlet implementation class FindUserIdServlet
  */
-@WebServlet("/upVote.ch")
-public class VoteCountUpServlet extends HttpServlet {
+@WebServlet("/findUserId.me")
+public class FindUserIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VoteCountUpServlet() {
+    public FindUserIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +35,26 @@ public class VoteCountUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		
-		String chTitle = request.getParameter("chTitle");
+		String userName = request.getParameter("userName");
+		String phone = request.getParameter("phone");
 		
-		ChallengeVote cv = new ChallengeVote();
+		Member mem = new MemberService().findUserId(userName, phone);
+		System.out.println("mem : " + mem);
 		
-		cv.setChTitle(chTitle);
-		int result = new ChallengeService().voteCountUp(cv);
-
-		if (result > 0) {
-			request.getSession().setAttribute("msg", "투표해주셔서 감사합니다!");
-			response.sendRedirect("challengeVote.ch");
-			System.out.println("투표 성공!");
-		} else {
-			request.setAttribute("errMsg", "투표 실패");
+		String userId = null;
+		
+		if (mem == null) {
+			request.setAttribute("errMsg", "일치하는 회원 정보가 없습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		} else {
+			userId = mem.getUserId();
+			System.out.println("userId : " + userId);
+			request.setAttribute("userId", userId);
+			RequestDispatcher view = request.getRequestDispatcher("/findUserIdResult.me");
 			view.forward(request, response);
 		}
 		
