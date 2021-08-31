@@ -348,7 +348,7 @@ public class ChallengeDao {
 		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
 		int endRow = startRow + pi.getListLimit() - 1;
 		/*SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM 
-		 * (SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME, PH_LOCATION, RP_LIKE FROM CHALLENGE_REPLY 
+		 * (SELECT CH_RP_NO, RP_USER, CREATE_DATE, RP_BODY, PH_ORIGINNAME, PH_NEWNAME, PH_LOCATION FROM CHALLENGE_REPLY 
 		 * WHERE CH_NO = ?, RP_STATUS = 'Y') A)WHERE RNUM BETWEEN ? AND ?
 		 */
 		try {
@@ -366,8 +366,7 @@ public class ChallengeDao {
 											rset.getString("RP_BODY"),
 											rset.getString("PH_ORIGINNAME"),
 											rset.getString("PH_NEWNAME"),
-											rset.getString("PH_LOCATION"),
-											rset.getInt("RP_LIKE")));			
+											rset.getString("PH_LOCATION")));			
 			};
 
 		} catch (SQLException e) {

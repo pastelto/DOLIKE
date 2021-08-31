@@ -55,16 +55,22 @@
     	background-color: #ced4da;
     	border-color: #ced4da;
 	}
-	#sendMsgLink, #resetBtn, #sendBtn {
+	#sendMsgLink, #resetBtn, #sendBtn, #deleteAllBtn {
     	color: #fff;
     	background-color: #78c2ad;
     	border-color: #78c2ad;
 	}
+
+		
+  	#loginBtnModal:hover, #EnrollBtnModal:hover {
+     	background-color: #f3969a;
+     	border-color: #f3969a;
+	}
 	
-	#deleteAllBtn{
-		color: #fff;
-    	background-color: #78c2ad;
-    	border-color: #78c2ad;
+	#deleteAllBtn:hover, #sendMsgLink:hover{
+		color: #78c2ad !important;
+    	background-color: #fff !important;
+    	border-color: #78c2ad !important;
 	}
 </style>
 </head>
@@ -98,7 +104,7 @@
                     <div class="col-lg-12">
                         <div class="card" >
                             <div class="card-body">
-                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;  border: none;">쪽지보내기</a>
+                                <div class="email-left-box"  style="height: 40rem" ><a href="<%= request.getContextPath() %>/writeForm.ms" id="sendMsgLink" class="btn btn-primary btn-block" style="background: #78c2ad;">쪽지보내기</a>
                                     <div class="mail-list mt-4"><a href="<%= request.getContextPath() %>/list.ms" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i>받은 쪽지함                                    
                                     <%if(newMsgCount > 0){ %>
                                     <span class="badge badge-primary badge-sm float-none m-t-5" style="background-color: #f3969a; margin-left : 10px;"> <%= newMsgCount %> </span>

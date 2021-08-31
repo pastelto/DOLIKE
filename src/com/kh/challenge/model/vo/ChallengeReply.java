@@ -12,7 +12,6 @@ public class ChallengeReply {
 	private String originName;
 	private String newName;
 	private String location;
-	private int rpLike;
 	private char status;
 	
 	public ChallengeReply() {
@@ -20,7 +19,7 @@ public class ChallengeReply {
 	}
 
 	public ChallengeReply(int rpNo, int chNo, String rpWriter, Date writeDate, String content, String originName,
-			String newName, String location, int rpLike, char status) {
+			String newName, String location, char status) {
 		super();
 		this.rpNo = rpNo;
 		this.chNo = chNo;
@@ -30,14 +29,13 @@ public class ChallengeReply {
 		this.originName = originName;
 		this.newName = newName;
 		this.location = location;
-		this.rpLike = rpLike;
 		this.status = status;
 	}
 
 	
 	
 	public ChallengeReply(int rpNo, String rpWriter, Date writeDate, String content, String originName, String newName,
-			String location, int rpLike) {
+			String location) {
 		super();
 		this.rpNo = rpNo;
 		this.rpWriter = rpWriter;
@@ -46,7 +44,6 @@ public class ChallengeReply {
 		this.originName = originName;
 		this.newName = newName;
 		this.location = location;
-		this.rpLike = rpLike;
 	}
 
 	public int getRpNo() {
@@ -113,13 +110,6 @@ public class ChallengeReply {
 		this.location = location;
 	}
 
-	public int getRpLike() {
-		return rpLike;
-	}
-
-	public void setRpLike(int rpLike) {
-		this.rpLike = rpLike;
-	}
 
 	public char getStatus() {
 		return status;
@@ -133,7 +123,7 @@ public class ChallengeReply {
 	public String toString() {
 		return "ChallengeReply [rpNo=" + rpNo + ", chNo=" + chNo + ", rpWriter=" + rpWriter + ", writeDate=" + writeDate
 				+ ", content=" + content + ", originName=" + originName + ", newName=" + newName + ", location="
-				+ location + ", rpLike=" + rpLike + ", status=" + status + "]";
+				+ location + ", status=" + status + "]";
 	}
 	
 	
