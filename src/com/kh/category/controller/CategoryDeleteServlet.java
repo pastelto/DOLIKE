@@ -25,7 +25,7 @@ public class CategoryDeleteServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    //카테고리 삭제
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,7 +40,7 @@ public class CategoryDeleteServlet extends HttpServlet {
 			response.sendRedirect("categoryList.ca");
 		}else {
 			 request.setAttribute("errMsg", "카테고리 삭제 실패");
-	         
+	        
 	         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 	         view.forward(request, response);
 		}
