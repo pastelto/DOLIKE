@@ -43,6 +43,10 @@
 	<title>DO LIKE - 게시글 수정 </title>
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
 	<style>
+		#formDiv{
+			display: flex;
+    		justify-content: center;
+		}
 		#subBtn, #clBtn{
 			color: #fff;
 	    	background-color: #78c2ad;
@@ -59,6 +63,7 @@
 		.title-class{
 			width:100%;
 		}
+		
 	</style>
 </head>
 <body>
@@ -75,7 +80,7 @@
                 </div>
             </div>
         <div class="container-fluid">
-	 		<div class="row">
+	 		<div id="formDiv" class="row">
 		 		<form id="updateForm" method="post" action="<%= contextPath %>/update.bo" style="width:100%; max-width:1000px" enctype="multipart/form-data">
 		 		<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
 		 		<div class="col-lg-10" style="margin: 0 auto; max-width:800px;">
