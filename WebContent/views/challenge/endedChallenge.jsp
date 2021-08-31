@@ -78,7 +78,7 @@
 	.item-wrap{
 		display: flex;
 		width:800px ;
-		height: 165px;
+		height: 163px;
 		transition-delay: initial;
 		transition-duration: 0.1s;
 		transition-property: all;
@@ -250,10 +250,12 @@
 										%>
 										<li class="item">
 											<div class="hide"><%=list.get(i).getChNo()%></div>
-											<div class="item-wrap">
-											 <a href="<%=request.getContextPath()%>/challengedetail.ch" class="item-click">
-											 	<img src="./resources/challenge_upfiles/<%=fileList.get(i).getNewName()%>" alt="챌린지이미지" class="img-challenge">
-											 	</a>
+											<div class="item-wrap">	
+											<%for(int j=0; j<fileList.size(); j++) {%>							
+												<%if(list.get(i).getChNo() == fileList.get(j).getChNo()) {%>
+													 <img src="./resources/challenge_upfiles/<%=fileList.get(j).getNewName()%>" alt="챌린지이미지" class="img-challenge" style="width:362px", style="height:162px">
+												<%} %>
+											<%} %>
 												<div class="item-info">
 													<div>
 														<h4 class="title" style="float:left">

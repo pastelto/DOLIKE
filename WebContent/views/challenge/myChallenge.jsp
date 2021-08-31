@@ -13,7 +13,6 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="./images/do_32.png">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- font Awesome cdn -->
 <style>
 * {
 	box-sizing: border-box;
@@ -220,7 +219,7 @@ a {
 										<li class="item">
 											<div class="hide"><%=c.getChNo()%></div>
 											<div class="item-wrap">
-												 <img src="./resources/challenge_upfiles/<%=at.getNewName()%>" alt="챌린지이미지" class="img-challenge">												
+												 <img src="./resources/challenge_upfiles/<%=at.getNewName()%>" alt="챌린지이미지" class="img-challenge" style="width:362px", style="height:162px">												
 												<div class="item-info">
 													<div>
 													<h4 class="title" style="float:left">

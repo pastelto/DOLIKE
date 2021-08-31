@@ -190,7 +190,7 @@
 												<p id="categoryUser" style="margin-bottom: 5px;"><%= memList.get(i).getFollowId() %></p>
 						
 												<% if(loginUser == null){%>
-													<button id="addfr" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
+													<button id="disBtn" onclick="plusFl();" class="btn btn-sm btn-rounded" disabled="disabled">친구추가</button>
 												<%}else{%>
 													<form action="insert.fl" method="get">
 														<input id="insertFl" type="hidden" name="followId" value="<%= memList.get(i).getFollowId() %>">

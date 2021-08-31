@@ -92,6 +92,32 @@ public class ChallengeDao {
 		System.out.println(listCount +" listcount dao");
 		return listCount;
 	}
+	
+	public int getchListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null; 
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("getchListCount");
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+
+			if (rset.next()) {
+				listCount =  rset.getInt(1);  
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		System.out.println(listCount +" listcount dao");
+		return listCount;
+	}
+
 
 	public int getApListCount(Connection conn) {
 		
@@ -146,32 +172,39 @@ public class ChallengeDao {
 		return listCount;
 	}
 
-	public ArrayList<Challenge> selectList(Connection conn) {
+	public ArrayList<Challenge> selectList(Connection conn, PageInfo pi) {
 
-		ArrayList<Challenge> list = new ArrayList<Challenge>();
+		ArrayList<Challenge> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		/*
-		 *	SELECT CH_NO, CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
-		 *	FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO 
-		 *	WHERE CH_STATUS = 'Y' ORDER BY CH_END ASC
-		 */
-
 		String sql = prop.getProperty("selectChallengeList");
-		System.out.println(sql);
-
+		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getListLimit() + 1;
+		int endRow = startRow + pi.getListLimit() - 1;
+		
+		/*
+		 * SELECT * 
+		 * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT CH_NO, CH_TITLE, CH_BODY, CH_START, CH_END, CH_STATUS, CATEGORY_NAME 
+		 * FROM CHALLENGE A JOIN CATEGORY B ON A.CATEGORY_NO = B.CATEGORY_NO WHERE CH_STATUS = 'Y' ORDER BY CH_END DESC) A) 
+		 * WHERE RNUM BETWEEN ? AND ?
+		 */
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);	
 			
-			while (rset.next()) {									
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
 				list.add(new Challenge(rset.getInt("CH_NO"),
-									   rset.getString("CH_TITLE"), 
-									   rset.getString("CH_START"),
-									   rset.getString("CH_END"),
-									   rset.getString("CH_STATUS"),
-									   rset.getString("CATEGORY_NAME")));
+						   			   rset.getString("CH_TITLE"), 						   			  
+						   			   rset.getString("CH_START"),
+						   			   rset.getString("CH_END"),						   			   
+						   			   rset.getString("CH_STATUS"),
+						   			   rset.getString("CH_BODY"),
+						   			   rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -180,8 +213,6 @@ public class ChallengeDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		System.out.println(list +": dao");
 
 		return list;
 	}
@@ -978,6 +1009,7 @@ public class ChallengeDao {
 		return result;
 	}
 
+	
 	
 
 
