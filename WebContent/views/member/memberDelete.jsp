@@ -40,15 +40,9 @@
 	</style>
 </head>
 <body>
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
 	<div id="main-wrapper">
     <%@ include file="../common/menuSideBar.jsp" %> 
     
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -56,14 +50,7 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
     
-    <!--**********************************
-        Content body start
-    ***********************************-->
     <div class="content-body">
      <div class="row page-titles mx-0">
          <div class="col p-md-0">

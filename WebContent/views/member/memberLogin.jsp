@@ -29,9 +29,6 @@
 	</style>
 </head>
 <body>
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
@@ -39,19 +36,10 @@
             </svg>
         </div>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-   	
-   	<!--**********************************
-        Main wrapper start
-    ***********************************-->
+
 	<div id="main-wrapper">
 	<%@ include file="../common/menuSideBar.jsp" %> 
-        
-        <!--**********************************
-            Content body start
-        ***********************************-->
+
 		<div class="content-body">
 		    <div class="row page-titles mx-0">
 		    	<div class="col p-md-0">
@@ -95,28 +83,31 @@
 	    </div>
 	
 		<script>
-			function loginValidate(){
-				if($("#userId").val().trim().length == 0){
-					swal.fire({
-						text: '아이디를 입력하세요.',
-						icon: 'warning',
-						confirmButtonColor: "#78c2ad"
-					});
-					$("#userId").focus();
-					return false;
-				}
-				if($("#userPwd").val().trim().length == 0){
-					swal.fire({
-						text: '비밀번호를 입력하세요.',
-						icon: 'warning',
-						confirmButtonColor: "#78c2ad"
-					});
-					$("#userPwd").focus();
-					return false;
-				}
-				
-				return true;
+    	//==============================================
+    	// 입력 확인
+    	//==============================================
+		function loginValidate(){
+			if($("#userId").val().trim().length == 0){
+				swal.fire({
+					text: '아이디를 입력하세요.',
+					icon: 'warning',
+					confirmButtonColor: "#78c2ad"
+				});
+				$("#userId").focus();
+				return false;
 			}
+			if($("#userPwd").val().trim().length == 0){
+				swal.fire({
+					text: '비밀번호를 입력하세요.',
+					icon: 'warning',
+					confirmButtonColor: "#78c2ad"
+				});
+				$("#userPwd").focus();
+				return false;
+			}
+			
+			return true;
+		}
 		
 		</script>
 	</div>

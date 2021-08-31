@@ -168,7 +168,7 @@
 									
 									</form>
 									<br>
-									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="history.back();">돌아가기</button>
+									<button style="text-align: center" id="returnBtn" class="btn btn-sm" onclick="returnList();">돌아가기</button>
 								</div>
 							</div>
 						</div>
@@ -188,6 +188,10 @@
 	 	})
 	 	function updateForm(){
 			$("#postForm").attr("action", "<%=contextPath%>/updateForm.bo");
+			$("#postForm").submit();
+		}
+	 	function returnList(){
+			$("#postForm").attr("action", "<%=contextPath%>/list.bo");
 			$("#postForm").submit();
 		}
 			
