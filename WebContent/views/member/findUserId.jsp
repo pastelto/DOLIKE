@@ -72,28 +72,31 @@
 	    </div>
 	    
 	    <script>
-			function findUserIdValidate(){
-				if($("#userName").val().trim().length == 0){
-					swal.fire({
-						text: '성명을 입력하세요.',
-						icon: 'warning',
-						confirmButtonColor: "#78c2ad"
-					});
-					$("#userName").focus();
-					return false;
-				}
-				if($("#phone").val().trim().length == 0){
-					swal.fire({
-						text: '전화번호를 입력하세요.',
-						icon: 'warning',
-						confirmButtonColor: "#78c2ad"
-					});
-					$("#phone").focus();
-					return false;
-				}
-				
-				return true;
+    	//==============================================
+    	// 입력 확인
+    	//==============================================
+		function findUserIdValidate(){
+			if($("#userName").val().trim().length == 0){
+				swal.fire({
+					text: '성명을 입력하세요.',
+					icon: 'warning',
+					confirmButtonColor: "#78c2ad"
+				});
+				$("#userName").focus();
+				return false;
 			}
+			if($("#phone").val().trim().length == 0){
+				swal.fire({
+					text: '전화번호를 입력하세요.',
+					icon: 'warning',
+					confirmButtonColor: "#78c2ad"
+				});
+				$("#phone").focus();
+				return false;
+			}
+			
+			return true;
+		}
 		</script>
 	</div>
 	<%@ include file="../common/footer.jsp" %>
