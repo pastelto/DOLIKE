@@ -323,5 +323,83 @@ public class MemberDao {
 		System.out.println(result);
 		return result;
 	}
+
+	//아이디 찾기
+	public Member findUserId(Connection conn, String userName, String phone) {
+		Member mem = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findUserId");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userName);
+			pstmt.setString(2, phone);
+			System.out.println("userName : " + userName);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				mem = new Member(
+						rset.getString("USER_ID"),
+						rset.getString("USER_NAME"),
+						rset.getString("PASSWORD"),
+						rset.getString("BIRTHDATE"),
+						rset.getString("PHONE"),
+						rset.getString("EMAIL"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTERESTS"),
+						rset.getDate("USER_CREATE_DATE"),
+						rset.getString("USER_STATUS")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mem;
+	}
+
+	public Member findPwd(Connection conn, String userId, String userName, String phone) {
+		Member mem = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findPwd");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, phone);
+			System.out.println("userId : " + userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				mem = new Member(
+						rset.getString("USER_ID"),
+						rset.getString("USER_NAME"),
+						rset.getString("PASSWORD"),
+						rset.getString("BIRTHDATE"),
+						rset.getString("PHONE"),
+						rset.getString("EMAIL"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTERESTS"),
+						rset.getDate("USER_CREATE_DATE"),
+						rset.getString("USER_STATUS")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mem;
+	}
 	 
 }

@@ -1,4 +1,4 @@
-package com.kh.main.model.dao;
+package com.kh.dlmain.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
 
@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
-import com.kh.follow.model.vo.Follow;
+import com.kh.dlmain.model.vo.DLMain;
 
 public class MainDao {
 	
@@ -37,33 +37,54 @@ public class MainDao {
 	}
 	
 	// 전체 인기 게시글 선택 
-	public ArrayList<Board> selectTopList(Connection conn) {
+	public ArrayList<DLMain> selectTopList(Connection conn) {
+		ArrayList<DLMain> bTopList = new ArrayList<DLMain>();
 		
-		ArrayList<Board> bTopList = new ArrayList<Board>();
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectTopList");
+		String sql = prop.getProperty("selectTopList1");
+		/*
+		 * String bno = "BNO"; String bno = "BTITLE"; String bno = "WRITER"; String bno
+		 * = "VCOUNT"; String bno = "CNO"; String bno = "FNO"; String bno = "FONAME";
+		 * String bno = "FNNAME";
+		 */
 		
 		try {
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			/*
+			 * pstmt.setString(1, "BNO"); pstmt.setString(2, "BTITLE"); pstmt.setString(3,
+			 * "WRITER"); pstmt.setString(4, "VCOUNT"); pstmt.setString(5, "CNO");
+			 * pstmt.setString(6, "CNAME"); pstmt.setString(7, "FNO"); pstmt.setString(8,
+			 * "FONAME"); pstmt.setString(9, "FNNAME"); pstmt.setString(10, "BNO");
+			 * pstmt.setString(11, "BTITLE"); pstmt.setString(12, "WRITER");
+			 * pstmt.setString(13, "VCOUNT"); pstmt.setString(14, "CNO");
+			 * pstmt.setString(15, "CNAME"); pstmt.setString(16, "FNO"); pstmt.setString(17,
+			 * "FONAME"); pstmt.setString(18, "FNNAME"); pstmt.setString(19, "VCOUNT");
+			 */
 			
-			rset = stmt.executeQuery(sql);
-			
+			rset = pstmt.executeQuery();
+			System.out.println("1. rset? " + rset);
 			while(rset.next()) {
-				bTopList.add(new Board(rset.getInt("BOARD_NO"), 
-									  rset.getString("NICKNAME"),
-								      rset.getString("BOARD_TITLE"),
-								      rset.getInt("VIEWS"),
-								      rset.getInt("CATEGORY_NO")
-						));
+				bTopList.add(new DLMain(rset.getInt("BNO"), 
+									  rset.getString("BTITLE"),
+								      rset.getString("WRITER"),
+								      rset.getInt("VCOUNT"),
+								      rset.getInt("CNO"),
+								      rset.getString("CNAME"),
+								      rset.getInt("FNO"),
+								      rset.getString("FONAME"),
+								      rset.getString("FNNAME")
+					      ));
 			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		} finally{
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		System.out.println("bTopList? : " + bTopList);
 		return bTopList;
@@ -103,29 +124,29 @@ public class MainDao {
 	// 카테고리 별 인기 게시글
 	public ArrayList<Board> selectEachBoardTopList(Connection conn, String cTitle) {
 		ArrayList<Board> eList = new ArrayList<Board>();
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String sql = prop.getProperty("selectEachBoardTopList");
-		
-		
+
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cTitle);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			while(rset.next()) {
 				eList.add(new Board(rset.getInt("BOARD_NO"), 
-						  rset.getString("NICKNAME"),
+					      rset.getString("NICKNAME"),
 					      rset.getString("BOARD_TITLE"),
 					      rset.getInt("VIEWS"),
 					      rset.getInt("CATEGORY_NO")
 					      ));
 			}
-			
-			
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

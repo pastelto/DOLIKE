@@ -80,8 +80,10 @@
 			                                    </div>
 			                                    <button id="loginBtn1" class="btn login-form__btn submit w-100" type="submit">로그인</button>
 			                                </form>
-			                                <p class="mt-5 login-form__footer">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary"> 회원가입</a> 하러가기</p>
-			                                <p class="mt-2 login-form__footer">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/noticeView.no" class="text-primary"> 공지사항</a> 보러가기</p>
+			                                <p class="mt-5 login-form__footer" style="text-align: center;">계정이 없으신가요? <a href="<%= request.getContextPath()%>/enrollForm.me" class="text-primary"> 회원가입</a> 하러가기</p>
+			                                <p class="mt-2 login-form__footer" style="text-align: center;">로그인이 안되시나요? <a href="<%= request.getContextPath()%>/read.no?nno=3" class="text-primary"> 공지사항</a> 보러가기</p>
+			                            	<p class="mt-5 login-form__footer" style="text-align: center;"><a href="<%= request.getContextPath()%>/findUserIdForm.me" class="text-primary">아이디찾기</a> /
+			                            	<a href="<%= request.getContextPath()%>/findPwdForm.me" class="text-primary">비밀번호찾기</a></p>
 			                            </div>
 			                        </div>
 			                    </div>
@@ -105,7 +107,7 @@
 				}
 				if($("#userPwd").val().trim().length == 0){
 					swal.fire({
-						text: '아이디를 입력하세요.',
+						text: '비밀번호를 입력하세요.',
 						icon: 'warning',
 						confirmButtonColor: "#78c2ad"
 					});

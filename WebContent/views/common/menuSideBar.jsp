@@ -32,6 +32,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap&family=Chakra+Petch:wght@300&family=Lobster&display=swap" rel="stylesheet">
 	
 	<script>
+	
 	//기쁜일 했을 때 gif 팝업
 	   $(function(){
 		      var msg = "<%=msg%>";
@@ -307,55 +308,28 @@
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="categoryList2">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">카테고리</span>
                         </a>
-                        <ul aria-expanded="false" class="collapse">
+                        <ul aria-expanded="false" class="collapse" >
 
                         </ul>
 
-				        <script>
-				        
-							$(function(){
-								$("#btn-like").eq(0).click(function(){
-								var favB = $("#categoryList").val();
-								
-								$.ajax({
-									
-									url: "jqTest2.do",
-									data: {input:input},
-									type: "post",
-									success: function(result){
-										$("#output2").val(result);
-									},
-									error: function(e){ 
-										console.log(e);
-									}
-								})
-							})
-						})
-				        	$(".btn-like").click(function() {
-				         	   $(this).toggleClass("done");
-				       		 })
-				       		 
-				       		 				       		
-        				</script>
-        				
-
-
                     	</li>
                       <%} %> 
+                      
+                      <!-- 즐겨찾는 게시판 로그인 값이 없으면 로그인 후 이용하라고 안내 -->
                       <% if(loginUser == null) {%> 
-                      <li class="mega-menu-sm">
+                      <li class="mega-menu-sm"> 
                         <a class="has-arrow" aria-expanded="false" onclick="needLogin();">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
                         </a>
+                       <!-- 로그인 값이 있으면 해당 유저의 즐겨찾기 게시판 목록 보여줌 -->
                       <%}else{ %>
-                      <li class="mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                      <li class="mega-menu-sm" id="favBoard"> 
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" class="active" id="myFavBoardList">
                             <i class="icon-heart menu-icon"></i><span class="nav-text">즐겨찾는 게시판</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
-                        <!-- 나중에 코드로 구현할 부분 -->
-                            <li><a href="list.bo">카테고리1</a></li>
-                            <li><a href="./layout-one-column.html">카테고리2</a></li>
+                        
+                        <!-- Ajax로 즐겨찾는 게시판 카테고리 값이 붙을 곳 -->
                      
                         </ul>
                     </li>
@@ -420,7 +394,7 @@
                             <i class="mdi mdi-bell-outline menu-icon"></i><span class="nav-text">공지사항</span>
                         </a>
                     </li>
-                    <%-- <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> --%>
+                     <% if(loginUser != null && loginUser.getUserId().equals("admin")) { %> 
                     <li class="mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">회원 관리</span>
@@ -431,7 +405,7 @@
                             <li><a href="blackList.am">블랙리스트</a></li>
                         </ul>
                     </li>
-                    <%-- <% } %> --%>         
+                     <% } %> 
                 </ul>
                 
                                
@@ -461,29 +435,10 @@
                 </div>
             </div>
         <script>
-        	function msgLoginerror(){
-        		alert("로그인 후 이용 가능합니다.");
-        	}
-        	
-			$(function(){
-				$("#btn-like").eq(0).click(function(){
-				var favB = $("#input2").val();
-								
-				$.ajax({
-									
-				url: "myFavBoard.bo",
-				data: {input:input},
-				type: "post",
-				success: function(result){
-				$("#output2").val(result);
-				},
-				error: function(e){ 
-					console.log(e);
-				}
-				})
-				})
-				})
-				
+        // DH -- 즐겨찾기 
+
+		
+        // 로그인 후 이용 가능 팝업창
 			function needLogin(){
 				Swal.fire({
 				  title: "로그인이 필요합니다.",
@@ -493,6 +448,8 @@
 				  footer: '<a style="color: #78c2ad;" href="<%= contextPath %>/loginForm.me">로그인 바로가기</a> &nbsp; &nbsp; / &nbsp; &nbsp; <a style="color: #78c2ad;" href="<%= contextPath %>/enrollForm.me">회원가입 바로가기</a>'
 				})
 			}
+        
+      	
 
         </script>
         
@@ -534,11 +491,7 @@
                 		         }) 
               				  })
              			       	
-             		          	        				
-        </script>
-        
-		<script>
-        				
+	
               				  $(function(){
               					 $("#categoryList2").click(function(){     				       			                 			        
               						 
@@ -558,7 +511,7 @@
    				       	 					
    				       	 					$.each(list, function(i){
    				       																														
-    				       						result = "<li><a href='list.bo?cno="+list[i].categoryNo+"'><span><button class='btn-like' name='myFavBoard'>⭐</button></span>" + list[i].categoryName +"</a></li>"
+    				       						result = "<li><table><tr><th><button class='btn-like' id='"+list[i].categoryNo+"fb' value='"+list[i].categoryNo+"'style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+list[i].categoryNo+"' style='padding-left:10px;'>" + list[i].categoryName +"</a></td></tr></table></li>"
     				       					
    				       							$liBody.append(result)
    				       							
@@ -575,7 +528,49 @@
                 		         }) 
               				  })
              			       	
-             		          	        				
+          // 즐겨찾기 카테고리 리스트 값 가져오기
+			  $(function(){
+					 $("#myFavBoardList").click(function(){     				       			                 			        
+						 
+	       				$.ajax({
+	       					url:"gmfb.fb",
+	       					type:"post",
+	       					success:function(fav){
+	       						console.log(fav)
+	       						console.log("ajax 성공!!")
+	       						
+	       						var newFav = ""
+	       						var $favLiBody = $("#favBoard ul")
+	       						
+	       						
+	       						$favLiBody.html(""); 
+	       	 					
+	       	 					$.each(fav, function(i){
+	       																														
+		       						newFav =  "<li><table><tr><th><button class='btn-like done' name='addFavB' id='"+fav[i].categoryNo+"fb' value='"+fav[i].categoryNo+"' style='padding-left: 30px;'>⭐</button></th><td><a href='list.bo?cno="+fav[i].categoryNo+"' style='padding-left:10px;'>" + fav[i].fbTitle +"</a></td></tr></table></li>"
+		       					
+	       							$favLiBody.append(newFav)
+	       							
+	       							console.log(newFav)
+	       							console.log("즐겨찾는 게시판!")
+									
+	       						
+	       	 				})
+	       					},
+	       					error:function(e){
+	       						console.log("ajax 통신 실패함")
+	       					}               			       			       			  
+	       			  })  
+ 		         }) 
+				  })
+              				  
+             
+             // 즐겨찾기 카테고리 리스트 
+              	$(function(){
+              		$("#")
+              		
+              	})
+              	
         </script>
         
 		<script src="plugins/common/common.min.js"></script>

@@ -12,6 +12,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -19,12 +20,6 @@
  <title>DO LIKE - 챌린지</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="./images/do_32.png">
-<!-- Custom Stylesheet -->
-<!-- <link href="../css/style.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
 
 <style>
 	*{
@@ -120,7 +115,7 @@
 		
 	}
 	.item-info{
-		width: 54%;
+		width: 70%;
 		padding-left: 1.5rem;
 		padding-right: 1rem;
 		padding-top: 1rem;
@@ -203,18 +198,29 @@
 										</ol>
 										<div class="carousel-inner">
 											<div class="carousel-item active">
-											<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
-												<img class="d-block w-100"
-													style="width: 10%; height: 18rem;"
-													src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
-											</a>
-											</div>
-											<div class="carousel-item">
-											<a href="<%=request.getContextPath()%>/challengeVote.ch">
-												<img class="d-block w-100"
-													style="width: 10%; height: 18rem;"
-													src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
-											</a>
+											<%if(loginUser != null) {%>
+												<a href="<%=request.getContextPath()%>/challengeApplyForm.ch">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">
+												</a>
+												</div>
+												<div class="carousel-item"  id="vtBanner">
+												<a href="<%=request.getContextPath()%>/challengeVote.ch">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+												</a>
+											<%} else {%>
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지신청.png"alt="First slide">									
+												</div>
+												<div class="carousel-item"  id="vtBanner">
+													<img class="d-block w-100"
+														style="width: 10%; height: 18rem;"
+														src="./resources/challenge_upfiles/챌린지투표.png"alt="Second slide">
+											<%} %>
 											</div>
 										</div>
 										<a class="carousel-control-prev"
@@ -251,12 +257,13 @@
 												<div class="item-info">
 													<div>
 														<h4 class="title" style="float:left">
-															<%=list.get(i).getChTitle()%>
+															<b><%=list.get(i).getChTitle()%></b>
 														</h4>
-													</div> <br>
+													</div>
+													<br><br>
 													<div>									
 													<ul class="challenge-period">
-														<li>진행일정 : <%=list.get(i).getStart()%> ~ <%=list.get(i).getEnd()%></li>
+														<li>진행일정 : <%=list.get(i).getStart().substring(2,10)%> ~ <%=list.get(i).getEnd().substring(2,10)%></li>
 														<li>카테고리 : <%=list.get(i).getCategoryTitle()%></li>
 													</ul>
 													</div>

@@ -1,4 +1,4 @@
-package com.kh.main.controller;
+package com.kh.dlmain.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.vo.Board;
 import com.kh.category.model.vo.Category;
-import com.kh.main.model.service.MainService;
+import com.kh.dlmain.model.service.MainService;
+import com.kh.dlmain.model.vo.DLMain;
 
 /**
  * Servlet implementation class firstMainServlet
@@ -37,7 +37,7 @@ public class firstMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 전체 인기게시글 불러오기
-		ArrayList<Board> topList = new MainService().selectTopList();
+		ArrayList<DLMain> topList = new MainService().selectTopList();
 		
 		// 카테고리 리스트 불러오기
 		ArrayList<Category> cList = new ArrayList<Category>();
@@ -55,7 +55,6 @@ public class firstMainServlet extends HttpServlet {
 			System.out.println("카테고리 번호 : " + i + "번 이름 : " + cList.get(i).getCategoryName());
 			
 			ArrayList<Board> eachBoardTopList = new MainService().selectEachBoardTopList(cTitle);
-			
 			// 카테고리별 인기게시글 
 			hashmap.put(cTitle, eachBoardTopList);
 			
@@ -64,7 +63,7 @@ public class firstMainServlet extends HttpServlet {
 		
 		
 		// 만약 게시글이 0개라면, 게시글 없는 곳으로!
-		if(topList.isEmpty() || hashmap.isEmpty()) {
+		if(topList.size() < 4 || hashmap.size() < 4 ) {
 			RequestDispatcher view = request.getRequestDispatcher("/alterIndex2.jsp");
 			view.forward(request, response);
 		} else {

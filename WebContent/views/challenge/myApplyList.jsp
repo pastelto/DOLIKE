@@ -203,8 +203,8 @@ a {
 	                        <li class="breadcrumb-item active">마이 챌린지</li>
 	                    </ol>
 	                </div>
-	        </div> <br>
-       	
+	        </div> 
+	        <br>
 		<div class="container-fluid">
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a class="nav-link "
@@ -238,7 +238,7 @@ a {
 							<tbody>					
 								<% if(list.isEmpty()){ %>
 							 	<tr>
-									<td colspan="4">신청된 챌린지가 없습니다.</td>
+									<td colspan="5"><%=loginUser.getNickName()%>님! 원하시는 챌린지를 신청해주세요!</td>
 								</tr>
 							 <% }else{  %>
 							 	<% for(ChallengeApply ca: list){ %>
@@ -259,6 +259,7 @@ a {
 		</div>
 		
 		<!-- 페이지 처리 -->
+				<% if(!list.isEmpty()){ %>
 					<div>
 						<ul class="pagination justify-content-center">
 							<!-- 맨앞으로 -->
@@ -294,7 +295,8 @@ a {
 							<!-- 맨뒤로 -->
 							<li><a id="pageTag" class="page-link" href="<%= contextPath %>/applyList.ch?currentPage=<%= maxPage %>"> &raquo; </a></li>
 						</ul>
-					</div>		
+					</div>	
+					<%} %>	
 				</div>
 	  		</div>
 		</div>
