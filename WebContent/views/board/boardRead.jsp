@@ -139,8 +139,10 @@
 									<br><br>
 									<div id="replyAdd">
 									<% if(loginUser != null) {%>
-										<textarea placeholder="댓글 내용을 입력해주세요" rows="1" cols="60" id="replyContent" style="resize:none; width:93%; border:none; outline:none;"></textarea>
+										<textarea placeholder="댓글 내용을 입력해주세요" rows="3" cols="60" id="replyContent" style="resize:none; width:90%; border:none; outline:none;"></textarea>
+										
 										<button id="addReply" class="btn btn-sm" >댓글등록</button>
+										
 									<% } else{ %>
 										<textarea readonly rows="1" cols="60" id="replyContent" style="resize:none; width:70%; border:none; outline:none;">로그인한 사용자만 가능합니다.</textarea>
 									<% } %>
@@ -198,7 +200,7 @@
 		function deleteBoard(){
 			  swal.fire({
 	                title: '확인', 
-	                text: "정말 쪽지를 삭제하시겠습니까?", 
+	                text: "정말 게시글을 삭제하시겠습니까?", 
 	                type: 'warning', 
 	                confirmButtonText: '삭제', 
 	                showCancelButton: true,     
@@ -229,24 +231,25 @@
 			$('#addReply').click(function(){
 				var content = $('#replyContent').val();
 				var bId = <%= b.getBoardNo()%>;
-				
-				$.ajax({
-					url:"rinsert.bo",
-					type:"post",
-					data:{
-						content:content,
-						bId:bId
-					},
-					success:function(status){
-						if(status == "success"){
-							selectReplyList(); 
-							$('#replyContent').val("");
+				if(content.length != 0){
+					$.ajax({
+						url:"rinsert.bo",
+						type:"post",
+						data:{
+							content:content,
+							bId:bId
+						},
+						success:function(status){
+							if(status == "success"){
+								selectReplyList(); 
+								$('#replyContent').val("");
+							}
+						},
+						error:function(){
+							console.log("ajax 통신 실패 - 댓글등록");
 						}
-					},
-					error:function(){
-						console.log("ajax 통신 실패 - 댓글등록");
-					}
-				})
+					})
+				}	
 			})
 		})
 		function selectReplyList(){
