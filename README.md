@@ -6,13 +6,6 @@
 > **개발 환경**
 
 
-|운영체제|Window OS|
-|개발도구|Eclipse|
-|DBMS|Oracle DB – sql Developer|
-|Server|apache-tomcat-8.5|
-|Language|JAVA, HTML5, CSS3, JavaScript, jQuery, Servlet|
-|디자인 툴|Bootstrap|
-
 > **개발일정**
 
 ![스크린샷(6)](https://user-images.githubusercontent.com/84160340/136980916-1661cdbc-90b0-4278-abf8-0e6987a6244b.png)
